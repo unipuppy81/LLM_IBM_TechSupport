@@ -1,9 +1,11 @@
 from pathlib import Path
 
 # 1. 파일 경로 설정
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 INPUT_PATH = ROOT / "data" / "raw" / "corpus.txt"
 OUTPUT_DIR = ROOT / "data" / "processed"
+
+print(ROOT)
 
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)  # 디렉토리 생성 (이미 존재하면 무시)
 
