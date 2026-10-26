@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 
 
-# 1. Character Tokenizer
+# 1. Character Tokenizer Class
 class CharTokenizer:
     def __init__(self, text):
         # 학습 데이터에서 고유 문자 추출

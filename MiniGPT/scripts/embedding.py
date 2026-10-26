@@ -6,7 +6,7 @@ import torch.nn as nn
 from tokenizer import CharTokenizer
 
 
-# Token Embedding
+# Token Embedding Class
 class TokenEmbedding(nn.Module):
     def __init__(self, vocab_size, embedding_dim):
         super().__init__()
