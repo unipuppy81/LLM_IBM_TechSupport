@@ -225,3 +225,6 @@ IBMTechSupport/models/
 IBMTechSupport/data/raw/
 IBMTechSupport/data/processed/
 IBMTechSupport/**/__pycache__/
+
+# MiniGPT exported model weights
+MiniGPT/export/minigpt/*.pt
