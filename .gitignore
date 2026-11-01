@@ -218,3 +218,10 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# IBM TechSupport
+IBMTechSupport/.venv/
+IBMTechSupport/models/
+IBMTechSupport/data/raw/
+IBMTechSupport/data/processed/
+IBMTechSupport/**/__pycache__/
