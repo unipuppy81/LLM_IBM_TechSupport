@@ -1,0 +1,12 @@
+{
+  "model": "Qwen2.5-1.5B-Instruct",
+  "dataset": "validation",
+  "total": 5,
+  "max_new_tokens": 160,
+  "answerable": 4,
+  "impossible": 1,
+  "exact_match_percent": 0.0,
+  "token_f1_percent": 23.74,
+  "abstention_rate_percent": 0.0,
+  "false_refusal_rate_percent": 0.0
+}
