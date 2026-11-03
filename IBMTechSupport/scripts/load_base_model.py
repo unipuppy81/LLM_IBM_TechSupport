@@ -1,4 +1,3 @@
-
 from pathlib import Path
 
 import torch
@@ -20,15 +19,10 @@ def main():
     print("Transformers:", transformers.__version__)
 
     # 다운로드한 모델 폴더 확인
-    assert (MODEL_DIR / "config.json").exists(), (
-        "Model configuration not found"
-    )
+    assert (MODEL_DIR / "config.json").exists(), ("Model configuration not found")
 
     # 1. 토크나이저 로드
-    tokenizer = AutoTokenizer.from_pretrained(
-        MODEL_DIR,
-        local_files_only=True
-    )
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_DIR, local_files_only=True)
 
     print("Tokenizer: OK")
     print("Vocabulary Size:", len(tokenizer))
@@ -88,11 +82,7 @@ def main():
 
     # 6. 새로 생성한 토큰만 디코딩
     generated_ids = outputs[0][inputs["input_ids"].shape[-1]:]
-
-    answer = tokenizer.decode(
-        generated_ids,
-        skip_special_tokens=True
-    ).strip()
+    answer = tokenizer.decode(generated_ids, skip_special_tokens=True).strip()
 
     print("\n[Base Model Output]")
     print("Question:", messages[-1]["content"])
@@ -103,7 +93,6 @@ def main():
     # GPU 메모리 확인
     used_memory = torch.cuda.max_memory_allocated() / 1024**3
     print(f"\nPeak GPU Memory: {used_memory:.2f} GB")
-
     print("Base Model Load: OK")
 
 

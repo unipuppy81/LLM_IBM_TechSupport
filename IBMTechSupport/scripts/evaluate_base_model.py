@@ -1,7 +1,8 @@
-
 import argparse
+import copy
 import json
 import re
+import time
 import unicodedata
 from collections import Counter
 from pathlib import Path
@@ -10,17 +11,14 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 
-# 프로젝트 경로
 PROJECT_DIR = Path(__file__).resolve().parents[1]
 MODEL_DIR = PROJECT_DIR / "models" / "Qwen2.5-1.5B-Instruct"
-DATA_PATH = PROJECT_DIR / "data" / "processed" / "val.json"
+DATA_DIR = PROJECT_DIR / "data" / "processed"
 RESULT_DIR = PROJECT_DIR / "results"
 
-# 평가 설정
 MODEL_NAME = "Qwen2.5-1.5B-Instruct"
 MAX_NEW_TOKENS = 160
 ABSTAIN = "INSUFFICIENT_INFORMATION"
-
 SYSTEM_PROMPT = (
     "You are an IBM technical support assistant. "
     "Answer technical questions using only your existing knowledge. "
@@ -31,256 +29,286 @@ SYSTEM_PROMPT = (
 
 
 def tokenize_for_metrics(text):
-    """평가를 위한 Unicode 정규화 및 토큰 분리."""
-    text = unicodedata.normalize("NFKC", text)
-    text = text.casefold()
-
+    text = unicodedata.normalize("NFKC", text).casefold()
     return re.findall(r"\w+|[^\w\s]", text)
 
 
 def exact_match(prediction, reference):
-    """정답과 예측이 정규화 후 동일한지 검사."""
-    return int(
-        tokenize_for_metrics(prediction)
-        == tokenize_for_metrics(reference)
-    )
+    return int(tokenize_for_metrics(prediction) == tokenize_for_metrics(reference))
 
 
 def token_f1(prediction, reference):
-    """정답과 예측의 토큰 Precision / Recall / F1."""
-    pred_tokens = tokenize_for_metrics(prediction)
-    ref_tokens = tokenize_for_metrics(reference)
+    predicted = tokenize_for_metrics(prediction)
+    correct = tokenize_for_metrics(reference)
+    if not predicted or not correct:
+        return float(predicted == correct)
 
-    if not pred_tokens or not ref_tokens:
-        return float(pred_tokens == ref_tokens)
-
-    common = Counter(pred_tokens) & Counter(ref_tokens)
+    common = Counter(predicted) & Counter(correct)
     overlap = sum(common.values())
-
     if overlap == 0:
         return 0.0
 
-    precision = overlap / len(pred_tokens)
-    recall = overlap / len(ref_tokens)
-
+    precision = overlap / len(predicted)
+    recall = overlap / len(correct)
     return 2 * precision * recall / (precision + recall)
 
 
+def percentage(numerator, denominator):
+    return round(numerator / denominator * 100, 2) if denominator else None
+
+
 def load_model():
-    """기존 Qwen 모델과 토크나이저 로드."""
     if not torch.cuda.is_available():
         raise RuntimeError("CUDA GPU가 필요합니다.")
 
-    tokenizer = AutoTokenizer.from_pretrained(
-        MODEL_DIR,
-        local_files_only=True
-    )
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_DIR, local_files_only=True)
+    tokenizer.padding_side = "left"  # Decoder-only 모델 Batch 생성에 필요
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
 
     model = AutoModelForCausalLM.from_pretrained(
         MODEL_DIR,
         dtype=torch.float16,
         device_map="auto",
-        local_files_only=True
+        local_files_only=True,
     )
-
     model.eval()
+    if {p.device.type for p in model.parameters()} != {"cuda"}:
+        raise RuntimeError("모델 전체가 GPU에 배치되지 않았습니다.")
+
+    # Greedy 생성 시 샘플링 파라미터 경고 방지
+    generation_config = copy.deepcopy(model.generation_config)
+    generation_config.do_sample = False
+    generation_config.temperature = None
+    generation_config.top_p = None
+    generation_config.top_k = None
+    generation_config.max_new_tokens = MAX_NEW_TOKENS
+    generation_config.pad_token_id = tokenizer.pad_token_id
 
     print("GPU:", torch.cuda.get_device_name(0))
     print("Model:", MODEL_NAME)
     print("Model Load: OK")
+    return model, tokenizer, generation_config
 
-    return model, tokenizer
 
-
-def generate_answer(model, tokenizer, question):
-    """Base Model로 기술지원 질문에 답변 생성."""
-
-    messages = [
-        {"role": "system", "content": SYSTEM_PROMPT},
-        {"role": "user", "content": question}
+def generate_batch(model, tokenizer, generation_config, questions):
+    conversations = [
+        [
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": question},
+        ]
+        for question in questions
     ]
 
-    # Qwen Chat Template 적용
+    # 여러 대화를 동시에 토큰화하고 왼쪽 패딩
     inputs = tokenizer.apply_chat_template(
-        messages,
+        conversations,
         tokenize=True,
         add_generation_prompt=True,
+        padding=True,
         return_dict=True,
-        return_tensors="pt"
+        return_tensors="pt",
     ).to(model.device)
 
-    # 학습 없이 추론만 수행
     with torch.inference_mode():
-        outputs = model.generate(
-            **inputs,
-            max_new_tokens=MAX_NEW_TOKENS,
-            do_sample=False,
-            pad_token_id=tokenizer.eos_token_id
+        outputs = model.generate(**inputs, generation_config=generation_config)
+
+    input_width = inputs["input_ids"].shape[1]
+    return [
+        answer.strip()
+        for answer in tokenizer.batch_decode(
+            outputs[:, input_width:], skip_special_tokens=True
+        )
+    ]
+
+
+def make_prediction_rows(model, tokenizer, generation_config, records, batch_size):
+    rows = []
+    torch.cuda.reset_peak_memory_stats()
+    torch.cuda.synchronize()
+    start = time.perf_counter()
+
+    for offset in range(0, len(records), batch_size):
+        batch = records[offset : offset + batch_size]
+        answers = generate_batch(
+            model, tokenizer, generation_config,
+            [record["question"] for record in batch],
         )
 
-    # 입력 부분 제외하고 생성 토큰만 추출
-    input_length = inputs["input_ids"].shape[-1]
-    generated_ids = outputs[0][input_length:]
+        if len(answers) != len(batch):
+            raise RuntimeError("Batch 응답 개수가 입력과 다릅니다.")
 
-    return tokenizer.decode(generated_ids, skip_special_tokens=True).strip()
+        for record, answer in zip(batch, answers):
+            rows.append({
+                "id": record["id"],
+                "question": record["question"],
+                "reference_answer": record["answer"],
+                "is_impossible": record["is_impossible"],
+                "prediction": answer,
+            })
+        print(f"Generated: {len(rows)}/{len(records)}", flush=True)
+
+    torch.cuda.synchronize()
+    seconds = time.perf_counter() - start
+    peak_gb = torch.cuda.max_memory_allocated() / (1024 ** 3)
+    return rows, seconds, peak_gb
 
 
-def percentage(numerator, denominator):
-    """백분율 계산. 데이터가 없으면 None."""
-    if denominator == 0:
-        return None
+def validate_prediction_rows(records, predictions):
+    if len(records) != len(predictions):
+        raise ValueError("예측 파일 레코드 수가 평가 데이터와 다릅니다.")
 
-    return round(numerator / denominator * 100, 2)
+    for record, result in zip(records, predictions):
+        expected = (
+            record["id"], record["question"],
+            record["answer"], record["is_impossible"],
+        )
+        actual = (
+            result["id"], result["question"],
+            result["reference_answer"], result["is_impossible"],
+        )
+        if actual != expected or not isinstance(result.get("prediction"), str):
+            raise ValueError(f"평가 데이터와 예측 결과가 불일치: {record['id']}")
 
 
-def evaluate(model, tokenizer, records, output_path):
-    """Validation 데이터 평가 및 예측 저장."""
-
+def score_predictions(records, predictions, dataset, batch_size):
+    validate_prediction_rows(records, predictions)
     stats = Counter()
     total_f1 = 0.0
 
-    with open(output_path, "w", encoding="utf-8") as file:
+    for record, row in zip(records, predictions):
+        prediction = row["prediction"]
+        abstained = prediction == ABSTAIN
+        row["abstained"] = abstained
 
-        for index, record in enumerate(records, start=1):
-            question = record["question"]
-            reference = record["answer"]
-            impossible = record["is_impossible"]
+        if record["is_impossible"]:
+            stats["impossible"] += 1
+            stats["correct_abstentions"] += int(abstained)
+            row["exact_match"] = None
+            row["token_f1"] = None
+        else:
+            stats["answerable"] += 1
+            em = exact_match(prediction, record["answer"])
+            f1 = token_f1(prediction, record["answer"])
+            stats["exact_matches"] += em
+            stats["false_refusals"] += int(abstained)
+            total_f1 += f1
+            row["exact_match"] = em
+            row["token_f1"] = round(f1, 4)
 
-            # 모델 답변 생성
-            prediction = generate_answer(model, tokenizer, question)
-
-            # 정확히 지정된 문자열일 때만 답변 거부 인정
-            abstained = prediction == ABSTAIN
-
-            em = None
-            f1 = None
-
-            if impossible:
-                stats["impossible"] += 1
-
-                if abstained:
-                    stats["correct_abstentions"] += 1
-
-            else:
-                stats["answerable"] += 1
-
-                em = exact_match(prediction, reference)
-                f1 = token_f1(prediction, reference)
-
-                stats["exact_matches"] += em
-                total_f1 += f1
-
-                if abstained:
-                    stats["false_refusals"] += 1
-
-            # 개별 평가 결과
-            result = {
-                "id": record["id"],
-                "question": question,
-                "reference_answer": reference,
-                "is_impossible": impossible,
-                "prediction": prediction,
-                "abstained": abstained,
-                "exact_match": em,
-                "token_f1": round(f1, 4) if f1 is not None else None
-            }
-
-            # JSONL 형태로 즉시 저장
-            file.write(json.dumps(result, ensure_ascii=False) + "\n")
-            file.flush()
-
-            # 진행 상태 출력
-            print(
-                f"[{index}/{len(records)}] "
-                f"{record['id']} | "
-                f"F1={f1:.4f} " if f1 is not None
-                else
-                f"[{index}/{len(records)}] "
-                f"{record['id']} | Impossible"
-            )
-
-    # 최종 평가 지표
-    metrics = {
+    return {
         "model": MODEL_NAME,
-        "dataset": "validation",
+        "dataset": dataset,
         "total": len(records),
+        "batch_size": batch_size,
         "max_new_tokens": MAX_NEW_TOKENS,
         "answerable": stats["answerable"],
         "impossible": stats["impossible"],
-        "exact_match_percent": percentage(
-            stats["exact_matches"],
-            stats["answerable"]
-        ),
-        "token_f1_percent": percentage(
-            total_f1,
-            stats["answerable"]
-        ),
+        "exact_match_percent": percentage(stats["exact_matches"], stats["answerable"]),
+        "token_f1_percent": percentage(total_f1, stats["answerable"]),
         "abstention_rate_percent": percentage(
-            stats["correct_abstentions"],
-            stats["impossible"]
+            stats["correct_abstentions"], stats["impossible"]
         ),
         "false_refusal_rate_percent": percentage(
-            stats["false_refusals"],
-            stats["answerable"]
-        )
+            stats["false_refusals"], stats["answerable"]
+        ),
     }
 
-    return metrics
+
+def save_jsonl(path, records):
+    temp_path = path.with_suffix(path.suffix + ".part")
+    try:
+        with open(temp_path, "w", encoding="utf-8") as file:
+            for record in records:
+                file.write(json.dumps(record, ensure_ascii=False) + "\n")
+        temp_path.replace(path)
+    finally:
+        temp_path.unlink(missing_ok=True)
+
+
+def read_jsonl(path):
+    with open(path, encoding="utf-8") as file:
+        return [json.loads(line) for line in file if line.strip()]
 
 
 def main():
     parser = argparse.ArgumentParser()
-
-    # 0이면 Validation 전체 평가
+    parser.add_argument("--dataset", choices=("clean", "original"), default="clean")
+    parser.add_argument("--batch-size", type=int, default=4)
+    parser.add_argument("--limit", type=int, default=0)
+    parser.add_argument("--reuse", action="store_true")
     parser.add_argument(
-        "--limit",
-        type=int,
-        default=0,
-        help="평가할 질문 수. 0이면 전체 평가"
+        "--predictions", type=Path, default=None,
+        help="--reuse 시 기존 JSONL 파일 경로 (미지정 시 현재 Batch 출력 사용)",
     )
-
     args = parser.parse_args()
 
-    if args.limit < 0:
-        parser.error("--limit must be >= 0")
+    if args.batch_size < 1 or args.limit < 0:
+        parser.error("--batch-size >= 1, --limit >= 0 이어야 합니다.")
+    if args.predictions is not None and not args.reuse:
+        parser.error("--predictions는 --reuse와 함께 사용해야 합니다.")
 
-    RESULT_DIR.mkdir(parents=True, exist_ok=True)
-
-    # Validation 데이터 로드
-    with open(DATA_PATH, "r", encoding="utf-8") as file:
+    data_name = "val_clean.json" if args.dataset == "clean" else "val.json"
+    with open(DATA_DIR / data_name, encoding="utf-8") as file:
         records = json.load(file)
+    if args.limit:
+        records = records[: args.limit]
+    if not records:
+        raise ValueError("평가 데이터가 비어 있습니다.")
 
-    assert records, "Validation dataset is empty"
-
-    # 일부 샘플만 검증 가능
-    if args.limit > 0:
-        records = records[:args.limit]
-        prefix = "base_val_smoke"
-    else:
-        prefix = "base_val"
-
+    prefix = f"base_val_{args.dataset}_b{args.batch_size}"
+    if args.limit:
+        prefix += f"_smoke{args.limit}"
+    RESULT_DIR.mkdir(parents=True, exist_ok=True)
     prediction_path = RESULT_DIR / f"{prefix}_predictions.jsonl"
     metrics_path = RESULT_DIR / f"{prefix}_metrics.json"
+    inference_seconds = None
+    peak_memory_gb = None
 
     print("Evaluation Samples:", len(records))
+    print("Dataset:", data_name)
+    print("Batch Size:", args.batch_size)
 
-    # Base Model 로드
-    model, tokenizer = load_model()
+    if args.reuse:
+        source_path = args.predictions or prediction_path
+        predictions = read_jsonl(source_path)
+        print("Reuse Predictions:", source_path)
+        # 원본 생성 당시 저장된 속도 측정값이 있다면 유지
+        if metrics_path.exists():
+            with open(metrics_path, encoding="utf-8") as file:
+                old_metrics = json.load(file)
+            if (
+                old_metrics.get("dataset") == args.dataset
+                and old_metrics.get("total") == len(records)
+                and old_metrics.get("batch_size") == args.batch_size
+            ):
+                inference_seconds = old_metrics.get("generation_seconds")
+                peak_memory_gb = old_metrics.get("peak_gpu_memory_gb")
+    else:
+        model, tokenizer, generation_config = load_model()
+        predictions, inference_seconds, peak_memory_gb = make_prediction_rows(
+            model, tokenizer, generation_config, records, args.batch_size
+        )
 
-    # 성능 평가
-    metrics = evaluate(model, tokenizer, records, prediction_path)
+    metrics = score_predictions(records, predictions, args.dataset, args.batch_size)
+    metrics["generation_seconds"] = inference_seconds
+    metrics["questions_per_second"] = (
+        round(len(records) / inference_seconds, 3)
+        if inference_seconds is not None and inference_seconds > 0 else None
+    )
+    metrics["peak_gpu_memory_gb"] = peak_memory_gb
 
-    # 평가 지표 저장
+    # 재평가 시 원본 예측 파일은 변경하지 않고 지표만 다시 저장
+    if not args.reuse:
+        save_jsonl(prediction_path, predictions)
+
     with open(metrics_path, "w", encoding="utf-8") as file:
         json.dump(metrics, file, ensure_ascii=False, indent=2)
 
     print("\n[Base Model Evaluation]")
     for key, value in metrics.items():
         print(f"{key}: {value}")
-
-    print("\nPredictions:", prediction_path)
     print("Metrics:", metrics_path)
-
     print("Base Model Evaluation: OK")
 
 
