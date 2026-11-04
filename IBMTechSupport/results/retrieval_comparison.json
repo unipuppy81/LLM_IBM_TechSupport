@@ -1,0 +1,6510 @@
+{
+  "bm25": {
+    "metrics": {
+      "dataset": "val_clean.json",
+      "total_records": 135,
+      "evaluated_questions": 90,
+      "skipped_impossible": 45,
+      "skipped_no_gold": 0,
+      "hit_at_5": 53.33,
+      "recall_at_5": 53.33,
+      "mrr_at_10": 0.4318,
+      "avg_latency_ms": 26.721,
+      "p95_latency_ms": 34.991
+    },
+    "details": [
+      {
+        "id": "TRAIN_Q137",
+        "gold_filenames": [
+          "swg21443723.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_03882_chunk_0001",
+            "filename": "swg1IV73173.txt",
+            "score": 98.9803
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_03946_chunk_0001",
+            "filename": "swg1IV76435.txt",
+            "score": 98.3197
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_15289_chunk_0001",
+            "filename": "swg21509017.txt",
+            "score": 82.6294
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_14249_chunk_0003",
+            "filename": "swg21460740.txt",
+            "score": 80.2554
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_14249_chunk_0002",
+            "filename": "swg21460740.txt",
+            "score": 79.8065
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_24818_chunk_0001",
+            "filename": "swg22000798.txt",
+            "score": 79.6726
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_12988_chunk_0000",
+            "filename": "swg21403644.txt",
+            "score": 79.2354
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_18458_chunk_0001",
+            "filename": "swg21650364.txt",
+            "score": 78.3639
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_23587_chunk_0000",
+            "filename": "swg21984514.txt",
+            "score": 76.6089
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_22732_chunk_0000",
+            "filename": "swg21974848.txt",
+            "score": 73.8273
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 72.823
+      },
+      {
+        "id": "TRAIN_Q270",
+        "gold_filenames": [
+          "swg27046675.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_28144_chunk_0000",
+            "filename": "swg27046675.txt",
+            "score": 67.9842
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_01336_chunk_0001",
+            "filename": "swg1HE12432.txt",
+            "score": 39.5587
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_01334_chunk_0001",
+            "filename": "swg1HE12427.txt",
+            "score": 36.1301
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_13118_chunk_0000",
+            "filename": "swg21410440.txt",
+            "score": 35.6495
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_01336_chunk_0000",
+            "filename": "swg1HE12432.txt",
+            "score": 35.3891
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_03627_chunk_0002",
+            "filename": "swg1IV54662.txt",
+            "score": 32.1185
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_06259_chunk_0001",
+            "filename": "swg1LO77915.txt",
+            "score": 30.3926
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_16674_chunk_0000",
+            "filename": "swg21598137.txt",
+            "score": 30.3921
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_21858_chunk_0000",
+            "filename": "swg21962024.txt",
+            "score": 29.7469
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_00975_chunk_0000",
+            "filename": "swg1GA16014.txt",
+            "score": 29.7234
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 39.91
+      },
+      {
+        "id": "TRAIN_Q113",
+        "gold_filenames": [
+          "swg21981881.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_23347_chunk_0000",
+            "filename": "swg21981881.txt",
+            "score": 56.5248
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_23108_chunk_0000",
+            "filename": "swg21978855.txt",
+            "score": 34.9365
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_24410_chunk_0001",
+            "filename": "swg21995382.txt",
+            "score": 32.593
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_24136_chunk_0000",
+            "filename": "swg21991583.txt",
+            "score": 31.7403
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_01363_chunk_0002",
+            "filename": "swg1HE12524.txt",
+            "score": 31.4704
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_24406_chunk_0001",
+            "filename": "swg21995290.txt",
+            "score": 31.2223
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_23348_chunk_0000",
+            "filename": "swg21981882.txt",
+            "score": 31.1004
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_23391_chunk_0000",
+            "filename": "swg21982354.txt",
+            "score": 30.6416
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_27119_chunk_0000",
+            "filename": "swg24042026.txt",
+            "score": 29.234
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_23152_chunk_0000",
+            "filename": "swg21979457.txt",
+            "score": 28.7896
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 26.068
+      },
+      {
+        "id": "TRAIN_Q037",
+        "gold_filenames": [
+          "swg21576245.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_12007_chunk_0002",
+            "filename": "swg21316928.txt",
+            "score": 66.7617
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_21070_chunk_0000",
+            "filename": "swg21699908.txt",
+            "score": 65.6879
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_17560_chunk_0000",
+            "filename": "swg21624858.txt",
+            "score": 65.1454
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_14013_chunk_0000",
+            "filename": "swg21451201.txt",
+            "score": 62.7104
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_17592_chunk_0000",
+            "filename": "swg21625710.txt",
+            "score": 60.8027
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_16731_chunk_0001",
+            "filename": "swg21599398.txt",
+            "score": 59.6163
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_08775_chunk_0006",
+            "filename": "swg1PK91233.txt",
+            "score": 59.3167
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_16866_chunk_0000",
+            "filename": "swg21606884.txt",
+            "score": 59.1347
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_12007_chunk_0000",
+            "filename": "swg21316928.txt",
+            "score": 58.7351
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_03330_chunk_0000",
+            "filename": "swg1IV25262.txt",
+            "score": 58.6627
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 40.312
+      },
+      {
+        "id": "TRAIN_Q549",
+        "gold_filenames": [
+          "swg21985630.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_23668_chunk_0000",
+            "filename": "swg21985630.txt",
+            "score": 21.7445
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_14532_chunk_0000",
+            "filename": "swg21477388.txt",
+            "score": 21.0159
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_19306_chunk_0000",
+            "filename": "swg21671107.txt",
+            "score": 19.0449
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_14473_chunk_0000",
+            "filename": "swg21476176.txt",
+            "score": 18.2449
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_00183_chunk_0000",
+            "filename": "isg3T1020613.txt",
+            "score": 18.1417
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_17859_chunk_0000",
+            "filename": "swg21634954.txt",
+            "score": 17.8959
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_03913_chunk_0000",
+            "filename": "swg1IV74714.txt",
+            "score": 17.4569
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_01201_chunk_0001",
+            "filename": "swg1HE02471.txt",
+            "score": 17.3911
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_22654_chunk_0000",
+            "filename": "swg21974097.txt",
+            "score": 17.0014
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_17344_chunk_0000",
+            "filename": "swg21619205.txt",
+            "score": 16.5648
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 34.991
+      },
+      {
+        "id": "TRAIN_Q006",
+        "gold_filenames": [
+          "swg22008493.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_25516_chunk_0000",
+            "filename": "swg22008493.txt",
+            "score": 36.8462
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_25054_chunk_0000",
+            "filename": "swg22003397.txt",
+            "score": 34.6757
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_25844_chunk_0000",
+            "filename": "swg22011984.txt",
+            "score": 28.9469
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_25844_chunk_0004",
+            "filename": "swg22011984.txt",
+            "score": 27.7334
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_06046_chunk_0000",
+            "filename": "swg1JR59361.txt",
+            "score": 26.5814
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_26033_chunk_0000",
+            "filename": "swg22014053.txt",
+            "score": 26.2176
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_25968_chunk_0000",
+            "filename": "swg22013336.txt",
+            "score": 24.4367
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_25792_chunk_0002",
+            "filename": "swg22011469.txt",
+            "score": 23.6945
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_26088_chunk_0000",
+            "filename": "swg22014471.txt",
+            "score": 23.6092
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_26344_chunk_0000",
+            "filename": "swg22016771.txt",
+            "score": 23.5709
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 32.696
+      },
+      {
+        "id": "TRAIN_Q535",
+        "gold_filenames": [
+          "swg21690184.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_20374_chunk_0000",
+            "filename": "swg21690184.txt",
+            "score": 84.9202
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_02639_chunk_0000",
+            "filename": "swg1IT10958.txt",
+            "score": 35.2335
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_13089_chunk_0000",
+            "filename": "swg21408665.txt",
+            "score": 33.4931
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_24005_chunk_0000",
+            "filename": "swg21990051.txt",
+            "score": 32.2882
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_02007_chunk_0001",
+            "filename": "swg1IC96939.txt",
+            "score": 31.4593
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_07617_chunk_0001",
+            "filename": "swg1PI82940.txt",
+            "score": 30.1175
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_07703_chunk_0001",
+            "filename": "swg1PI88904.txt",
+            "score": 29.8948
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_01851_chunk_0006",
+            "filename": "swg1IC86795.txt",
+            "score": 28.6986
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_01740_chunk_0000",
+            "filename": "swg1IC76559.txt",
+            "score": 28.459
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_09615_chunk_0001",
+            "filename": "swg1PM63218.txt",
+            "score": 28.348
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 31.215
+      },
+      {
+        "id": "DEV_Q035",
+        "gold_filenames": [
+          "swg22013168.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_25953_chunk_0000",
+            "filename": "swg22013168.txt",
+            "score": 53.0129
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_00762_chunk_0000",
+            "filename": "nas8N1022348.txt",
+            "score": 42.7534
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_25799_chunk_0000",
+            "filename": "swg22011533.txt",
+            "score": 40.7696
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_25640_chunk_0000",
+            "filename": "swg22009851.txt",
+            "score": 40.1989
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_25942_chunk_0000",
+            "filename": "swg22013088.txt",
+            "score": 39.9255
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_25720_chunk_0000",
+            "filename": "swg22010601.txt",
+            "score": 39.3641
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_25826_chunk_0000",
+            "filename": "swg22011830.txt",
+            "score": 38.5977
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_23714_chunk_0000",
+            "filename": "swg21986144.txt",
+            "score": 35.7705
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_25654_chunk_0000",
+            "filename": "swg22009964.txt",
+            "score": 35.5504
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_19911_chunk_0000",
+            "filename": "swg21682094.txt",
+            "score": 33.3856
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 34.667
+      },
+      {
+        "id": "TRAIN_Q100",
+        "gold_filenames": [
+          "swg24039742.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_19856_chunk_0000",
+            "filename": "swg21681206.txt",
+            "score": 19.9201
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_06445_chunk_0001",
+            "filename": "swg1OW57262.txt",
+            "score": 19.0302
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_03465_chunk_0001",
+            "filename": "swg1IV39784.txt",
+            "score": 18.7022
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_11949_chunk_0000",
+            "filename": "swg21313006.txt",
+            "score": 18.5358
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_23079_chunk_0000",
+            "filename": "swg21978507.txt",
+            "score": 18.4649
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_25573_chunk_0001",
+            "filename": "swg22009061.txt",
+            "score": 18.4301
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_06312_chunk_0001",
+            "filename": "swg1OA21811.txt",
+            "score": 18.2981
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_18510_chunk_0000",
+            "filename": "swg21651500.txt",
+            "score": 17.8441
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_22348_chunk_0000",
+            "filename": "swg21969566.txt",
+            "score": 17.7373
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_23392_chunk_0000",
+            "filename": "swg21982364.txt",
+            "score": 17.6091
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 30.137
+      },
+      {
+        "id": "TRAIN_Q103",
+        "gold_filenames": [
+          "swg27050456.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_08762_chunk_0001",
+            "filename": "swg1PK89909.txt",
+            "score": 202.72
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_08790_chunk_0001",
+            "filename": "swg1PK93789.txt",
+            "score": 202.72
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_09402_chunk_0000",
+            "filename": "swg1PM47018.txt",
+            "score": 197.2127
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_07008_chunk_0001",
+            "filename": "swg1PI41468.txt",
+            "score": 184.521
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_13937_chunk_0001",
+            "filename": "swg21448370.txt",
+            "score": 166.6547
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_06364_chunk_0005",
+            "filename": "swg1OA40383.txt",
+            "score": 165.5972
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_07262_chunk_0003",
+            "filename": "swg1PI58355.txt",
+            "score": 164.0808
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_15645_chunk_0001",
+            "filename": "swg21551596.txt",
+            "score": 160.1107
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_08282_chunk_0002",
+            "filename": "swg1PK44318.txt",
+            "score": 159.9115
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_11788_chunk_0000",
+            "filename": "swg21297324.txt",
+            "score": 159.6086
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 34.288
+      },
+      {
+        "id": "TRAIN_Q316",
+        "gold_filenames": [
+          "swg21498634.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_18023_chunk_0000",
+            "filename": "swg21638782.txt",
+            "score": 32.3729
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_17800_chunk_0000",
+            "filename": "swg21633306.txt",
+            "score": 29.2869
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_16062_chunk_0000",
+            "filename": "swg21576087.txt",
+            "score": 28.4901
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_11383_chunk_0000",
+            "filename": "swg21256195.txt",
+            "score": 27.3021
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_16062_chunk_0001",
+            "filename": "swg21576087.txt",
+            "score": 26.5119
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_17800_chunk_0001",
+            "filename": "swg21633306.txt",
+            "score": 26.2237
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_15294_chunk_0000",
+            "filename": "swg21509220.txt",
+            "score": 25.4521
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_17898_chunk_0001",
+            "filename": "swg21635704.txt",
+            "score": 25.1635
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_16093_chunk_0000",
+            "filename": "swg21577098.txt",
+            "score": 25.0146
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_21727_chunk_0002",
+            "filename": "swg21960234.txt",
+            "score": 24.7772
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 25.804
+      },
+      {
+        "id": "TRAIN_Q019",
+        "gold_filenames": [
+          "swg22001418.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_19369_chunk_0000",
+            "filename": "swg21672109.txt",
+            "score": 52.9665
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_24868_chunk_0000",
+            "filename": "swg22001418.txt",
+            "score": 48.7757
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_21548_chunk_0000",
+            "filename": "swg21903724.txt",
+            "score": 46.3396
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_14488_chunk_0000",
+            "filename": "swg21476467.txt",
+            "score": 45.5331
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_14534_chunk_0000",
+            "filename": "swg21477392.txt",
+            "score": 45.2104
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_14610_chunk_0000",
+            "filename": "swg21479763.txt",
+            "score": 43.7715
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_14608_chunk_0000",
+            "filename": "swg21479736.txt",
+            "score": 43.342
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_14556_chunk_0000",
+            "filename": "swg21478016.txt",
+            "score": 42.5956
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_14591_chunk_0000",
+            "filename": "swg21479339.txt",
+            "score": 42.3381
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_20681_chunk_0000",
+            "filename": "swg21694688.txt",
+            "score": 42.3169
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 0.5,
+        "latency_ms": 32.589
+      },
+      {
+        "id": "DEV_Q167",
+        "gold_filenames": [
+          "swg21580830.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_16213_chunk_0000",
+            "filename": "swg21580830.txt",
+            "score": 41.8763
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_16266_chunk_0003",
+            "filename": "swg21585104.txt",
+            "score": 27.7436
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_17418_chunk_0000",
+            "filename": "swg21621554.txt",
+            "score": 26.7067
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_10729_chunk_0001",
+            "filename": "swg21152288.txt",
+            "score": 25.3526
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_11784_chunk_0000",
+            "filename": "swg21296860.txt",
+            "score": 25.2765
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_16213_chunk_0001",
+            "filename": "swg21580830.txt",
+            "score": 25.1478
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_12984_chunk_0000",
+            "filename": "swg21403468.txt",
+            "score": 24.7568
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_24566_chunk_0000",
+            "filename": "swg21997793.txt",
+            "score": 24.4259
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_19877_chunk_0000",
+            "filename": "swg21681549.txt",
+            "score": 24.2312
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_27897_chunk_0005",
+            "filename": "swg27040473.txt",
+            "score": 24.1415
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 24.251
+      },
+      {
+        "id": "DEV_Q028",
+        "gold_filenames": [
+          "swg21975747.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_22818_chunk_0000",
+            "filename": "swg21975747.txt",
+            "score": 59.7096
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_25674_chunk_0000",
+            "filename": "swg22010112.txt",
+            "score": 49.7953
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_19641_chunk_0000",
+            "filename": "swg21676772.txt",
+            "score": 48.7739
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_22269_chunk_0000",
+            "filename": "swg21968674.txt",
+            "score": 47.6191
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_22910_chunk_0000",
+            "filename": "swg21976558.txt",
+            "score": 47.509
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_19902_chunk_0000",
+            "filename": "swg21681915.txt",
+            "score": 47.3641
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_23632_chunk_0000",
+            "filename": "swg21985095.txt",
+            "score": 47.2328
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_25361_chunk_0000",
+            "filename": "swg22006813.txt",
+            "score": 46.1124
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_24067_chunk_0000",
+            "filename": "swg21990711.txt",
+            "score": 45.3494
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_22049_chunk_0000",
+            "filename": "swg21965152.txt",
+            "score": 45.1202
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 25.627
+      },
+      {
+        "id": "TRAIN_Q172",
+        "gold_filenames": [
+          "swg21998312.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_24594_chunk_0000",
+            "filename": "swg21998312.txt",
+            "score": 31.8107
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_18625_chunk_0000",
+            "filename": "swg21654825.txt",
+            "score": 21.2006
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_17617_chunk_0000",
+            "filename": "swg21626316.txt",
+            "score": 19.8556
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_04009_chunk_0000",
+            "filename": "swg1IV80888.txt",
+            "score": 18.2754
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_23538_chunk_0000",
+            "filename": "swg21983916.txt",
+            "score": 17.906
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_25387_chunk_0000",
+            "filename": "swg22007135.txt",
+            "score": 17.665
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_04163_chunk_0000",
+            "filename": "swg1IV91000.txt",
+            "score": 17.6053
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_24573_chunk_0000",
+            "filename": "swg21997889.txt",
+            "score": 17.5901
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_24728_chunk_0003",
+            "filename": "swg22000057.txt",
+            "score": 17.5402
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_02352_chunk_0001",
+            "filename": "swg1IO26390.txt",
+            "score": 17.4024
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 21.969
+      },
+      {
+        "id": "TRAIN_Q058",
+        "gold_filenames": [
+          "swg1pi37248.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_17353_chunk_0000",
+            "filename": "swg21619511.txt",
+            "score": 21.3737
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_06531_chunk_0002",
+            "filename": "swg1PI09576.txt",
+            "score": 20.7462
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_15051_chunk_0000",
+            "filename": "swg21502298.txt",
+            "score": 20.0852
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_18574_chunk_0000",
+            "filename": "swg21653537.txt",
+            "score": 19.2367
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_05236_chunk_0001",
+            "filename": "swg1IZ95307.txt",
+            "score": 19.0585
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_16577_chunk_0000",
+            "filename": "swg21594974.txt",
+            "score": 18.8241
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_17150_chunk_0000",
+            "filename": "swg21613638.txt",
+            "score": 18.1177
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_17483_chunk_0000",
+            "filename": "swg21622887.txt",
+            "score": 18.1044
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_19628_chunk_0000",
+            "filename": "swg21676467.txt",
+            "score": 17.4377
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_13164_chunk_0000",
+            "filename": "swg21412647.txt",
+            "score": 17.3928
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 21.555
+      },
+      {
+        "id": "TRAIN_Q236",
+        "gold_filenames": [
+          "swg21507587.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_14628_chunk_0001",
+            "filename": "swg21480369.txt",
+            "score": 67.0683
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_14563_chunk_0000",
+            "filename": "swg21478316.txt",
+            "score": 62.9686
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_14788_chunk_0000",
+            "filename": "swg21487431.txt",
+            "score": 61.9062
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_14806_chunk_0000",
+            "filename": "swg21487938.txt",
+            "score": 60.9051
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_14488_chunk_0000",
+            "filename": "swg21476467.txt",
+            "score": 60.2441
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_14794_chunk_0000",
+            "filename": "swg21487595.txt",
+            "score": 60.0376
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_14691_chunk_0000",
+            "filename": "swg21482640.txt",
+            "score": 59.4983
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_15335_chunk_0000",
+            "filename": "swg21512068.txt",
+            "score": 59.2516
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_14796_chunk_0001",
+            "filename": "swg21487600.txt",
+            "score": 59.066
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_14809_chunk_0000",
+            "filename": "swg21487990.txt",
+            "score": 59.011
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 27.769
+      },
+      {
+        "id": "TRAIN_Q307",
+        "gold_filenames": [
+          "swg21967589.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_22199_chunk_0000",
+            "filename": "swg21967589.txt",
+            "score": 194.5002
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_22199_chunk_0002",
+            "filename": "swg21967589.txt",
+            "score": 120.7618
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_22199_chunk_0001",
+            "filename": "swg21967589.txt",
+            "score": 115.2925
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_16305_chunk_0000",
+            "filename": "swg21586312.txt",
+            "score": 106.535
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_19551_chunk_0000",
+            "filename": "swg21675252.txt",
+            "score": 100.0096
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_19539_chunk_0000",
+            "filename": "swg21675140.txt",
+            "score": 98.7035
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_18477_chunk_0000",
+            "filename": "swg21650712.txt",
+            "score": 88.2093
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_01749_chunk_0000",
+            "filename": "swg1IC77162.txt",
+            "score": 83.707
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_19720_chunk_0000",
+            "filename": "swg21678684.txt",
+            "score": 77.9301
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_22199_chunk_0003",
+            "filename": "swg21967589.txt",
+            "score": 77.3116
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 32.532
+      },
+      {
+        "id": "TRAIN_Q087",
+        "gold_filenames": [
+          "swg21631478.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_19565_chunk_0000",
+            "filename": "swg21675509.txt",
+            "score": 35.2509
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_06500_chunk_0001",
+            "filename": "swg1PI08015.txt",
+            "score": 32.7979
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_12266_chunk_0000",
+            "filename": "swg21338882.txt",
+            "score": 31.3519
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_06500_chunk_0002",
+            "filename": "swg1PI08015.txt",
+            "score": 31.2846
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_19628_chunk_0000",
+            "filename": "swg21676467.txt",
+            "score": 30.6783
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_21570_chunk_0000",
+            "filename": "swg21957806.txt",
+            "score": 30.654
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_22890_chunk_0000",
+            "filename": "swg21976351.txt",
+            "score": 29.5271
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_17734_chunk_0002",
+            "filename": "swg21631877.txt",
+            "score": 29.3107
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_27882_chunk_0004",
+            "filename": "swg27040108.txt",
+            "score": 29.123
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_25908_chunk_0001",
+            "filename": "swg22012734.txt",
+            "score": 29.051
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 31.059
+      },
+      {
+        "id": "TRAIN_Q581",
+        "gold_filenames": [
+          "swg21959444.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_06920_chunk_0001",
+            "filename": "swg1PI35893.txt",
+            "score": 160.3658
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_06920_chunk_0005",
+            "filename": "swg1PI35893.txt",
+            "score": 134.8265
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_06920_chunk_0002",
+            "filename": "swg1PI35893.txt",
+            "score": 127.3777
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_07238_chunk_0000",
+            "filename": "swg1PI57148.txt",
+            "score": 106.7495
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_06479_chunk_0001",
+            "filename": "swg1PI06311.txt",
+            "score": 102.5996
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_19671_chunk_0000",
+            "filename": "swg21677568.txt",
+            "score": 88.1033
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_19671_chunk_0002",
+            "filename": "swg21677568.txt",
+            "score": 87.9642
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_22260_chunk_0001",
+            "filename": "swg21968507.txt",
+            "score": 87.9036
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_04843_chunk_0001",
+            "filename": "swg1IZ50471.txt",
+            "score": 87.342
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_06920_chunk_0000",
+            "filename": "swg1PI35893.txt",
+            "score": 87.3117
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 32.758
+      },
+      {
+        "id": "TRAIN_Q295",
+        "gold_filenames": [
+          "swg21499307.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_18569_chunk_0000",
+            "filename": "swg21653261.txt",
+            "score": 48.2779
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_18884_chunk_0000",
+            "filename": "swg21662227.txt",
+            "score": 44.4742
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_02065_chunk_0001",
+            "filename": "swg1IC99693.txt",
+            "score": 43.6474
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_03580_chunk_0003",
+            "filename": "swg1IV51054.txt",
+            "score": 41.5448
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_19379_chunk_0003",
+            "filename": "swg21672355.txt",
+            "score": 41.308
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_02047_chunk_0001",
+            "filename": "swg1IC98974.txt",
+            "score": 40.9296
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_03580_chunk_0004",
+            "filename": "swg1IV51054.txt",
+            "score": 39.9743
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_03580_chunk_0005",
+            "filename": "swg1IV51054.txt",
+            "score": 39.8304
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_03580_chunk_0006",
+            "filename": "swg1IV51054.txt",
+            "score": 39.8304
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_03580_chunk_0007",
+            "filename": "swg1IV51054.txt",
+            "score": 39.5101
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 25.155
+      },
+      {
+        "id": "TRAIN_Q368",
+        "gold_filenames": [
+          "swg21318303.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_19891_chunk_0000",
+            "filename": "swg21681687.txt",
+            "score": 100.9563
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_19891_chunk_0001",
+            "filename": "swg21681687.txt",
+            "score": 55.602
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_04089_chunk_0000",
+            "filename": "swg1IV86027.txt",
+            "score": 54.7226
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_02891_chunk_0000",
+            "filename": "swg1IT18829.txt",
+            "score": 51.7122
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_11729_chunk_0000",
+            "filename": "swg21292144.txt",
+            "score": 49.6994
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_12776_chunk_0000",
+            "filename": "swg21391005.txt",
+            "score": 46.6751
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_01708_chunk_0000",
+            "filename": "swg1IC74458.txt",
+            "score": 46.0032
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_06330_chunk_0001",
+            "filename": "swg1OA28852.txt",
+            "score": 45.4117
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_01708_chunk_0001",
+            "filename": "swg1IC74458.txt",
+            "score": 44.9824
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_15350_chunk_0000",
+            "filename": "swg21512416.txt",
+            "score": 44.9651
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 28.41
+      },
+      {
+        "id": "TRAIN_Q431",
+        "gold_filenames": [
+          "swg21961222.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_14296_chunk_0001",
+            "filename": "swg21462187.txt",
+            "score": 30.9943
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_05209_chunk_0000",
+            "filename": "swg1IZ89613.txt",
+            "score": 29.3953
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_03390_chunk_0001",
+            "filename": "swg1IV32710.txt",
+            "score": 29.0208
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_14402_chunk_0002",
+            "filename": "swg21472714.txt",
+            "score": 28.9029
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_23478_chunk_0001",
+            "filename": "swg21983225.txt",
+            "score": 27.8599
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_12589_chunk_0001",
+            "filename": "swg21380494.txt",
+            "score": 27.6986
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_21815_chunk_0000",
+            "filename": "swg21961222.txt",
+            "score": 27.6447
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_05128_chunk_0002",
+            "filename": "swg1IZ78754.txt",
+            "score": 27.5034
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_14574_chunk_0000",
+            "filename": "swg21478600.txt",
+            "score": 27.1431
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_14574_chunk_0001",
+            "filename": "swg21478600.txt",
+            "score": 26.8204
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.1429,
+        "latency_ms": 25.907
+      },
+      {
+        "id": "TRAIN_Q336",
+        "gold_filenames": [
+          "swg21882989.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_21337_chunk_0001",
+            "filename": "swg21882989.txt",
+            "score": 109.3548
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_21337_chunk_0000",
+            "filename": "swg21882989.txt",
+            "score": 97.8243
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_11809_chunk_0002",
+            "filename": "swg21299170.txt",
+            "score": 91.5938
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_02547_chunk_0005",
+            "filename": "swg1IT07768.txt",
+            "score": 90.2214
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_02547_chunk_0002",
+            "filename": "swg1IT07768.txt",
+            "score": 80.8808
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_02547_chunk_0004",
+            "filename": "swg1IT07768.txt",
+            "score": 76.9153
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_21937_chunk_0002",
+            "filename": "swg21963265.txt",
+            "score": 74.9489
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_11809_chunk_0003",
+            "filename": "swg21299170.txt",
+            "score": 74.2622
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_02547_chunk_0001",
+            "filename": "swg1IT07768.txt",
+            "score": 74.0784
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_21337_chunk_0004",
+            "filename": "swg21882989.txt",
+            "score": 73.8914
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 26.498
+      },
+      {
+        "id": "DEV_Q220",
+        "gold_filenames": [
+          "swg21960375.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_21740_chunk_0000",
+            "filename": "swg21960375.txt",
+            "score": 49.5401
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_20554_chunk_0007",
+            "filename": "swg21693011.txt",
+            "score": 45.7961
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_00652_chunk_0000",
+            "filename": "nas8N1020471.txt",
+            "score": 43.5101
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_20565_chunk_0000",
+            "filename": "swg21693184.txt",
+            "score": 42.9528
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_20575_chunk_0000",
+            "filename": "swg21693255.txt",
+            "score": 42.9403
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_20574_chunk_0000",
+            "filename": "swg21693254.txt",
+            "score": 42.7498
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_20584_chunk_0000",
+            "filename": "swg21693312.txt",
+            "score": 42.69
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_20618_chunk_0000",
+            "filename": "swg21693877.txt",
+            "score": 42.5952
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_20612_chunk_0000",
+            "filename": "swg21693669.txt",
+            "score": 42.5919
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_20554_chunk_0000",
+            "filename": "swg21693011.txt",
+            "score": 42.4471
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 23.945
+      },
+      {
+        "id": "TRAIN_Q231",
+        "gold_filenames": [
+          "swg21675858.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_19587_chunk_0000",
+            "filename": "swg21675858.txt",
+            "score": 80.4776
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_04231_chunk_0001",
+            "filename": "swg1IV96354.txt",
+            "score": 62.6813
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_19587_chunk_0001",
+            "filename": "swg21675858.txt",
+            "score": 49.2764
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_04897_chunk_0000",
+            "filename": "swg1IZ54766.txt",
+            "score": 46.7491
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_04897_chunk_0001",
+            "filename": "swg1IZ54766.txt",
+            "score": 46.2078
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_05072_chunk_0000",
+            "filename": "swg1IZ73857.txt",
+            "score": 43.7153
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_03967_chunk_0000",
+            "filename": "swg1IV78003.txt",
+            "score": 42.3246
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_03089_chunk_0006",
+            "filename": "swg1IV02207.txt",
+            "score": 40.6713
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_17538_chunk_0000",
+            "filename": "swg21624345.txt",
+            "score": 33.3647
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_19505_chunk_0000",
+            "filename": "swg21674718.txt",
+            "score": 33.2255
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 22.929
+      },
+      {
+        "id": "TRAIN_Q526",
+        "gold_filenames": [
+          "swg27038779.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_23805_chunk_0000",
+            "filename": "swg21987140.txt",
+            "score": 16.8669
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_09647_chunk_0000",
+            "filename": "swg1PM65082.txt",
+            "score": 16.016
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_10067_chunk_0000",
+            "filename": "swg1PM98847.txt",
+            "score": 15.847
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_09223_chunk_0000",
+            "filename": "swg1PM30603.txt",
+            "score": 15.8061
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_07641_chunk_0001",
+            "filename": "swg1PI84730.txt",
+            "score": 15.0257
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_08895_chunk_0001",
+            "filename": "swg1PM04743.txt",
+            "score": 14.9274
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_06772_chunk_0000",
+            "filename": "swg1PI28202.txt",
+            "score": 14.894
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_13259_chunk_0000",
+            "filename": "swg21417451.txt",
+            "score": 14.6867
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_08945_chunk_0001",
+            "filename": "swg1PM09352.txt",
+            "score": 14.6708
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_13311_chunk_0000",
+            "filename": "swg21419661.txt",
+            "score": 14.5109
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 23.458
+      },
+      {
+        "id": "TRAIN_Q343",
+        "gold_filenames": [
+          "swg22010419.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_25958_chunk_0000",
+            "filename": "swg22013233.txt",
+            "score": 68.3319
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_22049_chunk_0000",
+            "filename": "swg21965152.txt",
+            "score": 58.5724
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_25955_chunk_0000",
+            "filename": "swg22013204.txt",
+            "score": 58.4845
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_24544_chunk_0000",
+            "filename": "swg21997466.txt",
+            "score": 57.8987
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_26293_chunk_0000",
+            "filename": "swg22016191.txt",
+            "score": 57.3927
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_24227_chunk_0000",
+            "filename": "swg21992907.txt",
+            "score": 57.17
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_25042_chunk_0000",
+            "filename": "swg22003259.txt",
+            "score": 57.0495
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_24091_chunk_0000",
+            "filename": "swg21990928.txt",
+            "score": 57.0222
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_24701_chunk_0000",
+            "filename": "swg21999661.txt",
+            "score": 57.0222
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_24500_chunk_0000",
+            "filename": "swg21996780.txt",
+            "score": 56.986
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 25.177
+      },
+      {
+        "id": "DEV_Q122",
+        "gold_filenames": [
+          "swg21969653.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_22354_chunk_0000",
+            "filename": "swg21969653.txt",
+            "score": 62.5303
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_17634_chunk_0000",
+            "filename": "swg21626666.txt",
+            "score": 48.301
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_04047_chunk_0001",
+            "filename": "swg1IV83104.txt",
+            "score": 42.1459
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_03968_chunk_0001",
+            "filename": "swg1IV78083.txt",
+            "score": 40.9519
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_04047_chunk_0000",
+            "filename": "swg1IV83104.txt",
+            "score": 39.653
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_05069_chunk_0000",
+            "filename": "swg1IZ73561.txt",
+            "score": 37.7486
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_05069_chunk_0010",
+            "filename": "swg1IZ73561.txt",
+            "score": 34.8203
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_05204_chunk_0003",
+            "filename": "swg1IZ89276.txt",
+            "score": 32.6472
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_05113_chunk_0000",
+            "filename": "swg1IZ77110.txt",
+            "score": 32.4078
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_03791_chunk_0002",
+            "filename": "swg1IV67500.txt",
+            "score": 32.3515
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 26.116
+      },
+      {
+        "id": "TRAIN_Q222",
+        "gold_filenames": [
+          "swg21599258.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_19991_chunk_0000",
+            "filename": "swg21683906.txt",
+            "score": 214.7005
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_19991_chunk_0001",
+            "filename": "swg21683906.txt",
+            "score": 90.6471
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_18617_chunk_0000",
+            "filename": "swg21654557.txt",
+            "score": 67.4909
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_27532_chunk_0000",
+            "filename": "swg27020324.txt",
+            "score": 64.2115
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_24607_chunk_0000",
+            "filename": "swg21998510.txt",
+            "score": 61.5623
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_18485_chunk_0000",
+            "filename": "swg21650919.txt",
+            "score": 61.015
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_20764_chunk_0000",
+            "filename": "swg21695922.txt",
+            "score": 51.8587
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_24183_chunk_0010",
+            "filename": "swg21992203.txt",
+            "score": 50.1603
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_22635_chunk_0000",
+            "filename": "swg21973837.txt",
+            "score": 50.0602
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_27532_chunk_0001",
+            "filename": "swg27020324.txt",
+            "score": 49.9091
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 26.956
+      },
+      {
+        "id": "DEV_Q154",
+        "gold_filenames": [
+          "swg21598417.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_16400_chunk_0000",
+            "filename": "swg21588811.txt",
+            "score": 33.7413
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_04435_chunk_0001",
+            "filename": "swg1IY88294.txt",
+            "score": 30.1085
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_27008_chunk_0057",
+            "filename": "swg24039742.txt",
+            "score": 29.4733
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_16588_chunk_0000",
+            "filename": "swg21595271.txt",
+            "score": 28.8787
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_16683_chunk_0000",
+            "filename": "swg21598417.txt",
+            "score": 28.8787
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_12405_chunk_0002",
+            "filename": "swg21358512.txt",
+            "score": 28.7336
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_18940_chunk_0000",
+            "filename": "swg21663611.txt",
+            "score": 27.044
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_04455_chunk_0000",
+            "filename": "swg1IY90277.txt",
+            "score": 26.8989
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_04435_chunk_0000",
+            "filename": "swg1IY88294.txt",
+            "score": 26.8863
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_16400_chunk_0001",
+            "filename": "swg21588811.txt",
+            "score": 26.7032
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 0.2,
+        "latency_ms": 24.384
+      },
+      {
+        "id": "DEV_Q158",
+        "gold_filenames": [
+          "swg21960062.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_06383_chunk_0003",
+            "filename": "swg1OA44764.txt",
+            "score": 25.0573
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_06383_chunk_0002",
+            "filename": "swg1OA44764.txt",
+            "score": 25.0511
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_08190_chunk_0006",
+            "filename": "swg1PK27613.txt",
+            "score": 24.1944
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_08190_chunk_0008",
+            "filename": "swg1PK27613.txt",
+            "score": 23.6865
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_21710_chunk_0041",
+            "filename": "swg21960062.txt",
+            "score": 23.1683
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_08522_chunk_0002",
+            "filename": "swg1PK68226.txt",
+            "score": 23.0556
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_08190_chunk_0005",
+            "filename": "swg1PK27613.txt",
+            "score": 23.0285
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_08190_chunk_0001",
+            "filename": "swg1PK27613.txt",
+            "score": 22.6856
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_10138_chunk_0005",
+            "filename": "swg1PQ51154.txt",
+            "score": 22.5153
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_13709_chunk_0003",
+            "filename": "swg21439439.txt",
+            "score": 22.4828
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 0.2,
+        "latency_ms": 23.802
+      },
+      {
+        "id": "DEV_Q034",
+        "gold_filenames": [
+          "swg21413628.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_27687_chunk_0003",
+            "filename": "swg27024872.txt",
+            "score": 25.0548
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_12957_chunk_0000",
+            "filename": "swg21401502.txt",
+            "score": 23.8453
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_18572_chunk_0006",
+            "filename": "swg21653445.txt",
+            "score": 23.8431
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_27959_chunk_0000",
+            "filename": "swg27042119.txt",
+            "score": 23.6876
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_26820_chunk_0000",
+            "filename": "swg24035288.txt",
+            "score": 23.6621
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_16289_chunk_0002",
+            "filename": "swg21585753.txt",
+            "score": 23.3867
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_01088_chunk_0002",
+            "filename": "swg1HD64484.txt",
+            "score": 22.4622
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_14248_chunk_0000",
+            "filename": "swg21460720.txt",
+            "score": 22.3234
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_27468_chunk_0003",
+            "filename": "swg27018423.txt",
+            "score": 21.8706
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_16321_chunk_0001",
+            "filename": "swg21586791.txt",
+            "score": 21.7385
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 26.078
+      },
+      {
+        "id": "TRAIN_Q456",
+        "gold_filenames": [
+          "swg21626683.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_17635_chunk_0000",
+            "filename": "swg21626683.txt",
+            "score": 39.4803
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_11794_chunk_0000",
+            "filename": "swg21297639.txt",
+            "score": 34.6025
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_11794_chunk_0006",
+            "filename": "swg21297639.txt",
+            "score": 34.1068
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_03937_chunk_0000",
+            "filename": "swg1IV76071.txt",
+            "score": 30.9266
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_09880_chunk_0003",
+            "filename": "swg1PM85345.txt",
+            "score": 30.1431
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_01581_chunk_0002",
+            "filename": "swg1IC64230.txt",
+            "score": 29.9885
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_08144_chunk_0001",
+            "filename": "swg1PK20683.txt",
+            "score": 29.1149
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_04982_chunk_0005",
+            "filename": "swg1IZ66275.txt",
+            "score": 28.7738
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_11794_chunk_0002",
+            "filename": "swg21297639.txt",
+            "score": 28.139
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_24528_chunk_0001",
+            "filename": "swg21997207.txt",
+            "score": 28.1272
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 26.912
+      },
+      {
+        "id": "TRAIN_Q380",
+        "gold_filenames": [
+          "swg21981880.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_23346_chunk_0000",
+            "filename": "swg21981880.txt",
+            "score": 56.8302
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_28051_chunk_0000",
+            "filename": "swg27044173.txt",
+            "score": 44.4046
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_23473_chunk_0000",
+            "filename": "swg21983163.txt",
+            "score": 38.9834
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_23993_chunk_0000",
+            "filename": "swg21989919.txt",
+            "score": 36.3391
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_28051_chunk_0001",
+            "filename": "swg27044173.txt",
+            "score": 36.3021
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_01247_chunk_0000",
+            "filename": "swg1HE11993.txt",
+            "score": 32.4055
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_01247_chunk_0001",
+            "filename": "swg1HE11993.txt",
+            "score": 30.9629
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_24063_chunk_0000",
+            "filename": "swg21990692.txt",
+            "score": 28.6795
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_23582_chunk_0000",
+            "filename": "swg21984438.txt",
+            "score": 27.9115
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_18041_chunk_0000",
+            "filename": "swg21639241.txt",
+            "score": 26.8126
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 21.364
+      },
+      {
+        "id": "TRAIN_Q171",
+        "gold_filenames": [
+          "swg21700633.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_21131_chunk_0000",
+            "filename": "swg21700633.txt",
+            "score": 50.787
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_21228_chunk_0000",
+            "filename": "swg21701696.txt",
+            "score": 44.9768
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_19615_chunk_0000",
+            "filename": "swg21676326.txt",
+            "score": 44.4322
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_24011_chunk_0000",
+            "filename": "swg21990143.txt",
+            "score": 44.4052
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_21297_chunk_0000",
+            "filename": "swg21882609.txt",
+            "score": 44.1448
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_21211_chunk_0000",
+            "filename": "swg21701520.txt",
+            "score": 43.3875
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_19524_chunk_0000",
+            "filename": "swg21674944.txt",
+            "score": 42.5229
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_21212_chunk_0000",
+            "filename": "swg21701521.txt",
+            "score": 42.2926
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_20166_chunk_0000",
+            "filename": "swg21686458.txt",
+            "score": 41.948
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_21087_chunk_0000",
+            "filename": "swg21700144.txt",
+            "score": 41.8895
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 24.22
+      },
+      {
+        "id": "TRAIN_Q003",
+        "gold_filenames": [
+          "swg21179559.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_19277_chunk_0000",
+            "filename": "swg21670474.txt",
+            "score": 35.1521
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_00642_chunk_0000",
+            "filename": "nas8N1020262.txt",
+            "score": 33.8769
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_11433_chunk_0000",
+            "filename": "swg21260155.txt",
+            "score": 29.635
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_16074_chunk_0000",
+            "filename": "swg21576361.txt",
+            "score": 29.4488
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_11433_chunk_0002",
+            "filename": "swg21260155.txt",
+            "score": 29.1623
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_17912_chunk_0016",
+            "filename": "swg21636093.txt",
+            "score": 28.7942
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_22588_chunk_0000",
+            "filename": "swg21973130.txt",
+            "score": 28.3617
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_00642_chunk_0003",
+            "filename": "nas8N1020262.txt",
+            "score": 27.7366
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_16454_chunk_0000",
+            "filename": "swg21590510.txt",
+            "score": 27.2536
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_11433_chunk_0001",
+            "filename": "swg21260155.txt",
+            "score": 27.0156
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 25.285
+      },
+      {
+        "id": "TRAIN_Q372",
+        "gold_filenames": [
+          "swg21985946.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_26242_chunk_0001",
+            "filename": "swg22015884.txt",
+            "score": 23.6426
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_25346_chunk_0001",
+            "filename": "swg22006632.txt",
+            "score": 23.5769
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_26243_chunk_0001",
+            "filename": "swg22015885.txt",
+            "score": 23.4466
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_25342_chunk_0001",
+            "filename": "swg22006588.txt",
+            "score": 23.4466
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_23822_chunk_0003",
+            "filename": "swg21987385.txt",
+            "score": 23.4159
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_25752_chunk_0001",
+            "filename": "swg22010991.txt",
+            "score": 23.382
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_25751_chunk_0001",
+            "filename": "swg22010990.txt",
+            "score": 23.1271
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_24962_chunk_0001",
+            "filename": "swg22002458.txt",
+            "score": 23.1271
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_25753_chunk_0002",
+            "filename": "swg22010993.txt",
+            "score": 23.1271
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_24963_chunk_0001",
+            "filename": "swg22002464.txt",
+            "score": 23.0643
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 26.895
+      },
+      {
+        "id": "TRAIN_Q070",
+        "gold_filenames": [
+          "swg21982451.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_23398_chunk_0000",
+            "filename": "swg21982451.txt",
+            "score": 61.4899
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_21068_chunk_0004",
+            "filename": "swg21699896.txt",
+            "score": 35.207
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_10534_chunk_0001",
+            "filename": "swg21102586.txt",
+            "score": 34.5189
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_10425_chunk_0000",
+            "filename": "swg21023358.txt",
+            "score": 29.9402
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_21068_chunk_0003",
+            "filename": "swg21699896.txt",
+            "score": 29.3311
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_10530_chunk_0001",
+            "filename": "swg21100436.txt",
+            "score": 28.7074
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_10534_chunk_0000",
+            "filename": "swg21102586.txt",
+            "score": 28.4904
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_08106_chunk_0000",
+            "filename": "swg1PK13223.txt",
+            "score": 28.2917
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_22059_chunk_0001",
+            "filename": "swg21965372.txt",
+            "score": 27.8437
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_11607_chunk_0000",
+            "filename": "swg21278203.txt",
+            "score": 27.8423
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 25.267
+      },
+      {
+        "id": "TRAIN_Q592",
+        "gold_filenames": [
+          "swg21685666.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_20091_chunk_0000",
+            "filename": "swg21685666.txt",
+            "score": 39.8729
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_20086_chunk_0000",
+            "filename": "swg21685604.txt",
+            "score": 38.5657
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_20104_chunk_0000",
+            "filename": "swg21685764.txt",
+            "score": 36.2647
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_20148_chunk_0000",
+            "filename": "swg21686196.txt",
+            "score": 35.7394
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_20107_chunk_0000",
+            "filename": "swg21685798.txt",
+            "score": 33.478
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_20077_chunk_0000",
+            "filename": "swg21685541.txt",
+            "score": 33.1873
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_20141_chunk_0000",
+            "filename": "swg21686131.txt",
+            "score": 31.7905
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_20150_chunk_0000",
+            "filename": "swg21686246.txt",
+            "score": 31.7819
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_20115_chunk_0000",
+            "filename": "swg21685851.txt",
+            "score": 31.4406
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_20134_chunk_0000",
+            "filename": "swg21686084.txt",
+            "score": 30.8136
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 23.807
+      },
+      {
+        "id": "DEV_Q306",
+        "gold_filenames": [
+          "swg21642839.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_20637_chunk_0000",
+            "filename": "swg21694159.txt",
+            "score": 31.0756
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_22001_chunk_0000",
+            "filename": "swg21964407.txt",
+            "score": 28.7039
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_02209_chunk_0001",
+            "filename": "swg1IO20943.txt",
+            "score": 28.0761
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_18171_chunk_0000",
+            "filename": "swg21642839.txt",
+            "score": 27.9683
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_16638_chunk_0000",
+            "filename": "swg21597217.txt",
+            "score": 27.9656
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_18536_chunk_0000",
+            "filename": "swg21652144.txt",
+            "score": 27.6163
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_15565_chunk_0000",
+            "filename": "swg21536465.txt",
+            "score": 27.5486
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_18915_chunk_0000",
+            "filename": "swg21663137.txt",
+            "score": 27.529
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_15532_chunk_0000",
+            "filename": "swg21530363.txt",
+            "score": 27.1599
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_15309_chunk_0000",
+            "filename": "swg21509512.txt",
+            "score": 27.0019
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 0.25,
+        "latency_ms": 22.916
+      },
+      {
+        "id": "TRAIN_Q463",
+        "gold_filenames": [
+          "swg21227799.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_08454_chunk_0001",
+            "filename": "swg1PK61622.txt",
+            "score": 28.448
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_03321_chunk_0004",
+            "filename": "swg1IV24771.txt",
+            "score": 26.6896
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_01026_chunk_0003",
+            "filename": "swg1HD36843.txt",
+            "score": 25.7816
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_08710_chunk_0004",
+            "filename": "swg1PK85418.txt",
+            "score": 25.306
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_19674_chunk_0000",
+            "filename": "swg21677642.txt",
+            "score": 25.1223
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_11096_chunk_0000",
+            "filename": "swg21227799.txt",
+            "score": 25.1058
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_01082_chunk_0001",
+            "filename": "swg1HD62330.txt",
+            "score": 24.7902
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_08454_chunk_0000",
+            "filename": "swg1PK61622.txt",
+            "score": 24.32
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_11096_chunk_0001",
+            "filename": "swg21227799.txt",
+            "score": 24.2283
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_01082_chunk_0000",
+            "filename": "swg1HD62330.txt",
+            "score": 24.2142
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.1667,
+        "latency_ms": 25.712
+      },
+      {
+        "id": "TRAIN_Q221",
+        "gold_filenames": [
+          "swg22004617.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_25854_chunk_0000",
+            "filename": "swg22012121.txt",
+            "score": 129.0317
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_05439_chunk_0001",
+            "filename": "swg1JR41244.txt",
+            "score": 99.0162
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_07702_chunk_0001",
+            "filename": "swg1PI88874.txt",
+            "score": 81.3426
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_25075_chunk_0001",
+            "filename": "swg22003784.txt",
+            "score": 76.4773
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_05439_chunk_0002",
+            "filename": "swg1JR41244.txt",
+            "score": 70.8108
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_10040_chunk_0000",
+            "filename": "swg1PM97003.txt",
+            "score": 63.9014
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_05439_chunk_0000",
+            "filename": "swg1JR41244.txt",
+            "score": 60.5045
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_10040_chunk_0001",
+            "filename": "swg1PM97003.txt",
+            "score": 55.6204
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_07702_chunk_0000",
+            "filename": "swg1PI88874.txt",
+            "score": 50.979
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_08011_chunk_0000",
+            "filename": "swg1PJ44301.txt",
+            "score": 43.9355
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 27.58
+      },
+      {
+        "id": "TRAIN_Q044",
+        "gold_filenames": [
+          "swg21592093.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_22868_chunk_0000",
+            "filename": "swg21976219.txt",
+            "score": 30.5009
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_24352_chunk_0001",
+            "filename": "swg21994470.txt",
+            "score": 30.2682
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_22305_chunk_0000",
+            "filename": "swg21968944.txt",
+            "score": 29.9012
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_14764_chunk_0000",
+            "filename": "swg21486099.txt",
+            "score": 28.1424
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_14640_chunk_0000",
+            "filename": "swg21480568.txt",
+            "score": 28.0471
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_14505_chunk_0000",
+            "filename": "swg21476920.txt",
+            "score": 27.7858
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_24352_chunk_0002",
+            "filename": "swg21994470.txt",
+            "score": 27.3452
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_14514_chunk_0000",
+            "filename": "swg21477068.txt",
+            "score": 27.2547
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_23193_chunk_0000",
+            "filename": "swg21980065.txt",
+            "score": 27.0283
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_14766_chunk_0000",
+            "filename": "swg21486143.txt",
+            "score": 26.652
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 23.102
+      },
+      {
+        "id": "TRAIN_Q360",
+        "gold_filenames": [
+          "swg24042283.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_19961_chunk_0001",
+            "filename": "swg21683210.txt",
+            "score": 51.1369
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_16984_chunk_0000",
+            "filename": "swg21609678.txt",
+            "score": 39.0055
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_04974_chunk_0001",
+            "filename": "swg1IZ65316.txt",
+            "score": 35.2815
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_16666_chunk_0000",
+            "filename": "swg21597868.txt",
+            "score": 34.686
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_21197_chunk_0000",
+            "filename": "swg21701400.txt",
+            "score": 34.4547
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_18830_chunk_0000",
+            "filename": "swg21660763.txt",
+            "score": 34.346
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_16761_chunk_0000",
+            "filename": "swg21600322.txt",
+            "score": 33.7107
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_04974_chunk_0000",
+            "filename": "swg1IZ65316.txt",
+            "score": 33.6413
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_14231_chunk_0000",
+            "filename": "swg21459919.txt",
+            "score": 32.8805
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_03094_chunk_0001",
+            "filename": "swg1IV02358.txt",
+            "score": 32.532
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 22.165
+      },
+      {
+        "id": "TRAIN_Q272",
+        "gold_filenames": [
+          "swg21662193.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_17993_chunk_0002",
+            "filename": "swg21638168.txt",
+            "score": 14.8434
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_10686_chunk_0003",
+            "filename": "swg21138961.txt",
+            "score": 14.4835
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_09800_chunk_0000",
+            "filename": "swg1PM78572.txt",
+            "score": 13.9704
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_06834_chunk_0001",
+            "filename": "swg1PI31471.txt",
+            "score": 13.9119
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_10044_chunk_0000",
+            "filename": "swg1PM97353.txt",
+            "score": 13.7019
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_06965_chunk_0000",
+            "filename": "swg1PI38562.txt",
+            "score": 13.596
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_06727_chunk_0000",
+            "filename": "swg1PI24847.txt",
+            "score": 13.5312
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_06674_chunk_0000",
+            "filename": "swg1PI20907.txt",
+            "score": 13.3422
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_06590_chunk_0001",
+            "filename": "swg1PI14280.txt",
+            "score": 13.1481
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_06590_chunk_0000",
+            "filename": "swg1PI14280.txt",
+            "score": 13.0554
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 22.78
+      },
+      {
+        "id": "DEV_Q114",
+        "gold_filenames": [
+          "swg21989702.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_22107_chunk_0000",
+            "filename": "swg21966062.txt",
+            "score": 49.3465
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_21990_chunk_0000",
+            "filename": "swg21964179.txt",
+            "score": 49.1827
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_10463_chunk_0000",
+            "filename": "swg21049516.txt",
+            "score": 46.5498
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_10463_chunk_0002",
+            "filename": "swg21049516.txt",
+            "score": 42.4892
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_09400_chunk_0001",
+            "filename": "swg1PM46870.txt",
+            "score": 42.1813
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_02672_chunk_0000",
+            "filename": "swg1IT12121.txt",
+            "score": 42.0759
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_03071_chunk_0001",
+            "filename": "swg1IV00812.txt",
+            "score": 41.9367
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_10463_chunk_0001",
+            "filename": "swg21049516.txt",
+            "score": 41.6304
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_08605_chunk_0001",
+            "filename": "swg1PK74872.txt",
+            "score": 39.9929
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_03071_chunk_0000",
+            "filename": "swg1IV00812.txt",
+            "score": 39.9645
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 23.355
+      },
+      {
+        "id": "TRAIN_Q422",
+        "gold_filenames": [
+          "swg21689914.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_20360_chunk_0000",
+            "filename": "swg21689914.txt",
+            "score": 43.0383
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_20343_chunk_0002",
+            "filename": "swg21689730.txt",
+            "score": 39.5988
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_20624_chunk_0000",
+            "filename": "swg21693977.txt",
+            "score": 39.3254
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_20387_chunk_0000",
+            "filename": "swg21690454.txt",
+            "score": 36.352
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_21843_chunk_0000",
+            "filename": "swg21961812.txt",
+            "score": 35.8403
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_20276_chunk_0001",
+            "filename": "swg21688444.txt",
+            "score": 35.4821
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_20373_chunk_0000",
+            "filename": "swg21690182.txt",
+            "score": 35.0509
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_20535_chunk_0001",
+            "filename": "swg21692828.txt",
+            "score": 34.9187
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_20224_chunk_0000",
+            "filename": "swg21687648.txt",
+            "score": 34.7557
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_20452_chunk_0000",
+            "filename": "swg21691604.txt",
+            "score": 34.5184
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 22.437
+      },
+      {
+        "id": "TRAIN_Q165",
+        "gold_filenames": [
+          "swg21994741.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_27199_chunk_0000",
+            "filename": "swg24043474.txt",
+            "score": 40.6939
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_07480_chunk_0000",
+            "filename": "swg1PI73197.txt",
+            "score": 39.9157
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_24370_chunk_0004",
+            "filename": "swg21994742.txt",
+            "score": 37.6889
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_24370_chunk_0003",
+            "filename": "swg21994742.txt",
+            "score": 30.1685
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_07182_chunk_0001",
+            "filename": "swg1PI53589.txt",
+            "score": 27.8111
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_24010_chunk_0000",
+            "filename": "swg21990128.txt",
+            "score": 24.721
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_28092_chunk_0000",
+            "filename": "swg27045339.txt",
+            "score": 24.2739
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_07182_chunk_0000",
+            "filename": "swg1PI53589.txt",
+            "score": 23.0068
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_25029_chunk_0001",
+            "filename": "swg22003156.txt",
+            "score": 22.4079
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_07182_chunk_0002",
+            "filename": "swg1PI53589.txt",
+            "score": 22.3947
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 22.071
+      },
+      {
+        "id": "TRAIN_Q233",
+        "gold_filenames": [
+          "swg22013054.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_25934_chunk_0000",
+            "filename": "swg22013054.txt",
+            "score": 55.9435
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_25935_chunk_0000",
+            "filename": "swg22013058.txt",
+            "score": 40.0017
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_23176_chunk_0000",
+            "filename": "swg21979754.txt",
+            "score": 33.1641
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_26135_chunk_0000",
+            "filename": "swg22014905.txt",
+            "score": 31.0138
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_19936_chunk_0000",
+            "filename": "swg21682696.txt",
+            "score": 30.9345
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_25864_chunk_0000",
+            "filename": "swg22012327.txt",
+            "score": 30.7582
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_20898_chunk_0000",
+            "filename": "swg21697451.txt",
+            "score": 30.6896
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_26031_chunk_0000",
+            "filename": "swg22014046.txt",
+            "score": 30.3104
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_25944_chunk_0000",
+            "filename": "swg22013094.txt",
+            "score": 30.1285
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_23294_chunk_0000",
+            "filename": "swg21981221.txt",
+            "score": 30.0036
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 22.94
+      },
+      {
+        "id": "TRAIN_Q071",
+        "gold_filenames": [
+          "swg21962862.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_24098_chunk_0000",
+            "filename": "swg21991056.txt",
+            "score": 24.236
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_01003_chunk_0000",
+            "filename": "swg1HD08108.txt",
+            "score": 23.8416
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_07788_chunk_0001",
+            "filename": "swg1PJ32962.txt",
+            "score": 23.0807
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_08829_chunk_0000",
+            "filename": "swg1PK97487.txt",
+            "score": 22.6395
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_25513_chunk_0000",
+            "filename": "swg22008462.txt",
+            "score": 22.5949
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_01093_chunk_0001",
+            "filename": "swg1HD64648.txt",
+            "score": 22.0469
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_23397_chunk_0000",
+            "filename": "swg21982449.txt",
+            "score": 21.9645
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_12446_chunk_0000",
+            "filename": "swg21367308.txt",
+            "score": 21.5744
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_16864_chunk_0002",
+            "filename": "swg21606831.txt",
+            "score": 21.4862
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_01419_chunk_0001",
+            "filename": "swg1IC43160.txt",
+            "score": 21.2351
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 22.83
+      },
+      {
+        "id": "TRAIN_Q553",
+        "gold_filenames": [
+          "swg21903249.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_21516_chunk_0000",
+            "filename": "swg21903249.txt",
+            "score": 65.1063
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_23515_chunk_0000",
+            "filename": "swg21983644.txt",
+            "score": 55.6083
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_24517_chunk_0000",
+            "filename": "swg21997055.txt",
+            "score": 54.6351
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_21888_chunk_0000",
+            "filename": "swg21962370.txt",
+            "score": 54.5565
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_22501_chunk_0000",
+            "filename": "swg21971907.txt",
+            "score": 54.425
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_21912_chunk_0000",
+            "filename": "swg21962837.txt",
+            "score": 52.6038
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_21676_chunk_0000",
+            "filename": "swg21959709.txt",
+            "score": 51.8703
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_21019_chunk_0000",
+            "filename": "swg21699200.txt",
+            "score": 49.1792
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_22415_chunk_0000",
+            "filename": "swg21970662.txt",
+            "score": 48.8919
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_23638_chunk_0000",
+            "filename": "swg21985213.txt",
+            "score": 48.2706
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 25.803
+      },
+      {
+        "id": "TRAIN_Q234",
+        "gold_filenames": [
+          "swg21397335.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_12459_chunk_0001",
+            "filename": "swg21368020.txt",
+            "score": 16.1584
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_08537_chunk_0000",
+            "filename": "swg1PK69769.txt",
+            "score": 15.9977
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_08411_chunk_0002",
+            "filename": "swg1PK58459.txt",
+            "score": 15.8772
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_08175_chunk_0003",
+            "filename": "swg1PK25360.txt",
+            "score": 15.8531
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_17512_chunk_0000",
+            "filename": "swg21623478.txt",
+            "score": 15.7129
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_20745_chunk_0000",
+            "filename": "swg21695608.txt",
+            "score": 15.5969
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_00749_chunk_0000",
+            "filename": "nas8N1022168.txt",
+            "score": 15.5147
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_11129_chunk_0000",
+            "filename": "swg21232521.txt",
+            "score": 15.0589
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_14975_chunk_0001",
+            "filename": "swg21499913.txt",
+            "score": 14.9025
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_10474_chunk_0003",
+            "filename": "swg21053924.txt",
+            "score": 14.8264
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 25.378
+      },
+      {
+        "id": "TRAIN_Q579",
+        "gold_filenames": [
+          "swg21507587.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_27059_chunk_0000",
+            "filename": "swg24041224.txt",
+            "score": 40.7164
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_19941_chunk_0000",
+            "filename": "swg21682765.txt",
+            "score": 37.0771
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_14575_chunk_0000",
+            "filename": "swg21478606.txt",
+            "score": 36.9036
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_19369_chunk_0000",
+            "filename": "swg21672109.txt",
+            "score": 36.5459
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_21548_chunk_0000",
+            "filename": "swg21903724.txt",
+            "score": 34.9412
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_16877_chunk_0000",
+            "filename": "swg21607077.txt",
+            "score": 34.2508
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_16565_chunk_0000",
+            "filename": "swg21594747.txt",
+            "score": 32.825
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_21370_chunk_0000",
+            "filename": "swg21883438.txt",
+            "score": 32.5176
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_14612_chunk_0000",
+            "filename": "swg21479912.txt",
+            "score": 31.396
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_23195_chunk_0000",
+            "filename": "swg21980090.txt",
+            "score": 31.3849
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 25.552
+      },
+      {
+        "id": "DEV_Q305",
+        "gold_filenames": [
+          "swg21656263.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_26348_chunk_0000",
+            "filename": "swg22016849.txt",
+            "score": 41.6832
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_25697_chunk_0000",
+            "filename": "swg22010233.txt",
+            "score": 40.6282
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_18691_chunk_0000",
+            "filename": "swg21656263.txt",
+            "score": 37.6414
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_12280_chunk_0000",
+            "filename": "swg21339916.txt",
+            "score": 36.5856
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_12317_chunk_0000",
+            "filename": "swg21342608.txt",
+            "score": 35.8204
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_25790_chunk_0000",
+            "filename": "swg22011448.txt",
+            "score": 35.4379
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_07586_chunk_0000",
+            "filename": "swg1PI81214.txt",
+            "score": 33.9035
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_04575_chunk_0001",
+            "filename": "swg1IZ07607.txt",
+            "score": 33.8794
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_16856_chunk_0000",
+            "filename": "swg21606593.txt",
+            "score": 33.6653
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_12293_chunk_0000",
+            "filename": "swg21340590.txt",
+            "score": 33.4518
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 0.3333,
+        "latency_ms": 23.958
+      },
+      {
+        "id": "TRAIN_Q599",
+        "gold_filenames": [
+          "swg21991690.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_24142_chunk_0001",
+            "filename": "swg21991690.txt",
+            "score": 151.2162
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_24142_chunk_0000",
+            "filename": "swg21991690.txt",
+            "score": 119.4397
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_02739_chunk_0001",
+            "filename": "swg1IT14222.txt",
+            "score": 89.5382
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_16880_chunk_0000",
+            "filename": "swg21607104.txt",
+            "score": 86.6989
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_16229_chunk_0000",
+            "filename": "swg21584245.txt",
+            "score": 85.0516
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_16221_chunk_0000",
+            "filename": "swg21581427.txt",
+            "score": 82.4647
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_20312_chunk_0001",
+            "filename": "swg21689122.txt",
+            "score": 80.3577
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_19988_chunk_0001",
+            "filename": "swg21683847.txt",
+            "score": 79.5739
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_15812_chunk_0001",
+            "filename": "swg21567742.txt",
+            "score": 78.2366
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_21932_chunk_0001",
+            "filename": "swg21963154.txt",
+            "score": 77.0379
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 30.583
+      },
+      {
+        "id": "TRAIN_Q075",
+        "gold_filenames": [
+          "swg24044440.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_27256_chunk_0000",
+            "filename": "swg24044440.txt",
+            "score": 63.6194
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_27256_chunk_0029",
+            "filename": "swg24044440.txt",
+            "score": 62.6781
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_04219_chunk_0000",
+            "filename": "swg1IV95149.txt",
+            "score": 55.27
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_27256_chunk_0030",
+            "filename": "swg24044440.txt",
+            "score": 55.1124
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_25325_chunk_0001",
+            "filename": "swg22006414.txt",
+            "score": 31.4044
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_04213_chunk_0000",
+            "filename": "swg1IV94705.txt",
+            "score": 30.9115
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_04208_chunk_0000",
+            "filename": "swg1IV94269.txt",
+            "score": 30.7623
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_03543_chunk_0004",
+            "filename": "swg1IV47613.txt",
+            "score": 29.8511
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_03429_chunk_0002",
+            "filename": "swg1IV36526.txt",
+            "score": 29.0753
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_15293_chunk_0000",
+            "filename": "swg21509160.txt",
+            "score": 28.046
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 23.017
+      },
+      {
+        "id": "TRAIN_Q225",
+        "gold_filenames": [
+          "swg21569953.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_21418_chunk_0000",
+            "filename": "swg21884042.txt",
+            "score": 24.4213
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_20676_chunk_0004",
+            "filename": "swg21694652.txt",
+            "score": 22.8124
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_21901_chunk_0002",
+            "filename": "swg21962567.txt",
+            "score": 22.5198
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_06750_chunk_0000",
+            "filename": "swg1PI26782.txt",
+            "score": 22.2281
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_20684_chunk_0003",
+            "filename": "swg21694738.txt",
+            "score": 21.9274
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_21221_chunk_0003",
+            "filename": "swg21701566.txt",
+            "score": 21.9217
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_21221_chunk_0007",
+            "filename": "swg21701566.txt",
+            "score": 21.4675
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_22558_chunk_0003",
+            "filename": "swg21972736.txt",
+            "score": 21.2268
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_21414_chunk_0003",
+            "filename": "swg21883995.txt",
+            "score": 21.1001
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_20444_chunk_0003",
+            "filename": "swg21691458.txt",
+            "score": 21.0938
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 23.589
+      },
+      {
+        "id": "TRAIN_Q111",
+        "gold_filenames": [
+          "swg21983129.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_23470_chunk_0000",
+            "filename": "swg21983129.txt",
+            "score": 51.5057
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_23470_chunk_0001",
+            "filename": "swg21983129.txt",
+            "score": 28.4255
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_21225_chunk_0003",
+            "filename": "swg21701602.txt",
+            "score": 27.518
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_18261_chunk_0000",
+            "filename": "swg21645387.txt",
+            "score": 26.4085
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_04599_chunk_0002",
+            "filename": "swg1IZ12278.txt",
+            "score": 25.5208
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_04677_chunk_0002",
+            "filename": "swg1IZ26781.txt",
+            "score": 25.4075
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_04677_chunk_0004",
+            "filename": "swg1IZ26781.txt",
+            "score": 25.3674
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_04831_chunk_0001",
+            "filename": "swg1IZ48398.txt",
+            "score": 25.2974
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_04830_chunk_0001",
+            "filename": "swg1IZ48396.txt",
+            "score": 25.2974
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_04601_chunk_0000",
+            "filename": "swg1IZ12280.txt",
+            "score": 25.2597
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 25.161
+      },
+      {
+        "id": "TRAIN_Q504",
+        "gold_filenames": [
+          "swg21468340.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_14315_chunk_0000",
+            "filename": "swg21468340.txt",
+            "score": 33.3924
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_16904_chunk_0000",
+            "filename": "swg21607690.txt",
+            "score": 27.448
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_17559_chunk_0000",
+            "filename": "swg21624836.txt",
+            "score": 27.4024
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_15032_chunk_0000",
+            "filename": "swg21501604.txt",
+            "score": 26.7455
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_05047_chunk_0008",
+            "filename": "swg1IZ71966.txt",
+            "score": 22.9801
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_21355_chunk_0000",
+            "filename": "swg21883201.txt",
+            "score": 22.9759
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_17619_chunk_0000",
+            "filename": "swg21626348.txt",
+            "score": 22.9447
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_22385_chunk_0000",
+            "filename": "swg21970101.txt",
+            "score": 22.3035
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_19996_chunk_0000",
+            "filename": "swg21684054.txt",
+            "score": 22.0432
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_11224_chunk_0000",
+            "filename": "swg21241936.txt",
+            "score": 21.6338
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 23.553
+      },
+      {
+        "id": "TRAIN_Q256",
+        "gold_filenames": [
+          "swg24035571.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_26837_chunk_0050",
+            "filename": "swg24035571.txt",
+            "score": 34.3656
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_12107_chunk_0000",
+            "filename": "swg21324358.txt",
+            "score": 31.1477
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_13691_chunk_0003",
+            "filename": "swg21438832.txt",
+            "score": 30.1878
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_18214_chunk_0000",
+            "filename": "swg21644086.txt",
+            "score": 29.8419
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_17278_chunk_0000",
+            "filename": "swg21617073.txt",
+            "score": 29.2323
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_15341_chunk_0000",
+            "filename": "swg21512245.txt",
+            "score": 28.2724
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_17631_chunk_0000",
+            "filename": "swg21626625.txt",
+            "score": 28.1998
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_26837_chunk_0051",
+            "filename": "swg24035571.txt",
+            "score": 27.128
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_12362_chunk_0000",
+            "filename": "swg21347874.txt",
+            "score": 26.4722
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_17539_chunk_0000",
+            "filename": "swg21624356.txt",
+            "score": 26.1235
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 27.087
+      },
+      {
+        "id": "DEV_Q266",
+        "gold_filenames": [
+          "swg24037641.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_20269_chunk_0000",
+            "filename": "swg21688209.txt",
+            "score": 22.0099
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_26914_chunk_0003",
+            "filename": "swg24037641.txt",
+            "score": 21.408
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_12736_chunk_0000",
+            "filename": "swg21389225.txt",
+            "score": 21.3477
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_16415_chunk_0001",
+            "filename": "swg21589303.txt",
+            "score": 20.8309
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_26914_chunk_0004",
+            "filename": "swg24037641.txt",
+            "score": 20.7919
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_17799_chunk_0000",
+            "filename": "swg21633291.txt",
+            "score": 20.4378
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_26914_chunk_0005",
+            "filename": "swg24037641.txt",
+            "score": 20.3509
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_20269_chunk_0001",
+            "filename": "swg21688209.txt",
+            "score": 20.3001
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_26424_chunk_0000",
+            "filename": "swg24016094.txt",
+            "score": 20.1961
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_25381_chunk_0000",
+            "filename": "swg22007063.txt",
+            "score": 20.0628
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 0.5,
+        "latency_ms": 23.716
+      },
+      {
+        "id": "DEV_Q210",
+        "gold_filenames": [
+          "swg21067352.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_15574_chunk_0000",
+            "filename": "swg21537317.txt",
+            "score": 29.1924
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_15649_chunk_0001",
+            "filename": "swg21551911.txt",
+            "score": 28.0564
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_05292_chunk_0000",
+            "filename": "swg1JR27566.txt",
+            "score": 28.0224
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_08692_chunk_0000",
+            "filename": "swg1PK83238.txt",
+            "score": 27.5706
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_05292_chunk_0001",
+            "filename": "swg1JR27566.txt",
+            "score": 27.4167
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_21543_chunk_0000",
+            "filename": "swg21903630.txt",
+            "score": 27.3552
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_20956_chunk_0000",
+            "filename": "swg21698405.txt",
+            "score": 26.5886
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_04935_chunk_0000",
+            "filename": "swg1IZ61679.txt",
+            "score": 26.3741
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_12831_chunk_0000",
+            "filename": "swg21393774.txt",
+            "score": 26.1381
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_14325_chunk_0000",
+            "filename": "swg21468765.txt",
+            "score": 25.9905
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 25.39
+      },
+      {
+        "id": "DEV_Q184",
+        "gold_filenames": [
+          "swg21584783.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_13039_chunk_0000",
+            "filename": "swg21405864.txt",
+            "score": 93.0529
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_16258_chunk_0000",
+            "filename": "swg21584783.txt",
+            "score": 89.8504
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_01521_chunk_0001",
+            "filename": "swg1IC59660.txt",
+            "score": 75.925
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_05456_chunk_0004",
+            "filename": "swg1JR42025.txt",
+            "score": 58.5148
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_01485_chunk_0003",
+            "filename": "swg1IC54874.txt",
+            "score": 57.36
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_05456_chunk_0003",
+            "filename": "swg1JR42025.txt",
+            "score": 57.2907
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_01625_chunk_0002",
+            "filename": "swg1IC66490.txt",
+            "score": 56.1486
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_01459_chunk_0000",
+            "filename": "swg1IC52511.txt",
+            "score": 54.1495
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_01485_chunk_0002",
+            "filename": "swg1IC54874.txt",
+            "score": 53.9262
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_05456_chunk_0005",
+            "filename": "swg1JR42025.txt",
+            "score": 53.0486
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 0.5,
+        "latency_ms": 30.998
+      },
+      {
+        "id": "TRAIN_Q098",
+        "gold_filenames": [
+          "swg21902654.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_20649_chunk_0000",
+            "filename": "swg21694308.txt",
+            "score": 26.4584
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_04157_chunk_0001",
+            "filename": "swg1IV90841.txt",
+            "score": 24.9544
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_22578_chunk_0000",
+            "filename": "swg21972956.txt",
+            "score": 23.8176
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_21973_chunk_0000",
+            "filename": "swg21963919.txt",
+            "score": 23.1071
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_23888_chunk_0000",
+            "filename": "swg21988562.txt",
+            "score": 22.9057
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_19310_chunk_0001",
+            "filename": "swg21671146.txt",
+            "score": 22.5616
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_22578_chunk_0001",
+            "filename": "swg21972956.txt",
+            "score": 22.5057
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_23344_chunk_0000",
+            "filename": "swg21981870.txt",
+            "score": 22.3784
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_21765_chunk_0000",
+            "filename": "swg21960719.txt",
+            "score": 21.8977
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_23779_chunk_0004",
+            "filename": "swg21986883.txt",
+            "score": 21.759
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 24.746
+      },
+      {
+        "id": "DEV_Q021",
+        "gold_filenames": [
+          "swg21298897.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_01857_chunk_0001",
+            "filename": "swg1IC87187.txt",
+            "score": 47.0735
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_11808_chunk_0000",
+            "filename": "swg21298897.txt",
+            "score": 43.4481
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_15961_chunk_0000",
+            "filename": "swg21572593.txt",
+            "score": 42.5513
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_02071_chunk_0002",
+            "filename": "swg1IC99865.txt",
+            "score": 40.3761
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_16009_chunk_0000",
+            "filename": "swg21574515.txt",
+            "score": 40.312
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_01857_chunk_0000",
+            "filename": "swg1IC87187.txt",
+            "score": 39.4903
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_12754_chunk_0000",
+            "filename": "swg21390086.txt",
+            "score": 39.2193
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_02723_chunk_0001",
+            "filename": "swg1IT13795.txt",
+            "score": 37.3118
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_11808_chunk_0001",
+            "filename": "swg21298897.txt",
+            "score": 36.9759
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_18158_chunk_0000",
+            "filename": "swg21642398.txt",
+            "score": 36.6688
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 0.5,
+        "latency_ms": 30.248
+      },
+      {
+        "id": "DEV_Q224",
+        "gold_filenames": [
+          "swg21696267.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_20795_chunk_0000",
+            "filename": "swg21696267.txt",
+            "score": 62.1367
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_27992_chunk_0000",
+            "filename": "swg27042922.txt",
+            "score": 40.0105
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_01274_chunk_0001",
+            "filename": "swg1HE12127.txt",
+            "score": 35.7738
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_13383_chunk_0000",
+            "filename": "swg21422185.txt",
+            "score": 35.2225
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_27992_chunk_0001",
+            "filename": "swg27042922.txt",
+            "score": 34.97
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_09699_chunk_0004",
+            "filename": "swg1PM69691.txt",
+            "score": 31.7225
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_13383_chunk_0001",
+            "filename": "swg21422185.txt",
+            "score": 30.5759
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_24105_chunk_0000",
+            "filename": "swg21991198.txt",
+            "score": 30.0715
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_06593_chunk_0002",
+            "filename": "swg1PI14340.txt",
+            "score": 29.8876
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_13383_chunk_0002",
+            "filename": "swg21422185.txt",
+            "score": 29.5629
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 42.816
+      },
+      {
+        "id": "DEV_Q186",
+        "gold_filenames": [
+          "swg21608744.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_15249_chunk_0001",
+            "filename": "swg21507754.txt",
+            "score": 47.3393
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_16943_chunk_0000",
+            "filename": "swg21608744.txt",
+            "score": 37.9333
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_15249_chunk_0000",
+            "filename": "swg21507754.txt",
+            "score": 36.1661
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_04725_chunk_0001",
+            "filename": "swg1IZ34049.txt",
+            "score": 36.0352
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_13608_chunk_0000",
+            "filename": "swg21432483.txt",
+            "score": 32.1371
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_18011_chunk_0001",
+            "filename": "swg21638505.txt",
+            "score": 31.8296
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_19971_chunk_0003",
+            "filename": "swg21683398.txt",
+            "score": 31.6057
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_11687_chunk_0004",
+            "filename": "swg21289007.txt",
+            "score": 31.2141
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_20044_chunk_0001",
+            "filename": "swg21685081.txt",
+            "score": 31.1608
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_11497_chunk_0003",
+            "filename": "swg21266602.txt",
+            "score": 31.1115
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 0.5,
+        "latency_ms": 34.346
+      },
+      {
+        "id": "TRAIN_Q127",
+        "gold_filenames": [
+          "swg21292808.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_11733_chunk_0000",
+            "filename": "swg21292808.txt",
+            "score": 57.168
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_14346_chunk_0001",
+            "filename": "swg21469404.txt",
+            "score": 52.717
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_19425_chunk_0000",
+            "filename": "swg21673208.txt",
+            "score": 51.0114
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_14346_chunk_0000",
+            "filename": "swg21469404.txt",
+            "score": 49.2842
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_23639_chunk_0005",
+            "filename": "swg21985223.txt",
+            "score": 48.8492
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_15936_chunk_0003",
+            "filename": "swg21571873.txt",
+            "score": 48.6279
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_12307_chunk_0000",
+            "filename": "swg21341650.txt",
+            "score": 46.9511
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_01892_chunk_0001",
+            "filename": "swg1IC89568.txt",
+            "score": 46.7834
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_00263_chunk_0001",
+            "filename": "isg3T1024495.txt",
+            "score": 46.353
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_16223_chunk_0000",
+            "filename": "swg21583233.txt",
+            "score": 45.9498
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 30.145
+      },
+      {
+        "id": "TRAIN_Q415",
+        "gold_filenames": [
+          "swg21501900.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_13898_chunk_0000",
+            "filename": "swg21446945.txt",
+            "score": 76.8352
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_15038_chunk_0001",
+            "filename": "swg21501900.txt",
+            "score": 76.105
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_15038_chunk_0000",
+            "filename": "swg21501900.txt",
+            "score": 64.3391
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_16113_chunk_0000",
+            "filename": "swg21577997.txt",
+            "score": 62.9991
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_13898_chunk_0001",
+            "filename": "swg21446945.txt",
+            "score": 55.7733
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_18287_chunk_0000",
+            "filename": "swg21645923.txt",
+            "score": 50.5076
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_21084_chunk_0000",
+            "filename": "swg21700134.txt",
+            "score": 49.7523
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_19147_chunk_0000",
+            "filename": "swg21668211.txt",
+            "score": 47.706
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_22421_chunk_0000",
+            "filename": "swg21970741.txt",
+            "score": 44.164
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_23285_chunk_0000",
+            "filename": "swg21981166.txt",
+            "score": 43.4129
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 0.5,
+        "latency_ms": 22.4
+      },
+      {
+        "id": "TRAIN_Q261",
+        "gold_filenames": [
+          "swg21405302.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_18975_chunk_0002",
+            "filename": "swg21664375.txt",
+            "score": 48.6642
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_05715_chunk_0004",
+            "filename": "swg1JR50424.txt",
+            "score": 45.6034
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_20903_chunk_0003",
+            "filename": "swg21697498.txt",
+            "score": 44.0501
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_21533_chunk_0000",
+            "filename": "swg21903489.txt",
+            "score": 42.5117
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_20649_chunk_0000",
+            "filename": "swg21694308.txt",
+            "score": 42.3832
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_20903_chunk_0000",
+            "filename": "swg21697498.txt",
+            "score": 42.3682
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_20957_chunk_0000",
+            "filename": "swg21698429.txt",
+            "score": 42.343
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_20867_chunk_0002",
+            "filename": "swg21697160.txt",
+            "score": 41.4082
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_20903_chunk_0002",
+            "filename": "swg21697498.txt",
+            "score": 39.9878
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_20649_chunk_0001",
+            "filename": "swg21694308.txt",
+            "score": 39.9313
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 23.834
+      },
+      {
+        "id": "TRAIN_Q482",
+        "gold_filenames": [
+          "swg21698950.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_25636_chunk_0000",
+            "filename": "swg22009834.txt",
+            "score": 55.1081
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_21000_chunk_0000",
+            "filename": "swg21698950.txt",
+            "score": 48.2405
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_09001_chunk_0000",
+            "filename": "swg1PM14292.txt",
+            "score": 30.571
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_08173_chunk_0000",
+            "filename": "swg1PK25000.txt",
+            "score": 29.5415
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_08173_chunk_0002",
+            "filename": "swg1PK25000.txt",
+            "score": 28.9054
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_24038_chunk_0002",
+            "filename": "swg21990369.txt",
+            "score": 28.8414
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_11927_chunk_0000",
+            "filename": "swg21307834.txt",
+            "score": 28.7504
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_08173_chunk_0001",
+            "filename": "swg1PK25000.txt",
+            "score": 27.9949
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_23686_chunk_0000",
+            "filename": "swg21985852.txt",
+            "score": 27.4617
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_08053_chunk_0001",
+            "filename": "swg1PK04175.txt",
+            "score": 27.0753
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 0.5,
+        "latency_ms": 23.647
+      },
+      {
+        "id": "DEV_Q109",
+        "gold_filenames": [
+          "swg21995079.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_24398_chunk_0000",
+            "filename": "swg21995079.txt",
+            "score": 55.5229
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_22410_chunk_0001",
+            "filename": "swg21970582.txt",
+            "score": 22.2488
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_19689_chunk_0000",
+            "filename": "swg21677891.txt",
+            "score": 22.0925
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_22770_chunk_0000",
+            "filename": "swg21975233.txt",
+            "score": 21.9207
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_20276_chunk_0000",
+            "filename": "swg21688444.txt",
+            "score": 21.7771
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_21802_chunk_0000",
+            "filename": "swg21961072.txt",
+            "score": 21.2501
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_22185_chunk_0000",
+            "filename": "swg21967265.txt",
+            "score": 21.1761
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_23310_chunk_0004",
+            "filename": "swg21981402.txt",
+            "score": 20.9247
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_21106_chunk_0001",
+            "filename": "swg21700354.txt",
+            "score": 20.7583
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_22541_chunk_0000",
+            "filename": "swg21972391.txt",
+            "score": 20.4892
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 21.261
+      },
+      {
+        "id": "TRAIN_Q515",
+        "gold_filenames": [
+          "swg21651225.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_15069_chunk_0000",
+            "filename": "swg21502922.txt",
+            "score": 71.7028
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_14610_chunk_0000",
+            "filename": "swg21479763.txt",
+            "score": 71.6275
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_14700_chunk_0000",
+            "filename": "swg21483046.txt",
+            "score": 69.2794
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_14529_chunk_0000",
+            "filename": "swg21477344.txt",
+            "score": 68.6879
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_16877_chunk_0000",
+            "filename": "swg21607077.txt",
+            "score": 67.9321
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_14517_chunk_0000",
+            "filename": "swg21477147.txt",
+            "score": 67.1001
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_19369_chunk_0000",
+            "filename": "swg21672109.txt",
+            "score": 66.7324
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_14563_chunk_0000",
+            "filename": "swg21478316.txt",
+            "score": 65.9938
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_14784_chunk_0001",
+            "filename": "swg21487212.txt",
+            "score": 65.8009
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_14513_chunk_0000",
+            "filename": "swg21477057.txt",
+            "score": 65.6059
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 25.595
+      },
+      {
+        "id": "TRAIN_Q493",
+        "gold_filenames": [
+          "swg22012342.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_26209_chunk_0000",
+            "filename": "swg22015618.txt",
+            "score": 80.4088
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_25966_chunk_0000",
+            "filename": "swg22013312.txt",
+            "score": 72.3332
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_26283_chunk_0000",
+            "filename": "swg22016123.txt",
+            "score": 72.2876
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_00012_chunk_0000",
+            "filename": "ibm10716573.txt",
+            "score": 72.2259
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_00027_chunk_0000",
+            "filename": "ibm10717345.txt",
+            "score": 72.0191
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_25933_chunk_0000",
+            "filename": "swg22013044.txt",
+            "score": 71.9744
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_26210_chunk_0000",
+            "filename": "swg22015623.txt",
+            "score": 71.8766
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_00023_chunk_0000",
+            "filename": "ibm10717327.txt",
+            "score": 71.2673
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_25967_chunk_0000",
+            "filename": "swg22013313.txt",
+            "score": 71.2153
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_25016_chunk_0000",
+            "filename": "swg22002975.txt",
+            "score": 66.7984
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 25.158
+      },
+      {
+        "id": "TRAIN_Q596",
+        "gold_filenames": [
+          "swg24043057.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_06329_chunk_0001",
+            "filename": "swg1OA28843.txt",
+            "score": 36.1755
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_03051_chunk_0003",
+            "filename": "swg1IT25113.txt",
+            "score": 27.5195
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_02891_chunk_0000",
+            "filename": "swg1IT18829.txt",
+            "score": 27.5189
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_04468_chunk_0004",
+            "filename": "swg1IY91542.txt",
+            "score": 27.3008
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_18113_chunk_0004",
+            "filename": "swg21641284.txt",
+            "score": 26.2543
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_28246_chunk_0002",
+            "filename": "swg27048601.txt",
+            "score": 25.4409
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_20817_chunk_0000",
+            "filename": "swg21696464.txt",
+            "score": 25.3603
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_07431_chunk_0002",
+            "filename": "swg1PI69916.txt",
+            "score": 25.1665
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_12776_chunk_0000",
+            "filename": "swg21391005.txt",
+            "score": 24.9501
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_03051_chunk_0002",
+            "filename": "swg1IT25113.txt",
+            "score": 24.8086
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 21.45
+      },
+      {
+        "id": "DEV_Q074",
+        "gold_filenames": [
+          "swg21959169.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_22387_chunk_0000",
+            "filename": "swg21970106.txt",
+            "score": 67.4277
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_22513_chunk_0000",
+            "filename": "swg21972135.txt",
+            "score": 63.879
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_22513_chunk_0001",
+            "filename": "swg21972135.txt",
+            "score": 61.0796
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_22384_chunk_0000",
+            "filename": "swg21970092.txt",
+            "score": 60.6532
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_21607_chunk_0000",
+            "filename": "swg21959169.txt",
+            "score": 59.3579
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_22387_chunk_0001",
+            "filename": "swg21970106.txt",
+            "score": 52.5876
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_21626_chunk_0000",
+            "filename": "swg21959305.txt",
+            "score": 51.9659
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_22384_chunk_0001",
+            "filename": "swg21970092.txt",
+            "score": 49.5157
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_21625_chunk_0000",
+            "filename": "swg21959304.txt",
+            "score": 49.3879
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_21306_chunk_0000",
+            "filename": "swg21882703.txt",
+            "score": 47.8705
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 0.2,
+        "latency_ms": 23.991
+      },
+      {
+        "id": "DEV_Q181",
+        "gold_filenames": [
+          "swg21569933.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_06162_chunk_0001",
+            "filename": "swg1LO52147.txt",
+            "score": 29.5748
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_03941_chunk_0002",
+            "filename": "swg1IV76111.txt",
+            "score": 28.6786
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_03941_chunk_0006",
+            "filename": "swg1IV76111.txt",
+            "score": 28.5161
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_01406_chunk_0001",
+            "filename": "swg1IC37810.txt",
+            "score": 27.7091
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_06162_chunk_0000",
+            "filename": "swg1LO52147.txt",
+            "score": 26.8737
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_14748_chunk_0000",
+            "filename": "swg21485350.txt",
+            "score": 26.8372
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_12245_chunk_0001",
+            "filename": "swg21336572.txt",
+            "score": 26.4197
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_03730_chunk_0001",
+            "filename": "swg1IV63503.txt",
+            "score": 26.0154
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_12399_chunk_0000",
+            "filename": "swg21352555.txt",
+            "score": 25.6657
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_12457_chunk_0000",
+            "filename": "swg21367735.txt",
+            "score": 25.4923
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 22.198
+      },
+      {
+        "id": "TRAIN_Q423",
+        "gold_filenames": [
+          "swg21371279.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_10131_chunk_0002",
+            "filename": "swg1PQ41735.txt",
+            "score": 32.9228
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_10132_chunk_0002",
+            "filename": "swg1PQ41736.txt",
+            "score": 32.9228
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_15006_chunk_0000",
+            "filename": "swg21500714.txt",
+            "score": 30.7291
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_12237_chunk_0001",
+            "filename": "swg21335702.txt",
+            "score": 30.553
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_03282_chunk_0000",
+            "filename": "swg1IV21231.txt",
+            "score": 30.4106
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_20393_chunk_0004",
+            "filename": "swg21690511.txt",
+            "score": 30.383
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_01626_chunk_0000",
+            "filename": "swg1IC66550.txt",
+            "score": 29.96
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_03161_chunk_0001",
+            "filename": "swg1IV09505.txt",
+            "score": 29.5876
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_03976_chunk_0001",
+            "filename": "swg1IV78693.txt",
+            "score": 29.5519
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_15006_chunk_0001",
+            "filename": "swg21500714.txt",
+            "score": 29.1067
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 21.99
+      },
+      {
+        "id": "TRAIN_Q583",
+        "gold_filenames": [
+          "swg21985630.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_23668_chunk_0000",
+            "filename": "swg21985630.txt",
+            "score": 128.5138
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_14017_chunk_0000",
+            "filename": "swg21451253.txt",
+            "score": 56.4563
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_19881_chunk_0000",
+            "filename": "swg21681572.txt",
+            "score": 56.4319
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_07047_chunk_0000",
+            "filename": "swg1PI43643.txt",
+            "score": 50.5347
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_04777_chunk_0000",
+            "filename": "swg1IZ40926.txt",
+            "score": 49.5738
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_15251_chunk_0000",
+            "filename": "swg21507792.txt",
+            "score": 45.5105
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_16413_chunk_0000",
+            "filename": "swg21589262.txt",
+            "score": 42.9384
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_19725_chunk_0000",
+            "filename": "swg21678752.txt",
+            "score": 39.5084
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_13084_chunk_0000",
+            "filename": "swg21408390.txt",
+            "score": 38.3848
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_13448_chunk_0000",
+            "filename": "swg21425481.txt",
+            "score": 37.7993
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 24.249
+      },
+      {
+        "id": "TRAIN_Q300",
+        "gold_filenames": [
+          "swg21606716.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_09177_chunk_0003",
+            "filename": "swg1PM26921.txt",
+            "score": 82.7252
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_03441_chunk_0002",
+            "filename": "swg1IV37318.txt",
+            "score": 80.1542
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_09177_chunk_0002",
+            "filename": "swg1PM26921.txt",
+            "score": 76.0955
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_14865_chunk_0002",
+            "filename": "swg21496900.txt",
+            "score": 69.4385
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_14865_chunk_0003",
+            "filename": "swg21496900.txt",
+            "score": 68.0128
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_18912_chunk_0000",
+            "filename": "swg21663031.txt",
+            "score": 65.1623
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_04198_chunk_0001",
+            "filename": "swg1IV93834.txt",
+            "score": 65.0195
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_09120_chunk_0002",
+            "filename": "swg1PM22636.txt",
+            "score": 63.0861
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_13923_chunk_0001",
+            "filename": "swg21447884.txt",
+            "score": 61.9968
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_09177_chunk_0004",
+            "filename": "swg1PM26921.txt",
+            "score": 61.2418
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 28.987
+      },
+      {
+        "id": "TRAIN_Q081",
+        "gold_filenames": [
+          "swg24042387.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_01368_chunk_0001",
+            "filename": "swg1HE12537.txt",
+            "score": 21.3879
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_23274_chunk_0000",
+            "filename": "swg21980994.txt",
+            "score": 20.5028
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_23047_chunk_0000",
+            "filename": "swg21978131.txt",
+            "score": 20.4992
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_01368_chunk_0002",
+            "filename": "swg1HE12537.txt",
+            "score": 19.6727
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_27141_chunk_0002",
+            "filename": "swg24042387.txt",
+            "score": 19.4296
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_01368_chunk_0000",
+            "filename": "swg1HE12537.txt",
+            "score": 19.327
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_11343_chunk_0000",
+            "filename": "swg21253503.txt",
+            "score": 19.3268
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_23274_chunk_0001",
+            "filename": "swg21980994.txt",
+            "score": 18.7937
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_00062_chunk_0000",
+            "filename": "ibm10718883.txt",
+            "score": 18.6656
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_12626_chunk_0000",
+            "filename": "swg21382452.txt",
+            "score": 18.3256
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 0.2,
+        "latency_ms": 20.788
+      },
+      {
+        "id": "TRAIN_Q299",
+        "gold_filenames": [
+          "swg21138332.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_13499_chunk_0001",
+            "filename": "swg21427178.txt",
+            "score": 43.8628
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_08125_chunk_0004",
+            "filename": "swg1PK17063.txt",
+            "score": 40.2214
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_13499_chunk_0002",
+            "filename": "swg21427178.txt",
+            "score": 36.4002
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_13499_chunk_0000",
+            "filename": "swg21427178.txt",
+            "score": 36.2549
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_15852_chunk_0005",
+            "filename": "swg21568772.txt",
+            "score": 36.0518
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_00426_chunk_0000",
+            "filename": "nas8N1011892.txt",
+            "score": 34.8533
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_08143_chunk_0001",
+            "filename": "swg1PK20640.txt",
+            "score": 34.0938
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_10917_chunk_0001",
+            "filename": "swg21199423.txt",
+            "score": 33.7201
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_27285_chunk_0001",
+            "filename": "swg24044985.txt",
+            "score": 32.9556
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_27655_chunk_0006",
+            "filename": "swg27024037.txt",
+            "score": 32.6861
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 25.187
+      },
+      {
+        "id": "TRAIN_Q541",
+        "gold_filenames": [
+          "swg21593254.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_14910_chunk_0000",
+            "filename": "swg21498402.txt",
+            "score": 30.8767
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_23571_chunk_0000",
+            "filename": "swg21984315.txt",
+            "score": 30.3994
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_16544_chunk_0001",
+            "filename": "swg21593254.txt",
+            "score": 30.2158
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_22114_chunk_0000",
+            "filename": "swg21966170.txt",
+            "score": 30.0998
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_17613_chunk_0003",
+            "filename": "swg21626203.txt",
+            "score": 28.5901
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_14910_chunk_0001",
+            "filename": "swg21498402.txt",
+            "score": 28.4497
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_16544_chunk_0000",
+            "filename": "swg21593254.txt",
+            "score": 27.4788
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_19390_chunk_0000",
+            "filename": "swg21672536.txt",
+            "score": 26.9166
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_17613_chunk_0004",
+            "filename": "swg21626203.txt",
+            "score": 26.5498
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_23186_chunk_0000",
+            "filename": "swg21979997.txt",
+            "score": 26.5407
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 0.3333,
+        "latency_ms": 19.745
+      },
+      {
+        "id": "TRAIN_Q352",
+        "gold_filenames": [
+          "swg21425772.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_13592_chunk_0000",
+            "filename": "swg21431888.txt",
+            "score": 26.9185
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_27652_chunk_0004",
+            "filename": "swg27024018.txt",
+            "score": 26.2724
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_13454_chunk_0000",
+            "filename": "swg21425708.txt",
+            "score": 25.4422
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_16779_chunk_0000",
+            "filename": "swg21600639.txt",
+            "score": 24.2524
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_11903_chunk_0000",
+            "filename": "swg21305619.txt",
+            "score": 23.7803
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_13378_chunk_0000",
+            "filename": "swg21422095.txt",
+            "score": 23.7463
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_15357_chunk_0000",
+            "filename": "swg21512555.txt",
+            "score": 23.6934
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_27652_chunk_0005",
+            "filename": "swg27024018.txt",
+            "score": 23.5334
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_15842_chunk_0000",
+            "filename": "swg21568541.txt",
+            "score": 22.7116
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_27652_chunk_0000",
+            "filename": "swg27024018.txt",
+            "score": 22.39
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 21.993
+      },
+      {
+        "id": "TRAIN_Q208",
+        "gold_filenames": [
+          "swg21568844.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_15855_chunk_0002",
+            "filename": "swg21568844.txt",
+            "score": 32.5252
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_15855_chunk_0000",
+            "filename": "swg21568844.txt",
+            "score": 30.751
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_15855_chunk_0001",
+            "filename": "swg21568844.txt",
+            "score": 27.3542
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_15855_chunk_0003",
+            "filename": "swg21568844.txt",
+            "score": 27.2449
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_22849_chunk_0000",
+            "filename": "swg21976062.txt",
+            "score": 22.7987
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_09572_chunk_0001",
+            "filename": "swg1PM60001.txt",
+            "score": 22.3551
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_06595_chunk_0000",
+            "filename": "swg1PI14834.txt",
+            "score": 22.3539
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_23871_chunk_0000",
+            "filename": "swg21988314.txt",
+            "score": 21.8584
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_07639_chunk_0000",
+            "filename": "swg1PI84660.txt",
+            "score": 20.7959
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_09924_chunk_0001",
+            "filename": "swg1PM88407.txt",
+            "score": 20.248
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 25.032
+      },
+      {
+        "id": "TRAIN_Q414",
+        "gold_filenames": [
+          "swg21674407.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_04956_chunk_0000",
+            "filename": "swg1IZ63758.txt",
+            "score": 16.5175
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_03364_chunk_0002",
+            "filename": "swg1IV28775.txt",
+            "score": 16.3695
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_19486_chunk_0016",
+            "filename": "swg21674407.txt",
+            "score": 15.3542
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_01916_chunk_0000",
+            "filename": "swg1IC91443.txt",
+            "score": 15.2198
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_04929_chunk_0000",
+            "filename": "swg1IZ60328.txt",
+            "score": 15.1791
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_19486_chunk_0001",
+            "filename": "swg21674407.txt",
+            "score": 15.1786
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_04910_chunk_0000",
+            "filename": "swg1IZ57605.txt",
+            "score": 14.6753
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_19486_chunk_0015",
+            "filename": "swg21674407.txt",
+            "score": 14.637
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_16679_chunk_0006",
+            "filename": "swg21598341.txt",
+            "score": 14.5191
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_03117_chunk_0000",
+            "filename": "swg1IV05536.txt",
+            "score": 14.4327
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 0.3333,
+        "latency_ms": 22.533
+      },
+      {
+        "id": "TRAIN_Q063",
+        "gold_filenames": [
+          "swg24039235.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_26933_chunk_0005",
+            "filename": "swg24037905.txt",
+            "score": 77.927
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_26933_chunk_0006",
+            "filename": "swg24037905.txt",
+            "score": 77.2316
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_26933_chunk_0004",
+            "filename": "swg24037905.txt",
+            "score": 75.0058
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_26933_chunk_0007",
+            "filename": "swg24037905.txt",
+            "score": 72.3563
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_26856_chunk_0003",
+            "filename": "swg24036507.txt",
+            "score": 56.8541
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_26856_chunk_0004",
+            "filename": "swg24036507.txt",
+            "score": 56.4539
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_26856_chunk_0005",
+            "filename": "swg24036507.txt",
+            "score": 56.0907
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_27232_chunk_0005",
+            "filename": "swg24044043.txt",
+            "score": 55.6667
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_27202_chunk_0005",
+            "filename": "swg24043530.txt",
+            "score": 55.6667
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_27202_chunk_0006",
+            "filename": "swg24043530.txt",
+            "score": 54.8466
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 23.935
+      },
+      {
+        "id": "TRAIN_Q537",
+        "gold_filenames": [
+          "swg21967958.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_22221_chunk_0000",
+            "filename": "swg21967958.txt",
+            "score": 31.4138
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_27269_chunk_0004",
+            "filename": "swg24044676.txt",
+            "score": 20.5295
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_22221_chunk_0001",
+            "filename": "swg21967958.txt",
+            "score": 20.0215
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_25685_chunk_0002",
+            "filename": "swg22010162.txt",
+            "score": 19.612
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_26141_chunk_0001",
+            "filename": "swg22014970.txt",
+            "score": 19.4673
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_26041_chunk_0001",
+            "filename": "swg22014125.txt",
+            "score": 19.1062
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_24480_chunk_0002",
+            "filename": "swg21996503.txt",
+            "score": 18.8151
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_27269_chunk_0003",
+            "filename": "swg24044676.txt",
+            "score": 18.2707
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_03456_chunk_0005",
+            "filename": "swg1IV38616.txt",
+            "score": 17.1725
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_26320_chunk_0006",
+            "filename": "swg22016544.txt",
+            "score": 16.8534
+          }
+        ],
+        "hit_at_5": 1,
+        "recall_at_5": 1.0,
+        "reciprocal_rank_at_10": 1.0,
+        "latency_ms": 25.072
+      },
+      {
+        "id": "TRAIN_Q589",
+        "gold_filenames": [
+          "swg21114864.txt"
+        ],
+        "retrieved": [
+          {
+            "rank": 1,
+            "chunk_id": "doc_04961_chunk_0001",
+            "filename": "swg1IZ63993.txt",
+            "score": 36.571
+          },
+          {
+            "rank": 2,
+            "chunk_id": "doc_04646_chunk_0002",
+            "filename": "swg1IZ21929.txt",
+            "score": 30.9955
+          },
+          {
+            "rank": 3,
+            "chunk_id": "doc_24550_chunk_0001",
+            "filename": "swg21997585.txt",
+            "score": 30.1756
+          },
+          {
+            "rank": 4,
+            "chunk_id": "doc_04323_chunk_0004",
+            "filename": "swg1IY50414.txt",
+            "score": 29.6611
+          },
+          {
+            "rank": 5,
+            "chunk_id": "doc_04310_chunk_0004",
+            "filename": "swg1IY44424.txt",
+            "score": 29.6611
+          },
+          {
+            "rank": 6,
+            "chunk_id": "doc_04646_chunk_0000",
+            "filename": "swg1IZ21929.txt",
+            "score": 29.3546
+          },
+          {
+            "rank": 7,
+            "chunk_id": "doc_12338_chunk_0004",
+            "filename": "swg21345570.txt",
+            "score": 29.2983
+          },
+          {
+            "rank": 8,
+            "chunk_id": "doc_04332_chunk_0002",
+            "filename": "swg1IY54159.txt",
+            "score": 29.2869
+          },
+          {
+            "rank": 9,
+            "chunk_id": "doc_20460_chunk_0000",
+            "filename": "swg21691687.txt",
+            "score": 28.8439
+          },
+          {
+            "rank": 10,
+            "chunk_id": "doc_25789_chunk_0001",
+            "filename": "swg22011447.txt",
+            "score": 28.4564
+          }
+        ],
+        "hit_at_5": 0,
+        "recall_at_5": 0.0,
+        "reciprocal_rank_at_10": 0.0,
+        "latency_ms": 26.26
+      }
+    ]
+  },
+  "embedding_build": {
+    "model": "all-MiniLM-L6-v2",
+    "total_chunks": 140821,
+    "dimension": 384,
+    "batch_size": 64,
+    "max_sequence_length": 256,
+    "corpus_sha256": "fb551523b01d9ce63b8a16520ae07180d632b5de862fe7da2663613d7f9dac91",
+    "embedding_seconds": 192.558,
+    "chunks_per_second": 731.318,
+    "peak_gpu_memory_gb": 0.366,
+    "embedding_file": "corpus_embeddings.npy"
+  }
+}
