@@ -1,14 +1,3 @@
-"""IBM TechSupport QA 중복 정제·유사도 분석·검토 통합 도구.
-
-실행 순서 (최초 이전 작업 재사용):
-  python IBMTechSupport/scripts/analyze_duplicates.py dedup
-  python IBMTechSupport/scripts/analyze_duplicates.py merge
-  python IBMTechSupport/scripts/analyze_duplicates.py status
-
-검색을 처음부터 재생성할 때만:
-  python IBMTechSupport/scripts/analyze_duplicates.py scan
-"""
-
 import argparse
 import csv
 import json
