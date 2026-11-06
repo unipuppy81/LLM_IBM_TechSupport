@@ -27,16 +27,23 @@ SYSTEM_PROMPT = (
     "Otherwise, provide a concise technical answer in English."
 )
 
+# region 공용 함수
 
 def tokenize_for_metrics(text):
     text = unicodedata.normalize("NFKC", text).casefold()
     return re.findall(r"\w+|[^\w\s]", text)
 
+def percentage(numerator, denominator):
+    return round(numerator / denominator * 100, 2) if denominator else None
+
+# endregion
+
+# region 정답 일치 평가 (Exact Match / Token F1)
 
 def exact_match(prediction, reference):
     return int(tokenize_for_metrics(prediction) == tokenize_for_metrics(reference))
 
-
+# F1 = 2 * Precision * Recall / (Precision + Recall)
 def token_f1(prediction, reference):
     predicted = tokenize_for_metrics(prediction)
     correct = tokenize_for_metrics(reference)
@@ -52,10 +59,34 @@ def token_f1(prediction, reference):
     recall = overlap / len(correct)
     return 2 * precision * recall / (precision + recall)
 
+# endregion
 
-def percentage(numerator, denominator):
-    return round(numerator / denominator * 100, 2) if denominator else None
+# region 정답 / 예측 평가
 
+def validate_prediction_rows(records, predictions):
+    if len(records) != len(predictions):
+        raise ValueError("예측 파일 레코드 수가 평가 데이터와 다릅니다.")
+
+    for record, result in zip(records, predictions):
+        expected = (
+            record["id"], 
+            record["question"],
+            record["answer"], 
+            record["is_impossible"],
+        )
+        actual = (
+            result["id"], 
+            result["question"],
+            result["reference_answer"], 
+            result["is_impossible"],
+        )
+        
+        if actual != expected or not isinstance(result.get("prediction"), str):
+            raise ValueError(f"평가 데이터와 예측 결과가 불일치: {record['id']}")
+
+# endregion
+
+# region Qwen 모델 및 토크나이저 로드
 
 def load_model():
     if not torch.cuda.is_available():
@@ -73,6 +104,7 @@ def load_model():
         local_files_only=True,
     )
     model.eval()
+
     if {p.device.type for p in model.parameters()} != {"cuda"}:
         raise RuntimeError("모델 전체가 GPU에 배치되지 않았습니다.")
 
@@ -90,6 +122,9 @@ def load_model():
     print("Model Load: OK")
     return model, tokenizer, generation_config
 
+# endregion
+
+# region Batch 추론 / 생성 시간 및 GPU 메모리 측정
 
 def generate_batch(model, tokenizer, generation_config, questions):
     conversations = [
@@ -120,7 +155,6 @@ def generate_batch(model, tokenizer, generation_config, questions):
             outputs[:, input_width:], skip_special_tokens=True
         )
     ]
-
 
 def make_prediction_rows(model, tokenizer, generation_config, records, batch_size):
     rows = []
@@ -153,23 +187,9 @@ def make_prediction_rows(model, tokenizer, generation_config, records, batch_siz
     peak_gb = torch.cuda.max_memory_allocated() / (1024 ** 3)
     return rows, seconds, peak_gb
 
+# endregion
 
-def validate_prediction_rows(records, predictions):
-    if len(records) != len(predictions):
-        raise ValueError("예측 파일 레코드 수가 평가 데이터와 다릅니다.")
-
-    for record, result in zip(records, predictions):
-        expected = (
-            record["id"], record["question"],
-            record["answer"], record["is_impossible"],
-        )
-        actual = (
-            result["id"], result["question"],
-            result["reference_answer"], result["is_impossible"],
-        )
-        if actual != expected or not isinstance(result.get("prediction"), str):
-            raise ValueError(f"평가 데이터와 예측 결과가 불일치: {record['id']}")
-
+# region 평가 지표 집계 (EM / F1 / 답변 거부율)
 
 def score_predictions(records, predictions, dataset, batch_size):
     validate_prediction_rows(records, predictions)
@@ -206,14 +226,21 @@ def score_predictions(records, predictions, dataset, batch_size):
         "impossible": stats["impossible"],
         "exact_match_percent": percentage(stats["exact_matches"], stats["answerable"]),
         "token_f1_percent": percentage(total_f1, stats["answerable"]),
-        "abstention_rate_percent": percentage(
-            stats["correct_abstentions"], stats["impossible"]
-        ),
-        "false_refusal_rate_percent": percentage(
-            stats["false_refusals"], stats["answerable"]
-        ),
+        "abstention_rate_percent": percentage(stats["correct_abstentions"], stats["impossible"]),
+        "false_refusal_rate_percent": percentage(stats["false_refusals"], stats["answerable"]),
     }
 
+# endregion
+
+# region 추가 예정
+
+# Answer Correctness
+# Unsupported Claim Rate
+# Hallucination / Contradiction Rate
+
+# endregion
+
+# region JSONL 저장 및 로드
 
 def save_jsonl(path, records):
     temp_path = path.with_suffix(path.suffix + ".part")
@@ -225,11 +252,11 @@ def save_jsonl(path, records):
     finally:
         temp_path.unlink(missing_ok=True)
 
-
-def read_jsonl(path):
+def load_jsonl(path):
     with open(path, encoding="utf-8") as file:
         return [json.loads(line) for line in file if line.strip()]
 
+# endregion
 
 def main():
     parser = argparse.ArgumentParser()
@@ -271,7 +298,7 @@ def main():
 
     if args.reuse:
         source_path = args.predictions or prediction_path
-        predictions = read_jsonl(source_path)
+        predictions = load_jsonl(source_path)
         print("Reuse Predictions:", source_path)
         # 원본 생성 당시 저장된 속도 측정값이 있다면 유지
         if metrics_path.exists():
@@ -286,9 +313,7 @@ def main():
                 peak_memory_gb = old_metrics.get("peak_gpu_memory_gb")
     else:
         model, tokenizer, generation_config = load_model()
-        predictions, inference_seconds, peak_memory_gb = make_prediction_rows(
-            model, tokenizer, generation_config, records, args.batch_size
-        )
+        predictions, inference_seconds, peak_memory_gb = make_prediction_rows(model, tokenizer, generation_config, records, args.batch_size)
 
     metrics = score_predictions(records, predictions, args.dataset, args.batch_size)
     metrics["generation_seconds"] = inference_seconds
@@ -306,8 +331,10 @@ def main():
         json.dump(metrics, file, ensure_ascii=False, indent=2)
 
     print("\n[Base Model Evaluation]")
+
     for key, value in metrics.items():
         print(f"{key}: {value}")
+
     print("Metrics:", metrics_path)
     print("Base Model Evaluation: OK")
 
