@@ -1,0 +1,24 @@
+{
+  "dataset": "val_clean.json",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "bm25": {
+    "hit_at_5_percent": 52.22,
+    "recall_at_5_percent": 52.22,
+    "mrr_at_10": 0.4394
+  },
+  "dense": {
+    "hit_at_5_percent": 50.0,
+    "recall_at_5_percent": 50.0,
+    "mrr_at_10": 0.4042
+  },
+  "hybrid_rrf": {
+    "hit_at_5_percent": 55.56,
+    "recall_at_5_percent": 55.56,
+    "mrr_at_10": 0.4419
+  },
+  "candidate_k_per_retriever": 50,
+  "rrf_k": 60,
+  "query_search_total_seconds": 0.957
+}

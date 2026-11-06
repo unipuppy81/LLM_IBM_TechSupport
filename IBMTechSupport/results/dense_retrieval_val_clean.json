@@ -1,0 +1,14 @@
+{
+  "dataset": "val_clean.json",
+  "retriever": "Dense / FAISS IndexFlatIP",
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "hit_at_5_percent": 50.0,
+  "recall_at_5_percent": 50.0,
+  "mrr_at_10": 0.4042,
+  "query_encoding_seconds": 0.256,
+  "faiss_search_seconds": 0.351,
+  "avg_faiss_search_ms_per_question": 3.896
+}
