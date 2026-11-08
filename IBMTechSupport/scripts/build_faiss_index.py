@@ -50,12 +50,7 @@ def build_index(embeddings):
 
     for start in range(0, count, BATCH_SIZE):
         end = min(start + BATCH_SIZE, count)
-        vectors = np.array(
-            embeddings[start:end],
-            dtype=np.float32,
-            order="C",
-            copy=True,
-        )
+        vectors = np.array(embeddings[start:end], dtype=np.float32, order="C", copy=True)
 
         if not np.isfinite(vectors).all():
             raise ValueError(f"NaN/Inf 임베딩 발견: {start}:{end}")
@@ -78,12 +73,7 @@ def verify_index(index, embeddings):
         raise ValueError("FAISS 인덱스의 벡터 수 또는 차원이 일치하지 않습니다.")
 
     sample_ids = [0, count // 2, count - 1]
-    queries = np.array(
-        embeddings[sample_ids],
-        dtype=np.float32,
-        order="C",
-        copy=True,
-    )
+    queries = np.array(embeddings[sample_ids], dtype=np.float32, order="C", copy=True)
     faiss.normalize_L2(queries)
 
     scores, ids = index.search(queries, 1)

@@ -1,0 +1,14 @@
+{
+  "model": "qlora",
+  "optimizer": "default",
+  "checkpoint": "on",
+  "warmup_samples": 8,
+  "timed_samples": 32,
+  "grad_accum": 8,
+  "max_length": 512,
+  "optimizer_steps": 4,
+  "mean_loss": 2.3526,
+  "seconds": 12.417,
+  "samples_per_second": 2.577,
+  "peak_gpu_memory_gb": 2.64
+}

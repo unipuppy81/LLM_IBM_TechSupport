@@ -4,7 +4,6 @@ import time
 
 import bm25s
 
-# 기존 11단계 Dense Retrieval 함수 재사용
 from dense_search import (
     DATA_DIR,
     RESULT_DIR,

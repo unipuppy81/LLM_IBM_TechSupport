@@ -1,0 +1,14 @@
+{
+  "model": "lora",
+  "optimizer": "fused",
+  "checkpoint": "on",
+  "warmup_samples": 8,
+  "timed_samples": 32,
+  "grad_accum": 8,
+  "max_length": 512,
+  "optimizer_steps": 4,
+  "mean_loss": 2.0979,
+  "seconds": 8.73,
+  "samples_per_second": 3.666,
+  "peak_gpu_memory_gb": 3.549
+}

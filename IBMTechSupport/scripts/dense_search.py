@@ -57,13 +57,7 @@ def chunk_filename(chunk):
     )
 
     for data in candidates:
-        for key in (
-            "filename",
-            "source_file",
-            "source",
-            "document_id",
-            "doc_id",
-        ):
+        for key in ("filename", "source_file", "source", "document_id", "doc_id"):
             value = data.get(key)
 
             if isinstance(value, str) and value.strip():
@@ -90,7 +84,7 @@ def encode_questions(model, questions):
         show_progress_bar=False,
     )
 
-    return np.ascontiguousarray(vectors, dtype=np.float32,)
+    return np.ascontiguousarray(vectors, dtype=np.float32)
 
 # endregion
 
@@ -112,12 +106,7 @@ def dense_search(model, index, chunks, question, top_k):
             continue
 
         chunk = chunks[int(row_id)]
-
-        results.append({
-            **chunk,
-            "row_id": int(row_id),
-            "score": float(score),
-        })
+        results.append({**chunk, "row_id": int(row_id), "score": float(score) })
 
     return results
 
@@ -236,27 +225,10 @@ def evaluate(model, index, chunks):
 
 def main():
     parser = argparse.ArgumentParser()
-
     group = parser.add_mutually_exclusive_group(required=True)
-
-    group.add_argument(
-        "--question",
-        type=str,
-        help="사용자 질문으로 문서 검색",
-    )
-
-    group.add_argument(
-        "--evaluate",
-        action="store_true",
-        help="val_clean 전체 검색 성능 평가",
-    )
-
-    parser.add_argument(
-        "--top-k",
-        type=int,
-        default=5,
-    )
-
+    group.add_argument("--question", type=str, help="사용자 질문으로 문서 검색")
+    group.add_argument("--evaluate", action="store_true", help="val_clean 전체 검색 성능 평가")
+    parser.add_argument("--top-k", type=int, default=5)
     args = parser.parse_args()
 
     if args.top_k < 1:
@@ -268,13 +240,7 @@ def main():
         evaluate(model, index, chunks)
 
     else:
-        results = dense_search(
-            model,
-            index,
-            chunks,
-            args.question,
-            args.top_k,
-        )
+        results = dense_search(model, index, chunks, args.question, args.top_k)
 
         for rank, hit in enumerate(results, 1):
             filename = chunk_filename(hit)
