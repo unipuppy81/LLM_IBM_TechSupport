@@ -1,6 +1,3 @@
-
-"""18단계: LoRA / QLoRA 학습 최적화 벤치마크."""
-
 import argparse
 import json
 import random
@@ -18,7 +15,7 @@ from train_lora import (
 )
 
 
-# region 01. 벤치마크 설정
+# region 벤치마크 설정
 
 def result_path(model_type, optimizer_type, checkpoint):
     name = (
@@ -30,7 +27,7 @@ def result_path(model_type, optimizer_type, checkpoint):
 # endregion
 
 
-# region 02. 모델 및 Optimizer 준비
+# region 모델 및 Optimizer 준비
 
 def load_training_model(model_type, checkpoint):
     if model_type == "lora":
@@ -71,7 +68,7 @@ def make_optimizer(model, optimizer_type):
 # endregion
 
 
-# region 03. 실제 학습 구간 실행
+# region 실제 학습 구간 실행
 
 def train_segment(
     dataset,
@@ -291,7 +288,7 @@ def benchmark(args):
 # endregion
 
 
-# region 05. 벤치마크 결과 비교
+# region 벤치마크 결과 비교
 
 def compare():
     print("\n[Training Optimization Comparison]")
@@ -353,9 +350,6 @@ def compare():
         )
 
 # endregion
-
-
-# region 06. 메인 실행
 
 def main():
     parser = argparse.ArgumentParser()
@@ -433,4 +427,4 @@ def main():
 if __name__ == "__main__":
     main()
 
-# endregion
+
