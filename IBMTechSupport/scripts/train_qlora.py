@@ -5,19 +5,12 @@ import time
 
 import bitsandbytes as bnb
 import torch
-from peft import (
-    LoraConfig,
-    get_peft_model,
-    prepare_model_for_kbit_training,
-)
-from torch.utils.data import DataLoader
-from transformers import (
-    AutoModelForCausalLM,
-    AutoTokenizer,
-    BitsAndBytesConfig,
-)
 
-from evaluate_base_model import MODEL_DIR, RESULT_DIR
+from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
+from torch.utils.data import DataLoader
+from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+
+from train_lora import MODEL_DIR, RESULT_DIR
 from train_lora import (
     QADataset,
     load_records,

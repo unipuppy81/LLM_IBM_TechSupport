@@ -1,0 +1,492 @@
+﻿
+================================================================================
+ID: DEV_Q203
+QUESTION: Why WebSphere Application Server transactions are rolled back with these StaleConnectionExceptions?
+
+Why WebSphere Application Server transactions are rolled back with these StaleConnectionExceptions?
+My transactions are rolled back and the following errors are seen in the WebSphere Application Server logs:
+
+ConnectionEve A J2CA0056I: ........ ........ Connection reset:java.net.SocketException: Connection reset [15/03/04 1:04:33:046 JST] 00000024 SystemOut O INFO Error executing internal sql (executing callable statement) com.ibm.websphere.ce.cm.StaleConnectionException: IO?G??챰[: Connection reset at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) at 
+...
+See original exception message: ...... with SQL State : 08003 SQL Code : 17008 ..... .....
+Caused by: java.sql.SQLRecoverableException: .......DSRA0010E: SQL State : 08003 SQL Code : 17008
+
+[Document 1]
+Chunk: doc_03340_chunk_0001
+Text: n was involved in a XA transaction.
+   When the Transaction Manager (for example, WebSphere
+   Application Server) attempts to call XA prepare on the
+   Session, it received a XAER_NOTA XA return code (-4), due to
+   the connection to the queue manager already being closed.
+   
+   Following this connection failure, the transaction became
+   stranded, until the WebSphere MQ queue manager encountered a
+   log-nearly-full condition.  At this point the transaction was
+   rolled back.
+   
+   The message received under the transaction is locked until the
+   transaction is rolled back.  This may occur many hours later
+   when the WebSphere MQ transaction logs become full and
+   incomplete transactions are rolled back to free space.
+   
+   The application server's SystemOut.log file records the
+   message:
+   
+   javax.transaction.xa.XAException: The method 'xa_prepare' has
+   failed with errorCode '-4'.
+   
+   When the transaction is eventually rolled back, WebSphere MQ
+
+
+[Document 2]
+Chunk: doc_08400_chunk_0005
+Text: .cm.StaleConnectionException:
+   Io exception: Connection reset
+   at sun.reflect.NativeConstructorAccessorImpl.
+         newInstance0(Native Method)
+   at sun.reflect.NativeConstructorAccessorImpl.
+         newInstance(NativeConstructorAccessorImpl.java:80)
+   at sun.reflect.DelegatingConstructorAccessorImpl.
+   newInstance(DelegatingConstructorAccessorImpl.java(Compiled
+   Code))
+   at java.lang.reflect.Constructor.
+         newInstance(Constructor.java(Compiled Code))
+   at com.ibm.websphere.rsadapter.GenericDataStoreHelper.
+         mapExceptionHelper(GenericDataStoreHelper.java:502)
+   at com.ibm.websphere.rsadapter.GenericDataStoreHelper.
+         mapException(GenericDataStoreHelper.java:545)
+   at com.ibm.ws.rsadapter.jdbc.WSJdbcUtil.
+         mapException(WSJdbcUtil.java:902)
+   at com.ibm.ws.rsadapter.jdbc.WSJdbcPreparedStatement.
+         executeUpdate(WSJdbcPreparedStatement.java:555)
+   at com.ibm.ws.sib.msgstore.persistence.impl.ItemTable.
+
+
+[Document 3]
+Chunk: doc_12494_chunk_0000
+Text: Title: IBM WebSphere Portal SystemOut.log J2CA0056I com.ibm.websphere.ce.cm.StaleConnectionException Connection reset - United States
+
+Text:
+com.ibm.websphere.ce.cm.StaleConnectionException; connection reset; Purge Policy; purge; policy; EntirePool; entire pool; Minimum Connections; minimum; connections; Unused Timeout; unused; timeout; time out; firewall; data source; connection pool settings; connection pool; connection; pool; settings; staleconnection; stale connection; exception; reset TECHNOTE (TROUBLESHOOTING)
+
+PROBLEM(ABSTRACT)
+ This technote describes a solution for IBM WebSphere Portal SystemOut.log entry, "J2CA0056I com.ibm.websphere.ce.cm.StaleConnectionException Connection reset" error. 
+
+SYMPTOM
+The WebSphere Portal SystemOut.log shows: 
+
+
+
+[Document 4]
+Chunk: doc_12494_chunk_0001
+Text: log entry, "J2CA0056I com.ibm.websphere.ce.cm.StaleConnectionException Connection reset" error. 
+
+SYMPTOM
+The WebSphere Portal SystemOut.log shows: 
+
+[datetime] 0000008b ConnectionEve A J2CA0056I: The Connection Manager received a fatal connection error from the Resource Adapter for resource jdbc/customdb. The exception which was received is com.ibm.websphere.ce.cm.StaleConnectionException: [ibm][db2][jcc][t4][2030][11211] A communication error has been detected. Communication protocol being used: TCP/IP.
+Communication API being used: SOCKETS. Location where the error was detected: T4Agent.sendRequest().
+Communication function detecting the error: OutputStream.flush(). Protocol specific error codes Connection reset, *, 0. Message: Connection reset:com.ibm.db2.jcc.c.DisconnectException: [ibm][db2][jcc][t4][2030][11211] A communication error has been detected. Communication protocol being used: TCP/IP.
+
+
+[Document 5]
+Chunk: doc_01798_chunk_0002
+Text: 
+   connection, this may cause the node, and even the execution
+   group to hang.
+   2) The WebSphere Message Broker JDBC connection pools may become
+   populated with stale connections, which do not get reset.
+   3) If the outage occurs during commit processing, then updates
+   to non JDBC resources in the same message flow do not get rolled
+   back.
+   
+   
+    
+   
+   
+
+PROBLEM CONCLUSION
+ *  WebSphere Message Broker JDBC connection handling has been
+   modified in the following way:
+   
+   1. The JDBC connection handling recognizes vendor specific SQL
+   exceptions, and resets JDBC connections when the database server
+   becomes available again.
+   2. A fix was also made to JDBC commit processing to report
+   failures, which enables roll back of other resources being
+   coordinated in the same transaction.
+   3. WebSphere Message Broker automatically reconnects to a JDBC
+   database server following an outage.
+   4. When WebSphere Message Broker discovers stale JDBC
+
+
+================================================================================
+ID: TRAIN_Q282
+QUESTION: Security Bulletin: Non-configured connections could cause denial of service in IBM WebSphere MQ Internet Pass-Thru (CVE-2017-1118)
+
+I need to understand details regarding Security Bulletin: Non-configured connections could cause denial of service in IBM WebSphere MQ Internet Pass-Thru (CVE-2017-1118). Where can I find this information?
+
+[Document 1]
+Chunk: doc_25341_chunk_0000
+Text: Title: IBM Security Bulletin: Non-configured connections could cause denial of service in IBM WebSphere MQ Internet Pass-Thru (CVE-2017-1118 ) - United States
+
+Text:
+ SECURITY BULLETIN
+
+SUMMARY
+ When using the MQIPT SecurityManager, IP addresses that are not configured in the MQIPT security policy file with the accept and resolve socket permissions, cause MQIPT to stop responding to connection attempts. 
+
+VULNERABILITY DETAILS
+CVEID:CVE-2017-1118 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1118]
+DESCRIPTION:IBM WebSphere MQ Internet Pass-Thru could allow an attacker to cause the MQIPT to stop responding due to an incorrectly configured security policy.
+CVSS Base Score: 3.7
+CVSS Temporal Score: Seehttps://exchange.xforce.ibmcloud.com/vulnerabilities/121156 [https://exchange.xforce.ibmcloud.com/vulnerabilities/121156]for the current score
+CVSS Environmental Score*: Undefined
+CVSS Vector: (CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:L) 
+
+
+
+[Document 2]
+Chunk: doc_25359_chunk_0000
+Text: Title: IBM ?먦궩??깷?ゃ깇?ｆ깄?긱멗BM WebSphere MQ?ㅳ꺍?욍꺖?띲긿?덀꺕?묆궧?밤꺂?쇈겗礪뗦닇?뚪겑?뉎겓礪뗦닇?뺛굦?╉걚?ゃ걚?닷릦?듐꺖?볝궧?믣맔?믣폊?띹돈?볝걲??꺗??(CVE-2017-1118 ) - United States
+
+Text:
+ SECURITY BULLETIN
+
+SUMMARY
+ MQIPT SecurityManager?믢슴?ⓦ걲?뗥졃?덀갡QIPT?삠궘?γ꺁?녴궍?쇈꺕?앫꺁?룔꺖?삠깢?▲궎?ャ겓Socket ?묆꺖?잆긿?룔깾?녈궓?녈깉?ゃ꺖?믦옙?졼걮?쪰P?㏂깋?с궧?뚪겑?뉎겓礪뗦닇?뺛굦?╉걚?ゃ걚?ⓦ갡QIPT?뚧렏泳싪ĳ烏뚣겓恙쒐춸?㎯걤?ゃ걦?ゃ굥??꺗?㎯걣?귙굤?얇걲??
+
+
+VULNERABILITY DETAILS
+??겹겗?끻젿?ャ겇?꾠겍??곦툔鼇쁕RL??뻼?몌펷?김첑竊됥굮?붷뢿?㎯걦?졼걬?꾠?
+Security Bulletin: Non-configured connections could cause denial of service in IBM WebSphere MQ Internet Pass-Thru (CVE-2017-1118 )
+http://www.ibm.com/support/docview.wss?uid=swg22006580 [http://www.ibm.com/support/docview.wss?uid=swg22006580]
+
+
+
+CVEID:CVE-2017-1118 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1118]
+DESCRIPTION:MQIPT SecurityManager?믢슴?ⓦ걲?뗥졃?덀갡QIPT?삠궘?γ꺁?녴궍?쇈꺕?앫꺁?룔꺖?삠깢?▲궎?ャ겓Socket ?묆꺖?잆긿?룔깾?녈궓?녈깉?ゃ꺖?믦옙?졼걮?쪰P?㏂깋?с궧?뚪겑?뉎겓礪뗦닇?뺛굦?╉걚?ゃ걚?ⓦ갡QIPT?뚧렏泳싪ĳ烏뚣겓恙쒐춸?㎯걤?ゃ걦?ゃ굥??꺗?㎯걣?귙굤?얇걲??
+CVSS Base Score: 3.7
+CVSS Temporal Score: Seehttps://exchange.xforce.ibmcloud.com/vulnerabilities/121156 [https://exchange.xforce.ibmcloud.com/vulnerabilities/121156]for the current score
+
+
+[Document 3]
+Chunk: doc_24897_chunk_0000
+Text: Title: IBM Security Bulletin: Multiple vulnerabilities in IBM Java Runtime affect IBM WebSphere MQ Internet Pass-Thru - United States
+
+Text:
+ SECURITY BULLETIN
+
+SUMMARY
+ There are multiple vulnerabilities in IBM짰 Runtime Environment Java??Version 7 that is used by IBM WebSphere MQ Internet Pass-Thru. These issues were disclosed as part of the IBM Java SDK updates in January and April 2017 
+
+VULNERABILITY DETAILS
+If you run your own Java code using the IBM Java Runtime delivered with this product, you should evaluate your code to determine whether the complete list of vulnerabilities are applicable to your code. For a complete list of vulnerabilities please refer to the link for ?쏧BM Java SDK Security Bulletin" located in the ?쏳eferences??section for more information. 
+
+
+
+[Document 4]
+Chunk: doc_20285_chunk_0000
+Text: Title: IBM Security Bulletin: A security vulnerability has been identified in IBM WebSphere MQ and IBM WebSphere Application Server shipped with IBM Financial Transaction Manager (CVE-2014-3566) - United States
+
+Text:
+ SECURITY BULLETIN
+
+SUMMARY
+ IBM WebSphere MQ is shipped as a component of IBM Financial Transaction Manager. Information about a security vulnerability affecting IBM WebSphere MQ has been published in a security bulletin. 
+
+IBM WebSphere Application Server is shipped as a component of IBM Financial Transaction Manager. Information about a security vulnerability affecting IBM WebSphere Application Server has been published in a security bulletin. 
+
+VULNERABILITY DETAILS
+IBM WebSphere MQ:
+Please consult the security bulletin Vulnerability in SSLv3 affects IBM WebSphere MQ, IBM WebSphere MQ Internet Pass-Thru and IBM Mobile Messaging and M2M Client Pack (CVE-2014-3566) [http://www-01.ibm.com/support/docview.wss?uid=swg21687433] for vulnerability details and information 
+
+[Document 5]
+Chunk: doc_22222_chunk_0000
+Text: Title: IBM Security Bulletin: IBM MQIPT is affected by multiple vulnerabilities in IBM SDK, Java??Technology Edition, Version 7  (CVE-2015-0488, CVE-2015-0478. CVE-2015-2808, CVE-2015-1916, CVE-2015-0204, CVE-2015-2613, CVE-2015-2601, CVE-2015-1931, CVE-2015-2625) - United States
+
+Text:
+ SECURITY BULLETIN
+
+SUMMARY
+ Multiple security vulnerabilities exist in the IBM Java Runtime Environment component of IBM WebSphere MQ Internet Pass-Thru (MQIPT). Patches for these are available in IBM SDK, Java??Technology Edition, Version 7 Service Refresh 9 Fix Pack 10 (7.0.9.10) 
+
+VULNERABILITY DETAILS
+CVEID:CVE-2015-0488 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-0488]
+DESCRIPTION:An unspecified vulnerability in Oracle Java SE and Jrockit related to the JSSE component could allow a remote attacker to cause a denial of service.
+CVSS Base Score: 5
+
+
+================================================================================
+ID: DEV_Q157
+QUESTION: How do I configure TLS/SSL for an IIB web service provider and consumer?
+
+I'm investigating ways and technologies for use with IIB to run a web service that runs as both a provider and consumer. I'm looking at HTTP and SOAP messages/nodes. At a high level it might look like this:
+HTTPInput (TLS over HTTPS) -> Compute -> HTTPRequest (SSL over HTTPS) -> Compute -> HTTPReply
+or
+SOAPInput (TLS over HTTPS) -> Compute -> SOAPRequest (SSL over HTTPS) -> Compute -> SOAPReply
+Does anyone have more details/references beyond the knowledge center on how to configure the TLS/SSL portions?
+
+[Document 1]
+Chunk: doc_20118_chunk_0000
+Text: Title: IBM Does IBM TRIRIGA support HTTPS, SSL and TLS? - United States
+
+Text:
+TRICONFIG; HTTPS; SSL; TLS; SSH; RDP; IPSec; ICA TECHNOTE (FAQ)
+
+QUESTION
+ Are HTTPS, SSL and TLS supported by IBM TRIRIGA product? 
+
+CAUSE
+Need to implement HTTPS, SSL and TLS for my IBM TRIRIGA solution.
+
+ANSWER
+The Transport Layer Security (TLS) and its predecessor, Secure Sockets Layer (SSL), are both supported via Hypertext Transfer Protocol Secure (HTTPS). The HTTPS protocol is the result of simply layering the Hypertext Transfer Protocol (HTTP) on top of the SSL/TLS protocol, thus adding the security capabilities of SSL/TLS to standard HTTP communications. This is implemented via Web Server configuration. We have tested HTTPS for IBM TRIRIGA and support it via Web Server set up. 
+
+[Document 2]
+Chunk: doc_22719_chunk_0000
+Text: Title: IBM Remote Syslog over TLS setup - United States
+
+Text:
+remote syslog; encryption; TLS; SSL; certificates TECHNOTE (FAQ)
+
+QUESTION
+ How do I set up Remote Syslog to encrypt data over TLS? 
+
+ANSWER
+
+
+REMOTE SYSLOG OVER TLS SETUP GUIDE
+
+Note: Remote Syslog over TLS is applicable only to IBM Security Network Protection 5.3.1.7 or 5.3.2.1 and later releases. Any 5.3.1.x or 5.3.2 releases prior to these updates do not include this feature. 
+
+Insert a custom TLS tag for all TLS configurations in the existing comment field on the Edit Remote Syslog Object page. 
+
+REMOTE SYSLOG CONFIGURATION
+
+Select Secure -> Network Access Policy, then click New -> Response -> Alert -> Remote syslog. 
+Type the <TlsExtension> tag information in the comment field. 
+Example: 
+<TlsExtension> 
+key1=value2 
+key2=value2 
+: 
+</TlsExtension> 
+
+KEY LIST
+
+enabled = [true|false] (default false)  * 
+
+cryto.level = [compatible|strict] (default strict)  * 
+ * (a1)
+ *  
+ * 
+ * 
+ * (a2)
+
+
+
+[Document 3]
+Chunk: doc_13319_chunk_0006
+Text: 6650_.htm] 
+    * Broker-wide HTTP listener parameters [http://www.ibm.com/support/knowledgecenter/SSKM8N_8.0.0/com.ibm.etools.mft.doc/an09141_.htm] 
+    * Execution group HTTP listener parameters (SOAP and HTTP nodes) [http://www.ibm.com/support/knowledgecenter/SSKM8N_8.0.0/com.ibm.etools.mft.doc/an09148_.htm] 
+    * Configuring HTTPInput and HTTPReply nodes to use SSL (HTTPS) [http://www.ibm.com/support/knowledgecenter/SSKM8N_8.0.0/com.ibm.etools.mft.doc/ap12234_.htm] 
+    * Configuring SOAPInput and SOAPReply nodes to use SSL (HTTPS [http://www.ibm.com/support/knowledgecenter/SSKM8N_8.0.0/com.ibm.etools.mft.doc/ap34021_.htm]) 
+   
+   
+ * IBM Integration Bus V9.0  * HTTP proxy servlet overview [http://www.ibm.com/support/knowledgecenter/SSMKHH_9.0.0/com.ibm.etools.mft.doc/ac69300_.htm] 
+    * Processing HTTP messages [http://www.ibm.com/support/knowledgecenter/SSMKHH_9.0.0/com.ibm.etools.mft.doc/ac56650_.htm] 
+
+
+[Document 4]
+Chunk: doc_00418_chunk_0000
+Text: Title: IBM Setting Up a Client to Consume a Web Service Over an SSL (HTTPS) Connection - United States
+
+Text:
+AXIS; HTTP; SSL TECHNOTE (TROUBLESHOOTING)
+
+PROBLEM(ABSTRACT)
+ There are some additional steps that need to be performed when setting up a client application to consume a Web service over a secure (https) connection. 
+
+RESOLVING THE PROBLEM
+There are some additional steps that need to be performed when setting up a client application to consume a Web service over a secure (https) connection. 
+
+As with any secure connection, you need to ensure that the CA certificate from the HTTPS server is in the *SYSTEM certificate store on the System i. By default, many of the commonly used CA certificates are shipped with Digital Certificate Manager (DCM). You can view the CA certificates that are in the *SYSTEM store using DCM. 
+
+[Document 5]
+Chunk: doc_00694_chunk_0000
+Text: Title: IBM How to configure the IBM i Access Host Servers for SSL Only - United States
+
+Text:
+ TECHNOTE (FAQ)
+
+QUESTION
+ How to configure the IBM i Access Host Servers for SSL communications only? 
+
+CAUSE
+Each IBM i Access client can be configured as to whether is connects over a non-secure or secure SSL/TLS communication link. In some environments, It may be desirable to limit IBM i Access Family connections to secure SSL/TLS communications only from the IBM i OS so that clients not configured for secure connections will not be able to connect.
+
+ANSWER
+IBM i Access Family clients (IBM i Access for Windows and IBM i Access Client Solution) connect using the following ports: 
+
+PC function Server Name Non-Secure TCP port Secure SSL/TLS TCP port [/support/docview.wss?uid=nas8N1021130&amp;aid=1] as-svrmap 449 - License Management as-central 8470 9470 Database Access as-database 8471 9471 Data Queue as-dtaq 8472 9472 Network Drive as-netdrive 8473 9473 Network Print as-netprt 8474 9474 
+
+================================================================================
+ID: TRAIN_Q326
+QUESTION: Is Re-naming the WebSphere Portal installation directory and cell name for an existing clustered installation possible?
+
+Question: Is re-naming the WebSphere Portal installation directory and cell name for an existing clustered installation possible?
+
+[Document 1]
+Chunk: doc_12475_chunk_0000
+Text: Title: IBM Can I change the name of the WebSphere_Portal server? - United States
+
+Text:
+server name; WebSphere_Portal; rename; change name TECHNOTE (FAQ)
+
+QUESTION
+ Can I change the name of the WebSphere_Portal server either during or after installation for IBM짰 WebSphere짰 Portal v6.0, v6.1, v7.0, v8.0, v8.5, and v9.0? 
+
+ANSWER
+This action is not possible nor supported during installation.
+Standalone Environment: 
+
+ * 
+ * 
+
+Static Cluster Environment:  * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * YourCustomName
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * YourCluster
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * YourCustomName2
+ * 
+ * 
+ * YourCustomName
+ * 
+ * 
+ * 
+ * Portal v6.1.x, v7.0, v8.0, v8.5, and v9.0 Only
+ * 
+ * 
+ * 
+ * 
+ * YourCustomName2
+ * 
+ * 
+ * 
+ * Portal v6.1.x, and v70 only. 
+ * 
+ * 
+
+
+[Document 2]
+Chunk: doc_18909_chunk_0003
+Text: IBM Installation Manager 
+ 3. Click Modify > Select the RAD 9.0.1 package group > Next > Next. 
+    You should now be on the feature selection page. 
+ 4. Under the Server tools section, ensure to have the Development tools and the Remote server stub installed for the Portal version and WAS version you are looking to install
+    
+    For example: If you are looking to install Portal 8 with WAS 8.5.x, ensure you have the Development tools and the Remote server stub also installed for the WebSphere Portal Server 8.0 on WebSphere Application Server 8.5 option 
+ 5. Click Next > Modify
+    
+
+
+Incorrect installation directory: 
+
+Enter the correct installation directories for the Portal and the WAS instances you are trying to add. 
+
+ 
+
+Note: 
+
+The default installation directory for WebSphere Portal Server 8.0 is at C:\Program Files (x86)\ibm\WebSphere\PortalServer 
+
+The default installation directory for WebSphere Application Server 8.5 is at C:\Program Files (x86)\ibm\WebSphere\AppServer 
+
+
+
+[Document 3]
+Chunk: doc_08273_chunk_0005
+Text: d the application, the cell_name directory
+   is the current cell name.
+   
+   To reinstall the enhanced EAR file, do either of the
+   following:
+   
+   -Use the Update operation available from the Enterprise
+    Applications page to upgrade the existing application
+    installation.
+   
+    The Update operation adds the application files to the
+    app_server_root/profiles/installedApps/cell_name directory,
+    where the cell_name is the current cell name or the name of
+    the cell that you specified for Directory to install
+    application when you first installed the application on a
+    deployment target. The Directory to install application
+    setting is on the Select installation options panel of the
+    application installation wizard. If you specified the
+    $(CELL) variable for Directory to install application when
+    you first installed the application, the cell_name directory
+    is the current cell name.
+   
+   -Use the Install New Application operation to install the
+
+
+[Document 4]
+Chunk: doc_14321_chunk_0006
+Text: re Portal uses. Check this log for errors generated during the installation step when WebSphere Portal initializes the WebSphere Application Server 
+
+Note: During a successful installation, the restoreConfig.log file may contain what looks like an error but is actually not an error. The following message is "normal" for WebSphere Portal and does NOT require a manual correction:
+
+ADMU7006W: The cell name contained in the backup file is not the same as the current cell name of your configuration which is "cells\\<yourcellname>\\". Since you specified the "-force" option, the backup file will be restored but you will need to manually correct the resulting problems. wplaunchlog.txt Contains trace information about the WebSphere Portal installation program launch. Check this log for errors generated during the launch of the installation GUI. cmcfgdbu.log Contains trace information that is generated during the creation of the JCR tables in WebSphere Portal's database. 
+
+[Document 5]
+Chunk: doc_19439_chunk_0000
+Text: Title: IBM Can you have multiple WebSphere Portal installs on the same machine? - United States
+
+Text:
+portal; install TECHNOTE (FAQ)
+
+QUESTION
+Can you have multiple WebSphere Portal installs on the same machine?
+
+CAUSE
+There may be a reason one would like to install multiple WebSphere Portal (but separate) environments on the same machine.
+
+ANSWER
+ The answer is YES.
+
+There is no problem with installing 2 completely separate Portal installs on the same machine. When you install the second one just make sure you change the install path for both WAS and Portal in the IIM panels.
+
+IIM will throw warning messages that you already have a WAS/Portal combination installed, but it should allow you to proceed as long as you change the installation paths. IIM will append an "_1" to the package names in its registry for the second installation. This allows IIM to catalog each install separately and also allows one installation to be upgraded without it affecting the other installation. 
+
+

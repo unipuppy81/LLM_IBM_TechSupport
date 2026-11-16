@@ -1,0 +1,14 @@
+{
+  "dataset": "clean",
+  "retriever": "reranker",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 54.44,
+  "recall_at_5_percent": 54.44,
+  "mrr_at_10": 0.4632,
+  "precision_at_5": 0.1089,
+  "ndcg_at_5": 0.4693,
+  "evaluation_seconds": 23.623
+}

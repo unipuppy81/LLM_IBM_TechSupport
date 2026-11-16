@@ -5,15 +5,8 @@ import time
 
 import torch
 
-from evaluate_base_model import RESULT_DIR
-from train_lora import (
-    LEARNING_RATE,
-    TRAIN_PATH,
-    QADataset,
-    load_lora_model,
-    load_records,
-)
-
+from train_lora import RESULT_DIR
+from train_lora import LEARNING_RATE, TRAIN_PATH, QADataset, load_lora_model, load_records
 
 # region 벤치마크 설정
 

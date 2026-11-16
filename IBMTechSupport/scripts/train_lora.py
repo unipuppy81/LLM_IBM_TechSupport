@@ -4,12 +4,15 @@ import random
 import time
 
 import torch
+import yaml
+
 from peft import LoraConfig, get_peft_model
 from torch.utils.data import Dataset, DataLoader
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from load_base_model import MODEL_DIR, PROJECT_DIR
 
-from evaluate_base_model import MODEL_DIR, DATA_DIR, RESULT_DIR, SYSTEM_PROMPT, ABSTAIN
-
+DATA_DIR = PROJECT_DIR / "data" / "processed"
+RESULT_DIR = PROJECT_DIR / "training_results"
 
 TRAIN_PATH = DATA_DIR / "train_clean.json"
 VAL_PATH = DATA_DIR / "val_clean.json"
