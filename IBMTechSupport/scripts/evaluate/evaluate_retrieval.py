@@ -127,6 +127,7 @@ def main(argv=None):
     p.add_argument("--predictions", type=Path)
     p.add_argument("--output", type=Path)
     a = p.parse_args(argv)
+    
     return evaluate(a.retriever, a.top_k, a.dataset, a.limit, a.predictions, a.output)
 
 

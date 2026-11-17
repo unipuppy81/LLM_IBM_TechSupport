@@ -1,116 +1,96 @@
 import argparse
-import json
 
-import bm25s
+from bm25_search import (
+    INDEX_DIR as BM25_INDEX_DIR,
+    load_index as load_bm25_index,
+    retrieve as bm25_retrieve
+)
 
-from dense_search import DATA_DIR, chunk_filename, encode_questions, load_retriever
+from dense_search import chunk_filename, encode_questions, load_retriever
+from retrieval_config import load_retrieval_config
 
-BM25_INDEX_DIR = DATA_DIR / "hybrid_bm25_index"
-CANDIDATE_K = 50
-RRF_K = 60
+# YAML에서 Hybrid 설정 불러오기
+HYBRID_CONFIG = load_retrieval_config()["hybrid"]
+
+CANDIDATE_K = HYBRID_CONFIG["candidate_k"]
+RRF_K = HYBRID_CONFIG["rrf_k"]
+
+BM25_WEIGHT = HYBRID_CONFIG["bm25_weight"]
+DENSE_WEIGHT = HYBRID_CONFIG["dense_weight"]
+
 TOP_K = 10
 
 
 
-# region BM25 인덱스 로딩 및 최초 구축
-
+# BM25 인덱스 로딩 및 최초 구축
 def load_bm25(chunks):
-    marker = BM25_INDEX_DIR / "params.index.json"
+    retriever, tokenizer = load_bm25_index()
 
-    if marker.is_file():
-        retriever = bm25s.BM25.load(
-            str(BM25_INDEX_DIR),
-            load_corpus=False,
-            mmap=True,
-        )
-        print("BM25 Index: Loaded", BM25_INDEX_DIR)
-
-    else:
-        texts = []
-
-        for row_id, chunk in enumerate(chunks):
-            value = (chunk.get("text") or chunk.get("content") or chunk.get("chunk_text"))
-
-            if not isinstance(value, str):
-                raise ValueError(f"청크 텍스트를 찾을 수 없습니다: row={row_id}")
-
-            texts.append(value)
-
-        retriever = bm25s.BM25()
-        tokens = bm25s.tokenize(
-            texts,
-            stopwords="en",
-            show_progress=True,
-        )
-
-        retriever.index(tokens)
-
-        BM25_INDEX_DIR.mkdir(parents=True, exist_ok=True)
-        retriever.save(str(BM25_INDEX_DIR))
-
-        print("BM25 Index: Built", BM25_INDEX_DIR)
-
+    # BM25와 FAISS의 문서 개수 일치 여부 확인
     if int(retriever.scores["num_docs"]) != len(chunks):
-        raise ValueError("BM25 인덱스와 FAISS 인덱스의 청크 개수가 다릅니다.")
+        raise ValueError("BM25와 FAISS의 청크 개수가 다릅니다.")
 
-    return retriever
+    # BM25 검색 결과의 chunk_id를 FAISS row_id로 변환하기 위한 매핑
+    chunk_id_to_row_id = {
+        chunk["chunk_id"]: row_id
+        for row_id, chunk in enumerate(chunks)
+    }
 
-# endregion
+    if len(chunk_id_to_row_id) != len(chunks):
+        raise ValueError("중복된 chunk_id가 존재합니다.")
+
+    return retriever, tokenizer, chunk_id_to_row_id
 
 
-# region BM25 / Dense 검색 및 RRF 결합
-
+# BM25 / Dense 검색 및 RRF 결합
 def search_all(model, faiss_index, bm25_index, questions):
     k = min(CANDIDATE_K, faiss_index.ntotal)
 
-    # Dense Retrieval: 질문 임베딩 -> FAISS 검색
+    retriever, tokenizer, chunk_id_to_row_id = bm25_index
+
+    # 1. Dense 검색
     vectors = encode_questions(model, questions)
-    dense_scores, dense_ids = faiss_index.search(vectors, k)
-
-    # BM25: 질문 토큰화 -> 키워드 검색
-    tokens = bm25s.tokenize(
-        questions,
-        stopwords="en",
-        show_progress=False,
-    )
-
-    bm25_ids, bm25_scores = bm25_index.retrieve(
-        tokens,
-        k=k,
-        show_progress=False,
-    )
+    _, dense_ids = faiss_index.search(vectors, k)
 
     all_results = []
 
-    for d_ids, b_ids, b_scores in zip(dense_ids, bm25_ids, bm25_scores):
-        dense_ranked = [
-            int(i)
-            for i in d_ids
-            if i >= 0
-        ]
+    for question, d_ids in zip(questions, dense_ids):
 
+        # 2. bm25_search.py의 검색 함수 사용
+        bm25_results = bm25_retrieve(
+            question,
+            retriever,
+            tokenizer,
+            k
+        )
+
+        # 3. BM25 검색 결과를 FAISS row_id로 변환
         bm25_ranked = [
-            int(i)
-            for i, score in zip(b_ids, b_scores)
-            if i >= 0 and score > 0
+            chunk_id_to_row_id[doc["chunk_id"]]
+            for doc in bm25_results
+            if doc["score"] > 0
         ]
 
-        # RRF: 각 검색기의 순위 점수를 합산
+        # 4. Dense 검색 결과 정리
+        dense_ranked = [
+            int(row_id)
+            for row_id in d_ids
+            if row_id >= 0
+        ]
+
+        # 5. Weighted RRF 점수 계산
         rrf_scores = {}
 
-        for ranked in (bm25_ranked, dense_ranked):
+        for ranked, weight in ((bm25_ranked, BM25_WEIGHT), (dense_ranked, DENSE_WEIGHT)):
             for rank, row_id in enumerate(ranked, start=1):
-                rrf_scores[row_id] = (rrf_scores.get(row_id, 0.0) + 1 / (RRF_K + rank))
+                rrf_scores[row_id] = (rrf_scores.get(row_id, 0.0) + weight / (RRF_K + rank))
 
-        # RRF 점수가 높은 순서대로 정렬
-        hybrid_ranked = sorted(rrf_scores, key=lambda row_id: (-rrf_scores[row_id], row_id, ), )
+        # 6. RRF 점수 내림차순 정렬
+        hybrid_ranked = sorted(rrf_scores, key=lambda row_id: (-rrf_scores[row_id], row_id))
 
-        all_results.append((bm25_ranked, dense_ranked, hybrid_ranked, rrf_scores, ))
+        all_results.append((bm25_ranked, dense_ranked, hybrid_ranked, rrf_scores))
 
     return all_results
-
-# endregion
-
 
 def main():
     parser = argparse.ArgumentParser()

@@ -1,6 +1,4 @@
 import argparse
-import json
-import time
 
 import numpy as np
 import torch
@@ -8,23 +6,24 @@ from sentence_transformers import CrossEncoder
 
 from dense_search import chunk_filename, load_retriever
 from hybrid_search import load_bm25, search_all
+from retrieval_config import load_retrieval_config
 
 
-RERANKER_MODEL = "cross-encoder/ms-marco-MiniLM-L6-v2"
-CANDIDATE_K = 50
-TOP_K = 5
-BATCH_SIZE = 16
+# YAML에서 Reranker 설정 불러오기
+RERANKER_CONFIG = load_retrieval_config()["reranker"]
+
+RERANKER_MODEL = RERANKER_CONFIG["model"]
+CANDIDATE_K = RERANKER_CONFIG["candidate_k"]
+TOP_K = RERANKER_CONFIG["top_k"]
+BATCH_SIZE = RERANKER_CONFIG["batch_size"]
+MAX_LENGTH = RERANKER_CONFIG["max_length"]
 
 # region Reranker 모델 로드
 
 def load_reranker():
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
-    model = CrossEncoder(
-        RERANKER_MODEL,
-        device=device,
-        max_length=512, 
-    )
+    model = CrossEncoder(RERANKER_MODEL, device=device, max_length=MAX_LENGTH)
 
     print("Reranker Device:", device)
     print("Reranker Model:", RERANKER_MODEL)

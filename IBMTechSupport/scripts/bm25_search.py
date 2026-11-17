@@ -5,6 +5,7 @@ import re
 from pathlib import Path
 from statistics import mean
 from document_utils import normalize_filename
+from retrieval_config import load_retrieval_config
 
 import bm25s
 from bm25s.tokenization import Tokenizer
@@ -17,18 +18,39 @@ INDEX_DIR = DATA_DIR / "bm25_index"
 
 # k1: 단어 빈도 영향력 조절 : 문서에 검색 단어가 반복해서 등장할 때 점수가 얼마나 증가할지 결정
 # B : 문서 길이 보정 : 0(문서 길이 보정 X), 1(문서 길이 완전히 반영해 보정)
-K1 = 1.5
-B = 0.75
+# YAML에서 BM25 설정 불러오기
+BM25_CONFIG = load_retrieval_config()["bm25"]
 
-TOKEN_PATTERN = re.compile(r"[A-Za-z0-9]+(?:[._-][A-Za-z0-9]+)*")
+METHOD = BM25_CONFIG["method"]
+K1 = BM25_CONFIG["k1"]
+B = BM25_CONFIG["b"]
+
+TOKEN_PATTERN = re.compile(BM25_CONFIG["token_pattern"])
 
 def split_tokens(text):
-    return TOKEN_PATTERN.findall(text.casefold())
+    # 1. 기존 방식으로 토큰 추출
+    tokens = TOKEN_PATTERN.findall(text.casefold())
+
+    expanded_tokens = []
+
+    for token in tokens:
+        # 2. 원본 토큰 유지
+        expanded_tokens.append(token)
+
+        # 3. 복합 토큰을 구분자로 분리
+        if any(separator in token for separator in "._-"):
+            parts = re.split(r"[._-]+", token)
+
+            for part in parts:
+                # 길이 3 이상이며 영문자가 포함된 토큰만 추가
+                if len(part) >= 3 and any(c.isalpha() for c in part):
+                    expanded_tokens.append(part)
+
+    return expanded_tokens
 
 
 def create_tokenizer():
-    """기존 BM25 토크나이저."""
-    return Tokenizer(splitter=split_tokens, stopwords=[])
+  return Tokenizer(splitter=split_tokens, stopwords=BM25_CONFIG["stopwords"])
 
 
 def load_corpus():
@@ -64,7 +86,7 @@ def build_index():
 
     tokenizer = create_tokenizer()
     corpus_tokens = tokenizer.tokenize([record["text"] for record in records], return_as="tuple")
-    retriever = bm25s.BM25(method="lucene", k1=K1, b=B)
+    retriever = bm25s.BM25(method=METHOD, k1=K1, b=B)
 
     retriever.index(corpus_tokens)
     INDEX_DIR.mkdir(parents=True, exist_ok=True)

@@ -8,6 +8,8 @@ import numpy as np
 import torch
 from sentence_transformers import SentenceTransformer
 from document_utils import chunk_filename
+from retrieval_config import load_retrieval_config
+
 
 PROJECT_DIR = Path(__file__).resolve().parents[1]
 DATA_DIR = PROJECT_DIR / "data" / "processed"
@@ -15,10 +17,17 @@ DATA_DIR = PROJECT_DIR / "data" / "processed"
 INDEX_PATH = DATA_DIR / "corpus_faiss.index"
 CHUNKS_PATH = DATA_DIR / "corpus_chunks.jsonl"
 
-EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+# YAML에서 Dense 설정 불러오기
+DENSE_CONFIG = load_retrieval_config()["dense"]
 
+EMBEDDING_MODEL = DENSE_CONFIG["model"]
+MODEL_DIR = PROJECT_DIR / "models" / EMBEDDING_MODEL.split("/")[-1]
 
-# region 검색 데이터 및 임베딩 모델 로드
+BATCH_SIZE = DENSE_CONFIG["batch_size"]
+NORMALIZE_EMBEDDINGS = DENSE_CONFIG["normalize_embeddings"]
+MAX_SEQ_LENGTH = DENSE_CONFIG["max_seq_length"]
+
+# 검색 데이터 및 임베딩 모델 로드
 
 def load_retriever():
     if not INDEX_PATH.is_file() or not CHUNKS_PATH.is_file():
@@ -37,7 +46,11 @@ def load_retriever():
         raise ValueError("인덱스 벡터 수와 청크 수가 일치하지 않습니다.")
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    model = SentenceTransformer(EMBEDDING_MODEL, device=device)
+    model = SentenceTransformer(str(MODEL_DIR), device=device, local_files_only=True)
+    model.max_seq_length = MAX_SEQ_LENGTH
+
+    if model.get_sentence_embedding_dimension() != index.d:
+        raise ValueError("FAISS 인덱스와 임베딩 모델 차원이 다릅니다.")
 
     print("Device:", device)
     print("Embedding Model:", EMBEDDING_MODEL)
@@ -46,31 +59,22 @@ def load_retriever():
     return model, index, chunks
 
 
-
-
-
-# endregion
-
-
-# region 질문 임베딩
-
+# 질문 임베딩
 def encode_questions(model, questions):
-    # 문서 임베딩에 사용한 것과 동일한 모델 사용
+    """질문을 임베딩 벡터로 변환."""
+
     vectors = model.encode(
         questions,
-        batch_size=32,
+        batch_size=BATCH_SIZE,
         convert_to_numpy=True,
-        normalize_embeddings=True,
+        normalize_embeddings=NORMALIZE_EMBEDDINGS,
         show_progress_bar=False,
     )
 
     return np.ascontiguousarray(vectors, dtype=np.float32)
 
-# endregion
 
-
-# region FAISS Dense Search
-
+# FAISS Dense Search
 def dense_search(model, index, chunks, question, top_k):
     # 1. 사용자 질문을 384차원 벡터로 변환
     query_vector = encode_questions(model, [question])
@@ -89,9 +93,6 @@ def dense_search(model, index, chunks, question, top_k):
         results.append({**chunk, "row_id": int(row_id), "score": float(score) })
 
     return results
-
-# endregion
-
 
 def main():
     parser = argparse.ArgumentParser()

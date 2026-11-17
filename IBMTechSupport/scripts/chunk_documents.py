@@ -3,16 +3,41 @@ import json
 import unicodedata
 import zipfile
 from pathlib import Path, PurePosixPath
+from retrieval_config import load_retrieval_config
 
 
 PROJECT_DIR = Path(__file__).resolve().parents[1]
 INPUT_PATH = PROJECT_DIR / "data" / "raw" / "corpus.zip"
-OUTPUT_PATH = (
-    PROJECT_DIR / "data" / "processed" / "corpus_chunks.jsonl"
-)
+OUTPUT_PATH = PROJECT_DIR / "data" / "processed" / "corpus_chunks.jsonl"
 
-CHUNK_SIZE = 1000
-CHUNK_OVERLAP = 150
+CHUNK_CONFIG = load_retrieval_config()["chunking"]
+
+CHUNK_SIZE = CHUNK_CONFIG["size"]
+CHUNK_OVERLAP = CHUNK_CONFIG["overlap"]
+
+if CHUNK_SIZE <= 0 or not 0 <= CHUNK_OVERLAP < int(CHUNK_SIZE * 0.75):
+    raise ValueError("Chunk Size 또는 Overlap 설정이 올바르지 않습니다.")
+
+
+"""
+# 1. 청크 재생성
+python IBMTechSupport/scripts/chunk_documents.py
+
+# 2. 문서 임베딩 재생성
+python IBMTechSupport/scripts/embed_documents.py --batch-size 16
+
+# 3. FAISS 인덱스 재생성
+python IBMTechSupport/scripts/build_faiss_index.py
+
+# 4. BM25 인덱스 재생성
+python IBMTechSupport/scripts/bm25_search.py build
+
+# 평가
+python -m evaluate.evaluate_retrieval --retriever bm25 --dataset clean --top-k 5
+python -m evaluate.evaluate_retrieval --retriever dense --dataset clean --top-k 5
+python -m evaluate.evaluate_retrieval --retriever hybrid --dataset clean --top-k 5
+python -m evaluate.evaluate_retrieval --retriever reranker --dataset clean --top-k 5
+"""
 
 
 def normalize_text(text):

@@ -7,6 +7,7 @@ from pathlib import Path
 import numpy as np
 import torch
 from sentence_transformers import SentenceTransformer
+from retrieval_config import load_retrieval_config
 
 
 PROJECT_DIR = Path(__file__).resolve().parents[1]
@@ -14,12 +15,16 @@ DATA_DIR = PROJECT_DIR / "data" / "processed"
 RESULT_DIR = PROJECT_DIR / "results"
 
 CORPUS_PATH = DATA_DIR / "corpus_chunks.jsonl"
-MODEL_DIR = PROJECT_DIR / "models" / "all-MiniLM-L6-v2"
 
 EMBEDDING_PATH = DATA_DIR / "corpus_embeddings.npy"
 COMPARISON_PATH = RESULT_DIR / "retrieval_comparison.json"
 
-BATCH_SIZE = 64
+# config
+DENSE_CONFIG = load_retrieval_config()["dense"]
+MODEL_DIR = PROJECT_DIR / "models" / DENSE_CONFIG["model"].split("/")[-1]
+BATCH_SIZE = DENSE_CONFIG["build_batch_size"]
+NORMALIZE_EMBEDDINGS = DENSE_CONFIG["normalize_embeddings"]
+MAX_SEQ_LENGTH = DENSE_CONFIG["max_seq_length"]
 
 
 def inspect_corpus():
@@ -49,7 +54,7 @@ def encode_batch(model, texts, output, start):
         texts,
         batch_size=len(texts),
         convert_to_numpy=True,
-        normalize_embeddings=True,
+        normalize_embeddings=NORMALIZE_EMBEDDINGS,
         show_progress_bar=False
     )
 
@@ -61,11 +66,12 @@ def encode_batch(model, texts, output, start):
     if not np.isfinite(embeddings).all():
         raise ValueError("Invalid embedding values")
 
-    # L2 정규화 여부 검증
-    norms = np.linalg.norm(embeddings, axis=1)
-
-    if not np.allclose(norms, 1.0, atol=1e-3):
-        raise ValueError("Embedding normalization failed")
+    # L2 정규화를 활성화했을 때만 검증
+    if NORMALIZE_EMBEDDINGS:
+        norms = np.linalg.norm(embeddings, axis=1)
+    
+        if not np.allclose(norms, 1.0, atol=1e-3):
+            raise ValueError("Embedding normalization failed")
 
     end = start + len(texts)
 
@@ -89,6 +95,7 @@ def build_embeddings(batch_size):
     print("Total Chunks:", total_chunks)
 
     model = SentenceTransformer(str(MODEL_DIR), device="cuda", local_files_only=True)
+    model.max_seq_length = MAX_SEQ_LENGTH
 
     dimension = model.get_sentence_embedding_dimension()
 
