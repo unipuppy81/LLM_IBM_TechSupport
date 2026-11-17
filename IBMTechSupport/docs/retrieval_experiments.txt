@@ -1,0 +1,1236 @@
+rag 검색 결과 정답 문서 몇위로 찾았는지
+1~5 : 48
+6~50 : 15
+50~ : 27
+
+## 지표
+{
+  "dataset": 전처리된 Validation 데이터(val_clean.json) 사용
+  "retriever": 검색 방식
+  "total": 전체 Validation 질문(135개)
+  "answerable_evaluated": 정답이 존재하여 검색 평가에 사용한 질문 수
+  "impossible_skipped": 정답이 없어 검색 평가에서 제외한 질문 수
+  "skipped_no_gold": 정답 문서 정보가 없어 추가 제외된 질문 수
+  "hit_at_5_percent": 정답 문서가 상위 5개 안에 하나라도 있는 질문의 비율
+  "recall_at_5_percent": 전체 정답 문서 중 상위 5개에 찾은 비율의 질문별 평균
+  "mrr_at_10": 상위 10개에서 첫 번째 정답 문서가 얼마나 높은 순위에 있는지
+  "precision_at_5": 상위 5개 검색 결과 중 정답 문서가 차지하는 비율의 평균
+  "ndcg_at_5": 상위 5개에서 정답 문서의 순위 배치가 얼마나 좋은지
+  "evaluation_seconds": 검색과 지표 계산에 소요된 시간(초)
+}
+
+{
+  "dataset": "clean",
+  "retriever": "bm25",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 53.33,
+  "recall_at_5_percent": 53.33,
+  "mrr_at_10": 0.4318,
+  "precision_at_5": 0.1067,
+  "ndcg_at_5": 0.4544,
+  "evaluation_seconds": 2.831
+}
+
+{
+  "dataset": "clean",
+  "retriever": "dense",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 50.0,
+  "recall_at_5_percent": 50.0,
+  "mrr_at_10": 0.4042,
+  "precision_at_5": 0.1,
+  "ndcg_at_5": 0.4224,
+  "evaluation_seconds": 9.623
+}
+
+
+{
+  "dataset": "clean",
+  "retriever": "hybrid",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 55.56,
+  "recall_at_5_percent": 55.56,
+  "mrr_at_10": 0.4419,
+  "precision_at_5": 0.1111,
+  "ndcg_at_5": 0.4589,
+  "evaluation_seconds": 7.695
+}
+
+
+{
+  "dataset": "clean",
+  "retriever": "reranker",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 54.44,
+  "recall_at_5_percent": 54.44,
+  "mrr_at_10": 0.4632,
+  "precision_at_5": 0.1089,
+  "ndcg_at_5": 0.4693,
+  "evaluation_seconds": 39.928
+}
+
+
+reranker 는 Hit@5 기준 효과 거의 없음
+mrr@10 은 소폭 상향
+precision@5 소폭 하회
+nDCG@5 소폭 개선
+
+
+# bm25
+1. k1, b 값 조절
+
+case 1)  k1=1.5, b=0.75
+{
+  "dataset": "clean",
+  "retriever": "bm25",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 53.33,
+  "recall_at_5_percent": 53.33,
+  "mrr_at_10": 0.4318,
+  "precision_at_5": 0.1067,
+  "ndcg_at_5": 0.4544,
+  "evaluation_seconds": 2.831
+}
+
+case 2) k1=2.0, b=0.75
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "bm25",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 50.0,
+  "recall_at_5_percent": 50.0,
+  "mrr_at_10": 0.4301,
+  "precision_at_5": 0.1,
+  "ndcg_at_5": 0.4436,
+  "evaluation_seconds": 1.817
+}
+
+case 3) k1=2.0 b=1.0
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "bm25",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 48.89,
+  "recall_at_5_percent": 48.89,
+  "mrr_at_10": 0.4291,
+  "precision_at_5": 0.0978,
+  "ndcg_at_5": 0.4388,
+  "evaluation_seconds": 1.879
+}
+
+case 4) k1=1.5 b=1.0
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "bm25",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 48.89,
+  "recall_at_5_percent": 48.89,
+  "mrr_at_10": 0.4325,
+  "precision_at_5": 0.0978,
+  "ndcg_at_5": 0.4394,
+  "evaluation_seconds": 1.867
+}
+
+case 5) k1=1.5 b=0.5
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "bm25",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 54.44,
+  "recall_at_5_percent": 54.44,
+  "mrr_at_10": 0.4317,
+  "precision_at_5": 0.1089,
+  "ndcg_at_5": 0.4582,
+  "evaluation_seconds": 1.845
+}
+
+case 6) k1=1.5, b=0.25
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "bm25",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 54.44,
+  "recall_at_5_percent": 54.44,
+  "mrr_at_10": 0.4417,
+  "precision_at_5": 0.1089,
+  "ndcg_at_5": 0.4665,
+  "evaluation_seconds": 1.845
+}
+
+case 7) k1=1.25, b=0.5
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "bm25",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 54.44,
+  "recall_at_5_percent": 54.44,
+  "mrr_at_10": 0.4374,
+  "precision_at_5": 0.1089,
+  "ndcg_at_5": 0.4629,
+  "evaluation_seconds": 1.941
+}
+
+case 8) k1=1.25, b=0.25
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "bm25",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 53.33,
+  "recall_at_5_percent": 53.33,
+  "mrr_at_10": 0.4459,
+  "precision_at_5": 0.1067,
+  "ndcg_at_5": 0.4634,
+  "evaluation_seconds": 1.928
+}
+
+case 9) k1=2, b=0.25
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "bm25",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 53.33,
+  "recall_at_5_percent": 53.33,
+  "mrr_at_10": 0.4454,
+  "precision_at_5": 0.1067,
+  "ndcg_at_5": 0.4653,
+  "evaluation_seconds": 1.876
+}
+
+=======
+case 6 선택 k1=1.5, b=0.25
+case 6 기준 hybrid 개선 평가
+=======
+
+기존) k1=1.5 b=0.5
+{
+  "dataset": "clean",
+  "retriever": "hybrid",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 55.56,
+  "recall_at_5_percent": 55.56,
+  "mrr_at_10": 0.4419,
+  "precision_at_5": 0.1111,
+  "ndcg_at_5": 0.4589,
+  "evaluation_seconds": 7.695
+}
+
+case 6) k1=1.5 b=0.25
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "hybrid",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 55.56,
+  "recall_at_5_percent": 55.56,
+  "mrr_at_10": 0.4434,
+  "precision_at_5": 0.1111,
+  "ndcg_at_5": 0.4624,
+  "evaluation_seconds": 14.285
+}
+
+=======
+case 6에서 hybrid에서까지 개선이 발생했으므로
+case 6(k1=1.5, b=0.25) 값으로 우선은 고정
+=======
+
+2. token_split 방식 변경
+
+변경 후_bm25)
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "bm25",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 52.22,
+  "recall_at_5_percent": 52.22,
+  "mrr_at_10": 0.457,
+  "precision_at_5": 0.1044,
+  "ndcg_at_5": 0.4687,
+  "evaluation_seconds": 2.633
+}
+
+변경 후_hybrid)
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "hybrid",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 57.78,
+  "recall_at_5_percent": 57.78,
+  "mrr_at_10": 0.4619,
+  "precision_at_5": 0.1156,
+  "ndcg_at_5": 0.4813,
+  "evaluation_seconds": 15.512
+}
+
+
+변경 후_reranker)
+{
+  "dataset": "clean",
+  "retriever": "reranker",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 53.33,
+  "recall_at_5_percent": 53.33,
+  "mrr_at_10": 0.4722,
+  "precision_at_5": 0.1067,
+  "ndcg_at_5": 0.474,
+  "evaluation_seconds": 44.508
+}
+
+=======
+이번 경우 reranker 적용이 hybrid 보다 개선되지 않음
+하지만 아직 reranker에 대한 개석 작업이 없이 진행되었기에 추후에 평가 필요
+=======
+
+
+
+3. chunk_size, chunk_overlap 수정
+
+기존 1000, 150)
+index vectors : 140,821
+
+case 1) 750, 150
+index vectors : 197,390
+
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "bm25",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 51.11,
+  "recall_at_5_percent": 51.11,
+  "mrr_at_10": 0.4473,
+  "precision_at_5": 0.1022,
+  "ndcg_at_5": 0.4576,
+  "evaluation_seconds": 2.581
+}
+
+{
+  "dataset": "clean",
+  "retriever": "dense",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 54.44,
+  "recall_at_5_percent": 54.44,
+  "mrr_at_10": 0.4479,
+  "precision_at_5": 0.1089,
+  "ndcg_at_5": 0.4647,
+  "evaluation_seconds": 10.386
+}
+
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "hybrid",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 57.78,
+  "recall_at_5_percent": 57.78,
+  "mrr_at_10": 0.4978,
+  "precision_at_5": 0.1156,
+  "ndcg_at_5": 0.5088,
+  "evaluation_seconds": 10.27
+}
+{
+  "dataset": "clean",
+  "retriever": "reranker",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 48.89,
+  "recall_at_5_percent": 48.89,
+  "mrr_at_10": 0.4157,
+  "precision_at_5": 0.0978,
+  "ndcg_at_5": 0.4211,
+  "evaluation_seconds": 29.583
+}
+
+
+case 2) 1250, 150
+
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "bm25",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 54.44,
+  "recall_at_5_percent": 54.44,
+  "mrr_at_10": 0.4837,
+  "precision_at_5": 0.1089,
+  "ndcg_at_5": 0.4914,
+  "evaluation_seconds": 2.427
+}
+
+{
+  "dataset": "clean",
+  "retriever": "dense",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 51.11,
+  "recall_at_5_percent": 51.11,
+  "mrr_at_10": 0.405,
+  "precision_at_5": 0.1022,
+  "ndcg_at_5": 0.4257,
+  "evaluation_seconds": 7.169
+}
+
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "hybrid",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 56.67,
+  "recall_at_5_percent": 56.67,
+  "mrr_at_10": 0.4414,
+  "precision_at_5": 0.1133,
+  "ndcg_at_5": 0.4606,
+  "evaluation_seconds": 9.462
+}
+{
+  "dataset": "clean",
+  "retriever": "reranker",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 58.89,
+  "recall_at_5_percent": 58.89,
+  "mrr_at_10": 0.441,
+  "precision_at_5": 0.1178,
+  "ndcg_at_5": 0.4701,
+  "evaluation_seconds": 32.432
+}
+
+=======
+bm25는 1250이 가장 좋음
+1000: 52.22
+750: 51.11
+1250: 54.44
+
+hybrid는 750이 가장 좋음
+hit@5 기존 1000과 동일한 57.78
+mrr@100과 nDCG@5는 750이 가장 높음
+
+reranker는 1250이 가장 좋음
+750: 48.89
+1000: 53.33
+1250: 58.89
+
+reranker 사용을 할거니까 1250 선택
+=======
+
+
+case 3) 1250, 100
+Index Vectors: 107806
+
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "bm25",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 56.67,
+  "recall_at_5_percent": 56.67,
+  "mrr_at_10": 0.4742,
+  "precision_at_5": 0.1133,
+  "ndcg_at_5": 0.4934,
+  "evaluation_seconds": 2.478
+}
+
+{
+  "dataset": "clean",
+  "retriever": "dense",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 53.33,
+  "recall_at_5_percent": 53.33,
+  "mrr_at_10": 0.4225,
+  "precision_at_5": 0.1067,
+  "ndcg_at_5": 0.4453,
+  "evaluation_seconds": 9.819
+}
+
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "hybrid",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 53.33,
+  "recall_at_5_percent": 53.33,
+  "mrr_at_10": 0.4412,
+  "precision_at_5": 0.1067,
+  "ndcg_at_5": 0.4519,
+  "evaluation_seconds": 11.957
+}
+
+{
+  "dataset": "clean",
+  "retriever": "reranker",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 57.78,
+  "recall_at_5_percent": 57.78,
+  "mrr_at_10": 0.4538,
+  "precision_at_5": 0.1156,
+  "ndcg_at_5": 0.4766,
+  "evaluation_seconds": 28.395
+}
+
+case 4) 1250, 250
+Index Vectors: 118664
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "bm25",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 56.67,
+  "recall_at_5_percent": 56.67,
+  "mrr_at_10": 0.4708,
+  "precision_at_5": 0.1133,
+  "ndcg_at_5": 0.492,
+  "evaluation_seconds": 2.466
+}
+
+{
+  "dataset": "clean",
+  "retriever": "dense",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 48.89,
+  "recall_at_5_percent": 48.89,
+  "mrr_at_10": 0.4041,
+  "precision_at_5": 0.0978,
+  "ndcg_at_5": 0.4165,
+  "evaluation_seconds": 7.649
+}
+
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "hybrid",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 56.67,
+  "recall_at_5_percent": 56.67,
+  "mrr_at_10": 0.4582,
+  "precision_at_5": 0.1133,
+  "ndcg_at_5": 0.472,
+  "evaluation_seconds": 13.781
+}
+
+{
+  "dataset": "clean",
+  "retriever": "reranker",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 54.44,
+  "recall_at_5_percent": 54.44,
+  "mrr_at_10": 0.4516,
+  "precision_at_5": 0.1089,
+  "ndcg_at_5": 0.4647,
+  "evaluation_seconds": 25.46
+}
+
+
+case 5) 1250, 200
+Index Vectors: 114563
+
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "bm25",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 56.67,
+  "recall_at_5_percent": 56.67,
+  "mrr_at_10": 0.4853,
+  "precision_at_5": 0.1133,
+  "ndcg_at_5": 0.501,
+  "evaluation_seconds": 2.39
+}
+
+{
+  "dataset": "clean",
+  "retriever": "dense",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 52.22,
+  "recall_at_5_percent": 52.22,
+  "mrr_at_10": 0.4064,
+  "precision_at_5": 0.1044,
+  "ndcg_at_5": 0.4267,
+  "evaluation_seconds": 7.186
+}
+
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "hybrid",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 56.67,
+  "recall_at_5_percent": 56.67,
+  "mrr_at_10": 0.4721,
+  "precision_at_5": 0.1133,
+  "ndcg_at_5": 0.4806,
+  "evaluation_seconds": 12.75
+}
+
+{
+  "dataset": "clean",
+  "retriever": "reranker",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 55.56,
+  "recall_at_5_percent": 55.56,
+  "mrr_at_10": 0.4534,
+  "precision_at_5": 0.1111,
+  "ndcg_at_5": 0.4687,
+  "evaluation_seconds": 24.786
+}
+
+=======
+1250, 150 이 최적이라 판단
+=======
+
+
+
+4. stopwords 활성화
+OFF : stopword=[]
+ON : stopword="en"
+
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "bm25",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 56.67,
+  "recall_at_5_percent": 56.67,
+  "mrr_at_10": 0.4795,
+  "precision_at_5": 0.1133,
+  "ndcg_at_5": 0.4964,
+  "evaluation_seconds": 2.334
+}
+
+{
+  "dataset": "clean",
+  "retriever": "dense",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 51.11,
+  "recall_at_5_percent": 51.11,
+  "mrr_at_10": 0.405,
+  "precision_at_5": 0.1022,
+  "ndcg_at_5": 0.4257,
+  "evaluation_seconds": 7.206
+}
+
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "hybrid",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 57.78,
+  "recall_at_5_percent": 57.78,
+  "mrr_at_10": 0.4379,
+  "precision_at_5": 0.1156,
+  "ndcg_at_5": 0.4603,
+  "evaluation_seconds": 9.497
+}
+
+{
+  "dataset": "clean",
+  "retriever": "reranker",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 58.89,
+  "recall_at_5_percent": 58.89,
+  "mrr_at_10": 0.4394,
+  "precision_at_5": 0.1178,
+  "ndcg_at_5": 0.4686,
+  "evaluation_seconds": 25.086
+}
+
+=======
+stopwords="en" 활성화 시 bm25, hybrid 소폭 상승. 하지만 reranker 성능 소폭 하락
+reranekr 사용할거라면 끄는게 낫다. 하지만 on/off 차이가 매우 작으므로 유의미한 성능 차이는 아님
+=======
+
+
+
+5. bm25 알고리즘 비교
+
+기존
+case lucene)
+
+
+case robertson)
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "bm25",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 56.67,
+  "recall_at_5_percent": 56.67,
+  "mrr_at_10": 0.487,
+  "precision_at_5": 0.1133,
+  "ndcg_at_5": 0.5025,
+  "evaluation_seconds": 2.435
+}
+
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "hybrid",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 57.78,
+  "recall_at_5_percent": 57.78,
+  "mrr_at_10": 0.441,
+  "precision_at_5": 0.1156,
+  "ndcg_at_5": 0.4635,
+  "evaluation_seconds": 9.79
+}
+
+
+  "dataset": "clean",
+  "retriever": "reranker",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 58.89,
+  "recall_at_5_percent": 58.89,
+  "mrr_at_10": 0.4399,
+  "precision_at_5": 0.1178,
+  "ndcg_at_5": 0.4701,
+  "evaluation_seconds": 25.251
+}
+
+
+case atire)
+
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "bm25",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 54.44,
+  "recall_at_5_percent": 54.44,
+  "mrr_at_10": 0.4837,
+  "precision_at_5": 0.1089,
+  "ndcg_at_5": 0.4914,
+  "evaluation_seconds": 2.485
+}
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "hybrid",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 56.67,
+  "recall_at_5_percent": 56.67,
+  "mrr_at_10": 0.4414,
+  "precision_at_5": 0.1133,
+  "ndcg_at_5": 0.4606,
+  "evaluation_seconds": 10.043
+}
+
+{
+  "dataset": "clean",
+  "retriever": "reranker",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 58.89,
+  "recall_at_5_percent": 58.89,
+  "mrr_at_10": 0.441,
+  "precision_at_5": 0.1178,
+  "ndcg_at_5": 0.4701,
+  "evaluation_seconds": 24.629
+}
+
+=======
+지표	Lucene	Robertson	ATIRE
+BM25 Hit@5	54.44%	56.67%	54.44%
+BM25 MRR@10	0.4837	0.4870	0.4837
+BM25 nDCG@5	0.4914	0.5025	0.4914
+Hybrid Hit@5	56.67%	57.78%	56.67%
+Hybrid MRR@10	0.4414	0.4410	0.4414
+Reranker Hit@5	58.89%	58.89%	58.89%
+Reranker MRR@10	0.4410	0.4399	0.4410
+Reranker nDCG@5	0.4701	0.4701	0.4701
+
+Robertson
+- BM25 Hit@5: 49개 → 51개 성공
+- Hybrid Hit@5: 51개 → 52개 성공
+- Reranker Hit@5: 53개로 동일
+
+ATIRE
+- 모든 집계 지표에서 Lucene과 동일한 결과
+- 별도의 성능 개선 확인되지 않음
+
+
+최종 Reranker Hit@5가 동일하므로 Robertson
+=======
+
+
+
+6. 검색 후보 수 조절
+reranker candidate_k 조절
+
+기존
+case 50)
+{
+  "dataset": "clean",
+  "retriever": "reranker",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 58.89,
+  "recall_at_5_percent": 58.89,
+  "mrr_at_10": 0.441,
+  "precision_at_5": 0.1178,
+  "ndcg_at_5": 0.4701,
+  "evaluation_seconds": 24.767
+}
+
+
+case 10)
+{
+  "dataset": "clean",
+  "retriever": "reranker",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 61.11,
+  "recall_at_5_percent": 61.11,
+  "mrr_at_10": 0.4836,
+  "precision_at_5": 0.1222,
+  "ndcg_at_5": 0.5094,
+  "evaluation_seconds": 13.175
+}
+
+
+case 20)
+{
+  "dataset": "clean",
+  "retriever": "reranker",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 57.78,
+  "recall_at_5_percent": 57.78,
+  "mrr_at_10": 0.4591,
+  "precision_at_5": 0.1156,
+  "ndcg_at_5": 0.4832,
+  "evaluation_seconds": 16.651
+}
+
+
+case 30)
+{
+  "dataset": "clean",
+  "retriever": "reranker",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 57.78,
+  "recall_at_5_percent": 57.78,
+  "mrr_at_10": 0.4444,
+  "precision_at_5": 0.1156,
+  "ndcg_at_5": 0.4713,
+  "evaluation_seconds": 18.956
+}
+
+
+case 75)
+{
+  "dataset": "clean",
+  "retriever": "reranker",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 56.67,
+  "recall_at_5_percent": 56.67,
+  "mrr_at_10": 0.4326,
+  "precision_at_5": 0.1133,
+  "ndcg_at_5": 0.4566,
+  "evaluation_seconds": 31.745
+}
+
+case 100)
+{
+  "dataset": "clean",
+  "retriever": "reranker",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 56.67,
+  "recall_at_5_percent": 56.67,
+  "mrr_at_10": 0.4293,
+  "precision_at_5": 0.1133,
+  "ndcg_at_5": 0.4543,
+  "evaluation_seconds": 35.353
+}
+
+=======
+Candidate K	Hit@5	MRR@10	nDCG@5	평가 시간
+10	61.11%	0.4836	0.5094	13.18초
+20	57.78%	0.4591	0.4832	16.65초
+30	57.78%	0.4444	0.4713	18.96초
+50 (기준)	58.89%	0.4410	0.4701	24.77초
+75	56.67%	0.4326	0.4566	31.75초
+100	56.67%	0.4293	0.4543	35.35초
+
+
+주요 개선 사항
+Hit@5 +2.22%p
+53개 → 55개 성공
+
+MRR@10 +0.0426
+0.4410 → 0.4836
+
+평가 시간 -46.8%
+24.77초 → 13.18초
+
+reranker_candidate_k 값은 10으로 선택
+=======
+
+
+
+# dense
+
+1. max_sequence_Length
+항목				결과
+전체 청크			111,023개
+모델 최대 입력 길이	256토큰
+256토큰 초과 청크	72,895개
+초과 비율			65.66%
+가장 긴 청크		1,370토큰
+
+전체 청크의 65.66%에서 256토큰을 초과하는 뒷부분이 임베딩에 반영되지 않음
+
+
+2. Embedding 모델 비교
+기존 설정)
+dense:
+  model: sentence-transformers/all-MiniLM-L6-v2
+  batch_size: 32
+  build_batch_size: 16
+  normalize_embeddings: true
+  max_seq_length: 256
+
+모델 차이
+항목				Small		Base			Large
+파라미터 수		약 3,300만	약 1억 900만	약 3억 3,500만
+임베딩 차원		384		768			1024
+최대 입력 길이		512토큰	512토큰		512토큰
+MTEB Retrieval 점수	51.68 	53.25			54.29
+연산 비용			낮음		중간			높음
+
+
+
+case BAAI/bge-small-en-v1.5)
+dense:
+  model: BAAI/bge-small-en-v1.5
+  batch_size: 32
+  build_batch_size: 16
+  normalize_embeddings: true
+  max_seq_length: 256
+
+
+{
+  "dataset": "clean",
+  "retriever": "dense",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 57.78,
+  "recall_at_5_percent": 57.78,
+  "mrr_at_10": 0.4512,
+  "precision_at_5": 0.1156,
+  "ndcg_at_5": 0.4733,
+  "evaluation_seconds": 6.764
+}
+
+
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "hybrid",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 58.89,
+  "recall_at_5_percent": 58.89,
+  "mrr_at_10": 0.4796,
+  "precision_at_5": 0.1178,
+  "ndcg_at_5": 0.4975,
+  "evaluation_seconds": 8.866
+}
+
+{
+  "dataset": "clean",
+  "retriever": "reranker",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 60.0,
+  "recall_at_5_percent": 60.0,
+  "mrr_at_10": 0.4806,
+  "precision_at_5": 0.12,
+  "ndcg_at_5": 0.5027,
+  "evaluation_seconds": 14.052
+}
+
+
+case BAAI/bge-small-en-v1.5)
+dense:
+  model: BAAI/bge-small-en-v1.5
+  batch_size: 32
+  build_batch_size: 16
+  normalize_embeddings: true
+  max_seq_length: 512
+
+
+
+case BAAI/bge-base-en-v1.5)
+dense:
+  model: BAAI/bge-base-en-v1.5
+  batch_size: 32
+  build_batch_size: 16
+  normalize_embeddings: true
+  max_seq_length: 256
+
+{
+  "dataset": "clean",
+  "retriever": "dense",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 57.78,
+  "recall_at_5_percent": 57.78,
+  "mrr_at_10": 0.4488,
+  "precision_at_5": 0.1156,
+  "ndcg_at_5": 0.4685,
+  "evaluation_seconds": 7.365
+}
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "hybrid",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 60.0,
+  "recall_at_5_percent": 60.0,
+  "mrr_at_10": 0.5147,
+  "precision_at_5": 0.12,
+  "ndcg_at_5": 0.5277,
+  "evaluation_seconds": 13.669
+}
+
+{
+  "dataset": "clean",
+  "retriever": "reranker",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 60.0,
+  "recall_at_5_percent": 60.0,
+  "mrr_at_10": 0.4752,
+  "precision_at_5": 0.12,
+  "ndcg_at_5": 0.4974,
+  "evaluation_seconds": 13.559
+}
+
+
+
+case BAAI/bge-base-en-v1.5)
+dense:
+  model: BAAI/bge-base-en-v1.5
+  batch_size: 32
+  build_batch_size: 16
+  normalize_embeddings: true
+  max_seq_length: 512
+
+
+{
+  "dataset": "clean",
+  "retriever": "dense",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 57.78,
+  "recall_at_5_percent": 57.78,
+  "mrr_at_10": 0.4604,
+  "precision_at_5": 0.1156,
+  "ndcg_at_5": 0.4802,
+  "evaluation_seconds": 7.486
+}
+
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "hybrid",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 62.22,
+  "recall_at_5_percent": 62.22,
+  "mrr_at_10": 0.5114,
+  "precision_at_5": 0.1244,
+  "ndcg_at_5": 0.5349,
+  "evaluation_seconds": 9.8
+}
+
+{
+  "dataset": "clean",
+  "retriever": "reranker",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 58.89,
+  "recall_at_5_percent": 58.89,
+  "mrr_at_10": 0.466,
+  "precision_at_5": 0.1178,
+  "ndcg_at_5": 0.4885,
+  "evaluation_seconds": 12.543
+}
+
+
+모델	256토큰	512토큰
+BGE Small	완료	미실험
+BGE Base	미실험	완료
+
+
+
+
+?. token 기반 chunking
+?. 현재 모델의 입력 길이 변경
+
+3. Query / Document 인코딩 방식
+
+
+
+
+4. Embedding 정규화 검증
+
+
+
+5. Embedding 차원 최적화
+
+
+
+6. FAISS 인덱스 최적화
