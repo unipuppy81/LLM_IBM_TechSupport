@@ -1,0 +1,119 @@
+{
+  "dataset": "clean",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "bm25_weight": 0.5,
+  "dense_weight": 1.0,
+  "rrf_k": 10,
+  "reranker_candidate_k": 10,
+  "candidate_k_values": [
+    20,
+    50,
+    100
+  ],
+  "question_embedding_seconds_shared": 0.4993,
+  "timing_note": "각 K에서 BM25/Dense를 재검색한 시간과 RRF 처리 시간을 측정. 질문 임베딩/모델 로딩/평가 시간 제외. 실험 실행 순서 및 CPU 환경에 따라 지연시간은 달라질 수 있음.",
+  "results": [
+    {
+      "candidate_k": 20,
+      "hybrid": {
+        "hit_at_5_percent": 60.0,
+        "recall_at_5_percent": 60.0,
+        "mrr_at_10": 0.4995,
+        "precision_at_5": 0.12,
+        "ndcg_at_5": 0.519
+      },
+      "reranker": {
+        "hit_at_5_percent": 60.0,
+        "recall_at_5_percent": 60.0,
+        "mrr_at_10": 0.4858,
+        "precision_at_5": 0.12,
+        "ndcg_at_5": 0.509
+      },
+      "timing": {
+        "bm25_seconds": 4.5885,
+        "dense_seconds": 0.0082,
+        "fusion_seconds": 0.0012,
+        "retrieval_seconds_excluding_embedding": 4.5979,
+        "reranker_seconds": 2.7365,
+        "retrieval_mean_ms_per_question": 51.088
+      }
+    },
+    {
+      "candidate_k": 50,
+      "hybrid": {
+        "hit_at_5_percent": 60.0,
+        "recall_at_5_percent": 60.0,
+        "mrr_at_10": 0.5046,
+        "precision_at_5": 0.12,
+        "ndcg_at_5": 0.5182
+      },
+      "reranker": {
+        "hit_at_5_percent": 65.56,
+        "recall_at_5_percent": 65.56,
+        "mrr_at_10": 0.5219,
+        "precision_at_5": 0.1311,
+        "ndcg_at_5": 0.5498
+      },
+      "timing": {
+        "bm25_seconds": 4.4267,
+        "dense_seconds": 0.0077,
+        "fusion_seconds": 0.0027,
+        "retrieval_seconds_excluding_embedding": 4.4371,
+        "reranker_seconds": 2.8554,
+        "retrieval_mean_ms_per_question": 49.301
+      }
+    },
+    {
+      "candidate_k": 100,
+      "hybrid": {
+        "hit_at_5_percent": 60.0,
+        "recall_at_5_percent": 60.0,
+        "mrr_at_10": 0.5065,
+        "precision_at_5": 0.12,
+        "ndcg_at_5": 0.5197
+      },
+      "reranker": {
+        "hit_at_5_percent": 65.56,
+        "recall_at_5_percent": 65.56,
+        "mrr_at_10": 0.5191,
+        "precision_at_5": 0.1311,
+        "ndcg_at_5": 0.5476
+      },
+      "timing": {
+        "bm25_seconds": 4.7862,
+        "dense_seconds": 0.0085,
+        "fusion_seconds": 0.0034,
+        "retrieval_seconds_excluding_embedding": 4.7981,
+        "reranker_seconds": 2.9615,
+        "retrieval_mean_ms_per_question": 53.312
+      }
+    }
+  ],
+  "best": {
+    "candidate_k": 50,
+    "hybrid": {
+      "hit_at_5_percent": 60.0,
+      "recall_at_5_percent": 60.0,
+      "mrr_at_10": 0.5046,
+      "precision_at_5": 0.12,
+      "ndcg_at_5": 0.5182
+    },
+    "reranker": {
+      "hit_at_5_percent": 65.56,
+      "recall_at_5_percent": 65.56,
+      "mrr_at_10": 0.5219,
+      "precision_at_5": 0.1311,
+      "ndcg_at_5": 0.5498
+    },
+    "timing": {
+      "bm25_seconds": 4.4267,
+      "dense_seconds": 0.0077,
+      "fusion_seconds": 0.0027,
+      "retrieval_seconds_excluding_embedding": 4.4371,
+      "reranker_seconds": 2.8554,
+      "retrieval_mean_ms_per_question": 49.301
+    }
+  }
+}

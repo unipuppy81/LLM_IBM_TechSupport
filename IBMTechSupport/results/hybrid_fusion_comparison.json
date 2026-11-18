@@ -1,0 +1,65 @@
+{
+  "dataset": "clean",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "bm25_weight": 0.5,
+  "dense_weight": 1.0,
+  "rrf_k": 10,
+  "hybrid_candidate_k": 50,
+  "reranker_candidate_k": 10,
+  "minmax_note": "질문별 BM25 / Dense 각각의 상위 후보 원점수를 독립적으로 [0,1] Min-Max 정규화 후 BM25=0.5, Dense=1.0으로 합산. BM25 score<=0 후보 제외, Dense 후보 전체 사용. 단일/상수 점수 집합의 정규화 결과는 1.0으로 처리.",
+  "timing_note": "같은 질문 임베딩과 검색 후보를 재사용. Fusion 시간은 순위 결합만 측정하며 BM25/Dense 검색, 임베딩, 모델 로딩 및 평가 시간은 제외. Reranker 시간은 별도 측정.",
+  "shared_timings": {
+    "embedding_seconds": 0.3998,
+    "bm25_seconds": 2.0862,
+    "dense_seconds": 0.0069
+  },
+  "results": [
+    {
+      "fusion_method": "weighted_rrf",
+      "hybrid": {
+        "hit_at_5_percent": 60.0,
+        "recall_at_5_percent": 60.0,
+        "mrr_at_10": 0.5046,
+        "precision_at_5": 0.12,
+        "ndcg_at_5": 0.5182
+      },
+      "reranker": {
+        "hit_at_5_percent": 65.56,
+        "recall_at_5_percent": 65.56,
+        "mrr_at_10": 0.5219,
+        "precision_at_5": 0.1311,
+        "ndcg_at_5": 0.5498
+      },
+      "timing": {
+        "fusion_seconds": 0.0018,
+        "fusion_mean_ms_per_question": 0.0201,
+        "reranker_seconds": 2.7223
+      }
+    },
+    {
+      "fusion_method": "minmax_score",
+      "hybrid": {
+        "hit_at_5_percent": 60.0,
+        "recall_at_5_percent": 60.0,
+        "mrr_at_10": 0.4839,
+        "precision_at_5": 0.12,
+        "ndcg_at_5": 0.5072
+      },
+      "reranker": {
+        "hit_at_5_percent": 61.11,
+        "recall_at_5_percent": 61.11,
+        "mrr_at_10": 0.4827,
+        "precision_at_5": 0.1222,
+        "ndcg_at_5": 0.5104
+      },
+      "timing": {
+        "fusion_seconds": 0.0029,
+        "fusion_mean_ms_per_question": 0.0327,
+        "reranker_seconds": 2.8064
+      }
+    }
+  ],
+  "best_fusion_method": "weighted_rrf"
+}

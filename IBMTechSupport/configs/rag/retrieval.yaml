@@ -17,8 +17,8 @@
 # python -m evaluate.evaluate_retrieval --retriever reranker --dataset clean --top-k 5
 
 chunking:
- size: 1250
- overlap: 150
+  size: 1250
+  overlap: 150
 
 # chunking:
 #   mode: token
@@ -55,9 +55,10 @@ dense:
 
 hybrid:
   candidate_k: 50
-  rrf_k: 60
-  bm25_weight: 1.0
+  rrf_k: 10
+  bm25_weight: 0.5
   dense_weight: 1.0
+  max_chunks_per_document: 1
 
 reranker:
   model: cross-encoder/ms-marco-MiniLM-L6-v2

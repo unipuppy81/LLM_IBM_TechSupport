@@ -1,0 +1,192 @@
+{
+  "dataset": "clean",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "candidate_k": 50,
+  "reranker_candidate_k": 10,
+  "bm25_weights": [
+    0.5,
+    1.0
+  ],
+  "dense_weight": 1.0,
+  "rrf_k_values": [
+    10,
+    30,
+    60,
+    100
+  ],
+  "results": [
+    {
+      "bm25_weight": 0.5,
+      "dense_weight": 1.0,
+      "rrf_k": 10,
+      "hybrid": {
+        "hit_at_5_percent": 60.0,
+        "recall_at_5_percent": 60.0,
+        "mrr_at_10": 0.5046,
+        "precision_at_5": 0.12,
+        "ndcg_at_5": 0.5182
+      },
+      "reranker": {
+        "hit_at_5_percent": 65.56,
+        "recall_at_5_percent": 65.56,
+        "mrr_at_10": 0.5219,
+        "precision_at_5": 0.1311,
+        "ndcg_at_5": 0.5498
+      }
+    },
+    {
+      "bm25_weight": 0.5,
+      "dense_weight": 1.0,
+      "rrf_k": 30,
+      "hybrid": {
+        "hit_at_5_percent": 61.11,
+        "recall_at_5_percent": 61.11,
+        "mrr_at_10": 0.5023,
+        "precision_at_5": 0.1222,
+        "ndcg_at_5": 0.5171
+      },
+      "reranker": {
+        "hit_at_5_percent": 64.44,
+        "recall_at_5_percent": 64.44,
+        "mrr_at_10": 0.517,
+        "precision_at_5": 0.1289,
+        "ndcg_at_5": 0.5409
+      }
+    },
+    {
+      "bm25_weight": 0.5,
+      "dense_weight": 1.0,
+      "rrf_k": 60,
+      "hybrid": {
+        "hit_at_5_percent": 61.11,
+        "recall_at_5_percent": 61.11,
+        "mrr_at_10": 0.4925,
+        "precision_at_5": 0.1222,
+        "ndcg_at_5": 0.5117
+      },
+      "reranker": {
+        "hit_at_5_percent": 63.33,
+        "recall_at_5_percent": 63.33,
+        "mrr_at_10": 0.5086,
+        "precision_at_5": 0.1267,
+        "ndcg_at_5": 0.5329
+      }
+    },
+    {
+      "bm25_weight": 0.5,
+      "dense_weight": 1.0,
+      "rrf_k": 100,
+      "hybrid": {
+        "hit_at_5_percent": 60.0,
+        "recall_at_5_percent": 60.0,
+        "mrr_at_10": 0.4932,
+        "precision_at_5": 0.12,
+        "ndcg_at_5": 0.5074
+      },
+      "reranker": {
+        "hit_at_5_percent": 63.33,
+        "recall_at_5_percent": 63.33,
+        "mrr_at_10": 0.5095,
+        "precision_at_5": 0.1267,
+        "ndcg_at_5": 0.5321
+      }
+    },
+    {
+      "bm25_weight": 1.0,
+      "dense_weight": 1.0,
+      "rrf_k": 10,
+      "hybrid": {
+        "hit_at_5_percent": 63.33,
+        "recall_at_5_percent": 63.33,
+        "mrr_at_10": 0.502,
+        "precision_at_5": 0.1267,
+        "ndcg_at_5": 0.5266
+      },
+      "reranker": {
+        "hit_at_5_percent": 63.33,
+        "recall_at_5_percent": 63.33,
+        "mrr_at_10": 0.5003,
+        "precision_at_5": 0.1267,
+        "ndcg_at_5": 0.5271
+      }
+    },
+    {
+      "bm25_weight": 1.0,
+      "dense_weight": 1.0,
+      "rrf_k": 30,
+      "hybrid": {
+        "hit_at_5_percent": 64.44,
+        "recall_at_5_percent": 64.44,
+        "mrr_at_10": 0.5031,
+        "precision_at_5": 0.1289,
+        "ndcg_at_5": 0.5314
+      },
+      "reranker": {
+        "hit_at_5_percent": 63.33,
+        "recall_at_5_percent": 63.33,
+        "mrr_at_10": 0.5009,
+        "precision_at_5": 0.1267,
+        "ndcg_at_5": 0.5276
+      }
+    },
+    {
+      "bm25_weight": 1.0,
+      "dense_weight": 1.0,
+      "rrf_k": 60,
+      "hybrid": {
+        "hit_at_5_percent": 63.33,
+        "recall_at_5_percent": 63.33,
+        "mrr_at_10": 0.5014,
+        "precision_at_5": 0.1267,
+        "ndcg_at_5": 0.5266
+      },
+      "reranker": {
+        "hit_at_5_percent": 63.33,
+        "recall_at_5_percent": 63.33,
+        "mrr_at_10": 0.5046,
+        "precision_at_5": 0.1267,
+        "ndcg_at_5": 0.5302
+      }
+    },
+    {
+      "bm25_weight": 1.0,
+      "dense_weight": 1.0,
+      "rrf_k": 100,
+      "hybrid": {
+        "hit_at_5_percent": 61.11,
+        "recall_at_5_percent": 61.11,
+        "mrr_at_10": 0.4999,
+        "precision_at_5": 0.1222,
+        "ndcg_at_5": 0.5175
+      },
+      "reranker": {
+        "hit_at_5_percent": 63.33,
+        "recall_at_5_percent": 63.33,
+        "mrr_at_10": 0.5046,
+        "precision_at_5": 0.1267,
+        "ndcg_at_5": 0.5302
+      }
+    }
+  ],
+  "best": {
+    "bm25_weight": 0.5,
+    "dense_weight": 1.0,
+    "rrf_k": 10,
+    "hybrid": {
+      "hit_at_5_percent": 60.0,
+      "recall_at_5_percent": 60.0,
+      "mrr_at_10": 0.5046,
+      "precision_at_5": 0.12,
+      "ndcg_at_5": 0.5182
+    },
+    "reranker": {
+      "hit_at_5_percent": 65.56,
+      "recall_at_5_percent": 65.56,
+      "mrr_at_10": 0.5219,
+      "precision_at_5": 0.1311,
+      "ndcg_at_5": 0.5498
+    }
+  }
+}

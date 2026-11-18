@@ -1845,3 +1845,274 @@ HNSW 128	63.33%	0.5046		0.5302
 4. MRR@10, nDCG@5 차이가 매우 작음
 다만 현재 데이터가 11만 개 수준이고 FlatIP도 평균 3.187ms이므로, 메모리 효율과 정확한 검색이 더 중요하다면 FlatIP를 유지하는 것도 합리적입니다.
 
+
+
+
+
+
+
+
+
+
+
+
+3. Hybrid 개선
+
+
+1) BM25 / Dense 가중치		두 검색 방식의 영향력 조정	
+# 실험 고정 조건
+가중치 외의 모든 조건은 동일하게 유지
+
+항목				설정
+평가 데이터			val_clean.json
+평가 질문			90개 (답변 가능 질문)
+BM25				ATIRE, k1=1.5, b=0.25
+Dense 모델			BGE-small-en-v1.5
+Embedding			PCA 192차원, L2 정규화
+FAISS				HNSW, M=32, efSearch=128
+Hybrid Candidate K		50
+RRF K				60
+Reranker			MS MARCO MiniLM-L6-v2
+Reranker			입력 후보	Hybrid 상위 10개
+최종 평가			Hit@5, MRR@10, nDCG@5
+
+
+# 가중치 실험 조건
+dense_weight=1.0으로 고정하고 bm25_weight만 변경
+실험	BM25 Weight	Dense Weight	의미
+1	0.25			1.0			Dense 강하게 우선
+2	0.50			1.0			Dense 우선
+3	0.75			1.0			Dense 약간 우선
+4	1.00			1.0			동일 가중치 (기준)
+5	1.50			1.0			BM25 약간 우선
+6	2.00			1.0			BM25 우선
+7	3.00			1.0			BM25 강하게 우선
+
+# 가중치 적용 방식
+현재 hybrid_search.py의 Weighted RRF 수식을 그대로 사용합니다.
+\[
+Score(d)=\frac{w_{BM25}}{60+r_{BM25}(d)}
++\frac{w_{Dense}}{60+r_{Dense}(d)}
+\]
+
+- r: 각 검색 방식에서 문서의 순위(1부터 시작)
+- 검색되지 않은 문서의 해당 검색 방식 점수는 0
+- w: 실험할 가중치
+
+
+
+======
+BM25 가중치		Hybrid Hit@5	Reranker Hit@5	Reranker MRR@10		Reranker nDCG@5
+0.25			60.00%		62.22%		0.4914				0.5196
+0.50			61.11%		63.33%		0.5086				0.5329
+0.75			62.22%		63.33%		0.5081				0.5329
+1.00 (기존)		63.33%		63.33%		0.5046				0.5302
+1.50			61.11%		58.89%		0.4858				0.5040
+2.00			61.11%		58.89%		0.4880				0.5047
+3.00			61.11%		57.78%		0.4749				0.4929
+
+
+Reranker 기준 최적: BM25 0.5 / Dense 1.0
+Hybrid Hit@5 기준 최적: BM25 1.0 / Dense 1.0
+BM25 가중치가 1.5 이상이면 Reranker 성능이 저하됩니다.
+0.5 설정은 기존 대비 Reranker MRR@10이 0.0040, nDCG@5가 0.0027 높지만 차이가 작습니다.
+
+잠정 선정: BM25 0.5 / Dense 1.0
+======
+2) RRF K				검색 순위별 점수 반영 방식 조정	
+# 실험 조건
+항목			설정
+BM25 가중치		0.5, 1.0
+Dense 가중치	1.0 고정
+RRF K			10, 30, 60, 100
+Candidate K		50 고정
+Reranker 후보	10개 고정
+평가 데이터		Validation 90개
+비교 지표		Hit@5, MRR@10, nDCG@5
+
+======
+Reranker 성능 비교
+BM25 가중치		RRF K		Hit@5		MRR@10	nDCG@5
+0.5			10		65.56%	0.5219		0.5498
+0.5			30		64.44%	0.5170		0.5409
+0.5			60		63.33%	0.5086		0.5329
+0.5			100		63.33%	0.5095		0.5321
+1.0			10		63.33%	0.5003		0.5271
+1.0			30		63.33%	0.5009		0.5276
+1.0			60		63.33%	0.5046		0.5302
+1.0			100		63.33%	0.5046		0.5302
+
+기존 설정 대비 개선
+지표			기존 (1.0 / K60)	최적 (0.5 / K10)
+Hit@5			63.33%		65.56%
+MRR@10		0.5046			0.5219
+nDCG@5		0.5302			0.5498
+
+- Hit@5: +2.23%p (90개 중 정답 문서를 찾은 질문 2개 증가)
+- MRR@10: +0.0173
+- nDCG@5: +0.0196
+
+Hybrid 자체의 최고 Hit@5는 BM25 1.0 / RRF K30에서 64.44%
+0.5 / K10 선택
+
+잠정 선정
+hybrid:
+  candidate_k: 50
+  rrf_k: 10
+  bm25_weight: 0.5
+  dense_weight: 1.0
+======
+
+
+3) Candidate K			BM25·Dense에서 가져오는 후보 개수 조정	
+
+Candidate K는 BM25와 Dense가 각각 검색해서 RRF에 전달하는 후보 청크 개수
+예를 들어 candidate_k=50이면 BM25 상위 50개와 Dense 상위 50개를 가져와 Weighted RRF로 결합
+
+# 실험 조건
+항목			설정
+Candidate K		20, 50, 100
+BM25 가중치		0.5
+Dense 가중치	1.0
+RRF K			10
+Reranker 입력	Hybrid 상위 10개 고정
+Dense			PCA 192차원 + HNSW
+평가 데이터		Validation 90개
+
+# 평가 기준
+- Hit@5: 상위 5개 결과에 정답 문서가 포함되는 비율
+- MRR@10: 정답 문서가 검색 결과에서 얼마나 높은 순위에 있는지
+- nDCG@5: 상위 5개 결과의 정답 문서 순위 품질
+- 검색 시간: 후보 개수가 증가할 때 검색 비용이 얼마나 늘어나는지
+
+선정 기준: Reranker Hit@5 → MRR@10 → nDCG@5 순으로 비교
+성능이 사실상 같다면 Candidate K가 작은 설정을 우선
+
+기존 candidate_k=50의 Reranker 기준 성능은 Hit@5 65.56%, MRR@10 0.5219, nDCG@5 0.5498
+
+======
+Candidate K		Hybrid Hit@5	Reranker Hit@5	Reranker MRR@10		Reranker nDCG@5
+20			60.00%		60.00%		0.4858				0.5090
+50			60.00%		65.56%		0.5219				0.5498
+100			60.00%		65.56%		0.5191				0.5476
+
+K=20: 후보 수가 부족해 Reranker Hit@5가 5.56%p 낮았습니다.
+K=50: 최종 Reranker 지표가 가장 높았습니다.
+K=100: 후보를 늘려도 Hit@5 개선이 없었고 MRR@10과 nDCG@5는 소폭 낮았습니다.
+검색 시간은 K=50에서 49.301ms/질문으로 가장 짧았지만, 측정 차이가 작아 속도 우위를 확정하기는 어렵습니다.
+
+
+잠정 선정
+hybrid:
+  candidate_k: 50
+  rrf_k: 10
+  bm25_weight: 0.5
+  dense_weight: 1.0
+
+======
+
+4) Fusion 알고리즘			RRF와 정규화 점수 기반 결합 비교	
+
+BM25와 Dense의 검색 결과를 결합하는 두 가지 알고리즘을 비교
+
+알고리즘			결합 방식
+Weighted RRF		검색 순위에 가중치를 적용해 결합
+Min-Max Score Fusion	BM25·Dense 점수를 각각 0~1로 정규화한 후 가중 합산
+
+# 조건
+항목			설정
+BM25 가중치		0.5
+Dense 가중치	1.0
+RRF K			10
+Candidate K		50
+Reranker 후보	10개
+PCA / FAISS		192차원 / HNSW
+평가 데이터		Validation 90개
+
+두 알고리즘에 동일한 검색 후보와 가중치를 적용
+
+======
+평가 지표			Weighted RRF	Min-Max Score
+Hybrid Hit@5		60.00%		60.00%
+Hybrid MRR@10		0.5046			0.4839
+Hybrid nDCG@5		0.5182			0.5072
+Reranker Hit@5		65.56%		61.11%
+Reranker MRR@10		0.5219			0.4827
+Reranker nDCG@5		0.5498			0.5104
+Fusion 처리 시간		0.0201ms/질문	0.0327ms/질문
+
+Reranker Hit@5: Weighted RRF가 4.45%p 높음
+Reranker MRR@10: +0.0392
+Reranker nDCG@5: +0.0394
+Fusion 처리 시간도 Weighted RRF가 짧지만, 차이는 질문당 약 0.013ms로 매우 작습니다.
+
+
+
+Weighted RRF 유지
+hybrid:
+  candidate_k: 50
+  rrf_k: 10
+  bm25_weight: 0.5
+  dense_weight: 1.0
+
+======
+
+5) 중복 청크 처리			동일 문서의 유사 청크가 상위 결과를 점유하는 현상 완화	
+실험		동일 문서당 최대 청크 수
+기존 방식	제한 없음
+실험 1		1개
+실험 2		2개
+실험 3		3개
+
+모든 조건에서 BM25 가중치 0.5, Dense 가중치 1.0, RRF K 10, Candidate K 50을 고정
+
+중복 처리 방식: Weighted RRF로 정렬한 뒤 동일 원본 문서의 청크 수를 제한
+제외된 청크는 다음 순위의 다른 청크로 보충해 Reranker 입력 10개를 가능한 한 유지
+
+
+평가기준
+Hybrid / Reranker의 Hit@5, MRR@10, nDCG@5
+상위 10개 후보의 고유 문서 개수
+Reranker 상위 5개의 고유 문서 개수
+중복 처리 시간
+
+
+
+
+======
+조건		Reranker Hit@5	MRR@10	nDCG@5	고유 문서@10
+제한 없음	65.56%		0.5219		0.5498		8.87
+최대 1개	66.67%		0.5231		0.5537		10.00
+최대 2개	65.56%		0.5219		0.5498		9.04
+최대 3개	65.56%		0.5219		0.5498		8.92
+
+- Hit@5: +1.11%p (90개 질문 중 정답 문서를 찾은 질문 1개 증가)
+- MRR@10: +0.0012
+- nDCG@5: +0.0039
+- Reranker 입력 10개가 모두 서로 다른 문서에서 선택됨
+- 후보 10개 미만으로 줄어든 질문은 없음
+성능 개선은 작지만, 문서 다양성은 확실히 높아짐
+
+
+Hybrid 최종 잠정 설정
+최적화 항목			선정 결과
+BM25 / Dense 가중치	0.5 / 1.0
+RRF K				10
+Candidate K			50
+Fusion 알고리즘		Weighted RRF
+중복 청크 처리		문서당 최대 1개
+======
+
+
+Hybrid 최적화 결과
+초기 설정 대비 성능 변화
+
+Reranker 지표	초기 설정	최적화 후
+Hit@5			63.33%	66.67%
+MRR@10		0.5046		0.5231
+nDCG@5		0.5302		0.5537
+
+Validation 90개 기준으로 Hit@5가 3.34%p 증가했습니다.
+
+
+
