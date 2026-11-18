@@ -64,5 +64,5 @@ reranker:
   model: cross-encoder/ms-marco-MiniLM-L6-v2
   candidate_k: 10
   top_k: 5
-  batch_size: 16
+  batch_size: 8
   max_length: 512
