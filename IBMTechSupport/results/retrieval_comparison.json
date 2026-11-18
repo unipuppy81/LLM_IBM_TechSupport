@@ -6496,15 +6496,15 @@
     ]
   },
   "embedding_build": {
-    "model": "bge-base-en-v1.5",
+    "model": "bge-small-en-v1.5",
     "total_chunks": 111023,
-    "dimension": 768,
+    "dimension": 384,
     "batch_size": 16,
     "max_sequence_length": 512,
     "corpus_sha256": "ba7a86b1411659495c1ddcdf7842abccde52615c2f08d6bb9c568100908caa17",
-    "embedding_seconds": 1791.189,
-    "chunks_per_second": 61.983,
-    "peak_gpu_memory_gb": 0.68,
+    "embedding_seconds": 638.252,
+    "chunks_per_second": 173.948,
+    "peak_gpu_memory_gb": 0.266,
     "embedding_file": "corpus_embeddings.npy"
   }
 }

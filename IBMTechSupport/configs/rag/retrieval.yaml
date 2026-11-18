@@ -17,8 +17,13 @@
 # python -m evaluate.evaluate_retrieval --retriever reranker --dataset clean --top-k 5
 
 chunking:
-  size: 1250
-  overlap: 150
+ size: 1250
+ overlap: 150
+
+# chunking:
+#   mode: token
+#   size: 384
+#   overlap: 64
 
 bm25:
   method: atire
@@ -29,12 +34,24 @@ bm25:
 
 dense:
   # model: sentence-transformers/all-MiniLM-L6-v2
-  # model: BAAI/bge-small-en-v1.5
-  model: BAAI/bge-base-en-v1.5
+  model: BAAI/bge-small-en-v1.5
+  # model: BAAI/bge-base-en-v1.5
   batch_size: 32
   build_batch_size: 16
   normalize_embeddings: true
   max_seq_length: 512
+  query_prefix: ""
+
+  pca:
+    enabled: true
+    dimension: 192
+
+  faiss:
+    index_type: hnsw
+    m: 32
+    ef_construction: 80
+    ef_search: 128
+    threads: 4
 
 hybrid:
   candidate_k: 50

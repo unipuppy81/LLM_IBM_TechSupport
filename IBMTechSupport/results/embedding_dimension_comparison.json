@@ -1,0 +1,146 @@
+{
+  "method": "PCA trained on a document-embedding sample, then L2-normalized",
+  "source_model": "BAAI/bge-small-en-v1.5",
+  "source_dimension": 384,
+  "source_max_seq_length": 512,
+  "source_chunk_count": 111023,
+  "dataset": "clean",
+  "total_questions": 135,
+  "answerable_questions": 90,
+  "pca_fit_sample": 20000,
+  "pca_random_state": 42,
+  "notes": "Baseline uses existing IndexFlatIP. PCA output gets L2 normalized for both docs and queries. Experiment seconds exclude model loading and PCA fitting; not directly comparable to standard evaluation seconds.",
+  "results": [
+    {
+      "dimension": 384,
+      "vector_data_mib": 162.63,
+      "dense": {
+        "answerable_evaluated": 90,
+        "hit_at_5_percent": 54.44,
+        "recall_at_5_percent": 54.44,
+        "mrr_at_10": 0.4491,
+        "precision_at_5": 0.1089,
+        "ndcg_at_5": 0.465,
+        "experiment_seconds": 0.337
+      },
+      "hybrid": {
+        "answerable_evaluated": 90,
+        "hit_at_5_percent": 60.0,
+        "recall_at_5_percent": 60.0,
+        "mrr_at_10": 0.48,
+        "precision_at_5": 0.12,
+        "ndcg_at_5": 0.5003,
+        "experiment_seconds": 0.231
+      },
+      "reranker": {
+        "answerable_evaluated": 90,
+        "hit_at_5_percent": 62.22,
+        "recall_at_5_percent": 62.22,
+        "mrr_at_10": 0.4947,
+        "precision_at_5": 0.1244,
+        "ndcg_at_5": 0.5201,
+        "experiment_seconds": 2.977
+      },
+      "index_build_seconds": 0.0
+    },
+    {
+      "dimension": 256,
+      "vector_data_mib": 108.42,
+      "dense": {
+        "answerable_evaluated": 90,
+        "hit_at_5_percent": 57.78,
+        "recall_at_5_percent": 57.78,
+        "mrr_at_10": 0.4462,
+        "precision_at_5": 0.1156,
+        "ndcg_at_5": 0.4746,
+        "experiment_seconds": 0.157
+      },
+      "hybrid": {
+        "answerable_evaluated": 90,
+        "hit_at_5_percent": 61.11,
+        "recall_at_5_percent": 61.11,
+        "mrr_at_10": 0.5015,
+        "precision_at_5": 0.1222,
+        "ndcg_at_5": 0.5187,
+        "experiment_seconds": 0.152
+      },
+      "reranker": {
+        "answerable_evaluated": 90,
+        "hit_at_5_percent": 63.33,
+        "recall_at_5_percent": 63.33,
+        "mrr_at_10": 0.5016,
+        "precision_at_5": 0.1267,
+        "ndcg_at_5": 0.5268,
+        "experiment_seconds": 2.82
+      },
+      "index_build_seconds": 0.471,
+      "pca_explained_variance_ratio": 0.936339
+    },
+    {
+      "dimension": 192,
+      "vector_data_mib": 81.32,
+      "dense": {
+        "answerable_evaluated": 90,
+        "hit_at_5_percent": 55.56,
+        "recall_at_5_percent": 55.56,
+        "mrr_at_10": 0.451,
+        "precision_at_5": 0.1111,
+        "ndcg_at_5": 0.4713,
+        "experiment_seconds": 0.118
+      },
+      "hybrid": {
+        "answerable_evaluated": 90,
+        "hit_at_5_percent": 62.22,
+        "recall_at_5_percent": 62.22,
+        "mrr_at_10": 0.5009,
+        "precision_at_5": 0.1244,
+        "ndcg_at_5": 0.5223,
+        "experiment_seconds": 0.123
+      },
+      "reranker": {
+        "answerable_evaluated": 90,
+        "hit_at_5_percent": 63.33,
+        "recall_at_5_percent": 63.33,
+        "mrr_at_10": 0.5055,
+        "precision_at_5": 0.1267,
+        "ndcg_at_5": 0.5309,
+        "experiment_seconds": 2.834
+      },
+      "index_build_seconds": 0.355,
+      "pca_explained_variance_ratio": 0.877124
+    },
+    {
+      "dimension": 128,
+      "vector_data_mib": 54.21,
+      "dense": {
+        "answerable_evaluated": 90,
+        "hit_at_5_percent": 54.44,
+        "recall_at_5_percent": 54.44,
+        "mrr_at_10": 0.4296,
+        "precision_at_5": 0.1089,
+        "ndcg_at_5": 0.4536,
+        "experiment_seconds": 0.079
+      },
+      "hybrid": {
+        "answerable_evaluated": 90,
+        "hit_at_5_percent": 58.89,
+        "recall_at_5_percent": 58.89,
+        "mrr_at_10": 0.4961,
+        "precision_at_5": 0.1178,
+        "ndcg_at_5": 0.5072,
+        "experiment_seconds": 0.076
+      },
+      "reranker": {
+        "answerable_evaluated": 90,
+        "hit_at_5_percent": 61.11,
+        "recall_at_5_percent": 61.11,
+        "mrr_at_10": 0.4839,
+        "precision_at_5": 0.1222,
+        "ndcg_at_5": 0.5068,
+        "experiment_seconds": 2.794
+      },
+      "index_build_seconds": 0.328,
+      "pca_explained_variance_ratio": 0.783675
+    }
+  ]
+}

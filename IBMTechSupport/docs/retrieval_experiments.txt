@@ -1035,7 +1035,7 @@ MTEB Retrieval 점수	51.68 	53.25			54.29
 
 
 
-case BAAI/bge-small-en-v1.5)
+case BAAI/bge-small-en-v1.5_256)
 dense:
   model: BAAI/bge-small-en-v1.5
   batch_size: 32
@@ -1091,7 +1091,7 @@ dense:
 }
 
 
-case BAAI/bge-small-en-v1.5)
+case BAAI/bge-small-en-v1.5_512)
 dense:
   model: BAAI/bge-small-en-v1.5
   batch_size: 32
@@ -1099,15 +1099,64 @@ dense:
   normalize_embeddings: true
   max_seq_length: 512
 
+{
+  "dataset": "clean",
+  "retriever": "dense",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 54.44,
+  "recall_at_5_percent": 54.44,
+  "mrr_at_10": 0.4491,
+  "precision_at_5": 0.1089,
+  "ndcg_at_5": 0.465,
+  "evaluation_seconds": 6.96
+}
+
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "hybrid",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 60.0,
+  "recall_at_5_percent": 60.0,
+  "mrr_at_10": 0.48,
+  "precision_at_5": 0.12,
+  "ndcg_at_5": 0.5003,
+  "evaluation_seconds": 9.183
+}
+
+{
+  "dataset": "clean",
+  "retriever": "reranker",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 62.22,
+  "recall_at_5_percent": 62.22,
+  "mrr_at_10": 0.4947,
+  "precision_at_5": 0.1244,
+  "ndcg_at_5": 0.5201,
+  "evaluation_seconds": 12.876
+}
 
 
-case BAAI/bge-base-en-v1.5)
+
+
+
+
+case BAAI/bge-base-en-v1.5_256)
 dense:
   model: BAAI/bge-base-en-v1.5
   batch_size: 32
   build_batch_size: 16
   normalize_embeddings: true
   max_seq_length: 256
+
 
 {
   "dataset": "clean",
@@ -1121,8 +1170,10 @@ dense:
   "mrr_at_10": 0.4488,
   "precision_at_5": 0.1156,
   "ndcg_at_5": 0.4685,
-  "evaluation_seconds": 7.365
+  "evaluation_seconds": 7.84
 }
+
+
 {                                                                                                                           
   "dataset": "clean",
   "retriever": "hybrid",
@@ -1135,8 +1186,9 @@ dense:
   "mrr_at_10": 0.5147,
   "precision_at_5": 0.12,
   "ndcg_at_5": 0.5277,
-  "evaluation_seconds": 13.669
+  "evaluation_seconds": 14.859
 }
+
 
 {
   "dataset": "clean",
@@ -1150,12 +1202,12 @@ dense:
   "mrr_at_10": 0.4752,
   "precision_at_5": 0.12,
   "ndcg_at_5": 0.4974,
-  "evaluation_seconds": 13.559
+  "evaluation_seconds": 15.811
 }
 
 
 
-case BAAI/bge-base-en-v1.5)
+case BAAI/bge-base-en-v1.5_512)
 dense:
   model: BAAI/bge-base-en-v1.5
   batch_size: 32
@@ -1209,28 +1261,587 @@ dense:
   "evaluation_seconds": 12.543
 }
 
+=======
+Embedding 모델	최대 토큰	Dense Hit@5	Hybrid Hit@5	Reranker Hit@5
+MiniLM		256		51.11%		56.67%		61.11%
+BGE Small		256		57.78%		58.89%		60.00%
+BGE Small		512		54.44%		60.00%		62.22%
+BGE Base		256		57.78%		60.00%		60.00%
+BGE Base		512		57.78%		62.22%		58.89%
 
-모델	256토큰	512토큰
-BGE Small	완료	미실험
-BGE Base	미실험	완료
+
+
+Reranker 성능
+모델		최대 토큰	Hit@5		MRR@10	nDCG@5
+MiniLM	256		61.11%	0.4836		0.5094
+BGE Small	256		60.00%	0.4806		0.5027
+BGE Small	512		62.22%	0.4947		0.5201
+BGE Base	256		60.00%	0.4752		0.4974
+BGE Base	512		58.89%	0.4660		0.4885
+
+Dense: BGE Small 512는 256 대비 Hit@5가 57.78% → 54.44%로 하락했습니다.
+Hybrid: BGE Small 512는 256 대비 Hit@5가 58.89% → 60.00%로 상승했습니다.
+Reranker: BGE Small 512는 256 대비 Hit@5가 60.00% → 62.22%로 상승했습니다.
+모델 크기: BGE Base가 더 큰 모델이지만, 최종 Reranker 성능은 BGE Small 512보다 낮습니다
+
+따라서 BGE Small 512 선택
+=======
+
+
+
+3. token 기반 chunking
+
+
+case 1) 
+chunking:
+  mode: token
+  size: 384
+  overlap: 64
+
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "bm25",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 56.67,
+  "recall_at_5_percent": 56.67,
+  "mrr_at_10": 0.4783,
+  "precision_at_5": 0.1133,
+  "ndcg_at_5": 0.4991,
+  "evaluation_seconds": 3.584
+}
+
+
+{
+  "dataset": "clean",
+  "retriever": "dense",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 56.67,
+  "recall_at_5_percent": 56.67,
+  "mrr_at_10": 0.4549,
+  "precision_at_5": 0.1133,
+  "ndcg_at_5": 0.4766,
+  "evaluation_seconds": 21.925
+}
+
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "hybrid",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 55.56,
+  "recall_at_5_percent": 55.56,
+  "mrr_at_10": 0.4641,
+  "precision_at_5": 0.1111,
+  "ndcg_at_5": 0.4749,
+  "evaluation_seconds": 11.829
+}
+
+{
+  "dataset": "clean",
+  "retriever": "reranker",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 62.22,
+  "recall_at_5_percent": 62.22,
+  "mrr_at_10": 0.4825,
+  "precision_at_5": 0.1244,
+  "ndcg_at_5": 0.5133,
+  "evaluation_seconds": 13.09
+}
+
+
+
+case 2)
+
+chunking:
+  mode: token
+  size: 256
+  overlap: 32
+
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "bm25",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 53.33,
+  "recall_at_5_percent": 53.33,
+  "mrr_at_10": 0.4629,
+  "precision_at_5": 0.1067,
+  "ndcg_at_5": 0.4731,
+  "evaluation_seconds": 3.691
+}
+
+{
+  "dataset": "clean",
+  "retriever": "dense",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 56.67,
+  "recall_at_5_percent": 56.67,
+  "mrr_at_10": 0.4611,
+  "precision_at_5": 0.1133,
+  "ndcg_at_5": 0.4784,
+  "evaluation_seconds": 20.078
+}
+
+
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "hybrid",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 60.0,
+  "recall_at_5_percent": 60.0,
+  "mrr_at_10": 0.4849,
+  "precision_at_5": 0.12,
+  "ndcg_at_5": 0.5066,
+  "evaluation_seconds": 9.467
+}
+
+
+{
+  "dataset": "clean",
+  "retriever": "reranker",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 60.0,
+  "recall_at_5_percent": 60.0,
+  "mrr_at_10": 0.4893,
+  "precision_at_5": 0.12,
+  "ndcg_at_5": 0.5105,
+  "evaluation_seconds": 12.551
+}
+
+
+
+case 3)
+chunking:
+  mode: token
+  size: 480
+  overlap: 64
+
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "bm25",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 55.56,
+  "recall_at_5_percent": 55.56,
+  "mrr_at_10": 0.4907,
+  "precision_at_5": 0.1111,
+  "ndcg_at_5": 0.505,
+  "evaluation_seconds": 2.762
+}
+
+{
+  "dataset": "clean",
+  "retriever": "dense",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 57.78,
+  "recall_at_5_percent": 57.78,
+  "mrr_at_10": 0.4632,
+  "precision_at_5": 0.1156,
+  "ndcg_at_5": 0.4889,
+  "evaluation_seconds": 9.327
+}
+
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "hybrid",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 56.67,
+  "recall_at_5_percent": 56.67,
+  "mrr_at_10": 0.4763,
+  "precision_at_5": 0.1133,
+  "ndcg_at_5": 0.4896,
+  "evaluation_seconds": 13.338
+}
+
+{
+  "dataset": "clean",
+  "retriever": "reranker",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 58.89,
+  "recall_at_5_percent": 58.89,
+  "mrr_at_10": 0.4756,
+  "precision_at_5": 0.1178,
+  "ndcg_at_5": 0.4985,
+  "evaluation_seconds": 14.047
+}
+
+
+
+=======
+BGE Small 512 기준
+Chunking		BM25 Hit@5		Dense Hit@5		Hybrid Hit@5	Reranker Hit@5
+문자 1250/150	—			54.44%		60.00%		62.22%
+토큰 384/64		56.67%		56.67%		55.56%		62.22%
+토큰 256/32		53.33%		56.67%		60.00%		60.00%
+토큰 480/64		55.56%		57.78%		56.67%		58.89%
+
+
+
+Reranker 성능
+Chunking		Hit@5		MRR@10	nDCG@5
+문자 1250/150	62.22%	0.4947		0.5201
+토큰 384/64		62.22%	0.4825		0.5133
+토큰 256/32		60.00%	0.4893		0.5105
+토큰 480/64		58.89%	0.4756		0.4985
+
+결과 1250/150 유지
+=======
 
 
 
 
-?. token 기반 chunking
-?. 현재 모델의 입력 길이 변경
+
+
+
+
+
 
 3. Query / Document 인코딩 방식
 
+Query 인코딩 방식 변경
+query_prefix: 'Represent this sentence for searching relevant passages: '
+
+{
+  "dataset": "clean",
+  "retriever": "dense",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 58.89,
+  "recall_at_5_percent": 58.89,
+  "mrr_at_10": 0.4639,
+  "precision_at_5": 0.1178,
+  "ndcg_at_5": 0.4876,
+  "evaluation_seconds": 10.298
+}
+
+
+
+
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "hybrid",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 60.0,
+  "recall_at_5_percent": 60.0,
+  "mrr_at_10": 0.4849,
+  "precision_at_5": 0.12,
+  "ndcg_at_5": 0.5044,
+  "evaluation_seconds": 12.225
+}
+
+{
+  "dataset": "clean",
+  "retriever": "reranker",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 62.22,
+  "recall_at_5_percent": 62.22,
+  "mrr_at_10": 0.4829,
+  "precision_at_5": 0.1244,
+  "ndcg_at_5": 0.5112,
+  "evaluation_seconds": 15.809
+}
+
+======
+Query Prefix 적용 전후 성능 비교
+기준: BGE Small 512 / 문자 기반 Chunking 1250/150
+검색 방식	지표		Prefix 없음	Prefix 적용
+Dense		Hit@5		54.44%	58.89%
+		MRR@10	0.4491		0.4639
+		nDCG@5	0.4650		0.4876
+Hybrid		Hit@5		60.00%	60.00%
+		MRR@10	0.4800		0.4849
+		nDCG@5	0.5003		0.5044
+Reranker	Hit@5		62.22%	62.22%
+		MRR@10	0.4947		0.4829
+		nDCG@5	0.5201		0.5112
+
+
+Dense 검색은 개선됐습니다.
+- Hit@5: +4.45%p (정답 문서 검색 성공 49개 → 53개)
+- MRR@10: +0.0148
+- nDCG@5: +0.0226
+Hybrid도 순위 품질이 소폭 개선됐습니다.
+- Hit@5는 동일
+- MRR@10과 nDCG@5는 상승
+Reranker는 개선되지 않았습니다.
+- Hit@5: 동일 (56/90개)
+- MRR@10: -0.0118
+- nDCG@5: -0.0089
+
+
+현재 최종 파이프라인이 Dense → Hybrid → Reranker이므로 Query Prefix를 적용하지 않는 기존 설정을 잠정 선택하는 것이 적절
+======
+
+Document 인코딩은 진행하지 않음
+BGE 공식 문서에 따르면 검색용 Instruction은 Query에 적용하며, Document에는 별도의 Instruction을 추가하지 않는 방식이 권장
+현재 코드도 이 방식
+embeddings = model.encode(
+    texts,
+    normalize_embeddings=True
+)
+따라서 Document Prefix를 임의로 추가할 필요는 없음
+
+
+=======
 
 
 
 4. Embedding 정규화 검증
 
+[Query Embeddings]
+Model: BAAI/bge-small-en-v1.5
+Max sequence length: 512
+Query prefix: ''
+Questions: 90
+Raw query norm min/mean/max: 1.000000 / 1.000000 / 1.000000
+Normalized query norm mean: 1.000000
+Identical top-10 rankings (ON vs OFF): 90/90
+Max scaled-IP score difference: 0.00000012
+
+Normalization verification: OK
+
+
+=======
+검증 항목			결과				판정
+문서 임베딩			111,023개 × 384차원	정상
+문서 벡터 L2 Norm		1.000000			정상
+정규화 오차 최댓값		0.00000012			정상
+정규화 오류			0개				정상
+FAISS 인덱스			111,023개			정상
+FAISS 벡터 일치 여부	오차 0				정상
+Query 정규화 ON/OFF	90/90개 순위 동일		정상
+
+Document 정규화: 모든 문서 벡터의 길이가 1로 정규화되어 있습니다.
+FAISS: 저장된 벡터와 원본 임베딩이 일치합니다.
+Query 정규화: ON/OFF 모두 검색 순위가 동일했습니다.
+Warning: Windows 관련 안내와 메서드 이름 변경 경고로, 검증 실패는 아닙니다.
+
+기존설정 유지. 문서 정규화 체크 통과
+======
+
 
 
 5. Embedding 차원 최적화
+PCA(Principal Component Analysis)
+IBM 기술 문서
+    ↓ BGE Small Embedding
+384차원 벡터
+    ↓ PCA
+192차원 벡터
+    ↓ L2 정규화
+FAISS 검색
+
+PCA는 원래 벡터의 차원 일부를 단순히 삭제하는 것이 아니다.
+전체 벡터 분석해 데이터 분산이 큰 방향을 찾아 새로운 좌표축을 구성하고, 그중 일부 사용
+PCA는 정보 손실 없이 압축하는 방식은 아니지만 검색에 중요한 정보가 충분히 유지된다면 차원을 줄여도 성능을 유지하거나 개선이 가능
+
+
+기존) 384
+Case	차원		벡터 저장 용량 감소
+1	384 (기존)	0%
+2	256		33.3%
+3	192		50.0%
+4	128		66.7%
+PCA(주성분 분석) 를 사용해 문서 벡터와 Query 벡터를 동일한 방식으로 축소합니다. BGE Small은 차원 축소에 특화된 Matryoshka 모델이 아니므로 단순히 벡터 뒤쪽 차원을 자르는 대신 PCA를 실험합니다.
+
+- 원본 청크: 변경 없음
+- 기존 문서 임베딩: 변경 없음
+- 기존 FAISS 인덱스: 변경 없음
+- 축소된 인덱스: 실험 중 메모리에서 별도 생성
+- 평가: Dense → Hybrid → Reranker
+
+case 0) 384
+[Dimension 384]
+dense     Hit@5= 54.44% MRR@10=0.4491 nDCG@5=0.4650
+hybrid    Hit@5= 60.00% MRR@10=0.4800 nDCG@5=0.5003
+reranker  Hit@5= 62.22% MRR@10=0.4947 nDCG@5=0.5201
+Dimension 256: FAISS indexed 111,023 vectors (0.5s)
+
+case 1) 256
+[Dimension 256]
+dense     Hit@5= 57.78% MRR@10=0.4462 nDCG@5=0.4746
+hybrid    Hit@5= 61.11% MRR@10=0.5015 nDCG@5=0.5187
+reranker  Hit@5= 63.33% MRR@10=0.5016 nDCG@5=0.5268
+Dimension 192: FAISS indexed 111,023 vectors (0.4s)
+
+case 2) 192
+[Dimension 192]
+dense     Hit@5= 55.56% MRR@10=0.4510 nDCG@5=0.4713
+hybrid    Hit@5= 62.22% MRR@10=0.5009 nDCG@5=0.5223
+reranker  Hit@5= 63.33% MRR@10=0.5055 nDCG@5=0.5309
+Dimension 128: FAISS indexed 111,023 vectors (0.3s)
+
+
+case 3) 128
+[Dimension 128]
+dense     Hit@5= 54.44% MRR@10=0.4296 nDCG@5=0.4536
+hybrid    Hit@5= 58.89% MRR@10=0.4961 nDCG@5=0.5072
+reranker  Hit@5= 61.11% MRR@10=0.4839 nDCG@5=0.5068
+
+
+=======
+1. 전체 성능 비교
+차원	Dense Hit@5		Hybrid Hit@5	Reranker Hit@5
+384 	54.44%		60.00%		62.22%
+256	57.78%		61.11%		63.33%
+192	55.56%		62.22%		63.33%
+128	54.44%		58.89%		61.11%
+
+2. 최종 Reranker 상세 지표
+차원	Hit@5		MRR@10	nDCG@5	벡터 용량 감소
+384	62.22%	0.4947		0.5201		0%
+256	63.33%	0.5016		0.5268		33.3%
+192	63.33%	0.5055		0.5309		50%
+128	61.11%	0.4839		0.5068	66.	7%
+
+256차원: Dense Hit@5가 가장 높습니다.
+192차원: 최종 Reranker의 Hit@5가 256차원과 동일하며 MRR@10, nDCG@5는 더 높습니다.
+128차원: 차원을 지나치게 줄이면서 성능이 하락했습니다.
+384차원: 192차원보다 최종 검색 성능이 낮았습니다.
+
+
+PCA 192차원을 잠정 선택하는 것이 적절
+=======
+
+
+
+192차원 변경
+PCA: enabled (384 -> 192)
+{
+  "dataset": "clean",
+  "retriever": "dense",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 55.56,
+  "recall_at_5_percent": 55.56,
+  "mrr_at_10": 0.451,
+  "precision_at_5": 0.1111,
+  "ndcg_at_5": 0.4713,
+  "evaluation_seconds": 6.435
+}
+
+PCA: enabled (384 -> 192)
+{                                                                                                                           
+  "dataset": "clean",
+  "retriever": "hybrid",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 62.22,
+  "recall_at_5_percent": 62.22,
+  "mrr_at_10": 0.5009,
+  "precision_at_5": 0.1244,
+  "ndcg_at_5": 0.5223,
+  "evaluation_seconds": 8.509
+}
+
+{
+  "dataset": "clean",
+  "retriever": "reranker",
+  "total": 135,
+  "answerable_evaluated": 90,
+  "impossible_skipped": 45,
+  "skipped_no_gold": 0,
+  "hit_at_5_percent": 63.33,
+  "recall_at_5_percent": 63.33,
+  "mrr_at_10": 0.5055,
+  "precision_at_5": 0.1267,
+  "ndcg_at_5": 0.5309,
+  "evaluation_seconds": 12.349
+}
+=======
+BGE Small의 384차원 임베딩에 PCA를 적용하여 차원별 검색 성능을 비교
+Validation 결과에서 192차원이 최종 Reranker 성능과 저장 용량 측면에서 가장 유리하여 잠정 선택
+이후 실제 검색 파이프라인에 PCA 192차원을 통합했으며, Dense·Hybrid·Reranker 평가 지표가 기존 PCA 실험과 동일하게 재현됨을 확인
+=======
 
 
 
 6. FAISS 인덱스 최적화
+Case	설정
+1	FlatIP
+2	IVFFlat — nlist=256, nprobe=8
+3	IVFFlat — nlist=256, nprobe=32
+4	HNSW — M=32, efSearch=64
+5	HNSW — M=32, efSearch=128
+
+
+1. FAISS 성능 비교
+인덱스		Recall@50	평균 검색 시간	인덱스 용량	Reranker Hit@5
+FlatIP (기존)	100%		3.187ms		81.32 MiB	63.33%
+IVFFlat 8	78.04%	0.122ms		82.35 MiB	54.44%
+IVFFlat 32	92.40%	0.465ms		82.35 MiB	61.11%
+HNSW 64	95.00%	0.101ms		110.14 MiB	63.33%
+HNSW 128	98.11%	0.190ms		110.14 MiB	63.33%
+
+Recall@50은 FlatIP 상위 50개 검색 결과와 얼마나 일치하는지 측정한 값입니다.
+
+2. 최종 Reranker 순위 품질
+인덱스		Hit@5		MRR@10	nDCG@5
+FlatIP		63.33%	0.5055		0.5309
+IVFFlat 8	54.44%	0.4484		0.4629
+IVFFlat 32	61.11%	0.4803		0.5053
+HNSW 64	63.33%	0.5064		0.5317
+HNSW 128	63.33%	0.5046		0.5302
+
+3. 결과 분석
+- FlatIP: 모든 벡터를 정확하게 검색하며 인덱스 용량이 가장 작습니다.
+- IVFFlat: 빠르지만 현재 실험에서는 검색 정확도가 떨어졌습니다.
+- HNSW 64: FlatIP 대비 약 31.6배 빠르며 최종 Reranker 성능이 유지됐습니다.
+- HNSW 128: FlatIP 대비 약 16.8배 빠르고, 원본 검색 결과 재현율이 98.11%로 높습니다.
+단, HNSW는 FlatIP보다 인덱스 용량이 약 35% 크며, 이번 속도 측정은 FAISS 검색 부분만의 시간입니다. Query Embedding과 Reranker를 포함한 전체 응답 속도가 16~32배 빨라진다는 뜻은 아닙니다.
+
+4. 결론
+검색 속도 최적화가 목적이라면 HNSW(M=32, efSearch=128)를 잠정 선택하겠습니다.
+
+선택 근거는 다음과 같습니다.
+1. FlatIP 대비 약 16.8배 빠른 검색
+2. Recall@50 98.11%
+3. Reranker Hit@5 63.33% 유지
+4. MRR@10, nDCG@5 차이가 매우 작음
+다만 현재 데이터가 11만 개 수준이고 FlatIP도 평균 3.187ms이므로, 메모리 효율과 정확한 검색이 더 중요하다면 FlatIP를 유지하는 것도 합리적입니다.
+
