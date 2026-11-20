@@ -1,0 +1,782 @@
+﻿id,qa_is_impossible,gold_source_in_top5,gold_source_selected_baseline,gold_source_selected_new,baseline_selected_ranks,new_selected_ranks,baseline_abstained,new_abstained,changed,question
+TRAIN_Q169,True,N/A,N/A,N/A,,,True,True,False,"What is right trace for investigate the ""CWTKE0021W: The expired people assignment (staff query result) cannot be refreshed"" in SystemOut.log
+
+Hello, after upgrading from Websphere Process Server 7 to Business Process Manager Advanced - Process Server 8.5.6 we are seeing many CWTKE0021W in the SystemOut.log on two different test environments. We use Standalone LDAP repository.
+According to very brief (none) description at http://www-01.ibm.com/support/knowledgecenter/SS9KLH_8.5.6/com.ibm.wbpm.ref.doc/CWTKE0021W.html there should be further info in SystemOut.log (some exception I suppose) but in our case there is not - the logs are clear, the CWTKE0021W is only information. AFAIK we are not aware of any problems with our staff queries, so far it is only disturbing message in the logs but we want to get rid of them before we hit production with 8.5.6.
+I found the http://www-01.ibm.com/support/docview.wss but I guess that is not our case, we dont see any timeout messages in the logs.
+I wanted to enable the trace but Im not sure what trace string to use, there are many trace code packages which I consider as candidates (com.ibm.task., com.ibm.bpe.staff., com.ibm.bpe.query.*) but those enviroments are heavily used so I dont want to blindly enable all as I need to make smallest performance impact as possible.
+Please could you advice with right trace string to use (or other means for resolving the problem without the traces) ?"
+DEV_Q061,True,N/A,N/A,N/A,"2,3",,False,True,True,"Why does my JVMSERVER remain in a ""BEING DISABLED""  state?
+
+When I try to disable a JVMSERVER it becomes hung and remains in a ""BEING DISABLED"" state. This also occurs when I shut down the CICS region. The CICS region ultimately has to be cancelled."
+TRAIN_Q137,False,False,False,False,"2,3","2,3",False,False,False,"What could cause a ""Connection refused"" to SQLDB/DB2 after some time?
+
+I have deployed an WAS Liberty/ JPA application. Everything is fine, and after a while (a day or 2), I get the connection refused exception: java.sql.SQLNonTransientException: [jcc][t4][2043][11550][4.14.103] Exception java.net.ConnectException: Error opening socket to server /XX.XXX.XXX.XXXon port 50,000 with message: Connection refused. ERRORCODE=-4499, SQLSTATE=08001 DSRA0010E: SQL State = 08001, Error Code = -4,499 
+Any idea what could cause this issue?"
+TRAIN_Q270,False,True,True,True,1,1,False,False,False,"How to resolve ""An unexpected error occurred. Contact your system administrator. ICWPA1001E""
+
+
+
+When trying to add people to a matter request when there are more than 1000 people in the clipboard, the following error is reported:
+
+An unexpected error occurred. Contact your system administrator. ICWPA1001E"""
+TRAIN_Q113,False,True,True,True,1,"1,2,3,4",False,False,True,"How do I configure logging for Atlas Extensions in Atlas 6.0.3.3?
+
+How do I configure logging for Atlas Extensions in Atlas 6.0.3.3?"
+TRAIN_Q037,False,True,False,False,,,True,True,False,"How can multiple TDWC users logon into TDWC with same TWS user id?
+
+
+
+Given that one TDWC user is already accessing TDWC and a second TDWC user using the same logon id wants to logon to TDWC sees the following error:
+
+Another user is currently logged in with the same user ID. Select from the following options:
+
+    List item
+
+Log out the other user with the same user ID. You can recover changes made during the other user's session.
+
+    List item
+
+Return to the Login page and enter a different user ID.
+
+How can multiple users logon without one user needing to logout?"
+TRAIN_Q025,True,N/A,N/A,N/A,,,True,True,False,"We are experiencing issues after we cleared the  /tmp/javasharedresources location and restarted the jvm.
+
+
+
+We experienced an issue when we cleared the /tmp/javasharedresources location and restarted jvm. We found a behavior where our website is serving a blank page and also cache monitor is not reflecting the statistics.
+
+Please help us to understand why we cannot clear the /tmp/javasharedresources ?"
+TRAIN_Q549,False,True,True,True,1,1,False,False,False,"What does the end-file-message mean while doing a launchpad.sh in the MS""
+
+I am getting an end-file-message means while doing a launchpad.sh in the MS. How do I solve the problem?"
+TRAIN_Q006,False,True,True,True,"1,2,3,5","1,2,3,5",False,False,False,"Is ITNM exposed to Apache CXF vulnerability (CVE-2017-3156)?
+
+Is ITNM versions are affected by Apache CXF vulnerability (CVE-2017-3156), If yes then what are all the version will be affected and where I can find the details?"
+TRAIN_Q535,False,True,False,False,,,True,True,False,"SYSIBMADM.DBCFG IS AN UNDEFINED NAME error message on z/OS ODM Event Server
+
+On Z/OS, Events runtime may trace the following exception into system logs when DB2 is used as the runtime repository: com.ibm.websphere.ce.cm.StaleConnectionException: SYSIBMADM.DBCFG IS AN UNDEFINED NAME. SQLCODE=-204, SQLSTATE=42704, DRIVER=3.65.102"
+DEV_Q035,False,True,True,True,"1,2,3,5","1,2",False,False,True,"Help with Security Bulletin: API Connect is affected by a Node.js denial of service vulnerability (CVE-2017-14919)
+
+I need to understand details regarding Security Bulletin: API Connect is affected by a Node.js denial of service vulnerability (CVE-2017-14919). Where can I find this information?"
+TRAIN_Q100,False,False,False,False,,,True,True,False,"Which version of TBSM support ITM 6.3?
+
+What is the TBSM version that is certified with ITM 6.3?"
+TRAIN_Q103,False,False,False,False,,,True,True,False,"PARMGEN ABEND S013 in JOB KCIJPALO
+
+
+
+After installing IBM OMEGAMON for Messaging on z/OS 07.05.00, I receive the following ABEND after submitting PARMGEN Job KCIJPALO:
+
+      JOB02175  IEC141I 013-18,IGG0191B,U600861X,KMCJPALR,RKPDIN,600D,ISMS01,  083
+         083             HSYS.S002.OMGNEW.TKANPAR(KMCPDICT)
+     JOB02175  IEA995I SYMPTOM DUMP OUTPUT  085
+         085             SYSTEM COMPLETION CODE=013  REASON CODE=00000018
+         085              TIME=07.41.33  SEQ=00630  CPU=0000  ASID=004C
+         085              PSW AT TIME OF ERROR  075C1000   80E9E456  ILC 2  INTC 0D
+         085                NO ACTIVE MODULE FOUND
+         085                NAME=UNKNOWN
+         085                DATA AT PSW  00E9E450 - 4100302C  0A0D010D  A7E5014B
+         085                AR/GR 0: 009FF028/00E9E760   1: 00000000/A4013000
+         085                      2: 00000000/00081CB8   3: 00000000/00E9E734
+         085                      4: 00000000/009B1410   5: 00000000/009B17A4
+         085                      6: 00000000/009B174C   7: 00000000/009B17A4
+         085                      8: 00000000/009B176C   9: 00000000/00000080
+         085                      A: 00000000/00F20E10   B: 00000000/009B10FC
+         085                      C: 00000000/00000008   D: 00000000/00000000
+         085                      E: 00000000/80E9DCB4   F: 00000000/00000018
+         085              END OF SYMPTOM DUMP
+
+What is the cause of this?"
+TRAIN_Q316,False,False,False,False,5,,False,True,True,"Datapower WebGUI down due to an expired or invalid certificate
+
+The Datapower WebGUI is down due to an expired or invalid certificate. How can the WebGUI access be restored?"
+TRAIN_Q019,False,True,False,False,,,True,True,False,"i cannot enter SPSS statistics trial program
+
+
+
+I've downloaded the 14-days trial of SPSS subscription for 32bit, windows. After opening the program I'm asked to login and after entering my username and password a blank page comes up. And there is no way to proceed from here. I already saw previous answers about SPSS trial Login error, and there is a link(https://ibm.box.com/s/huaafbjzabkyblh47n7g4l0o4gxp4zdy) to download the zip file of 'jxbrowser'. But i cannot enter the link, and the webpage says ""probably the address was changed or deleted.""
+
+i'm using Windows 7(32bit), and just want to know how can i resolve it."
+DEV_Q203,True,N/A,N/A,N/A,"1,2,3,4,5","1,2,3,5",False,False,True,"Why WebSphere Application Server transactions are rolled back with these StaleConnectionExceptions?
+
+Why WebSphere Application Server transactions are rolled back with these StaleConnectionExceptions?
+My transactions are rolled back and the following errors are seen in the WebSphere Application Server logs:
+
+ConnectionEve A J2CA0056I: ........ ........ Connection reset:java.net.SocketException: Connection reset [15/03/04 1:04:33:046 JST] 00000024 SystemOut O INFO Error executing internal sql (executing callable statement) com.ibm.websphere.ce.cm.StaleConnectionException: IO?G??ñ[: Connection reset at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) at 
+...
+See original exception message: ...... with SQL State : 08003 SQL Code : 17008 ..... .....
+Caused by: java.sql.SQLRecoverableException: .......DSRA0010E: SQL State : 08003 SQL Code : 17008"
+TRAIN_Q282,True,N/A,N/A,N/A,1,1,False,False,False,"Security Bulletin: Non-configured connections could cause denial of service in IBM WebSphere MQ Internet Pass-Thru (CVE-2017-1118)
+
+I need to understand details regarding Security Bulletin: Non-configured connections could cause denial of service in IBM WebSphere MQ Internet Pass-Thru (CVE-2017-1118). Where can I find this information?"
+DEV_Q157,True,N/A,N/A,N/A,,,True,True,False,"How do I configure TLS/SSL for an IIB web service provider and consumer?
+
+I'm investigating ways and technologies for use with IIB to run a web service that runs as both a provider and consumer. I'm looking at HTTP and SOAP messages/nodes. At a high level it might look like this:
+HTTPInput (TLS over HTTPS) -> Compute -> HTTPRequest (SSL over HTTPS) -> Compute -> HTTPReply
+or
+SOAPInput (TLS over HTTPS) -> Compute -> SOAPRequest (SSL over HTTPS) -> Compute -> SOAPReply
+Does anyone have more details/references beyond the knowledge center on how to configure the TLS/SSL portions?"
+DEV_Q167,False,True,True,True,"1,2,4,5","1,2,3,4",False,False,True,"How do I recreate all the Oracle Text indexes for the Atlas database
+
+How do I recreate all the Oracle Text indexes for the Atlas database ?"
+DEV_Q028,False,True,True,True,"1,4","1,4",False,False,False,"Help with Security Bulletin: Multiple vulnerabilities have been identified in WebSphere Application Server shipped with WSRR (CVE-2015-4911)
+
+I need to understand details regarding Security Bulletin: Multiple vulnerabilities have been identified in WebSphere Application Server shipped with WebSphere Service Registry and Repository (CVE-2015-4911). Where can I find this information?"
+TRAIN_Q172,False,True,True,True,"1,4",1,False,False,True,"Does StoredIQ support TLS v1.2?
+
+Does StoredIQ support TLS v1.2?"
+TRAIN_Q058,False,False,False,False,,,True,True,False,"Portal v8.5 install fails with INSTCONFFAILED - No Portral logs are written
+
+Portal v8.5 install fails with INSTCONFFAILED - No Portral logs are written"
+TRAIN_Q236,False,True,False,False,,,True,True,False,"Cannot Authorize SPSS 19 Installation on New Computer,Need to Authorize SPSS 19 on a New Computer
+
+I'm currently using SPSS 19 and need to install it on a new computer, however, it will not authorize. I've spoken to SPSS support by phone but they recommended checking here. I'm running on a Mac, OS X Sierra, for SPSS 19. Would someone please be able to assist?,I'm currently running SPSS 19 and need to install it on a new computer. When I try to authorize it, it fails. I've spoken to SPSS over the phone to no avail. I'm running OS X Sierra. Could anyone please help?"
+TRAIN_Q326,True,N/A,N/A,N/A,3,,False,True,True,"Is Re-naming the WebSphere Portal installation directory and cell name for an existing clustered installation possible?
+
+Question: Is re-naming the WebSphere Portal installation directory and cell name for an existing clustered installation possible?"
+TRAIN_Q307,False,True,True,True,1,1,False,False,False,"Product upgrade installed a second instance of the DE, causing upgrade failure.
+
+The Deployment Engine should only have one instance installed on a server with IBM products installed. In this case, a second DE was installed, which caused the failure of the Product upgrade. Error: Wrong Deployment Engine.
+
+Product install failed. You will get a message similar to this: You are updating an instance of (Product name) that was installed using the Tivoli Deployment Engine (DE) located at ""/home/nc_admin/.acsi_FQDN"". However you are now using the DE located at ""/home/nc_admin/.acsi_HOSTNAME"".
+
+When the DE is installed as non-root ( in this case nc_admin ), it will install the DE in the user home directory, in this case /home/nc_admin, and use the FQDN in the name: /home/nc_admin/.acsi_FQDN"
+DEV_Q198,True,N/A,N/A,N/A,"2,5",,False,True,True,"Why is CSV002I occurring for CSQADITB?
+
+An application is getting repeated errors: 
+CSV002I REQUESTS FOR MODULE CSQADITB EXCEED MAXIMUM USE COUNT
+
+Restarting the application clears the error messages for a while. Why is this occurring?"
+TRAIN_Q087,False,True,False,False,,,True,True,False,"Installation manager (IIM) fails to start on AIX, generates core file from GPF even though all GTK libs are installed.
+
+Trying to install DASH 3.1.3 on AIX but IIM won't start and instead creates a dump file with a GPF noted. We found a technical note with a list of the required libs for IIM on AIX and we have all of the latest versions of those libs. Why is the installer failing to start?"
+TRAIN_Q581,False,True,True,True,2,2,False,False,False,"OOM exception thrown when trying to configure an ITCAM for WAS 7.2 Data Collector
+
+I am trying to configure an ITCAM for WAS 7.2.0.0.x DC using config.sh, but getting OOM exceptions, as following:
+
+./config.sh
+
+Log file name: /opt/IBM/ITM/dchome/7.2.0.0.10/data/config-trace.log.
+
+List of TCP/IP interfaces discovered:
+
+       1. ...
+     Enter a number [default is: 1]:
+     1
+     JVMDUMP039I Processing dump event ""systhrow"", detail ""java/lang/OutOfMemoryError"" at 2017/08/22 12:27:03 - please wait.
+....
+     java.lang.OutOfMemoryError: java.lang.OutOfMemoryError: Java heap space
+
+Looking at the javacore.txt files, I can see that this is the command throwing an OOM
+
+1CICMDLINE /opt/IBM/ITM/JRE/aix526/bin/java -classpath /opt/IBM/ITM/dchome/7.2.0.0.10/bin/jython/jython.jar:/opt/IBM/ITM/dchome/7.2.0.0.10/bin/lib/installbundle.jar -Xms256m -Xmx256m -Dpython.path=/opt/IBM/ITM/dchome/7.2.0.0.10/bin/lib:/opt/IBM/ITM/dchome/7.2.0.0.10/bin/lib org.python.util.jython /opt/IBM/ITM/dchome/7.2.0.0.10/bin/config.py
+
+How could I solve this?"
+TRAIN_Q295,False,False,False,False,,1,True,False,True,"Why are ITNM or Omnnibus WebGUI java applets fail to load with ""Missing Permissions manifest attribute in main jar""
+
+Why are ITNM or Omnnibus WebGUI java applets fail to load with ""Missing Permissions manifest attribute in main jar"""
+TRAIN_Q368,False,False,False,False,,,True,True,False,"Does ITCAM for MQ monitoring agent (kmq) use SYSTEM.MQXR.COMMAND.QUEUE causing Unknown Object Name [2085] event?
+
+
+
+Using the ITCAM MQ Monitoring agent, we have a situation that generates alerts when a 2085 event (object unknown) occurs. We have recently seen alerts for the queue SYSTEM.MQXR.COMMAND.QUEUE
+We found following technote:
+Unknown Object Name [2085], SYSTEM.MQXR.COMMAND.QUEUE
+http://www-01.ibm.com/support/docview.wss?uid=swg21681687
+
+This technote does not mention Tivoli monitoring product, and only mentions monitoring products such as Nastel and InfraRed360.
+Does Tivoli monitoring agent for WebSphere MQ use the SYSTEM.MQXR.COMMAND.QUEUE? We are try to find out which application is causing the 2085 event."
+TRAIN_Q094,True,N/A,N/A,N/A,1,,False,True,True,"Test MDB with Multiline message.
+
+
+
+Hi, I need to test my MDB injecting a multiline message into my Local WAS server. I have tried the WAS Integrated Universal Client and SIBExplorer. But the only accept on line mesage. How can I inject a multiline message into my Local WAS?
+
+I have tryid to config HermeJMS but without success."
+TRAIN_Q385,True,N/A,N/A,N/A,,,True,True,False,"Where in the WAS admin console can I set the java nursery sizes? (-Xmns256M -Xmnx256M)
+
+So, when GC=GENCON the HEAP gets split up into a nursery and tenured HEAP space. Can I ,in the Admin console, set the nursery size?? In the console, if I go here: A. WAS 8.X where to set these:
+
+Servers => Application servers => server_name Now find the ""System Infrastructure"" section -> Java and Process Management -> (Lower right ) -> Process definition -> (Additional Properties section) -> Java Virtual Machine (Right hand side)
+B. Now in the Configuration window I only see the general MIN/MAX HEAP JVM settings. (These are the (-Xmos756M (Min) -Xmox1024M (Max)) tenured heap settings settings.
+
+Shows near bottom I only see: Inital heap size (MIN) Maximum Heap size (MAX)
+However, I need to also set the nursery (-Xmns256M -Xmnx256M). How/where can this get set in the WAS admin console? (I'd rather not try and go hacking through the server.xml file...) I know in WAS 6.1 and 7.X we used to add these java parms in the ""generic JVM arguments"" section or directly into the ..\WebSphere\AppServer\bin\startServer.bat . However, it looks like some some WAS editions and versions do NOT have the ""Generic JVM arguments"" section on the JVM page. What can you do in this case?"
+TRAIN_Q061,True,N/A,N/A,N/A,"2,3,4,5",4,False,False,True,"Getting hung threads,  sometimes followed by OutOfMemory error
+
+Our application is hanging, we see lots of hung threads in the SystemOut.log, occasionally followed by OutOfMemory error."
+TRAIN_Q431,False,True,True,False,2,,False,True,True,"Install path under ""Program Files""
+
+My path for the OS agent is e:\Program Files\IBM. Is there any issues or underlying problems if I install under ""Program Files""? Just want to make sure no issues with a ""space"" in the install path."
+TRAIN_Q336,False,True,False,False,,,True,True,False,"Why does silent install abort indicating files are locked?
+
+Silent installs can fail reporting that there are locked files under the ITM installation directory on Windows platform. Why does this happen?
+
+Example:
+
+C:\IBM\ITM\InstallITM\
+Abort IBM Tivoli Monitoring 20160203 1832.log
+
+02-03-2016 18:37:10: File C:\IBM\ITM\TMAITM6\deploy.jar is locked.
+02-03-2016 18:37:10: File C:\IBM\ITM\TMAITM6\deploy.jar could not be renamed, errors may occur.
+02-03-2016 18:37:17: Directory C:\IBM\ITM has locked files.
+02-03-2016 18:37:17: Correct and launch setup again.
+02-03-2016 18:37:17: Directory C:\IBM\ITM has locked files, unable to continue.
+02-03-2016 18:37:17: SEVERE: ERROR - Install aborted."
+DEV_Q220,False,True,True,True,"1,2,3,4,5","1,2,3,4,5",False,False,False,"Help with Security Bulletin: TLS padding vulnerability affects IBM PureApplication System (CVE-2014-8730)
+
+I need to understand details regarding ""Security Bulletin: TLS padding vulnerability affects IBM PureApplication System (CVE-2014-8730)"". Where can I find this information?"
+TRAIN_Q231,False,True,False,False,,,True,True,False,"Netcool/Impact (all versions): OMNIbusEventReader Filter Analyzer error ""rule includes an unsupported expression""
+
+Netcool/Impact (all versions): OMNIbusEventReader Filter Analyzer error ""rule includes an unsupported expression""
+
+This occurs when comparing two ObjectServer fields against each other in a Filter."
+TRAIN_Q526,False,False,False,False,,,True,True,False,"Reporting in Rhapsody
+
+
+
+Hello All,
+
+I can't find the reports plus in my Rhapsody v8.1.2 x64
+
+anybody knows the reason."
+TRAIN_Q343,False,False,False,False,,,True,True,False,"Help with Security Bulletin: A security vulnerability has been identified in WebSphere Application Server shipped with WebSphere Service Registry and Repository (CVE-2017-1681)
+
+I need to understand details regarding Security Bulletin: A security vulnerability has been identified in WebSphere Application Server shipped with WebSphere Service Registry and Repository (CVE-2017-1681). Is WAS Liberty affected?"
+DEV_Q122,False,True,False,False,,,True,True,False,"Importing Asset GL Errors
+
+ When importing or syncing with assets, I receive the following error for the glaccount.
+
+Internal Server Error
+Error 500: nested exception is: psdi.util.MXAccessException: BMXAA4198E - The GL attribute TLOAMNEWGLACCOUNT on object {1} requires an organization. Specify a value in the Organization field."
+TRAIN_Q222,False,False,False,False,,,True,True,False,"Composite Platform Installation Tool (CPIT) does not support IBM Tivoli Directory Server (ITDS) 6.3 on Red Hat Enterprise Linux
+
+
+
+When use the CPIT to install the FileNet P8 platform, the installation is not successful and the error occurs at ITDS installation, refer to the detailed error in cpit_install_stderr.txt:
+
+OUTPUT>========================================== OUTPUT>Setting Directories... OUTPUT>Mon Aug 11 08:20:00 SGT 2014 OUTPUT>/opt/IBM/cpit/decompressed/TDS/tdsV6.3/tds ERROR>./install_tds.bin: line 1956: warning: here-document at line 1956 delimited by end-of-file (wanted `/dev/null') OUTPUT>ERROR: /opt/IBM/ldap/V6.3/sbin/idsldif2db not found. TDS installation failed. Process completed with exit code: 1 ERROR in InvokeScripts-function - Terminate the remaining scripts. ***Aborting InvokeScripts-Install function."
+DEV_Q154,False,True,False,False,,,True,True,False,"Why are some Datatypes corrupt after Impact cluster failover/failback ?
+
+
+
+Running Impact 7.1.0.11. The symptom is whenever Impact does a failover, a couple DataTypes
+turn out empty.
+
+I've checked the type files before and after Impact failover and the difference happens in the property
+
+*.SQL.USERPARAMETERS
+
+This property no longer exists for the corrupted datatypes""."
+DEV_Q158,False,True,False,False,3,4,False,False,True,"Must the TOKEN_SEPARATOR value be enclosed in quotes for the custom scripting feature?
+
+Must the TOKEN_SEPARATOR value be enclosed in quotes for the custom scripting feature?"
+TRAIN_Q133,True,N/A,N/A,N/A,,,True,True,False,"DFHXS1201 when using ATS after applying RSU1412 to CICS TS 5.2 or 5.1
+
+Why would I start receiving signon error DFHXS1201 after applying the PTFs in Recommended Service Update RSU1412 to CICS Transaction Server for z/OS (CICS TS) V5.2 or V5.1? The terminal is autoinstalled, then automatically signed on by CA Top Secret using Automated Terminal Signon (ATS). This is the error message I receive: 
+DFHXS1201 The password supplied in the verification request for userid userid was invalid. This occurred in transaction CSGM when userid userid was signed on at netname netname.
+The only difference in a region without the maintenance is that the last message seen is the DFHSN1100 indicating that the terminal was successfully signed on. In the region with the error, there is an extra XS0601 trace entry for INQUIRE PASSWORD that is failing, which causes the sign-on to fail and prevents the automation from running."
+DEV_Q034,False,False,False,False,,,True,True,False,"Profiler for WebSphere 8
+
+
+
+Hi,
+
+We noticed that a was application server uses 1,4 Go of memory at startup, we would like to understand what java classes are using most part of it.
+
+Is a Java profiler provided by default with WAS 8.0 ? Is there something to activate via the WAS admin console ?
+
+ 
+
+Thanks a lot"
+TRAIN_Q456,False,True,False,False,,,True,True,False,"zonecfg error while starting nodeagent and dmgr
+
+
+
+I saw zonecfg error while starting nodeagent and dmgr in solaris server
+
+My env is Oracle Solaris 11.2 SPARC, and WAS is 8558, jave 1.7. [1/22/16 21:31:18:379 AEDT] 00000001 SystemOut O java.lang.Exception: command /usr/sbin/zonecfg failed with 1 at com.ibm.ws.xd.agent.hypervisor.SolarisHypervisor.executeCommand(SolarisHypervisor.java:357) at com.ibm.ws.xd.agent.hypervisor.SolarisHypervisor.access$100 (SolarisHypervisor.java:30) at com.ibm.ws.xd.agent.hypervisor.SolarisHypervisor$Zone.processZoneCfg(SolarisHypervisor.java:570) at com.ibm.ws.xd.agent.hypervisor.SolarisHypervisor$Zone.(SolarisHypervisor.java:461) at com.ibm.ws.xd.agent.hypervisor.SolarisHypervisor ..... Is that normal behavior and what's the exactly meaning of the error?"
+TRAIN_Q157,True,N/A,N/A,N/A,"1,2,4",1,False,False,True,"Help with Security Bulletin: IBM WebSphere MQ 7.0.1 potential denial of service (CVE-2015-2013)
+
+I need to understand details regarding Security Bulletin: IBM WebSphere MQ 7.0.1 potential denial of service (CVE-2015-2013). Where can I find this information?"
+TRAIN_Q392,True,N/A,N/A,N/A,,,True,True,False,"KD4SoapHeaderV2 in WebServices messages
+
+The following header appears in the WebServices messages after configuring ITCAM for SOA DC:
+
+<soapenv:Header> <KD4NS:KD4SoapHeaderV2 xmlns:KD4NS=""www.ibm.com/KD4Soap"" >AFIAAgAkYzViZmRmOTUtYmY3Mi0zNGY1LWExNDItNTNlMGI3MzUxNmRmACRjYTdmZTQwYi1 mNDFlLTMxNzUtYjExYi04MzY1MmMyMTliNjUABA==</KD4NS:KD4SoapHeaderV2> </soapenv:Header>
+Is it possible to remove the KD4SoapHeaderV2 header appearing in the WebServices messages after that ITCAM for SOA monitoring has been enabled?"
+TRAIN_Q380,False,True,True,True,"1,2","1,2,3,5",False,False,True,"How do I view Custodian Notes in Atlas Preservation Plan?
+
+How do I view Custodian Notes in Atlas Preservation Plan?"
+TRAIN_Q171,False,True,True,True,"1,2,4","2,4",False,False,True,"Help with Security Bulletin: Security vulnerabilities have been identified in IBM DB2 shipped with WebSphere Remote Server (CVE-2014-8730)
+
+I need to understand details regarding Security Bulletin: Security vulnerabilities have been identified in IBM DB2 shipped with WebSphere Remote Server (CVE-2014-8730). Where can I find this information?"
+TRAIN_Q003,False,False,False,False,5,,False,True,True,"How to configure SSL mutual authentication in IBM HTTP Server?
+
+
+
+We are running IHS v7 and our application team has a specific webservice that they require SSL mutual authentication to be enabled for at the http server. Does anyone know how to set this up on IHS? Or any documentation?
+
+Thanks"
+TRAIN_Q372,False,False,False,False,4,1,False,False,True,"How to fix error CRIMA1217E when upgrade JAZZ from 1.1.0 to 1.1.3 failed?
+
+How to fix problem when upgrade JAZZ from 1.1.0 to 1.1.3 failed?"
+TRAIN_Q594,True,N/A,N/A,N/A,,,True,True,False,"In WebSphere MQ, why am I getting AMQ9776, AMQ9777 Channel was blocked errors?
+
+In WebSphere MQ, why am I getting AMQ9776, AMQ9777 Channel was blocked errors"
+TRAIN_Q070,False,True,True,True,"1,2","1,2,4,5",False,False,True,"How do I search for a string which has reserved words or characters when searching in documents in Atlas?
+
+How do I search for a string which has reserved words or characters when searching in documents in Atlas?"
+DEV_Q107,True,N/A,N/A,N/A,,,True,True,False,"Why the exception ""BO Service is not supported or disabled in this profile"" when trying to publish from IID to a local Process Server?
+
+When trying to publish a project from IBM Integration Designer (IID) to the local Process Server, it fails with error ADMA5014E in SystemOut.log. The FFDC log is showing exception of BO Service is not supported or disabled in this profile; Trace:
+
+FFDC Exception:java.lang.ExceptionInInitializerError SourceId:com.ibm.ws.bpm.cmdfrmwrk.task.WBICleanupTask ProbeId:200 java.lang.ExceptionInInitializerError at java.lang.J9VMInternals.initialize(J9VMInternals.java:259) 
+....
+Caused by: java.lang.IllegalStateException: BO Service is not supported or disabled in this profile. at com.ibm.ws.bo.BOCore.init(BOCore.java:107) ...."
+TRAIN_Q592,False,True,False,False,"2,5",2,False,False,True,"Do the  Bash Bug  vulnerabilities affect WebSphere MQ Hypervisor?
+
+Do the Bourne Again Shell (Bash) vulnerabilities known as Bash Bugs or Shellshock affect WebSphere MQ Hypervisor and if so, what action is required to address this situation?"
+DEV_Q306,False,True,False,False,,,True,True,False,"Unable to view batches in DotEdit
+
+
+
+Hi all,
+
+Is there any limitation to view batches in Dot Edit client application, because I am unable to see batches with QID more than 1119.
+
+Also unable to see batches with status as ""Pending""."
+TRAIN_Q463,False,True,False,False,,,True,True,False,"Can Portal prevent the usage of simultaneous logins with the same userID?
+
+Is it possible for WebSphere Portal to limit the usage of a userID to one authenticated session as a time? In other words, prevent authenticating to Portal as ""user1"" from one browser and then simultaneously authenticating to Portal again as ""user1"" from another browser?"
+TRAIN_Q221,False,False,False,False,,,True,True,False,"Case Analyzer is not working
+
+
+
+CaseAnalyzer is not working, no latest audit log although service is running
+
+Error in log:
+
+""CAPublisher c2dce3b9 [Error] Unexpected exception occurred while processing task CAPublisher for store CASTORE.; Exception: com.microsoft.sqlserver.jdbc.SQLServerException: The query processor ran out of internal resources and could not produce a query plan. This is a rare event and only expected for extremely complex queries or queries that reference a very large number of tables or partitions. Please simplify the query. If you believe you have received this message in error, contact Customer Support Services for more information."""
+DEV_Q136,True,N/A,N/A,N/A,1,,False,True,True,"Compose tab appears disabled and project is not editable in Decision Center
+
+I have upgraded my ODM version and a project in Decision Center appears non editable :
+
+the compose tab is disabled
+in explore tab there are no new nor edit button"
+TRAIN_Q044,False,False,False,False,,,True,True,False,"Authorization code missing for SPSS 25?
+
+I purchased the IBM SPSS from Amazon, and I do not know where to locate the authorization code of license code/key. Can anyone help me?"
+DEV_Q247,True,N/A,N/A,N/A,,,True,True,False,"IID 8.5.7 failed to start due to ""Java was started but returned exit code=-805306369""
+
+We have installed new IID 8.5.7 on Windows 7 on VMware. The installation was successed. However, IID failed to launch always. The dialog shows ""Java was started but returned exit code=-805306369"". The IID log shows BundleStatusException. How do we resolve this?"
+TRAIN_Q360,False,False,False,False,,,True,True,False,"Is it possible to monitor Memory/LPAR metrics using ITM HMC agent?
+
+I understand the ITM AIX Premium agent captures these metrics but like to know if it is possible to monitor Memory/LPAR metrics using ITM HMC agent?"
+TRAIN_Q272,False,False,False,False,1,,False,True,True,"Why are we seeing MQRC_NOT_AUTHORIZED errors after upgrading Websphere from V7.0 to V8.5.5?
+
+https://www-01.ibm.com/support/docview.wss?uid=swg21662193"
+DEV_Q233,True,N/A,N/A,N/A,,,True,True,False,"How does configuring ""hung threads detection"" impact performance of a production WAS server?
+
+I took a pmr about hung issue on Solaris. Customer said he couldn't collect MG data because the issue always happened at night. So I let him to configure hung detection policy by adding JVM arguments (alarm threads hung). He said it was production server and worried about any impact performance."
+DEV_Q114,False,True,False,False,,,True,True,False,"Any difference between DB2 z/OS V9.1 + IBM Cobol and DB2 LUW V10.5 FP7 + MF Cobol?
+
+We are planning below migration.
+
+[Current]
+DB2 z/OS V9.1 + IBM Cobol
+[New]
+DB2 AESE V10.5 FP7 / AIX V7.1 + Micro Focus Cobol (MF Cobol)
+
+Any known limitation or things what we need to concern?"
+DEV_Q185,True,N/A,N/A,N/A,,,True,True,False,"What can I do when I receive CWZIP9602E, CWZIP9604W and CWZIP4514E with Call Home?
+
+I received the following critical events after enabling CallHome on my PureApplication System v.2.0.0.1:
+CWZIP4514E: Configuration Settings for Call Home are not configured properly.
+CWZIP9602E: Service53 is failed offline at node and cannot be restarted.
+CWZIP9604W: Service53 failed. The high availability component will attempt to recover the service.
+What can I do?"
+TRAIN_Q422,False,True,True,True,"2,3,4,5","2,4",False,False,True,"Help with Security Bulletin: Vulnerability in SSLv3 affects IID and WID (CVE-2014-3566)
+
+I need to understand details regarding Security Bulletin: Vulnerability in SSLv3 affects IBM Integration Designer and WebSphere Integration Developer (CVE-2014-3566). Where can I find this information?"
+TRAIN_Q264,True,N/A,N/A,N/A,,,True,True,False,"Why are data source connections to Microsoft SQL Server failing after upgrading WebSphere Application Server?
+
+
+
+WebSphere Application Server v7 and Java SDK were updated to Fix Pack v7.0.0.37. Afterward, all data source connections to Microsoft SQL Server failed."
+TRAIN_Q165,False,True,False,False,"1,2,4","1,2,4",False,False,False,"Is Java 8 supported for EJBDeploy on WebSphere Application Server 8.5.5.9 or later?
+
+Is Java 8 supported for EJBDeploy on WebSphere Application Server 8.5.5.9 or later?"
+TRAIN_Q233,False,True,True,True,"1,2,3",1,False,False,True,"Help with Security Bulletin: API Connect is affected by a cross-site scripting vulnerability CVE-2018-1382
+
+I need to understand details regarding Security Bulletin: API Connect is affected by a cross-site scripting vulnerability CVE-2018-1382. Where can I find this information?"
+TRAIN_Q419,True,N/A,N/A,N/A,,,True,True,False,"Does double the number of instances equal double through put in IIB / WMB?
+
+If I double the number of instances of an IBM Integration Bus (IIB) or WebSphere Message Broker (WMB) flow should I get double the through put?"
+TRAIN_Q071,False,True,False,False,,,True,True,False,"Why does my upgrade to BigFix version 9.2.5 take a very long time?
+
+My upgrade to BigFix version 9.2.5 takes a very long time. What do I need to do?"
+DEV_Q026,True,N/A,N/A,N/A,,,True,True,False,"DNS cache is not updating even when DNS server is updated
+
+
+
+Datapower DNS is still showing old IP address even after the DNS server was changed few days ago.
+
+How can i change DNS cache so it shows the new IP Address?"
+TRAIN_Q311,True,N/A,N/A,N/A,,,True,True,False,"S878 abends during CICS startup after applying PTF for OA45950
+
+After applying the PTF for z/OS APAR OA45950, why am I suddenly receiving many S878 abends when I bring up my CICS regions? No CICS system or application software changes were made. 
+The PTF numbers for APAR OA45950 for the various MVS releases are:
+Release C10 : UA75818 available 15/02/25 (F502 ) 
+Release D10 : UA75819 available 15/02/25 (F502 ) 
+Release 210 : UA75838 available 15/02/25 (F502 )"
+TRAIN_Q553,False,True,True,False,"2,3,4,5",,False,True,True,"Help with Security Bulletin: Multiple vulnerabilities in IBM Java SDK affect IBM Image Construction and Composition Tool (CVE-2014-3566 and CVE-2014-6457)
+
+I need to understand details regarding ""Security Bulletin: Multiple vulnerabilities in IBM Java SDK affect IBM Image Construction and Composition Tool (CVE-2014-3566 and CVE-2014-6457) ."" Where can I find this information?"
+TRAIN_Q498,True,N/A,N/A,N/A,,,True,True,False,"How do I reduce the amount of CPU being consumed by Just In Time (JIT) compilation?
+
+My Portal system is experiencing period bursts of high CPU. After reviewing some data, I've determined the primarily culprit behind these CPU bursts are Just In Time (JIT) compilation threads, similar to the following:
+
+ 3XMTHREADINFO      ""JIT Compilation Thread-0""                          
+ J9VMThread:0x0000000040004F00, j9thread_t:0x0000010010122040, 
+ java/lang/Thread:0x00000007011CAA58, state:CW, prio=10                 
+ 3XMJAVALTHREAD            (java/lang/Thread getId:0x4, isDaemon:true)  
+ 3XMTHREADINFO1            (native thread ID:0x39100EF, native priority:0xB, native policy:UNKNOWN)                      
+Why is this happening and how can I reduce the amount of CPU that JIT is using?"
+DEV_Q147,True,N/A,N/A,N/A,,2,True,False,True,"TEP to TEPS communication issues with different Java versions
+
+Recent Java updates have caused connection problems when logging into the TEPS via the TEP client (Browser or Java Web Start). Is there an updated list of known issues?"
+TRAIN_Q234,False,True,False,False,,,True,True,False,"How do I create a windows service for WebSphere Application Server version 7.0.X?
+
+Is there a tool that can help me create the windows service in an automated form?"
+TRAIN_Q558,True,N/A,N/A,N/A,,,True,True,False,"Could UCD import template from ipas?
+
+I am trying to import a template from ipas, UCD seems to be able to retrieve the pattern name after some hints. But I am getting the following Error after clicking the Save button on the import template page:
+
+(WeaverError) handshake alert: handshake_failure (original=handshake alert: handshake_failure, original backtrace=org/jruby/ext/openssl/SSLSocket.java:170:in
+connect' file:/media/udeploy/server/lib/weaver.jar!/gems/httpclient-2.2.7/lib/httpclient/session.rb:300:in
+ssl_connect')
+
+UCD is version 6.0.1.3.484576 IPAS is 4.0.0.3-20140404055836 / 20140404-0551-458"
+TRAIN_Q579,False,True,False,False,,,True,True,False,"Trouble downloading SPSS Statistics free trial
+
+I am trying to download the free trial version of SPSS Statistics version 24. I'm a graduate student and want to try it out on my Mac OS X 10.9.5 laptop. However, when I get to the ""confirm"" part, it keeps showing me an error message saying ""can't save profile."" How do you go about fixing this and getting it installed? Thanks!"
+DEV_Q305,False,False,False,False,"1,2",2,False,False,True,"Cognos Analytics - Images not displayed in PDF/Excel, working in HTML
+
+I've just completed an upgrade to Cognos Analytics 11.0.3. When running existing reports in HTML, the images are displayed but when I try to run them in PDF/Excel they are not."
+TRAIN_Q599,False,True,True,False,1,,False,True,True,"ICC configuration manager error: This implementation is not part of the Windows Platform FIPS validated cryptographic algorithms.
+
+When saving changes in ICC configuration manager, an ""Application Error"" window pops up.
+
+Error:
+
+A severe error occurred.
+
+Problem:
+
+Exception has been thrown by the target of an invocation.
+
+Solution:
+
+Contact IBM Software Support with this error message (see Details).
+
+Click on the Details button and the following stack trace is reported:
+
+Details
+
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor) at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+
+.....
+
+.....
+
+System.InvalidOperationException: This implementation is not part of the Windows Platform FIPS validated cryptographic algorithms.
+
+at System.Security.Cryptography.MD5CryptoServiceProvider..ctor()
+
+What is causing this?"
+TRAIN_Q086,True,N/A,N/A,N/A,,,True,True,False,"I can't find the JDBC driver for my DB2.
+
+I am running BPM 8.0.1 with DB2 10.1.0.
+
+ 
+
+Reading this technote:
+http://www-01.ibm.com/support/docview.wss
+
+""Use the JDBC driver of your database product instead of the JDBC delivered with IBM Business Process Manager (BPM)""I am trying to download the latest JDBC driver from the following technote:
+
+http://www-01.ibm.com/support/docview.wss
+
+It looks like the link for the JDBC driver download for DB2 10.1.0 is greyed out. Where can I download this driver?"
+TRAIN_Q075,False,True,False,False,,,True,True,False,"Where can I get Tivoli Monitoring Agent for Sybase Server 620 FP2 (6.2.0-TIV-ITM_SYB-FP0002)?
+
+Where can I get Tivoli Composite Application Manager for Applications 721 FP2: Monitoring Agent for Sybase Server 620 FP2 (6.2.0-TIV-ITM_SYB-FP0002)? I can't find this on Fix Central."
+TRAIN_Q225,False,False,False,False,"1,3,5","1,3,5",False,False,False,"Why the Portal 7.0.0.2 - CF29 upgrade is failing ?
+
+Why the Portal 7.0.0.2 - CF29 upgrade is failing ?"
+DEV_Q252,True,N/A,N/A,N/A,,,True,True,False,"How to resolve the StaleConnectionException in WebSphere Application Server?
+
+I see this exception in WebSphere Application Server J2c and RRA traces:
+
+WSRdbManagedC > preTestConnection Entry WSRdbManagedConnectionImpl@51a507f2 query: SELECT 1 FROM DUAL WSRdbManagedC 3 Exception java.sql.SQLException: ORA-02396: exceeded maximum idle time, please connect again DSRA0010E: SQL State = 61000, Error Code = 2,396 at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:440) at 
+...
+Entry java.sql.SQLException: ORA-01012: not logged on ..... OracleDataSto < findMappingClass return Exit class com.ibm.websphere.ce.cm.StaleConnectionException"
+DEV_Q009,True,N/A,N/A,N/A,,,True,True,False,"""The transaction log for database BPMDB is full"" error message is seen when running BPMInstallOfflinePackage
+
+During our latest deployment of a larger process application we received the following error
+
+The transaction log for database 'BPMDB' is full. To find out why space in the log cannot be reused, see the log_reuse_wait_desc column in sys.databases
+Why does this happen. The transaction log for the database is 80GB which should be sufficient."
+TRAIN_Q532,True,N/A,N/A,N/A,4,"2,4",False,False,True,"Does Tivoli Monitoring NetApp monitoring agent support OCUM environments?
+
+Does Tivoli Monitoring NetApp monitoring agent support OCUM environments?"
+TRAIN_Q111,False,True,True,True,1,"1,2,5",False,False,True,"How to find details of Corrupted Object from the entries in db2diag.log?
+
+We have corruption in DB2 Database and got entries for corrupted Object in db2diag.log ,Need to find details of the Object using information dumped in db2diag.log"
+TRAIN_Q504,False,True,False,False,2,,False,True,True,"OMNIBUS   nco_p_mttrapd : Malformed traps
+
+How can you determine why the MTTrapd [SNMP] probe drops traps?"
+TRAIN_Q404,True,N/A,N/A,N/A,,,True,True,False,"Why do I get ""error: The admin task reported the following: null"" if uploading a DataPower scrypt3 firmware image file WAS 8.x DataPower Appliance Manager?
+
+How can I manage a set of DataPower appliances that shall run v7 firmware images by using WebSphere Application Server 8.x DataPower Appliance Manager?I get ""error: The admin task reported the following: null"" if uploading a DataPower scrypt3, while scrypt2 works fine."
+TRAIN_Q256,False,True,False,False,3,,False,True,True,"Error running krzgrant.sql script provided with 6.3.1.2-TIV-ITM_KRZ-IF0003.tar
+
+When running the krzgrant.sql script provided in the package - 6.3.1.2-TIV-ITM_KRZ-IF0003.tar get the following errors:
+
+ERROR at line 1:
+ORA-00942: table or view does not exist ORA-06512: at line 50 
+
+How to correct this?"
+DEV_Q266,False,True,True,False,1,,False,True,True,"How to install Packaging utility?
+
+How to install Packaging utility?"
+DEV_Q042,True,N/A,N/A,N/A,,,True,True,False,"Why is my Portal 8.5 install saying it cannot detect WAS?
+
+When I try to install WebSphere PortaV8.5, I am getting the message
+
+The required version 8.5.5 or later of WebSphere Application Server has not been detected on this system. Select the WebSphere Application Server Package to install WebSphere Application Server and WebSphere Portal.
+
+The required IBM WebSphere SDK Java Technology Edition version 7.0 or later is not detected on this system. Select the IBM WebSphere SDK Java Technology Edition package to install it."
+DEV_Q210,False,False,False,False,3,3,False,False,False,"startNode failed with ADML3000E after a deployment failure
+
+Client had a deployment failure due to ""Too many open files"" error.
+
+Afterwards, the startNode failed with ADML3000E:
+
+What could cause the ""Too many open files error?"
+DEV_Q232,True,N/A,N/A,N/A,,,True,True,False,"CICS TS support for IBM SDK Java Version 8
+
+Do any of the current releases of CICS Transaction Server for z/OS (CICS TS) support the new IBM SDK, Java™ Technology Edition V8?"
+TRAIN_Q566,True,N/A,N/A,N/A,4,,False,True,True,"When required, upgrade the IBM Installation Manager rather than install a new copy.
+
+During the installation of WebSphere Process Server (WPS) Fix Pack, or IBM Business Process Manager (BPM) Fix Pack, there may be requirement to use a newer version of IBM Installation Manager.
+What is the right method to meet this requirement?"
+DEV_Q076,True,N/A,N/A,N/A,"1,4",,False,True,True,"Why is Oracle agent (rz) reporting listeners and services as 'Inactive' even when those are active?
+
+On Unix/Linux, the Extended Oracle agent sends false alert for listener status. All listeners and services in Net Service Connection workspace show as inactive."
+DEV_Q184,False,True,True,True,"1,2","1,2,5",False,False,True,"Why am I seeing ""CWSXM0100E: Multiple replies have been produced for a single request flow in module"" ?
+
+We are building a simple mediation module, consisting only of the request flow. The mediation module has one service invoke calling an external service through web service binding. Upon testing the process, we observe see that the service invoke is being called twice. There is no Fan-in or fan -out in the request flow. Below is the error: ""Caused by: com.ibm.wsspi.sibx.mediation.flow.MediationRuntimeException: CWSXM1023E: Exception when calling flow action: CWSXM0100E: Multiple replies have been produced for a single request flow in module"""
+TRAIN_Q098,False,False,False,False,,,True,True,False,"Restore JazzSM DASH login page to default images
+
+We've changed the JazzSM DASH login page images and want to restore them. What values do we use to revert those changes?"
+DEV_Q021,False,True,True,False,2,,False,True,True,"How to refresh a DataPower WebService Proxy which WSDL got changed?
+
+I have made changes to a WSDL stored in DP local filesystem.
+
+How can I make the WSP reflect this change since DataPower Gateway 7.1.0 WebService Proxy WebGUI doesn't offer the ""Refresh"" button anymore?
+
+Is there a best practice to refresh the WSP if I modified my WSDL?"
+TRAIN_Q436,True,N/A,N/A,N/A,,,True,True,False,"Can you delete temporary data that is generated by IBM Business Process Manager?
+
+In the OS temporary directories, there are many files generated for BPM. These files are created on the following operations:
+create TWX snapshot for export
+access a managed asset during process execution
+create offline install package
+The following temporary directories are used for storing temp files:Operating system temporary directory:/tmp (Linux)c:\windows\temp (Windows)
+
+How can these files be cleaned up?"
+DEV_Q224,False,True,True,True,"1,2","1,2,3,4,5",False,False,True,"How do we set HttpOnly and secure flag in Oracle Weblogic 12c to secure IBM Atlas?
+
+How do we set HttpOnly and secure flag in Oracle Weblogic 12c to secure IBM Atlas?"
+DEV_Q186,False,True,False,False,,,True,True,False,"Silent uninstall of ITCAM for MQ agent fails
+
+Running silent uninstall of the ITCAM for MQ agent with this command: start /wait setup /z""/sfMQ_Silent_Uninstall.txt"" /s /f2""C:\temp\silent_setup.log"" fails with this message in the Abort_*.trc file: SEVERE: You must agree to the License Agreement.
+
+The MQ_Silent_Uninstall.txt does contain this line: License Agreement=I agree to use the software only in accordance with the installed license."
+TRAIN_Q127,False,True,False,False,,,True,True,False,"How precise is DataPower's backside persistent timeout value related to intermittent ""Failed to Process Response Headers"" error messages?
+
+
+
+I have a service on DataPower with a backside persistent timeout value set to 28 seconds. The actual backend device has a persistent timeout setting of 30 seconds.
+
+Since my service is configured with a lower persistent timeout value than 30 seconds, why am I still seeing the following error intermittently?
+
+Wed June 25 2009 09:20:02 [0x80000001][xsltmsg][error] mpgw (MyGateway): tid(8675309)[error][9.x.x.x]: Failed to process response headers"
+TRAIN_Q415,False,True,False,False,,,True,True,False,"Unable to login to FileNet Workplace XT 1.1.5.x. Getting error, Problem initializing encryption/decryption with keyID.
+
+
+
+We are having issue while trying to login Workplace XT. Getting the error message below as soon as I hit after giving credentials.
+
+Error Message: com.filenet.wcm.api.EncryptionException: Problem initializing encryption/decryption with keyId 7d3f93e3, size 256 bits. java.home=/opt/IBM/WebSphere/AppServer/java/jre. Cause: java.security. InvalidKeyException: Illegal key size or default parameters
+
+IBM WAS 8.5.5.9 Workplace XT 1.1.5"
+TRAIN_Q261,False,False,False,False,,,True,True,False,"Cannot Start JazzSM Dash after ObjectServer as a User Repository
+
+
+
+Unable to see the User roles and Groups in WebSphere Admin Console. Added Repositories in the WebSphere Admin Console. It was added under Security.
+
+Console Settings > Websphere Administrative Console > Security > Global Security > Federated Repositories
+
+Added Object Server Repository
+
+Server was stopped. Tried to restart but unable to start the JazzSM Dash server
+
+Why would the server not restart?"
+TRAIN_Q482,False,True,True,True,"1,2,4","1,2,4",False,False,False,"Is there a limit to the number of items that can be listed within an ""in"" list as part of a where clause?
+
+Is there a limit to the number of items that can be listed within an ""in"" list as part of a where clause?"
+DEV_Q295,True,N/A,N/A,N/A,"2,3,5",3,False,False,True,"Why are we seeing high CPU and hung threads in WebSphere Application Server?
+
+During the job execution in WebSphere Compute Grid we are seeing high CPU along with many hung threads reporting
+WSVR0605W from BatchFileLoggerInfo.getDirectoryList method.
+In Sysprint many threads are hung with this stack:
+BossLog: { 0426} <time stamp> SYSTEM=CPU4 CELL=FGDCELL NODE=FGDNODE4 CLUSTER=WFGDS1 SERVER=WFGDS14 PID=0X060835 TID=0 X2ED98E0000000162 t=8897F0 c=UNK ./bbgrjtr.cpp+733 tag= ... BBOO0221W: WSVR0605W: Thread ""WebSphere WLM Dispatch Thread t=008a6b70"" (0000006a) has been active for 683953 milliseconds and may be hung.
+...."
+DEV_Q109,False,True,True,True,1,1,False,False,False,"Help with Security Bulletin: Authentication vulnerability affects IIB V10.0.0.4 onwards (CVE-2016-8918 )
+
+I need to understand details regarding Security Bulletin: Authentication vulnerability affects IBM Integration Bus V10.0.0.4 onwards (CVE-2016-8918 ). Where can I find this information?"
+TRAIN_Q515,False,False,False,False,3,,False,True,True,"SPSS will not start on Mac
+
+
+
+I downloaded SPSS about 3 weeks ago. On the day when I downloaded it, it was working fine. Last week, I tried starting SPSS but it did not start. I tried reinstalling it, it still would not open. I've updated JAVA (thought this would be a problem), it slowly opened the program but then now that I have reinstalled it and entered in my code, I've used up my code and I have no authorization. But just now, I started SPSS and the same problem is happening. The IBM SPSS name screen appears but nothing happens.
+
+    SPSS would not start.
+
+    Even if it does start, I have licensing problems."
+TRAIN_Q077,True,N/A,N/A,N/A,,,True,True,False,"Why is the test suite execution failing from Decision Center?
+
+When executing a test suite from Decision Center the run may fail with an error message similar to:
+ XU client error.
+ GBRXU0448E: Plugin error.
+ Unable to retrieve the engine manager.
+ The parsing of the ruleset failed Problem occurred loading translation: Error when translating parameter ""inputParameter"": Cannot translate class ""sample.InputParameter"".
+
+What can be causing this error?"
+TRAIN_Q493,False,False,False,False,"1,2,3,4,5","1,2,3,4,5",False,False,False,"Help with Security Bulletin: A security vulnerability has been identified in IBM WebSphere Application Server, which is shipped with, or a required product for, IBM Tivoli Network Manager IP Edition (CVE-2017-1741).
+
+I need to understand details regarding Security Bulletin: A security vulnerability has been identified in IBM WebSphere Application Server, which is shipped with, or a required product for, IBM Tivoli Network Manager IP Edition (CVE-2017-1741) Where can I find this information?"
+TRAIN_Q596,False,False,False,False,,,True,True,False,"Why is ITCAM MQ agent shutting down often?
+
+
+
+We have an MQ agent instance that keeps shutting down randomly.
+Below is the version of agent:
+mq WebSphere MQ Monitoring Agent lx8263 Version: 07.30.01.00"
+DEV_Q100,True,N/A,N/A,N/A,,,True,True,False,"ITCAM Agent for WebSphere DataPower 7.1 agent support for TLS
+
+Does the ITCAM Agent for WebSphere DataPower 7.1 agent support TLS?"
+DEV_Q074,False,True,True,True,"1,4,5",1,False,False,True,"Help with Security Bulletin: Security Vulnerability in IBM WebSphere Application Server affects IBM SOA Policy Gateway Pattern for AIX Server 2.5 (CVE-2015-1920)
+
+I need to understand details regarding Security Bulletin: Security Vulnerability in IBM WebSphere Application Server affects IBM SOA Policy Gateway Pattern for AIX Server 2.5 (CVE-2015-1920). Where can I find this information?"
+DEV_Q181,False,False,False,False,,,True,True,False,"Get all data that\'s registred today
+
+Version: 
+MxLoader 4.7.4
+                        
+
+Problem:
+Is it possible to do something like this:
+reportdate >= TODAY()?
+
+I cant get it to work but i would like to get all the data that has been registred today today."
+TRAIN_Q423,False,True,False,False,,,True,True,False,"Report stuck in current queue
+
+
+
+We have one report that has been showing in the admin current
+activities status tab for 20+ days and we have had 2 full re-starts
+since then. Also it appears we have interactive jobs staying around as well for past days and days.
+
+How can we clean this up ?"
+TRAIN_Q583,False,True,True,True,2,2,False,False,False,"Why does the ITCAM for AD Managing GUI install fail with an end-of-file message?
+
+I am trying to install the ITCAM for AD Managing server and I am seeing the following error when doing either 'launchpad.sh' or 'silent_MS_linux.bin': Initializing InstallShield Wizard........ Launching InstallShield Wizard........
+
+./setup_MS_lin.bin: line 1926: warning: here-document at line 1926 delimited by end-of-file (wanted `/dev/null')
+
+The installer is unable to run in graphical mode. Try running the installer with the -console for -silent flag."
+TRAIN_Q300,False,False,False,False,,,True,True,False,"How to access the 2nd portal profile?
+
+ Hello,
+
+I created a second WebSphere portal profile (wp_profile2) under C:\IBM\WebSphere as part of setting up multi-profile environment on windows using WebSphere Portal 8.0.0.1 CF04/WAS 8.0.0.10. I started the WebSphere_Portal under this profile successfully and am trying to access this new portal profile from a web browser using http://<host>:port/wps/myportal. I tried all the ports listed in SystemOut log but none of them seem to work and the one that appears to work is writing below error in logs and is showing a blank page:
+
+ 
+
+[11/10/15 9:45:13:374 PST] 00000044 SystemOut     O javax.servlet.jsp.JspException: com.ibm.portal.resolver.exceptions.LocalizedIOException: RT7507E: Unable to initialize Repository: Default.
+[11/10/15 9:45:13:374 PST] 00000044 SystemOut     O  at com.ibm.wps.engine.templates.themes.Default.render(Default.java:237)
+[11/10/15 9:45:13:374 PST] 00000044 SystemOut     O  at com.ibm.wps.engine.templates.ThemeTemplate.render(ThemeT
+
+ 
+
+Does anyone have any idea of how to fix the above issues and get the portal access working?
+
+Appreciate your help regarding this.
+
+ 
+
+Thank you."
+DEV_Q223,True,N/A,N/A,N/A,,,True,True,False,"Can I use Chrome browser for viewing Monitor 801 Cognos report viewer widget ?
+
+Some users use Chrome browser with Business Monitor and have reported issues when trying to view Cognos reports from Report Viewer widget within Business Space."
+TRAIN_Q081,False,True,False,False,1,2,False,False,True,"'Access is denied' install errors with ICC
+
+Installing ICC 4.0.1 and then FP2 gives the 'Access is denied' error on WASSERVICE.exe. How to resolve this?"
+DEV_Q194,True,N/A,N/A,N/A,"1,3,5","1,5",False,False,True,"How to generate Javacores automatically in on hung threads reported in SystemOut.log for WebSphere Application Server?
+
+Need Javacores to be generated on hung threads messages reported in SystemOut.log for WebSphere Applicaiton Server.Example:WSVR0605W: Thread has been active for and may be hung. There are in total in the server that may be hung."
+DEV_Q101,True,N/A,N/A,N/A,1,1,False,False,False,"Help with Security Bulletin: WMB and IIB Toolkit cannot connect to a remote WMB broker or IIB node with a TLS-compliant cipher (CVE-2015-0118)
+
+I need to understand details regarding Security Bulletin: WebSphere Message Broker Toolkit and IBM Integration Toolkit cannot connect to a remote WebSphere Message Broker broker or IBM Integration Bus node with a TLS-compliant cipher (CVE-2015-0118). Where can I find this information?"
+TRAIN_Q299,False,False,False,False,,,True,True,False,"Installing fixpacks with Installation Manager - when did it change from using updateInstaller,  starting in which version of WebSphere
+
+I was using updateInstaller to install fixpacks, and there was a separate fixpack for WebSphere and separate for the JDK, independent of each other. Now I understand that with Installation Manager there is a single package containing both the WebSphere App server fixpack as well as the JDK. When did this occur, starting with which version of WebSphere ?"
+TRAIN_Q541,False,True,False,False,,,True,True,False,"Cognos Workspace Advanced Users are unable to see features. Why?
+
+
+
+Certain Workspace Advanced users cannot open Report Studio. This happens with certain custom roles.
+
+Environment: IBM Cognos 10.2.2.x"
+TRAIN_Q352,False,False,False,False,4,"1,2",False,False,True,"How to Create an Application with the the Websphere Adapter for Flat File using Hex05 delimeter?
+
+How to Create an Application with the the Websphere Adapter for Flat File using Hex05 delimeter?"
+TRAIN_Q487,True,N/A,N/A,N/A,"1,2,5","1,2",False,False,True,"Security Bulletin: API Connect Portal is affected by multiple Drupal vulnerabilities
+
+I need to understand details regarding Security Bulletin: API Connect Portal is affected by multiple Drupal vulnerabilities (CVE-2017-6924, CVE-2017-6923, CVE-2015-7875, CVE-2017-6925). Where can I find this information?"
+TRAIN_Q208,False,True,False,False,,,True,True,False,"Can I run different levels of the Rational Developer for z Systems host and client?
+
+I'd like to know if I can run different versions of the RDz client and host and if so what compatible or supported versions and releases?"
+TRAIN_Q414,False,True,False,False,,,True,True,False,"Is MQ V7.0 is going out of support?
+
+Is Websphere MQ V7.0 is going out of support?"
+TRAIN_Q410,True,N/A,N/A,N/A,,,True,True,False,"how to disable clickjacking at ICN?
+
+We need to secure IBM Content navigator 2.0.3 Fixpack (FileNet P8 5.2.1 FP5, OS AIX 7.1) on our Production environment against malicious activity in the following ways:
+
+Disable clickjacking i.e. it was observed that the server didn't return an X-Frame-Options header. The X-Frame-Options HTTP response header can be used to indicate whether or not a browser should be allowed to render"
+TRAIN_Q063,False,False,False,False,,,True,True,False,"How to get the ODM 8.5.1.2 fixpack of ODM 8.5.1.1?
+
+ODM 8.5.1.2 fixpack is not listed in Fix Central when installed platform ODM 8.5.1.1 is used: http://www-933.ibm.com/support/fixcentral/swg/selectFixes?parent=ibm~WebSphere&product=ibm/WebSphere/WebSphere+Operational+Decision+Management&release=8.5.1.1&platform=All&function=all"
+TRAIN_Q537,False,True,False,False,,,True,True,False,"Netcool/Impact 6.1.0: How to change the HSQLDB password?
+
+Netcool/Impact 6.1.0: How to change the HSQLDB password?"
+TRAIN_Q589,False,True,False,False,,,True,True,False,"How to have IBM HTTP Server re-direct an application URL from HTTPS to HTTP?
+
+We have an application which uses SSL, but we need to make this http only. We disabled all the SSL, but many clients URLs are still pointing to https. So we need a HTTP Server redirect to change these URLs from https to http. Is this possible?"

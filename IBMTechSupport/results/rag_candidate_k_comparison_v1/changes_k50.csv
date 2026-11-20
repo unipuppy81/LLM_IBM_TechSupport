@@ -1,0 +1,84 @@
+﻿id,change,question,gold_filenames,hybrid_first_gold_rank,k10_gold_first_rank,k50_gold_first_rank,k10_top5_filenames,k50_top5_filenames
+TRAIN_Q037,LOST_HIT,"How can multiple TDWC users logon into TDWC with same TWS user id?
+
+
+
+Given that one TDWC user is already accessing TDWC and a second TDWC user using the same logon id wants to logon to TDWC sees the following error:
+
+Another user is currently logged in with the same user ID. Select from the following options:
+
+    List item
+
+Log out the other user with the same user ID. You can recover changes made during the other user's session.
+
+    List item
+
+Return to the Login page and enter a different user ID.
+
+How can multiple users logon without one user needing to logout?",swg21576245.txt,2,5,21,swg21624858.txt;swg21316928.txt;swg21699908.txt;swg21227799.txt;swg21576245.txt,swg21624858.txt;swg21316928.txt;swg21699908.txt;swg1pk91233.txt;swg21622876.txt
+TRAIN_Q103,NEW_HIT,"PARMGEN ABEND S013 in JOB KCIJPALO
+
+
+
+After installing IBM OMEGAMON for Messaging on z/OS 07.05.00, I receive the following ABEND after submitting PARMGEN Job KCIJPALO:
+
+      JOB02175  IEC141I 013-18,IGG0191B,U600861X,KMCJPALR,RKPDIN,600D,ISMS01,  083
+         083             HSYS.S002.OMGNEW.TKANPAR(KMCPDICT)
+     JOB02175  IEA995I SYMPTOM DUMP OUTPUT  085
+         085             SYSTEM COMPLETION CODE=013  REASON CODE=00000018
+         085              TIME=07.41.33  SEQ=00630  CPU=0000  ASID=004C
+         085              PSW AT TIME OF ERROR  075C1000   80E9E456  ILC 2  INTC 0D
+         085                NO ACTIVE MODULE FOUND
+         085                NAME=UNKNOWN
+         085                DATA AT PSW  00E9E450 - 4100302C  0A0D010D  A7E5014B
+         085                AR/GR 0: 009FF028/00E9E760   1: 00000000/A4013000
+         085                      2: 00000000/00081CB8   3: 00000000/00E9E734
+         085                      4: 00000000/009B1410   5: 00000000/009B17A4
+         085                      6: 00000000/009B174C   7: 00000000/009B17A4
+         085                      8: 00000000/009B176C   9: 00000000/00000080
+         085                      A: 00000000/00F20E10   B: 00000000/009B10FC
+         085                      C: 00000000/00000008   D: 00000000/00000000
+         085                      E: 00000000/80E9DCB4   F: 00000000/00000018
+         085              END OF SYMPTOM DUMP
+
+What is the cause of this?",swg27050456.txt,27,,1,swg1pk45997.txt;swg22002498.txt;swg21961909.txt;swg1pi76362.txt;swg21319654.txt,swg27050456.txt;swg21293837.txt;swg1pi82205.txt;swg21967699.txt;swg1pk45997.txt
+TRAIN_Q236,LOST_HIT,"Cannot Authorize SPSS 19 Installation on New Computer,Need to Authorize SPSS 19 on a New Computer
+
+I'm currently using SPSS 19 and need to install it on a new computer, however, it will not authorize. I've spoken to SPSS support by phone but they recommended checking here. I'm running on a Mac, OS X Sierra, for SPSS 19. Would someone please be able to assist?,I'm currently running SPSS 19 and need to install it on a new computer. When I try to authorize it, it fails. I've spoken to SPSS over the phone to no avail. I'm running OS X Sierra. Could anyone please help?",swg21507587.txt,9,3,12,swg21512068.txt;swg21476243.txt;swg21507587.txt;swg21479763.txt;swg21480416.txt,swg22011329.txt;swg21968434.txt;swg21478415.txt;swg21487595.txt;swg21475390.txt
+TRAIN_Q581,LOST_HIT,"OOM exception thrown when trying to configure an ITCAM for WAS 7.2 Data Collector
+
+I am trying to configure an ITCAM for WAS 7.2.0.0.x DC using config.sh, but getting OOM exceptions, as following:
+
+./config.sh
+
+Log file name: /opt/IBM/ITM/dchome/7.2.0.0.10/data/config-trace.log.
+
+List of TCP/IP interfaces discovered:
+
+       1. ...
+     Enter a number [default is: 1]:
+     1
+     JVMDUMP039I Processing dump event ""systhrow"", detail ""java/lang/OutOfMemoryError"" at 2017/08/22 12:27:03 - please wait.
+....
+     java.lang.OutOfMemoryError: java.lang.OutOfMemoryError: Java heap space
+
+Looking at the javacore.txt files, I can see that this is the command throwing an OOM
+
+1CICMDLINE /opt/IBM/ITM/JRE/aix526/bin/java -classpath /opt/IBM/ITM/dchome/7.2.0.0.10/bin/jython/jython.jar:/opt/IBM/ITM/dchome/7.2.0.0.10/bin/lib/installbundle.jar -Xms256m -Xmx256m -Dpython.path=/opt/IBM/ITM/dchome/7.2.0.0.10/bin/lib:/opt/IBM/ITM/dchome/7.2.0.0.10/bin/lib org.python.util.jython /opt/IBM/ITM/dchome/7.2.0.0.10/bin/config.py
+
+How could I solve this?",swg21959444.txt,1,2,12,swg21615472.txt;swg21959444.txt;swg21460411.txt;swg21973298.txt;swg1pm84305.txt,swg21968507.txt;swg1pi06311.txt;swg21377823.txt;swg21677568.txt;swg21420638.txt
+TRAIN_Q372,NEW_HIT,"How to fix error CRIMA1217E when upgrade JAZZ from 1.1.0 to 1.1.3 failed?
+
+How to fix problem when upgrade JAZZ from 1.1.0 to 1.1.3 failed?",swg21985946.txt,28,,1,swg21997234.txt;swg21959612.txt;swg21698820.txt;swg21403259.txt;swg27038034.txt,swg21985946.txt;swg21660384.txt;swg21426711.txt;swg21997234.txt;swg21985803.txt
+TRAIN_Q165,LOST_HIT,"Is Java 8 supported for EJBDeploy on WebSphere Application Server 8.5.5.9 or later?
+
+Is Java 8 supported for EJBDeploy on WebSphere Application Server 8.5.5.9 or later?",swg21994741.txt,3,5,16,swg24043474.txt;swg1pi73197.txt;swg21994742.txt;swg1pi53589.txt;swg21994741.txt,swg24043474.txt;swg1pi73197.txt;swg21994742.txt;swg1pi53589.txt;swg21986722.txt
+TRAIN_Q553,LOST_HIT,"Help with Security Bulletin: Multiple vulnerabilities in IBM Java SDK affect IBM Image Construction and Composition Tool (CVE-2014-3566 and CVE-2014-6457)
+
+I need to understand details regarding ""Security Bulletin: Multiple vulnerabilities in IBM Java SDK affect IBM Image Construction and Composition Tool (CVE-2014-3566 and CVE-2014-6457) ."" Where can I find this information?",swg21903249.txt,4,4,6,swg21962370.txt;swg21983644.txt;swg21997055.txt;swg21903249.txt;swg21980640.txt,swg21962837.txt;swg21971907.txt;swg21962370.txt;swg21983644.txt;swg21997055.txt
+TRAIN_Q234,LOST_HIT,"How do I create a windows service for WebSphere Application Server version 7.0.X?
+
+Is there a tool that can help me create the windows service in an automated form?",swg21397335.txt,3,5,8,swg21201697.txt;swg21368020.txt;swg21568262.txt;swg21195440.txt;swg21397335.txt,swg21201697.txt;swg21517154.txt;swg21368020.txt;swg21568262.txt;swg21282839.txt
+TRAIN_Q579,LOST_HIT,"Trouble downloading SPSS Statistics free trial
+
+I am trying to download the free trial version of SPSS Statistics version 24. I'm a graduate student and want to try it out on my Mac OS X 10.9.5 laptop. However, when I get to the ""confirm"" part, it keeps showing me an error message saying ""can't save profile."" How do you go about fixing this and getting it installed? Thanks!",swg21507587.txt,1,3,9,swg24041224.txt;swg24043574.txt;swg21507587.txt;swg21606447.txt;swg21607077.txt,swg24041224.txt;swg21672109.txt;swg21903724.txt;swg27049540.txt;swg21688476.txt

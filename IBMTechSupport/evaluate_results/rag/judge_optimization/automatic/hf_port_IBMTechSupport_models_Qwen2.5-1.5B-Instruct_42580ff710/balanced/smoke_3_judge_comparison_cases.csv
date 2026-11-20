@@ -1,0 +1,15 @@
+﻿id,qa_is_impossible,gold_source_in_top5,gold_source_selected_baseline,gold_source_selected_new,baseline_selected_ranks,new_selected_ranks,baseline_abstained,new_abstained,changed,question
+TRAIN_Q169,True,N/A,N/A,N/A,,,True,True,False,"What is right trace for investigate the ""CWTKE0021W: The expired people assignment (staff query result) cannot be refreshed"" in SystemOut.log
+
+Hello, after upgrading from Websphere Process Server 7 to Business Process Manager Advanced - Process Server 8.5.6 we are seeing many CWTKE0021W in the SystemOut.log on two different test environments. We use Standalone LDAP repository.
+According to very brief (none) description at http://www-01.ibm.com/support/knowledgecenter/SS9KLH_8.5.6/com.ibm.wbpm.ref.doc/CWTKE0021W.html there should be further info in SystemOut.log (some exception I suppose) but in our case there is not - the logs are clear, the CWTKE0021W is only information. AFAIK we are not aware of any problems with our staff queries, so far it is only disturbing message in the logs but we want to get rid of them before we hit production with 8.5.6.
+I found the http://www-01.ibm.com/support/docview.wss but I guess that is not our case, we dont see any timeout messages in the logs.
+I wanted to enable the trace but Im not sure what trace string to use, there are many trace code packages which I consider as candidates (com.ibm.task., com.ibm.bpe.staff., com.ibm.bpe.query.*) but those enviroments are heavily used so I dont want to blindly enable all as I need to make smallest performance impact as possible.
+Please could you advice with right trace string to use (or other means for resolving the problem without the traces) ?"
+DEV_Q061,True,N/A,N/A,N/A,"2,3",,False,True,True,"Why does my JVMSERVER remain in a ""BEING DISABLED""  state?
+
+When I try to disable a JVMSERVER it becomes hung and remains in a ""BEING DISABLED"" state. This also occurs when I shut down the CICS region. The CICS region ultimately has to be cancelled."
+TRAIN_Q137,False,False,False,False,"2,3",2,False,False,True,"What could cause a ""Connection refused"" to SQLDB/DB2 after some time?
+
+I have deployed an WAS Liberty/ JPA application. Everything is fine, and after a while (a day or 2), I get the connection refused exception: java.sql.SQLNonTransientException: [jcc][t4][2043][11550][4.14.103] Exception java.net.ConnectException: Error opening socket to server /XX.XXX.XXX.XXXon port 50,000 with message: Connection refused. ERRORCODE=-4499, SQLSTATE=08001 DSRA0010E: SQL State = 08001, Error Code = -4,499 
+Any idea what could cause this issue?"

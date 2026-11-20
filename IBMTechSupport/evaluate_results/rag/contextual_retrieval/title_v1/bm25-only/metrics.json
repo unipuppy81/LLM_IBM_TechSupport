@@ -1,0 +1,15 @@
+{
+  "variant": "bm25-only",
+  "kind": "deterministic_title_context_not_llm_generated",
+  "n_answerable": 90,
+  "baseline_hit_at_5_percent": 66.67,
+  "contextual_hit_at_5_percent": 66.67,
+  "baseline_mrr_at_5": 0.5159,
+  "contextual_mrr_at_5": 0.5109,
+  "baseline_ndcg_at_5": 0.5537,
+  "contextual_ndcg_at_5": 0.5501,
+  "recovered_gold_sources": 0,
+  "lost_gold_sources": 0,
+  "retrieval_rerank_seconds": 6.703,
+  "note": "Gold source filename proxy, not exact answer-bearing chunk. No Judge/Generation test."
+}

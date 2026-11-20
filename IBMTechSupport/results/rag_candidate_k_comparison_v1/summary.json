@@ -1,0 +1,109 @@
+{
+  "experiment": "Reranker candidate_k 10 vs 30 vs 50",
+  "note": "Gold source filename match is not proof of sufficient answer evidence in any chunk.",
+  "dataset_count": 135,
+  "answerable_count": 90,
+  "baseline_top5_reproduced": 90,
+  "retrieval_seconds": 3.105,
+  "config": {
+    "reranker_model": "cross-encoder/ms-marco-MiniLM-L6-v2",
+    "reranker_batch_size": 8,
+    "hybrid": {
+      "candidate_k": 50,
+      "rrf_k": 10,
+      "bm25_weight": 0.5,
+      "dense_weight": 1.0,
+      "max_chunks_per_document": 1
+    },
+    "reranker": {
+      "model": "cross-encoder/ms-marco-MiniLM-L6-v2",
+      "candidate_k": 10,
+      "top_k": 5,
+      "batch_size": 8,
+      "max_length": 512
+    }
+  },
+  "input_sha256": {
+    "val_clean": "9d6c5fd79d1188fb29f7362d51a5b4953d7516f097cba2b37ed6182978a483e7",
+    "saved_baseline_predictions": "3f1a61771e2d057839987d34e3f05ef96df0b8c8f2abd5646b847e3ddf653e74",
+    "retrieval_config": "6f3ce60d671de34794896bb536c5b8353ed614c214073be847c50cc54f2af195"
+  },
+  "metrics": {
+    "10": {
+      "hit_at_5_percent": 66.67,
+      "hit_at_5_questions": 60,
+      "mrr_at_10": 0.5231,
+      "ndcg_at_5": 0.5537
+    },
+    "30": {
+      "hit_at_5_percent": 63.33,
+      "hit_at_5_questions": 57,
+      "mrr_at_10": 0.4974,
+      "ndcg_at_5": 0.5228
+    },
+    "50": {
+      "hit_at_5_percent": 61.11,
+      "hit_at_5_questions": 55,
+      "mrr_at_10": 0.478,
+      "ndcg_at_5": 0.5026
+    }
+  },
+  "versus_k10": {
+    "30": {
+      "new_success_count": 2,
+      "new_success_ids": [
+        "TRAIN_Q103",
+        "TRAIN_Q372"
+      ],
+      "lost_success_count": 5,
+      "lost_success_ids": [
+        "TRAIN_Q037",
+        "TRAIN_Q236",
+        "TRAIN_Q165",
+        "TRAIN_Q234",
+        "TRAIN_Q579"
+      ],
+      "baseline_30_failures_recovered": 2,
+      "delta_percentage_points": -3.33,
+      "paired_bootstrap_95ci_pp": [
+        -8.89,
+        2.22
+      ],
+      "bootstrap_draws": 10000
+    },
+    "50": {
+      "new_success_count": 2,
+      "new_success_ids": [
+        "TRAIN_Q103",
+        "TRAIN_Q372"
+      ],
+      "lost_success_count": 7,
+      "lost_success_ids": [
+        "TRAIN_Q037",
+        "TRAIN_Q236",
+        "TRAIN_Q581",
+        "TRAIN_Q165",
+        "TRAIN_Q553",
+        "TRAIN_Q234",
+        "TRAIN_Q579"
+      ],
+      "baseline_30_failures_recovered": 2,
+      "delta_percentage_points": -5.56,
+      "paired_bootstrap_95ci_pp": [
+        -12.22,
+        1.11
+      ],
+      "bootstrap_draws": 10000
+    }
+  },
+  "timings": {
+    "30": {
+      "rerank_seconds": 8.011,
+      "pairs_scored": 2700
+    },
+    "50": {
+      "rerank_seconds": 13.51,
+      "pairs_scored": 4477
+    }
+  }
+}

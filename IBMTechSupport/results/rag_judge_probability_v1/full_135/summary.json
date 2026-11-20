@@ -1,0 +1,95 @@
+{
+  "questions": 135,
+  "chunks_scored": 675,
+  "question_label_judge_roc_auc": 0.557,
+  "question_label_reranker_roc_auc": 0.6407,
+  "question_label_judge_minus_reranker_auc": -0.0837,
+  "question_label_auc_difference_paired_95ci": [
+    -0.1948,
+    0.0091
+  ],
+  "question_label_warning": "원본 QA 가능/불가능 레이블은 검색된 문서의 실제 근거 충분성을 검증하지 않습니다. AUC는 대리 지표입니다.",
+  "weak_labeled_chunk_count": 262,
+  "weak_chunk_judge_auc": 0.7459,
+  "weak_chunk_reranker_auc": 0.7825,
+  "reviewed_positive_chunks_in_top5": 12,
+  "reviewed_positive_p_yes": [
+    {
+      "id": "TRAIN_Q535",
+      "p_yes": 0.02369,
+      "baseline_judge_yes": false
+    },
+    {
+      "id": "TRAIN_Q236",
+      "p_yes": 0.03309,
+      "baseline_judge_yes": false
+    },
+    {
+      "id": "TRAIN_Q336",
+      "p_yes": 0.38122,
+      "baseline_judge_yes": false
+    },
+    {
+      "id": "TRAIN_Q592",
+      "p_yes": 0.32767,
+      "baseline_judge_yes": false
+    },
+    {
+      "id": "TRAIN_Q165",
+      "p_yes": 0.15003,
+      "baseline_judge_yes": false
+    },
+    {
+      "id": "TRAIN_Q071",
+      "p_yes": 0.04886,
+      "baseline_judge_yes": false
+    },
+    {
+      "id": "TRAIN_Q234",
+      "p_yes": 0.04024,
+      "baseline_judge_yes": false
+    },
+    {
+      "id": "TRAIN_Q504",
+      "p_yes": 0.12252,
+      "baseline_judge_yes": false
+    },
+    {
+      "id": "DEV_Q186",
+      "p_yes": 0.17554,
+      "baseline_judge_yes": false
+    },
+    {
+      "id": "TRAIN_Q541",
+      "p_yes": 0.14415,
+      "baseline_judge_yes": false
+    },
+    {
+      "id": "TRAIN_Q208",
+      "p_yes": 0.35577,
+      "baseline_judge_yes": false
+    },
+    {
+      "id": "TRAIN_Q537",
+      "p_yes": 0.22542,
+      "baseline_judge_yes": false
+    }
+  ],
+  "labels": {
+    "weak_negative_impossible": 225,
+    "unlabeled": 413,
+    "weak_full_reference_positive": 25,
+    "reviewed_positive": 12
+  },
+  "baseline_judge_questions_allowed": 61,
+  "baseline_false_refusals": 45,
+  "baseline_correct_refusals": 29,
+  "original_yes_no_vs_p05_chunk_decision_differences": 2,
+  "p_yes_0_5_questions_allowed": 62,
+  "p_yes_0_5_false_refusals": 44,
+  "p_yes_0_5_correct_refusals": 29,
+  "token_ids_warning": "P(YES)는 YES/NO 첫 토큰만을 대상으로 한 조건부 softmax이며 보정된 확률이 아닙니다.",
+  "threshold_warning": "135개에서 선택한 최적 임곗값은 학습셋 과적합 가능성이 있으므로 별도 검증 필요. 최종 답변 F1은 새 임곗값으로 다시 생성해야 계산 가능.",
+  "input_fingerprint": "fad9b926e2d835d254ec2826fa816753e670c23fc62730502d1703213f215351",
+  "approved_csv_loaded": true
+}

@@ -1,0 +1,536 @@
+﻿id,question,gold_filenames,bm25_first_gold_rank,dense_first_gold_rank,hybrid_first_gold_rank,k10_hit5,k10_gold_first_rank,k10_top5_filenames,k10_top5_chunk_ids,k10_top5_reranker_scores,k30_hit5,k30_gold_first_rank,k30_top5_filenames,k30_top5_chunk_ids,k30_top5_reranker_scores,k50_hit5,k50_gold_first_rank,k50_top5_filenames,k50_top5_chunk_ids,k50_top5_reranker_scores
+TRAIN_Q137,"What could cause a ""Connection refused"" to SQLDB/DB2 after some time?
+
+I have deployed an WAS Liberty/ JPA application. Everything is fine, and after a while (a day or 2), I get the connection refused exception: java.sql.SQLNonTransientException: [jcc][t4][2043][11550][4.14.103] Exception java.net.ConnectException: Error opening socket to server /XX.XXX.XXX.XXXon port 50,000 with message: Connection refused. ERRORCODE=-4499, SQLSTATE=08001 DSRA0010E: SQL State = 08001, Error Code = -4,499 
+Any idea what could cause this issue?",swg21443723.txt,,38,40,0,,swg21588225.txt;swg21960759.txt;swg21460740.txt;swg21571036.txt;swg1iv76435.txt,doc_16378_chunk_0001;doc_21773_chunk_0001;doc_14249_chunk_0001;doc_15921_chunk_0002;doc_03946_chunk_0001,1.91671;0.31002;-0.86396;-1.35171;-1.77765,0,,swg21588225.txt;swg21403644.txt;swg21578246.txt;swg21468957.txt;swg21997425.txt,doc_16378_chunk_0001;doc_12988_chunk_0000;doc_16121_chunk_0000;doc_14330_chunk_0000;doc_24543_chunk_0000,1.91671;1.71496;1.42607;1.26353;0.86958,0,19,swg21588225.txt;swg21403644.txt;swg21578246.txt;swg21468957.txt;swg21997425.txt,doc_16378_chunk_0001;doc_12988_chunk_0000;doc_16121_chunk_0000;doc_14330_chunk_0000;doc_24543_chunk_0000,1.91671;1.71496;1.42607;1.26353;0.86958
+TRAIN_Q270,"How to resolve ""An unexpected error occurred. Contact your system administrator. ICWPA1001E""
+
+
+
+When trying to add people to a matter request when there are more than 1000 people in the clipboard, the following error is reported:
+
+An unexpected error occurred. Contact your system administrator. ICWPA1001E""",swg27046675.txt,1,1,1,1,1,swg27046675.txt;swg1he12432.txt;swg1lo77915.txt;swg21675213.txt;swg21423147.txt,doc_28144_chunk_0000;doc_01336_chunk_0000;doc_06259_chunk_0001;doc_19543_chunk_0000;doc_13403_chunk_0000,6.03349;3.60307;1.43171;0.86483;0.51449,1,1,swg27046675.txt;swg1he12432.txt;swg1he12427.txt;swg21997777.txt;swg21598137.txt,doc_28144_chunk_0000;doc_01336_chunk_0000;doc_01334_chunk_0000;doc_24565_chunk_0000;doc_16674_chunk_0000,6.03349;3.60307;2.85065;2.24974;1.84216,1,1,swg27046675.txt;swg1ga16014.txt;swg1he12432.txt;swg21337673.txt;swg1he12427.txt,doc_28144_chunk_0000;doc_00975_chunk_0000;doc_01336_chunk_0000;doc_12256_chunk_0000;doc_01334_chunk_0000,6.03349;4.32314;3.60307;2.98905;2.85065
+TRAIN_Q113,"How do I configure logging for Atlas Extensions in Atlas 6.0.3.3?
+
+How do I configure logging for Atlas Extensions in Atlas 6.0.3.3?",swg21981881.txt,1,1,1,1,1,swg21981881.txt;swg1he12524.txt;swg21980203.txt;swg21654976.txt;swg21454483.txt,doc_23347_chunk_0000;doc_01363_chunk_0000;doc_23201_chunk_0000;doc_18635_chunk_0002;doc_14107_chunk_0001,7.99533;3.72638;2.65496;1.77033;1.68331,1,1,swg21981881.txt;swg1he12524.txt;swg27021990.txt;swg21980203.txt;swg1he12659.txt,doc_23347_chunk_0000;doc_01363_chunk_0000;doc_27595_chunk_0001;doc_23201_chunk_0000;doc_01386_chunk_0000,7.99533;3.72638;3.51431;2.65496;1.97227,1,1,swg21981881.txt;swg1he12524.txt;swg27039894.txt;swg27021990.txt;swg27043161.txt,doc_23347_chunk_0000;doc_01363_chunk_0000;doc_27878_chunk_0001;doc_27595_chunk_0001;doc_28014_chunk_0002,7.99533;3.72638;3.71077;3.51431;3.27768
+TRAIN_Q037,"How can multiple TDWC users logon into TDWC with same TWS user id?
+
+
+
+Given that one TDWC user is already accessing TDWC and a second TDWC user using the same logon id wants to logon to TDWC sees the following error:
+
+Another user is currently logged in with the same user ID. Select from the following options:
+
+    List item
+
+Log out the other user with the same user ID. You can recover changes made during the other user's session.
+
+    List item
+
+Return to the Login page and enter a different user ID.
+
+How can multiple users logon without one user needing to logout?",swg21576245.txt,48,1,2,1,5,swg21624858.txt;swg21316928.txt;swg21699908.txt;swg21227799.txt;swg21576245.txt,doc_17560_chunk_0000;doc_12007_chunk_0001;doc_21070_chunk_0000;doc_11096_chunk_0000;doc_16072_chunk_0000,2.97795;2.42650;1.88922;0.12985;-0.38611,0,14,swg21624858.txt;swg21316928.txt;swg21699908.txt;swg21622876.txt;swg21694211.txt,doc_17560_chunk_0000;doc_12007_chunk_0001;doc_21070_chunk_0000;doc_17482_chunk_0000;doc_20642_chunk_0000,2.97795;2.42650;1.88922;1.69655;1.56454,0,21,swg21624858.txt;swg21316928.txt;swg21699908.txt;swg1pk91233.txt;swg21622876.txt,doc_17560_chunk_0000;doc_12007_chunk_0001;doc_21070_chunk_0000;doc_08775_chunk_0001;doc_17482_chunk_0000,2.97795;2.42650;1.88922;1.87631;1.69655
+TRAIN_Q549,"What does the end-file-message mean while doing a launchpad.sh in the MS""
+
+I am getting an end-file-message means while doing a launchpad.sh in the MS. How do I solve the problem?",swg21985630.txt,1,1,1,1,1,swg21985630.txt;swg21598626.txt;swg21636377.txt;swg27036126.txt;swg1iv23428.txt,doc_23668_chunk_0000;doc_16690_chunk_0000;doc_17928_chunk_0000;doc_27728_chunk_0002;doc_03303_chunk_0003,3.78921;0.78427;-0.64364;-1.38277;-4.49394,1,1,swg21985630.txt;swg21598626.txt;swg21634954.txt;swg21636377.txt;swg21628494.txt,doc_23668_chunk_0000;doc_16690_chunk_0000;doc_17859_chunk_0000;doc_17928_chunk_0000;doc_17697_chunk_0000,3.78922;0.78427;0.28908;-0.64364;-0.80043,1,1,swg21985630.txt;swg21598626.txt;swg21634954.txt;swg21636377.txt;swg21628494.txt,doc_23668_chunk_0000;doc_16690_chunk_0000;doc_17859_chunk_0000;doc_17928_chunk_0000;doc_17697_chunk_0000,3.78922;0.78427;0.28908;-0.64364;-0.80043
+TRAIN_Q006,"Is ITNM exposed to Apache CXF vulnerability (CVE-2017-3156)?
+
+Is ITNM versions are affected by Apache CXF vulnerability (CVE-2017-3156), If yes then what are all the version will be affected and where I can find the details?",swg22008493.txt,1,23,6,1,1,swg22008493.txt;swg22015467.txt;swg22014078.txt;swg22005158.txt;swg22003397.txt,doc_25516_chunk_0000;doc_26197_chunk_0000;doc_26035_chunk_0000;doc_25194_chunk_0000;doc_25054_chunk_0000,5.43673;5.04259;4.60782;4.12795;4.08199,1,1,swg22008493.txt;swg22015467.txt;swg22014053.txt;swg22014078.txt;swg22013597.txt,doc_25516_chunk_0000;doc_26197_chunk_0000;doc_26033_chunk_0000;doc_26035_chunk_0000;doc_25994_chunk_0000,5.43673;5.04259;5.00615;4.60782;4.13546,1,1,swg22008493.txt;swg22015467.txt;swg22014053.txt;swg22014078.txt;swg22013597.txt,doc_25516_chunk_0000;doc_26197_chunk_0000;doc_26033_chunk_0000;doc_26035_chunk_0000;doc_25994_chunk_0000,5.43673;5.04259;5.00615;4.60782;4.13546
+TRAIN_Q535,"SYSIBMADM.DBCFG IS AN UNDEFINED NAME error message on z/OS ODM Event Server
+
+On Z/OS, Events runtime may trace the following exception into system logs when DB2 is used as the runtime repository: com.ibm.websphere.ce.cm.StaleConnectionException: SYSIBMADM.DBCFG IS AN UNDEFINED NAME. SQLCODE=-204, SQLSTATE=42704, DRIVER=3.65.102",swg21690184.txt,1,1,1,1,1,swg21690184.txt;swg21408665.txt;swg21990051.txt;swg1it05694.txt;swg1pi88904.txt,doc_20374_chunk_0000;doc_13089_chunk_0000;doc_24005_chunk_0000;doc_02475_chunk_0004;doc_07703_chunk_0001,7.27873;3.53599;2.62844;2.20215;1.55250,1,1,swg21690184.txt;swg21508821.txt;swg1it10958.txt;swg21405243.txt;swg21408665.txt,doc_20374_chunk_0000;doc_15283_chunk_0001;doc_02639_chunk_0000;doc_13021_chunk_0000;doc_13089_chunk_0000,7.27873;4.25369;3.91478;3.79537;3.53599,1,1,swg21690184.txt;swg21508821.txt;swg1it10958.txt;swg21405243.txt;swg21408665.txt,doc_20374_chunk_0000;doc_15283_chunk_0001;doc_02639_chunk_0000;doc_13021_chunk_0000;doc_13089_chunk_0000,7.27873;4.25369;3.91478;3.79537;3.53599
+DEV_Q035,"Help with Security Bulletin: API Connect is affected by a Node.js denial of service vulnerability (CVE-2017-14919)
+
+I need to understand details regarding Security Bulletin: API Connect is affected by a Node.js denial of service vulnerability (CVE-2017-14919). Where can I find this information?",swg22013168.txt,1,1,1,1,1,swg22013168.txt;swg22013088.txt;swg22009964.txt;swg21999445.txt;swg21986144.txt,doc_25953_chunk_0000;doc_25942_chunk_0000;doc_25654_chunk_0000;doc_24687_chunk_0000;doc_23714_chunk_0000,7.85452;7.19889;6.33725;5.86307;5.52427,1,1,swg22013168.txt;swg22013088.txt;swg22009964.txt;swg22006472.txt;swg21999445.txt,doc_25953_chunk_0000;doc_25942_chunk_0000;doc_25654_chunk_0000;doc_25335_chunk_0000;doc_24687_chunk_0000,7.85452;7.19889;6.33725;5.92474;5.86307,1,1,swg22013168.txt;swg22013088.txt;swg22009964.txt;swg22006472.txt;swg21999445.txt,doc_25953_chunk_0000;doc_25942_chunk_0000;doc_25654_chunk_0000;doc_25335_chunk_0000;doc_24687_chunk_0000,7.85452;7.19889;6.33725;5.92474;5.86307
+TRAIN_Q100,"Which version of TBSM support ITM 6.3?
+
+What is the TBSM version that is certified with ITM 6.3?",swg24039742.txt,19,10,14,0,,swg21313006.txt;swg21681206.txt;swg21691693.txt;swg21969566.txt;swg21978507.txt,doc_11949_chunk_0000;doc_19856_chunk_0000;doc_20461_chunk_0002;doc_22348_chunk_0000;doc_23079_chunk_0000,3.00655;2.39333;1.87168;1.64994;0.31329,0,14,swg21313006.txt;swg21699842.txt;swg21681206.txt;swg21691693.txt;swg21701395.txt,doc_11949_chunk_0000;doc_21062_chunk_0000;doc_19856_chunk_0000;doc_20461_chunk_0002;doc_21196_chunk_0000,3.00655;2.51789;2.39334;1.87169;1.75820,0,17,swg21313006.txt;swg21699842.txt;swg21681206.txt;swg21691693.txt;swg21701395.txt,doc_11949_chunk_0000;doc_21062_chunk_0000;doc_19856_chunk_0000;doc_20461_chunk_0002;doc_21196_chunk_0000,3.00655;2.51789;2.39333;1.87169;1.75820
+TRAIN_Q103,"PARMGEN ABEND S013 in JOB KCIJPALO
+
+
+
+After installing IBM OMEGAMON for Messaging on z/OS 07.05.00, I receive the following ABEND after submitting PARMGEN Job KCIJPALO:
+
+      JOB02175  IEC141I 013-18,IGG0191B,U600861X,KMCJPALR,RKPDIN,600D,ISMS01,  083
+         083             HSYS.S002.OMGNEW.TKANPAR(KMCPDICT)
+     JOB02175  IEA995I SYMPTOM DUMP OUTPUT  085
+         085             SYSTEM COMPLETION CODE=013  REASON CODE=00000018
+         085              TIME=07.41.33  SEQ=00630  CPU=0000  ASID=004C
+         085              PSW AT TIME OF ERROR  075C1000   80E9E456  ILC 2  INTC 0D
+         085                NO ACTIVE MODULE FOUND
+         085                NAME=UNKNOWN
+         085                DATA AT PSW  00E9E450 - 4100302C  0A0D010D  A7E5014B
+         085                AR/GR 0: 009FF028/00E9E760   1: 00000000/A4013000
+         085                      2: 00000000/00081CB8   3: 00000000/00E9E734
+         085                      4: 00000000/009B1410   5: 00000000/009B17A4
+         085                      6: 00000000/009B174C   7: 00000000/009B17A4
+         085                      8: 00000000/009B176C   9: 00000000/00000080
+         085                      A: 00000000/00F20E10   B: 00000000/009B10FC
+         085                      C: 00000000/00000008   D: 00000000/00000000
+         085                      E: 00000000/80E9DCB4   F: 00000000/00000018
+         085              END OF SYMPTOM DUMP
+
+What is the cause of this?",swg27050456.txt,,23,27,0,,swg1pk45997.txt;swg22002498.txt;swg21961909.txt;swg1pi76362.txt;swg21319654.txt,doc_08293_chunk_0000;doc_24967_chunk_0000;doc_21850_chunk_0000;doc_07524_chunk_0001;doc_12036_chunk_0000,-1.89421;-2.03600;-2.56424;-3.42099;-3.44125,1,1,swg27050456.txt;swg21293837.txt;swg21967699.txt;swg1pk45997.txt;swg22002498.txt,doc_28356_chunk_0001;doc_11748_chunk_0000;doc_22209_chunk_0000;doc_08293_chunk_0000;doc_24967_chunk_0000,-0.25746;-1.46886;-1.79574;-1.89421;-2.03600,1,1,swg27050456.txt;swg21293837.txt;swg1pi82205.txt;swg21967699.txt;swg1pk45997.txt,doc_28356_chunk_0001;doc_11748_chunk_0000;doc_07601_chunk_0000;doc_22209_chunk_0000;doc_08293_chunk_0000,-0.25746;-1.46886;-1.71351;-1.79574;-1.89421
+TRAIN_Q316,"Datapower WebGUI down due to an expired or invalid certificate
+
+The Datapower WebGUI is down due to an expired or invalid certificate. How can the WebGUI access be restored?",swg21498634.txt,15,7,7,0,6,swg21509220.txt;swg21633306.txt;swg21576087.txt;swg1ic76399.txt;swg21577098.txt,doc_15294_chunk_0000;doc_17800_chunk_0000;doc_16062_chunk_0000;doc_01732_chunk_0000;doc_16093_chunk_0000,5.27686;5.24330;4.38954;4.34236;4.13705,0,6,swg21509220.txt;swg21633306.txt;swg21576087.txt;swg1ic76399.txt;swg21577098.txt,doc_15294_chunk_0000;doc_17800_chunk_0000;doc_16062_chunk_0000;doc_01732_chunk_0000;doc_16093_chunk_0000,5.27686;5.24330;4.38954;4.34236;4.13705,0,6,swg21509220.txt;swg21633306.txt;swg21576087.txt;swg1ic76399.txt;swg21577098.txt,doc_15294_chunk_0000;doc_17800_chunk_0000;doc_16062_chunk_0000;doc_01732_chunk_0000;doc_16093_chunk_0000,5.27687;5.24330;4.38954;4.34236;4.13705
+TRAIN_Q019,"i cannot enter SPSS statistics trial program
+
+
+
+I've downloaded the 14-days trial of SPSS subscription for 32bit, windows. After opening the program I'm asked to login and after entering my username and password a blank page comes up. And there is no way to proceed from here. I already saw previous answers about SPSS trial Login error, and there is a link(https://ibm.box.com/s/huaafbjzabkyblh47n7g4l0o4gxp4zdy) to download the zip file of 'jxbrowser'. But i cannot enter the link, and the webpage says ""probably the address was changed or deleted.""
+
+i'm using Windows 7(32bit), and just want to know how can i resolve it.",swg22001418.txt,2,37,7,1,1,swg22001418.txt;swg21672109.txt;swg21479763.txt;swg21684196.txt;swg21484012.txt,doc_24868_chunk_0000;doc_19369_chunk_0000;doc_14610_chunk_0000;doc_20003_chunk_0000;doc_14718_chunk_0000,1.33530;-0.51589;-0.68218;-0.81746;-1.68685,1,2,swg21903724.txt;swg22001418.txt;swg21672109.txt;swg21479763.txt;swg21684196.txt,doc_21548_chunk_0000;doc_24868_chunk_0000;doc_19369_chunk_0000;doc_14610_chunk_0000;doc_20003_chunk_0000,1.76373;1.33530;-0.51589;-0.68218;-0.81746,1,2,swg21903724.txt;swg22001418.txt;swg27049540.txt;swg21672109.txt;swg21479763.txt,doc_21548_chunk_0000;doc_24868_chunk_0000;doc_28298_chunk_0002;doc_19369_chunk_0000;doc_14610_chunk_0000,1.76373;1.33530;0.63405;-0.51589;-0.68218
+DEV_Q167,"How do I recreate all the Oracle Text indexes for the Atlas database
+
+How do I recreate all the Oracle Text indexes for the Atlas database ?",swg21580830.txt,1,1,1,1,1,swg21580830.txt;swg21621554.txt;swg21403468.txt;swg21997793.txt;swg21585104.txt,doc_16213_chunk_0000;doc_17418_chunk_0000;doc_12984_chunk_0000;doc_24566_chunk_0000;doc_16266_chunk_0002,9.49459;5.06043;4.09936;3.69399;3.16089,1,1,swg21580830.txt;swg21621554.txt;swg21403468.txt;swg21997793.txt;swg21585104.txt,doc_16213_chunk_0000;doc_17418_chunk_0000;doc_12984_chunk_0000;doc_24566_chunk_0000;doc_16266_chunk_0002,9.49459;5.06043;4.09936;3.69399;3.16089,1,1,swg21580830.txt;swg21621554.txt;swg21403468.txt;swg21997793.txt;swg21585104.txt,doc_16213_chunk_0000;doc_17418_chunk_0000;doc_12984_chunk_0000;doc_24566_chunk_0000;doc_16266_chunk_0002,9.49459;5.06043;4.09936;3.69399;3.16089
+DEV_Q028,"Help with Security Bulletin: Multiple vulnerabilities have been identified in WebSphere Application Server shipped with WSRR (CVE-2015-4911)
+
+I need to understand details regarding Security Bulletin: Multiple vulnerabilities have been identified in WebSphere Application Server shipped with WebSphere Service Registry and Repository (CVE-2015-4911). Where can I find this information?",swg21975747.txt,1,1,1,1,1,swg21975747.txt;swg22011786.txt;swg21968674.txt;swg21681915.txt;swg22010112.txt,doc_22818_chunk_0000;doc_25821_chunk_0000;doc_22269_chunk_0000;doc_19902_chunk_0000;doc_25674_chunk_0000,7.77796;7.51397;7.47086;7.47065;7.47040,1,1,swg21975747.txt;swg21968857.txt;swg2c1000011.txt;swg22011786.txt;swg21964746.txt,doc_22818_chunk_0000;doc_22289_chunk_0000;doc_28410_chunk_0000;doc_25821_chunk_0000;doc_22022_chunk_0000,7.77796;7.64032;7.62131;7.51397;7.49658,1,1,swg21975747.txt;swg21968857.txt;swg2c1000011.txt;swg21968858.txt;swg22011786.txt,doc_22818_chunk_0000;doc_22289_chunk_0000;doc_28410_chunk_0000;doc_22290_chunk_0000;doc_25821_chunk_0000,7.77796;7.64032;7.62131;7.58518;7.51397
+TRAIN_Q172,"Does StoredIQ support TLS v1.2?
+
+Does StoredIQ support TLS v1.2?",swg21998312.txt,1,1,1,1,1,swg21998312.txt;swg21990652.txt;swg21697925.txt;swg21584390.txt;swg21632275.txt,doc_24594_chunk_0000;doc_24061_chunk_0000;doc_20928_chunk_0001;doc_16233_chunk_0000;doc_17753_chunk_0001,9.88056;3.17805;-1.06817;-1.17048;-1.34015,1,1,swg21998312.txt;swg21654825.txt;swg21990652.txt;swg21626316.txt;swg21978072.txt,doc_24594_chunk_0000;doc_18625_chunk_0000;doc_24061_chunk_0000;doc_17617_chunk_0000;doc_23043_chunk_0000,9.88056;4.10862;3.17805;2.81672;2.61815,1,1,swg21998312.txt;swg21654825.txt;swg21990652.txt;swg21626316.txt;swg21978072.txt,doc_24594_chunk_0000;doc_18625_chunk_0000;doc_24061_chunk_0000;doc_17617_chunk_0000;doc_23043_chunk_0000,9.88056;4.10862;3.17805;2.81672;2.61815
+TRAIN_Q058,"Portal v8.5 install fails with INSTCONFFAILED - No Portral logs are written
+
+Portal v8.5 install fails with INSTCONFFAILED - No Portral logs are written",swg1pi37248.txt,,,,0,,swg21620606.txt;swg21619511.txt;swg21613065.txt;swg21701478.txt;swg21678752.txt,doc_17392_chunk_0000;doc_17353_chunk_0000;doc_17123_chunk_0000;doc_21204_chunk_0000;doc_19725_chunk_0000,4.10085;3.59376;3.46178;3.05309;0.95398,0,,swg21633874.txt;swg21685680.txt;swg21620606.txt;swg21613638.txt;swg21619511.txt,doc_17821_chunk_0000;doc_20096_chunk_0000;doc_17392_chunk_0000;doc_17150_chunk_0000;doc_17353_chunk_0000,4.41014;4.31942;4.10085;3.72543;3.59376,0,,swg21633874.txt;swg21685680.txt;swg21644066.txt;swg21620606.txt;swg21613638.txt,doc_17821_chunk_0000;doc_20096_chunk_0000;doc_18213_chunk_0000;doc_17392_chunk_0000;doc_17150_chunk_0000,4.41014;4.31942;4.28455;4.10085;3.72543
+TRAIN_Q236,"Cannot Authorize SPSS 19 Installation on New Computer,Need to Authorize SPSS 19 on a New Computer
+
+I'm currently using SPSS 19 and need to install it on a new computer, however, it will not authorize. I've spoken to SPSS support by phone but they recommended checking here. I'm running on a Mac, OS X Sierra, for SPSS 19. Would someone please be able to assist?,I'm currently running SPSS 19 and need to install it on a new computer. When I try to authorize it, it fails. I've spoken to SPSS over the phone to no avail. I'm running OS X Sierra. Could anyone please help?",swg21507587.txt,6,20,9,1,3,swg21512068.txt;swg21476243.txt;swg21507587.txt;swg21479763.txt;swg21480416.txt,doc_15335_chunk_0000;doc_14477_chunk_0000;doc_15244_chunk_0001;doc_14610_chunk_0000;doc_14631_chunk_0000,2.53645;2.16002;2.04328;1.91751;1.74747,0,9,swg22011329.txt;swg21968434.txt;swg21475390.txt;swg21512068.txt;swg24029689.txt,doc_25781_chunk_0001;doc_22252_chunk_0001;doc_14458_chunk_0000;doc_15335_chunk_0000;doc_26632_chunk_0002,3.94310;3.75922;2.81723;2.53645;2.28981,0,12,swg22011329.txt;swg21968434.txt;swg21478415.txt;swg21487595.txt;swg21475390.txt,doc_25781_chunk_0001;doc_22252_chunk_0001;doc_14566_chunk_0000;doc_14794_chunk_0000;doc_14458_chunk_0000,3.94310;3.75922;2.88586;2.84880;2.81723
+TRAIN_Q307,"Product upgrade installed a second instance of the DE, causing upgrade failure.
+
+The Deployment Engine should only have one instance installed on a server with IBM products installed. In this case, a second DE was installed, which caused the failure of the Product upgrade. Error: Wrong Deployment Engine.
+
+Product install failed. You will get a message similar to this: You are updating an instance of (Product name) that was installed using the Tivoli Deployment Engine (DE) located at ""/home/nc_admin/.acsi_FQDN"". However you are now using the DE located at ""/home/nc_admin/.acsi_HOSTNAME"".
+
+When the DE is installed as non-root ( in this case nc_admin ), it will install the DE in the user home directory, in this case /home/nc_admin, and use the FQDN in the name: /home/nc_admin/.acsi_FQDN",swg21967589.txt,1,1,1,1,1,swg21967589.txt;swg1ic77162.txt;swg21656215.txt;swg21650712.txt;swg21675140.txt,doc_22199_chunk_0000;doc_01749_chunk_0000;doc_18688_chunk_0000;doc_18477_chunk_0000;doc_19539_chunk_0000,5.86986;3.97633;3.93141;3.91368;3.05281,1,1,swg21967589.txt;swg1ic77162.txt;swg21656215.txt;swg21650712.txt;swg21650791.txt,doc_22199_chunk_0000;doc_01749_chunk_0000;doc_18688_chunk_0000;doc_18477_chunk_0000;doc_18481_chunk_0000,5.86986;3.97633;3.93141;3.91368;3.62787,1,1,swg21967589.txt;swg21645030.txt;swg1ic77162.txt;swg21656215.txt;swg21650712.txt,doc_22199_chunk_0000;doc_18248_chunk_0000;doc_01749_chunk_0000;doc_18688_chunk_0000;doc_18477_chunk_0000,5.86986;4.22685;3.97633;3.93141;3.91368
+TRAIN_Q087,"Installation manager (IIM) fails to start on AIX, generates core file from GPF even though all GTK libs are installed.
+
+Trying to install DASH 3.1.3 on AIX but IIM won't start and instead creates a dump file with a GPF noted. We found a technical note with a list of the required libs for IIM on AIX and we have all of the latest versions of those libs. Why is the installer failing to start?",swg21631478.txt,5,1,1,1,3,swg21675509.txt;swg21626283.txt;swg21631478.txt;swg21675704.txt;swg21646440.txt,doc_19565_chunk_0000;doc_17616_chunk_0001;doc_17722_chunk_0006;doc_19573_chunk_0000;doc_18318_chunk_0002,4.39133;3.07124;3.03089;3.01943;2.49394,1,3,swg21675509.txt;swg21626283.txt;swg21631478.txt;swg21675704.txt;swg21646440.txt,doc_19565_chunk_0000;doc_17616_chunk_0001;doc_17722_chunk_0006;doc_19573_chunk_0000;doc_18318_chunk_0002,4.39133;3.07124;3.03089;3.01943;2.49394,1,4,swg21675509.txt;swg21672430.txt;swg21626283.txt;swg21631478.txt;swg21675704.txt,doc_19565_chunk_0000;doc_19384_chunk_0000;doc_17616_chunk_0001;doc_17722_chunk_0006;doc_19573_chunk_0000,4.39133;3.52590;3.07124;3.03089;3.01943
+TRAIN_Q581,"OOM exception thrown when trying to configure an ITCAM for WAS 7.2 Data Collector
+
+I am trying to configure an ITCAM for WAS 7.2.0.0.x DC using config.sh, but getting OOM exceptions, as following:
+
+./config.sh
+
+Log file name: /opt/IBM/ITM/dchome/7.2.0.0.10/data/config-trace.log.
+
+List of TCP/IP interfaces discovered:
+
+       1. ...
+     Enter a number [default is: 1]:
+     1
+     JVMDUMP039I Processing dump event ""systhrow"", detail ""java/lang/OutOfMemoryError"" at 2017/08/22 12:27:03 - please wait.
+....
+     java.lang.OutOfMemoryError: java.lang.OutOfMemoryError: Java heap space
+
+Looking at the javacore.txt files, I can see that this is the command throwing an OOM
+
+1CICMDLINE /opt/IBM/ITM/JRE/aix526/bin/java -classpath /opt/IBM/ITM/dchome/7.2.0.0.10/bin/jython/jython.jar:/opt/IBM/ITM/dchome/7.2.0.0.10/bin/lib/installbundle.jar -Xms256m -Xmx256m -Dpython.path=/opt/IBM/ITM/dchome/7.2.0.0.10/bin/lib:/opt/IBM/ITM/dchome/7.2.0.0.10/bin/lib org.python.util.jython /opt/IBM/ITM/dchome/7.2.0.0.10/bin/config.py
+
+How could I solve this?",swg21959444.txt,20,1,1,1,2,swg21615472.txt;swg21959444.txt;swg21460411.txt;swg21973298.txt;swg1pm84305.txt,doc_17216_chunk_0001;doc_21647_chunk_0000;doc_14243_chunk_0003;doc_22599_chunk_0000;doc_09868_chunk_0004,-4.43181;-5.76070;-6.61361;-6.66282;-7.42799,1,4,swg21377823.txt;swg21615472.txt;swg1pi57148.txt;swg21959444.txt;swg1pi35893.txt,doc_12556_chunk_0001;doc_17216_chunk_0001;doc_07238_chunk_0000;doc_21647_chunk_0000;doc_06920_chunk_0001,-3.33734;-4.43181;-4.71807;-5.76070;-5.84858,0,12,swg21968507.txt;swg1pi06311.txt;swg21377823.txt;swg21677568.txt;swg21420638.txt,doc_22260_chunk_0001;doc_06479_chunk_0000;doc_12556_chunk_0001;doc_19671_chunk_0001;doc_13335_chunk_0001,1.71845;-1.02012;-3.33734;-3.88238;-3.91347
+TRAIN_Q295,"Why are ITNM or Omnnibus WebGUI java applets fail to load with ""Missing Permissions manifest attribute in main jar""
+
+Why are ITNM or Omnnibus WebGUI java applets fail to load with ""Missing Permissions manifest attribute in main jar""",swg21499307.txt,,,,0,,swg21653261.txt;swg21672355.txt;swg1ic99693.txt;swg21666104.txt;swg21683575.txt,doc_18569_chunk_0000;doc_19379_chunk_0003;doc_02065_chunk_0001;doc_19049_chunk_0001;doc_19979_chunk_0000,4.79619;4.60437;4.40551;4.31016;3.91300,0,,swg21653261.txt;swg21672355.txt;swg1ic99693.txt;swg21666104.txt;swg21683575.txt,doc_18569_chunk_0000;doc_19379_chunk_0003;doc_02065_chunk_0001;doc_19049_chunk_0001;doc_19979_chunk_0000,4.79619;4.60437;4.40551;4.31016;3.91300,0,,swg21653261.txt;swg21672355.txt;swg1ic99693.txt;swg21666104.txt;swg21683575.txt,doc_18569_chunk_0000;doc_19379_chunk_0003;doc_02065_chunk_0001;doc_19049_chunk_0001;doc_19979_chunk_0000,4.79619;4.60437;4.40551;4.31016;3.91300
+TRAIN_Q368,"Does ITCAM for MQ monitoring agent (kmq) use SYSTEM.MQXR.COMMAND.QUEUE causing Unknown Object Name [2085] event?
+
+
+
+Using the ITCAM MQ Monitoring agent, we have a situation that generates alerts when a 2085 event (object unknown) occurs. We have recently seen alerts for the queue SYSTEM.MQXR.COMMAND.QUEUE
+We found following technote:
+Unknown Object Name [2085], SYSTEM.MQXR.COMMAND.QUEUE
+http://www-01.ibm.com/support/docview.wss?uid=swg21681687
+
+This technote does not mention Tivoli monitoring product, and only mentions monitoring products such as Nastel and InfraRed360.
+Does Tivoli monitoring agent for WebSphere MQ use the SYSTEM.MQXR.COMMAND.QUEUE? We are try to find out which application is causing the 2085 event.",swg21318303.txt,,,,0,,swg21681687.txt;swg1iv86027.txt;swg27048600.txt;swg21391005.txt;swg21161141.txt,doc_19891_chunk_0000;doc_04089_chunk_0000;doc_28245_chunk_0000;doc_12776_chunk_0000;doc_10756_chunk_0000,2.54616;2.04555;1.71282;1.46475;1.36716,0,,swg21681687.txt;swg1it18829.txt;swg1iv86027.txt;swg1oa28852.txt;swg27048600.txt,doc_19891_chunk_0000;doc_02891_chunk_0000;doc_04089_chunk_0000;doc_06330_chunk_0001;doc_28245_chunk_0000,2.54616;2.09282;2.04555;1.93563;1.71282,0,,swg21681687.txt;swg1it18829.txt;swg1iv86027.txt;swg1oa28852.txt;swg27048600.txt,doc_19891_chunk_0000;doc_02891_chunk_0000;doc_04089_chunk_0000;doc_06330_chunk_0001;doc_28245_chunk_0000,2.54616;2.09282;2.04555;1.93563;1.71282
+TRAIN_Q431,"Install path under ""Program Files""
+
+My path for the OS agent is e:\Program Files\IBM. Is there any issues or underlying problems if I install under ""Program Files""? Just want to make sure no issues with a ""space"" in the install path.",swg21961222.txt,6,3,1,1,2,swg1iv32710.txt;swg21961222.txt;swg21292441.txt;swg21306734.txt;swg21290142.txt,doc_03390_chunk_0001;doc_21815_chunk_0000;doc_11731_chunk_0004;doc_11919_chunk_0005;doc_11701_chunk_0004,3.73838;3.53277;3.47392;2.75096;0.47965,1,2,swg1iv32710.txt;swg21961222.txt;swg21292441.txt;swg21462187.txt;swg21326172.txt,doc_03390_chunk_0001;doc_21815_chunk_0000;doc_11731_chunk_0004;doc_14296_chunk_0000;doc_12138_chunk_0001,3.73838;3.53276;3.47392;3.26086;3.22230,1,2,swg1iv32710.txt;swg21961222.txt;swg21292441.txt;swg21462187.txt;swg21326172.txt,doc_03390_chunk_0001;doc_21815_chunk_0000;doc_11731_chunk_0004;doc_14296_chunk_0000;doc_12138_chunk_0001,3.73838;3.53276;3.47392;3.26086;3.22230
+TRAIN_Q336,"Why does silent install abort indicating files are locked?
+
+Silent installs can fail reporting that there are locked files under the ITM installation directory on Windows platform. Why does this happen?
+
+Example:
+
+C:\IBM\ITM\InstallITM\
+Abort IBM Tivoli Monitoring 20160203 1832.log
+
+02-03-2016 18:37:10: File C:\IBM\ITM\TMAITM6\deploy.jar is locked.
+02-03-2016 18:37:10: File C:\IBM\ITM\TMAITM6\deploy.jar could not be renamed, errors may occur.
+02-03-2016 18:37:17: Directory C:\IBM\ITM has locked files.
+02-03-2016 18:37:17: Correct and launch setup again.
+02-03-2016 18:37:17: Directory C:\IBM\ITM has locked files, unable to continue.
+02-03-2016 18:37:17: SEVERE: ERROR - Install aborted.",swg21882989.txt,1,1,1,1,1,swg21882989.txt;swg1iv59978.txt;swg1it07768.txt;swg1iz73700.txt;swg21608744.txt,doc_21337_chunk_0001;doc_03684_chunk_0000;doc_02547_chunk_0004;doc_05070_chunk_0002;doc_16943_chunk_0000,4.50892;2.72042;1.89846;0.67235;0.57369,1,1,swg21882989.txt;swg1iv59978.txt;swg1it07768.txt;swg1iz50762.txt;swg1iz73700.txt,doc_21337_chunk_0001;doc_03684_chunk_0000;doc_02547_chunk_0004;doc_04850_chunk_0000;doc_05070_chunk_0002,4.50892;2.72042;1.89846;1.41889;0.67235,1,1,swg21882989.txt;swg1iv59978.txt;swg1it07768.txt;swg1iz50762.txt;swg21504417.txt,doc_21337_chunk_0001;doc_03684_chunk_0000;doc_02547_chunk_0004;doc_04850_chunk_0000;doc_15125_chunk_0001,4.50892;2.72042;1.89846;1.41889;1.03150
+DEV_Q220,"Help with Security Bulletin: TLS padding vulnerability affects IBM PureApplication System (CVE-2014-8730)
+
+I need to understand details regarding ""Security Bulletin: TLS padding vulnerability affects IBM PureApplication System (CVE-2014-8730)"". Where can I find this information?",swg21960375.txt,1,3,1,1,1,swg21960375.txt;swg21693254.txt;swg21693255.txt;swg21694312.txt;swg21693877.txt,doc_21740_chunk_0000;doc_20574_chunk_0000;doc_20575_chunk_0000;doc_20650_chunk_0000;doc_20618_chunk_0000,7.21806;6.99883;6.92126;6.51768;6.49248,1,1,swg21960375.txt;swg21693254.txt;swg21693255.txt;swg21694312.txt;swg21693877.txt,doc_21740_chunk_0000;doc_20574_chunk_0000;doc_20575_chunk_0000;doc_20650_chunk_0000;doc_20618_chunk_0000,7.21806;6.99883;6.92126;6.51768;6.49248,1,1,swg21960375.txt;swg21693254.txt;swg21693255.txt;swg21692934.txt;swg21694312.txt,doc_21740_chunk_0000;doc_20574_chunk_0000;doc_20575_chunk_0000;doc_20549_chunk_0000;doc_20650_chunk_0000,7.21806;6.99883;6.92126;6.79002;6.51768
+TRAIN_Q231,"Netcool/Impact (all versions): OMNIbusEventReader Filter Analyzer error ""rule includes an unsupported expression""
+
+Netcool/Impact (all versions): OMNIbusEventReader Filter Analyzer error ""rule includes an unsupported expression""
+
+This occurs when comparing two ObjectServer fields against each other in a Filter.",swg21675858.txt,1,2,1,1,1,swg21675858.txt;swg1iz54766.txt;swg21624345.txt;swg1iz73857.txt;swg21566480.txt,doc_19587_chunk_0000;doc_04897_chunk_0001;doc_17538_chunk_0000;doc_05072_chunk_0000;doc_15767_chunk_0000,5.48501;5.15126;4.92598;4.85616;4.40488,1,1,swg21675858.txt;swg1iz54766.txt;swg21624345.txt;swg1iz73857.txt;swg21674718.txt,doc_19587_chunk_0000;doc_04897_chunk_0001;doc_17538_chunk_0000;doc_05072_chunk_0000;doc_19505_chunk_0000,5.48501;5.15126;4.92598;4.85616;4.76641,1,1,swg21675858.txt;swg1iz54766.txt;swg21624345.txt;swg1iz73857.txt;swg21674718.txt,doc_19587_chunk_0000;doc_04897_chunk_0001;doc_17538_chunk_0000;doc_05072_chunk_0000;doc_19505_chunk_0000,5.48501;5.15126;4.92598;4.85616;4.76641
+TRAIN_Q526,"Reporting in Rhapsody
+
+
+
+Hello All,
+
+I can't find the reports plus in my Rhapsody v8.1.2 x64
+
+anybody knows the reason.",swg27038779.txt,,,,0,,swg21451104.txt;swg1pm36366.txt;swg1pi71302.txt;swg21397517.txt;swg1pm65082.txt,doc_14010_chunk_0000;doc_09293_chunk_0000;doc_07458_chunk_0001;doc_12894_chunk_0001;doc_09647_chunk_0000,-0.91723;-0.93653;-0.96093;-2.48431;-3.78077,0,,swg1pm09352.txt;swg1pi28202.txt;swg21451104.txt;swg1pm36366.txt;swg1pi71302.txt,doc_08945_chunk_0001;doc_06772_chunk_0000;doc_14010_chunk_0000;doc_09293_chunk_0000;doc_07458_chunk_0001,1.42033;-0.18204;-0.91723;-0.93653;-0.96093,0,,swg1pm09352.txt;swg21424516.txt;swg1pi28202.txt;swg1pk89060.txt;swg21451104.txt,doc_08945_chunk_0001;doc_13430_chunk_0000;doc_06772_chunk_0000;doc_08754_chunk_0001;doc_14010_chunk_0000,1.42033;0.11681;-0.18204;-0.80880;-0.91723
+TRAIN_Q343,"Help with Security Bulletin: A security vulnerability has been identified in WebSphere Application Server shipped with WebSphere Service Registry and Repository (CVE-2017-1681)
+
+I need to understand details regarding Security Bulletin: A security vulnerability has been identified in WebSphere Application Server shipped with WebSphere Service Registry and Repository (CVE-2017-1681). Is WAS Liberty affected?",swg22010419.txt,,,,0,,swg22013233.txt;swg22013204.txt;swg21965152.txt;swg22003005.txt;swg21992907.txt,doc_25958_chunk_0000;doc_25955_chunk_0000;doc_22049_chunk_0000;doc_25022_chunk_0000;doc_24227_chunk_0000,7.93461;7.83072;7.67575;7.56161;7.50491,0,,swg22013233.txt;swg22013204.txt;swg21965152.txt;swg22003259.txt;swg22014520.txt,doc_25958_chunk_0000;doc_25955_chunk_0000;doc_22049_chunk_0000;doc_25042_chunk_0000;doc_26097_chunk_0000,7.93461;7.83072;7.67575;7.61079;7.56430,0,,swg22013233.txt;swg22013204.txt;swg21965152.txt;swg22003259.txt;swg22014520.txt,doc_25958_chunk_0000;doc_25955_chunk_0000;doc_22049_chunk_0000;doc_25042_chunk_0000;doc_26097_chunk_0000,7.93461;7.83072;7.67575;7.61079;7.56430
+DEV_Q122,"Importing Asset GL Errors
+
+ When importing or syncing with assets, I receive the following error for the glaccount.
+
+Internal Server Error
+Error 500: nested exception is: psdi.util.MXAccessException: BMXAA4198E - The GL attribute TLOAMNEWGLACCOUNT on object {1} requires an organization. Specify a value in the Organization field.",swg21969653.txt,1,3,1,1,1,swg21969653.txt;swg1iz89276.txt;swg1iv83104.txt;swg1iv67500.txt;swg1iv78083.txt,doc_22354_chunk_0000;doc_05204_chunk_0001;doc_04047_chunk_0001;doc_03791_chunk_0000;doc_03968_chunk_0001,3.84399;3.06038;2.57952;2.00390;0.62755,1,1,swg21969653.txt;swg1iz89276.txt;swg1iv83104.txt;swg1iz78090.txt;swg1iv67500.txt,doc_22354_chunk_0000;doc_05204_chunk_0001;doc_04047_chunk_0001;doc_05122_chunk_0000;doc_03791_chunk_0000,3.84399;3.06038;2.57952;2.15028;2.00390,1,1,swg21969653.txt;swg1iz89276.txt;swg1iv83104.txt;swg1iz78090.txt;swg1iv67500.txt,doc_22354_chunk_0000;doc_05204_chunk_0001;doc_04047_chunk_0001;doc_05122_chunk_0000;doc_03791_chunk_0000,3.84399;3.06038;2.57952;2.15028;2.00390
+TRAIN_Q222,"Composite Platform Installation Tool (CPIT) does not support IBM Tivoli Directory Server (ITDS) 6.3 on Red Hat Enterprise Linux
+
+
+
+When use the CPIT to install the FileNet P8 platform, the installation is not successful and the error occurs at ITDS installation, refer to the detailed error in cpit_install_stderr.txt:
+
+OUTPUT>========================================== OUTPUT>Setting Directories... OUTPUT>Mon Aug 11 08:20:00 SGT 2014 OUTPUT>/opt/IBM/cpit/decompressed/TDS/tdsV6.3/tds ERROR>./install_tds.bin: line 1956: warning: here-document at line 1956 delimited by end-of-file (wanted `/dev/null') OUTPUT>ERROR: /opt/IBM/ldap/V6.3/sbin/idsldif2db not found. TDS installation failed. Process completed with exit code: 1 ERROR in InvokeScripts-function - Terminate the remaining scripts. ***Aborting InvokeScripts-Install function.",swg21599258.txt,,14,16,0,,swg21998510.txt;swg21683906.txt;swg21498526.txt;swg21973837.txt;swg27020324.txt,doc_24607_chunk_0000;doc_19991_chunk_0000;doc_14917_chunk_0000;doc_22635_chunk_0000;doc_27532_chunk_0000,5.85064;4.98709;3.81354;3.27205;1.81757,0,8,swg21998510.txt;swg21683906.txt;swg1pj40828.txt;swg21498526.txt;swg21973837.txt,doc_24607_chunk_0000;doc_19991_chunk_0000;doc_07924_chunk_0000;doc_14917_chunk_0000;doc_22635_chunk_0000,5.85064;4.98709;3.92870;3.81354;3.27205,0,8,swg21998510.txt;swg21683906.txt;swg1pj40828.txt;swg21498526.txt;swg21973837.txt,doc_24607_chunk_0000;doc_19991_chunk_0000;doc_07924_chunk_0000;doc_14917_chunk_0000;doc_22635_chunk_0000,5.85064;4.98709;3.92870;3.81354;3.27205
+DEV_Q154,"Why are some Datatypes corrupt after Impact cluster failover/failback ?
+
+
+
+Running Impact 7.1.0.11. The symptom is whenever Impact does a failover, a couple DataTypes
+turn out empty.
+
+I've checked the type files before and after Impact failover and the difference happens in the property
+
+*.SQL.USERPARAMETERS
+
+This property no longer exists for the corrupted datatypes"".",swg21598417.txt,6,9,3,1,1,swg21598417.txt;swg21588811.txt;swg1iz81446.txt;swg24039742.txt;swg21578032.txt,doc_16683_chunk_0000;doc_16400_chunk_0000;doc_05145_chunk_0000;doc_27008_chunk_0045;doc_16114_chunk_0002,1.55343;1.45256;1.32872;0.41462;-0.12933,1,1,swg21598417.txt;swg21588811.txt;swg1iz81446.txt;swg1iy99622.txt;swg24039742.txt,doc_16683_chunk_0000;doc_16400_chunk_0000;doc_05145_chunk_0000;doc_04519_chunk_0000;doc_27008_chunk_0045,1.55343;1.45256;1.32872;0.66695;0.41462,1,1,swg21598417.txt;swg21619295.txt;swg21588811.txt;swg1iz81446.txt;swg21515407.txt,doc_16683_chunk_0000;doc_17347_chunk_0000;doc_16400_chunk_0000;doc_05145_chunk_0000;doc_15399_chunk_0000,1.55343;1.46090;1.45256;1.32872;1.27663
+DEV_Q158,"Must the TOKEN_SEPARATOR value be enclosed in quotes for the custom scripting feature?
+
+Must the TOKEN_SEPARATOR value be enclosed in quotes for the custom scripting feature?",swg21960062.txt,1,3,2,1,2,swg1pk27613.txt;swg21960062.txt;swg1pn59611.txt;swg21699894.txt;swg1pk67819.txt,doc_08190_chunk_0001;doc_21710_chunk_0022;doc_10079_chunk_0001;doc_21067_chunk_0007;doc_08520_chunk_0001,1.54425;-0.43205;-2.69966;-3.18731;-4.73020,1,2,swg1pk27613.txt;swg21960062.txt;swg1oa44764.txt;swg21606547.txt;swg1pn59611.txt,doc_08190_chunk_0001;doc_21710_chunk_0022;doc_06383_chunk_0002;doc_16852_chunk_0001;doc_10079_chunk_0001,1.54425;-0.43205;-0.87023;-2.68814;-2.69966,1,2,swg1pk27613.txt;swg21960062.txt;swg1oa44764.txt;swg21689540.txt;swg1iz24725.txt,doc_08190_chunk_0001;doc_21710_chunk_0022;doc_06383_chunk_0002;doc_20334_chunk_0002;doc_04662_chunk_0001,1.54425;-0.43205;-0.87023;-1.99802;-2.67822
+DEV_Q034,"Profiler for WebSphere 8
+
+
+
+Hi,
+
+We noticed that a was application server uses 1,4 Go of memory at startup, we would like to understand what java classes are using most part of it.
+
+Is a Java profiler provided by default with WAS 8.0 ? Is there something to activate via the WAS admin console ?
+
+ 
+
+Thanks a lot",swg21413628.txt,,,,0,,nas8n1020621.txt;nas8n1021317.txt;swg21572646.txt;swg21446987.txt;swg21459854.txt,doc_00666_chunk_0005;doc_00706_chunk_0000;doc_15964_chunk_0002;doc_13900_chunk_0002;doc_14227_chunk_0002,-0.16234;-0.63719;-0.93555;-1.76975;-2.33258,0,,swg21307233.txt;swg27024872.txt;swg21227729.txt;nas8n1020621.txt;swg27042119.txt,doc_11922_chunk_0001;doc_27687_chunk_0002;doc_11095_chunk_0002;doc_00666_chunk_0005;doc_27959_chunk_0000,1.04570;0.39349;0.32831;-0.16234;-0.54989,0,,swg21307233.txt;swg27024872.txt;swg21227729.txt;swg1pk71528.txt;nas8n1020621.txt,doc_11922_chunk_0001;doc_27687_chunk_0002;doc_11095_chunk_0002;doc_08560_chunk_0001;doc_00666_chunk_0005,1.04570;0.39349;0.32831;-0.04472;-0.16234
+TRAIN_Q456,"zonecfg error while starting nodeagent and dmgr
+
+
+
+I saw zonecfg error while starting nodeagent and dmgr in solaris server
+
+My env is Oracle Solaris 11.2 SPARC, and WAS is 8558, jave 1.7. [1/22/16 21:31:18:379 AEDT] 00000001 SystemOut O java.lang.Exception: command /usr/sbin/zonecfg failed with 1 at com.ibm.ws.xd.agent.hypervisor.SolarisHypervisor.executeCommand(SolarisHypervisor.java:357) at com.ibm.ws.xd.agent.hypervisor.SolarisHypervisor.access$100 (SolarisHypervisor.java:30) at com.ibm.ws.xd.agent.hypervisor.SolarisHypervisor$Zone.processZoneCfg(SolarisHypervisor.java:570) at com.ibm.ws.xd.agent.hypervisor.SolarisHypervisor$Zone.(SolarisHypervisor.java:461) at com.ibm.ws.xd.agent.hypervisor.SolarisHypervisor ..... Is that normal behavior and what's the exactly meaning of the error?",swg21626683.txt,1,1,1,1,1,swg21626683.txt;swg21297639.txt;swg1ij00081.txt;swg21551427.txt;swg1iz66275.txt,doc_17635_chunk_0000;doc_11794_chunk_0000;doc_02080_chunk_0001;doc_15643_chunk_0000;doc_04982_chunk_0004,0.37449;-2.13497;-2.13607;-3.00882;-3.36438,1,1,swg21626683.txt;swg1iv76071.txt;swg21294171.txt;swg1pm85345.txt;swg21297639.txt,doc_17635_chunk_0000;doc_03937_chunk_0000;doc_11761_chunk_0003;doc_09880_chunk_0003;doc_11794_chunk_0000,0.37449;-1.00922;-1.22182;-1.59556;-2.13497,1,2,swg1pk78858.txt;swg21626683.txt;swg21598372.txt;swg1iv76071.txt;swg21294171.txt,doc_08645_chunk_0000;doc_17635_chunk_0000;doc_16682_chunk_0001;doc_03937_chunk_0000;doc_11761_chunk_0003,1.18788;0.37449;-0.48890;-1.00922;-1.22182
+TRAIN_Q380,"How do I view Custodian Notes in Atlas Preservation Plan?
+
+How do I view Custodian Notes in Atlas Preservation Plan?",swg21981880.txt,1,1,1,1,1,swg21981880.txt;swg27044173.txt;swg1he11993.txt;swg21639241.txt;swg21989919.txt,doc_23346_chunk_0000;doc_28051_chunk_0001;doc_01247_chunk_0001;doc_18041_chunk_0000;doc_23993_chunk_0000,8.96424;7.15157;5.66479;3.19564;2.20724,1,1,swg21981880.txt;swg27044173.txt;swg1he11993.txt;swg21639241.txt;swg21989919.txt,doc_23346_chunk_0000;doc_28051_chunk_0001;doc_01247_chunk_0001;doc_18041_chunk_0000;doc_23993_chunk_0000,8.96424;7.15157;5.66479;3.19563;2.20724,1,1,swg21981880.txt;swg27044173.txt;swg1he11993.txt;swg21639241.txt;swg21989919.txt,doc_23346_chunk_0000;doc_28051_chunk_0001;doc_01247_chunk_0001;doc_18041_chunk_0000;doc_23993_chunk_0000,8.96424;7.15157;5.66479;3.19563;2.20724
+TRAIN_Q171,"Help with Security Bulletin: Security vulnerabilities have been identified in IBM DB2 shipped with WebSphere Remote Server (CVE-2014-8730)
+
+I need to understand details regarding Security Bulletin: Security vulnerabilities have been identified in IBM DB2 shipped with WebSphere Remote Server (CVE-2014-8730). Where can I find this information?",swg21700633.txt,1,18,4,1,2,swg21674944.txt;swg21700633.txt;swg21676326.txt;swg21701696.txt;swg21674593.txt,doc_19524_chunk_0000;doc_21131_chunk_0000;doc_19615_chunk_0000;doc_21228_chunk_0000;doc_19498_chunk_0000,8.07120;8.02506;7.98679;7.90367;7.64306,1,2,swg21674944.txt;swg21700633.txt;swg21676326.txt;swg21701696.txt;swg21674593.txt,doc_19524_chunk_0000;doc_21131_chunk_0000;doc_19615_chunk_0000;doc_21228_chunk_0000;doc_19498_chunk_0000,8.07120;8.02506;7.98679;7.90367;7.64306,1,2,swg21674944.txt;swg21700633.txt;swg21676326.txt;swg21701696.txt;swg21674593.txt,doc_19524_chunk_0000;doc_21131_chunk_0000;doc_19615_chunk_0000;doc_21228_chunk_0000;doc_19498_chunk_0000,8.07120;8.02506;7.98679;7.90367;7.64306
+TRAIN_Q003,"How to configure SSL mutual authentication in IBM HTTP Server?
+
+
+
+We are running IHS v7 and our application team has a specific webservice that they require SSL mutual authentication to be enabled for at the http server. Does anyone know how to set this up on IHS? Or any documentation?
+
+Thanks",swg21179559.txt,26,3,3,0,7,swg21425960.txt;swg21260155.txt;nas8n1020262.txt;swg27016948.txt;swg21973130.txt,doc_13461_chunk_0000;doc_11433_chunk_0000;doc_00642_chunk_0000;doc_27438_chunk_0000;doc_22588_chunk_0000,4.90453;4.84428;4.72338;4.08164;4.07390,0,8,swg21425960.txt;swg21260155.txt;nas8n1020262.txt;swg27016948.txt;swg21973130.txt,doc_13461_chunk_0000;doc_11433_chunk_0000;doc_00642_chunk_0000;doc_27438_chunk_0000;doc_22588_chunk_0000,4.90453;4.84428;4.72338;4.08164;4.07390,0,10,swg21425960.txt;swg21260155.txt;nas8n1020262.txt;swg27016948.txt;swg21973130.txt,doc_13461_chunk_0000;doc_11433_chunk_0000;doc_00642_chunk_0000;doc_27438_chunk_0000;doc_22588_chunk_0000,4.90453;4.84428;4.72338;4.08164;4.07390
+TRAIN_Q372,"How to fix error CRIMA1217E when upgrade JAZZ from 1.1.0 to 1.1.3 failed?
+
+How to fix problem when upgrade JAZZ from 1.1.0 to 1.1.3 failed?",swg21985946.txt,,26,28,0,,swg21997234.txt;swg21959612.txt;swg21698820.txt;swg21403259.txt;swg27038034.txt,doc_24530_chunk_0000;doc_21671_chunk_0001;doc_20984_chunk_0003;doc_12978_chunk_0004;doc_27781_chunk_0001,4.18886;3.13618;3.05003;2.84816;2.53561,1,1,swg21985946.txt;swg21997234.txt;swg21959612.txt;swg21646319.txt;swg21698820.txt,doc_23697_chunk_0000;doc_24530_chunk_0000;doc_21671_chunk_0001;doc_18309_chunk_0001;doc_20984_chunk_0003,5.01617;4.18886;3.13618;3.07495;3.05003,1,1,swg21985946.txt;swg21660384.txt;swg21426711.txt;swg21997234.txt;swg21985803.txt,doc_23697_chunk_0000;doc_18815_chunk_0003;doc_13481_chunk_0001;doc_24530_chunk_0000;doc_23683_chunk_0000,5.01617;4.34300;4.22924;4.18886;3.99894
+TRAIN_Q070,"How do I search for a string which has reserved words or characters when searching in documents in Atlas?
+
+How do I search for a string which has reserved words or characters when searching in documents in Atlas?",swg21982451.txt,1,1,1,1,1,swg21982451.txt;swg21100436.txt;swg21246286.txt;swg21102586.txt;swg21996232.txt,doc_23398_chunk_0000;doc_10530_chunk_0001;doc_11274_chunk_0001;doc_10534_chunk_0000;doc_24471_chunk_0000,8.67460;4.18720;4.02570;2.84250;1.29968,1,1,swg21982451.txt;nas8n1015483.txt;swg21100436.txt;swg21246286.txt;swg1pk13407.txt,doc_23398_chunk_0000;doc_00522_chunk_0001;doc_10530_chunk_0001;doc_11274_chunk_0001;doc_08107_chunk_0001,8.67460;4.32825;4.18720;4.02570;3.18002,1,1,swg21982451.txt;nas8n1015483.txt;swg21100436.txt;swg21246286.txt;swg1pk13407.txt,doc_23398_chunk_0000;doc_00522_chunk_0001;doc_10530_chunk_0001;doc_11274_chunk_0001;doc_08107_chunk_0001,8.67460;4.32825;4.18720;4.02570;3.18002
+TRAIN_Q592,"Do the  Bash Bug  vulnerabilities affect WebSphere MQ Hypervisor?
+
+Do the Bourne Again Shell (Bash) vulnerabilities known as Bash Bugs or Shellshock affect WebSphere MQ Hypervisor and if so, what action is required to address this situation?",swg21685666.txt,1,2,2,1,4,swg21685604.txt;swg21685673.txt;swg21685528.txt;swg21685666.txt;swg21685433.txt,doc_20086_chunk_0000;doc_20093_chunk_0000;doc_20076_chunk_0000;doc_20091_chunk_0000;doc_20065_chunk_0000,4.06239;3.47849;3.25561;3.14294;2.21840,1,4,swg21685604.txt;swg21685673.txt;swg21685528.txt;swg21685666.txt;swg21685435.txt,doc_20086_chunk_0000;doc_20093_chunk_0000;doc_20076_chunk_0000;doc_20091_chunk_0000;doc_20066_chunk_0000,4.06239;3.47849;3.25561;3.14294;2.69139,1,5,swg21685851.txt;swg21685604.txt;swg21685673.txt;swg21685528.txt;swg21685666.txt,doc_20115_chunk_0000;doc_20086_chunk_0000;doc_20093_chunk_0000;doc_20076_chunk_0000;doc_20091_chunk_0000,4.06586;4.06239;3.47849;3.25561;3.14294
+DEV_Q306,"Unable to view batches in DotEdit
+
+
+
+Hi all,
+
+Is there any limitation to view batches in Dot Edit client application, because I am unable to see batches with QID more than 1119.
+
+Also unable to see batches with status as ""Pending"".",swg21642839.txt,3,1,1,1,3,swg1io24002.txt;swg27047895.txt;swg21642839.txt;swg21694159.txt;swg21608052.txt,doc_02272_chunk_0001;doc_28198_chunk_0005;doc_18171_chunk_0000;doc_20637_chunk_0000;doc_16923_chunk_0000,1.89210;1.21199;0.90182;0.20761;0.10565,1,3,swg1io24002.txt;swg27047895.txt;swg21642839.txt;swg21597217.txt;swg21694159.txt,doc_02272_chunk_0001;doc_28198_chunk_0005;doc_18171_chunk_0000;doc_16638_chunk_0000;doc_20637_chunk_0000,1.89210;1.21199;0.90182;0.51204;0.20761,1,4,swg1io24002.txt;swg1io26281.txt;swg27047895.txt;swg21642839.txt;swg21597217.txt,doc_02272_chunk_0001;doc_02348_chunk_0000;doc_28198_chunk_0005;doc_18171_chunk_0000;doc_16638_chunk_0000,1.89210;1.49126;1.21199;0.90182;0.51204
+TRAIN_Q463,"Can Portal prevent the usage of simultaneous logins with the same userID?
+
+Is it possible for WebSphere Portal to limit the usage of a userID to one authenticated session as a time? In other words, prevent authenticating to Portal as ""user1"" from one browser and then simultaneously authenticating to Portal again as ""user1"" from another browser?",swg21227799.txt,1,1,1,1,1,swg21227799.txt;swg21224029.txt;swg21505013.txt;swg21253578.txt;swg21296083.txt,doc_11096_chunk_0000;doc_11074_chunk_0001;doc_15154_chunk_0001;doc_11345_chunk_0001;doc_11777_chunk_0001,4.46168;3.70437;2.34873;2.33240;1.13798,1,1,swg21227799.txt;swg21224029.txt;swg21505013.txt;swg21253578.txt;swg1iv24771.txt,doc_11096_chunk_0000;doc_11074_chunk_0001;doc_15154_chunk_0001;doc_11345_chunk_0001;doc_03321_chunk_0003,4.46168;3.70437;2.34873;2.33240;1.18827,1,1,swg21227799.txt;swg21224029.txt;swg21505013.txt;swg21253578.txt;swg1iv24771.txt,doc_11096_chunk_0000;doc_11074_chunk_0001;doc_15154_chunk_0001;doc_11345_chunk_0001;doc_03321_chunk_0003,4.46168;3.70437;2.34873;2.33240;1.18827
+TRAIN_Q221,"Case Analyzer is not working
+
+
+
+CaseAnalyzer is not working, no latest audit log although service is running
+
+Error in log:
+
+""CAPublisher c2dce3b9 [Error] Unexpected exception occurred while processing task CAPublisher for store CASTORE.; Exception: com.microsoft.sqlserver.jdbc.SQLServerException: The query processor ran out of internal resources and could not produce a query plan. This is a rare event and only expected for extremely complex queries or queries that reference a very large number of tables or partitions. Please simplify the query. If you believe you have received this message in error, contact Customer Support Services for more information.""",swg22004617.txt,36,,64,0,,swg22012121.txt;swg21989683.txt;swg21883490.txt;swg1pj44871.txt;swg1jr41244.txt,doc_25854_chunk_0000;doc_23975_chunk_0001;doc_21380_chunk_0000;doc_08027_chunk_0000;doc_05439_chunk_0000,1.37132;-0.74436;-2.85226;-2.95122;-3.34708,0,,swg22012121.txt;swg21989683.txt;swg21883490.txt;swg1pj44871.txt;swg1pi88874.txt,doc_25854_chunk_0000;doc_23975_chunk_0001;doc_21380_chunk_0000;doc_08027_chunk_0000;doc_07702_chunk_0000,1.37132;-0.74436;-2.85226;-2.95122;-2.96062,0,,swg22012121.txt;swg21989683.txt;swg21883490.txt;swg1pj44871.txt;swg1pi88874.txt,doc_25854_chunk_0000;doc_23975_chunk_0001;doc_21380_chunk_0000;doc_08027_chunk_0000;doc_07702_chunk_0000,1.37132;-0.74436;-2.85226;-2.95122;-2.96062
+TRAIN_Q044,"Authorization code missing for SPSS 25?
+
+I purchased the IBM SPSS from Amazon, and I do not know where to locate the authorization code of license code/key. Can anyone help me?",swg21592093.txt,,,,0,,swg21476498.txt;swg21486143.txt;swg21638833.txt;swg21684196.txt;swg21480568.txt,doc_14490_chunk_0000;doc_14766_chunk_0000;doc_18024_chunk_0000;doc_20003_chunk_0000;doc_14640_chunk_0000,4.02788;3.38296;2.71273;2.52092;2.44511,0,,swg21476498.txt;swg21486143.txt;swg21594747.txt;swg21484650.txt;swg21477068.txt,doc_14490_chunk_0000;doc_14766_chunk_0000;doc_16565_chunk_0000;doc_14729_chunk_0001;doc_14514_chunk_0000,4.02788;3.38296;3.31060;2.91154;2.83508,0,,swg21476498.txt;swg21486143.txt;swg21594747.txt;swg21484650.txt;swg21477068.txt,doc_14490_chunk_0000;doc_14766_chunk_0000;doc_16565_chunk_0000;doc_14729_chunk_0001;doc_14514_chunk_0000,4.02788;3.38296;3.31060;2.91154;2.83509
+TRAIN_Q360,"Is it possible to monitor Memory/LPAR metrics using ITM HMC agent?
+
+I understand the ITM AIX Premium agent captures these metrics but like to know if it is possible to monitor Memory/LPAR metrics using ITM HMC agent?",swg24042283.txt,20,46,28,0,,swg21683210.txt;swg21597868.txt;swg21609678.txt;swg21600322.txt;swg1iz65316.txt,doc_19961_chunk_0001;doc_16666_chunk_0000;doc_16984_chunk_0000;doc_16761_chunk_0000;doc_04974_chunk_0001,4.67374;3.13769;3.11219;3.06858;3.01754,0,18,swg21683210.txt;swg21597868.txt;swg21609678.txt;swg21600322.txt;swg1iz65316.txt,doc_19961_chunk_0001;doc_16666_chunk_0000;doc_16984_chunk_0000;doc_16761_chunk_0000;doc_04974_chunk_0001,4.67374;3.13769;3.11219;3.06858;3.01754,0,24,swg21683210.txt;swg21597868.txt;swg21609678.txt;swg21600322.txt;swg1iz65316.txt,doc_19961_chunk_0001;doc_16666_chunk_0000;doc_16984_chunk_0000;doc_16761_chunk_0000;doc_04974_chunk_0001,4.67374;3.13769;3.11219;3.06858;3.01754
+TRAIN_Q272,"Why are we seeing MQRC_NOT_AUTHORIZED errors after upgrading Websphere from V7.0 to V8.5.5?
+
+https://www-01.ibm.com/support/docview.wss?uid=swg21662193",swg21662193.txt,,37,33,0,,swg21420469.txt;swg21636093.txt;swg1iy81628.txt;swg1se44314.txt;swg21138961.txt,doc_13328_chunk_0000;doc_17912_chunk_0000;doc_04407_chunk_0000;doc_10326_chunk_0001;doc_10686_chunk_0000,5.61246;4.86536;4.39520;4.03334;3.95423,0,,swg21420469.txt;swg21636093.txt;swg1iy81628.txt;swg1pm40148.txt;swg1se44314.txt,doc_13328_chunk_0000;doc_17912_chunk_0000;doc_04407_chunk_0000;doc_09334_chunk_0003;doc_10326_chunk_0001,5.61246;4.86536;4.39520;4.22700;4.03334,0,10,swg21420469.txt;swg21636093.txt;swg21685549.txt;swg1iy81628.txt;swg1pm40148.txt,doc_13328_chunk_0000;doc_17912_chunk_0000;doc_20079_chunk_0001;doc_04407_chunk_0000;doc_09334_chunk_0003,5.61246;4.86536;4.45840;4.39520;4.22701
+DEV_Q114,"Any difference between DB2 z/OS V9.1 + IBM Cobol and DB2 LUW V10.5 FP7 + MF Cobol?
+
+We are planning below migration.
+
+[Current]
+DB2 z/OS V9.1 + IBM Cobol
+[New]
+DB2 AESE V10.5 FP7 / AIX V7.1 + Micro Focus Cobol (MF Cobol)
+
+Any known limitation or things what we need to concern?",swg21989702.txt,13,2,2,1,1,swg21989702.txt;swg1pk74872.txt;swg1pq83744.txt;swg21986065.txt;swg22007296.txt,doc_23977_chunk_0001;doc_08605_chunk_0001;doc_10167_chunk_0000;doc_23704_chunk_0000;doc_25407_chunk_0000,1.24961;0.19920;0.14040;-0.32187;-0.97306,1,2,swg21420314.txt;swg21989702.txt;swg21610862.txt;swg21687935.txt;swg22011650.txt,doc_13323_chunk_0000;doc_23977_chunk_0001;doc_17037_chunk_0000;doc_20239_chunk_0000;doc_25807_chunk_0002,1.69547;1.24961;1.20280;1.13000;0.82787,1,3,swg21420314.txt;swg21688554.txt;swg21989702.txt;swg21610862.txt;swg21687935.txt,doc_13323_chunk_0000;doc_20286_chunk_0001;doc_23977_chunk_0001;doc_17037_chunk_0000;doc_20239_chunk_0000,1.69547;1.54561;1.24961;1.20280;1.13000
+TRAIN_Q422,"Help with Security Bulletin: Vulnerability in SSLv3 affects IID and WID (CVE-2014-3566)
+
+I need to understand details regarding Security Bulletin: Vulnerability in SSLv3 affects IBM Integration Designer and WebSphere Integration Developer (CVE-2014-3566). Where can I find this information?",swg21689914.txt,1,3,1,1,2,swg21687405.txt;swg21689914.txt;swg21689152.txt;swg21689730.txt;swg21689726.txt,doc_20208_chunk_0002;doc_20360_chunk_0000;doc_20313_chunk_0000;doc_20343_chunk_0000;doc_20342_chunk_0000,5.14287;5.08771;4.43410;4.32057;4.30524,1,3,swg21700896.txt;swg21687405.txt;swg21689914.txt;swg21687638.txt;swg21689918.txt,doc_21154_chunk_0000;doc_20208_chunk_0002;doc_20360_chunk_0000;doc_20223_chunk_0000;doc_20361_chunk_0004,5.44013;5.14287;5.08771;5.00220;4.78587,1,3,swg21700896.txt;swg21687405.txt;swg21689914.txt;swg21687638.txt;swg21691604.txt,doc_21154_chunk_0000;doc_20208_chunk_0002;doc_20360_chunk_0000;doc_20223_chunk_0000;doc_20452_chunk_0000,5.44013;5.14287;5.08771;5.00220;4.81557
+TRAIN_Q165,"Is Java 8 supported for EJBDeploy on WebSphere Application Server 8.5.5.9 or later?
+
+Is Java 8 supported for EJBDeploy on WebSphere Application Server 8.5.5.9 or later?",swg21994741.txt,13,3,3,1,5,swg24043474.txt;swg1pi73197.txt;swg21994742.txt;swg1pi53589.txt;swg21994741.txt,doc_27199_chunk_0000;doc_07480_chunk_0000;doc_24370_chunk_0003;doc_07182_chunk_0001;doc_24369_chunk_0001,8.60015;8.25945;7.09944;6.51355;4.07746,0,10,swg24043474.txt;swg1pi73197.txt;swg21994742.txt;swg1pi53589.txt;swg21986722.txt,doc_27199_chunk_0000;doc_07480_chunk_0000;doc_24370_chunk_0003;doc_07182_chunk_0001;doc_23763_chunk_0001,8.60014;8.25945;7.09944;6.51355;5.76892,0,16,swg24043474.txt;swg1pi73197.txt;swg21994742.txt;swg1pi53589.txt;swg21986722.txt,doc_27199_chunk_0000;doc_07480_chunk_0000;doc_24370_chunk_0003;doc_07182_chunk_0001;doc_23763_chunk_0001,8.60015;8.25945;7.09944;6.51355;5.76892
+TRAIN_Q233,"Help with Security Bulletin: API Connect is affected by a cross-site scripting vulnerability CVE-2018-1382
+
+I need to understand details regarding Security Bulletin: API Connect is affected by a cross-site scripting vulnerability CVE-2018-1382. Where can I find this information?",swg22013054.txt,1,1,1,1,1,swg22013054.txt;swg22013058.txt;swg22008372.txt;swg22015968.txt;swg22015105.txt,doc_25934_chunk_0000;doc_25935_chunk_0000;doc_25501_chunk_0000;doc_26251_chunk_0000;doc_26159_chunk_0000,7.71384;7.10031;6.72406;5.92765;5.68633,1,1,swg22013054.txt;swg22013058.txt;swg22008372.txt;swg22015968.txt;swg22015105.txt,doc_25934_chunk_0000;doc_25935_chunk_0000;doc_25501_chunk_0000;doc_26251_chunk_0000;doc_26159_chunk_0000,7.71384;7.10031;6.72406;5.92765;5.68633,1,1,swg22013054.txt;swg22013058.txt;swg22008372.txt;swg22015968.txt;swg22015105.txt,doc_25934_chunk_0000;doc_25935_chunk_0000;doc_25501_chunk_0000;doc_26251_chunk_0000;doc_26159_chunk_0000,7.71384;7.10031;6.72406;5.92765;5.68633
+TRAIN_Q071,"Why does my upgrade to BigFix version 9.2.5 take a very long time?
+
+My upgrade to BigFix version 9.2.5 takes a very long time. What do I need to do?",swg21962862.txt,47,9,9,1,2,swg22011128.txt;swg21962862.txt;swg1iv88883.txt;swg22015035.txt;swg21995816.txt,doc_25761_chunk_0002;doc_21914_chunk_0000;doc_04120_chunk_0001;doc_26147_chunk_0004;doc_24438_chunk_0006,3.87237;1.68783;1.28686;1.05583;0.72678,1,4,swg22011128.txt;swg22011230.txt;swg22002870.txt;swg21962862.txt;swg1iv90104.txt,doc_25761_chunk_0002;doc_25769_chunk_0001;doc_25002_chunk_0005;doc_21914_chunk_0000;doc_04143_chunk_0001,3.87237;3.16876;2.56291;1.68783;1.43650,1,4,swg22011128.txt;swg22011230.txt;swg22002870.txt;swg21962862.txt;swg1iv90104.txt,doc_25761_chunk_0002;doc_25769_chunk_0001;doc_25002_chunk_0005;doc_21914_chunk_0000;doc_04143_chunk_0001,3.87237;3.16876;2.56291;1.68783;1.43650
+TRAIN_Q553,"Help with Security Bulletin: Multiple vulnerabilities in IBM Java SDK affect IBM Image Construction and Composition Tool (CVE-2014-3566 and CVE-2014-6457)
+
+I need to understand details regarding ""Security Bulletin: Multiple vulnerabilities in IBM Java SDK affect IBM Image Construction and Composition Tool (CVE-2014-3566 and CVE-2014-6457) ."" Where can I find this information?",swg21903249.txt,1,6,4,1,4,swg21962370.txt;swg21983644.txt;swg21997055.txt;swg21903249.txt;swg21980640.txt,doc_21888_chunk_0000;doc_23515_chunk_0000;doc_24517_chunk_0000;doc_21516_chunk_0000;doc_23237_chunk_0000,6.90868;6.68805;6.67677;6.64873;6.51041,1,5,swg21962837.txt;swg21962370.txt;swg21983644.txt;swg21997055.txt;swg21903249.txt,doc_21912_chunk_0000;doc_21888_chunk_0000;doc_23515_chunk_0000;doc_24517_chunk_0000;doc_21516_chunk_0000,7.14445;6.90868;6.68805;6.67677;6.64873,0,6,swg21962837.txt;swg21971907.txt;swg21962370.txt;swg21983644.txt;swg21997055.txt,doc_21912_chunk_0000;doc_22501_chunk_0000;doc_21888_chunk_0000;doc_23515_chunk_0000;doc_24517_chunk_0000,7.14445;7.07587;6.90868;6.68805;6.67677
+TRAIN_Q234,"How do I create a windows service for WebSphere Application Server version 7.0.X?
+
+Is there a tool that can help me create the windows service in an automated form?",swg21397335.txt,34,1,3,1,5,swg21201697.txt;swg21368020.txt;swg21568262.txt;swg21195440.txt;swg21397335.txt,doc_10931_chunk_0001;doc_12459_chunk_0001;doc_15832_chunk_0001;doc_10894_chunk_0003;doc_12889_chunk_0001,7.78762;5.99403;5.33190;4.52304;4.42337,0,6,swg21201697.txt;swg21517154.txt;swg21368020.txt;swg21568262.txt;swg21195440.txt,doc_10931_chunk_0001;doc_15459_chunk_0005;doc_12459_chunk_0001;doc_15832_chunk_0001;doc_10894_chunk_0003,7.78762;6.45853;5.99403;5.33190;4.52304,0,8,swg21201697.txt;swg21517154.txt;swg21368020.txt;swg21568262.txt;swg21282839.txt,doc_10931_chunk_0001;doc_15459_chunk_0005;doc_12459_chunk_0001;doc_15832_chunk_0001;doc_11637_chunk_0002,7.78762;6.45853;5.99403;5.33190;5.15104
+TRAIN_Q579,"Trouble downloading SPSS Statistics free trial
+
+I am trying to download the free trial version of SPSS Statistics version 24. I'm a graduate student and want to try it out on my Mac OS X 10.9.5 laptop. However, when I get to the ""confirm"" part, it keeps showing me an error message saying ""can't save profile."" How do you go about fixing this and getting it installed? Thanks!",swg21507587.txt,,1,1,1,3,swg24041224.txt;swg24043574.txt;swg21507587.txt;swg21606447.txt;swg21607077.txt,doc_27059_chunk_0000;doc_27206_chunk_0003;doc_15244_chunk_0001;doc_16850_chunk_0003;doc_16877_chunk_0000,3.61435;-1.10407;-1.45438;-1.68350;-1.74887,0,8,swg24041224.txt;swg21672109.txt;swg21903724.txt;swg27049540.txt;swg21688476.txt,doc_27059_chunk_0000;doc_19369_chunk_0000;doc_21548_chunk_0000;doc_28298_chunk_0002;doc_20278_chunk_0000,3.61435;1.76227;0.81026;-0.48522;-1.00481,0,9,swg24041224.txt;swg21672109.txt;swg21903724.txt;swg27049540.txt;swg21688476.txt,doc_27059_chunk_0000;doc_19369_chunk_0000;doc_21548_chunk_0000;doc_28298_chunk_0002;doc_20278_chunk_0000,3.61435;1.76227;0.81026;-0.48522;-1.00481
+DEV_Q305,"Cognos Analytics - Images not displayed in PDF/Excel, working in HTML
+
+I've just completed an upgrade to Cognos Analytics 11.0.3. When running existing reports in HTML, the images are displayed but when I try to run them in PDF/Excel they are not.",swg21656263.txt,5,16,9,0,9,swg22016849.txt;swg22010233.txt;swg21621242.txt;swg21340590.txt;swg22015168.txt,doc_26348_chunk_0000;doc_25697_chunk_0000;doc_17407_chunk_0001;doc_12293_chunk_0000;doc_26167_chunk_0001,5.73471;5.51032;3.19302;2.67211;2.30453,0,27,swg22016849.txt;swg22010233.txt;swg21992627.txt;swg21998523.txt;swg21982010.txt,doc_26348_chunk_0000;doc_25697_chunk_0000;doc_24208_chunk_0000;doc_24608_chunk_0000;doc_23356_chunk_0000,5.73471;5.51032;4.46114;4.18789;3.63000,0,37,swg22016849.txt;swg22010233.txt;swg21992627.txt;swg21998523.txt;swg21982010.txt,doc_26348_chunk_0000;doc_25697_chunk_0000;doc_24208_chunk_0000;doc_24608_chunk_0000;doc_23356_chunk_0000,5.73471;5.51032;4.46114;4.18789;3.63000
+TRAIN_Q599,"ICC configuration manager error: This implementation is not part of the Windows Platform FIPS validated cryptographic algorithms.
+
+When saving changes in ICC configuration manager, an ""Application Error"" window pops up.
+
+Error:
+
+A severe error occurred.
+
+Problem:
+
+Exception has been thrown by the target of an invocation.
+
+Solution:
+
+Contact IBM Software Support with this error message (see Details).
+
+Click on the Details button and the following stack trace is reported:
+
+Details
+
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor) at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+
+.....
+
+.....
+
+System.InvalidOperationException: This implementation is not part of the Windows Platform FIPS validated cryptographic algorithms.
+
+at System.Security.Cryptography.MD5CryptoServiceProvider..ctor()
+
+What is causing this?",swg21991690.txt,1,1,1,1,1,swg21991690.txt;swg21985877.txt;swg21974382.txt;swg21581427.txt;swg21607104.txt,doc_24142_chunk_0000;doc_23690_chunk_0000;doc_22681_chunk_0000;doc_16221_chunk_0000;doc_16880_chunk_0000,2.99539;1.09327;-1.88263;-3.12830;-3.89570,1,1,swg21991690.txt;swg21389286.txt;swg21980418.txt;swg21985877.txt;swg21671568.txt,doc_24142_chunk_0000;doc_12738_chunk_0000;doc_23214_chunk_0000;doc_23690_chunk_0000;doc_19337_chunk_0001,2.99539;1.51711;1.40152;1.09327;-0.42785,1,1,swg21991690.txt;swg21389286.txt;swg21980418.txt;swg21985877.txt;swg1he12015.txt,doc_24142_chunk_0000;doc_12738_chunk_0000;doc_23214_chunk_0000;doc_23690_chunk_0000;doc_01251_chunk_0001,2.99539;1.51711;1.40152;1.09327;1.01616
+TRAIN_Q075,"Where can I get Tivoli Monitoring Agent for Sybase Server 620 FP2 (6.2.0-TIV-ITM_SYB-FP0002)?
+
+Where can I get Tivoli Composite Application Manager for Applications 721 FP2: Monitoring Agent for Sybase Server 620 FP2 (6.2.0-TIV-ITM_SYB-FP0002)? I can't find this on Fix Central.",swg24044440.txt,1,1,1,1,1,swg24044440.txt;swg1iv95149.txt;swg22006414.txt;swg24035402.txt;swg24041633.txt,doc_27256_chunk_0000;doc_04219_chunk_0000;doc_25325_chunk_0001;doc_26824_chunk_0002;doc_27092_chunk_0002,4.12209;3.79841;3.12819;2.07143;2.05936,1,1,swg24044440.txt;swg1iv95149.txt;swg1iy99386.txt;swg22006414.txt;swg1iz11539.txt,doc_27256_chunk_0000;doc_04219_chunk_0000;doc_04516_chunk_0000;doc_25325_chunk_0001;doc_04596_chunk_0000,4.12209;3.79841;3.50524;3.12819;2.44886,1,1,swg24044440.txt;swg1iv95149.txt;swg1iy99386.txt;swg22006414.txt;swg1iz05396.txt,doc_27256_chunk_0000;doc_04219_chunk_0000;doc_04516_chunk_0000;doc_25325_chunk_0001;doc_04563_chunk_0000,4.12209;3.79841;3.50524;3.12819;3.08604
+TRAIN_Q225,"Why the Portal 7.0.0.2 - CF29 upgrade is failing ?
+
+Why the Portal 7.0.0.2 - CF29 upgrade is failing ?",swg21569953.txt,,,,0,,swg21884042.txt;swg21690482.txt;swg21677833.txt;swg22011519.txt;swg21691034.txt,doc_21418_chunk_0000;doc_20390_chunk_0000;doc_19685_chunk_0000;doc_25798_chunk_0001;doc_20429_chunk_0000,5.31967;4.99973;3.92445;3.79561;3.27478,0,,swg21884042.txt;swg21690482.txt;swg21677833.txt;swg22011519.txt;swg21691034.txt,doc_21418_chunk_0000;doc_20390_chunk_0000;doc_19685_chunk_0000;doc_25798_chunk_0001;doc_20429_chunk_0000,5.31967;4.99973;3.92445;3.79561;3.27478,0,,swg21884042.txt;swg21690482.txt;swg21578509.txt;swg21677833.txt;swg21469910.txt,doc_21418_chunk_0000;doc_20390_chunk_0000;doc_16127_chunk_0000;doc_19685_chunk_0000;doc_14359_chunk_0003,5.31967;4.99973;3.96043;3.92445;3.84339
+TRAIN_Q111,"How to find details of Corrupted Object from the entries in db2diag.log?
+
+We have corruption in DB2 Database and got entries for corrupted Object in db2diag.log ,Need to find details of the Object using information dumped in db2diag.log",swg21983129.txt,1,1,1,1,1,swg21983129.txt;swg22001505.txt;swg1it00510.txt;swg21666034.txt;swg22001502.txt,doc_23470_chunk_0000;doc_24878_chunk_0000;doc_02372_chunk_0002;doc_19047_chunk_0000;doc_24877_chunk_0000,9.09154;5.24456;5.04206;5.02079;4.89681,1,1,swg21983129.txt;swg22001505.txt;swg1it00392.txt;swg1it00510.txt;swg21666034.txt,doc_23470_chunk_0000;doc_24878_chunk_0000;doc_02371_chunk_0002;doc_02372_chunk_0002;doc_19047_chunk_0000,9.09154;5.24456;5.19449;5.04206;5.02079,1,1,swg21983129.txt;swg22001505.txt;swg1it00392.txt;swg1it00510.txt;swg21666034.txt,doc_23470_chunk_0000;doc_24878_chunk_0000;doc_02371_chunk_0002;doc_02372_chunk_0002;doc_19047_chunk_0000,9.09154;5.24456;5.19449;5.04206;5.02079
+TRAIN_Q504,"OMNIBUS   nco_p_mttrapd : Malformed traps
+
+How can you determine why the MTTrapd [SNMP] probe drops traps?",swg21468340.txt,1,1,1,1,1,swg21468340.txt;swg21501604.txt;swg21624836.txt;swg21883201.txt;swg21667679.txt,doc_14315_chunk_0000;doc_15032_chunk_0000;doc_17559_chunk_0000;doc_21355_chunk_0000;doc_19123_chunk_0000,5.39144;4.29913;4.28084;4.03226;3.36510,1,1,swg21468340.txt;swg21501604.txt;swg21624836.txt;swg21883201.txt;swg21667679.txt,doc_14315_chunk_0000;doc_15032_chunk_0000;doc_17559_chunk_0000;doc_21355_chunk_0000;doc_19123_chunk_0000,5.39144;4.29913;4.28084;4.03226;3.36510,1,1,swg21468340.txt;swg21501604.txt;swg21624836.txt;swg21883201.txt;swg21667679.txt,doc_14315_chunk_0000;doc_15032_chunk_0000;doc_17559_chunk_0000;doc_21355_chunk_0000;doc_19123_chunk_0000,5.39144;4.29913;4.28084;4.03226;3.36510
+TRAIN_Q256,"Error running krzgrant.sql script provided with 6.3.1.2-TIV-ITM_KRZ-IF0003.tar
+
+When running the krzgrant.sql script provided in the package - 6.3.1.2-TIV-ITM_KRZ-IF0003.tar get the following errors:
+
+ERROR at line 1:
+ORA-00942: table or view does not exist ORA-06512: at line 50 
+
+How to correct this?",swg24035571.txt,1,15,4,1,2,swg1iz95428.txt;swg24035571.txt;swg21438832.txt;swg1pi63424.txt;swg21263950.txt,doc_05239_chunk_0000;doc_26837_chunk_0039;doc_13691_chunk_0002;doc_07339_chunk_0001;doc_11465_chunk_0004,3.58674;2.97408;2.69308;-0.25042;-0.32565,1,2,swg1iz95428.txt;swg24035571.txt;swg21438832.txt;swg1iv08618.txt;swg21678825.txt,doc_05239_chunk_0000;doc_26837_chunk_0039;doc_13691_chunk_0002;doc_03145_chunk_0000;doc_19730_chunk_0001,3.58674;2.97408;2.69308;2.50440;1.68139,1,2,swg1iz95428.txt;swg24035571.txt;swg1iv93882.txt;swg21438832.txt;swg1iv08618.txt,doc_05239_chunk_0000;doc_26837_chunk_0039;doc_04199_chunk_0000;doc_13691_chunk_0002;doc_03145_chunk_0000,3.58674;2.97408;2.74440;2.69308;2.50440
+DEV_Q266,"How to install Packaging utility?
+
+How to install Packaging utility?",swg24037641.txt,3,1,1,1,1,swg24037641.txt;swg27023080.txt;swg21688209.txt;swg24019074.txt;swg24021020.txt,doc_26914_chunk_0003;doc_27615_chunk_0001;doc_20269_chunk_0000;doc_26447_chunk_0001;doc_26469_chunk_0001,7.98085;6.98301;5.77629;5.12375;5.02726,1,2,swg27023960.txt;swg24037641.txt;swg27023080.txt;swg21633291.txt;swg21589303.txt,doc_27650_chunk_0001;doc_26914_chunk_0003;doc_27615_chunk_0001;doc_17799_chunk_0000;doc_16415_chunk_0000,8.27309;7.98085;6.98301;6.97403;6.74644,1,2,swg27023960.txt;swg24037641.txt;swg21609350.txt;swg27023080.txt;swg21633291.txt,doc_27650_chunk_0001;doc_26914_chunk_0003;doc_16973_chunk_0002;doc_27615_chunk_0001;doc_17799_chunk_0000,8.27309;7.98085;7.15258;6.98301;6.97403
+DEV_Q210,"startNode failed with ADML3000E after a deployment failure
+
+Client had a deployment failure due to ""Too many open files"" error.
+
+Afterwards, the startNode failed with ADML3000E:
+
+What could cause the ""Too many open files error?",swg21067352.txt,7,46,14,0,,swg21980823.txt;swg1pm99046.txt;swg21551911.txt;swg21613091.txt;swg21468765.txt,doc_23252_chunk_0000;doc_10071_chunk_0002;doc_15649_chunk_0001;doc_17125_chunk_0000;doc_14325_chunk_0000,3.39509;3.20818;2.57919;2.48556;2.26563,0,30,swg21980823.txt;swg1pm99046.txt;swg1pk83238.txt;swg21551911.txt;swg21613091.txt,doc_23252_chunk_0000;doc_10071_chunk_0002;doc_08692_chunk_0000;doc_15649_chunk_0001;doc_17125_chunk_0000,3.39509;3.20818;2.94824;2.57919;2.48556,0,44,swg21980823.txt;swg1pm99046.txt;swg1pk83238.txt;swg21551911.txt;swg21613091.txt,doc_23252_chunk_0000;doc_10071_chunk_0002;doc_08692_chunk_0000;doc_15649_chunk_0001;doc_17125_chunk_0000,3.39509;3.20818;2.94824;2.57919;2.48556
+DEV_Q184,"Why am I seeing ""CWSXM0100E: Multiple replies have been produced for a single request flow in module"" ?
+
+We are building a simple mediation module, consisting only of the request flow. The mediation module has one service invoke calling an external service through web service binding. Upon testing the process, we observe see that the service invoke is being called twice. There is no Fan-in or fan -out in the request flow. Below is the error: ""Caused by: com.ibm.wsspi.sibx.mediation.flow.MediationRuntimeException: CWSXM1023E: Exception when calling flow action: CWSXM0100E: Multiple replies have been produced for a single request flow in module""",swg21584783.txt,1,1,1,1,1,swg21584783.txt;swg21405864.txt;swg1ic59660.txt;swg1ic52511.txt;swg1jr42025.txt,doc_16258_chunk_0000;doc_13039_chunk_0000;doc_01521_chunk_0001;doc_01459_chunk_0000;doc_05456_chunk_0003,3.35676;2.49689;1.73810;0.23732;0.12859,1,1,swg21584783.txt;swg21405864.txt;swg1ic59660.txt;swg1ic67220.txt;swg1ic50351.txt,doc_16258_chunk_0000;doc_13039_chunk_0000;doc_01521_chunk_0001;doc_01634_chunk_0002;doc_01446_chunk_0000,3.35676;2.49689;1.73810;1.70469;0.40942,1,1,swg21584783.txt;swg21405864.txt;swg1ic59660.txt;swg1ic67220.txt;swg1ic50351.txt,doc_16258_chunk_0000;doc_13039_chunk_0000;doc_01521_chunk_0001;doc_01634_chunk_0002;doc_01446_chunk_0000,3.35676;2.49689;1.73810;1.70469;0.40942
+TRAIN_Q098,"Restore JazzSM DASH login page to default images
+
+We've changed the JazzSM DASH login page images and want to restore them. What values do we use to revert those changes?",swg21902654.txt,12,,39,0,,swg21677167.txt;swg21972956.txt;swg21960719.txt;swg21697553.txt;swg1iv90841.txt,doc_19659_chunk_0000;doc_22578_chunk_0001;doc_21765_chunk_0000;doc_20905_chunk_0000;doc_04157_chunk_0000,2.48160;1.97700;1.54269;0.80224;0.79070,0,,swg21677167.txt;swg21986883.txt;swg21972956.txt;swg21974360.txt;swg21960719.txt,doc_19659_chunk_0000;doc_23779_chunk_0003;doc_22578_chunk_0001;doc_22676_chunk_0000;doc_21765_chunk_0000,2.48160;2.19000;1.97701;1.62925;1.54269,0,26,swg21677167.txt;swg21986883.txt;swg21972956.txt;swg21699414.txt;swg21974360.txt,doc_19659_chunk_0000;doc_23779_chunk_0003;doc_22578_chunk_0001;doc_21030_chunk_0000;doc_22676_chunk_0000,2.48160;2.19000;1.97701;1.89459;1.62925
+DEV_Q021,"How to refresh a DataPower WebService Proxy which WSDL got changed?
+
+I have made changes to a WSDL stored in DP local filesystem.
+
+How can I make the WSP reflect this change since DataPower Gateway 7.1.0 WebService Proxy WebGUI doesn't offer the ""Refresh"" button anymore?
+
+Is there a best practice to refresh the WSP if I modified my WSDL?",swg21298897.txt,2,3,1,1,2,swg21330218.txt;swg21298897.txt;swg21384937.txt;swg21574515.txt;swg1ic99511.txt,doc_12209_chunk_0000;doc_11808_chunk_0000;doc_12675_chunk_0001;doc_16009_chunk_0000;doc_02060_chunk_0000,5.82395;4.88129;4.14583;4.12729;4.09451,1,2,swg21330218.txt;swg21298897.txt;swg21384937.txt;swg21574515.txt;swg1ic99511.txt,doc_12209_chunk_0000;doc_11808_chunk_0000;doc_12675_chunk_0001;doc_16009_chunk_0000;doc_02060_chunk_0000,5.82395;4.88129;4.14583;4.12729;4.09451,1,2,swg21330218.txt;swg21298897.txt;swg21384937.txt;swg21574515.txt;swg1ic99511.txt,doc_12209_chunk_0000;doc_11808_chunk_0000;doc_12675_chunk_0001;doc_16009_chunk_0000;doc_02060_chunk_0000,5.82395;4.88129;4.14583;4.12729;4.09451
+DEV_Q224,"How do we set HttpOnly and secure flag in Oracle Weblogic 12c to secure IBM Atlas?
+
+How do we set HttpOnly and secure flag in Oracle Weblogic 12c to secure IBM Atlas?",swg21696267.txt,1,1,1,1,1,swg21696267.txt;swg27042922.txt;swg21422185.txt;swg1he12127.txt;swg21967575.txt,doc_20795_chunk_0000;doc_27992_chunk_0000;doc_13383_chunk_0000;doc_01274_chunk_0000;doc_22197_chunk_0000,7.78305;6.26741;5.64892;3.49764;2.44410,1,1,swg21696267.txt;swg27042922.txt;swg21422185.txt;swg1he12127.txt;swg21967575.txt,doc_20795_chunk_0000;doc_27992_chunk_0000;doc_13383_chunk_0000;doc_01274_chunk_0000;doc_22197_chunk_0000,7.78305;6.26741;5.64892;3.49764;2.44410,1,1,swg21696267.txt;swg27042922.txt;swg21422185.txt;swg1he12127.txt;swg21967575.txt,doc_20795_chunk_0000;doc_27992_chunk_0000;doc_13383_chunk_0000;doc_01274_chunk_0000;doc_22197_chunk_0000,7.78305;6.26742;5.64892;3.49764;2.44410
+DEV_Q186,"Silent uninstall of ITCAM for MQ agent fails
+
+Running silent uninstall of the ITCAM for MQ agent with this command: start /wait setup /z""/sfMQ_Silent_Uninstall.txt"" /s /f2""C:\temp\silent_setup.log"" fails with this message in the Abort_*.trc file: SEVERE: You must agree to the License Agreement.
+
+The MQ_Silent_Uninstall.txt does contain this line: License Agreement=I agree to use the software only in accordance with the installed license.",swg21608744.txt,1,40,9,1,1,swg21608744.txt;swg1iz50762.txt;swg21273734.txt;swg21432483.txt;swg21331026.txt,doc_16943_chunk_0000;doc_04850_chunk_0000;doc_11583_chunk_0004;doc_13608_chunk_0000;doc_12217_chunk_0004,2.63685;2.42900;2.07140;0.42062;0.36100,1,1,swg21608744.txt;swg1iz50762.txt;swg21273734.txt;swg21441139.txt;swg1pm58205.txt,doc_16943_chunk_0000;doc_04850_chunk_0000;doc_11583_chunk_0004;doc_13758_chunk_0000;doc_09557_chunk_0003,2.63685;2.42900;2.07140;1.97307;1.74891,1,1,swg21608744.txt;swg1iz50762.txt;swg21273734.txt;swg21441139.txt;swg21963426.txt,doc_16943_chunk_0000;doc_04850_chunk_0000;doc_11583_chunk_0004;doc_13758_chunk_0000;doc_21946_chunk_0000,2.63685;2.42900;2.07140;1.97307;1.91878
+TRAIN_Q127,"How precise is DataPower's backside persistent timeout value related to intermittent ""Failed to Process Response Headers"" error messages?
+
+
+
+I have a service on DataPower with a backside persistent timeout value set to 28 seconds. The actual backend device has a persistent timeout setting of 30 seconds.
+
+Since my service is configured with a lower persistent timeout value than 30 seconds, why am I still seeing the following error intermittently?
+
+Wed June 25 2009 09:20:02 [0x80000001][xsltmsg][error] mpgw (MyGateway): tid(8675309)[error][9.x.x.x]: Failed to process response headers",swg21292808.txt,2,20,5,1,1,swg21292808.txt;swg21282678.txt;swg21673208.txt;swg1it02803.txt;swg1ic81605.txt,doc_11733_chunk_0000;doc_11635_chunk_0002;doc_19425_chunk_0000;doc_02407_chunk_0002;doc_01805_chunk_0000,3.61938;2.03214;1.33591;0.96918;0.81541,1,1,swg21292808.txt;swg21587045.txt;swg21282678.txt;swg21673208.txt;swg21407324.txt,doc_11733_chunk_0000;doc_16332_chunk_0000;doc_11635_chunk_0002;doc_19425_chunk_0000;doc_13066_chunk_0002,3.61938;2.19907;2.03214;1.33591;1.11746,1,1,swg21292808.txt;swg21498785.txt;swg21587045.txt;swg21282678.txt;swg21673208.txt,doc_11733_chunk_0000;doc_14929_chunk_0000;doc_16332_chunk_0000;doc_11635_chunk_0002;doc_19425_chunk_0000,3.61938;2.22970;2.19907;2.03214;1.33591
+TRAIN_Q415,"Unable to login to FileNet Workplace XT 1.1.5.x. Getting error, Problem initializing encryption/decryption with keyID.
+
+
+
+We are having issue while trying to login Workplace XT. Getting the error message below as soon as I hit after giving credentials.
+
+Error Message: com.filenet.wcm.api.EncryptionException: Problem initializing encryption/decryption with keyId 7d3f93e3, size 256 bits. java.home=/opt/IBM/WebSphere/AppServer/java/jre. Cause: java.security. InvalidKeyException: Illegal key size or default parameters
+
+IBM WAS 8.5.5.9 Workplace XT 1.1.5",swg21501900.txt,1,3,2,1,1,swg21501900.txt;swg21497362.txt;swg21568109.txt;swg21446945.txt;swg21996475.txt,doc_15038_chunk_0000;doc_14877_chunk_0000;doc_15824_chunk_0000;doc_13898_chunk_0000;doc_24478_chunk_0000,4.49077;3.71701;3.66044;3.21578;2.99721,1,1,swg21501900.txt;swg21686397.txt;swg21497362.txt;swg21568109.txt;swg21645923.txt,doc_15038_chunk_0000;doc_20161_chunk_0000;doc_14877_chunk_0000;doc_15824_chunk_0000;doc_18287_chunk_0000,4.49077;3.90540;3.71701;3.66044;3.46213,1,1,swg21501900.txt;swg21686397.txt;swg21497362.txt;swg21568109.txt;swg21645923.txt,doc_15038_chunk_0000;doc_20161_chunk_0000;doc_14877_chunk_0000;doc_15824_chunk_0000;doc_18287_chunk_0000,4.49077;3.90540;3.71701;3.66044;3.46213
+TRAIN_Q261,"Cannot Start JazzSM Dash after ObjectServer as a User Repository
+
+
+
+Unable to see the User roles and Groups in WebSphere Admin Console. Added Repositories in the WebSphere Admin Console. It was added under Security.
+
+Console Settings > Websphere Administrative Console > Security > Global Security > Federated Repositories
+
+Added Object Server Repository
+
+Server was stopped. Tried to restart but unable to start the JazzSM Dash server
+
+Why would the server not restart?",swg21405302.txt,18,,49,0,,swg21973744.txt;swg21697498.txt;swg21697809.txt;swg21695608.txt;swg21998191.txt,doc_22629_chunk_0000;doc_20903_chunk_0000;doc_20919_chunk_0000;doc_20745_chunk_0000;doc_24583_chunk_0002,3.99969;3.46222;2.95117;2.86767;2.10950,0,,swg21973744.txt;swg21697498.txt;swg21664375.txt;swg21697809.txt;swg21695608.txt,doc_22629_chunk_0000;doc_20903_chunk_0000;doc_18975_chunk_0002;doc_20919_chunk_0000;doc_20745_chunk_0000,3.99969;3.46222;3.00666;2.95117;2.86767,0,28,swg21973744.txt;swg21697498.txt;swg21664375.txt;swg21697809.txt;swg21695608.txt,doc_22629_chunk_0000;doc_20903_chunk_0000;doc_18975_chunk_0002;doc_20919_chunk_0000;doc_20745_chunk_0000,3.99969;3.46222;3.00666;2.95117;2.86767
+TRAIN_Q482,"Is there a limit to the number of items that can be listed within an ""in"" list as part of a where clause?
+
+Is there a limit to the number of items that can be listed within an ""in"" list as part of a where clause?",swg21698950.txt,1,2,2,1,2,swg22009834.txt;swg21698950.txt;swg21341684.txt;swg1it11555.txt;swg1hd50577.txt,doc_25636_chunk_0000;doc_21000_chunk_0000;doc_12309_chunk_0000;doc_02654_chunk_0001;doc_01053_chunk_0001,9.11098;9.00165;1.23595;0.75204;0.04158,1,2,swg22009834.txt;swg21698950.txt;swg21990369.txt;swg21097770.txt;swg21341684.txt,doc_25636_chunk_0000;doc_21000_chunk_0000;doc_24038_chunk_0004;doc_10521_chunk_0000;doc_12309_chunk_0000,9.11098;9.00165;2.04876;1.36322;1.23595,1,2,swg22009834.txt;swg21698950.txt;swg21990369.txt;swg21097770.txt;swg21341684.txt,doc_25636_chunk_0000;doc_21000_chunk_0000;doc_24038_chunk_0004;doc_10521_chunk_0000;doc_12309_chunk_0000,9.11098;9.00165;2.04876;1.36322;1.23595
+DEV_Q109,"Help with Security Bulletin: Authentication vulnerability affects IIB V10.0.0.4 onwards (CVE-2016-8918 )
+
+I need to understand details regarding Security Bulletin: Authentication vulnerability affects IBM Integration Bus V10.0.0.4 onwards (CVE-2016-8918 ). Where can I find this information?",swg21995079.txt,1,1,1,1,1,swg21995079.txt;swg22009250.txt;swg21969672.txt;swg21961734.txt;swg22011695.txt,doc_24398_chunk_0000;doc_25589_chunk_0000;doc_22361_chunk_0000;doc_21839_chunk_0000;doc_25812_chunk_0000,6.86779;4.08645;3.76843;3.26042;2.78210,1,1,swg21995079.txt;swg22009250.txt;swg22008470.txt;swg21972391.txt;swg21969672.txt,doc_24398_chunk_0000;doc_25589_chunk_0000;doc_25514_chunk_0000;doc_22541_chunk_0000;doc_22361_chunk_0000,6.86779;4.08645;4.05216;3.95038;3.76843,1,1,swg21995079.txt;swg22009250.txt;swg22008470.txt;swg22005331.txt;swg21972391.txt,doc_24398_chunk_0000;doc_25589_chunk_0000;doc_25514_chunk_0000;doc_25208_chunk_0000;doc_22541_chunk_0000,6.86779;4.08645;4.05216;3.98879;3.95038
+TRAIN_Q515,"SPSS will not start on Mac
+
+
+
+I downloaded SPSS about 3 weeks ago. On the day when I downloaded it, it was working fine. Last week, I tried starting SPSS but it did not start. I tried reinstalling it, it still would not open. I've updated JAVA (thought this would be a problem), it slowly opened the program but then now that I have reinstalled it and entered in my code, I've used up my code and I have no authorization. But just now, I started SPSS and the same problem is happening. The IBM SPSS name screen appears but nothing happens.
+
+    SPSS would not start.
+
+    Even if it does start, I have licensing problems.",swg21651225.txt,,8,10,0,10,swg21607077.txt;swg21478971.txt;swg21501894.txt;swg21479636.txt;swg21484012.txt,doc_16877_chunk_0000;doc_14585_chunk_0000;doc_15035_chunk_0000;doc_14605_chunk_0000;doc_14718_chunk_0000,2.90741;2.86806;2.83971;1.93522;1.85063,0,25,swg21607077.txt;swg21478971.txt;swg21501894.txt;swg21966637.txt;swg21985805.txt,doc_16877_chunk_0000;doc_14585_chunk_0000;doc_15035_chunk_0000;doc_22133_chunk_0000;doc_23684_chunk_0004,2.90741;2.86806;2.83971;2.54972;2.26450,0,37,swg21968434.txt;swg22011329.txt;swg21607077.txt;swg21478971.txt;swg21501894.txt,doc_22252_chunk_0001;doc_25781_chunk_0001;doc_16877_chunk_0000;doc_14585_chunk_0000;doc_15035_chunk_0000,3.90957;3.79218;2.90741;2.86806;2.83971
+TRAIN_Q493,"Help with Security Bulletin: A security vulnerability has been identified in IBM WebSphere Application Server, which is shipped with, or a required product for, IBM Tivoli Network Manager IP Edition (CVE-2017-1741).
+
+I need to understand details regarding Security Bulletin: A security vulnerability has been identified in IBM WebSphere Application Server, which is shipped with, or a required product for, IBM Tivoli Network Manager IP Edition (CVE-2017-1741) Where can I find this information?",swg22012342.txt,,,,0,,swg22013313.txt;ibm10717345.txt;swg22013044.txt;swg22016123.txt;swg22013312.txt,doc_25967_chunk_0000;doc_00027_chunk_0000;doc_25933_chunk_0000;doc_26283_chunk_0000;doc_25966_chunk_0000,7.45473;7.42811;7.39064;7.38063;7.37001,0,,swg22016551.txt;swg22013313.txt;ibm10717345.txt;swg22003286.txt;ibm10717335.txt,doc_26323_chunk_0000;doc_25967_chunk_0000;doc_00027_chunk_0000;doc_25046_chunk_0000;doc_00025_chunk_0000,7.45752;7.45473;7.42811;7.42528;7.40371,0,,swg22006144.txt;swg21903626.txt;ibm10719469.txt;swg22016551.txt;swg22013313.txt,doc_25284_chunk_0000;doc_21542_chunk_0000;doc_00076_chunk_0000;doc_26323_chunk_0000;doc_25967_chunk_0000,7.52629;7.50932;7.49463;7.45752;7.45473
+TRAIN_Q596,"Why is ITCAM MQ agent shutting down often?
+
+
+
+We have an MQ agent instance that keeps shutting down randomly.
+Below is the version of agent:
+mq WebSphere MQ Monitoring Agent lx8263 Version: 07.30.01.00",swg24043057.txt,,30,33,0,,swg1pi69916.txt;swg1it25113.txt;swg21472728.txt;swg1oa28843.txt;swg21391005.txt,doc_07431_chunk_0002;doc_03051_chunk_0002;doc_14403_chunk_0000;doc_06329_chunk_0001;doc_12776_chunk_0000,2.63915;1.95912;0.92178;0.45024;0.44892,0,,swg1pi69916.txt;swg1it25113.txt;swg27020934.txt;swg1iv31825.txt;swg1oa44952.txt,doc_07431_chunk_0002;doc_03051_chunk_0002;doc_27558_chunk_0008;doc_03385_chunk_0004;doc_06384_chunk_0004,2.63915;1.95912;1.62538;1.56158;1.43445,0,36,swg1pi69916.txt;swg1it25113.txt;swg27020934.txt;swg1iv31825.txt;swg1oa44952.txt,doc_07431_chunk_0002;doc_03051_chunk_0002;doc_27558_chunk_0008;doc_03385_chunk_0004;doc_06384_chunk_0004,2.63915;1.95913;1.62538;1.56158;1.43445
+DEV_Q074,"Help with Security Bulletin: Security Vulnerability in IBM WebSphere Application Server affects IBM SOA Policy Gateway Pattern for AIX Server 2.5 (CVE-2015-1920)
+
+I need to understand details regarding Security Bulletin: Security Vulnerability in IBM WebSphere Application Server affects IBM SOA Policy Gateway Pattern for AIX Server 2.5 (CVE-2015-1920). Where can I find this information?",swg21959169.txt,2,2,2,1,1,swg21959169.txt;swg21970106.txt;swg21959305.txt;swg21972135.txt;swg21970092.txt,doc_21607_chunk_0000;doc_22387_chunk_0000;doc_21626_chunk_0000;doc_22513_chunk_0000;doc_22384_chunk_0000,7.44995;7.25735;6.71480;6.48942;6.12729,1,1,swg21959169.txt;swg21970106.txt;swg21959305.txt;swg21972135.txt;swg21882703.txt,doc_21607_chunk_0000;doc_22387_chunk_0000;doc_21626_chunk_0000;doc_22513_chunk_0000;doc_21306_chunk_0000,7.44995;7.25735;6.71480;6.48942;6.29781,1,1,swg21959169.txt;swg21970106.txt;swg21959305.txt;swg21700675.txt;swg21972135.txt,doc_21607_chunk_0000;doc_22387_chunk_0000;doc_21626_chunk_0000;doc_21133_chunk_0000;doc_22513_chunk_0000,7.44995;7.25735;6.71480;6.65307;6.48942
+DEV_Q181,"Get all data that\'s registred today
+
+Version: 
+MxLoader 4.7.4
+                        
+
+Problem:
+Is it possible to do something like this:
+reportdate >= TODAY()?
+
+I cant get it to work but i would like to get all the data that has been registred today today.",swg21569933.txt,,,,0,,swg21373023.txt;swg1iv76111.txt;swg21367735.txt;swg21337010.txt;swg21336572.txt,doc_12497_chunk_0000;doc_03941_chunk_0002;doc_12457_chunk_0000;doc_12249_chunk_0000;doc_12245_chunk_0001,-1.48933;-3.51898;-3.69104;-3.97639;-4.71076,0,,swg21373023.txt;swg1iv76111.txt;swg21367735.txt;swg21337010.txt;swg1iv63503.txt,doc_12497_chunk_0000;doc_03941_chunk_0002;doc_12457_chunk_0000;doc_12249_chunk_0000;doc_03730_chunk_0002,-1.48933;-3.51898;-3.69104;-3.97639;-4.12408,0,,swg21373023.txt;swg1pj38317.txt;swg1iv76111.txt;swg21485350.txt;swg21367735.txt,doc_12497_chunk_0000;doc_07880_chunk_0001;doc_03941_chunk_0002;doc_14748_chunk_0000;doc_12457_chunk_0000,-1.48933;-3.48763;-3.51898;-3.57154;-3.69104
+TRAIN_Q423,"Report stuck in current queue
+
+
+
+We have one report that has been showing in the admin current
+activities status tab for 20+ days and we have had 2 full re-starts
+since then. Also it appears we have interactive jobs staying around as well for past days and days.
+
+How can we clean this up ?",swg21371279.txt,,3,3,1,1,swg21371279.txt;swg1iz97234.txt;swg27036422.txt;swg21342845.txt;swg21965606.txt,doc_12489_chunk_0000;doc_05263_chunk_0001;doc_27743_chunk_0002;doc_12321_chunk_0002;doc_22075_chunk_0000,-4.22377;-4.22967;-6.43255;-6.96930;-6.99639,1,2,swg21497877.txt;swg21371279.txt;swg1iz97234.txt;swg27048240.txt;swg1iv09505.txt,doc_14895_chunk_0000;doc_12489_chunk_0000;doc_05263_chunk_0001;doc_28215_chunk_0131;doc_03161_chunk_0000,-0.69458;-4.22377;-4.22967;-4.63968;-5.07520,1,4,swg21497877.txt;swg21998967.txt;swg21534359.txt;swg21371279.txt;swg1iz97234.txt,doc_14895_chunk_0000;doc_24647_chunk_0000;doc_15550_chunk_0000;doc_12489_chunk_0000;doc_05263_chunk_0001,-0.69458;-4.04745;-4.16506;-4.22377;-4.22967
+TRAIN_Q583,"Why does the ITCAM for AD Managing GUI install fail with an end-of-file message?
+
+I am trying to install the ITCAM for AD Managing server and I am seeing the following error when doing either 'launchpad.sh' or 'silent_MS_linux.bin': Initializing InstallShield Wizard........ Launching InstallShield Wizard........
+
+./setup_MS_lin.bin: line 1926: warning: here-document at line 1926 delimited by end-of-file (wanted `/dev/null')
+
+The installer is unable to run in graphical mode. Try running the installer with the -console for -silent flag.",swg21985630.txt,1,1,1,1,2,swg21972260.txt;swg21985630.txt;swg21469762.txt;swg21613030.txt;swg21961771.txt,doc_22534_chunk_0000;doc_23668_chunk_0000;doc_14355_chunk_0000;doc_17121_chunk_0000;doc_21841_chunk_0000,0.78311;0.18134;0.08453;-0.09066;-0.19339,1,4,swg24035302.txt;swg21972260.txt;swg21452449.txt;swg21985630.txt;swg21469762.txt,doc_26821_chunk_0000;doc_22534_chunk_0000;doc_14036_chunk_0000;doc_23668_chunk_0000;doc_14355_chunk_0000,0.80927;0.78311;0.66133;0.18134;0.08453,1,5,swg21668494.txt;swg24035302.txt;swg21972260.txt;swg21452449.txt;swg21985630.txt,doc_19161_chunk_0000;doc_26821_chunk_0000;doc_22534_chunk_0000;doc_14036_chunk_0000;doc_23668_chunk_0000,1.41333;0.80927;0.78311;0.66133;0.18134
+TRAIN_Q300,"How to access the 2nd portal profile?
+
+ Hello,
+
+I created a second WebSphere portal profile (wp_profile2) under C:\IBM\WebSphere as part of setting up multi-profile environment on windows using WebSphere Portal 8.0.0.1 CF04/WAS 8.0.0.10. I started the WebSphere_Portal under this profile successfully and am trying to access this new portal profile from a web browser using http://<host>:port/wps/myportal. I tried all the ports listed in SystemOut log but none of them seem to work and the one that appears to work is writing below error in logs and is showing a blank page:
+
+ 
+
+[11/10/15 9:45:13:374 PST] 00000044 SystemOut     O javax.servlet.jsp.JspException: com.ibm.portal.resolver.exceptions.LocalizedIOException: RT7507E: Unable to initialize Repository: Default.
+[11/10/15 9:45:13:374 PST] 00000044 SystemOut     O  at com.ibm.wps.engine.templates.themes.Default.render(Default.java:237)
+[11/10/15 9:45:13:374 PST] 00000044 SystemOut     O  at com.ibm.wps.engine.templates.ThemeTemplate.render(ThemeT
+
+ 
+
+Does anyone have any idea of how to fix the above issues and get the portal access working?
+
+Appreciate your help regarding this.
+
+ 
+
+Thank you.",swg21606716.txt,,,,0,,swg1pm28138.txt;swg1pm69373.txt;swg21701048.txt;swg1pm30404.txt;swg1pm27779.txt,doc_09191_chunk_0000;doc_09692_chunk_0001;doc_21163_chunk_0002;doc_09220_chunk_0001;doc_09185_chunk_0002,1.96512;1.75918;0.50326;0.18712;-0.20560,0,,swg1pm28138.txt;swg1pm69373.txt;swg21646048.txt;swg21701048.txt;swg1pm30404.txt,doc_09191_chunk_0000;doc_09692_chunk_0001;doc_18293_chunk_0001;doc_21163_chunk_0002;doc_09220_chunk_0001,1.96512;1.75918;0.79683;0.50326;0.18712,0,,swg1pm28138.txt;swg1pm69373.txt;swg21646048.txt;swg21701048.txt;swg1pm30404.txt,doc_09191_chunk_0000;doc_09692_chunk_0001;doc_18293_chunk_0001;doc_21163_chunk_0002;doc_09220_chunk_0001,1.96512;1.75918;0.79683;0.50326;0.18712
+TRAIN_Q081,"'Access is denied' install errors with ICC
+
+Installing ICC 4.0.1 and then FP2 gives the 'Access is denied' error on WASSERVICE.exe. How to resolve this?",swg24042387.txt,4,35,7,1,3,swg1he12537.txt;swg21980994.txt;swg24042387.txt;swg21971485.txt;swg21700215.txt,doc_01368_chunk_0001;doc_23274_chunk_0000;doc_27141_chunk_0002;doc_22466_chunk_0000;doc_21094_chunk_0001,5.38986;4.67060;4.51610;3.30075;2.90253,1,3,swg1he12537.txt;swg21980994.txt;swg24042387.txt;swg21971485.txt;swg21700215.txt,doc_01368_chunk_0001;doc_23274_chunk_0000;doc_27141_chunk_0002;doc_22466_chunk_0000;doc_21094_chunk_0001,5.38986;4.67060;4.51609;3.30075;2.90252,1,3,swg1he12537.txt;swg21980994.txt;swg24042387.txt;swg21971485.txt;swg21700215.txt,doc_01368_chunk_0001;doc_23274_chunk_0000;doc_27141_chunk_0002;doc_22466_chunk_0000;doc_21094_chunk_0001,5.38986;4.67060;4.51609;3.30075;2.90252
+TRAIN_Q299,"Installing fixpacks with Installation Manager - when did it change from using updateInstaller,  starting in which version of WebSphere
+
+I was using updateInstaller to install fixpacks, and there was a separate fixpack for WebSphere and separate for the JDK, independent of each other. Now I understand that with Installation Manager there is a single package containing both the WebSphere App server fixpack as well as the JDK. When did this occur, starting with which version of WebSphere ?",swg21138332.txt,7,10,10,0,8,swg21651637.txt;swg24033752.txt;swg27019072.txt;swg21569693.txt;swg21568772.txt,doc_18514_chunk_0000;doc_26771_chunk_0004;doc_27487_chunk_0003;doc_15873_chunk_0001;doc_15852_chunk_0004,3.93503;3.71244;3.58267;3.38771;2.38800,0,22,swg21303247.txt;swg21651637.txt;swg24033752.txt;swg21304460.txt;swg27019072.txt,doc_11876_chunk_0002;doc_18514_chunk_0000;doc_26771_chunk_0004;doc_11887_chunk_0005;doc_27487_chunk_0003,4.20481;3.93503;3.71244;3.65421;3.58267,0,28,swg21303247.txt;swg21651637.txt;swg24033752.txt;swg21304460.txt;swg27019072.txt,doc_11876_chunk_0002;doc_18514_chunk_0000;doc_26771_chunk_0004;doc_11887_chunk_0005;doc_27487_chunk_0003,4.20481;3.93503;3.71244;3.65421;3.58267
+TRAIN_Q541,"Cognos Workspace Advanced Users are unable to see features. Why?
+
+
+
+Certain Workspace Advanced users cannot open Report Studio. This happens with certain custom roles.
+
+Environment: IBM Cognos 10.2.2.x",swg21593254.txt,3,2,1,1,3,swg21617712.txt;swg21984315.txt;swg21593254.txt;swg21568187.txt;swg21498402.txt,doc_17300_chunk_0000;doc_23571_chunk_0000;doc_16544_chunk_0000;doc_15827_chunk_0000;doc_14910_chunk_0000,4.77854;3.89513;3.66496;2.88403;2.79936,1,3,swg21617712.txt;swg21984315.txt;swg21593254.txt;swg21976445.txt;swg21670555.txt,doc_17300_chunk_0000;doc_23571_chunk_0000;doc_16544_chunk_0000;doc_22903_chunk_0000;doc_19284_chunk_0000,4.77854;3.89513;3.66496;3.21978;2.91638,1,3,swg21617712.txt;swg21984315.txt;swg21593254.txt;swg21976445.txt;swg21670555.txt,doc_17300_chunk_0000;doc_23571_chunk_0000;doc_16544_chunk_0000;doc_22903_chunk_0000;doc_19284_chunk_0000,4.77854;3.89513;3.66496;3.21978;2.91638
+TRAIN_Q352,"How to Create an Application with the the Websphere Adapter for Flat File using Hex05 delimeter?
+
+How to Create an Application with the the Websphere Adapter for Flat File using Hex05 delimeter?",swg21425772.txt,,,,0,,swg21434084.txt;swg27024018.txt;swg21605089.txt;swg21495693.txt;swg24025178.txt,doc_13635_chunk_0000;doc_27652_chunk_0004;doc_16805_chunk_0000;doc_14830_chunk_0003;doc_26528_chunk_0002,3.75759;3.06909;2.33040;2.15590;1.43762,0,,swg21434084.txt;swg21568541.txt;swg27024018.txt;swg21201697.txt;swg21216797.txt,doc_13635_chunk_0000;doc_15842_chunk_0000;doc_27652_chunk_0004;doc_10931_chunk_0001;doc_11008_chunk_0000,3.75759;3.08378;3.06909;2.98956;2.53628,0,,swg21434084.txt;swg21269631.txt;swg21568541.txt;swg27024018.txt;swg21201697.txt,doc_13635_chunk_0000;doc_11543_chunk_0000;doc_15842_chunk_0000;doc_27652_chunk_0004;doc_10931_chunk_0001,3.75759;3.33792;3.08378;3.06909;2.98956
+TRAIN_Q208,"Can I run different levels of the Rational Developer for z Systems host and client?
+
+I'd like to know if I can run different versions of the RDz client and host and if so what compatible or supported versions and releases?",swg21568844.txt,1,1,1,1,1,swg21568844.txt;swg1pi84660.txt;swg1pm88407.txt;swg1pi14834.txt;swg21994204.txt,doc_15855_chunk_0000;doc_07639_chunk_0000;doc_09924_chunk_0000;doc_06595_chunk_0000;doc_24332_chunk_0005,4.52594;3.43685;3.34147;3.31297;3.08797,1,1,swg21568844.txt;swg1pi84660.txt;swg1pm88407.txt;swg1pi14834.txt;swg21994204.txt,doc_15855_chunk_0000;doc_07639_chunk_0000;doc_09924_chunk_0000;doc_06595_chunk_0000;doc_24332_chunk_0005,4.52594;3.43685;3.34147;3.31297;3.08797,1,1,swg21568844.txt;swg1pi84660.txt;swg1pm88407.txt;swg1pi14834.txt;swg21994204.txt,doc_15855_chunk_0000;doc_07639_chunk_0000;doc_09924_chunk_0000;doc_06595_chunk_0000;doc_24332_chunk_0005,4.52594;3.43685;3.34147;3.31297;3.08797
+TRAIN_Q414,"Is MQ V7.0 is going out of support?
+
+Is Websphere MQ V7.0 is going out of support?",swg21674407.txt,1,1,1,1,1,swg21674407.txt;swg21426198.txt;swg1iz63758.txt;swg24038252.txt;swg22017459.txt,doc_19486_chunk_0012;doc_13468_chunk_0000;doc_04956_chunk_0000;doc_26947_chunk_0001;doc_26368_chunk_0001,8.83455;4.97408;4.78935;3.08972;2.79508,1,1,swg21674407.txt;swg1ic91443.txt;swg21426198.txt;swg1iz63758.txt;swg1iz60328.txt,doc_19486_chunk_0012;doc_01916_chunk_0000;doc_13468_chunk_0000;doc_04956_chunk_0000;doc_04929_chunk_0000,8.83455;6.10489;4.97408;4.78935;4.73113,1,1,swg21674407.txt;swg1ic91443.txt;swg21426198.txt;swg1iz63758.txt;swg1iz60328.txt,doc_19486_chunk_0012;doc_01916_chunk_0000;doc_13468_chunk_0000;doc_04956_chunk_0000;doc_04929_chunk_0000,8.83455;6.10489;4.97408;4.78935;4.73113
+TRAIN_Q063,"How to get the ODM 8.5.1.2 fixpack of ODM 8.5.1.1?
+
+ODM 8.5.1.2 fixpack is not listed in Fix Central when installed platform ODM 8.5.1.1 is used: http://www-933.ibm.com/support/fixcentral/swg/selectFixes?parent=ibm~WebSphere&product=ibm/WebSphere/WebSphere+Operational+Decision+Management&release=8.5.1.1&platform=All&function=all",swg24039235.txt,10,15,16,0,,swg24041725.txt;swg24040633.txt;swg24039916.txt;swg24043852.txt;swg24043671.txt,doc_27098_chunk_0000;doc_27045_chunk_0003;doc_27019_chunk_0000;doc_27224_chunk_0000;doc_27214_chunk_0000,2.85245;2.78847;2.64016;2.44293;2.39915,0,7,swg24041725.txt;swg24040633.txt;swg24041821.txt;swg24039916.txt;swg24037905.txt,doc_27098_chunk_0000;doc_27045_chunk_0003;doc_27103_chunk_0000;doc_27019_chunk_0000;doc_26933_chunk_0000,2.85245;2.78847;2.73764;2.64016;2.60538,0,7,swg24041725.txt;swg24040633.txt;swg24041821.txt;swg24039916.txt;swg24037905.txt,doc_27098_chunk_0000;doc_27045_chunk_0003;doc_27103_chunk_0000;doc_27019_chunk_0000;doc_26933_chunk_0000,2.85245;2.78847;2.73764;2.64016;2.60538
+TRAIN_Q537,"Netcool/Impact 6.1.0: How to change the HSQLDB password?
+
+Netcool/Impact 6.1.0: How to change the HSQLDB password?",swg21967958.txt,1,1,1,1,1,swg21967958.txt;swg24039742.txt;swg22004059.txt;swg21984825.txt;swg21970291.txt,doc_22221_chunk_0000;doc_27008_chunk_0057;doc_25106_chunk_0000;doc_23615_chunk_0003;doc_22399_chunk_0000,3.89854;3.39132;3.21839;2.38519;1.48618,1,2,swg22014125.txt;swg21967958.txt;swg24039742.txt;swg22004059.txt;swg24044676.txt,doc_26041_chunk_0001;doc_22221_chunk_0000;doc_27008_chunk_0057;doc_25106_chunk_0000;doc_27269_chunk_0003,5.06486;3.89854;3.39132;3.21840;3.16286,1,2,swg22014125.txt;swg21967958.txt;swg24039742.txt;swg22004059.txt;swg24044676.txt,doc_26041_chunk_0001;doc_22221_chunk_0000;doc_27008_chunk_0057;doc_25106_chunk_0000;doc_27269_chunk_0003,5.06486;3.89854;3.39132;3.21840;3.16286
+TRAIN_Q589,"How to have IBM HTTP Server re-direct an application URL from HTTPS to HTTP?
+
+We have an application which uses SSL, but we need to make this http only. We disabled all the SSL, but many clients URLs are still pointing to https. So we need a HTTP Server redirect to change these URLs from https to http. Is this possible?",swg21114864.txt,,2,4,1,3,swg1iz63993.txt;swg21662909.txt;swg21114864.txt;swg21336190.txt;swg21179559.txt,doc_04961_chunk_0001;doc_18908_chunk_0000;doc_10587_chunk_0000;doc_12241_chunk_0000;doc_10852_chunk_0011,3.88228;3.67894;3.66426;3.64457;3.57188,1,3,swg1iz63993.txt;swg21662909.txt;swg21114864.txt;swg21336190.txt;swg21179559.txt,doc_04961_chunk_0001;doc_18908_chunk_0000;doc_10587_chunk_0000;doc_12241_chunk_0000;doc_10852_chunk_0011,3.88228;3.67894;3.66426;3.64457;3.57188,1,4,swg21983132.txt;swg1iz63993.txt;swg21662909.txt;swg21114864.txt;swg21336190.txt,doc_23471_chunk_0000;doc_04961_chunk_0001;doc_18908_chunk_0000;doc_10587_chunk_0000;doc_12241_chunk_0000,4.50154;3.88228;3.67894;3.66426;3.64457

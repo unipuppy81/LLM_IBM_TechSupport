@@ -1,0 +1,40 @@
+{
+  "model": "Qwen2.5-1.5B-Instruct",
+  "backend": "hf",
+  "prompt": "evidence_check",
+  "kind": "generation_only_fixed_judge_selected_evidence",
+  "baseline": {
+    "total": 135,
+    "answerable": 90,
+    "impossible": 45,
+    "judge_selected_questions": 61,
+    "answerable_with_selected_evidence": 45,
+    "token_f1_percent": 16.52,
+    "exact_match_percent": 0.0,
+    "false_refusal_rate_percent": 50.0,
+    "abstention_rate_percent": 64.44,
+    "answered_subset_token_f1_percent": 33.04,
+    "generation_abstentions_after_judge_yes": 0,
+    "generation_seconds": 359.715,
+    "avg_generation_input_tokens": 780.0
+  },
+  "candidate": {
+    "total": 135,
+    "answerable": 90,
+    "impossible": 45,
+    "judge_selected_questions": 61,
+    "answerable_with_selected_evidence": 45,
+    "token_f1_percent": 16.16,
+    "exact_match_percent": 0.0,
+    "false_refusal_rate_percent": 51.11,
+    "abstention_rate_percent": 64.44,
+    "answered_subset_token_f1_percent": 32.32,
+    "generation_abstentions_after_judge_yes": 1,
+    "generation_seconds": 368.454,
+    "avg_generation_input_tokens": 809.0
+  },
+  "f1_improved_questions": 19,
+  "f1_declined_questions": 26,
+  "fingerprint": "65af704c0ad061764d36088279cf2dbcbd4cb078d9674d20baf8060af39be6b9",
+  "note": "F1 is lexical QA metric; sufficient answer-bearing evidence is not human-verified"
+}

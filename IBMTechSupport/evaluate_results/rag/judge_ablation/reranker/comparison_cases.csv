@@ -1,0 +1,715 @@
+﻿id,is_impossible,retrieved_count,judge_evidence_count,judge_abstained,no_judge_abstained,judge_token_f1,no_judge_token_f1,f1_delta,judge_prediction,no_judge_prediction
+TRAIN_Q169,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"To resolve the ""CWTKE0021W: The expired people assignment (staff query result) cannot be refreshed"" issue in SystemOut.log, you should enable diagnostic tracing for the specified components related to staff queries. Based on Document 1, the correct trace string to use is:
+
+```plaintext
+com.ibm.wps.command.xml.*=all
+```
+
+This will help capture more detailed information about the staff query process. After enabling this trace, restart the WebSphere Portal application server. This should provide additional context in the SystemOut.log file to diagnose and potentially resolve the issue."
+DEV_Q061,True,5,2,False,False,,,,"The JVMSERVER remains in a ""BEING DISABLED"" state because there is an unexpected abend (0C7) caused by EIBTASKN being overlaid, leading CICS to handle the abend and issue messages DFHSJ0001 and DFHSJ1007. This causes CICS to attempt disabling the JVMSERVER and re-enabling it. However, since the JVM function DestroyJavaVM() waits for all non-daemon threads to complete before termination, the thread in the JVM that was being used by the abending CICS task still exists, preventing the JVM from terminating and leaving the JVMSERVER in a DISABLING state. To resolve this, either issue a Unix kill command against the process ID or terminate the entire CICS region","The issue you're experiencing with your JVMSERVER remaining in a ""BEING DISABLED"" state could be due to a runaway condition caused by an unexpected abend event, such as an EIBTASKN overlay leading to an 0C7 abend. This causes the JVM to hang and prevent it from terminating properly. To resolve this, you should either issue a Unix kill command against the process ID or terminate the entire CICS region."
+TRAIN_Q137,False,5,2,False,False,0.1136,0.1264,0.0128,"The ""Connection refused"" error typically indicates that the client cannot establish a connection to the specified server and port. In this case, it seems to be related to a database connection attempt made through WebSphere Application Server Liberty and Java Persistence API (JPA). The specific error code (-4499) suggests a network-related issue where the connection attempt was denied due to a refusal of service (Refused connection).
+
+Possible causes for this issue include:
+
+1. Network connectivity issues between the client machine and the target server.
+2. Firewall rules blocking the connection attempt.
+3. Port configuration mismatch between the client and the server.
+4. Server-side resource exhaustion or misconfiguration preventing new connections.
+5. Temporary network instability affecting the connection attempt.
+
+To troubleshoot further, you should contact the DB2 system","The ""Connection refused"" error typically indicates that there is no active network connection to the specified server and port. In the context of deploying a WebSphere Liberty/JPA application, this can occur due to several reasons such as:
+
+1. The DB2 database service is not running.
+2. Network configuration issues preventing communication between the application server and the database server.
+3. A stale connection within the application or infrastructure.
+4. Configuration errors in the application's connection pool settings.
+5. Resource exhaustion leading to insufficient connections being created.
+
+In the specific case described, it seems to involve a connection attempt to a local IP address (localhost) on port 50,000, which is often used for internal testing purposes but may also indicate misconfiguration if not properly set up for production environments."
+TRAIN_Q270,False,5,1,False,False,0.3077,0.2222,-0.0855,"The error message indicates that it is not possible to add more than 1000 people to a matter request through the clipboard method. To resolve this issue, users should limit the number of people added at once to less than 1000. If they need to add more than 1000 people, they can copy and paste them multiple times until all have been added.","If you encounter the error ""An unexpected error occurred. Contact your system administrator. ICWPA1001E"" when trying to add people to a matter request due to exceeding the limit of 1000 people in the clipboard, follow these steps:
+
+1. Ensure that you have fewer than 1000 people selected in the clipboard before attempting to add them to the matter request.
+2. If the issue persists, check the version of the software you are using. The problem might be resolved in a later update or fix pack.
+3. If the issue still occurs after updating the software, consider subscribing to IBM's support resources for further assistance."
+TRAIN_Q113,False,5,1,False,False,0.8955,0.8571,-0.0384,"To configure logging for Atlas Extensions in Atlas 6.0.3.3:
+
+1. Navigate to <Atlas_Install_folder>/Atlas/Properties folder.
+2. Edit log4.properties file.
+3. Update the paths for the following three properties:
+   - log4j.appender.MATTER_APPENDER.File=matter_adapter.log
+   - log4j.appender.PERSON_APPENDER.File=person_adapter.log
+   - log4j.appender.ORG_UNIT_APPENDER.File=org_unit_adapter.log
+4. Save the file.
+5. Restart the Atlas application server.","To configure logging for Atlas Extensions in Atlas 6.0.3.3:
+
+1. Navigate to <Atlas_Install_folder>/Atlas/Properties/log4.properties.
+2. Update the paths for the following three properties:
+   - log4j.appender.MATTER_APPENDER.File=matter_adapter.log
+   - log4j.appender.PERSON_APPENDER.File=person_adapter.log
+   - log4j.appender.ORG_UNIT_APPENDER.File=org_unit_adapter.log
+3. Save the file.
+4. Restart the Atlas application server."
+TRAIN_Q037,False,5,0,True,False,0.0,0.3419,0.3419,INSUFFICIENT_INFORMATION,"To allow multiple users to logon to TDWC with the same TWS user ID without requiring them to log out, follow these steps:
+
+1. Ensure there is only one browser session active to the TDWC on the same physical server.
+2. Check the machine to see which browsers are already open, including the browser tabs. If you already have a browser session open to the TDWC, use that and do not start another.
+3. If you cannot avoid having multiple sessions, return to the Login page and enter a different user ID."
+TRAIN_Q025,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"It appears that the issue arises because the /tmp/javasharedresources directory is being used by the JVM during its operation. To resolve this, you must first stop the JVM processes, then run the clearClassCache.bat script located at <WebSphere_HOME>/bin/. This will clear the JVM's class cache. Additionally, you should clear the contents of the javasharedresources directory located at C:\Windows\System32\config\systemprofile\AppData\Local\javasharedresources. Ensure that all Java-based applications are closed and that javaw.exe is not running before proceeding."
+TRAIN_Q549,False,5,1,False,False,0.139,0.1297,-0.0093,"The ""end-file-message"" you're encountering during the execution of the `launchpad.sh` script on Microsoft Windows systems typically indicates that there is an issue with the installation process due to missing Linux system libraries. This can occur because the script expects certain files from the Linux environment but cannot find them.
+
+To resolve this issue:
+
+1. Ensure that all necessary Linux system libraries are installed on your Windows machine.
+2. Verify that the paths specified in the script match those available on your Windows system.
+3. Consider using alternative methods or scripts designed specifically for Windows installations if possible.
+4. Check for any updates or patches related to the software being installed that might address compatibility issues with Windows environments.
+
+If these steps do not resolve the issue, further investigation into the specific requirements of the software being installed may be","The end-file-message you're encountering while executing launchpad.sh in the MS environment likely indicates a missing or incompatible library required for the installation process. This issue can occur due to the presence of unsupported browsers like Firefox version 10 or higher, which are not supported by the software being installed via launchpad.sh.
+
+To resolve this problem, ensure that the necessary Linux system libraries are present and compatible with the version of Firefox being used. You might need to update your Firefox browser to a more recent version that is supported by the software.
+
+Additionally, check the compatibility of other dependencies listed in the error messages. Ensure that all required libraries and tools are correctly installed and accessible during the installation process.
+
+If the issue persists after addressing the above points, consider reaching out to IBM Support for further assistance specific to your"
+TRAIN_Q006,False,5,4,False,False,0.2657,0.2596,-0.0061,"Yes, ITNM versions are affected by the Apache CXF vulnerability (CVE-2017-3156). Specifically, it is affected by the same vulnerability in both Tivoli Network Manager IP Edition 4.1.1 and 4.2.0. The affected versions are:
+
+- Tivoli Network Manager IP Edition 4.1.1 (Huawei MTOSI Collector install)
+- Tivoli Network Manager IP Edition 4.2.0 (Huawei MTOSI Collector install)
+
+To find more detailed information, refer to Document 1, which provides comprehensive details including CVSS scores, environmental scores, and remediation fixes for these vulnerabilities.","Yes, ITNM versions are affected by Apache CXF vulnerability (CVE-2017-3156). Specifically, it is affected by the same vulnerability in both Tivoli Network Manager IP Edition 4.1.1 and 4.2.0. The affected versions are:
+
+- Tivoli Network Manager IP Edition 4.1.1 (Huawei MTOSI Collector install)
+- Tivoli Network Manager IP Edition 4.2.0 (Huawei MTOSI Collector install)
+
+To find more detailed information, refer to Document 1, which provides comprehensive details including CVSS scores, environmental scores, and remediation fixes for these vulnerabilities."
+TRAIN_Q535,False,5,0,True,False,0.0,0.1905,0.1905,INSUFFICIENT_INFORMATION,"The error message ""SYSIBMADM.DBCFG IS AN UNDEFINED NAME"" typically occurs when trying to access the DB2 System Administrator Configuration Table (DBCFG). This error can be safely ignored according to Document 1. The problem arises because the DB2 SYSIBMADM.DBCFG table view does not exist on Z/OS. To resolve this issue, ensure that the necessary tables are created before attempting to access them."
+DEV_Q035,False,5,4,False,False,0.29,0.2288,-0.0612,"To find more detailed information about the security bulletin related to API Connect being affected by a Node.js denial of service vulnerability (CVE-2017-14919), you should refer to Document 1 titled ""IBM Security Bulletin: API Connect is affected by a Node.js denial of service vulnerability (CVE-2017-14919) - United States"". This document provides comprehensive details on the vulnerability, including its description, CVSS scores, and affected products and versions.","To find more detailed information about the Security Bulletin: API Connect is affected by a Node.js denial of service vulnerability (CVE-2017-14919), you should refer to Document 1, which provides comprehensive details including the summary, vulnerability description, CVSS scores, affected products, and versions."
+TRAIN_Q100,False,5,0,True,False,0.0,0.2474,0.2474,INSUFFICIENT_INFORMATION,"To determine which version of TBSM support ITM 6.3, refer to Document 1:
+
+""The TBSM v3.1 TEP feed support for ITM v6.2 - United States""
+
+This document states that the TBSM v3.1 TEP feed supports ITM v6.2. Therefore, the version of TBSM that is certified with ITM 6.3 is likely TBSM v3.1."
+TRAIN_Q103,False,5,0,True,False,0.0,0.2825,0.2825,INSUFFICIENT_INFORMATION,"The cause of the ABEND S013 in the PARMGEN job KCIJPALO is likely related to the IBM OMEGAMON messaging installation on z/OS 07.05.00. The symptoms described indicate an issue where OMEGAMON cannot find any active modules when initializing, resulting in a ""NO ACTIVE MODULE FOUND"" error. This could be caused by various factors such as missing dependencies, incorrect configuration settings, or issues with the OMEGAMON database setup.
+
+Given the context provided, it seems that there might have been an update or change in the OMEGAMON software version or configuration since the initial installation, which has led to compatibility issues or unexpected behavior. The specific details about the ABEND codes and symptom dumps"
+TRAIN_Q316,False,5,1,False,False,0.2445,0.2846,0.0401,"To restore the WebGUI access after an expired or invalid certificate:
+
+1. Replace the certificate used by the DataPower Web Management Service (WebGUI) with a valid certificate from a trusted Certificate Authority (CA).
+2. Ensure that the new certificate is properly installed on the DataPower appliance.
+3. Restart the WebGUI service for the changes to take effect.
+
+This solution involves replacing the existing self-signed certificate with a trusted certificate provided by a recognized CA, thereby restoring secure web management access.","To restore the WebGUI access after an expired or invalid certificate, follow these steps:
+
+1. Replace the DataPower Web Management Service (WebGUI) certificate with a new certificate of your choice. You can either sign it yourself or get a certificate signed by a well-known trusted third-party CA.
+
+2. Ensure that the new certificate is correctly installed and trusted by your web browser.
+
+3. Restart the DataPower appliance to apply the changes.
+
+If you're unable to generate a self-signed certificate, consider getting a certificate signed by a reputable CA. This ensures better security and trustworthiness for your connections."
+TRAIN_Q019,False,5,0,True,False,0.0,0.3443,0.3443,INSUFFICIENT_INFORMATION,"It seems like you're having trouble logging into the SPSS Statistics trial version on your Windows 7 (32-bit) system. Here are some troubleshooting steps based on the provided documents:
+
+1. **Check Installation**: Ensure that you have installed the correct version of SPSS Statistics (32-bit). If you installed the 64-bit version instead, you might encounter issues.
+
+2. **Uninstall and Reinstall**:
+   - Uninstall the existing 32-bit SPSS Statistics software.
+   - Download and install the 32-bit version from your IBM products and services window on IBM.com.
+
+3. **Adjust Screen Size**:
+   - Use the display properties method to reduce the size of the text and windows before launching SPSS Statistics.
+
+4. **Compatibility Mode**"
+DEV_Q203,True,5,5,False,False,,,,"WebSphere Application Server transactions are rolled back with StaleConnectionExceptions because the database vendor issues an exception indicating that a connection currently in the connection pool is no longer valid. This can happen due to various reasons such as the application trying to obtain a connection and failing, a connection becoming unusable due to a database failure, the application calling close() and attempting to reuse the connection, or an event occurring outside of the WebSphere Application Server causing the connection to become invalid. To resolve this issue, the WebSphere Application Server must be restarted. Additionally, catching the StaleConnectionException and retrying the getConnection() call when it occurs is recommended to allow applications to recover from stale connections without impacting end-users.","WebSphere Application Server transactions are rolled back with StaleConnectionExceptions because the database vendor issues an exception indicating that a connection currently in the connection pool is no longer valid. This can happen due to various reasons such as the application trying to obtain a connection and failing, a connection becoming unusable due to a database failure, the application calling close() and attempting to reuse the connection, or an event occurring outside of the WebSphere Application Server causing the connection to become invalid. To resolve this issue, the WebSphere Application Server must be restarted. Additionally, catching the StaleConnectionException and retrying the getConnection() call when it occurs is recommended to allow applications to recover from stale connections without impacting end-users."
+TRAIN_Q282,True,5,1,False,False,,,,"The Security Bulletin for CVE-2017-1118, titled ""Non-configured connections could cause denial of service in IBM WebSphere MQ Internet Pass-Thru,"" was issued by IBM. This bulletin highlights that when using the MQIPT SecurityManager without properly configuring IP addresses in the MQIPT security policy file, it may lead to the MQIPT stopping its response to connection attempts. The vulnerability is described as allowing attackers to cause the MQIPT to stop responding due to incorrect configuration.
+
+Affected products and versions include IBM WebSphere MQ Internet Pass-Thru v2.0 and v2.1, available on all supported platforms. For more detailed information about the CVSS scores and affected systems, refer to the linked X-Force page at https://exchange.xforce","To find more detailed information about the Security Bulletin ""Non-configured connections could cause denial of service in IBM WebSphere MQ Internet Pass-Thru (CVE-2017-1118)"", you should refer to Document 1, which contains the specific details provided in the question. The bulletin discusses how unconfigured IP addresses in the MQIPT security policy file can lead to the MQIPT stopping responses to connection attempts, resulting in a denial of service. It also mentions the CVSS scores and affected products versions."
+DEV_Q157,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"To configure TLS/SSL for an IIB web service provider and consumer:
+
+1. Ensure HTTPS is enabled in your application server and web server.
+2. Use HTTPS URLs when making requests to the web services.
+3. Implement certificate installations for security purposes.
+4. Configure the web server to use the appropriate SSL certificates.
+5. Consider configuring the IBM i Access Host Servers for SSL-only communications if desired.
+6. Be aware that TLS and SSL are encryption protocols used by HTTPS, but they don't affect HTTP-based connections directly."
+DEV_Q167,False,5,4,False,False,0.5788,0.5273,-0.0515,"To recreate all the Oracle Text indexes for the Atlas database, follow these steps:
+
+1. Shut down the application server running the Atlas applications.
+2. Locate the script `drop_ctxsys_indexes.sql` in the Atlas release file located in the `Atlas\Schema\Deploy\smf\db\etc\oracle` folder.
+3. Open a command window to the specified folder and execute the script using SQL Plus:
+   ```
+   sqlplus <user>/<password>@<database> @drop_ctxsys_indexes.sql
+   ```
+
+This process involves dropping any existing Oracle Text indexes and recreating them based on the Atlas release files provided. Ensure you have the necessary permissions to access the Atlas database and execute the SQL commands.","To recreate all the Oracle Text indexes for the Atlas database, follow these steps:
+
+1. Shut down the application server running the Atlas applications.
+2. Locate the script `drop_ctxsys_indexes.sql` in the Atlas release file located in the path `Atlas\Schema\Deploy\smf\db\etc\oracle`.
+3. Open a command window to the specified directory and execute the script using SQL Plus:
+   ```
+   sqlplus <user>/<password>@<database> @drop_ctxsys_indexes.sql
+   ```
+
+This process involves dropping any existing Oracle Text indexes and recreating them according to the provided documentation."
+DEV_Q028,False,5,2,False,False,0.2612,0.3108,0.0496,"To find more detailed information about the multiple vulnerabilities identified in WebSphere Application Server shipped with WebSphere Service Registry and Repository (CVE-2015-4911), you should refer to the IBM Security Bulletin titled ""Multiple vulnerabilities have been identified in WebSphere Application Server shipped with WebSphere Service Registry and Repository"" available at http://www.ibm.com/support/docview.wss?uid=swg21969620. This bulletin provides comprehensive details on the vulnerabilities including their CVSS scores and descriptions. Additionally, you may want to check the linked CVE entries for further specific information.","To find more detailed information on the multiple vulnerabilities identified in WebSphere Application Server shipped with WebSphere Service Registry and Repository (CVE-2015-4911), you should refer to the IBM Security Bulletin titled ""Security Bulletin: Multiple vulnerabilities have been identified in WebSphere Application Server shipped with WebSphere Service Registry and Repository (CVE-2015-4911)"" available at [http://www.ibm.com/support/docview.wss?uid=swg21969620]. This bulletin provides comprehensive details including CVSS scores, descriptions of the vulnerabilities, and links to additional resources for further information and remediation."
+TRAIN_Q172,False,5,2,False,False,0.9677,0.9836,0.0159,"Yes, StoredIQ 7.6.0.5 and above support TLS 1.2. TLS 1.2 is supported both on the Application Stack and Dataserver.","Yes, StoredIQ 7.6.0.5 and above support TLS 1.2. TLS 1.2 is supported both on Application Stack and Dataserver."
+TRAIN_Q058,False,5,0,True,False,0.0,0.1799,0.1799,INSUFFICIENT_INFORMATION,"The problem described involves issues related to the installation of IBM Portal version 8.5 on a Windows system. Specifically, it mentions two main problems:
+
+1. During the installation process, the installation fails with the error code INSTCONFFAILED, indicating that no Portal logs were written. This suggests there might be an issue with the configuration or setup scripts used during the installation.
+
+2. Another issue encountered was related to the installation of a second Portal 8.5 instance on the same machine, where the installation failed with the error ""ERROR: Error executing the work flow. Step 'Basic Config' FAILED!"". This indicates that there was a failure in the basic configuration step during the installation process.
+
+To resolve these issues, users should check their logs for detailed error messages. In the case of the"
+TRAIN_Q236,False,5,0,True,False,0.0,0.3234,0.3234,INSUFFICIENT_INFORMATION,"To authorize SPSS 19 on a new Mac running OS X Sierra, follow these steps:
+
+1. Open Terminal.
+2. Navigate to the appropriate SPSS installation directory:
+   - For SPSS 19: `cd /Applications/IBM/SPSS/Statistics/19`
+   - For SPSS 20: `cd /Applications/IBM/SPSS/Statistics/20`
+   - For SPSS 21: `cd /Applications/IBM/SPSS/Statistics/21`
+
+3. Find the `licin.sh` or `lic.sh` file within the bin folder:
+   ```
+   ls /Applications/IBM/SPSS/Statistics/19/bin/
+   ```
+
+4. Try launching the License Authorization Wizard by typing:"
+TRAIN_Q326,True,5,1,False,False,,,,"Yes, it is possible to rename the WebSphere Portal installation directory and cell name for an existing clustered installation. The steps provided in the retrieved documents outline how to update the application mappings, deploy the application, change its context root, and update the REST service provider configuration to reflect these changes.","Yes, it is possible to re-name the WebSphere Portal installation directory and cell name for an existing clustered installation. However, users must reinstall WebSphere to a path without spaces or underscores. The current installation path containing spaces or underscores cannot be used due to unsupported configurations."
+TRAIN_Q307,False,5,1,False,False,0.3636,0.3613,-0.0023,"A second instance of the Deployment Engine (DE) was installed on the server, leading to a product upgrade failure due to the presence of two different DEs. This issue occurred because the DE was installed by a non-root user (in this case, ""nc_admin""), resulting in the installation being placed in the user's home directory with the fully qualified hostname included in the path. This setup conflicts with the requirement for a single instance of the DE per server when installing IBM products.","The deployment engine should have only one instance installed on a server with IBM products installed. A second instance was installed, leading to the failure of the product upgrade. When the deployment engine is installed as non-root, it installs the DE in the user home directory and uses the FQDN in the name. This can cause issues during upgrades, especially when installing a product that requires the DE."
+DEV_Q198,True,5,2,False,False,,,,"The error CSV002I REQUESTS FOR MODULE CSQADITB EXCEED MAXIMUM USE COUNT is occurring because the application has reached its maximum allowed number of requests for the module CSQADITB. Restarting the application temporarily resolves the issue due to the system clearing the error messages. To resolve this permanently, the application should be relinked using the updated version of CSQADITB and the IMS MPRS should be recycled frequently to prevent the issue from recurring.","The error CSV002I REQUESTS FOR MODULE CSQADITB EXCEED MAXIMUM USE COUNT is occurring because the maximum number of requests for the module CSQADITB has been exceeded. Restarting the application temporarily resolves the issue due to the system clearing the error messages. To resolve this consistently, it is recommended to either implement a local fix such as relinking IMS/WMQ programs using the new version of CSQQSTUB or code an explicit MQDISC in the application."
+TRAIN_Q087,False,5,0,True,False,0.0,0.2113,0.2113,INSUFFICIENT_INFORMATION,"The IBM Installation Manager (IIM) fails to start on AIX due to a lack of the GTK libraries required for its GUI functionality. Despite having all the necessary GTK libraries installed, the installer cannot locate them correctly during the startup process. This issue arises because the current version of Installation Manager (version 1.6.2) uses the GTK window system, which differs from the Motif system used in previous versions. To resolve this, one needs to manually start Installation Manager after updating it to the latest version. Additionally, the GTK libraries must be installed on AIX for the GUI to function properly."
+TRAIN_Q581,False,5,1,False,False,0.2544,0.3347,0.0803,"The OOM error occurs because the JVM is running out of memory due to excessive memory usage by Python code during the configuration process. To resolve this issue, you should increase the maximum heap size allocated to the JVM. Modify the `JAVA_OPTS` parameter in your `config.sh` script to allocate more memory, such as `-Xmx512m`. This will allow the JVM to have more available memory and prevent the OutOfMemoryError from occurring.","Based on the retrieved documents, the OOM exception is occurring due to insufficient heap space being allocated for the JVM used during the configuration process. To resolve this issue, you should increase the maximum heap size specified in the JVM options. Edit the server.xml file in the ITM installation directory to modify the default maximumHeapSize attribute from ""512"" to a higher value suitable for your environment, such as around 1.5GB for a 32-bit system. For larger environments, consider implementing a 64-bit TEPS and eWAS."
+TRAIN_Q295,False,5,0,True,False,0.0,0.201,0.201,INSUFFICIENT_INFORMATION,"ITNM or Omnibus WebGUI java applets fail to load because they lack the ""Permissions"" manifest attribute in their main jar file. This is due to security enhancements introduced in Oracle's Java 7 Update 25, which prevent unsigned, self-signed, or missing permissions attributes from being allowed. These warnings should be treated as informational rather than errors, and the current JRE 7 updates are expected to work despite them. To resolve this issue, it is recommended to update the firmware to 4.6.2."
+TRAIN_Q368,False,5,0,True,False,0.0,0.272,0.272,INSUFFICIENT_INFORMATION,"Yes, the Tivoli Monitoring agent for WebSphere MQ uses the SYSTEM.MQXR.COMMAND.QUEUE. According to the retrieved documents, this queue is typically used by the MQ Telemetry component to forward telemetry-related PCF messages to the MQ Telemetry component for handling. The 2085 event (Unknown Object Name) could indicate issues with creating or configuring this queue, leading to the generation of the alert."
+TRAIN_Q094,True,5,1,False,False,,,,"To inject a multiline message into your Local WAS server when developing an MDB, you should ensure that the message format is correctly configured within the MDB class. The issue might be related to how the message is being serialized and deserialized, especially if the message contains newlines.
+
+Here are some steps you can follow:
+
+1. **Check Message Format**: Ensure that the message you're trying to send has newline characters properly formatted. In Java, messages sent over JMS typically require specific formatting to maintain their integrity during transmission.
+
+2. **Use Correct Serialization**: Make sure that the `Message` object is being serialized and deserialized correctly. For example, if you're sending a string containing newlines, make sure it's encoded appropriately before serialization.
+
+3. **Configure MDB Properly**: When deploying the MDB","To inject a multiline message into your Local WAS server when using an MDB, follow these steps based on the information provided:
+
+1. Ensure that your MDB has been properly configured to handle multiline messages. Check the deployment descriptor (e.g., ejb-jar.xml) to see if the MDB supports multiline messages.
+
+2. Modify the MDB code if necessary to accommodate multiline messages. This might involve changing the message type or altering the logic within the MDB to process multi-line data correctly.
+
+3. Use the appropriate configuration settings in your WAS environment to enable multiline messaging. For example, ensure that the MQ resource adapter is set up to handle multiline messages.
+
+4. Configure the MDB to listen for messages that match specific criteria. This can be done through the deployment descriptor or programmatically.
+
+5. Test the MDB"
+TRAIN_Q385,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"To set the nursery size (-Xmns256M -Xmnx256M) in the WAS admin console, follow these steps:
+
+1. Navigate to Servers > Application servers > server_name
+2. Find the ""System Infrastructure"" section -> Java and Process Management -> (Lower right) -> Process definition -> Additional Properties section
+3. Click Java Virtual Machine
+4. Type 256 as the Initial heap size and 256 as the Maximum heap size
+5. Save your changes
+6. Restart WebSphere
+
+If the ""Generic JVM arguments"" section is not available, you can use the workaround mentioned in Document 2:
+
+1. Backup the metadata database
+2. Navigate to Servers > Server Types > WebSphere application servers > server_name >"
+TRAIN_Q061,True,5,4,False,False,,,,"Based on the retrieved documents, your application is experiencing issues due to excessive creation of ORB threads leading to OutOfMemory errors. The symptoms include a high memory usage by the JVM and garbage collection not returning memory, along with numerous mailbox threads in the thread dumps. To resolve this issue, consider changing the value of updateMailboxLastModification in mailbox.properties.in to false temporarily until a more permanent solution is found.","Based on the retrieved documents, the issue described involves hanging threads leading to OutOfMemory errors. Specifically, the problem seems to arise when an Enterprise JavaBean calls ORB.init(), causing the creation of multiple ORB threads. Over time, this leads to excessive memory consumption and potential OutOfMemory errors. The symptoms include high memory usage, numerous ORB threads in thread dumps, and processing hangs. To resolve this, changing the updateMailboxLastModification property in mailbox.properties.in to false temporarily can help mitigate the issue until a more permanent solution is found."
+TRAIN_Q431,False,5,1,False,False,0.338,0.3404,0.0024,"There may be issues or underlying problems if you install the IBM OS agent under ""Program Files"" due to the presence of spaces in the path. The error message indicates that the installation path must not include spaces because of system settings. However, removing the spaces from the path can cause other issues such as incorrect file paths being created. It is recommended to either remove the spaces from the path or check the NTFS 8.3 name creation setting to allow directories with spaces in their names.","There is no direct mention of issues related to having a space in the ""Program Files"" directory specifically due to the presence of a space in the install path. However, based on Document 1, it states that installing into ""C:\Program Files (x86)\IBM\ITM"" or setting the PATH variable to exclude spaces might solve the issue. Therefore, if you choose to install under ""Program Files"", ensure that the PATH variable does not contain any spaces."
+TRAIN_Q336,False,5,0,True,False,0.0,0.2771,0.2771,INSUFFICIENT_INFORMATION,"The silent install aborting due to locked files typically happens because the installer cannot find enough space in the designated installation directory to proceed without overwriting existing files. In the case described, the issue arises specifically within the ITM installation directory on Windows platforms. When attempting a silent install, the installer checks for locked files and renames them temporarily to avoid conflicts. However, if the silent install fails at this point, the renamed files remain locked, preventing further operations such as restarting ITM components.
+
+This locking behavior is intended to ensure that no ongoing ITM processes interfere with the silent installation process. To resolve this issue, users should first attempt to restart the ITM components manually after the silent install fails. If manual restarts also fail, it might indicate a deeper underlying issue requiring additional troubleshooting steps beyond just"
+DEV_Q220,False,5,5,False,False,0.186,0.186,0.0,"To find more detailed information about the ""Security Bulletin: TLS padding vulnerability affects IBM PureApplication System (CVE-2014-8730)"", you should refer to Document 1, which provides comprehensive details including the summary, vulnerability details, CVSS scores, and affected products.","To find more detailed information about the ""Security Bulletin: TLS padding vulnerability affects IBM PureApplication System (CVE-2014-8730)"", you should refer to Document 1, which provides comprehensive details including the summary, vulnerability details, CVSS scores, and affected products."
+TRAIN_Q231,False,5,0,True,False,0.0,0.3309,0.3309,INSUFFICIENT_INFORMATION,"The Filter Analyzer error ""rule includes an unsupported expression"" occurs when comparing two ObjectServer fields against each other or a field against GetDate within an EventReader Filter. This issue is due to a limitation in the functionality of the Filter Analyzer in Impact and can produce the log file message: WARN [EventFilter] Could not consolidate filters. Please check if the filter expressions are valid. Java.util.concurrent.ExecutionException. To resolve this, add the following properties to the EventReader's props file: impact.<readername>.consolidatefilters=false and impact.<readername>.uselikeoperator=true."
+TRAIN_Q526,False,5,0,True,False,0.0,0.0376,0.0376,INSUFFICIENT_INFORMATION,"It seems there might be some confusion regarding the specific issue related to reporting in Rhapsody. The provided documents do not directly address the problem of being unable to find the ""reports plus"" in Rhapsody v8.1.2 x64. Instead, they discuss issues like the DoDAF Report Generator not working properly, problems with the Rhapsody search feature, and compatibility issues between different versions of Rhapsody and its plugins. Without more context about what specifically cannot be found in Rhapsody, it's difficult to provide a precise answer to why one might be experiencing difficulties with reporting tools within Rhapsody."
+TRAIN_Q343,False,5,0,True,False,0.0,0.303,0.303,INSUFFICIENT_INFORMATION,"Yes, WAS Liberty is affected by the security vulnerability identified in WebSphere Application Server shipped with WebSphere Service Registry and Repository (CVE-2017-1681). The vulnerability affects all versions of WebSphere Service Registry and Repository and WebSphere Application Server that were shipped together."
+DEV_Q122,False,5,0,True,False,0.0,0.3023,0.3023,INSUFFICIENT_INFORMATION,"The error message ""BMXAA4198E - The GL attribute TLOAMNEWGLACCOUNT on object {1} requires an organization. Specify a value in the Organization field."" indicates that the GL account being imported or synced does not have an associated organization. This requirement is part of the fix for APAR IV67500, which was included in Maximo 7.5.0.6 or later ifixes. To resolve this issue, ensure that the GL account has an organization specified in its attributes."
+TRAIN_Q222,False,5,0,True,False,0.0,0.3182,0.3182,INSUFFICIENT_INFORMATION,The Composite Platform Installation Tool (CPIT) version 5.2.1 does not support installing IBM Tivoli Directory Server (ITDS) 6.3 on Red Hat Enterprise Linux (RHEL). This limitation prevents the successful installation of the FileNet P8 platform using CPIT 5.2.1 due to the requirement of ITDS 6.3 for the installation to proceed.
+DEV_Q154,False,5,0,True,False,0.0,0.4354,0.4354,INSUFFICIENT_INFORMATION,"Some DataTypes become corrupt after an Impact cluster failover because the secondary ImpactServer may truncate the .type file due to limitations in the property size. To resolve this issue, add the property to the server.properties file on all ImpactServers in the cluster, restarting them ensures proper replication. Additionally, examine the .type file of the corrupted DataTypes for missing properties or incomplete lines. If necessary, manually rebuild the DataTypes while the ImpactServer is shut down. Ensure that the existing DataTypes are not corrupted and that the correct FAILOVERPOLICY is set for each data source."
+DEV_Q158,False,5,1,False,False,0.35,0.1975,-0.1525,"Yes, the TOKEN_SEPARATOR value must be enclosed in quotes for the custom scripting feature. This is because if it is not enclosed in quotes, the EPDM dialog will complain that only one value must be entered. However, if you choose to use quotes, they are optional and the expression is not case sensitive.","Yes, according to Document 2, the TOKEN_SEPARATOR value must be enclosed in quotes for the custom scripting feature."
+TRAIN_Q133,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"When applying RSU1412 to CICS TS 5.2 or 5.1, you may encounter the signon error DFHXS1201 due to the presence of an extra XS0601 trace entry for INQUIRE PASSWORD failing. This issue occurs because the terminal netname does not appear in the SMF 80 audit record as it did in regions without the maintenance. The problem arises specifically when running with CICS TS on a machine running RACF, causing the sign-on to fail and preventing the automation from running. The solution involves obtaining the fix for APAR PI21866, which supports the Enhanced Password Algorithm."
+DEV_Q034,False,5,0,True,False,0.0,0.1892,0.1892,INSUFFICIENT_INFORMATION,"Yes, a Java profiler is available for WebSphere 8.0. You can use the `was-profile` command-line tool to start profiling. To activate it through the WAS Admin Console, follow these steps:
+
+1. Open a web browser and navigate to the IBM Web Administration for i console.
+2. Log in with your credentials.
+3. In the left-hand menu, click on ""Servers"" > ""<server-name>"" > ""Java Processes"".
+4. Select the Java process you want to profile.
+5. Click on the ""Edit"" button next to the Java process.
+6. Scroll down to the ""Profile"" section.
+7. Check the box next to ""Start Profiling"".
+8. Save the changes.
+
+This will start profiling the selected Java process."
+TRAIN_Q456,False,5,0,True,False,0.0,0.3448,0.3448,INSUFFICIENT_INFORMATION,"Yes, it is normal behavior when starting nodeagent and dmgr in Solaris 11.2 SPARC with WebSphere Application Server 8.5. The error messages indicate that the Java application is unable to run native commands due to restricted permissions for non-root users. This limitation prevents the execution of certain native commands like zonecfg, which is necessary for configuring zones in Solaris. The solution is to run WebSphere Application Server under a root user to avoid these issues."
+TRAIN_Q157,True,5,3,False,False,,,,"The Security Bulletin for IBM WebSphere MQ 7.0.1 potential denial of service (CVE-2015-2013) was issued by IBM. The bulletin describes a vulnerability where a client could send a specially crafted selection string to crash the channel agent, leading to a denial of service for other channels running under the same MCA process. The CVSS base score is 4.3, indicating a high severity. To mitigate this issue, IBM recommends applying the fix for APAR IV73860, available in IBM WebSphere MQ 7.0.1.13.","To find more detailed information on the Security Bulletin: IBM WebSphere MQ 7.0.1 potential denial of service (CVE-2015-2013), you should refer to Document 1, which provides comprehensive details including the summary, vulnerability details, affected products and versions, remediation/fixes, and CVSS scores."
+TRAIN_Q392,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"Yes, it is possible to remove the KD4SoapHeaderV2 header appearing in the WebServices messages after enabling ITCAM for SOA DC. According to Document 1, ITCAM adds its SOAP headers only when there is a child element for Header under the SOAP envelope for JAXWS implementation of Axis2 used by WebSphere. If the header element is not added or stripped out by other handlers in the chain, they will not be added. Therefore, if the header element is not being added or stripped out properly, it could lead to the appearance of the KD4SoapHeaderV2 header in the WebServices messages."
+TRAIN_Q380,False,5,2,False,False,0.4968,0.5957,0.0989,"To view Custodian Notes in Atlas Preservation Plan:
+
+1. Click the ""Notes"" tab.
+2. If no custodian notes are displayed, click the ""Show Custodian Notes"" button.
+3. This will list the custodian notes.
+4. To return to plan notes, click the ""Show Plan Notes"" button.
+5. Alternatively, if you prefer to view only custodian notes, click the ""Show Custodian Notes"" button again.
+6. In the Custodians tab, select the custodian whose notes you wish to view by clicking their name.","To view Custodian Notes in Atlas Preservation Plan:
+
+1. Click on the Notes tab in a Preservation Plan.
+2. By default, it displays Plan Notes. To view Custodian Notes, click the ""Show Custodian Notes"" button.
+3. If you need to return to Plan Notes, click the ""Show Plan Notes"" button.
+4. Alternatively, to view Custodian Notes directly, click the Custodians tab and select the custodian whose notes you wish to view."
+TRAIN_Q171,False,5,3,False,False,0.2667,0.2317,-0.035,"To find details regarding the Security Bulletin: Security vulnerabilities have been identified in IBM DB2 shipped with WebSphere Remote Server (CVE-2014-8730), you should refer to Document 1 and Document 2. Both documents mention that IBM DB2 is affected by security vulnerabilities when used with WebSphere Remote Server. The first document provides more general information on the issue, while the second specifically mentions CVE-2014-8730 and its related products.","To find more detailed information on the security vulnerabilities in IBM DB2 shipped with WebSphere Remote Server, you should refer to the following sources:
+
+1. IBM Security Bulletin: ""Security vulnerabilities have been identified in IBM DB2 shipped with WebSphere Remote Server (CVE-2014-8730)"" - This bulletin provides comprehensive details including affected products, versions, and vulnerability specifics.
+   
+2. Document 2: ""IBM Security Bulletin: Security vulnerabilities have been identified in IBM DB2 shipped with WebSphere Remote Server (CVE-2014-8730)"" - This document contains similar information as the first one but focuses specifically on the TLS padding vulnerability affecting IBM DB2 LUW.
+
+These resources will give you the most accurate and up-to-date details about the security"
+TRAIN_Q003,False,5,1,False,False,0.4511,0.4453,-0.0058,"To enable SSL mutual authentication in IBM HTTP Server (IHS) version 7, you need to follow these steps:
+
+1. Go to the Local Management Interface.
+2. Navigate to Secure Federations > Global Settings > Server Connections.
+3. Configure client certificate support by setting the SSL Mutual Authentication Key field under Server properties. This field represents the label of the client certificate to be presented during connection to the LDAP server.
+4. Ensure that the SSL Truststore is correctly configured to retrieve the necessary certificates.
+
+This configuration ensures that both the server and the client present their respective certificates during the SSL handshake, providing mutual authentication.","To enable SSL mutual authentication in IBM HTTP Server (IHS), follow these steps:
+
+1. Stop the IBM HTTP server if it is currently running.
+2. Start the IBM HTTP server Key Management Utility tool.
+3. Create a keystore file containing the necessary certificates and keys.
+4. Configure the IHS load balancer and Change Management Server for SSL-only access using a self-signed certificate and matching private key.
+5. In the local management interface, go to Secure Federations > Global Settings > Server Connections. Configure client certificate support with the SSL Mutual Authentication Key field under Server properties. This field represents the label of client certificate to be presented when connecting to the LDAP. This property is sourced from SSL Truststore."
+TRAIN_Q372,False,5,1,False,False,0.3306,0.296,-0.0346,"To fix the error CRIMA1217E when upgrading JAZZ from 1.1.0 to 1.1.3, follow these steps:
+
+1. Check the migration log located at ""/opt/IBM/XXXXX/server/repotools_import.log"".
+2. Identify the cause of the error by referring to the CAUSE section in the retrieved documents.
+3. Since the error occurs due to a duplicate attribute ID in the exported file, you need to update your RTC (Real-Time Collaboration) software to version 2.0.0.1.
+4. This version includes the fix for the jazz.net work item 88109 mentioned in the retrieved documents.
+
+By following these steps, you should be able to resolve the error and successfully complete the","When upgrading JAZZ from 1.1.0 to 1.1.3 failed due to the CRIMA1217E error, follow these steps:
+
+1. Identify the problematic package causing the issue through Installation Manager or console mode.
+2. Check the installation history for clues about which package caused the problem.
+3. Contact IBM customer support if necessary to identify the specific package causing the issue.
+4. Ensure that the correct version of the JVM is being used during the upgrade process.
+5. Follow the workaround provided in Document 3, specifically modifying the JAVA_HOME environment variable in the setenv.sh script before running the upgrade again.
+6. Upgrade RTC to version 2.0.0.1 if encountering issues related to importing data from older versions of Jazz for Service"
+TRAIN_Q594,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"The errors AMQ9776 and AMQ9777 indicate that a channel was blocked while trying to communicate with a remote host. This typically occurs when there is a mismatch between the active values of the channel and the configuration settings, specifically related to the ""USERSRC"" parameter which controls access permissions. To resolve this issue, you should temporarily disable sharing conversations on the channel by altering its type to SVRCONN and setting sharecnv to 0.
+
+Additionally, if your environment involves long usernames, ensure they are properly set before making calls to MQ. Missing or incorrectly set long usernames can lead to authorization issues resulting in the described errors."
+TRAIN_Q070,False,5,2,False,False,0.4839,0.1659,-0.318,"To search for a string containing reserved words or characters in documents in Atlas, you should use double backslashes (\\) before the reserved characters. For example, instead of typing ""String1-String2"", type ""String1\\-String2"". This will ensure that the hyphen (-) is interpreted correctly as part of the search term rather than being treated as a literal character.","To search for a string which includes reserved words or characters in documents in Atlas, you should:
+
+1. Use double quotes around the string to treat each word separately.
+2. Escape special characters like hyphens (-), underscores (_), asterisks (*), colons (:), periods (.), slashes (/), angle brackets (<>, >), caret (^), dollar signs ($), percent signs (%), ampersands (&), and less-than sign (<) by preceding them with two backslashes (\).
+3. Use single backslashes (\) instead of double backslashes (\\) before reserved characters like ' and "" to avoid confusion with literal quotation marks.
+4. Be aware that some characters have special meanings in queries, so escaping them may change their behavior."
+DEV_Q107,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"The issue encountered when trying to publish from IBM Integration Designer (IID) to a local Process Server results from the BO Service being unsupported or disabled in the current profile. Specifically, the SCA service manager running on WebSphere Portal cannot locate the necessary configuration files required for the Process Server to function properly. Additionally, there may be issues related to the serialization of business objects, such as encountering invalid XML characters or class definitions not being found. These problems lead to exceptions like ""BO Service is not supported or disabled in this profile,"" causing the publication process to fail."
+TRAIN_Q592,False,5,2,False,False,0.2331,0.3559,0.1228,"Yes, the Bash Bug vulnerabilities known as Bash Bugs or Shellshock can affect WebSphere MQ Hypervisor. The affected versions of WebSphere MQ Hypervisor are ""WebSphere Message Broker v8 HVE"" and ""IBM Integration Bus V9 HVE"". To address this situation, action is required to ensure no vulnerable scripts have been added to IBM HTTP Server. Specifically, fixes for Bash will come from Unix distribution, and IBM HTTP Server does not ship bash nor ship any CGI scripts. However, several modules included with IBM HTTP Server could be vulnerable.","Yes, the Bash Bug vulnerabilities known as Bash Bugs or Shellshock can affect WebSphere MQ Hypervisor. Specifically, IBM WebSphere MQ Hypervisor Edition for Red Hat Enterprise Linux Server requires customer action to address these vulnerabilities. The recommended course of action is to contact Red Hat to obtain fixes and install them."
+DEV_Q306,False,5,0,True,False,0.0,0.3223,0.3223,INSUFFICIENT_INFORMATION,"There appears to be a limitation in IBM Datacap Taskmaster Capture version 8.1.0.2 where the maximum number of batches that can be viewed simultaneously is limited to 100. This restriction applies to both the batch view and the thumbnail view. The local fix provided suggests modifying the apps.ini file to increase the batch limit, which would allow viewing up to 1000 batches at once. However, this solution is not directly applicable to the current version being used, as indicated by the version number mentioned in the question."
+TRAIN_Q463,False,5,0,True,False,0.0,0.2353,0.2353,INSUFFICIENT_INFORMATION,"No, WebSphere Portal does not inherently prevent the usage of simultaneous logins with the same userID. Concurrent modifications can lead to unexpected behavior such as ""ConcurrentModificationException"". To prevent multiple logins, you might need to implement custom tracking code or configure timeouts and redirects as suggested in the retrieved documents. Additionally, ensure user accounts have appropriate roles to access multiple web applications simultaneously."
+TRAIN_Q221,False,5,0,True,False,0.0,0.2636,0.2636,INSUFFICIENT_INFORMATION,"The issue appears to be related to resource limitations on the SQL Server instance being used by Case Analyzer. Specifically, the query processor encountered an unexpected exception because it ran out of internal resources to process the query. To resolve this, the batch update mode should be updated to 'BATCH', and further investigation into tuning the Microsoft® SQL Server configuration might be necessary to ensure adequate memory allocation for handling large datasets processed by Case Analyzer."
+DEV_Q136,True,5,1,False,False,,,,"The issue described where the compose tab is disabled and the project cannot be edited in Decision Center after upgrading to ODM version 7.5.2 suggests that there might be a configuration problem related to category schema editing. This behavior is documented in the provided text from Document 1, which indicates that when navigating through the administration interface, specifically selecting a community, then the Category Schema tab becomes editable, but the OK button remains disabled until changes are made to the Category Configuration.
+
+To resolve this issue, it would be necessary to check the specific settings or configurations within the Decision Center environment that could be causing the disablement of the OK button. Additionally, ensuring that all required permissions and access levels are correctly set up for the user attempting to make changes should also be considered.","The issue described involves projects appearing non-editable in the Decision Center after upgrading to ODM version 7.5.2. Specifically:
+
+1. The Compose tab is disabled.
+2. There are no new or edit buttons in the Explore tab.
+
+These symptoms suggest a potential bug related to the configuration or behavior of the Category Schema tab within the Administration section of the Decision Center. The recommendation provided suggests checking the Community Configuration settings to resolve the issue.
+
+Given the context and the available information, the most likely cause seems to be a change in how the Category Schema tab interacts with the overall system configuration upon upgrade. The temporary fix mentioned in Document 2 indicates that reverting to a previous release might help, although this is not considered a long-term solution due to its impact on functionality.
+
+In summary"
+TRAIN_Q044,False,5,0,True,False,0.0,0.125,0.125,INSUFFICIENT_INFORMATION,"It seems like there might be some confusion regarding the authorization code for IBM SPSS. The provided documents suggest that you should contact IBM SPSS Customer Service to verify the accuracy of the code. They can help determine whether the code is valid for your specific release of SPSS. If you have any doubts about the code, they can assist you in creating a service request through IBM Support. Ensure that the authorization code you're entering matches the version and software product you're trying to license."
+DEV_Q247,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"Based on the provided documents, the issue seems to be related to a Java Virtual Machine (JVM) error specifically associated with IBM Rational Application Developer (RAD) when trying to launch. The symptoms indicate that the application fails to start with an exit code of -8096, which corresponds to a specific error code in the IBM documentation.
+
+The root cause appears to be corruption in the IBM Installation Manager cache directories, leading to issues with starting the JVM. To resolve this:
+
+1. Check the Windows temporary directory locations mentioned in Document 1.
+2. Remove the following directories from these locations: `ciclogs_<username>`, `cicvolcache_<username>`, and `IBMIM<#>` (where `<#>` represents the installation number).
+3. Restart IBM Installation Manager"
+TRAIN_Q360,False,5,0,True,False,0.0,0.1489,0.1489,INSUFFICIENT_INFORMATION,"Yes, it is possible to monitor Memory/LPAR metrics using ITM HMC agent. The ITM HMC agent can capture metrics related to memory and LPARs, although it may not cover all available metrics compared to the full suite provided by the ITM UNIX OS agent."
+TRAIN_Q272,False,5,1,False,False,0.2893,0.359,0.0697,"The error message MQRC_NOT_AUTHORIZED indicates that the client application is unable to authenticate with the specified credentials when trying to connect to the WebSphere MQ queue manager. This issue arises because starting with MQ V6, changes were made to the MQ JMS client code to provide the userid of the process (application) connecting to the MQ server instead of relying solely on the connection string provided by the client application. The problem occurs if the userid used in the client application does not exist in the host of the MQ queue manager or if it lacks the appropriate authority to access the MQ queue manager. To diagnose and resolve this issue, one should trace the failure to identify the userid being sent by the MQ client to the MQ queue manager and ensure that the userid exists and has the required permissions in the host environment","After upgrading from WebSphere MQ V7.0 to V8.5.5, you may encounter MQRC_NOT_AUTHORIZED errors in Java or JMS applications. This issue arises because starting with MQ V6, changes were made to the MQ JMS client code to provide the userid of the process (application) connecting to the MQ server instead of relying solely on the userid specified in the host configuration. This change requires the userid to be present in the host of the MQ queue manager and must have the proper authority to access the queue manager. If the userid does not meet these requirements, the application will receive a MQRC_NOT_AUTHORIZED error. To resolve this issue, ensure that the userid exists in the host of the MQ queue manager and has the required authority before attempting to connect."
+DEV_Q233,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"Configuring ""hung threads detection"" in a production WebSphere Application Server environment can significantly impact performance due to its overhead. By enabling this feature, the system generates a thread dump or javacore whenever a thread is detected as potentially hanging. This can lead to increased disk I/O operations and potential memory consumption, especially during periods of heavy load or long-running transactions.
+
+However, the extent of the impact depends on several factors including the frequency of hung threads, the size of the thread dumps, and the overall capacity of the server resources. For most applications, the benefits of detecting hung threads outweigh the performance costs, particularly if they help identify and resolve underlying issues promptly.
+
+To mitigate potential performance impacts, consider the following strategies:
+1. Monitor the rate of hung threads closely. If the majority of hung threads"
+DEV_Q114,False,5,0,True,False,0.0,0.1053,0.1053,INSUFFICIENT_INFORMATION,"Based on the provided documents, there are some differences between DB2 z/OS V9.1 + IBM Cobol and DB2 LUW V10.5 FP7 + MF Cobol:
+
+1. **Precompilation**: Current DB2 LUW behavior allows generating Cobol declarations similar to those produced by the z/OS precompiler, while DB2 z/OS requires using supported COBOL compilers like IBM VS COBOL II Release 4.0.
+
+2. **Compiler Configuration**: In DB2 LUW, it is recommended to use supported COBOL compilers when compiling with the DB2 precompiler.
+
+3. **Feature Support**: Some features introduced in DB2 for z/OS Version 8 require enabling specific options in the Enterprise COBOL for z/"
+DEV_Q185,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"When receiving CWZIP9602E, CWZIP9604W, and CWZIP4514E with Call Home, follow these steps:
+
+1. Enable Call Home on your PureApplication System v.2.0.0.1.
+2. Check the global configuration settings via REST API to ensure they are correctly configured.
+3. Confirm that the CONNECTION_TYPE_1 value is set to 4.
+4. Navigate to System > Settings and open the Service and Support Manager section.
+5. Edit the connection settings and copy/paste the current proxy information.
+6. Connect to the internet directly instead of through the proxy.
+7. Subscribe to the APAR for tracking updates.
+8. Track all active APARs related to this component.
+9. Ensure the External"
+TRAIN_Q422,False,5,4,False,False,0.3669,0.3601,-0.0068,"The security bulletin ""Vulnerability in SSLv3 affects IBM Integration Designer and WebSphere Integration Developer (CVE-2014-3566)"" was issued by IBM. This bulletin highlights a vulnerability in SSLv3 protocols used in IBM Integration Designer and WebSphere Integration Developer products, which allows remote attackers to potentially obtain sensitive information through a man-in-the-middle attack on downgraded legacy encryption. The CVSS base score is 4.3, indicating a moderate risk.","The security bulletin ""Vulnerability in SSLv3 affects IBM Integration Designer and WebSphere Integration Developer (CVE-2014-3566)"" was issued by IBM. This bulletin highlights a vulnerability in SSLv3 protocols used in IBM Integration Designer and WebSphere Integration Developer, which could lead to sensitive information being obtained through a man-in-the-middle attack if SSLv3 is enabled. The CVSS base score for this vulnerability is 4.3, indicating it is considered high severity but not critical. The affected products are IBM Integration Designer and WebSphere Integration Developer, and they are vulnerable due to a design error when using the SSLv3 protocol."
+TRAIN_Q264,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"After updating WebSphere Application Server v7 and Java SDK to Fix Pack v7.0.0.37, data source connections to Microsoft SQL Server failed because the MS SQL Server database was found to lack certain components required for successful connection. Specifically, the ""master..xp_jdbc_open"" stored procedure was missing, which is essential for establishing a connection via the Data Direct driver. This issue arises due to the fact that WebSphere Application Server versions prior to V6.1 are not fully compatible with Microsoft SQL Server 2005, making them incompatible with the MS SQL Server database. To resolve this problem, ensure that the correct version of the MS SQL Server database is being used and that any necessary updates have been applied to the WebSphere Application Server and its associated drivers."
+TRAIN_Q165,False,5,3,False,False,0.396,0.3913,-0.0047,"Yes, Java 8 is supported for EJBDeploy on WebSphere Application Server 8.5.5.9 or later. However, it is noted that after applying this fix, EJBDeploy cannot be used with Java 6. The fix is targeted for inclusion in 2Q2018.","Yes, Java 8 is supported for EJBDeploy on WebSphere Application Server 8.5.5.9 or later. However, it is noted that after applying this fix, EJBDeploy cannot be used with Java 6."
+TRAIN_Q233,False,5,3,False,False,0.4538,0.2008,-0.253,"The security bulletin for IBM API Connect addressing the cross-site scripting vulnerability CVE-2018-1382 states that it allows users to embed arbitrary JavaScript code in the Web UI, thereby altering the intended functionality and potentially leading to credentials disclosure within a trusted session. The CVSS base score is 5.4, indicating a high severity level. The vulnerability affects versions ranging from API Connect 5.0.0.0 to 5.0.7.2.","To find more detailed information about the security bulletin related to the cross-site scripting vulnerability CVE-2018-1382 affecting IBM API Connect, you should refer to Document 1, which contains the full text of the security bulletin. The document provides comprehensive details including the summary, vulnerability description, CVSS scores, affected products and versions, and remediation fixes."
+TRAIN_Q419,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"No, doubling the number of instances does not necessarily equate to double throughput in IBM Integration Bus (IIB) or WebSphere Message Broker (WMB). The scalability of message flow instances depends on various factors such as the number of concurrent threads assigned to each instance, the number of execution groups, and whether multiple brokers are being used in a clustering environment. Additionally, there are specific configurations and settings needed to achieve optimal performance, which are not covered in the provided documents."
+TRAIN_Q071,False,5,0,True,False,0.0,0.4309,0.4309,INSUFFICIENT_INFORMATION,"The upgrade to BigFix version 9.2.5 is taking a very long time because it involves upgrading the database. According to Document 1, the installer launches the BESAdmin utility to complete this part of the upgrade, but does not provide detailed progress during this phase. Some long-running upgrades may appear hung or not progressing due to the BESAdmin UI indicating ""Not Responding"" on Windows or reporting ""Configuring the database for the server component, please wait ..."" on Linux. It is recommended to allow the upgrade to complete without attempting to cancel or kill the upgrade process. To verify the upgrade is still active, check that the BESAdmin process is still running."
+DEV_Q026,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"To resolve the issue where the DNS cache is not updating even after the DNS server has been changed, follow these steps based on the provided documents:
+
+1. Edit the <gis install directory>/jdk/jre/lib/security/java.security file and uncomment the networkaddress.cache.ttl parameter. Set its value to -1 to force Java to use an infinite time storage for the DNS cache.
+
+2. Restart the GIS service for the settings to take effect.
+
+3. Ensure that the DNS query cache on the iSeries is cleared. Execute the CHGTCPDMN command with no parameters from the operating system command line to clear the DNS query cache.
+
+After performing these steps, the DNS cache should reflect the updated IP address from the DNS server."
+TRAIN_Q311,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"Based on the information provided in the retrieved documents, there seems to be an issue related to the CICS transaction server (CICS TS) V4. The problem appears to be caused by the application of the PTF for OA45950, which was applied to the CICS TS V4.0 release. The specific cause of the issue is not detailed in the given documents but is described as involving the invocation of predatory takeover of VTAM sessions and resources by subsequent CICS regions, leading to abends with messages like DFHSR0606 and abend code 0208.
+
+To resolve this issue, users should apply the appropriate PTF for their specific CICS TS V4.0 release, as indicated in Document 1. The PTF availability"
+TRAIN_Q553,False,5,4,False,False,0.1538,0.2717,0.1179,"To find more detailed information about the ""Security Bulletin: Multiple vulnerabilities in IBM Java SDK affect IBM Image Construction and Composition Tool (CVE-2014-3566 and CVE-2014-6457),"" you should refer to Document 3, which specifically addresses these vulnerabilities in IBM Java SDK Version 6 affecting IBM PureApplication System. This document provides comprehensive details including CVSS scores, environmental scores, and remediation fixes.","To find more detailed information about the ""Security Bulletin: Multiple vulnerabilities in IBM Java SDK affect IBM Image Construction and Composition Tool (CVE-2014-3566 and CVE-2014-6457),"" you should refer to Document 4, which specifically addresses these vulnerabilities. This document provides comprehensive details including CVSS scores, environmental scores, descriptions of the vulnerabilities, and their impacts on confidentiality, integrity, and availability. Additionally, it mentions that there is a fix for the Padding Oracle On Downgraded Legacy Encryption (POODLE) SSLv3 vulnerability (CVE-2014-3566), which is included in the IBM Java SDK updates mentioned in the bulletin."
+TRAIN_Q498,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"The issue described involves high CPU consumption due to Just-In-Time (JIT) compilation threads in your IBM Portal system. These threads are consuming significant CPU resources, particularly when they encounter certain bytecode patterns during compilation. To address this, consider the following steps based on the provided documents:
+
+1. **Disable JIT Compilation**: Use the `-Xjit:disableDeadTreeElimination` option to avoid the problematic pattern of bytecode that causes JIT compilation threads to consume excessive CPU. This should be applied selectively to the affected methods rather than globally.
+
+2. **Adjust Native Stack Size**: Increase the native stack size to handle any recursive native calls effectively. This might involve modifying the operating system limits for stack size.
+
+3. **Monitor and Analyze Threads**: Use tools like `ps`, `top`, and `jstack"
+DEV_Q147,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"Yes, there is an updated list of known issues regarding TEP to TEPS communication problems with different Java versions. These issues were reported starting from Oracle Java 7 update 45 and Java 6 update 65, as well as IBM Java 7 SR 6 and Java 6 SR 15. The main issue seems to be related to connection problems when logging into the TEPS via the TEP client (Browser or Java Web Start), particularly affecting those running on systems with these Java versions. The symptoms include receiving KFWITM009I messages upon login attempts and seeing errors like ""initial and forwarded IOR inaccessible"" in the eWAS's SystemOut.log file."
+TRAIN_Q234,False,5,0,True,False,0.0,0.1611,0.1611,INSUFFICIENT_INFORMATION,"To create a Windows service for WebSphere Application Server version 7.0.X, follow these steps:
+
+1. Use the WebSphere profile creation tool to create a profile for the desired runtime environment.
+2. Disable the option to configure the profile as a Windows service.
+3. Follow the related URL provided in Document 2 for additional guidance on creating the Windows service.
+4. Alternatively, open the Windows Services Control Panel, find the service name of WAS V6.1, and remove it using the command WASService.exe -remove [service_name].
+5. Restart Rational Application Developer and try starting the WASv6.1.x server again."
+TRAIN_Q558,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"The error encountered when attempting to save the import template in UCD indicates a problem related to SSL connection issues during the import process. Specifically, there was an issue connecting to the server at IPAS version 4.0.0.3-20140404055836 / 20140404-0551-458. To resolve this, upgrading to UCD version 6.0.1.3.484576 would likely address the compatibility and connectivity issues. However, without specific details about the exact nature of the SSL handshake failure mentioned in the error message, it's difficult to pinpoint the root cause precisely. It might also be helpful to check the firewall settings or network configuration between"
+TRAIN_Q579,False,5,0,True,False,0.0,0.1333,0.1333,INSUFFICIENT_INFORMATION,"To resolve the issue where the ""Save"" and ""Save As"" functions are not working properly in SPSS Statistics 24 on Mac OS X 10.9.5, follow these steps:
+
+1. Go to the Edit drop-down menu.
+2. Select Options.
+3. In the General tab, change the ""Look and Feel"" setting from ""Macintosh"" to ""SPSS Standard"".
+
+After making this change, the ""Save"" and ""Save As"" functions should work correctly again."
+DEV_Q305,False,5,2,False,False,0.3037,0.2941,-0.0096,"The issue you're experiencing where images are not displayed in PDF/Excel versions of your reports after upgrading to Cognos Analytics 11.0.3 could be due to incomplete or missing Chain of Trust for SSL within the Cognos Analytics Keystore. To resolve this problem, there are two options:
+
+1. Place the images on the application tier in the Cognos installation directory in the same path they exist on the gateway server. For example, `<cognos install>/webcontent/samples/images/pic.jpg`.
+
+2. Import the SSL certificate chain of trust on the application tier by obtaining the CA certificate and any intermediate certificates which is in the chain of the trust that has signed the website certificate.
+
+Additionally, if you have upgraded from Cognos BI 10.x","The issue described in the questions appears to be related to the display of images in PDF and Excel outputs after upgrading to Cognos Analytics 11.0.3. Specifically:
+
+- In HTML mode, images work as expected.
+- However, when running the same reports in PDF or Excel formats, images fail to display.
+
+The problem seems to stem from changes made during the upgrade process, particularly regarding the location of images in the new Cognos Analytics environment. Here are the key points from the relevant documents:
+
+1. **Image Location Change**: During the upgrade from Cognos BI 10.x.x to Cognos Analytics 11.0.x, the location of images was altered. This change affects the ability to display images in PDF and Excel formats.
+
+2. **"
+TRAIN_Q599,False,5,1,False,False,0.0448,0.04,-0.0048,"The issue appears to be related to the MD5 algorithm being used for encryption within the IBM Content Collector (ICC) configuration manager. The error message indicates that the implementation of the MD5 algorithm is not part of the Windows Platform FIPS validated cryptographic algorithms, which could be causing compatibility issues between the current version of ICC and certain security policies enforced by Windows systems. To resolve this problem, it would be necessary to either update the ICC installation to a version that supports FIPS validation or configure the system to allow non-FIPS compliant algorithms if possible. Contacting IBM Software Support with the provided details can help determine the best course of action based on specific system configurations and requirements.","The issue described involves an ""Application Error"" occurring in the IBM Content Collector (ICC) configuration manager when trying to save a task route or other settings. Specifically, the problem arises because the implementation being used does not meet the requirements for Windows Platform FIPS validated cryptographic algorithms. This leads to a `System.InvalidOperationException` stating that the current implementation is not part of the Windows Platform FIPS validated cryptographic algorithms. The solution suggested is to contact IBM Software Support with the error message details."
+TRAIN_Q086,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"Based on the retrieved documents, the JDBC driver for DB2 10.1.0 is no longer provided with IBM Business Process Manager (BPM). To resolve this issue, you should update the JDBC driver to the latest version provided by the database vendor. The latest JDBC driver for DB2 10.1.0 can be downloaded from the official IBM website or through other relevant documentation sources."
+TRAIN_Q075,False,5,0,True,False,0.0,0.3934,0.3934,INSUFFICIENT_INFORMATION,"To obtain the Tivoli Monitoring Agent for Sybase Server 620 FP2 (6.2.0-TIV-ITM_SYB-FP0002), you should visit the IBM website at http://www-01.ibm.com/support/docview.wss?uid=swg24044440. The link provided there will direct you to the download page where you can access the necessary files."
+TRAIN_Q225,False,5,3,False,False,0.2873,0.314,0.0267,"The Portal 7.0.0.2 - CF29 upgrade is failing because one or more files are write protected or locked, preventing the upgrade process from writing to the specified temporary directory (/tmp/VirtualPortal.zip4374324232943413816.tmp). The ConfigTrace.log shows that the target started with the action-export-vp-asset, indicating that the upgrade attempt involved exporting virtual portals assets. The issue likely arises when trying to access or modify certain system files or directories that are either read-only or locked by another process. To resolve this problem, ensure that all necessary files and directories are writable and accessible during the upgrade process.",The Portal 7.0.0.2 - CF29 upgrade is failing because the required version of Portal (7.0.0.2 FP2) is not compatible with the current version (7.0.0.0). The upgrade process cannot proceed without matching versions of both the Portal binaries and the Portal profile.
+DEV_Q252,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"To resolve the StaleConnectionException in WebSphere Application Server, follow these steps based on the provided documents:
+
+1. **Restart the WebSphere Application Server Liberty Profile server**:
+   - Refer to Document 1 for detailed instructions.
+
+2. **Check for stale connections**:
+   - Review logs for any indications of stale connections, such as those mentioned in Document 2 and Document 3.
+
+3. **Review systemOut.log**:
+   - Look for messages related to stale connection exceptions, as shown in Document 4.
+
+4. **Identify root cause**:
+   - Determine whether the stale connection is due to:
+     - External factors like firewalls or database server inactivity.
+     - Internal issues within the application or database.
+
+5. **Address the underlying issue**:"
+DEV_Q009,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"The ""transaction log for database 'BPMDB' is full"" error occurs because the transaction log for the BPMDB database is 80GB, which is considered sufficient based on the provided information. However, the specific reason for the log being full could involve issues such as long-running loops within processes causing excessive data buildup in the BPMDB database. These loops include child processes, in-line human tasks, or wait activities, leading to the accumulation of significant amounts of process-related data. The error message suggests checking the log_reuse_wait_desc column in sys.databases to understand why space in the log cannot be reused."
+TRAIN_Q532,True,5,1,False,False,,,,"Yes, the Tivoli Monitoring NetApp monitoring agent supports OCUM (On Premise Cloud Unified Monitoring) environments. The retrieved document states that ""IBM Agent Builder version 6.3.4, previously known as IBM Tivoli® Monitoring Agent Builder, is now available for download"" and provides details on how it can be used to create custom agents for extending monitoring capabilities in IBM Tivoli Monitoring or IBM Application Performance Management environments.","Yes, the Tivoli Monitoring NetApp monitoring agent supports OCUM (On Premise Computing Model) environments. However, it requires specific prerequisites and configurations to work properly within this model."
+TRAIN_Q111,False,5,1,False,False,0.1667,0.1879,0.0212,"To find details of the corrupted object from the entries in db2diag.log, you should look for lines that mention ""bad page"" or similar phrases indicating corruption. The log will typically show the specific object ID, type, and other relevant details when such errors occur. For example:
+
+```
+2016-05-04-03.13.05.261082-360 I3442A358 LEVEL: Error PID : 393470 TID : 1 PROC : db2pfchr 0 INSTANCE: db2inst1 NODE : 000 FUNCTION: DB2 UDB, buffer pool services, sqlbReadAndReleaseBuffers, probe:13 RETCODE :","To find details of a corrupted object from the entries in db2diag.log:
+
+1. Look for entries indicating corruption in the log, such as:
+   - ""ZRC=0x86020001=-2046689279=SQLB_BADP ""page is bad""""
+   - ""ZRC=0x86020019=-2046689255=SQLB_CSUM ""Bad Page, Checksum Error""
+
+2. Identify the specific object by examining the object descriptor in these entries:
+   - For example, in the first entry, the object descriptor is ""{pool:3;obj:21;type:0}"".
+
+3. Use the object ID and type provided"
+TRAIN_Q504,False,5,1,False,False,0.2742,0.4179,0.1437,"The MTTrapd probe will report that it is dropping traps when the trap queue is full. This occurs due to the trap queue being set using the TrapQueueMax property, which determines the maximum number of traps allowed in the queue before dropping new traps. The probe checks the trap queue size periodically and if it exceeds the configured limit, it stops accepting new traps until space becomes available again.","To determine why the MTTrapd [SNMP] probe drops traps, follow these steps based on the provided documents:
+
+1. Ensure the traps are being dropped from specific devices under normal load.
+2. Use tools like snoop, tcpdump, or Wireshark to capture the traps that are being dropped on the probe server ports, as defined in the property file.
+3. Check if the traps are being sent correctly with the required enterprise-oid and uptime fields.
+4. Try setting the Protocol to 'ALL' in case the trap is being sent as TCP|UDP.
+5. Review the trap queue processing statistics reported by the probe, which may indicate when the queue is full and traps start being dropped.
+6. Verify that the MTTrapd probe version is at least probe-nco"
+TRAIN_Q404,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"When attempting to upload a DataPower scrypt3 firmware image file via the 8.x DataPower Appliance Manager, you receive the error ""error: The admin task reported the following: null."" This issue occurs because DataPower appliances use the ""scrypt"" file format for both firmware upgrades and tools, including license upgrades and activators. Using commands other than the ""boot image"" command, such as ""reinitialize"" or ""boot reflash,"" with a scrypt tool might cause confusion and prevent automatic rebooting as required. To resolve this, always use the ""boot image"" command when running scrypt tools."
+TRAIN_Q256,False,5,1,False,False,0.1858,0.2476,0.0618,"The error message indicates that there is no table or view named 'value' in the database. This could be due to several reasons such as incorrect syntax in the SQL script, missing dependencies, or incorrect permissions. To resolve this issue, follow these steps:
+
+1. Verify that the krzgrant.sql script was correctly executed before attempting to run it again.
+2. Check the access rights on Oracle dynamic views (v$, gv$) required by Extended Agent.
+3. Execute the krzgrant.sql script directly on the Oracle server itself using the appropriate userid/password.
+4. Run the script located at <ITM_HOME>/<arch>/rz/bin (for Unix-based systems) or <ITM_HOME>/tmaitm6 (for Windows systems).
+
+Additionally, if the above steps do not resolve the","The error messages indicate that the script is trying to reference objects that do not exist in the current Oracle environment due to a non-standard NLS_NUMERIC_CHARACHTERS setting. To correct this issue, you should modify the NLS_NUMERIC_CHARACTERS parameter back to its default value before running the krzgrant.sql script. Additionally, ensure that the required access rights are granted on Oracle dynamic views (v$, gv$) as per the extended agent documentation."
+DEV_Q266,False,5,1,False,False,0.2469,0.1802,-0.0667,"To install or update Packaging Utility:
+
+1. Download the fix pack package (pu.update_version.zip) from the provided link.
+2. Add this fix pack as a repository in Installation Manager.
+3. Use the package to update Packaging Utility.
+4. Ensure you have internet access and that Installation Manager is installed before attempting to install or update Packaging Utility.","To install the Packaging Utility:
+
+1. Ensure you have internet access.
+2. Install IBM Installation Manager.
+3. Use the command-line utility to install or update Packaging Utility.
+4. Add the fix pack as a repository in Installation Manager.
+5. Run the install command to download and install the fix pack.
+6. For Windows, use the -platform option to specify the target operating system architecture.
+7. Follow the steps provided in Document 2 to identify and copy the required files for your platform."
+DEV_Q042,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"The error message indicates that the required version of WebSphere Application Server (8.5.5 or later) is not detected on the system while installing IBM Portal 8.5. To resolve this issue, ensure that the appropriate versions of WebSphere Application Server and the IBM WebSphere SDK Java Technology Edition are installed on the system before attempting to install Portal. Additionally, verify that the installation directories for Portal and WAS servers are correct and that the combination of Portal and WAS versions being used is supported."
+DEV_Q210,False,5,1,False,False,0.4247,0.3256,-0.0991,"The ""Too many open files"" error can occur due to a high demand for a common resource such as an RMI Channel, which is used by the Java Naming and Directory Interface (JNDI) to communicate between different parts of a distributed application. The error also suggests that this issue might be related to frequent item updates occurring on the system, leading to repeated RMI calls without proper context closure or resource release, eventually exhausting the available file descriptors.","The ""Too many open files"" error could be caused by either a high demand for a common resource such as RMI channels or insufficient limits set at the operating system level. The specific cause mentioned in Document 2 was related to repeated RMI calls due to frequent item updates, leading to insufficient time for context closure and resource release, eventually exhausting the socket connections."
+DEV_Q232,True,5,0,True,True,,,,INSUFFICIENT_INFORMATION,INSUFFICIENT_INFORMATION
+TRAIN_Q566,True,5,1,False,False,,,,"To meet the requirement of using a newer version of IBM Installation Manager during the installation of WebSphere Process Server (WPS) Fix Pack or IBM Business Process Manager (BPM) Fix Pack, follow these steps:
+
+1. Ensure that your machine meets the minimum system requirements for the desired version of IBM Installation Manager.
+2. Download the appropriate interim fix from Fix Central if necessary.
+3. Add the interim fix repository to Installation Manager along with the refresh pack repository.
+4. Select both the refresh pack and the interim fix to be installed during the upgrade process.
+5. Follow the standard upgrade procedure for WebSphere Process Server or IBM Business Process Manager Fix Pack, ensuring that the interim fix is installed before bootstrapping the database if applicable.
+
+By following these steps, you can successfully upgrade IBM Installation Manager","To meet the requirement of using a newer version of IBM Installation Manager during the installation of WebSphere Process Server (WPS) Fix Pack or IBM Business Process Manager (BPM) Fix Pack, follow these steps:
+
+1. Clear the ""Show recommended only"" option in the IBM Installation Manager to view the recommended WebSphere Application Server fixes.
+2. Identify the appropriate fix pack based on the target product (WPS or BPM).
+3. Download the relevant fix pack package files listed in Document 2.
+4. Manually install the recommended interim fixes for upgrade installations.
+5. Ensure the Installation Manager is at least version 1.6.0 before starting the IBM Business Process Manager 8.5 Refresh Pack 5 installation updates.
+6. If possible, perform the upgrade on a machine with"
+DEV_Q076,True,5,2,False,False,,,,"The issue arises due to changes in the design of the Extended Oracle agent, which now uses sqlnet.ora from its own ITM installation directory instead of the default location used in previous releases. This change causes sqlnet.log to fill up with error messages related to unavailable aliases when monitoring listeners via tnsnames.ora. As a result, the agent incorrectly reports listeners as inactive, leading to false alerts such as KRZ_Listener_Inactive_Crit. The agent does not have a built-in time-out mechanism for this type of monitoring, relying solely on the Oracle tnsping utility and the listener itself to determine the status.","The issue arises due to changes in the Extended Oracle monitoring agent design that now uses sqlnet.ora from its own ITM installation directory instead of Oracle's. This causes errors in sqlnet.log when the agent monitors listeners/NET aliases from tnsnames.ora, leading to incorrect reporting of listener statuses as inactive. The problem occurs specifically when there are multiple protocols configured for the same listener, where the Tivoli agent checks both TCP and IPC protocols sequentially, reporting the IPC protocol as inactive if it cannot connect successfully."
+DEV_Q184,False,5,2,False,False,0.3005,0.3434,0.0429,"The error message ""CWSXM0100E: Multiple replies have been produced for a single request flow in module"" indicates that your mediation module is receiving more than one reply for a single incoming request. This typically happens due to improper wiring of mediation primitives within the same flow component. Specifically, if a service invoke is connected to both a fan-out and a fan-in primitive without proper termination conditions, it can result in multiple responses being generated for a single request. To resolve this issue, ensure that each primitive is properly terminated so that the flow does not continue beyond its intended scope.","The error message ""CWSXM0100E: Multiple replies have been produced for a single request flow in module"" indicates that your mediation module is receiving responses from the external service more than once, even though there is no fan-in or fan-out in the request flow. This issue typically arises because a mediation primitive is wired more than once to the next mediation primitive, leading to duplicate invocations of the service. To resolve this, ensure that each mediation primitive is connected to its intended next step without redundant connections."
+TRAIN_Q098,False,5,0,True,False,0.0,0.428,0.428,INSUFFICIENT_INFORMATION,"To restore the default images of the JazzSM DASH login page, follow these steps based on the provided documentation:
+
+1. Obtain a copy of the `isclite.jar` file from a working DASH 3.1.2 system. You can obtain this via IBM Support if necessary.
+
+2. Stop DASH.
+
+3. Backup the existing `isclite.jar` file located at `<JazzSM Home>/profile/installedApps/JazzSMNode01Cell/isc.ear/isclite.jar`.
+
+4. Replace the existing `isclite.jar` file with the working copy (`isclite.jar.bak`). Ensure the new file is owned by the user who installed DASH/JazzSM.
+
+5. Restart DASH.
+
+This process should revert the login page"
+DEV_Q021,False,5,1,False,False,0.4479,0.3643,-0.0836,"To refresh a DataPower WebService Proxy that has its WSDL stored locally, you need to create a custom WSDL Cache Policy. This involves modifying the WSDL Cache Policy settings to point to the updated WSDL file. Here’s how you can do it:
+
+1. **Create a Custom WSDL Cache Policy**:
+   - Navigate to the DataPower Gateway configuration.
+   - Locate the WSDL Cache Policy section.
+   - Create a new policy or modify an existing one.
+   - Set the `URL Match Expression` to the path of your updated WSDL file (e.g., `local:///path/to/updated/wsdlfile.wsdl`).
+
+2. **Apply the New Policy**:
+   - Save the changes to the policy.
+   - Restart the DataPower Gateway to ensure","To refresh a DataPower WebService Proxy (WSP) that uses a modified WSDL, you need to remove the current WSDL from the WSP configuration and then re-add the updated WSDL. Follow these steps:
+
+1. Ensure all configuration changes have been saved.
+2. Remove the WSDL to be updated from the WSP configuration.
+3. From the Configure Web Service Proxy screen, click Add WSDL to add the updated WSDL.
+
+This process ensures that the WSP reflects the latest changes in the WSDL without requiring manual intervention through the WebGUI's Refresh button."
+TRAIN_Q436,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"To clean up the temporary files generated by IBM Business Process Manager (BPM), follow these steps:
+
+1. Identify the locations where temporary files are stored:
+   - Operating System Temporary Directory (/tmp on Linux, c:\windows\temp on Windows)
+   - BPM Profile Temp Directories (e.g., /opt/ibm/BPM/v7.5/profiles/ProcCtr01/temp/com.ibm.bpm.fds, /opt/ibm/BPM/v7.5/profiles/ProcCtr01/wstemp)
+
+2. Manually delete the files listed in the error descriptions provided in the retrieved documents:
+   - Application imports (TWX snapshots)
+   - Application exports (TWX snapshots)
+   - Managed asset files (CSS, JAR, PNG, etc.)
+
+3"
+DEV_Q224,False,5,2,False,False,0.8741,0.8942,0.0201,"To set the HttpOnly and secure flags in Oracle Weblogic 12c to secure IBM Atlas, follow these steps:
+
+1. Undeploy any existing PolicyAtlas deployments using Oracle Weblogic console.
+2. Open the PolicyAtlas.ear file using a tool like 7zip or similar and update the weblogic.xml file with the following changes:
+   ```
+   <wls:session-descriptor>
+       <wls:cookie-secure>true</wls:cookie-secure>
+       <wls:cookie-http-only>true</wls:cookie-http-only>
+       <wls:url-rewriting-enabled>false</wls:url-rewriting-enabled>
+   </wls:session-descriptor>
+   ```
+3. Save the changes by updating the ear file.
+4. Red","To set the HttpOnly and secure flags in Oracle Weblogic 12c to secure IBM Atlas, follow these steps:
+
+1. Undeploy any existing PolicyAtlas deployments using Oracle Weblogic console.
+2. Open the PolicyAtlas.ear file using a tool like 7zip or similar and update the weblogic.xml file with the changes below:
+
+```xml
+<wls:session-descriptor>
+<wls:cookie-secure>true</wls:cookie-secure>
+<wls:cookie-http-only>true</wls:cookie-http-only>
+<wls:url-rewriting-enabled>false</wls:url-rewriting-enabled>
+</wls:session-descriptor>
+```
+
+3. Save the changes by updating the ear file.
+4. Redeploy the updated ear file using Oracle"
+DEV_Q186,False,5,0,True,False,0.0,0.1935,0.1935,INSUFFICIENT_INFORMATION,"To resolve the issue where the silent uninstall of the ITCAM for MQ agent fails due to the need to agree to the License Agreement, follow these steps:
+
+1. Specify the complete path to the silent response file while launching the silent install. For example:
+   ```
+   setup /z""/sfE:\TEMP\silent_response.txt"" /s /f2""C:\temp\itm6_agent_setup.log""
+   ```
+
+2. Ensure that the License Agreement checkbox is checked before proceeding with the silent uninstall process.
+
+By specifying the full path to the silent response file and ensuring the License Agreement is agreed upon, the silent uninstall should succeed without encountering the ""You must agree to the License Agreement"" error."
+TRAIN_Q127,False,5,0,True,False,0.0,0.3415,0.3415,INSUFFICIENT_INFORMATION,"DataPower's backside persistent timeout value is less precise compared to the backend device's persistent timeout setting. Since your service has a lower persistent timeout value than 30 seconds, you are still experiencing intermittent ""Failed to Process Response Headers"" errors. This discrepancy likely occurs because the DataPower appliance is timing out before the backend device allows enough time for the full response to be received. To resolve this issue, consider increasing the backside persistent timeout value on the DataPower appliance to match or exceed the backend device's settings."
+TRAIN_Q415,False,5,0,True,False,0.0,0.0909,0.0909,INSUFFICIENT_INFORMATION,"Based on the retrieved documents, there seems to be an issue with the encryption/decryption process in FileNet Workplace XT 1.1.5.x. Specifically, the error message indicates that the application is unable to initialize encryption/decryption with a specified key ID due to an illegal key size or default parameters. This suggests that the key used for encryption might be too small or improperly configured.
+
+Given the symptoms described, such as encountering an ""Invalid Credentials"" error during login attempts, it appears that the application is failing to authenticate properly because it is receiving data that does not match expected authentication criteria. This could be due to issues with the key size, cipher algorithms supported by the client, or mismatches in SSL/TLS configurations between the client and server.
+
+To resolve this issue, you should"
+TRAIN_Q261,False,5,0,True,False,0.0,0.1497,0.1497,INSUFFICIENT_INFORMATION,"Based on the retrieved documents, the server cannot restart due to several potential causes:
+
+1. **WebSphere Security Configuration**: The realm name for the Federated Repository in DASH was changed but the requisite updates to the admin-authz.xml entries did not occur. The reason for these updates not occurring is unknown.
+
+2. **Windows Service Creation Issue**: JazzSM does not create a Windows service to restart the WebSphere Application Server on Windows. To resolve this, a user must manually add the start server in Windows.
+
+3. **File Ownership Issues**: During development discussions, the Tivoli Integrated Portal (TIP) installer team mentioned receiving numerous PMRs related to problems upgrading when a Windows service is automatically created to restart the WebSphere server. They suggested not including this capability in the design.
+
+To"
+TRAIN_Q482,False,5,3,False,False,0.3455,0.3657,0.0202,"There is no explicit limit mentioned in the retrieved documents regarding the number of items that can be listed within an ""IN"" list as part of a WHERE clause. However, it is noted that if the number of items exceeds a certain threshold (typically around 5), the query optimizer may choose to evaluate them sequentially rather than creating a virtual table. Additionally, some databases like Oracle have limitations on the number of items in an IN clause, which could affect performance. In general, there isn't a hard-coded limit but rather a trade-off between efficiency and complexity.","Yes, there is a limit to the number of items that can be listed within an ""IN"" list as part of a WHERE clause. The limit varies depending on the environment and the version of the software being used. Generally, it is recommended to keep the number of items in the ""IN"" list under 1000 unless the system supports larger lists."
+DEV_Q295,True,5,3,False,False,,,,"The high CPU usage and hung threads observed during job execution in WebSphere Application Server could be due to the WebSphere Application Server attempting to detect potentially hung threads using the hung thread detector. This process involves periodically checking threads for extended periods of activity and printing a WSVR0605W message if it detects one.
+
+To diagnose and address these issues, you should:
+
+1. Capture detailed system performance data including CPU usage, memory usage, disk I/O, network traffic, etc., as described in the related information section.
+2. Gather Java core dumps or thread dumps by configuring the hung thread detector to automatically generate them when a WSVR0605W message is encountered.
+3. Review the SystemOut.log file for any WSVR0605W messages indicating potential","The high CPU and hung threads observed during job execution in WebSphere Application Server are due to rapid operation causing threads to be identified as problematic while they are actually in an idle state. Threads may complete their work quickly after taking a javacore, leading to the misinterpretation of them as hung threads. To diagnose these issues, one should collect system performance information and Java core dumps as described in Document 2. Additionally, configuring the hung thread detector in WebSphere Application Server to automatically generate a javacore or thread dump upon receiving a WSVR0605W message can help identify potential hung threads."
+DEV_Q109,False,5,1,False,False,0.404,0.1869,-0.2171,"The security bulletin you're referring to is titled ""IBM Security Bulletin: Authentication vulnerability affects IBM Integration Bus V10.0.0.4 onwards (CVE-2016-8918)"" which was released on behalf of IBM. This bulletin highlights that web user accounts can be authenticated against an LDAP server in IBM Integration Bus V10.0.0.4 and later versions. The bulletin also mentions that under certain circumstances, a remote user might be able to authenticate without providing valid credentials.
+
+For more detailed information about the vulnerability, including CVSS scores and affected products, refer to the linked CVE entry at http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-8918.","To find more detailed information about the Security Bulletin: Authentication vulnerability affecting IBM Integration Bus V10.0.0.4 onwards (CVE-2016-8918), you should refer to Document 1, which contains the full summary of the bulletin including details such as CVSS scores, affected products, and remediation fixes."
+TRAIN_Q515,False,5,1,False,False,0.2459,0.2679,0.022,"It seems like there might be an issue with the local security software preventing IBM SPSS Statistics from launching on Mac OS X 10.6.x and 10.7.x. Disabling the virus checker/security software temporarily should resolve the problem. If that doesn't work, you can try setting an exclusion for the IBM SPSS Statistics folder in the virus checker/security software. If neither of these solutions works, opening a case with technical support for further troubleshooting would be advisable.","Based on the retrieved documents, the issue seems to be related to conflicts between IBM SPSS Statistics and other software or services on the Mac OS. Specifically, the documents mention potential conflicts with certain antivirus/firewall software, Internet search utilities like JWORD, and local security software. Disabling these programs or updating them might help resolve the issue. Additionally, verifying that you don't have multiple versions of SPSS installed simultaneously could prevent similar problems."
+TRAIN_Q077,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"The error message indicates issues related to HTTP requests between Decision Center and the SSP during test suite execution. Specifically, there seems to be variability in how requests are handled due to the use of a load balancer, leading to potential misrouting of requests. This inconsistency could result in some requests being processed successfully while others fail, ultimately preventing the entire test suite from running properly. To resolve this issue, ensure consistent routing of all HTTP requests from Decision Center to the SSPs involved in the test suite execution. Additionally, review the Eclipse log and server logs for more detailed error messages that might help pinpoint the specific cause of the connection failures."
+TRAIN_Q493,False,5,5,False,False,0.1364,0.1364,0.0,"To find more detailed information on the security vulnerability in IBM WebSphere Application Server that affects IBM Tivoli Network Manager IP Edition, you should refer to the following sources:
+
+1. IBM Security Bulletin: ""Security Vulnerability in IBM WebSphere Application Server"" - This bulletin provides comprehensive details including the affected products, versions, vulnerability details, remediation fixes, and links to specific security bulletins.
+   
+2. IBM Security Bulletin: ""Information Disclosure in WebSphere Application Server"" - This bulletin offers additional information on the same vulnerability but focuses specifically on how it impacts IBM WebSphere Application Server.
+
+Both of these documents were retrieved from Document 1, which contains general information about the security vulnerability affecting IBM WebSphere Application Server when used with IBM Tivoli Network Manager IP Edition.","To find more detailed information on the security vulnerability in IBM WebSphere Application Server that affects IBM Tivoli Network Manager IP Edition, you should refer to the following sources:
+
+1. IBM Security Bulletin: ""Security Vulnerability in IBM WebSphere Application Server"" - This bulletin provides comprehensive details including the affected products, versions, vulnerability details, remediation fixes, and links to specific security bulletins.
+   
+2. IBM Security Bulletin: ""Information Disclosure in WebSphere Application Server"" - This bulletin offers additional information on the same vulnerability but focuses specifically on how it impacts IBM WebSphere Application Server.
+
+Both of these documents were retrieved from Document 1, which contains general information about the security vulnerability affecting IBM WebSphere Application Server when used with IBM Tivoli Network Manager IP Edition."
+TRAIN_Q596,False,5,0,True,False,0.0,0.1143,0.1143,INSUFFICIENT_INFORMATION,"The IBM MQ agent instance is frequently shutting down due to issues related to the Admin Agent process (bipbroker) detecting an MQ or RRS availability problem and attempting to shut down cleanly but failing because the Admin Agent is not properly handling the shutdown process. Specifically, there are resource name changes between WebSphere Message Broker and IBM Integration Bus versions 9.0, leading to potential conflicts during the shutdown process. Additionally, the shutdown thread removes the object representing an instance of the Resource Monitor (RM), while the recovery thread tries to start the RM using the removed object, resulting in a NullPointerException and causing the agent to abend. To address these issues, IBM recommends updating to the latest available maintenance releases for the MQ Managed File Transfer (MFT) and checking for specific patches targeting the IBM MQ Monitoring"
+DEV_Q100,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"Yes, the ITCAM Agent for WebSphere DataPower 7.1 supports TLS. However, ensure that the Active Directory 7.1 domain controller is at least version 7.1.0.3.8 (or 7.1.0.4). Older versions may require heap size adjustments due to issues with GC and Application Server summary workspaces."
+DEV_Q074,False,5,3,False,False,0.2014,0.2086,0.0072,"To find more detailed information on the Security Bulletin: Security Vulnerability in IBM WebSphere Application Server affects IBM SOA Policy Gateway Pattern for AIX Server 2.5 (CVE-2015-1920), you can refer to Document 1 which provides a summary of the vulnerability, its CVSS scores, affected products, versions, remediation fix, and workarounds/mitigations. Additionally, Document 2 discusses vulnerabilities in WebSphere Service Registry and Repository and WebSphere Application Server that were shipped with IBM SOA Policy Gateway Pattern for AIX Server and Red Hat Enterprise Linux Server, including links to specific security bulletins for each vulnerability. Lastly, Document 3 covers vulnerabilities in IBM HTTP Server that were shipped with IBM SOA Policy Gateway Pattern for AIX","To find more detailed information on the Security Bulletin: Security Vulnerability in IBM WebSphere Application Server affects IBM SOA Policy Gateway Pattern for AIX Server 2.5 (CVE-2015-1920), you can refer to Document 1 which provides general information about the vulnerability and its impact. Additionally, Document 2 discusses another vulnerability in IBM WebSphere Application Server that was also affected by the same security bulletin. For specific remediation and workarounds, you might want to look at Document 3, which mentions installing a web application server interim fix. Document 4 covers additional vulnerabilities related to IBM SOA Policy Gateway Patterns for different operating systems. Lastly, Document 5 addresses vulnerabilities in IBM HTTP Server associated with the same patterns."
+DEV_Q181,False,5,0,True,False,0.0,0.2975,0.2975,INSUFFICIENT_INFORMATION,"Yes, it is possible to get all data registered today using the query ""reportdate >= TODAY()"" in MxLoader 4.7.4. This can be achieved by comparing the 'reportdate' field against the current date returned by the 'TODAY()' function."
+TRAIN_Q423,False,5,0,True,False,0.0,0.4419,0.4419,INSUFFICIENT_INFORMATION,"To clean up the report that has been stuck in the current queue for over two weeks, you need to identify and correct the underlying cause of the problem. Based on the available documents:
+
+1. **Corrupted Content Store**: The first step is to determine whether the Content Store is corrupted. You can stop the Cognos service, take a physical backup of the Content Store or Notification database, and then execute the SQL script `NC_DROP_<dbtype>.sql` to drop the corrupted tables. After restarting the Cognos services, the report should start running normally.
+
+2. **Credential Issues**: Ensure that the credentials being used to access the Content Store are valid and correctly configured. This includes checking the user account information and selecting the appropriate namespace in Content Manager.
+
+3. **Interactive Jobs St"
+TRAIN_Q583,False,5,1,False,False,0.2041,0.0917,-0.1124,"The installation of the ITCAM for AD Managing GUI fails due to missing Linux system libraries. The installer cannot run in graphical mode; instead, it should be executed with the -console flag for the silent_MS_linux.bin option.","The failure of the ITCAM for AD Managing GUI install due to an end-of-file message could be caused by missing Linux system libraries. This issue arises because the installer requires specific libraries that are not available on RHEL7 systems. To resolve this problem, users should try running the installer with the -console or -silent flags. Additionally, they can ensure that the necessary 64-bit Java Runtime Environment (JRE) is installed on their machines to avoid issues related to the X11 libraries required by the 32-bit JRE."
+TRAIN_Q300,False,5,0,True,False,0.0,0.0795,0.0795,INSUFFICIENT_INFORMATION,"The issue seems to be related to the configuration of the portal profile and its properties. To resolve the problem, you should edit the `wps.properties` file located in `/opt/WebSphere/PortalServer80/wps`. Specifically, you need to update the `ProfileName` and `ProfileDirectory` properties to match the desired profile name and directory structure.
+
+After making these changes, you should run the following commands to upgrade the portal profile to CF09:
+
+1. Stop the WebSphere_Portal server on the profile you intend to upgrade.
+2. Uninstall the existing offering list using the `-uninstall-offeringList` option.
+3. Repopulate the ConfigEngine registry using the `-install-offeringRoot` option.
+4. Upgrade the profile using the `-upgrade` option"
+DEV_Q223,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"Yes, you can use Chrome browser for viewing Monitor 801 Cognos report viewer widget. However, some users have reported issues when trying to view Cognos reports from the Report Viewer widget within Business Space while using Google Chrome. To resolve these issues, you may need to configure the Cognos gateway to trust the OpenPages website by updating the HTTP response headers. Additionally, if you encounter problems with the Show Instances function in the Cognos Report Viewer widget, you might need to subscribe to specific fixes available through IBM Support."
+TRAIN_Q081,False,5,1,False,False,0.1806,0.2667,0.0861,"The 'Access is denied' error occurs during the installation of ICC 4.0.1 and FP2 due to issues with the WASService.exe file. The solution provided in the retrieved documents suggests that if an existing copy of the WASService.exe file is copied from a previous installation, the upgrade can continue. This indicates that there might have been a previous installation of ICC that left behind a valid WASService.exe file which was subsequently overwritten by the newer installation. To resolve this issue, you should try copying the WASService.exe file from a previous installation onto your current system before attempting to install ICC again.","To resolve the 'Access is denied' error when installing ICC 4.0.1 and FP2, you should try copying an existing copy of the WASService.exe file from a previous installation. This temporary fix allows the installation to continue without creating a new WASService.exe file."
+DEV_Q194,True,5,3,False,False,,,,"To generate Javacores automatically in response to hung threads reported in SystemOut.log for WebSphere Application Server, you need to set a custom WebSphere property. This property triggers the generation of a javacore or thread dump whenever a WSVR0605W message is logged in the SystemOut.log file. This allows you to automatically analyze potential hung threads without manually creating them through other means like manual javacore creation or monitoring.","To generate Javacores automatically in response to hung threads reported in SystemOut.log for WebSphere Application Server, you need to configure a custom property. This property enables the hung thread detector to automatically produce a javacore or thread dump whenever a WSVR0605W message is logged in the SystemOut.log file. This allows you to identify and analyze potential hung threads without manually creating them each time."
+DEV_Q101,True,5,1,False,False,,,,"The security bulletin you're referring to is titled ""IBM Security Bulletin: WebSphere Message Broker Toolkit and IBM Integration Toolkit cannot connect to a remote WebSphere Message Broker broker or IBM Integration Bus node with a TLS-compliant cipher (CVE-2015-0118)"" which was issued by IBM. This bulletin highlights that the IBM Integration Toolkit cannot establish secure connections to a remote IBM Integration Bus node due to outdated IBM MQ client JAR files used within the toolkit. These older versions of the JAR files lack support for more robust TLS cipher suites, leading to potential vulnerabilities when attempting to connect over TLS. The affected products are WebSphere Message Broker Toolkit version 7 and 8, and IBM Integration Toolkit version 9.","To address the issue described in the Security Bulletin: WMB and IIB Toolkit cannot connect to a remote WMB broker or IIB node with a TLS-compliant cipher (CVE-2015-0118), you should ensure that the IBM MQ client JAR files included with the toolkit are updated to support stronger TLS cipher suites. Additionally, verify that the network configuration between the local and remote brokers is correct. If these steps do not resolve the issue, consider updating the IBM MQ client JAR files to version 7 or higher, which supports more secure TLS ciphers."
+TRAIN_Q299,False,5,0,True,False,0.0,0.2839,0.2839,INSUFFICIENT_INFORMATION,"According to Document 4, the Update Installer utility is meant only for WebSphere Application Server administration. For other products like WebSphere Process Server, WebSphere Enterprise Service Bus, and IBM Business Process Manager, users should use Installation Manager instead of the Update Installer utility. This is because the Update Installer utility is not included as part of these products and documentation for them instructs users to use Installation Manager rather than the Update Installer utility."
+TRAIN_Q541,False,5,0,True,False,0.0,0.2613,0.2613,INSUFFICIENT_INFORMATION,"Certain Workspace Advanced users cannot open Report Studio due to restrictions imposed by their assigned roles. To resolve this issue, users need to ensure that the appropriate roles/groups are removed from their associated groups. Specifically:
+
+1. For those experiencing issues with the 'Cognos Advanced Workspace' icon, remove the role/group 'Express Authors' from the user's associated groups.
+
+2. Alternatively, if removing the Express Authors role does not solve the problem, follow these additional steps:
+
+   a. Log into Cognos Connection.
+   
+   b. Launch IBM Cognos Administration.
+   
+   c. Navigate to the 'Security' tab.
+   
+   d. Go to the 'User Interface Profiles' tab on the left.
+   
+   e. Click the 'drop down' arrow on the 'Express' selection"
+TRAIN_Q352,False,5,1,False,False,0.1171,0.2316,0.1145,"To create an application with the Websphere Adapter for Flat File using the Hex05 delimiter, follow these steps:
+
+1. Open the Import EAR wizard in Rational Application Developer for WebSphere Software v8.0.x workspace.
+
+2. Select the Java EE 5.0 .EAR file and target runtime, then click ""Next"".
+
+3. Uncheck the jars that are being imported as application client projects, then click ""Finish"".
+
+4. Right-click on the EAR project, select ""Properties"", then go to ""Deployment Assembly"". Click ""Add"" and choose ""Archives from Workspace"".
+
+5. Expand the EAR file and select the jars needed, noting that the deploy path starts at ""/lib"", where utility jars are typically found.
+
+6. Close and open the EAR project again.
+
+By","To create an application with the IBM WebSphere Adapter for Flat File using the Hex05 delimiter, ensure that the generateUniqueFile option is not used along with a specified staging directory. If both options are enabled, a file with 0Kb will be created in the output directory."
+TRAIN_Q487,True,5,3,False,False,,,,"The Security Bulletin for IBM API Connect Portal states that it is affected by multiple Drupal vulnerabilities:
+
+1. CVE-2017-6924: Drupal could allow a remote attacker to bypass security restrictions through a flaw in the REST API.
+2. CVE-2017-6923: Drupal could allow a remote attacker to bypass security restrictions due to improper access control restriction of the Ajax endpoint.
+3. CVE-2017-6925: Drupal could allow a remote attacker to bypass security restrictions via a flaw in the entity access system.
+4. CVE-2018-7602: Drupal allows a remote attacker to execute arbitrary code on the system due to errors within multiple subsystems.
+
+These vulnerabilities have been addressed in IBM API","The Security Bulletin for IBM API Connect Portal states that it is affected by multiple Drupal vulnerabilities. The specific CVE IDs mentioned are CVE-2017-6924, CVE-2017-6923, CVE-2017-6925, CVE-2018-7600, and CVE-2018-7602. These vulnerabilities affect various aspects of the Drupal framework used in the API Connect Portal, including REST API bypass, access control restriction violation, entity access system flaw, and arbitrary code execution through multiple subsystem errors. The CVSS scores provided indicate varying levels of severity across these vulnerabilities."
+TRAIN_Q208,False,5,0,True,False,0.0,0.2706,0.2706,INSUFFICIENT_INFORMATION,"Yes, it is possible to run different levels of the Rational Developer for z Systems host and client. According to Document 1, IBM Developer for z Systems v14.1.x is compatible with both v14.1.x and v14.0.x clients/hosts, while v14.0.x is also compatible with v9.5.x clients/hosts. Similarly, Rational Developer for z Systems v9.5.x is compatible with v9.5.x clients/hosts, v9.1.x clients/hosts, and v9.5.1.x clients/hosts. However, specific compatibility details between individual versions are not provided in the given documents."
+TRAIN_Q414,False,5,0,True,False,0.0,0.4952,0.4952,INSUFFICIENT_INFORMATION,"Yes, WebSphere MQ V7.0 clients and WebSphere MQ File Transfer Edition V7.0.1 and V7.0.0 agents go out of support at the same time as the server. These products are still supported when they are bundled with another IBM product, but only when used by the bundling IBM product. Unrelated usage is not supported."
+TRAIN_Q410,True,5,0,True,False,,,,INSUFFICIENT_INFORMATION,"To disable clickjacking on IBM Content Navigator 2.0.3 Fixpack (FileNet P8 5.2.1 FP5, OS AIX 7.1), follow these steps:
+
+1. Ensure that the server returns an X-Frame-Options header in its responses. You can achieve this by configuring the server to send the appropriate header value.
+
+2. Set the X-Frame-Options header to either DENY or SAMEORIGIN. Deny completely blocks frames, while SAMEORIGIN allows only frames originating from the same origin.
+
+3. Configure the server to load the mod_headers module, which is necessary for sending the X-Frame-Options header.
+
+4. Add the following line to the server's configuration file (usually httpd.conf):
+
+   ```"
+TRAIN_Q063,False,5,0,True,False,0.0,0.2609,0.2609,INSUFFICIENT_INFORMATION,"To obtain the ODM 8.5.1.2 fixpack for ODM 8.5.1.1, follow these steps:
+
+1. Identify the correct fixpack number for your specific platform. In this case, it would be ""ODM 8.5.1.2"".
+2. Go to the Fix Central website at https://www.ibm.com/support/fixcentral/
+3. Search for the fixpack title ""IBM Operational Decision Management V8.5.1.2 Fix Pack"" on the search bar.
+4. Click on the link to view more details about the fixpack.
+5. Follow the installation instructions provided by IBM, which typically involve downloading the appropriate file based on your platform (e.g., AIX, HPUX, etc.)"
+TRAIN_Q537,False,5,0,True,False,0.0,0.1351,0.1351,INSUFFICIENT_INFORMATION,"To change the HSQLDB password in NetCool/Impact 6.1.0:
+
+1. Connect to the database using the default ImpactServer name (NCI) and HSQLDB port number (5435).
+2. Execute the following SQL commands:
+   ```
+   SET PASSWORD 'new_password';
+   ```
+
+3. Quit the database session.
+4. Log out of the current user account.
+5. Log in again with the new password.
+
+Note that if you're using a NetCool/Impact split installation where the Impact Server and GUI Server are in different directories, you'll need to specify the correct path to the `nci_changehost` script."
+TRAIN_Q589,False,5,0,True,False,0.0,0.2286,0.2286,INSUFFICIENT_INFORMATION,"Yes, it is possible to redirect an application URL from HTTPS to HTTP using IBM HTTP Server. According to Document 1, you can add an HTTP server in front of WebSphere with SSL communication. Additionally, the instructions in Document 2 provide specific steps for configuring IIS to redirect HTTP requests to HTTPS. These solutions involve adding the Rewrite module to IIS, creating redirection rules, and unchecking the ""Require SSL"" option for certain folders."

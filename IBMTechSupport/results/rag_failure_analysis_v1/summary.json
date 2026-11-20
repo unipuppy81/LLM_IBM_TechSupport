@@ -1,0 +1,55 @@
+{
+  "source": {
+    "val": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\val_clean.json",
+    "judge_on": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\rag\\final_e2e\\reranker\\predictions.jsonl",
+    "judge_off": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\rag\\judge_ablation\\reranker\\predictions_no_judge.jsonl"
+  },
+  "counts": {
+    "total": 135,
+    "answerable": 90,
+    "impossible": 45,
+    "gold_source_hit_top5": 60,
+    "gold_source_miss_top5": 30,
+    "category_counts": {
+      "impossible_correct_refusal": 29,
+      "impossible_generated": 16,
+      "source_miss_generated": 11,
+      "source_hit_judge_selected_gold": 28,
+      "source_hit_judge_rejected_all": 26,
+      "source_miss_refusal": 19,
+      "source_hit_judge_selected_other": 6
+    },
+    "correct_refusals": 29,
+    "false_refusals": 45,
+    "judge_refused_question_count": 74,
+    "selected_but_prediction_refused_ids": [],
+    "no_selected_but_prediction_generated_ids": []
+  },
+  "generation": {
+    "answerable_f1_percent": 16.5218,
+    "answered_conditional_f1_percent": 33.0436,
+    "judge_off_f1_percent": 28.7921,
+    "on_minus_off_paired_f1_diff_percent_points_ci95": [
+      -15.633,
+      -8.85
+    ]
+  },
+  "weak_labels": {
+    "answerable_with_full_reference_in_retrieved_chunk": 37,
+    "full_reference_match_chunks": 38,
+    "full_reference_match_chunks_selected": 17
+  },
+  "limitations": [
+    "정답 파일명 Hit@5는 실제로 답변에 충분한 문장을 찾았다는 증거가 아닙니다.",
+    "정답 전문 문자열 일치는 약한 양성 후보 라벨입니다. 미일치는 음성 라벨이 아닙니다.",
+    "원본 is_impossible은 검색 문서의 근거 충분성과 동치가 아닙니다.",
+    "Judge ON/OFF는 검색 Top5가 완전히 동일한 경우에만 직접 비교합니다.",
+    "Corpus 스캔은 --scan-corpus 옵션이 있을 때만 수행합니다."
+  ],
+  "corpus_scan": {
+    "corpus_chunks_scanned": 111023,
+    "weak_oracle_candidate_rows": 77,
+    "weak_oracle_candidate_questions": 75,
+    "remaining_answerable_questions": 15
+  }
+}

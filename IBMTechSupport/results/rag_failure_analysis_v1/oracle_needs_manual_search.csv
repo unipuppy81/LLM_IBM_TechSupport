@@ -1,0 +1,290 @@
+﻿id,question,reference_answer,gold_filenames,reason
+TRAIN_Q316,"Datapower WebGUI down due to an expired or invalid certificate
+
+The Datapower WebGUI is down due to an expired or invalid certificate. How can the WebGUI access be restored?","The following commands will reset the RBM's, ACL's, WebGUI and SSH services to the default settings. 
+
+Note: If the ssh is working, you may omit any commands with the ssh. 
+
+ 
+
+config 
+
+web-mgmt 
+
+no ssl 
+
+exit 
+
+write mem 
+
+y 
+
+no web-mgmt 
+
+no ssh 
+
+rbm 
+
+reset 
+
+exit 
+
+acl web-mgmt 
+
+reset 
+
+exit 
+
+acl ssh 
+
+reset 
+
+exit 
+
+write mem (key step to remove the current settings) 
+
+y 
+
+web-mgmt <ip to listen on or 0.0.0.0 for all> <port to use default is9090> 
+
+ssh <ip to listen on or 0.0.0.0 for all> <port to use default is22> 
+
+write mem 
+
+y",swg21498634.txt,검증된 후보 없음: 직접 청크를 찾아 추가 검증 필요
+DEV_Q167,"How do I recreate all the Oracle Text indexes for the Atlas database
+
+How do I recreate all the Oracle Text indexes for the Atlas database ?","Shutdown the application server running the Atlas applications. 
+ 2. Locate the script drop_ctxsys_indexes.sql to drop the Oracle Text indexes from the following folder in the Atlas release:
+    Atlas\Schema\Deploy\smf\db\etc\oracle 
+ 3. Open up a command window to that directory and execute the script using SQL Plus:
+    sqlplus <user>/<password>@<database> @drop_ctxsys_indexes.sql 
+ 4. Locate the scripts, setup_ctxsys_objects.sql and create_ctxsys_indexes.sql, used to create the Oracle Text preferences and indexes from the following folder in the Atlas release. The <version> folder will differ depending on which version you are currently running.
+    Atlas\Schema\Deploy\smf\db\release\<version>\oracle\create\schema 
+ 5. Open up a command window to that directory and execute the scripts using SQL Plus.
+    sqlplus <user>/<password>@<database> @setup_ctxsys_objects.sql
+    sqlplus <user>/<password>@<database> @create_ctxsys_indexes.sql 
+ 6. Start the application server running the Atlas applications.",swg21580830.txt,검증된 후보 없음: 직접 청크를 찾아 추가 검증 필요
+DEV_Q028,"Help with Security Bulletin: Multiple vulnerabilities have been identified in WebSphere Application Server shipped with WSRR (CVE-2015-4911)
+
+I need to understand details regarding Security Bulletin: Multiple vulnerabilities have been identified in WebSphere Application Server shipped with WebSphere Service Registry and Repository (CVE-2015-4911). Where can I find this information?","CVEID: CVE-2015-4911 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-4911]
+
+DESCRIPTION: An unspecified vulnerability related to the JAXP component could allow a remote attacker to cause a denial of service.
+CVSS Base Score: 5
+CVSS Temporal Score: See https://exchange.xforce.ibmcloud.com/vulnerabilities/107360 [https://exchange.xforce.ibmcloud.com/vulnerabilities/107360] for the current score
+CVSS Environmental Score*: Undefined
+CVSS Vector: (AV:N/AC:L/Au:N/C:N/I:N/A:P)",swg21975747.txt,검증된 후보 없음: 직접 청크를 찾아 추가 검증 필요
+TRAIN_Q368,"Does ITCAM for MQ monitoring agent (kmq) use SYSTEM.MQXR.COMMAND.QUEUE causing Unknown Object Name [2085] event?
+
+
+
+Using the ITCAM MQ Monitoring agent, we have a situation that generates alerts when a 2085 event (object unknown) occurs. We have recently seen alerts for the queue SYSTEM.MQXR.COMMAND.QUEUE
+We found following technote:
+Unknown Object Name [2085], SYSTEM.MQXR.COMMAND.QUEUE
+http://www-01.ibm.com/support/docview.wss?uid=swg21681687
+
+This technote does not mention Tivoli monitoring product, and only mentions monitoring products such as Nastel and InfraRed360.
+Does Tivoli monitoring agent for WebSphere MQ use the SYSTEM.MQXR.COMMAND.QUEUE? We are try to find out which application is causing the 2085 event.","Use the runmqsc display connection command to find the process id (PID) and application name. 
+
+Using the above example of the queue Q1, this is the complete command to invoke under runmqsc: 
+
+
+display conn(*) where(objname eq Q1) all",swg21318303.txt,검증된 후보 없음: 직접 청크를 찾아 추가 검증 필요
+DEV_Q154,"Why are some Datatypes corrupt after Impact cluster failover/failback ?
+
+
+
+Running Impact 7.1.0.11. The symptom is whenever Impact does a failover, a couple DataTypes
+turn out empty.
+
+I've checked the type files before and after Impact failover and the difference happens in the property
+
+*.SQL.USERPARAMETERS
+
+This property no longer exists for the corrupted datatypes"".","""a new property is added to increase the file size limit:
+
+
+
+ * 
+
+
+Add the property to $NCHOME/impact/etc/<SERVERNAME>_server.props file 
+where size limit can be 8192, 16384, 32768, etc.. "" 
+
+The property would have to be added to all ImpactServers in the Cluster and would require a restart to enable - ensuring that the ImpactServer started as Primary had the correct, uncorrupted .type file to be replicated across the Cluster. Also ensure that there are no trailing white-space characters on the property as these invalidate properties in lower versions of Impact. 
+
+The APAR is not an issue in Impact 6 and 7, but one would still have to include this property with an appropriate value to handle a large character length for the USERPARAMETERS parameter. 
+
+The character length includes the whole USERPARAMETERS property name as well as the definition.",swg21598417.txt,검증된 후보 없음: 직접 청크를 찾아 추가 검증 필요
+TRAIN_Q003,"How to configure SSL mutual authentication in IBM HTTP Server?
+
+
+
+We are running IHS v7 and our application team has a specific webservice that they require SSL mutual authentication to be enabled for at the http server. Does anyone know how to set this up on IHS? Or any documentation?
+
+Thanks","The following steps help guide you through the proper set up of SSL within the IBM HTTP Server: 
+
+ 1. Confirm that the Global Security Kit (GSKit) is installed and meets the minimum requirements
+    
+    
+ 2. Create a key database file and certificates needed to authenticate the Web server during an SSL handshake
+    
+    
+ 3. Enable SSL directives within the IBM HTTP Server configuration file (httpd.conf)
+    
+    
+ 4. Other considerations when enabling SSL directives within the IBM HTTP Server configuration file (httpd.conf)
+    
+    
+ 5. Information that IBM WebSphere® Support needs to debug SSL configuration and certificate issues related to the IBM HTTP Server",swg21179559.txt,검증된 후보 없음: 직접 청크를 찾아 추가 검증 필요
+TRAIN_Q372,"How to fix error CRIMA1217E when upgrade JAZZ from 1.1.0 to 1.1.3 failed?
+
+How to fix problem when upgrade JAZZ from 1.1.0 to 1.1.3 failed?","The upgrade must be initiated by using the attached script, which gives the non-root user (who originally installed this Jazz for Service Management instance) the correct permissions for the upgrade process. 
+
+
+The script takes two mandatory arguments and one optional argument.
+
+Usage: ./JazzSMgrpModeUpgrade.sh ""IM_Install_Location"" 
+""JazzSM_Install_Location [http://www.ibm.com/support/knowledgecenter/SSEKCU_1.1.3.0/com.ibm.psc.doc/ref/psc_r_pathnames.html]""""[Response_file_with_absolute_Path]""",swg21985946.txt,검증된 후보 없음: 직접 청크를 찾아 추가 검증 필요
+TRAIN_Q463,"Can Portal prevent the usage of simultaneous logins with the same userID?
+
+Is it possible for WebSphere Portal to limit the usage of a userID to one authenticated session as a time? In other words, prevent authenticating to Portal as ""user1"" from one browser and then simultaneously authenticating to Portal again as ""user1"" from another browser?","WebSphere Portal has no built-in mechanism or configuration setting to limit the number of times a user id may log in. Unexpected behavior may occur if the same id is logged in more than once and this is not supported. 
+
+""ConcurrentModificationException"" and other errors may be logged.
+
+Most of the related issues were resolved in WebSphere Portal 5.1. However, you may still encounter exceptions or side-effects if you access the Portal in multiple browser windows using the same user id, whether or not the authentication requests take place on separate physical hosts.
+
+It may be possible to prevent multiple logins by writing custom ""tracking code."" Contact IBM Services for assistance to undertake such a project. WebSphere Portal Development does not have any sample code.
+
+If you wish to write your own code, some of the issues to be aware of are (this is not an inclusive list):
+
+-- Multiple logins may take place on different nodes in a cluster. This means some cluster-wide mechanism would have to be in place to keep track of the logged-in users. Look at the WebSphere Application Server DistributedMap interface.
+
+-- There should be a fail-safe way to track user logout (explicit logout and session timeout). Using a session listener might be a possibility. 
+
+-- If a user closes the browser without logging out, that user must wait for a session timeout before logging in again. Otherwise, there should be a ""force simultaneous login"" option in the login user interface.
+
+For load testing, use unique user ids or virtual users.",swg21227799.txt,검증된 후보 없음: 직접 청크를 찾아 추가 검증 필요
+TRAIN_Q360,"Is it possible to monitor Memory/LPAR metrics using ITM HMC agent?
+
+I understand the ITM AIX Premium agent captures these metrics but like to know if it is possible to monitor Memory/LPAR metrics using ITM HMC agent?","6.2.2.3-TIV-ITM_HMC_BASE-IF0002
+---------------------------------
+Feature: 208626
+Abstract: LPAR Memory Attributes
+Additional information: The following new attributes are added in
+the Server LPARs attribute group:
+
+Current_Memory - The current amount of memory, in megabytes,
+configured for the LPAR.
+Warehouse name: CM0
+Running_Memory - The amount of memory, in megabytes, varied on-line
+by the LPAR.
+Warehouse name: RM
+
+In order to display these new attributes in the Tivoli Enterprise
+Portal, use the Query Editor and select Server LPARs_V9 under
+KPH SERVER LPARS.",swg24042283.txt,검증된 후보 없음: 직접 청크를 찾아 추가 검증 필요
+TRAIN_Q553,"Help with Security Bulletin: Multiple vulnerabilities in IBM Java SDK affect IBM Image Construction and Composition Tool (CVE-2014-3566 and CVE-2014-6457)
+
+I need to understand details regarding ""Security Bulletin: Multiple vulnerabilities in IBM Java SDK affect IBM Image Construction and Composition Tool (CVE-2014-3566 and CVE-2014-6457) ."" Where can I find this information?","CVEID: CVE-2014-6457 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6457]
+
+DESCRIPTION: An unspecified vulnerability related to the JSSE component has partial confidentiality impact, partial integrity impact, and no availability impact.
+
+CVSS Base Score: 4
+CVSS Temporal Score: See https://exchange.xforce.ibmcloud.com/vulnerabilities/97148 [https://exchange.xforce.ibmcloud.com/vulnerabilities/97148] for the current score
+CVSS Environmental Score*: Undefined
+CVSS Vector: (AV:N/AC:H/Au:N/C:P/I:P/A:N) 
+
+CVE-ID: CVE-2014-3566 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3566]
+
+DESCRIPTION: Product could allow a remote attacker to obtain sensitive information, caused by a design error when using the SSLv3 protocol. A remote user with the ability to conduct a man-in-the-middle attack could exploit this vulnerability via a POODLE (Padding Oracle On Downgraded Legacy Encryption) attack to decrypt SSL sessions and access the plaintext of encrypted connections. 
+
+CVSS Base Score: 4.3
+CVSS Temporal Score: See https://exchange.xforce.ibmcloud.com/vulnerabilities/97013 [https://exchange.xforce.ibmcloud.com/vulnerabilities/97013] for the current score
+CVSS Environmental Score*: Undefined
+CVSS Vector: (AV:N/AC:M/Au:N/C:P/I:N/A:N)",swg21903249.txt,검증된 후보 없음: 직접 청크를 찾아 추가 검증 필요
+TRAIN_Q599,"ICC configuration manager error: This implementation is not part of the Windows Platform FIPS validated cryptographic algorithms.
+
+When saving changes in ICC configuration manager, an ""Application Error"" window pops up.
+
+Error:
+
+A severe error occurred.
+
+Problem:
+
+Exception has been thrown by the target of an invocation.
+
+Solution:
+
+Contact IBM Software Support with this error message (see Details).
+
+Click on the Details button and the following stack trace is reported:
+
+Details
+
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor) at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+
+.....
+
+.....
+
+System.InvalidOperationException: This implementation is not part of the Windows Platform FIPS validated cryptographic algorithms.
+
+at System.Security.Cryptography.MD5CryptoServiceProvider..ctor()
+
+What is causing this?",Incompatible Windows security policy.,swg21991690.txt,검증된 후보 없음: 직접 청크를 찾아 추가 검증 필요
+DEV_Q021,"How to refresh a DataPower WebService Proxy which WSDL got changed?
+
+I have made changes to a WSDL stored in DP local filesystem.
+
+How can I make the WSP reflect this change since DataPower Gateway 7.1.0 WebService Proxy WebGUI doesn't offer the ""Refresh"" button anymore?
+
+Is there a best practice to refresh the WSP if I modified my WSDL?","In a WS Proxy, you can refresh WSDL from an URL using WSDL Cache policy. However, if the WSDL is hosted on the DataPower appliance, such as in local:///, rather than on an external URL, the WSDL Cache Policy does not apply. 
+
+For instance, changes made to local:///test.wsdl are not picked up by WS Proxy although there is a WSDL Cache policy setting the URL Match expression to local:///test.wsdl. 
+
+This issue was reported to Quality Engineering but it was determined that the DataPower device is working as designed. The device will not poll WSDL files on the local store.
+
+The WSDL Cache policy works with WSDL files hosted on an external URL.
+
+To refresh a WSDL in the local:/// directory, disable and re-enable the service.",swg21298897.txt,검증된 후보 없음: 직접 청크를 찾아 추가 검증 필요
+TRAIN_Q423,"Report stuck in current queue
+
+
+
+We have one report that has been showing in the admin current
+activities status tab for 20+ days and we have had 2 full re-starts
+since then. Also it appears we have interactive jobs staying around as well for past days and days.
+
+How can we clean this up ?","Dropping the NC* tables that use this script: 
+
+Steps:
+1. Stop the Cognos Service
+2. Take a physical backup of the Content Store or Notification database
+3. Select the appropriate folder for your content store or notification database type under <install>/configuration/schemas/delivery/<dbtype>/ 
+4. Run NC_DROP_<dbtype>.sql against the content store or notification database 
+4. Restart Cognos Services. 
+
+Should dropping the NC* tables not resolve the issue, then restore the content or notification store from the last backup version.",swg21371279.txt,검증된 후보 없음: 직접 청크를 찾아 추가 검증 필요
+TRAIN_Q583,"Why does the ITCAM for AD Managing GUI install fail with an end-of-file message?
+
+I am trying to install the ITCAM for AD Managing server and I am seeing the following error when doing either 'launchpad.sh' or 'silent_MS_linux.bin': Initializing InstallShield Wizard........ Launching InstallShield Wizard........
+
+./setup_MS_lin.bin: line 1926: warning: here-document at line 1926 delimited by end-of-file (wanted `/dev/null')
+
+The installer is unable to run in graphical mode. Try running the installer with the -console for -silent flag.","CAUSE
+Missing Linux system libraries.",swg21985630.txt,검증된 후보 없음: 직접 청크를 찾아 추가 검증 필요
+TRAIN_Q589,"How to have IBM HTTP Server re-direct an application URL from HTTPS to HTTP?
+
+We have an application which uses SSL, but we need to make this http only. We disabled all the SSL, but many clients URLs are still pointing to https. So we need a HTTP Server redirect to change these URLs from https to http. Is this possible?","First, make sure the LoadModule line for mod_rewrite is uncommented in the httpd.conf
+
+LoadModule rewrite_module modules/mod_rewrite.so
+
+Next, add the following to the global scope or any port 80 VirtualHost stanzas defined within the httpd.conf configuration file.
+
+RewriteEngine on
+RewriteCond %{SERVER_PORT} =80
+RewriteRule ^(.*) https://%{SERVER_NAME}%{REQUEST_URI} [R,L]
+
+Finally, restart the IBM HTTP Server after making the preceding changes",swg21114864.txt,검증된 후보 없음: 직접 청크를 찾아 추가 검증 필요

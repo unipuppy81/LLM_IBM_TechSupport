@@ -1,0 +1,34 @@
+{
+  "baseline_judge_on": {
+    "model": "Qwen2.5-1.5B-Instruct",
+    "dataset": "clean",
+    "total": 135,
+    "batch_size": 1,
+    "max_new_tokens": 160,
+    "answerable": 90,
+    "impossible": 45,
+    "exact_match_percent": 0.0,
+    "token_f1_percent": 16.52,
+    "abstention_rate_percent": 64.44,
+    "false_refusal_rate_percent": 50.0
+  },
+  "new_judge": {
+    "model": "Qwen2.5-1.5B-Instruct",
+    "dataset": "clean",
+    "total": 135,
+    "batch_size": 1,
+    "max_new_tokens": 160,
+    "answerable": 90,
+    "impossible": 45,
+    "exact_match_percent": 0.0,
+    "token_f1_percent": 14.11,
+    "abstention_rate_percent": 75.56,
+    "false_refusal_rate_percent": 55.56
+  },
+  "prompt": "strict",
+  "judge_model": "qwen2.5:3b",
+  "generation_model": "Qwen2.5-1.5B-Instruct",
+  "smoke_test": false,
+  "generation_seconds": 255.669,
+  "warning": "Original QA labels are used; impossible questions may have newly retrieved support."
+}

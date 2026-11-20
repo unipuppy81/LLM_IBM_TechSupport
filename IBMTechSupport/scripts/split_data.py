@@ -11,7 +11,7 @@ DATA_DIR = PROJECT_DIR / "data" / "processed"
 SEED = 42
 
 # 데이터 분리 비율
-RATIOS = { "train": 0.80, "val": 0.15, "test": 0.15 }
+RATIOS = { "train": 0.70, "val": 0.15, "test": 0.15 }
 
 def question_key(question):
     # 공백과 대소문자 차이 제거하여 중복 검사

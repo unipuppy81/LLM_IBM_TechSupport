@@ -1,0 +1,31 @@
+{
+  "model": "Qwen2.5-1.5B-Instruct",
+  "dataset": "clean",
+  "total": 135,
+  "batch_size": 1,
+  "max_new_tokens": 160,
+  "answerable": 90,
+  "impossible": 45,
+  "exact_match_percent": 0.0,
+  "token_f1_percent": 14.52,
+  "abstention_rate_percent": 66.67,
+  "false_refusal_rate_percent": 56.67,
+  "radius": 2,
+  "top_k": 5,
+  "reranker_rerun": false,
+  "judge_model": "Qwen2.5-1.5B-Instruct (unchanged baseline)",
+  "judge_prompt": "answerability_detection.py:detect_answerability (unchanged)",
+  "selected_questions": 55,
+  "selected_chunks": 103,
+  "gold_source_selected_questions": 25,
+  "total_judge_seconds": 163.031,
+  "total_generation_seconds": 317.474,
+  "avg_generation_input_tokens": 649.2,
+  "baseline": {
+    "token_f1_percent": 16.52,
+    "exact_match_percent": 0.0,
+    "abstention_rate_percent": 64.44,
+    "false_refusal_rate_percent": 50.0
+  },
+  "note": "QA labels and matching filenames are proxies; gold-source matching is not chunk-level evidence validation."
+}

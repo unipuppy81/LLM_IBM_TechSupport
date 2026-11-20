@@ -1,0 +1,35 @@
+{
+  "evaluation_total": 135,
+  "answerable": 90,
+  "corpus_chunks_scanned": 111023,
+  "source_file_matching_is_not_chunk_evidence": true,
+  "reference_match_is_weak_label_not_verified_evidence": true,
+  "reference_no_match_is_not_negative": true,
+  "reference_minimum_token_count": 8,
+  "k_comparison_loaded": true,
+  "counts": {
+    "GOLD_SOURCE_MISSED_REFERENCE_IN_CORPUS": 25,
+    "GOLD_SOURCE_AND_REFERENCE_IN_TOP5": 37,
+    "GOLD_SOURCE_TOP5_BUT_REFERENCE_ONLY_ELSEWHERE": 13,
+    "GOLD_SOURCE_MISSED_REFERENCE_NOT_VERBATIM": 5,
+    "GOLD_SOURCE_TOP5_REFERENCE_NOT_VERBATIM": 10
+  },
+  "weak_diagnostics": {
+    "questions_gold_source_in_top5": 60,
+    "questions_gold_source_missing_top5": 30,
+    "questions_full_reference_in_gold_corpus": 75,
+    "questions_full_reference_in_any_top5": 37,
+    "questions_full_reference_in_gold_top5": 37,
+    "questions_full_reference_selected_by_judge": 17,
+    "questions_full_reference_in_gold_top5_but_not_judge_selected": 20
+  },
+  "manual_review_candidates": 248,
+  "impossible_generated": 16,
+  "k_changed_question_count": 9,
+  "notes": [
+    "완전한 참조 정답이 청크에 연속 등장해야 weak match입니다. 부분 정답·의미 동등 표현은 검색되지 않을 수 있습니다.",
+    "정답 파일명은 정답 청크를 의미하지 않습니다. 충분 근거 확인은 사람이 질문과 청크를 함께 읽어야 합니다.",
+    "참조 정답을 활용한 청크 후보 랭킹은 평가/검토 편의를 위한 것으로 실서비스 Retriever 성능이 아닙니다.",
+    "기존 모델과 인덱스, Baseline 결과는 변경하지 않습니다."
+  ]
+}

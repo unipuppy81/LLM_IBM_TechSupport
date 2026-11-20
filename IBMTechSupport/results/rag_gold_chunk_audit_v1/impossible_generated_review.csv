@@ -1,0 +1,103 @@
+﻿id,question,prediction,retrieved_filenames,judge_selected_chunk_ids,manual_faithfulness,review_note
+DEV_Q061,"Why does my JVMSERVER remain in a ""BEING DISABLED""  state?
+
+When I try to disable a JVMSERVER it becomes hung and remains in a ""BEING DISABLED"" state. This also occurs when I shut down the CICS region. The CICS region ultimately has to be cancelled.","The JVMSERVER remains in a ""BEING DISABLED"" state because there is an unexpected abend (0C7) caused by EIBTASKN being overlaid, leading CICS to handle the abend and issue messages DFHSJ0001 and DFHSJ1007. This causes CICS to attempt disabling the JVMSERVER and re-enabling it. However, since the JVM function DestroyJavaVM() waits for all non-daemon threads to complete before termination, the thread in the JVM that was being used by the abending CICS task still exists, preventing the JVM from terminating and leaving the JVMSERVER in a DISABLING state. To resolve this, either issue a Unix kill command against the process ID or terminate the entire CICS region",swg1PI83951.txt;swg1PI35728.txt;swg1PI35443.txt;swg1PI64495.txt;swg1PI35890.txt,doc_06913_chunk_0001;doc_06915_chunk_0001,,
+DEV_Q203,"Why WebSphere Application Server transactions are rolled back with these StaleConnectionExceptions?
+
+Why WebSphere Application Server transactions are rolled back with these StaleConnectionExceptions?
+My transactions are rolled back and the following errors are seen in the WebSphere Application Server logs:
+
+ConnectionEve A J2CA0056I: ........ ........ Connection reset:java.net.SocketException: Connection reset [15/03/04 1:04:33:046 JST] 00000024 SystemOut O INFO Error executing internal sql (executing callable statement) com.ibm.websphere.ce.cm.StaleConnectionException: IO?G??ñ[: Connection reset at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) at 
+...
+See original exception message: ...... with SQL State : 08003 SQL Code : 17008 ..... .....
+Caused by: java.sql.SQLRecoverableException: .......DSRA0010E: SQL State : 08003 SQL Code : 17008","WebSphere Application Server transactions are rolled back with StaleConnectionExceptions because the database vendor issues an exception indicating that a connection currently in the connection pool is no longer valid. This can happen due to various reasons such as the application trying to obtain a connection and failing, a connection becoming unusable due to a database failure, the application calling close() and attempting to reuse the connection, or an event occurring outside of the WebSphere Application Server causing the connection to become invalid. To resolve this issue, the WebSphere Application Server must be restarted. Additionally, catching the StaleConnectionException and retrying the getConnection() call when it occurs is recommended to allow applications to recover from stale connections without impacting end-users.",swg21063645.txt;swg1IC81239.txt;swg21207584.txt;swg21973255.txt;swg21066467.txt,doc_01798_chunk_0001;doc_10483_chunk_0000;doc_10488_chunk_0002;doc_10958_chunk_0000;doc_22597_chunk_0003,,
+TRAIN_Q282,"Security Bulletin: Non-configured connections could cause denial of service in IBM WebSphere MQ Internet Pass-Thru (CVE-2017-1118)
+
+I need to understand details regarding Security Bulletin: Non-configured connections could cause denial of service in IBM WebSphere MQ Internet Pass-Thru (CVE-2017-1118). Where can I find this information?","The Security Bulletin for CVE-2017-1118, titled ""Non-configured connections could cause denial of service in IBM WebSphere MQ Internet Pass-Thru,"" was issued by IBM. This bulletin highlights that when using the MQIPT SecurityManager without properly configuring IP addresses in the MQIPT security policy file, it may lead to the MQIPT stopping its response to connection attempts. The vulnerability is described as allowing attackers to cause the MQIPT to stop responding due to incorrect configuration.
+
+Affected products and versions include IBM WebSphere MQ Internet Pass-Thru v2.0 and v2.1, available on all supported platforms. For more detailed information about the CVSS scores and affected systems, refer to the linked X-Force page at https://exchange.xforce",swg22006580.txt;swg21984565.txt;swg22001468.txt;swg21998648.txt;swg21696120.txt,doc_25341_chunk_0000,,
+TRAIN_Q326,"Is Re-naming the WebSphere Portal installation directory and cell name for an existing clustered installation possible?
+
+Question: Is re-naming the WebSphere Portal installation directory and cell name for an existing clustered installation possible?","Yes, it is possible to rename the WebSphere Portal installation directory and cell name for an existing clustered installation. The steps provided in the retrieved documents outline how to update the application mappings, deploy the application, change its context root, and update the REST service provider configuration to reflect these changes.",swg21989510.txt;swg21370392.txt;swg21426380.txt;swg27019810.txt;swg21568750.txt,doc_13473_chunk_0002,,
+DEV_Q198,"Why is CSV002I occurring for CSQADITB?
+
+An application is getting repeated errors: 
+CSV002I REQUESTS FOR MODULE CSQADITB EXCEED MAXIMUM USE COUNT
+
+Restarting the application clears the error messages for a while. Why is this occurring?","The error CSV002I REQUESTS FOR MODULE CSQADITB EXCEED MAXIMUM USE COUNT is occurring because the application has reached its maximum allowed number of requests for the module CSQADITB. Restarting the application temporarily resolves the issue due to the system clearing the error messages. To resolve this permanently, the application should be relinked using the updated version of CSQADITB and the IMS MPRS should be recycled frequently to prevent the issue from recurring.",swg1PM12719.txt;swg1PM68728.txt;swg1PM26058.txt;swg1PM09457.txt;swg1OW54974.txt,doc_06443_chunk_0001;doc_09686_chunk_0000,,
+TRAIN_Q094,"Test MDB with Multiline message.
+
+
+
+Hi, I need to test my MDB injecting a multiline message into my Local WAS server. I have tried the WAS Integrated Universal Client and SIBExplorer. But the only accept on line mesage. How can I inject a multiline message into my Local WAS?
+
+I have tryid to config HermeJMS but without success.","To inject a multiline message into your Local WAS server when developing an MDB, you should ensure that the message format is correctly configured within the MDB class. The issue might be related to how the message is being serialized and deserialized, especially if the message contains newlines.
+
+Here are some steps you can follow:
+
+1. **Check Message Format**: Ensure that the message you're trying to send has newline characters properly formatted. In Java, messages sent over JMS typically require specific formatting to maintain their integrity during transmission.
+
+2. **Use Correct Serialization**: Make sure that the `Message` object is being serialized and deserialized correctly. For example, if you're sending a string containing newlines, make sure it's encoded appropriately before serialization.
+
+3. **Configure MDB Properly**: When deploying the MDB",swg27016507.txt;swg27016581.txt;swg27020701.txt;swg27016582.txt;swg21372897.txt,doc_27431_chunk_0000,,
+TRAIN_Q061,"Getting hung threads,  sometimes followed by OutOfMemory error
+
+Our application is hanging, we see lots of hung threads in the SystemOut.log, occasionally followed by OutOfMemory error.","Based on the retrieved documents, your application is experiencing issues due to excessive creation of ORB threads leading to OutOfMemory errors. The symptoms include a high memory usage by the JVM and garbage collection not returning memory, along with numerous mailbox threads in the thread dumps. To resolve this issue, consider changing the value of updateMailboxLastModification in mailbox.properties.in to false temporarily until a more permanent solution is found.",swg21670780.txt;swg21224719.txt;swg21552635.txt;swg21633466.txt;swg1LO70092.txt,doc_06241_chunk_0003;doc_11076_chunk_0000;doc_15655_chunk_0000;doc_17804_chunk_0001,,
+TRAIN_Q157,"Help with Security Bulletin: IBM WebSphere MQ 7.0.1 potential denial of service (CVE-2015-2013)
+
+I need to understand details regarding Security Bulletin: IBM WebSphere MQ 7.0.1 potential denial of service (CVE-2015-2013). Where can I find this information?","The Security Bulletin for IBM WebSphere MQ 7.0.1 potential denial of service (CVE-2015-2013) was issued by IBM. The bulletin describes a vulnerability where a client could send a specially crafted selection string to crash the channel agent, leading to a denial of service for other channels running under the same MCA process. The CVSS base score is 4.3, indicating a high severity. To mitigate this issue, IBM recommends applying the fix for APAR IV73860, available in IBM WebSphere MQ 7.0.1.13.",swg21962479.txt;swg21696120.txt;swg22001468.txt;swg21996156.txt;swg21998648.txt,doc_20781_chunk_0000;doc_21897_chunk_0000;doc_24465_chunk_0001,,
+DEV_Q136,"Compose tab appears disabled and project is not editable in Decision Center
+
+I have upgraded my ODM version and a project in Decision Center appears non editable :
+
+the compose tab is disabled
+in explore tab there are no new nor edit button","The issue described where the compose tab is disabled and the project cannot be edited in Decision Center after upgrading to ODM version 7.5.2 suggests that there might be a configuration problem related to category schema editing. This behavior is documented in the provided text from Document 1, which indicates that when navigating through the administration interface, specifically selecting a community, then the Category Schema tab becomes editable, but the OK button remains disabled until changes are made to the Category Configuration.
+
+To resolve this issue, it would be necessary to check the specific settings or configurations within the Decision Center environment that could be causing the disablement of the OK button. Additionally, ensuring that all required permissions and access levels are correctly set up for the user attempting to make changes should also be considered.",swg1PI07795.txt;swg1IC48495.txt;swg1JR42380.txt;swg21678760.txt;swg21634938.txt,doc_06495_chunk_0002,,
+TRAIN_Q532,"Does Tivoli Monitoring NetApp monitoring agent support OCUM environments?
+
+Does Tivoli Monitoring NetApp monitoring agent support OCUM environments?","Yes, the Tivoli Monitoring NetApp monitoring agent supports OCUM (On Premise Cloud Unified Monitoring) environments. The retrieved document states that ""IBM Agent Builder version 6.3.4, previously known as IBM Tivoli® Monitoring Agent Builder, is now available for download"" and provides details on how it can be used to create custom agents for extending monitoring capabilities in IBM Tivoli Monitoring or IBM Application Performance Management environments.",swg24023044.txt;swg1IV27517.txt;swg21389010.txt;swg24043533.txt;swg21214773.txt,doc_27203_chunk_0000,,
+TRAIN_Q566,"When required, upgrade the IBM Installation Manager rather than install a new copy.
+
+During the installation of WebSphere Process Server (WPS) Fix Pack, or IBM Business Process Manager (BPM) Fix Pack, there may be requirement to use a newer version of IBM Installation Manager.
+What is the right method to meet this requirement?","To meet the requirement of using a newer version of IBM Installation Manager during the installation of WebSphere Process Server (WPS) Fix Pack or IBM Business Process Manager (BPM) Fix Pack, follow these steps:
+
+1. Ensure that your machine meets the minimum system requirements for the desired version of IBM Installation Manager.
+2. Download the appropriate interim fix from Fix Central if necessary.
+3. Add the interim fix repository to Installation Manager along with the refresh pack repository.
+4. Select both the refresh pack and the interim fix to be installed during the upgrade process.
+5. Follow the standard upgrade procedure for WebSphere Process Server or IBM Business Process Manager Fix Pack, ensuring that the interim fix is installed before bootstrapping the database if applicable.
+
+By following these steps, you can successfully upgrade IBM Installation Manager",swg24039492.txt;swg24037612.txt;swg27042065.txt;swg21617131.txt;swg21676099.txt,doc_17281_chunk_0001,,
+DEV_Q076,"Why is Oracle agent (rz) reporting listeners and services as 'Inactive' even when those are active?
+
+On Unix/Linux, the Extended Oracle agent sends false alert for listener status. All listeners and services in Net Service Connection workspace show as inactive.","The issue arises due to changes in the design of the Extended Oracle agent, which now uses sqlnet.ora from its own ITM installation directory instead of the default location used in previous releases. This change causes sqlnet.log to fill up with error messages related to unavailable aliases when monitoring listeners via tnsnames.ora. As a result, the agent incorrectly reports listeners as inactive, leading to false alerts such as KRZ_Listener_Inactive_Crit. The agent does not have a built-in time-out mechanism for this type of monitoring, relying solely on the Oracle tnsping utility and the listener itself to determine the status.",swg21671988.txt;swg21455093.txt;swg1IV64051.txt;swg21681555.txt;swg1IZ77124.txt,doc_19362_chunk_0000;doc_19879_chunk_0000,,
+DEV_Q295,"Why are we seeing high CPU and hung threads in WebSphere Application Server?
+
+During the job execution in WebSphere Compute Grid we are seeing high CPU along with many hung threads reporting
+WSVR0605W from BatchFileLoggerInfo.getDirectoryList method.
+In Sysprint many threads are hung with this stack:
+BossLog: { 0426} <time stamp> SYSTEM=CPU4 CELL=FGDCELL NODE=FGDNODE4 CLUSTER=WFGDS1 SERVER=WFGDS14 PID=0X060835 TID=0 X2ED98E0000000162 t=8897F0 c=UNK ./bbgrjtr.cpp+733 tag= ... BBOO0221W: WSVR0605W: Thread ""WebSphere WLM Dispatch Thread t=008a6b70"" (0000006a) has been active for 683953 milliseconds and may be hung.
+....","The high CPU usage and hung threads observed during job execution in WebSphere Application Server could be due to the WebSphere Application Server attempting to detect potentially hung threads using the hung thread detector. This process involves periodically checking threads for extended periods of activity and printing a WSVR0605W message if it detects one.
+
+To diagnose and address these issues, you should:
+
+1. Capture detailed system performance data including CPU usage, memory usage, disk I/O, network traffic, etc., as described in the related information section.
+2. Gather Java core dumps or thread dumps by configuring the hung thread detector to automatically generate them when a WSVR0605W message is encountered.
+3. Review the SystemOut.log file for any WSVR0605W messages indicating potential",swg21672204.txt;swg21976593.txt;swg21448581.txt;swg1LO40464.txt;swg21610001.txt,doc_13945_chunk_0000;doc_16998_chunk_0002;doc_22913_chunk_0004,,
+DEV_Q194,"How to generate Javacores automatically in on hung threads reported in SystemOut.log for WebSphere Application Server?
+
+Need Javacores to be generated on hung threads messages reported in SystemOut.log for WebSphere Applicaiton Server.Example:WSVR0605W: Thread has been active for and may be hung. There are in total in the server that may be hung.","To generate Javacores automatically in response to hung threads reported in SystemOut.log for WebSphere Application Server, you need to set a custom WebSphere property. This property triggers the generation of a javacore or thread dump whenever a WSVR0605W message is logged in the SystemOut.log file. This allows you to automatically analyze potential hung threads without manually creating them through other means like manual javacore creation or monitoring.",swg21448581.txt;swg1PI65836.txt;swg21314783.txt;swg1PI13428.txt;swg21610001.txt,doc_11977_chunk_0000;doc_13945_chunk_0000;doc_16998_chunk_0002,,
+DEV_Q101,"Help with Security Bulletin: WMB and IIB Toolkit cannot connect to a remote WMB broker or IIB node with a TLS-compliant cipher (CVE-2015-0118)
+
+I need to understand details regarding Security Bulletin: WebSphere Message Broker Toolkit and IBM Integration Toolkit cannot connect to a remote WebSphere Message Broker broker or IBM Integration Bus node with a TLS-compliant cipher (CVE-2015-0118). Where can I find this information?","The security bulletin you're referring to is titled ""IBM Security Bulletin: WebSphere Message Broker Toolkit and IBM Integration Toolkit cannot connect to a remote WebSphere Message Broker broker or IBM Integration Bus node with a TLS-compliant cipher (CVE-2015-0118)"" which was issued by IBM. This bulletin highlights that the IBM Integration Toolkit cannot establish secure connections to a remote IBM Integration Bus node due to outdated IBM MQ client JAR files used within the toolkit. These older versions of the JAR files lack support for more robust TLS cipher suites, leading to potential vulnerabilities when attempting to connect over TLS. The affected products are WebSphere Message Broker Toolkit version 7 and 8, and IBM Integration Toolkit version 9.",swg21957998.txt;swg21615685.txt;swg21677891.txt;swg22005331.txt;swg21969672.txt,doc_21580_chunk_0000,,
+TRAIN_Q487,"Security Bulletin: API Connect Portal is affected by multiple Drupal vulnerabilities
+
+I need to understand details regarding Security Bulletin: API Connect Portal is affected by multiple Drupal vulnerabilities (CVE-2017-6924, CVE-2017-6923, CVE-2015-7875, CVE-2017-6925). Where can I find this information?","The Security Bulletin for IBM API Connect Portal states that it is affected by multiple Drupal vulnerabilities:
+
+1. CVE-2017-6924: Drupal could allow a remote attacker to bypass security restrictions through a flaw in the REST API.
+2. CVE-2017-6923: Drupal could allow a remote attacker to bypass security restrictions due to improper access control restriction of the Ajax endpoint.
+3. CVE-2017-6925: Drupal could allow a remote attacker to bypass security restrictions via a flaw in the entity access system.
+4. CVE-2018-7602: Drupal allows a remote attacker to execute arbitrary code on the system due to errors within multiple subsystems.
+
+These vulnerabilities have been addressed in IBM API",swg22008323.txt;swg22008902.txt;swg22015105.txt;ibm10713449.txt;swg22015829.txt,doc_25495_chunk_0000;doc_25557_chunk_0000;doc_26233_chunk_0000,,
