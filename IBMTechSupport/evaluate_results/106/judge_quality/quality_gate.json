@@ -1,0 +1,12 @@
+{
+  "mode": "report_only",
+  "checks": [
+    {
+      "check": "calibration_present",
+      "pass": false,
+      "reason": "사람 검토 결과 아직 없음"
+    }
+  ],
+  "blocking_allowed": false,
+  "decision": "REPORT_ONLY"
+}

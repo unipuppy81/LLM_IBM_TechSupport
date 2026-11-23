@@ -1,0 +1,16 @@
+{
+  "warning": "QA 레이블 기반 대리 평가입니다. 실제 검색 청크의 근거 충분성 독립 라벨이 아닙니다.",
+  "total": 106,
+  "TP": 26,
+  "FP": 4,
+  "TN": 25,
+  "FN": 51,
+  "judge_precision_proxy_percent": 86.67,
+  "judge_recall_proxy_percent": 33.77,
+  "judge_specificity_proxy_percent": 86.21,
+  "judge_first5_yes": 20,
+  "judge_expanded10_yes": 10,
+  "false_negatives_gold_file_top5": 41,
+  "false_negatives_gold_file_top10": 45,
+  "false_negatives_no_gold_file_top10": 6
+}

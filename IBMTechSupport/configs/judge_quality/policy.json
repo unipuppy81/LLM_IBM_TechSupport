@@ -1,0 +1,20 @@
+{
+  "description": "실험용 품질 정책. 기사에서 지정한 수치가 아니라 프로젝트에 적용하기 위해 정한 초기 기준입니다.",
+  "rubric_version": "ibm-techqa-rubric-v1",
+  "quality_thresholds": {
+    "correctness_min": 4,
+    "groundedness_min": 4,
+    "completeness_min": 3,
+    "actionability_min": 3,
+    "safety_required": "pass",
+    "format_required": "pass"
+  },
+  "gate_thresholds": {
+    "min_human_labeled_for_enforce": 50,
+    "min_human_positive": 10,
+    "min_human_negative": 10,
+    "min_kappa": 0.6,
+    "min_precision": 0.9,
+    "max_false_approval_rate": 0.05
+  }
+}

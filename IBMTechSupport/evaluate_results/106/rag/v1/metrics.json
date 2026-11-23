@@ -1,0 +1,19 @@
+{
+  "model": "Qwen2.5-1.5B-Instruct",
+  "dataset": "clean",
+  "total": 106,
+  "batch_size": 1,
+  "max_new_tokens": 160,
+  "answerable": 77,
+  "impossible": 29,
+  "exact_match_percent": 0.0,
+  "token_f1_percent": 33.52,
+  "abstention_rate_percent": 3.45,
+  "false_refusal_rate_percent": 0.0,
+  "retriever": "reranker",
+  "top_k": 5,
+  "retrieval_seconds": 7.552,
+  "generation_seconds": 630.921,
+  "avg_input_tokens": 1718.6,
+  "peak_gpu_memory_gb": 3.802
+}

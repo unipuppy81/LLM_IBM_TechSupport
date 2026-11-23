@@ -10,6 +10,8 @@ import yaml
 from load_base_model import load_model
 
 from answerability_detection import detect_answerability, select_evidence_documents
+from rag_guardrails import answer_with_guardrails
+from rag_guardrails_per_document import choose_guardrail_runner
 
 PROJECT_DIR = Path(__file__).resolve().parents[1]
 ABSTAIN = "INSUFFICIENT_INFORMATION"
@@ -169,8 +171,8 @@ def generate_rag_answer(model, tokenizer, generation_config, question, documents
 
 # region RAG 실행
 
-def run_rag(question, method, top_k):
-    config_path = PROJECT_DIR / "configs/rag/v1.yaml"
+def run_rag(question, method, top_k, config_path=None):
+    config_path = Path(config_path) if config_path is not None else PROJECT_DIR / "configs/rag/v3.yaml"
     with open(config_path, "r", encoding="utf-8") as f:
         config = yaml.safe_load(f)
 
@@ -179,7 +181,10 @@ def run_rag(question, method, top_k):
 
     # 질문과 관련된 문서 검색
     search_start = time.perf_counter()
-    documents = retrieve_documents(question, embedding_model, faiss_index, bm25_index, chunks, method, top_k)
+    retry_top_k = int(config.get('guardrails', {}).get('retry_top_k', top_k))
+    if retry_top_k < top_k:
+        raise ValueError('guardrails.retry_top_k must be >= top_k')
+    documents = retrieve_documents(question, embedding_model, faiss_index, bm25_index, chunks, method, retry_top_k)
     search_seconds = time.perf_counter() - search_start
 
     # 검색 결과 출력
@@ -195,20 +200,39 @@ def run_rag(question, method, top_k):
     # Qwen 모델 로드
     model, tokenizer, generation_config = load_model(config)
 
-    # 문서별 근거 적합성 검사
-    evidence_documents = select_evidence_documents(model, tokenizer, question, documents)
-
-    # 선택된 문서들로 최종 답변 가능 여부 검사
-    # answerable = bool(evidence_documents) and detect_answerability(model, tokenizer, question, evidence_documents)
-    answerable = bool(evidence_documents)
-    
-    # 답변 가능 여부에 따라 처리
-    if answerable:
-        answer, generation_seconds, input_tokens = generate_rag_answer(model, tokenizer, generation_config, question, evidence_documents, config["prompt"])
+    # Optional production/evaluation-aligned evidence gates (enabled in v3).
+    if config.get("guardrails", {}).get("enabled", False):
+        guarded_result = choose_guardrail_runner(config)(
+            question=question,
+            retrieved_documents=documents,
+            model=model,
+            tokenizer=tokenizer,
+            generation_config=generation_config,
+            prompt_config=config["prompt"],
+            generate_answer=generate_rag_answer,
+            top_k=top_k,
+            retry_top_k=retry_top_k,
+        )
+        answer = guarded_result["answer"]
+        generation_seconds = guarded_result["generation_seconds"]
+        input_tokens = guarded_result["input_tokens"]
+        print("Guardrail Status:", guarded_result["status"])
+        print("Judge History:", guarded_result["judge_history"])
+        print("Grounding Verification:", guarded_result["verification"])
+        print("Judge Seconds:", guarded_result["judge_seconds"])
+        print("Verification Seconds:", guarded_result["verification_seconds"])
     else:
-        answer = ABSTAIN
-        generation_seconds = 0.0
-        input_tokens = 0
+        # Legacy behavior retained when running older config versions.
+        evidence_documents = select_evidence_documents(model, tokenizer, question, documents)
+        answerable = bool(evidence_documents)
+        if answerable:
+            answer, generation_seconds, input_tokens = generate_rag_answer(
+                model, tokenizer, generation_config, question, evidence_documents, config["prompt"]
+            )
+        else:
+            answer = ABSTAIN
+            generation_seconds = 0.0
+            input_tokens = 0
 
     print("\n[RAG Result]")
     print("Question:", question)
@@ -236,13 +260,14 @@ def main():
     parser.add_argument("--question", required=True, type=str)
     parser.add_argument("--retriever", choices=("hybrid", "reranker"), default="reranker")
     parser.add_argument("--top-k", type=int, default=TOP_K)
+    parser.add_argument("--config", type=Path, default=PROJECT_DIR / "configs/rag/v3.yaml")
 
     args = parser.parse_args()
 
     if not 1 <= args.top_k <= 50:
         parser.error("--top-k는 1~50 사이여야 합니다.")
 
-    run_rag(question=args.question, method=args.retriever, top_k=args.top_k)
+    run_rag(question=args.question, method=args.retriever, top_k=args.top_k, config_path=args.config)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,50 @@
+{
+  "source_file": "evaluate_results/106/rag/v4/predictions.jsonl",
+  "total": 106,
+  "answerable_original_label": 77,
+  "impossible_original_label": 29,
+  "status_by_label": [
+    {
+      "label": "answerable",
+      "status": "ANSWER_NO",
+      "count": 5
+    },
+    {
+      "label": "answerable",
+      "status": "ANSWER_VERIFIED",
+      "count": 67
+    },
+    {
+      "label": "answerable",
+      "status": "EVIDENCE_NO",
+      "count": 1
+    },
+    {
+      "label": "answerable",
+      "status": "GENERATOR_ABSTAINED",
+      "count": 4
+    },
+    {
+      "label": "impossible",
+      "status": "ANSWER_NO",
+      "count": 1
+    },
+    {
+      "label": "impossible",
+      "status": "ANSWER_VERIFIED",
+      "count": 26
+    },
+    {
+      "label": "impossible",
+      "status": "EVIDENCE_NO",
+      "count": 1
+    },
+    {
+      "label": "impossible",
+      "status": "GENERATOR_ABSTAINED",
+      "count": 1
+    }
+  ],
+  "v4_answer_verified": 93,
+  "warning": "자동 Judge 승인/원본 QA 레이블은 정답 정확성의 사람 평가 라벨이 아님"
+}
