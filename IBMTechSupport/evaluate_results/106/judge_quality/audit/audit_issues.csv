@@ -1,0 +1,53 @@
+﻿id,claim_id,issue,detail,recommendation
+TRAIN_Q270,1,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_28144_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q270,2,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_28144_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q270,1,POTENTIAL_FALSE_CONTRADICTION,Claim과 근거에 같은 수치 조건이 나타나므로 CONTRADICTED 판정 재검토 필요,모델의 모순 판단을 그대로 수용하지 말고 원문과 Claim을 사람이 대조; 자동 SUPPORTED 전환 금지
+TRAIN_Q270,2,POTENTIAL_FALSE_CONTRADICTION,Claim과 근거에 같은 수치 조건이 나타나므로 CONTRADICTED 판정 재검토 필요,모델의 모순 판단을 그대로 수용하지 말고 원문과 Claim을 사람이 대조; 자동 SUPPORTED 전환 금지
+TRAIN_Q037,1,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_11096_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q037,2,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_11096_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q037,2,MODEL_RESPONSE_INVALID,"attempt=2, problem=INVALID_EVIDENCE_ID_OR_REASON",스키마 오류를 1회만 재요청하고 이후 REVIEW_REQUIRED 처리
+TRAIN_Q037,2,UNRESOLVED_CLAIM,Malformed semantic verdict after bounded retry.,사람의 검토 후 판단; 자동 승인 금지
+TRAIN_Q025,1,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_24721_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q025,2,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_24721_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q549,1,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_23668_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q549,2,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_23668_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q549,3,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_23668_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q549,2,POTENTIAL_FALSE_CONTRADICTION,Claim과 근거의 어휘 중첩 F1=0.67; 부정 표현·숫자의 명시적 불일치가 없어 사람이 의미적 모순 여부를 검토해야 함,모델의 모순 판단을 그대로 수용하지 말고 원문과 Claim을 사람이 대조; 자동 SUPPORTED 전환 금지
+TRAIN_Q006,1,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_25516_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q006,2,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_25516_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q006,3,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_25516_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q006,4,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_25516_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q006,4,EVIDENCE_ID_INVALID,"attempt=2, source_chunk_id=doc_25516_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q006,2,EXACT_TEXT_CONTRADICTION,근거 인용문과 Claim이 문자 수준에서 동일하지만 CONTRADICTED로 판정됨,모델의 모순 판단을 그대로 수용하지 말고 원문과 Claim을 사람이 대조; 자동 SUPPORTED 전환 금지
+TRAIN_Q006,3,EXACT_TEXT_CONTRADICTION,근거 인용문과 Claim이 문자 수준에서 동일하지만 CONTRADICTED로 판정됨,모델의 모순 판단을 그대로 수용하지 말고 원문과 Claim을 사람이 대조; 자동 SUPPORTED 전환 금지
+TRAIN_Q006,4,UNRESOLVED_CLAIM,Malformed semantic verdict after bounded retry.,사람의 검토 후 판단; 자동 승인 금지
+TRAIN_Q535,1,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_20374_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q535,3,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_20374_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q535,3,POTENTIAL_FALSE_CONTRADICTION,Claim과 근거의 어휘 중첩 F1=0.69; 부정 표현·숫자의 명시적 불일치가 없어 사람이 의미적 모순 여부를 검토해야 함,모델의 모순 판단을 그대로 수용하지 말고 원문과 Claim을 사람이 대조; 자동 SUPPORTED 전환 금지
+DEV_Q035,1,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_25953_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q316,1,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_16093_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q316,3,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_16062_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q316,4,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_16093_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q316,5,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_16093_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q316,6,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_15294_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q282,1,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_25341_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q282,2,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_25341_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+DEV_Q157,1,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_25983_chunk_0005",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+DEV_Q157,2,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_25983_chunk_0005",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+DEV_Q167,3,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_16213_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+DEV_Q167,4,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_16213_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+DEV_Q167,5,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_16213_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+DEV_Q167,3,EXACT_TEXT_CONTRADICTION,근거 인용문과 Claim이 문자 수준에서 동일하지만 CONTRADICTED로 판정됨,모델의 모순 판단을 그대로 수용하지 말고 원문과 Claim을 사람이 대조; 자동 SUPPORTED 전환 금지
+DEV_Q028,2,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_22818_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q172,1,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_24594_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q172,1,EXACT_TEXT_CONTRADICTION,Claim 전체가 근거 인용문 안에 있지만 CONTRADICTED로 판정됨,모델의 모순 판단을 그대로 수용하지 말고 원문과 Claim을 사람이 대조; 자동 SUPPORTED 전환 금지
+TRAIN_Q326,1,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_12475_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q326,2,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_23964_chunk_0001",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q326,3,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_23964_chunk_0001",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q307,1,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_22199_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q307,2,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_22199_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q307,3,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_22199_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q307,4,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_19539_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+TRAIN_Q307,5,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_19539_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+DEV_Q198,2,EVIDENCE_ID_INVALID,"attempt=1, source_chunk_id=doc_09162_chunk_0000",후보 ID를 프롬프트에 명시·검증하고 오류 시 1회 재시도; 반복 오류는 UNRESOLVED로 분기
+DEV_Q198,2,REASON_RESTATES_CLAIM,CONTRADICTED 판정 사유가 오히려 Claim의 내용을 근거가 명시한다고 설명함,모델의 모순 판단을 그대로 수용하지 말고 원문과 Claim을 사람이 대조; 자동 SUPPORTED 전환 금지

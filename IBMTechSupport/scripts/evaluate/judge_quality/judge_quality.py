@@ -1,14 +1,3 @@
-"""IBM TechQA v4 Judge 품질 감사. 기존 RAG 파이프라인을 변경하지 않음.
-
-Commands:
-  prepare   v4 predictions -> baseline summary, risk-stratified human review CSV
-  grade     optional offline Qwen -> rubric JSONL (use local GPU, no API key)
-  calibrate human reviewer labels vs rubric Judge -> agreement/kappa/CI/segment metrics
-  gate      report-only by default; optional enforce with human calibration
-
-IMPORTANT: Human labels are NOT fabricated from QA is_impossible labels or Judge status.
-"""
-
 from __future__ import annotations
 
 import argparse
@@ -34,7 +23,7 @@ REVIEW_COLUMNS = [
     "human_actionability", "human_safety", "human_format", "failure_reason", "risk_level",
     "reviewer_notes",
 ]
-JUDGE_SCHEMA_VERSION = "ibm-techqa-judge-claims-v3.2"
+JUDGE_SCHEMA_VERSION = "ibm-techqa-judge-claims-v3.6"
 RUBRIC_SYSTEM = """You are an independent technical QA evaluator reviewing an IBM support answer.
 Use ONLY the user question, the candidate answer, and the provided IBM document BODY.
 You must check whether the source documents DIRECTLY support the actual answer.
@@ -597,7 +586,7 @@ def extract_answer_claims(answer: str) -> list[dict]:
     spans = []
     for original in lines:
         line = original.strip()
-        if not line or line in {"```", "```bash", "```powershell", "```python"}:
+        if not line or line.startswith("```"):
             continue
         # Keep literals exactly as typed, other than presentation bullets/steps.
         line = re.sub(r"^(?:\d{1,2}[.)]|[-*•])\s+", "", line)
@@ -624,6 +613,12 @@ def extract_answer_claims(answer: str) -> list[dict]:
         for piece in pieces:
             piece = piece.strip()
             if len(piece) >= 8:
+                spans.append(piece)
+            elif re.search(r"\b(?:rm|mv|cp|del|kill|drop|set|run|restart|reboot|" 
+                           r"delete|clear|enable|disable|install)\b", piece,
+                           flags=re.IGNORECASE):
+                # A short command is still a technical claim; never silently
+                # discard it merely because a previous splitter used len>=8.
                 spans.append(piece)
     if not spans:
         return []
@@ -871,6 +866,7 @@ def _required_identifier_absent(claim: dict, doc: dict) -> bool:
     identifiers.extend(re.findall(r"(?<![A-Za-z0-9_])(?:[A-Za-z_][A-Za-z0-9_+-]*\.){2,}[A-Za-z_][A-Za-z0-9_*+-]*", text))
     identifiers.extend(re.findall(r"<[^<>]+>(?:/[A-Za-z0-9_.-]+)+", text))
     identifiers.extend(re.findall(r"(?<!\w)[A-Za-z_][\w.+-]*=[^\s,;]+", text))
+    identifiers.extend(_required_claim_literals(text) - _key_literals(text))
     if not identifiers:
         return False
     body = _source_body(doc).casefold()
@@ -941,8 +937,14 @@ def derive_claim_rubric(claims: list[dict], policy: dict) -> tuple[dict, str]:
     Unverified model verdicts cannot be silently converted to a passing score.
     """
     core = [c for c in claims if c["essential"]]
-    all_claims = [c["verdict"] for c in claims]
-    core_verdicts = [c["verdict"] for c in core]
+    # A flagged contradiction is an *unresolved semantic judgment*, not a
+    # demonstrated factual contradiction. Keep the raw model verdict on each
+    # claim for the audit log, but do not turn it into a certain score of 1.
+    def effective_verdict(c):
+        return "UNRESOLVED" if c.get('review_flags') else c['verdict']
+
+    all_claims = [effective_verdict(c) for c in claims]
+    core_verdicts = [effective_verdict(c) for c in core]
     unknown_core = sum(v != "SUPPORTED" for v in core_verdicts)
     contradictory = any(v == "CONTRADICTED" for v in all_claims)
     unresolved = any(v == "UNRESOLVED" for v in all_claims)
@@ -959,6 +961,10 @@ def derive_claim_rubric(claims: list[dict], policy: dict) -> tuple[dict, str]:
         flags.append("ESSENTIAL_CLAIM_NOT_SUPPORTED")
     if missing_context:
         flags.append("CONTEXT_CLAIM_NOT_SUPPORTED")
+    # Review requirements raised by evidence-ID repair and contradiction
+    # consistency checks must propagate to the final case gate.
+    semantic_review_flags = sorted({flag for c in claims for flag in c.get('review_flags', [])})
+    flags.extend(semantic_review_flags)
     if fully_supported:
         correctness, groundedness, completeness, actionability = (5, 5, 4, 4)
     elif primary_supported and not contradictory and not unresolved:
@@ -969,10 +975,10 @@ def derive_claim_rubric(claims: list[dict], policy: dict) -> tuple[dict, str]:
         correctness, groundedness, completeness, actionability = (2, 2, 2, 2)
     else:
         correctness, groundedness, completeness, actionability = (3, 3, 3, 3)
-    quotes = [c["evidence_quote"] for c in claims if c["verdict"] == "SUPPORTED"
+    quotes = [c["evidence_quote"] for c in claims if effective_verdict(c) == "SUPPORTED"
               and c.get("evidence_quote_verified")]
-    failures = [f"claim {c['claim_id']}: {c['verdict']} - {c['reason']}"
-                for c in claims if c["verdict"] != "SUPPORTED"]
+    failures = [f"claim {c['claim_id']}: {effective_verdict(c)} - {c['reason']}"
+                for c in claims if effective_verdict(c) != "SUPPORTED"]
     thresholds = policy["quality_thresholds"]
     scores = {"correctness": correctness, "groundedness": groundedness,
               "completeness": completeness, "actionability": actionability,
@@ -999,102 +1005,477 @@ def derive_claim_rubric(claims: list[dict], policy: dict) -> tuple[dict, str]:
     # approval. Human calibration may justify a more nuanced policy later.
     scores["auto_pass"] = bool(pass_thresholds and fully_supported
                                 and not contradictory and not unresolved and not flags)
-    status = "REVIEW_REQUIRED" if unresolved else "OK"
+    status = "REVIEW_REQUIRED" if (unresolved or semantic_review_flags) else "OK"
     return scores, status
 
 
-def evaluate_case_claims(record, policy, generate_fn, max_attempts=2, debug_hook=None):
-    """Ground each answer claim in a matching IBM document, independently.
+# v3.3: Evidence-first semantic verification.
+# Python selects verbatim source passages; the model NEVER writes citations.
+# One Qwen call per claim, with at most one retry for malformed JSON.
+# The selected source span is an exact substring of one document.
+MAX_EVIDENCE_SNIPPETS = 5
+MAX_PASSAGE_CHARS = 430
 
-    Each claim is checked against one document at a time. An exact quote is
-    necessary but NOT sufficient for semantic support; the local Qwen verdict
-    is an uncalibrated estimate and must be compared with human labels.
-    """
-    docs = evaluation_docs(record)
-    answer = str(record.get("prediction") or "")
-    question = str(record.get("question") or "")
-    if answer.strip() == ABSTAIN:
-        rubric = {"auto_pass": False, "review_flags": ["REFUSAL_REQUIRES_HUMAN_REVIEW"],
-                  "claim_verifications": [], "failure_reason": "Refusal needs human review",
-                  "rubric_derivation": "not_scored_refusal"}
-        return {"judge_status": "REVIEW_REQUIRED", "score": rubric,
-                "raw_response": "", "attempt_count": 0, "attempts": []}
-    try:
-        extracted = extract_answer_claims(answer)
-    except ValueError as exc:
-        return {"judge_status": "REVIEW_REQUIRED", "score": {
-            "auto_pass": False, "review_flags": [str(exc)],
-            "claim_verifications": [], "failure_reason": str(exc),
-            "rubric_derivation": "extraction_failed"},
-            "raw_response": "", "attempt_count": 0, "attempts": []}
-    if not extracted:
-        return {"judge_status": "REVIEW_REQUIRED", "score": {
-            "auto_pass": False, "review_flags": ["NO_CLAIMS_EXTRACTED"],
-            "claim_verifications": [], "failure_reason": "No technical claims",
-            "rubric_derivation": "extraction_failed"},
-            "raw_response": "", "attempt_count": 0, "attempts": []}
-    verifications = []
-    total_calls = 0
-    all_attempts = []
-    last_raw = ""
-    for claim in extracted:
-        findings = []
-        for doc in docs:
-            def capture(event):
-                nonlocal total_calls, last_raw
-                if event.get("stage") == "procedure_match":
-                    # A deterministic check is a logged validation, not an LLM call.
-                    if debug_hook is not None:
-                        debug_hook(event)
-                    return
-                total_calls += 1
-                last_raw = event["raw_response"]
-                all_attempts.append({
-                    "stage": "claim_verify", "claim_id": claim["claim_id"],
-                    "source_chunk_id": doc.get("chunk_id"),
-                    "attempt": event["attempt"], "raw_response": last_raw,
-                    "problem": event["problem"],
-                })
-                if debug_hook is not None:
-                    debug_hook(event)
-            found = _verify_claim_in_document(
-                question, answer, claim, doc, generate_fn,
-                max_attempts=max_attempts, debug_hook=capture,
-            )
-            findings.append({**found, "source_filename": doc.get("filename"),
-                             "source_chunk_id": doc.get("chunk_id")})
-            # Stop at the first confirmed supporting passage for efficiency;
-            # contradictory evidence in earlier docs will still be detected.
-            if found["verdict"] == "SUPPORTED":
-                break
-        statuses = {f["verdict"] for f in findings}
-        if "UNRESOLVED" in statuses:
-            verdict = "UNRESOLVED"  # any invalid doc decision prevents approval
-        elif "SUPPORTED" in statuses and "CONTRADICTED" in statuses:
-            verdict = "UNRESOLVED"  # conflicting documents cannot auto-approve
-        elif "SUPPORTED" in statuses:
-            verdict = "SUPPORTED"
-        elif "CONTRADICTED" in statuses:
-            verdict = "CONTRADICTED"
+EVIDENCE_FIRST_SYSTEM = """You check ONE claim against numbered IBM source passages.
+Only E1, E2, ... are evidence. QUESTION and CLAIM are NOT evidence.
+Evaluate the exact action, product, error, version, numbers, and conditions.
+
+SUPPORTED: a passage DIRECTLY establishes EVERY MATERIAL PART of the claim.
+For a claimed remedy or instruction, a passage that mentions only a symptom,
+root cause, or desirable outcome is NOT enough; the action must be supported.
+Do not approve a claim about installing, deleting, renaming, restarting, or
+reconfiguring something from an excerpt that does not discuss that action.
+Do not approve a claim with a specific path/version/number unless the source
+supports that same detail. If a quote covers just part of a compound claim,
+return NOT_FOUND. Matching topic and keyword overlap alone are not support.
+CONTRADICTED: a passage explicitly states an incompatible fact (opposite
+polarity, mutually exclusive parameter/value or action). The claim and source
+saying the SAME thing is NEVER CONTRADICTED, even with different wording.
+NOT_FOUND: no passage directly proves either verdict; similarity is not enough.
+
+Return exactly ONE JSON object, with three keys:
+{"verdict":"SUPPORTED","evidence_id":"E1","reason":"brief case-specific explanation"}
+When verdict is SUPPORTED or CONTRADICTED: use EXACTLY ONE existing E number
+shown in the prompt. NEVER return a blank or made-up evidence_id.
+When verdict is NOT_FOUND: use evidence_id "" and explain missing evidence.
+Do not invent quotations; source text is copied by the program.
+"""
+
+
+def _passage_windows(body: str) -> list[str]:
+    """Generate genuine contiguous source windows, never model-made quotes."""
+    body = body.strip()
+    if not body:
+        return []
+    lines = [x for x in body.splitlines(keepends=True)]
+    # Preserve paragraph content; split exceptionally long lines at boundaries.
+    pieces = []
+    for line in lines:
+        if len(line) <= MAX_PASSAGE_CHARS:
+            pieces.append(line)
         else:
-            verdict = "NOT_FOUND"
-        exemplar = next((f for f in findings if f["verdict"] == verdict), None)
-        if exemplar is None:
-            exemplar = next((f for f in findings if f["verdict"] == "SUPPORTED"), None)
-        verifications.append({
-            **claim, "verdict": verdict,
-            "evidence_quote": exemplar.get("quote", "") if exemplar else "",
-            "evidence_quote_verified": bool(exemplar and exemplar.get("quote_verified") and verdict == "SUPPORTED"),
-            "source_filename": exemplar.get("source_filename") if exemplar else None,
-            "source_chunk_id": exemplar.get("source_chunk_id") if exemplar else None,
-            "reason": exemplar.get("reason", "No selected document supports this claim") if exemplar else "No selected document supports this claim",
-            "documents_checked": len(findings),
-            "per_document_verdicts": findings,
-        })
-    score, status = derive_claim_rubric(verifications, policy)
-    return {"judge_status": status, "score": score, "raw_response": last_raw,
-            "attempt_count": total_calls, "attempts": all_attempts}
+            # Slices remain contiguous within the original source line.
+            for offset in range(0, len(line), MAX_PASSAGE_CHARS):
+                pieces.append(line[offset:offset + MAX_PASSAGE_CHARS])
+    candidates = []
+    for i in range(len(pieces)):
+        if not pieces[i].strip():
+            continue
+        for width in (1, 2, 3, 4, 5):
+            if i + width > len(pieces):
+                break
+            sample = ''.join(pieces[i:i + width]).strip()
+            if 15 <= len(sample) <= MAX_PASSAGE_CHARS:
+                candidates.append(sample)
+    # Preserve document order and exact source membership.
+    return list(dict.fromkeys(candidates))
 
+
+def _evidence_relevance(claim: dict, excerpt: str) -> float:
+    """Retrieve likely evidence, NOT a conclusion about semantic entailment."""
+    words = _claim_tokens(claim["text"])
+    matches = words & _claim_tokens(excerpt)
+    if not matches:
+        return 0.0
+    literals = _key_literals(claim["text"])
+    literal_hits = sum(x.casefold() in excerpt.casefold() for x in literals)
+    # More matching claim words and identifier hits; penalize excessive text.
+    return (2.0 * len(matches) / max(len(words), 1)
+            + 0.08 * len(matches)
+            + 0.5 * literal_hits
+            - 0.0005 * len(excerpt))
+
+
+def _candidate_evidence(question: str, claim: dict, docs: list[dict], limit=MAX_EVIDENCE_SNIPPETS):
+    """Return original substrings with genuine document identifiers."""
+    ranked = []
+    for pos, doc in enumerate(docs):
+        if not _question_context_matches_document(question, doc):
+            continue
+        if _required_identifier_absent(claim, doc):
+            continue
+        body = _source_body(doc)
+        scored = [(_evidence_relevance(claim, x), x) for x in _passage_windows(body)]
+        scored.sort(key=lambda t: t[0], reverse=True)
+        # At most two passages from a given document; no unrelated source flood.
+        for score, quote in scored[:2]:
+            if score > 0:
+                ranked.append((score, pos, quote, doc))
+    ranked.sort(key=lambda x: (-x[0], x[1]))
+    chosen = []
+    seen = set()
+    for score, pos, quote, doc in ranked:
+        key = (str(doc.get('chunk_id')), quote)
+        if key in seen:
+            continue
+        seen.add(key)
+        chosen.append({"evidence_id": f"E{len(chosen) + 1}",
+                       "quote": quote, "source_filename": doc.get('filename'),
+                       "source_chunk_id": doc.get('chunk_id'),
+                       "rank_score": round(score, 4)})
+        if len(chosen) >= limit:
+            break
+    return chosen
+
+
+def _evidence_first_messages(question: str, claim: dict, evidence: list[dict]):
+    fragments = [f"{x['evidence_id']} ({x['source_filename']} | {x['source_chunk_id']}):\n{x['quote']}"
+                 for x in evidence]
+    user = ("QUESTION (context, not evidence):\n" + question +
+            "\n\nCLAIM TO VERIFY (not evidence):\n" + claim['text'] +
+            "\n\nSOURCE EVIDENCE (the only admissible text):\n" +
+            "\n\n".join(fragments) +
+            "\n\nDecide the claim, not the source's general topic. JSON only.")
+    return [{"role": "system", "content": EVIDENCE_FIRST_SYSTEM},
+            {"role": "user", "content": user}]
+
+
+def _required_claim_literals(claim_text: str) -> set[str]:
+    """Identifiers required to support a claim; exclude source reference numbers.
+
+    Long all-capital module names such as CSQADITB must not silently match an
+    unrelated IBM module (CSQQCON2) just because the error code is identical.
+    """
+    content = re.sub(r"\b(?:Document|Source)\s+\d+\b", "", claim_text, flags=re.IGNORECASE)
+    literals = _key_literals(content)
+    generic_caps = {"ERROR", "CAUSE", "REQUESTS", "MODULE", "COUNT", "EXCEED",
+                    "MAXIMUM", "APPLICATION", "RESTART", "RESOLVING", "PROBLEM",
+                    "INSTALL", "CONFIGURE", "WARNING", "VERSION", "VERSIONS",
+                    "AFFECTED", "PRODUCTS", "SERVICE", "MESSAGE"}
+    literals.update(x for x in re.findall(r"(?<![\w.])[A-Z][A-Z0-9_]{5,}(?![\w.])", content)
+                    if x not in generic_caps)
+    return literals
+
+
+def _recover_unique_evidence_id(reason: str, evidence: list[dict]) -> str | None:
+    """Recover a *reference* only when it has exactly one verifiable source.
+
+    Recovery establishes which passage was referenced; it is NOT proof that
+    a semantic SUPPORTED/CONTRADICTED verdict is correct. Never guess among
+    several passages by lexical similarity alone.
+    """
+    valid_ids = {str(item['evidence_id']) for item in evidence}
+    mentioned_ids = set(re.findall(r"(?<![A-Za-z0-9_])E\d+(?![A-Za-z0-9_])",
+                                   reason, flags=re.IGNORECASE))
+    mentioned_ids = {item.upper() for item in mentioned_ids}
+    if len(mentioned_ids) == 1 and mentioned_ids <= valid_ids:
+        return next(iter(mentioned_ids))
+    if mentioned_ids:
+        return None  # Ambiguous or invalid reference in the explanation.
+    if len(evidence) == 1:
+        return str(evidence[0]['evidence_id'])
+    # Some responses contain an exact quoted passage in the explanation,
+    # although evidence_id is blank. Match only a substantial verbatim span.
+    fragments = re.findall(r'["\']([^"\']{24,})["\']', reason)
+    matches = set()
+    for fragment in fragments:
+        for item in evidence:
+            if normalize_space(fragment) in normalize_space(item['quote']):
+                matches.add(str(item['evidence_id']))
+    return next(iter(matches)) if len(matches) == 1 else None
+
+
+def _contradiction_review_signal(claim_text: str, quote: str, reason: str) -> str | None:
+    """Detect *suspicious* contradictions; never auto-convert to SUPPORTED.
+
+    Overlap is a review signal, not an entailment/contradiction proof. A small
+    LLM can produce a convincing reason that does not follow from the quote.
+    """
+    claim_tokens = _claim_tokens(claim_text)
+    quote_tokens = _claim_tokens(quote)
+    if not claim_tokens or not quote_tokens:
+        return None
+    # If the original source literally contains the asserted sentence, asking
+    # a human is safer than accepting the model's contradictory classification.
+    if len(claim_text.strip()) >= 20 and normalize_space(claim_text.strip()) in normalize_space(quote):
+        return 'CLAIM_TEXT_PRESENT_IN_CONTRADICTING_QUOTE'
+    overlap = len(claim_tokens & quote_tokens) / max(len(claim_tokens), 1)
+    negatives = re.compile(r"\b(?:no|not|never|cannot|can't|without|unsupported|"
+                           r"impossible|unavailable|unable|forbidden|disallowed)\b",
+                           flags=re.IGNORECASE)
+    # Detect high lexical agreement without a basic polarity flip. Differences
+    # in wording or extra source context are not proof of contradiction.
+    if (overlap >= 0.67 and len(claim_tokens & quote_tokens) >= 3
+            and bool(negatives.search(claim_text)) == bool(negatives.search(quote))):
+        return 'POTENTIAL_FALSE_CONTRADICTION'
+    # An explanation that describes agreement while voting CONTRADICTED is
+    # internally inconsistent, even if the source quote is authentic.
+    agreement = re.search(
+        r"\b(?:supports? (?:the |this )?claim|directly supports?|"
+        r"aligns? with (?:the |this )?claim|matches? (?:the |this )?claim)\b",
+        reason, flags=re.IGNORECASE)
+    if agreement:
+        return 'VERDICT_REASON_INCONSISTENT'
+    return None
+
+
+# Lexical guards below only trigger HUMAN REVIEW; they never declare semantic
+# entailment or contradiction. This is important for a small local LLM Judge.
+_ACTION_PATTERNS = {
+    "restart": r"\b(?:restart|reboot|restarting|rebooting|restarted|rebooted)\b",
+    "install": r"\b(?:install|installs|installed|installing|reinstall|reinstalled)\b",
+    "delete": r"\b(?:delete|deleting|deleted|remove|removed|removing|clear|cleared|clearing|purge|purged|wipe|wiped|drop|dropped|dropping)\b",
+    "rename": r"\b(?:rename|renamed|renaming|move|moved|moving)\b",
+    "configure": r"\b(?:configure|configured|configuration|reconfigure|update|updated|updating|change|changed|changing|modify|modified|edit|edited|editing|set|setting)\b",
+    "generate": r"\b(?:generate|generating|generated|create|created|creating)\b",
+    "enable": r"\b(?:enable|enabled|enabling)\b",
+    "disable": r"\b(?:disable|disabled|disabling)\b",
+    "download": r"\b(?:download|downloaded|downloading)\b",
+    "upgrade": r"\b(?:upgrade|upgraded|upgrading)\b",
+    "execute": r"\b(?:execute|executed|executing|run|running|ran)\b",
+}
+
+_NUMBER_COMPARISONS = re.compile(
+    r"\b(less than|fewer than|under|below|at most|no more than|"
+    r"more than|greater than|over|above|at least|no fewer than)\s+"
+    r"(\d[\d,]*(?:\.\d+)?)\b", flags=re.IGNORECASE)
+
+
+def _number_comparators(text: str) -> dict[str, set[str]]:
+    comparisons = {}
+    for phrase, amount in _NUMBER_COMPARISONS.findall(text):
+        amount = amount.replace(',', '')
+        if phrase.casefold() in ('less than', 'fewer than', 'under', 'below'):
+            symbol = '<'
+        elif phrase.casefold() in ('at most', 'no more than'):
+            symbol = '<='
+        elif phrase.casefold() in ('more than', 'greater than', 'over', 'above'):
+            symbol = '>'
+        else:
+            symbol = '>='
+        comparisons.setdefault(amount, set()).add(symbol)
+    return comparisons
+
+
+def _support_review_signals(claim_text: str, quote: str) -> list[str]:
+    """Conservative review triggers, NOT automatic semantic rejection.
+
+    An exact source quotation verifies provenance, not entailment. A semantic
+    model's SUPPORTED decision must not become an automatic approval when the
+    source passage omits most of the asserted content or a specific local path.
+    Paraphrases can be valid, so suspicious positives become REVIEW_REQUIRED
+    rather than being relabeled as CONTRADICTED or NOT_FOUND.
+    """
+    flags = []
+    tokens = _claim_tokens(claim_text)
+    supported_tokens = _claim_tokens(quote)
+    shared = tokens & supported_tokens
+    if tokens and (len(shared) < (1 if len(tokens) == 1 else 2)
+                   or len(shared) / len(tokens) < 0.48):
+        flags.append('SUPPORTED_QUOTE_WEAK_ALIGNMENT')
+
+    # _required_claim_literals guards versions, modules and dotted keys. Check
+    # absolute paths separately because /tmp/foo is otherwise just common words.
+    paths = re.findall(r'(?<![\w/])/(?:[A-Za-z0-9_.-]+/)*[A-Za-z0-9_.-]+', claim_text)
+    paths += re.findall(r'(?<![A-Za-z0-9_])[A-Za-z]:[\\/](?:[^\s,;]+)', claim_text)
+    if any(path.casefold() not in quote.casefold() for path in paths):
+        flags.append('SUPPORTED_PATH_MISSING_FROM_QUOTE')
+
+    # Requiring the action itself, not only its context, prevents a causal
+    # description such as 'old class cache' from authorizing 'delete files'.
+    # An inference from symptom to remedy is not direct source support.
+    missing_actions = [name for name, pattern in _ACTION_PATTERNS.items()
+                       if re.search(pattern, claim_text, flags=re.IGNORECASE)
+                       and not re.search(pattern, quote, flags=re.IGNORECASE)]
+    if missing_actions:
+        flags.append('SUPPORTED_ACTION_NOT_IN_QUOTE')
+
+    claim_comp = _number_comparators(claim_text)
+    source_comp = _number_comparators(quote)
+    for amount, claim_ops in claim_comp.items():
+        if amount in source_comp and not (claim_ops & source_comp[amount]):
+            flags.append('SUPPORTED_NUMERIC_CONDITION_MISMATCH')
+            break
+    return flags
+
+
+def _parse_evidence_first(raw: str, evidence: list[dict], claim: dict) -> dict:
+    obj = _json_object_from_response(raw)
+    verdict = obj.get('verdict')
+    evidence_id = obj.get('evidence_id')
+    reason = obj.get('reason')
+    if not isinstance(verdict, str) or verdict.strip().upper() not in {'SUPPORTED', 'CONTRADICTED', 'NOT_FOUND'}:
+        raise ValueError('INVALID_VERDICT')
+    verdict = verdict.strip().upper()
+    if not isinstance(evidence_id, str) or not isinstance(reason, str) or len(reason.strip()) < 8:
+        raise ValueError('INVALID_EVIDENCE_ID_OR_REASON')
+    evidence_id = evidence_id.strip()
+    if verdict == 'NOT_FOUND':
+        if evidence_id:
+            raise ValueError('NOT_FOUND_MUST_HAVE_NO_EVIDENCE')
+        return {'verdict': 'NOT_FOUND', 'quote': '', 'quote_verified': False,
+                'reason': reason.strip(), 'verification_method': 'evidence_first_llm'}
+    selected = next((e for e in evidence if e['evidence_id'] == evidence_id), None)
+    recovered_id = False
+    if selected is None and not evidence_id:
+        # Missing ID is a formatting failure; only uniquely identifiable source
+        # references can be repaired without a second semantic judgment.
+        inferred = _recover_unique_evidence_id(reason, evidence)
+        if inferred is not None:
+            selected = next(e for e in evidence if e['evidence_id'] == inferred)
+            evidence_id = inferred
+            recovered_id = True
+    if selected is None:
+        raise ValueError('EVIDENCE_ID_NOT_IN_CANDIDATES')
+    # No model-created quote: selected['quote'] was copied directly from a source.
+    # Keep exact technical identifiers as an additional necessary check for support.
+    if verdict == 'SUPPORTED' and any(x.casefold() not in selected['quote'].casefold()
+                                      for x in _required_claim_literals(claim['text'])):
+        return {'verdict': 'NOT_FOUND', 'quote': '', 'quote_verified': False,
+                'reason': 'The chosen passage lacks a required technical identifier.',
+                'verification_method': 'literal_guard',
+                'evidence_id_recovered': recovered_id}
+    review_flags = []
+    if verdict == 'SUPPORTED':
+        review_flags.extend(_support_review_signals(claim['text'], selected['quote']))
+    if verdict == 'CONTRADICTED':
+        suspicion = _contradiction_review_signal(claim['text'], selected['quote'], reason)
+        if suspicion:
+            review_flags.append(suspicion)
+        # A quotation's exact provenance does not verify the Judge's inference
+        # of logical incompatibility. False contradictions in the 20-case run
+        # make such verdicts unsuitable for an automatic *definitive* failure.
+        review_flags.append('CONTRADICTION_NOT_INDEPENDENTLY_CONFIRMED')
+    return {'verdict': verdict, 'quote': selected['quote'],
+            'quote_verified': True, 'reason': reason.strip(),
+            'verification_method': 'evidence_first_llm',
+            'source_filename': selected['source_filename'],
+            'source_chunk_id': selected['source_chunk_id'],
+            'evidence_id': evidence_id,
+            'evidence_id_recovered': recovered_id,
+            'review_flags': review_flags}
+
+
+def _verify_claim_evidence_first(question, claim, docs, generate_fn,
+                                 max_attempts=2, debug_hook=None):
+    # First use narrow non-LLM support for almost-verbatim numbered procedures.
+    for doc in docs:
+        deterministic = _deterministic_procedure_support(
+            {**claim, 'question_context': question}, doc)
+        if deterministic is not None:
+            if debug_hook:
+                debug_hook({'stage': 'procedure_match', 'claim_id': claim['claim_id'],
+                            'claim': claim['text'], 'essential': claim['essential'],
+                            'source_filename': doc.get('filename'),
+                            'source_chunk_id': doc.get('chunk_id'),
+                            'parsed_verdict': deterministic})
+            return {**deterministic, 'source_filename': doc.get('filename'),
+                    'source_chunk_id': doc.get('chunk_id'),
+                    'documents_checked': 1, 'per_document_verdicts': [deterministic]}, 0, []
+    evidence = _candidate_evidence(question, claim, docs)
+    if not evidence:
+        return {'verdict': 'NOT_FOUND', 'quote': '', 'quote_verified': False,
+                'reason': 'No retrievable source passage overlaps this claim.',
+                'verification_method': 'no_candidate_passage',
+                'documents_checked': len(docs), 'per_document_verdicts': []}, 0, []
+    messages = _evidence_first_messages(question, claim, evidence)
+    attempts = []
+    previous_declared_verdicts = []
+    for attempt in range(1, max_attempts + 1):
+        raw = generate_fn(messages)
+        problem = None
+        try:
+            result = _parse_evidence_first(raw, evidence, claim)
+        except (ValueError, KeyError) as exc:
+            result = None
+            problem = str(exc)
+            # Preserve the model's first *semantic* verdict even when its
+            # reference format is invalid. A retry must not quietly change an
+            # earlier SUPPORTED finding into a confident CONTRADICTED finding.
+            try:
+                earlier_verdict = _json_object_from_response(raw).get('verdict')
+                if (isinstance(earlier_verdict, str)
+                        and earlier_verdict.strip().upper() in
+                        {'SUPPORTED', 'CONTRADICTED', 'NOT_FOUND'}):
+                    previous_declared_verdicts.append(earlier_verdict.strip().upper())
+            except ValueError:
+                pass
+        if result is not None and any(
+                old_verdict != result['verdict'] for old_verdict in previous_declared_verdicts):
+            result.setdefault('review_flags', []).append('VERDICT_CHANGED_ON_RETRY')
+            result['previous_unverified_verdicts'] = list(previous_declared_verdicts)
+        event = {'stage': 'claim_verify', 'claim_id': claim['claim_id'],
+                 'claim': claim['text'], 'essential': claim['essential'],
+                 'source_filename': evidence[0]['source_filename'],
+                 'source_chunk_id': evidence[0]['source_chunk_id'],
+                 'attempt': attempt, 'messages': [dict(m) for m in messages],
+                 'raw_response': raw, 'parsed_verdict': result, 'problem': problem,
+                 'candidate_evidence': evidence}
+        attempts.append({'stage': 'claim_verify', 'claim_id': claim['claim_id'],
+                         'source_chunk_id': evidence[0]['source_chunk_id'],
+                         'attempt': attempt, 'raw_response': raw, 'problem': problem})
+        if debug_hook:
+            debug_hook(event)
+        if result is not None:
+            return {**result, 'source_filename': result.get('source_filename'),
+                    'source_chunk_id': result.get('source_chunk_id'),
+                    'documents_checked': len({e['source_chunk_id'] for e in evidence}),
+                    'per_document_verdicts': [result]}, attempt, attempts
+        if attempt < max_attempts:
+            valid_ids = ', '.join(item['evidence_id'] for item in evidence)
+            # Start from the ORIGINAL evidence, rather than appending the
+            # defective model completion as an assistant turn. The latter made
+            # Qwen 1.5B flip its semantic verdict merely to repair a blank ID.
+            messages = _evidence_first_messages(question, claim, evidence)
+            original_verdict = previous_declared_verdicts[0] if previous_declared_verdicts else None
+            messages.append({'role': 'user', 'content':
+                             f'Previous output was invalid ({problem}). Available IDs: '
+                             f'{valid_ids}. The previous semantic verdict was '
+                             f'{original_verdict or "unparseable"}; do NOT reverse it just '
+                             'because of an ID formatting error. Identify the ONE '
+                             'source passage supporting the verdict. If no '
+                             'source actually proves the verdict, use NOT_FOUND '
+                             'with evidence_id "". Otherwise use exactly one '
+                             'listed E number. Return only the three-key JSON.'})
+    # Format failure is NOT evidence that the claim is false.
+    unresolved = {'verdict': 'UNRESOLVED', 'quote': '', 'quote_verified': False,
+                  'reason': 'Malformed semantic verdict after bounded retry.',
+                  'verification_method': 'model_output_invalid',
+                  'documents_checked': len({e['source_chunk_id'] for e in evidence}),
+                  'per_document_verdicts': []}
+    return unresolved, len(attempts), attempts
+
+
+def evaluate_case_claims(record, policy, generate_fn, max_attempts=2, debug_hook=None):
+    """v3.6: Evidence-first Judge; uncertain judgments require human review."""
+    docs = evaluation_docs(record)
+    answer = str(record.get('prediction') or '')
+    question = str(record.get('question') or '')
+    if answer.strip() == ABSTAIN:
+        score = {'auto_pass': False, 'review_flags': ['REFUSAL_REQUIRES_HUMAN_REVIEW'],
+                 'claim_verifications': [], 'failure_reason': 'Refusal needs human review',
+                 'rubric_derivation': 'not_scored_refusal'}
+        return {'judge_status': 'REVIEW_REQUIRED', 'score': score,
+                'raw_response': '', 'attempt_count': 0, 'attempts': []}
+    try:
+        claims = extract_answer_claims(answer)
+    except ValueError as exc:
+        claims = []
+        extraction_error = str(exc)
+    else:
+        extraction_error = 'NO_CLAIMS_EXTRACTED'
+    if not claims:
+        score = {'auto_pass': False, 'review_flags': [extraction_error],
+                 'claim_verifications': [], 'failure_reason': extraction_error,
+                 'rubric_derivation': 'extraction_failed'}
+        return {'judge_status': 'REVIEW_REQUIRED', 'score': score,
+                'raw_response': '', 'attempt_count': 0, 'attempts': []}
+    verified_claims = []
+    attempt_log = []
+    total_calls = 0
+    for claim in claims:
+        checked, count, attempts = _verify_claim_evidence_first(
+            question, claim, docs, generate_fn,
+            max_attempts=min(max_attempts, 2), debug_hook=debug_hook)
+        total_calls += count
+        attempt_log.extend(attempts)
+        verified_claims.append({**claim, **checked,
+                                'evidence_quote': checked.get('quote', ''),
+                                'evidence_quote_verified': checked.get('quote_verified', False)})
+    score, status = derive_claim_rubric(verified_claims, policy)
+    return {'judge_status': status, 'score': score,
+            'raw_response': attempt_log[-1]['raw_response'] if attempt_log else '',
+            'attempt_count': total_calls, 'attempts': attempt_log}
 
 
 def grade(args):
@@ -1129,6 +1510,11 @@ def grade(args):
         str(model_path), dtype=torch.float16, local_files_only=True
     ).to("cuda")
     model.eval()
+    # do_sample=False must not carry sampling-only settings from the model's
+    # saved generation_config (otherwise Transformers emits a warning).
+    for name in ('temperature', 'top_p', 'top_k'):
+        if hasattr(model.generation_config, name):
+            setattr(model.generation_config, name, None)
     max_attempts = getattr(args, "max_attempts", 3)
     output.parent.mkdir(parents=True, exist_ok=True)
 
@@ -1235,7 +1621,7 @@ def grade(args):
             "id": row["id"],
             "judge_model": str(model_path),
             "judge_schema_version": JUDGE_SCHEMA_VERSION,
-            "rubric_version": "ibm-techqa-claim-derived-v3.2",
+            "rubric_version": "ibm-techqa-claim-derived-v3.6",
             "policy_rubric_version": policy.get("rubric_version"),
             **evaluated,
             "source_fingerprint": hashlib.sha256(build_grade_prompt(row).encode("utf8")).hexdigest(),

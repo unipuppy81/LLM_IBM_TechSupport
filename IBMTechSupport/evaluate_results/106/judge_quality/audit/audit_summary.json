@@ -1,0 +1,59 @@
+{
+  "total_records": 20,
+  "status_counts": {
+    "OK": 17,
+    "REVIEW_REQUIRED": 3
+  },
+  "auto_pass_count": 1,
+  "verdict_counts": {
+    "NOT_FOUND": 16,
+    "CONTRADICTED": 36,
+    "SUPPORTED": 9,
+    "UNRESOLVED": 2
+  },
+  "total_model_attempts": 83,
+  "attempt_problems": {
+    "EVIDENCE_ID_NOT_IN_CANDIDATES": 40,
+    "INVALID_EVIDENCE_ID_OR_REASON": 1
+  },
+  "audit_issue_counts": {
+    "EVIDENCE_ID_INVALID": 40,
+    "POTENTIAL_FALSE_CONTRADICTION": 4,
+    "MODEL_RESPONSE_INVALID": 1,
+    "UNRESOLVED_CLAIM": 2,
+    "EXACT_TEXT_CONTRADICTION": 4,
+    "REASON_RESTATES_CLAIM": 1
+  },
+  "blocking_record_count": 9,
+  "blocking_record_ids": [
+    "DEV_Q167",
+    "DEV_Q198",
+    "TRAIN_Q006",
+    "TRAIN_Q037",
+    "TRAIN_Q172",
+    "TRAIN_Q236",
+    "TRAIN_Q270",
+    "TRAIN_Q535",
+    "TRAIN_Q549"
+  ],
+  "audit_affected_record_count": 16,
+  "audit_affected_record_ids": [
+    "DEV_Q028",
+    "DEV_Q035",
+    "DEV_Q157",
+    "DEV_Q167",
+    "DEV_Q198",
+    "TRAIN_Q006",
+    "TRAIN_Q025",
+    "TRAIN_Q037",
+    "TRAIN_Q172",
+    "TRAIN_Q270",
+    "TRAIN_Q282",
+    "TRAIN_Q307",
+    "TRAIN_Q316",
+    "TRAIN_Q326",
+    "TRAIN_Q535",
+    "TRAIN_Q549"
+  ],
+  "disclaimer": "Overlap flags are screening signals, not entailment proofs; source JSONL is unchanged."
+}
