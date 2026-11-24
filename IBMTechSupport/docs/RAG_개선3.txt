@@ -1,0 +1,76 @@
+﻿# RAG개선_3
+
+## 1. Stage2 Retrieval 실패 분석
+
+Stage2 Validation 106건 중 답변 가능한 77건에서:
+
+```text
+Hit@5 = 66 / 77 = 85.71%
+```
+
+95% 이상을 목표로 하려면 최소:
+
+```text
+74 / 77 = 96.10%
+```
+
+이 필요하다.
+
+현재 Hit@5 실패 11건을 분석한 결과:
+
+```text
+RERANKER_TOP5_FAILURE          4건
+CANDIDATE_K_CUTOFF            4건
+HYBRID_CANDIDATE_K_50_LIMIT   1건
+BASE_RETRIEVER_MISS           2건
+```
+
+후보 범위별 Gold 문서 존재율:
+
+```text
+Top10   70 / 77 = 90.91%
+Top20   73 / 77 = 94.81%
+Top30   74 / 77 = 96.10%
+Top50   74 / 77 = 96.10%
+RRF100  75 / 77 = 97.40%
+```
+
+즉 현재 `candidate_k=10` 구조로는 95% 달성이 어렵고,
+후보 수 확대와 Reranker 개선이 필요하다.
+
+---
+
+## 2. Stage3 개선 실험 준비
+
+진단 결과를 바탕으로 다음 항목을 비교하는 Optimizer를 작성하였다.
+
+```text
+Hybrid 후보 50 → 100 확대
+RRF 파라미터 재탐색
+BM25 / Dense 가중치 재탐색
+candidate_k 20 / 30 / 50 비교
+Filter Strength 재탐색
+CrossEncoder + Retrieval Prior 결합
+Metadata 포함 Reranker 입력 비교
+```
+
+총 1,728개 조합을 비교하도록 구성하였다.
+
+또한 106건에 과적합되는 것을 줄이기 위해
+5-Fold 평가도 함께 수행하도록 하였다.
+
+현재 상태:
+
+```text
+1. Stage2 실패 11건 진단 완료
+2. Stage3 Optimizer 작성 완료
+3. Optimizer 실행 전
+```
+
+다음 단계:
+
+```text
+retrieval_stage3_optimize.py 실행
+→ Hit@5 95% 이상 가능 여부 확인
+→ 최종 설정 선택
+```

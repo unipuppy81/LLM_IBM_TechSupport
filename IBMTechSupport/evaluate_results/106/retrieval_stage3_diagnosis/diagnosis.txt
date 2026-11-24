@@ -1,0 +1,36 @@
+# Retrieval Stage3 Diagnosis
+
+answerable: 77
+current Stage2 Hit@5: 66/77 = 85.71%
+95% target: >= 74/77
+
+## Gold candidate availability
+filtered_gold_available_at_5: 64/77 = 83.12%
+filtered_gold_available_at_10: 70/77 = 90.91%
+filtered_gold_available_at_20: 73/77 = 94.81%
+filtered_gold_available_at_30: 74/77 = 96.10%
+filtered_gold_available_at_50: 74/77 = 96.10%
+bm25_gold_available_at_100: 72/77 = 93.51%
+dense_gold_available_at_100: 75/77 = 97.40%
+wide_rrf_gold_available_at_100: 75/77 = 97.40%
+
+## Failure types
+RERANKER_TOP5_FAILURE: 4
+CANDIDATE_K_CUTOFF: 4
+BASE_RETRIEVER_MISS: 2
+HYBRID_CANDIDATE_K_50_LIMIT: 1
+
+## Failed cases
+ID | BM25 | Dense | RRF100 | Hybrid50 | Candidate50 | Filtered50 | Final | Type
+--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---
+TRAIN_Q316 | 14 | 6 | 7 | 7 | 7 | 7 | 6 | RERANKER_TOP5_FAILURE
+TRAIN_Q526 | - | 71 | 88 | - | - | - | - | HYBRID_CANDIDATE_K_50_LIMIT
+TRAIN_Q343 | - | - | - | - | - | - | - | BASE_RETRIEVER_MISS
+TRAIN_Q222 | - | 13 | 17 | 16 | 16 | 15 | - | CANDIDATE_K_CUTOFF
+TRAIN_Q003 | 1 | 2 | 2 | 2 | 2 | 1 | 8 | RERANKER_TOP5_FAILURE
+TRAIN_Q360 | 18 | 40 | 29 | 28 | 28 | 28 | - | CANDIDATE_K_CUTOFF
+TRAIN_Q165 | 11 | 3 | 3 | 3 | 3 | 5 | 6 | RERANKER_TOP5_FAILURE
+DEV_Q210 | 7 | 39 | 15 | 14 | 14 | 14 | - | CANDIDATE_K_CUTOFF
+TRAIN_Q493 | - | - | - | - | - | - | - | BASE_RETRIEVER_MISS
+TRAIN_Q299 | 6 | 9 | 10 | 10 | 10 | 10 | 8 | RERANKER_TOP5_FAILURE
+TRAIN_Q063 | 7 | 15 | 17 | 16 | 16 | 18 | - | CANDIDATE_K_CUTOFF

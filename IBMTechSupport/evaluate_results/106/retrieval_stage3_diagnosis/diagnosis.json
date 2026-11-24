@@ -1,0 +1,1627 @@
+{
+  "dataset": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\val_106.json",
+  "answerable": 77,
+  "current_stage2": {
+    "hit5_count": 66,
+    "hit5_percent": 85.7143,
+    "selected_config": {
+      "reranker_enabled": true,
+      "filter_enabled": true,
+      "filter_strength": 1.0,
+      "reranker_candidate_k": 10,
+      "query_rewrite_enabled": false,
+      "rewrite_weight": 0.7
+    }
+  },
+  "target": {
+    "minimum_hit5_count_for_95_percent": 74,
+    "target_percent": 95.0
+  },
+  "candidate_availability": {
+    "filtered_gold_available_at_5": 64,
+    "filtered_gold_available_at_10": 70,
+    "filtered_gold_available_at_20": 73,
+    "filtered_gold_available_at_30": 74,
+    "filtered_gold_available_at_50": 74,
+    "bm25_gold_available_at_100": 72,
+    "dense_gold_available_at_100": 75,
+    "wide_rrf_gold_available_at_100": 75
+  },
+  "failure_type_counts": {
+    "RERANKER_TOP5_FAILURE": 4,
+    "HYBRID_CANDIDATE_K_50_LIMIT": 1,
+    "BASE_RETRIEVER_MISS": 2,
+    "CANDIDATE_K_CUTOFF": 4
+  },
+  "failures": [
+    {
+      "id": "TRAIN_Q316",
+      "question": "Datapower WebGUI down due to an expired or invalid certificate\n\nThe Datapower WebGUI is down due to an expired or invalid certificate. How can the WebGUI access be restored?",
+      "gold_documents": [
+        "swg21498634.txt"
+      ],
+      "stage2_hit5": false,
+      "failure_type": "RERANKER_TOP5_FAILURE",
+      "ranks": {
+        "bm25_top100": 14,
+        "dense_top100": 6,
+        "wide_rrf_top100": 7,
+        "current_hybrid_top50": 7,
+        "stage2_candidate_top50": 7,
+        "after_filter_top50": 7,
+        "reranker_top10": 6
+      }
+    },
+    {
+      "id": "TRAIN_Q526",
+      "question": "Reporting in Rhapsody\n\n\n\nHello All,\n\nI can't find the reports plus in my Rhapsody v8.1.2 x64\n\nanybody knows the reason.",
+      "gold_documents": [
+        "swg27038779.txt"
+      ],
+      "stage2_hit5": false,
+      "failure_type": "HYBRID_CANDIDATE_K_50_LIMIT",
+      "ranks": {
+        "bm25_top100": null,
+        "dense_top100": 71,
+        "wide_rrf_top100": 88,
+        "current_hybrid_top50": null,
+        "stage2_candidate_top50": null,
+        "after_filter_top50": null,
+        "reranker_top10": null
+      }
+    },
+    {
+      "id": "TRAIN_Q343",
+      "question": "Help with Security Bulletin: A security vulnerability has been identified in WebSphere Application Server shipped with WebSphere Service Registry and Repository (CVE-2017-1681)\n\nI need to understand details regarding Security Bulletin: A security vulnerability has been identified in WebSphere Application Server shipped with WebSphere Service Registry and Repository (CVE-2017-1681). Is WAS Liberty affected?",
+      "gold_documents": [
+        "swg22010419.txt"
+      ],
+      "stage2_hit5": false,
+      "failure_type": "BASE_RETRIEVER_MISS",
+      "ranks": {
+        "bm25_top100": null,
+        "dense_top100": null,
+        "wide_rrf_top100": null,
+        "current_hybrid_top50": null,
+        "stage2_candidate_top50": null,
+        "after_filter_top50": null,
+        "reranker_top10": null
+      }
+    },
+    {
+      "id": "TRAIN_Q222",
+      "question": "Composite Platform Installation Tool (CPIT) does not support IBM Tivoli Directory Server (ITDS) 6.3 on Red Hat Enterprise Linux\n\n\n\nWhen use the CPIT to install the FileNet P8 platform, the installation is not successful and the error occurs at ITDS installation, refer to the detailed error in cpit_install_stderr.txt:\n\nOUTPUT>========================================== OUTPUT>Setting Directories... OUTPUT>Mon Aug 11 08:20:00 SGT 2014 OUTPUT>/opt/IBM/cpit/decompressed/TDS/tdsV6.3/tds ERROR>./install_tds.bin: line 1956: warning: here-document at line 1956 delimited by end-of-file (wanted `/dev/null') OUTPUT>ERROR: /opt/IBM/ldap/V6.3/sbin/idsldif2db not found. TDS installation failed. Process completed with exit code: 1 ERROR in InvokeScripts-function - Terminate the remaining scripts. ***Aborting InvokeScripts-Install function.",
+      "gold_documents": [
+        "swg21599258.txt"
+      ],
+      "stage2_hit5": false,
+      "failure_type": "CANDIDATE_K_CUTOFF",
+      "ranks": {
+        "bm25_top100": null,
+        "dense_top100": 13,
+        "wide_rrf_top100": 17,
+        "current_hybrid_top50": 16,
+        "stage2_candidate_top50": 16,
+        "after_filter_top50": 15,
+        "reranker_top10": null
+      }
+    },
+    {
+      "id": "TRAIN_Q003",
+      "question": "How to configure SSL mutual authentication in IBM HTTP Server?\n\n\n\nWe are running IHS v7 and our application team has a specific webservice that they require SSL mutual authentication to be enabled for at the http server. Does anyone know how to set this up on IHS? Or any documentation?\n\nThanks",
+      "gold_documents": [
+        "swg21670474.txt"
+      ],
+      "stage2_hit5": false,
+      "failure_type": "RERANKER_TOP5_FAILURE",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 2,
+        "wide_rrf_top100": 2,
+        "current_hybrid_top50": 2,
+        "stage2_candidate_top50": 2,
+        "after_filter_top50": 1,
+        "reranker_top10": 8
+      }
+    },
+    {
+      "id": "TRAIN_Q360",
+      "question": "Is it possible to monitor Memory/LPAR metrics using ITM HMC agent?\n\nI understand the ITM AIX Premium agent captures these metrics but like to know if it is possible to monitor Memory/LPAR metrics using ITM HMC agent?",
+      "gold_documents": [
+        "swg24042283.txt"
+      ],
+      "stage2_hit5": false,
+      "failure_type": "CANDIDATE_K_CUTOFF",
+      "ranks": {
+        "bm25_top100": 18,
+        "dense_top100": 40,
+        "wide_rrf_top100": 29,
+        "current_hybrid_top50": 28,
+        "stage2_candidate_top50": 28,
+        "after_filter_top50": 28,
+        "reranker_top10": null
+      }
+    },
+    {
+      "id": "TRAIN_Q165",
+      "question": "Is Java 8 supported for EJBDeploy on WebSphere Application Server 8.5.5.9 or later?\n\nIs Java 8 supported for EJBDeploy on WebSphere Application Server 8.5.5.9 or later?",
+      "gold_documents": [
+        "swg21994741.txt"
+      ],
+      "stage2_hit5": false,
+      "failure_type": "RERANKER_TOP5_FAILURE",
+      "ranks": {
+        "bm25_top100": 11,
+        "dense_top100": 3,
+        "wide_rrf_top100": 3,
+        "current_hybrid_top50": 3,
+        "stage2_candidate_top50": 3,
+        "after_filter_top50": 5,
+        "reranker_top10": 6
+      }
+    },
+    {
+      "id": "DEV_Q210",
+      "question": "startNode failed with ADML3000E after a deployment failure\n\nClient had a deployment failure due to \"Too many open files\" error.\n\nAfterwards, the startNode failed with ADML3000E:\n\nWhat could cause the \"Too many open files error?",
+      "gold_documents": [
+        "swg21067352.txt"
+      ],
+      "stage2_hit5": false,
+      "failure_type": "CANDIDATE_K_CUTOFF",
+      "ranks": {
+        "bm25_top100": 7,
+        "dense_top100": 39,
+        "wide_rrf_top100": 15,
+        "current_hybrid_top50": 14,
+        "stage2_candidate_top50": 14,
+        "after_filter_top50": 14,
+        "reranker_top10": null
+      }
+    },
+    {
+      "id": "TRAIN_Q493",
+      "question": "Help with Security Bulletin: A security vulnerability has been identified in IBM WebSphere Application Server, which is shipped with, or a required product for, IBM Tivoli Network Manager IP Edition (CVE-2017-1741).\n\nI need to understand details regarding Security Bulletin: A security vulnerability has been identified in IBM WebSphere Application Server, which is shipped with, or a required product for, IBM Tivoli Network Manager IP Edition (CVE-2017-1741) Where can I find this information?",
+      "gold_documents": [
+        "swg22012342.txt"
+      ],
+      "stage2_hit5": false,
+      "failure_type": "BASE_RETRIEVER_MISS",
+      "ranks": {
+        "bm25_top100": null,
+        "dense_top100": null,
+        "wide_rrf_top100": null,
+        "current_hybrid_top50": null,
+        "stage2_candidate_top50": null,
+        "after_filter_top50": null,
+        "reranker_top10": null
+      }
+    },
+    {
+      "id": "TRAIN_Q299",
+      "question": "Installing fixpacks with Installation Manager - when did it change from using updateInstaller,  starting in which version of WebSphere\n\nI was using updateInstaller to install fixpacks, and there was a separate fixpack for WebSphere and separate for the JDK, independent of each other. Now I understand that with Installation Manager there is a single package containing both the WebSphere App server fixpack as well as the JDK. When did this occur, starting with which version of WebSphere ?",
+      "gold_documents": [
+        "swg21138332.txt"
+      ],
+      "stage2_hit5": false,
+      "failure_type": "RERANKER_TOP5_FAILURE",
+      "ranks": {
+        "bm25_top100": 6,
+        "dense_top100": 9,
+        "wide_rrf_top100": 10,
+        "current_hybrid_top50": 10,
+        "stage2_candidate_top50": 10,
+        "after_filter_top50": 10,
+        "reranker_top10": 8
+      }
+    },
+    {
+      "id": "TRAIN_Q063",
+      "question": "How to get the ODM 8.5.1.2 fixpack of ODM 8.5.1.1?\n\nODM 8.5.1.2 fixpack is not listed in Fix Central when installed platform ODM 8.5.1.1 is used: http://www-933.ibm.com/support/fixcentral/swg/selectFixes?parent=ibm~WebSphere&product=ibm/WebSphere/WebSphere+Operational+Decision+Management&release=8.5.1.1&platform=All&function=all",
+      "gold_documents": [
+        "swg24039235.txt"
+      ],
+      "stage2_hit5": false,
+      "failure_type": "CANDIDATE_K_CUTOFF",
+      "ranks": {
+        "bm25_top100": 7,
+        "dense_top100": 15,
+        "wide_rrf_top100": 17,
+        "current_hybrid_top50": 16,
+        "stage2_candidate_top50": 16,
+        "after_filter_top50": 18,
+        "reranker_top10": null
+      }
+    }
+  ],
+  "all_cases": [
+    {
+      "id": "TRAIN_Q270",
+      "question": "How to resolve \"An unexpected error occurred. Contact your system administrator. ICWPA1001E\"\n\n\n\nWhen trying to add people to a matter request when there are more than 1000 people in the clipboard, the following error is reported:\n\nAn unexpected error occurred. Contact your system administrator. ICWPA1001E\"",
+      "gold_documents": [
+        "swg27046675.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q113",
+      "question": "How do I configure logging for Atlas Extensions in Atlas 6.0.3.3?\n\nHow do I configure logging for Atlas Extensions in Atlas 6.0.3.3?",
+      "gold_documents": [
+        "swg21981881.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q037",
+      "question": "How can multiple TDWC users logon into TDWC with same TWS user id?\n\n\n\nGiven that one TDWC user is already accessing TDWC and a second TDWC user using the same logon id wants to logon to TDWC sees the following error:\n\nAnother user is currently logged in with the same user ID. Select from the following options:\n\n    List item\n\nLog out the other user with the same user ID. You can recover changes made during the other user's session.\n\n    List item\n\nReturn to the Login page and enter a different user ID.\n\nHow can multiple users logon without one user needing to logout?",
+      "gold_documents": [
+        "swg21576245.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 37,
+        "dense_top100": 1,
+        "wide_rrf_top100": 2,
+        "current_hybrid_top50": 2,
+        "stage2_candidate_top50": 2,
+        "after_filter_top50": 2,
+        "reranker_top10": 5
+      }
+    },
+    {
+      "id": "TRAIN_Q549",
+      "question": "What does the end-file-message mean while doing a launchpad.sh in the MS\"\n\nI am getting an end-file-message means while doing a launchpad.sh in the MS. How do I solve the problem?",
+      "gold_documents": [
+        "swg21985630.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q006",
+      "question": "Is ITNM exposed to Apache CXF vulnerability (CVE-2017-3156)?\n\nIs ITNM versions are affected by Apache CXF vulnerability (CVE-2017-3156), If yes then what are all the version will be affected and where I can find the details?",
+      "gold_documents": [
+        "swg22008493.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 21,
+        "wide_rrf_top100": 6,
+        "current_hybrid_top50": 6,
+        "stage2_candidate_top50": 6,
+        "after_filter_top50": 3,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q535",
+      "question": "SYSIBMADM.DBCFG IS AN UNDEFINED NAME error message on z/OS ODM Event Server\n\nOn Z/OS, Events runtime may trace the following exception into system logs when DB2 is used as the runtime repository: com.ibm.websphere.ce.cm.StaleConnectionException: SYSIBMADM.DBCFG IS AN UNDEFINED NAME. SQLCODE=-204, SQLSTATE=42704, DRIVER=3.65.102",
+      "gold_documents": [
+        "swg21690184.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "DEV_Q035",
+      "question": "Help with Security Bulletin: API Connect is affected by a Node.js denial of service vulnerability (CVE-2017-14919)\n\nI need to understand details regarding Security Bulletin: API Connect is affected by a Node.js denial of service vulnerability (CVE-2017-14919). Where can I find this information?",
+      "gold_documents": [
+        "swg22013168.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q316",
+      "question": "Datapower WebGUI down due to an expired or invalid certificate\n\nThe Datapower WebGUI is down due to an expired or invalid certificate. How can the WebGUI access be restored?",
+      "gold_documents": [
+        "swg21498634.txt"
+      ],
+      "stage2_hit5": false,
+      "failure_type": "RERANKER_TOP5_FAILURE",
+      "ranks": {
+        "bm25_top100": 14,
+        "dense_top100": 6,
+        "wide_rrf_top100": 7,
+        "current_hybrid_top50": 7,
+        "stage2_candidate_top50": 7,
+        "after_filter_top50": 7,
+        "reranker_top10": 6
+      }
+    },
+    {
+      "id": "TRAIN_Q282",
+      "question": "Security Bulletin: Non-configured connections could cause denial of service in IBM WebSphere MQ Internet Pass-Thru (CVE-2017-1118)\n\nI need to understand details regarding Security Bulletin: Non-configured connections could cause denial of service in IBM WebSphere MQ Internet Pass-Thru (CVE-2017-1118). Where can I find this information?",
+      "gold_documents": [
+        "swg22006580.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "DEV_Q167",
+      "question": "How do I recreate all the Oracle Text indexes for the Atlas database\n\nHow do I recreate all the Oracle Text indexes for the Atlas database ?",
+      "gold_documents": [
+        "swg21580830.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "DEV_Q028",
+      "question": "Help with Security Bulletin: Multiple vulnerabilities have been identified in WebSphere Application Server shipped with WSRR (CVE-2015-4911)\n\nI need to understand details regarding Security Bulletin: Multiple vulnerabilities have been identified in WebSphere Application Server shipped with WebSphere Service Registry and Repository (CVE-2015-4911). Where can I find this information?",
+      "gold_documents": [
+        "swg21975747.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q172",
+      "question": "Does StoredIQ support TLS v1.2?\n\nDoes StoredIQ support TLS v1.2?",
+      "gold_documents": [
+        "swg21998312.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q236",
+      "question": "Cannot Authorize SPSS 19 Installation on New Computer,Need to Authorize SPSS 19 on a New Computer\n\nI'm currently using SPSS 19 and need to install it on a new computer, however, it will not authorize. I've spoken to SPSS support by phone but they recommended checking here. I'm running on a Mac, OS X Sierra, for SPSS 19. Would someone please be able to assist?,I'm currently running SPSS 19 and need to install it on a new computer. When I try to authorize it, it fails. I've spoken to SPSS over the phone to no avail. I'm running OS X Sierra. Could anyone please help?",
+      "gold_documents": [
+        "swg21507587.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 5,
+        "dense_top100": 18,
+        "wide_rrf_top100": 9,
+        "current_hybrid_top50": 9,
+        "stage2_candidate_top50": 9,
+        "after_filter_top50": 9,
+        "reranker_top10": 3
+      }
+    },
+    {
+      "id": "TRAIN_Q307",
+      "question": "Product upgrade installed a second instance of the DE, causing upgrade failure.\n\nThe Deployment Engine should only have one instance installed on a server with IBM products installed. In this case, a second DE was installed, which caused the failure of the Product upgrade. Error: Wrong Deployment Engine.\n\nProduct install failed. You will get a message similar to this: You are updating an instance of (Product name) that was installed using the Tivoli Deployment Engine (DE) located at \"/home/nc_admin/.acsi_FQDN\". However you are now using the DE located at \"/home/nc_admin/.acsi_HOSTNAME\".\n\nWhen the DE is installed as non-root ( in this case nc_admin ), it will install the DE in the user home directory, in this case /home/nc_admin, and use the FQDN in the name: /home/nc_admin/.acsi_FQDN",
+      "gold_documents": [
+        "swg21967589.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q581",
+      "question": "OOM exception thrown when trying to configure an ITCAM for WAS 7.2 Data Collector\n\nI am trying to configure an ITCAM for WAS 7.2.0.0.x DC using config.sh, but getting OOM exceptions, as following:\n\n./config.sh\n\nLog file name: /opt/IBM/ITM/dchome/7.2.0.0.10/data/config-trace.log.\n\nList of TCP/IP interfaces discovered:\n\n       1. ...\n     Enter a number [default is: 1]:\n     1\n     JVMDUMP039I Processing dump event \"systhrow\", detail \"java/lang/OutOfMemoryError\" at 2017/08/22 12:27:03 - please wait.\n....\n     java.lang.OutOfMemoryError: java.lang.OutOfMemoryError: Java heap space\n\nLooking at the javacore.txt files, I can see that this is the command throwing an OOM\n\n1CICMDLINE /opt/IBM/ITM/JRE/aix526/bin/java -classpath /opt/IBM/ITM/dchome/7.2.0.0.10/bin/jython/jython.jar:/opt/IBM/ITM/dchome/7.2.0.0.10/bin/lib/installbundle.jar -Xms256m -Xmx256m -Dpython.path=/opt/IBM/ITM/dchome/7.2.0.0.10/bin/lib:/opt/IBM/ITM/dchome/7.2.0.0.10/bin/lib org.python.util.jython /opt/IBM/ITM/dchome/7.2.0.0.10/bin/config.py\n\nHow could I solve this?",
+      "gold_documents": [
+        "swg21959444.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 16,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 3,
+        "reranker_top10": 5
+      }
+    },
+    {
+      "id": "TRAIN_Q295",
+      "question": "Why are ITNM or Omnnibus WebGUI java applets fail to load with \"Missing Permissions manifest attribute in main jar\"\n\nWhy are ITNM or Omnnibus WebGUI java applets fail to load with \"Missing Permissions manifest attribute in main jar\"",
+      "gold_documents": [
+        "swg21653261.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 3,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q431",
+      "question": "Install path under \"Program Files\"\n\nMy path for the OS agent is e:\\Program Files\\IBM. Is there any issues or underlying problems if I install under \"Program Files\"? Just want to make sure no issues with a \"space\" in the install path.",
+      "gold_documents": [
+        "swg21961222.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 6,
+        "dense_top100": 3,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 2
+      }
+    },
+    {
+      "id": "TRAIN_Q336",
+      "question": "Why does silent install abort indicating files are locked?\n\nSilent installs can fail reporting that there are locked files under the ITM installation directory on Windows platform. Why does this happen?\n\nExample:\n\nC:\\IBM\\ITM\\InstallITM\\\nAbort IBM Tivoli Monitoring 20160203 1832.log\n\n02-03-2016 18:37:10: File C:\\IBM\\ITM\\TMAITM6\\deploy.jar is locked.\n02-03-2016 18:37:10: File C:\\IBM\\ITM\\TMAITM6\\deploy.jar could not be renamed, errors may occur.\n02-03-2016 18:37:17: Directory C:\\IBM\\ITM has locked files.\n02-03-2016 18:37:17: Correct and launch setup again.\n02-03-2016 18:37:17: Directory C:\\IBM\\ITM has locked files, unable to continue.\n02-03-2016 18:37:17: SEVERE: ERROR - Install aborted.",
+      "gold_documents": [
+        "swg21882989.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "DEV_Q220",
+      "question": "Help with Security Bulletin: TLS padding vulnerability affects IBM PureApplication System (CVE-2014-8730)\n\nI need to understand details regarding \"Security Bulletin: TLS padding vulnerability affects IBM PureApplication System (CVE-2014-8730)\". Where can I find this information?",
+      "gold_documents": [
+        "swg21960375.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 3,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q231",
+      "question": "Netcool/Impact (all versions): OMNIbusEventReader Filter Analyzer error \"rule includes an unsupported expression\"\n\nNetcool/Impact (all versions): OMNIbusEventReader Filter Analyzer error \"rule includes an unsupported expression\"\n\nThis occurs when comparing two ObjectServer fields against each other in a Filter.",
+      "gold_documents": [
+        "swg21675858.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 2,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q526",
+      "question": "Reporting in Rhapsody\n\n\n\nHello All,\n\nI can't find the reports plus in my Rhapsody v8.1.2 x64\n\nanybody knows the reason.",
+      "gold_documents": [
+        "swg27038779.txt"
+      ],
+      "stage2_hit5": false,
+      "failure_type": "HYBRID_CANDIDATE_K_50_LIMIT",
+      "ranks": {
+        "bm25_top100": null,
+        "dense_top100": 71,
+        "wide_rrf_top100": 88,
+        "current_hybrid_top50": null,
+        "stage2_candidate_top50": null,
+        "after_filter_top50": null,
+        "reranker_top10": null
+      }
+    },
+    {
+      "id": "TRAIN_Q343",
+      "question": "Help with Security Bulletin: A security vulnerability has been identified in WebSphere Application Server shipped with WebSphere Service Registry and Repository (CVE-2017-1681)\n\nI need to understand details regarding Security Bulletin: A security vulnerability has been identified in WebSphere Application Server shipped with WebSphere Service Registry and Repository (CVE-2017-1681). Is WAS Liberty affected?",
+      "gold_documents": [
+        "swg22010419.txt"
+      ],
+      "stage2_hit5": false,
+      "failure_type": "BASE_RETRIEVER_MISS",
+      "ranks": {
+        "bm25_top100": null,
+        "dense_top100": null,
+        "wide_rrf_top100": null,
+        "current_hybrid_top50": null,
+        "stage2_candidate_top50": null,
+        "after_filter_top50": null,
+        "reranker_top10": null
+      }
+    },
+    {
+      "id": "DEV_Q122",
+      "question": "Importing Asset GL Errors\n\n When importing or syncing with assets, I receive the following error for the glaccount.\n\nInternal Server Error\nError 500: nested exception is: psdi.util.MXAccessException: BMXAA4198E - The GL attribute TLOAMNEWGLACCOUNT on object {1} requires an organization. Specify a value in the Organization field.",
+      "gold_documents": [
+        "swg21969653.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 3,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q222",
+      "question": "Composite Platform Installation Tool (CPIT) does not support IBM Tivoli Directory Server (ITDS) 6.3 on Red Hat Enterprise Linux\n\n\n\nWhen use the CPIT to install the FileNet P8 platform, the installation is not successful and the error occurs at ITDS installation, refer to the detailed error in cpit_install_stderr.txt:\n\nOUTPUT>========================================== OUTPUT>Setting Directories... OUTPUT>Mon Aug 11 08:20:00 SGT 2014 OUTPUT>/opt/IBM/cpit/decompressed/TDS/tdsV6.3/tds ERROR>./install_tds.bin: line 1956: warning: here-document at line 1956 delimited by end-of-file (wanted `/dev/null') OUTPUT>ERROR: /opt/IBM/ldap/V6.3/sbin/idsldif2db not found. TDS installation failed. Process completed with exit code: 1 ERROR in InvokeScripts-function - Terminate the remaining scripts. ***Aborting InvokeScripts-Install function.",
+      "gold_documents": [
+        "swg21599258.txt"
+      ],
+      "stage2_hit5": false,
+      "failure_type": "CANDIDATE_K_CUTOFF",
+      "ranks": {
+        "bm25_top100": null,
+        "dense_top100": 13,
+        "wide_rrf_top100": 17,
+        "current_hybrid_top50": 16,
+        "stage2_candidate_top50": 16,
+        "after_filter_top50": 15,
+        "reranker_top10": null
+      }
+    },
+    {
+      "id": "DEV_Q154",
+      "question": "Why are some Datatypes corrupt after Impact cluster failover/failback ?\n\n\n\nRunning Impact 7.1.0.11. The symptom is whenever Impact does a failover, a couple DataTypes\nturn out empty.\n\nI've checked the type files before and after Impact failover and the difference happens in the property\n\n*.SQL.USERPARAMETERS\n\nThis property no longer exists for the corrupted datatypes\".",
+      "gold_documents": [
+        "swg21598417.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 5,
+        "dense_top100": 7,
+        "wide_rrf_top100": 3,
+        "current_hybrid_top50": 3,
+        "stage2_candidate_top50": 3,
+        "after_filter_top50": 3,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "DEV_Q158",
+      "question": "Must the TOKEN_SEPARATOR value be enclosed in quotes for the custom scripting feature?\n\nMust the TOKEN_SEPARATOR value be enclosed in quotes for the custom scripting feature?",
+      "gold_documents": [
+        "swg21960062.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 3,
+        "wide_rrf_top100": 2,
+        "current_hybrid_top50": 2,
+        "stage2_candidate_top50": 2,
+        "after_filter_top50": 2,
+        "reranker_top10": 2
+      }
+    },
+    {
+      "id": "TRAIN_Q456",
+      "question": "zonecfg error while starting nodeagent and dmgr\n\n\n\nI saw zonecfg error while starting nodeagent and dmgr in solaris server\n\nMy env is Oracle Solaris 11.2 SPARC, and WAS is 8558, jave 1.7. [1/22/16 21:31:18:379 AEDT] 00000001 SystemOut O java.lang.Exception: command /usr/sbin/zonecfg failed with 1 at com.ibm.ws.xd.agent.hypervisor.SolarisHypervisor.executeCommand(SolarisHypervisor.java:357) at com.ibm.ws.xd.agent.hypervisor.SolarisHypervisor.access$100 (SolarisHypervisor.java:30) at com.ibm.ws.xd.agent.hypervisor.SolarisHypervisor$Zone.processZoneCfg(SolarisHypervisor.java:570) at com.ibm.ws.xd.agent.hypervisor.SolarisHypervisor$Zone.(SolarisHypervisor.java:461) at com.ibm.ws.xd.agent.hypervisor.SolarisHypervisor ..... Is that normal behavior and what's the exactly meaning of the error?",
+      "gold_documents": [
+        "swg21626683.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q157",
+      "question": "Help with Security Bulletin: IBM WebSphere MQ 7.0.1 potential denial of service (CVE-2015-2013)\n\nI need to understand details regarding Security Bulletin: IBM WebSphere MQ 7.0.1 potential denial of service (CVE-2015-2013). Where can I find this information?",
+      "gold_documents": [
+        "swg21962479.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q380",
+      "question": "How do I view Custodian Notes in Atlas Preservation Plan?\n\nHow do I view Custodian Notes in Atlas Preservation Plan?",
+      "gold_documents": [
+        "swg21981880.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q171",
+      "question": "Help with Security Bulletin: Security vulnerabilities have been identified in IBM DB2 shipped with WebSphere Remote Server (CVE-2014-8730)\n\nI need to understand details regarding Security Bulletin: Security vulnerabilities have been identified in IBM DB2 shipped with WebSphere Remote Server (CVE-2014-8730). Where can I find this information?",
+      "gold_documents": [
+        "swg21700633.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 18,
+        "wide_rrf_top100": 4,
+        "current_hybrid_top50": 4,
+        "stage2_candidate_top50": 4,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q003",
+      "question": "How to configure SSL mutual authentication in IBM HTTP Server?\n\n\n\nWe are running IHS v7 and our application team has a specific webservice that they require SSL mutual authentication to be enabled for at the http server. Does anyone know how to set this up on IHS? Or any documentation?\n\nThanks",
+      "gold_documents": [
+        "swg21670474.txt"
+      ],
+      "stage2_hit5": false,
+      "failure_type": "RERANKER_TOP5_FAILURE",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 2,
+        "wide_rrf_top100": 2,
+        "current_hybrid_top50": 2,
+        "stage2_candidate_top50": 2,
+        "after_filter_top50": 1,
+        "reranker_top10": 8
+      }
+    },
+    {
+      "id": "TRAIN_Q594",
+      "question": "In WebSphere MQ, why am I getting AMQ9776, AMQ9777 Channel was blocked errors?\n\nIn WebSphere MQ, why am I getting AMQ9776, AMQ9777 Channel was blocked errors",
+      "gold_documents": [
+        "swg1it12825.txt",
+        "swg1it23329.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 16,
+        "wide_rrf_top100": 8,
+        "current_hybrid_top50": 8,
+        "stage2_candidate_top50": 8,
+        "after_filter_top50": 2,
+        "reranker_top10": 3
+      }
+    },
+    {
+      "id": "TRAIN_Q070",
+      "question": "How do I search for a string which has reserved words or characters when searching in documents in Atlas?\n\nHow do I search for a string which has reserved words or characters when searching in documents in Atlas?",
+      "gold_documents": [
+        "swg21982451.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q592",
+      "question": "Do the  Bash Bug  vulnerabilities affect WebSphere MQ Hypervisor?\n\nDo the Bourne Again Shell (Bash) vulnerabilities known as Bash Bugs or Shellshock affect WebSphere MQ Hypervisor and if so, what action is required to address this situation?",
+      "gold_documents": [
+        "swg21685666.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 2,
+        "wide_rrf_top100": 2,
+        "current_hybrid_top50": 2,
+        "stage2_candidate_top50": 2,
+        "after_filter_top50": 2,
+        "reranker_top10": 2
+      }
+    },
+    {
+      "id": "TRAIN_Q463",
+      "question": "Can Portal prevent the usage of simultaneous logins with the same userID?\n\nIs it possible for WebSphere Portal to limit the usage of a userID to one authenticated session as a time? In other words, prevent authenticating to Portal as \"user1\" from one browser and then simultaneously authenticating to Portal again as \"user1\" from another browser?",
+      "gold_documents": [
+        "swg21227799.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q221",
+      "question": "Case Analyzer is not working\n\n\n\nCaseAnalyzer is not working, no latest audit log although service is running\n\nError in log:\n\n\"CAPublisher c2dce3b9 [Error] Unexpected exception occurred while processing task CAPublisher for store CASTORE.; Exception: com.microsoft.sqlserver.jdbc.SQLServerException: The query processor ran out of internal resources and could not produce a query plan. This is a rare event and only expected for extremely complex queries or queries that reference a very large number of tables or partitions. Please simplify the query. If you believe you have received this message in error, contact Customer Support Services for more information.\"",
+      "gold_documents": [
+        "swg22004617.txt",
+        "swg22012121.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q360",
+      "question": "Is it possible to monitor Memory/LPAR metrics using ITM HMC agent?\n\nI understand the ITM AIX Premium agent captures these metrics but like to know if it is possible to monitor Memory/LPAR metrics using ITM HMC agent?",
+      "gold_documents": [
+        "swg24042283.txt"
+      ],
+      "stage2_hit5": false,
+      "failure_type": "CANDIDATE_K_CUTOFF",
+      "ranks": {
+        "bm25_top100": 18,
+        "dense_top100": 40,
+        "wide_rrf_top100": 29,
+        "current_hybrid_top50": 28,
+        "stage2_candidate_top50": 28,
+        "after_filter_top50": 28,
+        "reranker_top10": null
+      }
+    },
+    {
+      "id": "TRAIN_Q272",
+      "question": "Why are we seeing MQRC_NOT_AUTHORIZED errors after upgrading Websphere from V7.0 to V8.5.5?\n\nhttps://www-01.ibm.com/support/docview.wss?uid=swg21662193",
+      "gold_documents": [
+        "swg21662193.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": null,
+        "dense_top100": 29,
+        "wide_rrf_top100": 36,
+        "current_hybrid_top50": 33,
+        "stage2_candidate_top50": 33,
+        "after_filter_top50": 4,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q422",
+      "question": "Help with Security Bulletin: Vulnerability in SSLv3 affects IID and WID (CVE-2014-3566)\n\nI need to understand details regarding Security Bulletin: Vulnerability in SSLv3 affects IBM Integration Designer and WebSphere Integration Developer (CVE-2014-3566). Where can I find this information?",
+      "gold_documents": [
+        "swg21689914.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 3,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 2
+      }
+    },
+    {
+      "id": "TRAIN_Q165",
+      "question": "Is Java 8 supported for EJBDeploy on WebSphere Application Server 8.5.5.9 or later?\n\nIs Java 8 supported for EJBDeploy on WebSphere Application Server 8.5.5.9 or later?",
+      "gold_documents": [
+        "swg21994741.txt"
+      ],
+      "stage2_hit5": false,
+      "failure_type": "RERANKER_TOP5_FAILURE",
+      "ranks": {
+        "bm25_top100": 11,
+        "dense_top100": 3,
+        "wide_rrf_top100": 3,
+        "current_hybrid_top50": 3,
+        "stage2_candidate_top50": 3,
+        "after_filter_top50": 5,
+        "reranker_top10": 6
+      }
+    },
+    {
+      "id": "TRAIN_Q233",
+      "question": "Help with Security Bulletin: API Connect is affected by a cross-site scripting vulnerability CVE-2018-1382\n\nI need to understand details regarding Security Bulletin: API Connect is affected by a cross-site scripting vulnerability CVE-2018-1382. Where can I find this information?",
+      "gold_documents": [
+        "swg22013054.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q419",
+      "question": "Does double the number of instances equal double through put in IIB / WMB?\n\nIf I double the number of instances of an IBM Integration Bus (IIB) or WebSphere Message Broker (WMB) flow should I get double the through put?",
+      "gold_documents": [
+        "swg21137319.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 2,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q071",
+      "question": "Why does my upgrade to BigFix version 9.2.5 take a very long time?\n\nMy upgrade to BigFix version 9.2.5 takes a very long time. What do I need to do?",
+      "gold_documents": [
+        "swg21962862.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 42,
+        "dense_top100": 8,
+        "wide_rrf_top100": 9,
+        "current_hybrid_top50": 9,
+        "stage2_candidate_top50": 9,
+        "after_filter_top50": 9,
+        "reranker_top10": 2
+      }
+    },
+    {
+      "id": "TRAIN_Q553",
+      "question": "Help with Security Bulletin: Multiple vulnerabilities in IBM Java SDK affect IBM Image Construction and Composition Tool (CVE-2014-3566 and CVE-2014-6457)\n\nI need to understand details regarding \"Security Bulletin: Multiple vulnerabilities in IBM Java SDK affect IBM Image Construction and Composition Tool (CVE-2014-3566 and CVE-2014-6457) .\" Where can I find this information?",
+      "gold_documents": [
+        "swg21903249.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 6,
+        "wide_rrf_top100": 4,
+        "current_hybrid_top50": 4,
+        "stage2_candidate_top50": 4,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q498",
+      "question": "How do I reduce the amount of CPU being consumed by Just In Time (JIT) compilation?\n\nMy Portal system is experiencing period bursts of high CPU. After reviewing some data, I've determined the primarily culprit behind these CPU bursts are Just In Time (JIT) compilation threads, similar to the following:\n\n 3XMTHREADINFO      \"JIT Compilation Thread-0\"                          \n J9VMThread:0x0000000040004F00, j9thread_t:0x0000010010122040, \n java/lang/Thread:0x00000007011CAA58, state:CW, prio=10                 \n 3XMJAVALTHREAD            (java/lang/Thread getId:0x4, isDaemon:true)  \n 3XMTHREADINFO1            (native thread ID:0x39100EF, native priority:0xB, native policy:UNKNOWN)                      \nWhy is this happening and how can I reduce the amount of CPU that JIT is using?",
+      "gold_documents": [
+        "isg3t1024513.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 49,
+        "dense_top100": 5,
+        "wide_rrf_top100": 6,
+        "current_hybrid_top50": 6,
+        "stage2_candidate_top50": 6,
+        "after_filter_top50": 6,
+        "reranker_top10": 3
+      }
+    },
+    {
+      "id": "DEV_Q147",
+      "question": "TEP to TEPS communication issues with different Java versions\n\nRecent Java updates have caused connection problems when logging into the TEPS via the TEP client (Browser or Java Web Start). Is there an updated list of known issues?",
+      "gold_documents": [
+        "swg21672459.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 2
+      }
+    },
+    {
+      "id": "TRAIN_Q234",
+      "question": "How do I create a windows service for WebSphere Application Server version 7.0.X?\n\nIs there a tool that can help me create the windows service in an automated form?",
+      "gold_documents": [
+        "swg21397335.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 30,
+        "dense_top100": 1,
+        "wide_rrf_top100": 2,
+        "current_hybrid_top50": 3,
+        "stage2_candidate_top50": 3,
+        "after_filter_top50": 2,
+        "reranker_top10": 5
+      }
+    },
+    {
+      "id": "TRAIN_Q599",
+      "question": "ICC configuration manager error: This implementation is not part of the Windows Platform FIPS validated cryptographic algorithms.\n\nWhen saving changes in ICC configuration manager, an \"Application Error\" window pops up.\n\nError:\n\nA severe error occurred.\n\nProblem:\n\nException has been thrown by the target of an invocation.\n\nSolution:\n\nContact IBM Software Support with this error message (see Details).\n\nClick on the Details button and the following stack trace is reported:\n\nDetails\n\nSystem.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor) at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\n\n.....\n\n.....\n\nSystem.InvalidOperationException: This implementation is not part of the Windows Platform FIPS validated cryptographic algorithms.\n\nat System.Security.Cryptography.MD5CryptoServiceProvider..ctor()\n\nWhat is causing this?",
+      "gold_documents": [
+        "swg21991690.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q075",
+      "question": "Where can I get Tivoli Monitoring Agent for Sybase Server 620 FP2 (6.2.0-TIV-ITM_SYB-FP0002)?\n\nWhere can I get Tivoli Composite Application Manager for Applications 721 FP2: Monitoring Agent for Sybase Server 620 FP2 (6.2.0-TIV-ITM_SYB-FP0002)? I can't find this on Fix Central.",
+      "gold_documents": [
+        "swg24044440.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "DEV_Q252",
+      "question": "How to resolve the StaleConnectionException in WebSphere Application Server?\n\nI see this exception in WebSphere Application Server J2c and RRA traces:\n\nWSRdbManagedC > preTestConnection Entry WSRdbManagedConnectionImpl@51a507f2 query: SELECT 1 FROM DUAL WSRdbManagedC 3 Exception java.sql.SQLException: ORA-02396: exceeded maximum idle time, please connect again DSRA0010E: SQL State = 61000, Error Code = 2,396 at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:440) at \n...\nEntry java.sql.SQLException: ORA-01012: not logged on ..... OracleDataSto < findMappingClass return Exit class com.ibm.websphere.ce.cm.StaleConnectionException",
+      "gold_documents": [
+        "swg21207584.txt",
+        "swg21634959.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 62,
+        "dense_top100": 3,
+        "wide_rrf_top100": 3,
+        "current_hybrid_top50": 3,
+        "stage2_candidate_top50": 3,
+        "after_filter_top50": 1,
+        "reranker_top10": 4
+      }
+    },
+    {
+      "id": "TRAIN_Q111",
+      "question": "How to find details of Corrupted Object from the entries in db2diag.log?\n\nWe have corruption in DB2 Database and got entries for corrupted Object in db2diag.log ,Need to find details of the Object using information dumped in db2diag.log",
+      "gold_documents": [
+        "swg21983129.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q504",
+      "question": "OMNIBUS   nco_p_mttrapd : Malformed traps\n\nHow can you determine why the MTTrapd [SNMP] probe drops traps?",
+      "gold_documents": [
+        "swg21468340.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q256",
+      "question": "Error running krzgrant.sql script provided with 6.3.1.2-TIV-ITM_KRZ-IF0003.tar\n\nWhen running the krzgrant.sql script provided in the package - 6.3.1.2-TIV-ITM_KRZ-IF0003.tar get the following errors:\n\nERROR at line 1:\nORA-00942: table or view does not exist ORA-06512: at line 50 \n\nHow to correct this?",
+      "gold_documents": [
+        "swg24035571.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 13,
+        "wide_rrf_top100": 4,
+        "current_hybrid_top50": 4,
+        "stage2_candidate_top50": 4,
+        "after_filter_top50": 5,
+        "reranker_top10": 2
+      }
+    },
+    {
+      "id": "DEV_Q266",
+      "question": "How to install Packaging utility?\n\nHow to install Packaging utility?",
+      "gold_documents": [
+        "swg24037641.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 3,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "DEV_Q210",
+      "question": "startNode failed with ADML3000E after a deployment failure\n\nClient had a deployment failure due to \"Too many open files\" error.\n\nAfterwards, the startNode failed with ADML3000E:\n\nWhat could cause the \"Too many open files error?",
+      "gold_documents": [
+        "swg21067352.txt"
+      ],
+      "stage2_hit5": false,
+      "failure_type": "CANDIDATE_K_CUTOFF",
+      "ranks": {
+        "bm25_top100": 7,
+        "dense_top100": 39,
+        "wide_rrf_top100": 15,
+        "current_hybrid_top50": 14,
+        "stage2_candidate_top50": 14,
+        "after_filter_top50": 14,
+        "reranker_top10": null
+      }
+    },
+    {
+      "id": "DEV_Q076",
+      "question": "Why is Oracle agent (rz) reporting listeners and services as 'Inactive' even when those are active?\n\nOn Unix/Linux, the Extended Oracle agent sends false alert for listener status. All listeners and services in Net Service Connection workspace show as inactive.",
+      "gold_documents": [
+        "swg1iv64051.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 2,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 3
+      }
+    },
+    {
+      "id": "DEV_Q184",
+      "question": "Why am I seeing \"CWSXM0100E: Multiple replies have been produced for a single request flow in module\" ?\n\nWe are building a simple mediation module, consisting only of the request flow. The mediation module has one service invoke calling an external service through web service binding. Upon testing the process, we observe see that the service invoke is being called twice. There is no Fan-in or fan -out in the request flow. Below is the error: \"Caused by: com.ibm.wsspi.sibx.mediation.flow.MediationRuntimeException: CWSXM1023E: Exception when calling flow action: CWSXM0100E: Multiple replies have been produced for a single request flow in module\"",
+      "gold_documents": [
+        "swg21584783.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "DEV_Q021",
+      "question": "How to refresh a DataPower WebService Proxy which WSDL got changed?\n\nI have made changes to a WSDL stored in DP local filesystem.\n\nHow can I make the WSP reflect this change since DataPower Gateway 7.1.0 WebService Proxy WebGUI doesn't offer the \"Refresh\" button anymore?\n\nIs there a best practice to refresh the WSP if I modified my WSDL?",
+      "gold_documents": [
+        "swg21298897.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 2,
+        "dense_top100": 3,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 2
+      }
+    },
+    {
+      "id": "TRAIN_Q436",
+      "question": "Can you delete temporary data that is generated by IBM Business Process Manager?\n\nIn the OS temporary directories, there are many files generated for BPM. These files are created on the following operations:\ncreate TWX snapshot for export\naccess a managed asset during process execution\ncreate offline install package\nThe following temporary directories are used for storing temp files:Operating system temporary directory:/tmp (Linux)c:\\windows\\temp (Windows)\n\nHow can these files be cleaned up?",
+      "gold_documents": [
+        "swg1jr47686.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 21,
+        "dense_top100": 1,
+        "wide_rrf_top100": 5,
+        "current_hybrid_top50": 5,
+        "stage2_candidate_top50": 5,
+        "after_filter_top50": 4,
+        "reranker_top10": 4
+      }
+    },
+    {
+      "id": "DEV_Q224",
+      "question": "How do we set HttpOnly and secure flag in Oracle Weblogic 12c to secure IBM Atlas?\n\nHow do we set HttpOnly and secure flag in Oracle Weblogic 12c to secure IBM Atlas?",
+      "gold_documents": [
+        "swg21696267.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "DEV_Q186",
+      "question": "Silent uninstall of ITCAM for MQ agent fails\n\nRunning silent uninstall of the ITCAM for MQ agent with this command: start /wait setup /z\"/sfMQ_Silent_Uninstall.txt\" /s /f2\"C:\\temp\\silent_setup.log\" fails with this message in the Abort_*.trc file: SEVERE: You must agree to the License Agreement.\n\nThe MQ_Silent_Uninstall.txt does contain this line: License Agreement=I agree to use the software only in accordance with the installed license.",
+      "gold_documents": [
+        "swg21608744.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 33,
+        "wide_rrf_top100": 9,
+        "current_hybrid_top50": 9,
+        "stage2_candidate_top50": 9,
+        "after_filter_top50": 9,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q415",
+      "question": "Unable to login to FileNet Workplace XT 1.1.5.x. Getting error, Problem initializing encryption/decryption with keyID.\n\n\n\nWe are having issue while trying to login Workplace XT. Getting the error message below as soon as I hit after giving credentials.\n\nError Message: com.filenet.wcm.api.EncryptionException: Problem initializing encryption/decryption with keyId 7d3f93e3, size 256 bits. java.home=/opt/IBM/WebSphere/AppServer/java/jre. Cause: java.security. InvalidKeyException: Illegal key size or default parameters\n\nIBM WAS 8.5.5.9 Workplace XT 1.1.5",
+      "gold_documents": [
+        "swg21501900.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 3,
+        "wide_rrf_top100": 2,
+        "current_hybrid_top50": 2,
+        "stage2_candidate_top50": 2,
+        "after_filter_top50": 2,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q482",
+      "question": "Is there a limit to the number of items that can be listed within an \"in\" list as part of a where clause?\n\nIs there a limit to the number of items that can be listed within an \"in\" list as part of a where clause?",
+      "gold_documents": [
+        "swg21698950.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 2,
+        "wide_rrf_top100": 2,
+        "current_hybrid_top50": 2,
+        "stage2_candidate_top50": 2,
+        "after_filter_top50": 2,
+        "reranker_top10": 2
+      }
+    },
+    {
+      "id": "DEV_Q109",
+      "question": "Help with Security Bulletin: Authentication vulnerability affects IIB V10.0.0.4 onwards (CVE-2016-8918 )\n\nI need to understand details regarding Security Bulletin: Authentication vulnerability affects IBM Integration Bus V10.0.0.4 onwards (CVE-2016-8918 ). Where can I find this information?",
+      "gold_documents": [
+        "swg21995079.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q493",
+      "question": "Help with Security Bulletin: A security vulnerability has been identified in IBM WebSphere Application Server, which is shipped with, or a required product for, IBM Tivoli Network Manager IP Edition (CVE-2017-1741).\n\nI need to understand details regarding Security Bulletin: A security vulnerability has been identified in IBM WebSphere Application Server, which is shipped with, or a required product for, IBM Tivoli Network Manager IP Edition (CVE-2017-1741) Where can I find this information?",
+      "gold_documents": [
+        "swg22012342.txt"
+      ],
+      "stage2_hit5": false,
+      "failure_type": "BASE_RETRIEVER_MISS",
+      "ranks": {
+        "bm25_top100": null,
+        "dense_top100": null,
+        "wide_rrf_top100": null,
+        "current_hybrid_top50": null,
+        "stage2_candidate_top50": null,
+        "after_filter_top50": null,
+        "reranker_top10": null
+      }
+    },
+    {
+      "id": "DEV_Q074",
+      "question": "Help with Security Bulletin: Security Vulnerability in IBM WebSphere Application Server affects IBM SOA Policy Gateway Pattern for AIX Server 2.5 (CVE-2015-1920)\n\nI need to understand details regarding Security Bulletin: Security Vulnerability in IBM WebSphere Application Server affects IBM SOA Policy Gateway Pattern for AIX Server 2.5 (CVE-2015-1920). Where can I find this information?",
+      "gold_documents": [
+        "swg21959169.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 2,
+        "dense_top100": 2,
+        "wide_rrf_top100": 2,
+        "current_hybrid_top50": 2,
+        "stage2_candidate_top50": 2,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q583",
+      "question": "Why does the ITCAM for AD Managing GUI install fail with an end-of-file message?\n\nI am trying to install the ITCAM for AD Managing server and I am seeing the following error when doing either 'launchpad.sh' or 'silent_MS_linux.bin': Initializing InstallShield Wizard........ Launching InstallShield Wizard........\n\n./setup_MS_lin.bin: line 1926: warning: here-document at line 1926 delimited by end-of-file (wanted `/dev/null')\n\nThe installer is unable to run in graphical mode. Try running the installer with the -console for -silent flag.",
+      "gold_documents": [
+        "swg21985630.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 2
+      }
+    },
+    {
+      "id": "TRAIN_Q081",
+      "question": "'Access is denied' install errors with ICC\n\nInstalling ICC 4.0.1 and then FP2 gives the 'Access is denied' error on WASSERVICE.exe. How to resolve this?",
+      "gold_documents": [
+        "swg24042387.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 3,
+        "dense_top100": 30,
+        "wide_rrf_top100": 7,
+        "current_hybrid_top50": 7,
+        "stage2_candidate_top50": 7,
+        "after_filter_top50": 5,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "DEV_Q194",
+      "question": "How to generate Javacores automatically in on hung threads reported in SystemOut.log for WebSphere Application Server?\n\nNeed Javacores to be generated on hung threads messages reported in SystemOut.log for WebSphere Applicaiton Server.Example:WSVR0605W: Thread has been active for and may be hung. There are in total in the server that may be hung.",
+      "gold_documents": [
+        "swg21448581.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "DEV_Q101",
+      "question": "Help with Security Bulletin: WMB and IIB Toolkit cannot connect to a remote WMB broker or IIB node with a TLS-compliant cipher (CVE-2015-0118)\n\nI need to understand details regarding Security Bulletin: WebSphere Message Broker Toolkit and IBM Integration Toolkit cannot connect to a remote WebSphere Message Broker broker or IBM Integration Bus node with a TLS-compliant cipher (CVE-2015-0118). Where can I find this information?",
+      "gold_documents": [
+        "swg21957998.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q299",
+      "question": "Installing fixpacks with Installation Manager - when did it change from using updateInstaller,  starting in which version of WebSphere\n\nI was using updateInstaller to install fixpacks, and there was a separate fixpack for WebSphere and separate for the JDK, independent of each other. Now I understand that with Installation Manager there is a single package containing both the WebSphere App server fixpack as well as the JDK. When did this occur, starting with which version of WebSphere ?",
+      "gold_documents": [
+        "swg21138332.txt"
+      ],
+      "stage2_hit5": false,
+      "failure_type": "RERANKER_TOP5_FAILURE",
+      "ranks": {
+        "bm25_top100": 6,
+        "dense_top100": 9,
+        "wide_rrf_top100": 10,
+        "current_hybrid_top50": 10,
+        "stage2_candidate_top50": 10,
+        "after_filter_top50": 10,
+        "reranker_top10": 8
+      }
+    },
+    {
+      "id": "TRAIN_Q541",
+      "question": "Cognos Workspace Advanced Users are unable to see features. Why?\n\n\n\nCertain Workspace Advanced users cannot open Report Studio. This happens with certain custom roles.\n\nEnvironment: IBM Cognos 10.2.2.x",
+      "gold_documents": [
+        "swg21593254.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 3,
+        "dense_top100": 2,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 3
+      }
+    },
+    {
+      "id": "TRAIN_Q487",
+      "question": "Security Bulletin: API Connect Portal is affected by multiple Drupal vulnerabilities\n\nI need to understand details regarding Security Bulletin: API Connect Portal is affected by multiple Drupal vulnerabilities (CVE-2017-6924, CVE-2017-6923, CVE-2015-7875, CVE-2017-6925). Where can I find this information?",
+      "gold_documents": [
+        "swg22008902.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 2,
+        "dense_top100": 3,
+        "wide_rrf_top100": 3,
+        "current_hybrid_top50": 3,
+        "stage2_candidate_top50": 3,
+        "after_filter_top50": 2,
+        "reranker_top10": 2
+      }
+    },
+    {
+      "id": "TRAIN_Q208",
+      "question": "Can I run different levels of the Rational Developer for z Systems host and client?\n\nI'd like to know if I can run different versions of the RDz client and host and if so what compatible or supported versions and releases?",
+      "gold_documents": [
+        "swg21568844.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q414",
+      "question": "Is MQ V7.0 is going out of support?\n\nIs Websphere MQ V7.0 is going out of support?",
+      "gold_documents": [
+        "swg21674407.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    },
+    {
+      "id": "TRAIN_Q063",
+      "question": "How to get the ODM 8.5.1.2 fixpack of ODM 8.5.1.1?\n\nODM 8.5.1.2 fixpack is not listed in Fix Central when installed platform ODM 8.5.1.1 is used: http://www-933.ibm.com/support/fixcentral/swg/selectFixes?parent=ibm~WebSphere&product=ibm/WebSphere/WebSphere+Operational+Decision+Management&release=8.5.1.1&platform=All&function=all",
+      "gold_documents": [
+        "swg24039235.txt"
+      ],
+      "stage2_hit5": false,
+      "failure_type": "CANDIDATE_K_CUTOFF",
+      "ranks": {
+        "bm25_top100": 7,
+        "dense_top100": 15,
+        "wide_rrf_top100": 17,
+        "current_hybrid_top50": 16,
+        "stage2_candidate_top50": 16,
+        "after_filter_top50": 18,
+        "reranker_top10": null
+      }
+    },
+    {
+      "id": "TRAIN_Q537",
+      "question": "Netcool/Impact 6.1.0: How to change the HSQLDB password?\n\nNetcool/Impact 6.1.0: How to change the HSQLDB password?",
+      "gold_documents": [
+        "swg21967958.txt"
+      ],
+      "stage2_hit5": true,
+      "failure_type": "HIT",
+      "ranks": {
+        "bm25_top100": 1,
+        "dense_top100": 1,
+        "wide_rrf_top100": 1,
+        "current_hybrid_top50": 1,
+        "stage2_candidate_top50": 1,
+        "after_filter_top50": 1,
+        "reranker_top10": 1
+      }
+    }
+  ]
+}
