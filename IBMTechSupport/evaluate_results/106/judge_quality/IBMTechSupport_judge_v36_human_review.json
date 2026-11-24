@@ -1,0 +1,247 @@
+{
+  "schema": "ibm-techqa-human-review-v1",
+  "source_judge_version": "v3.6",
+  "judge_ids": [
+    "TRAIN_Q169",
+    "TRAIN_Q270",
+    "TRAIN_Q113",
+    "TRAIN_Q037",
+    "TRAIN_Q025",
+    "TRAIN_Q549",
+    "TRAIN_Q006",
+    "TRAIN_Q535",
+    "DEV_Q035",
+    "TRAIN_Q316",
+    "DEV_Q203",
+    "TRAIN_Q282",
+    "DEV_Q157",
+    "DEV_Q167",
+    "DEV_Q028",
+    "TRAIN_Q172",
+    "TRAIN_Q236",
+    "TRAIN_Q326",
+    "TRAIN_Q307",
+    "DEV_Q198"
+  ],
+  "rag_source_loaded": true,
+  "rag_file_name": "predictions.jsonl",
+  "matched_count": 20,
+  "reviews": {
+    "TRAIN_Q169": {
+      "human_pass": "fail",
+      "human_correctness": "1",
+      "human_groundedness": "1",
+      "human_completeness": "1",
+      "human_actionability": "1",
+      "human_format": "",
+      "human_safety": "",
+      "root_cause": "evidence",
+      "risk_level": "medium",
+      "failure_reason": "검색 문서 1과 2는 WebSphere Portal 추적 및 로그 수집 방법에 관한 내용이며, BPM 8.5.6의 CWTKE0021W 오류나 com.ibm.bpe.staff.* 추적 문자열을 설명하지 않는다. LLM이 제시한 추적 문자열의 정확성을 검증할 근거가 없다.",
+      "root_cause_detail": "RAG가 SystemOut.log와 trace 등 공통 키워드가 포함된 다른 제품의 문서를 검색했다. LLM은 질문에 후보로 제시된 com.ibm.bpe.staff.*를 검증 없이 확정적인 해결 방법으로 답변했다.",
+      "proposed_fix": "검색 시 BPM 8.5.6, CWTKE0021W, staff assignment를 우선 반영하고 제품 일치 여부를 검증한다. 정확한 추적 문자열을 확인할 근거가 없으면 특정 문자열을 정답으로 단정하지 않도록 개선한다.",
+      "final_assessment": "FAIL. 질문과 직접 관련된 근거 문서를 검색하지 못했으며, LLM이 검증되지 않은 추적 문자열을 정답으로 제시했다. Judge의 세 주장에 대한 NOT_FOUND 판정은 적절하다."
+    },
+    "TRAIN_Q270": {
+      "human_pass": "pass",
+      "root_cause": "",
+      "root_cause_detail": "RAG 검색과 답변 생성은 정상이다. Judge도 핵심 주장과 해결 방법을 올바르게 판정했다.",
+      "failure_reason": "문서 1은 클립보드에 1,000명 이상이 있는 상태에서 사람을 추가하면 ICWPA1001E 오류가 발생하며, 한 번에 1,000명 미만을 추가해야 한다고 명시한다. LLM의 핵심 답변은 문서와 일치한다.",
+      "risk_level": "low",
+      "proposed_fix": "필수 수정 사항은 없다. 다만 문서에 없는 내부 서버 오류라는 표현과 불필요한 일반화를 줄이면 근거 충실도를 높일 수 있다.",
+      "final_assessment": "PASS. RAG가 정확한 IBM 문서를 검색했으며, LLM이 오류 발생 조건과 1,000명 미만씩 추가하는 해결 방법을 정확하게 제시했다. Judge의 두 SUPPORTED 판정도 적절하다."
+    },
+    "TRAIN_Q113": {
+      "human_pass": "pass",
+      "risk_level": "low",
+      "failure_reason": "문서 1의 설정 경로, 3개 로그 속성, 저장 및 서버 재시작 단계가 RAG 답변과 일치한다. Judge의 8개 SUPPORTED 판정도 적절하다. 단, 원본 문서에 설정 파일명이 혼용되어 있다.",
+      "root_cause_detail": "RAG 검색, 답변 생성 및 Judge 판정 모두 정상이다. 파일명 불일치는 원본 문서 내부에 존재한다.",
+      "proposed_fix": "필수 수정 없음. 다만 설정 파일명이 혼용되는 경우 정확한 파일명을 확인하도록 안내하는 것이 좋다.",
+      "reviewer_notes": "",
+      "final_assessment": "PASS. 정확한 IBM 문서를 검색했고, LLM이 로깅 구성 절차를 모두 안내했다. Judge의 8개 주장도 근거에 의해 지지된다."
+    },
+    "TRAIN_Q037": {
+      "human_pass": "fail",
+      "root_cause": "evidence",
+      "risk_level": "medium",
+      "failure_reason": "질문은 TWS/TDWC의 동일 사용자 ID 동시 로그인 허용 방법이지만, 검색 문서는 WebSphere Portal의 다중 로그인 제한에 관한 내용이다. LLM이 다른 제품의 정책을 답변으로 제시했다. Judge의 세 NOT_FOUND 판정도 문서 내용과 일치하지 않는다.",
+      "root_cause_detail": "RAG가 동일 사용자 ID와 다중 로그인이라는 공통 키워드로 다른 제품의 문서를 검색했다. LLM은 제품 차이를 검증하지 않았으며, Judge는 문서에 명시된 주장까지 근거 미발견으로 처리했다.",
+      "proposed_fix": "TWS/TDWC 제품명을 중심으로 검색하고, 답변 생성 시 근거 문서의 제품 일치 여부를 검증한다. Judge는 주장 자체의 문서 지지 여부와 실제 질문에 대한 적합성을 별도로 평가하도록 개선한다.",
+      "final_assessment": "FAIL. WebSphere Portal 문서의 내용은 정확하게 설명했지만, TWS/TDWC의 동시 로그인 문제에 대한 해결책이 아니다. 검색 문서 부적합과 답변 생성 오류가 발생했으며, Judge의 NOT_FOUND 판정에도 오류가 있다."
+    },
+    "TRAIN_Q025": {
+      "human_pass": "fail",
+      "root_cause": "evidence",
+      "failure_reason": "IBM 문서는 오래된 Java 클래스 캐시를 삭제해 Streams 성능 문제를 해결하라고 설명한다. \n그러나 LLM은 /tmp/javasharedresources 디렉터리를 삭제하면 문제가 발생할 수 있다고 답변했다. \nJudge는 이 주장을 SUPPORTED로 잘못 판정했다.",
+      "risk_level": "medium",
+      "root_cause_detail": "Judge가 '클래스 캐시 삭제'와 '캐시 디렉터리 삭제 후 장애 발생'을 동일한 의미로 해석했다.",
+      "proposed_fix": "Judge가 근거를 평가할 때 제품, 장애 상황, 조치 및 인과관계가 일치하는지 검증하도록 개선한다.",
+      "final_assessment": "RAG는 관련 문서를 검색했지만 질문에 대한 직접적인 해결 근거는 찾지 못했다. LLM 답변은 질문의 원인을 설명하지 못했고, Judge도 주장 1을 잘못 승인했다. 최종 FAIL."
+    },
+    "TRAIN_Q549": {
+      "failure_reason": "문서 1은 Linux 시스템 라이브러리 누락으로 설치 프로그램이 그래픽 모드에서 실행되지 않는다고 명시한다. LLM 답변도 동일한 원인을 설명했지만 Judge가 CONTRADICTED로 오판정했다.",
+      "human_pass": "pass",
+      "risk_level": "medium",
+      "root_cause": "semantic",
+      "root_cause_detail": "Judge가 원인 설명과 해결 방법을 혼동했다. 근거에 -console 옵션이 제시되어 있다는 이유로 Linux 라이브러리 누락이라는 원인 설명까지 모순으로 판단했다.",
+      "proposed_fix": "Judge의 CONTRADICTED 판정은 근거 문서에 주장과 직접적으로 양립할 수 없는 사실이 있을 때만 허용한다. 원인 설명과 해결 방법의 차이만으로 모순 판정하지 않도록 검증한다.",
+      "final_assessment": "PASS. RAG가 정확한 근거 문서를 검색했고 LLM도 오류 원인을 올바르게 설명했다. 다만 -console 옵션을 사용하는 우회 방법은 누락했다. Judge의 주장 2 CONTRADICTED 판정은 잘못됐다."
+    },
+    "TRAIN_Q006": {
+      "human_pass": "pass",
+      "failure_reason": "문서 1에 ITNM 4.1.1과 4.2.0이 모두 CVE-2017-3156의 영향을 받는다고 명시되어 있다. 그러나 Judge는 4.2.0에 대한 주장 3을 NOT_FOUND로 잘못 판정했다.",
+      "root_cause": "semantic",
+      "risk_level": "medium",
+      "root_cause_detail": "Judge가 동일한 청크에 있는 4.1.1은 인식했으나 4.2.0은 근거 미발견으로 처리했다. Judge에 전달된 근거 후보에서 4.2.0 내용이 누락됐는지, 모델이 해당 내용을 놓쳤는지 추가 확인이 필요하다.",
+      "proposed_fix": "Judge의 근거 후보 추출 과정에서 버전 목록이 잘리지 않는지 확인한다. 동일 문서에 여러 버전이 나열된 경우 각 버전을 개별적으로 검증하고, 단순 출처 안내는 기술적 주장 평가에서 제외한다.",
+      "final_assessment": "PASS. RAG가 정확한 IBM 보안 게시판을 검색했고 LLM은 영향을 받는 두 버전과 Huawei MTOSI Collector 설치 조건을 정확하게 답변했다. Judge의 주장 3 NOT_FOUND 판정은 오류다."
+    },
+    "TRAIN_Q535": {
+      "human_pass": "pass",
+      "root_cause": "semantic",
+      "risk_level": "medium",
+      "failure_reason": "문서 1은 동일한 SYSIBMADM.DBCFG 오류가 발생하는 조건과 원인, 무시 가능하다는 해결 방법을 명시한다. Judge는 주장 1과 2를 NOT_FOUND로 잘못 판정했다.",
+      "root_cause_detail": "Judge가 정답 문서에 존재하는 오류 발생 조건과 해결 문구를 제대로 연결하지 못했다. 근거 후보 추출 과정에서 해당 문장이 누락됐는지, 모델이 놓쳤는지는 추가 확인이 필요하다.",
+      "proposed_fix": "동일한 오류 코드와 환경 조건이 명시된 근거, 문제 해결 항목의 문장을 Judge에 누락 없이 전달하도록 후보 추출 과정을 점검한다. NOT_FOUND 판정 전에 관련 문서의 원인·해결 방법을 재확인하도록 개선한다.",
+      "final_assessment": "PASS. RAG가 정확한 IBM 기술 문서를 검색했고, LLM은 오류의 발생 상황과 원인, 무시 가능 여부를 올바르게 답변했다. Judge의 주장 1·2에 대한 NOT_FOUND 판정은 부적절하다."
+    },
+    "DEV_Q035": {
+      "human_pass": "pass",
+      "risk_level": "low",
+      "failure_reason": "주요 기술적 오류는 확인되지 않았다. 문서 1은 질문의 CVE와 제품이 정확히 일치하며 취약점 설명과 CVSS 정보를 포함한다. 다만 실제 문서 링크가 없고, Judge가 선택한 근거 구절에는 영향받는 버전 정보가 포함되지 않았다.",
+      "root_cause_detail": "Judge의 근거 연결 경고는 긴 주장에 비해 선택된 인용문이 일부 정보만 포함하기 때문에 발생한 것으로 보인다. 현재 자료만으로는 Judge의 의미 판정 오류라고 확정할 수 없다.",
+      "proposed_fix": "RAG 답변에서 Document 1 대신 실제 IBM 보안 게시판 제목과 접근 가능한 문서 URL을 제공하도록 개선한다.",
+      "final_assessment": "PASS. 질문과 정확히 일치하는 IBM 보안 게시판을 검색했고, LLM이 해당 문서의 위치와 주요 내용을 안내했다. 다만 문서 번호만 제시해 독립적인 사용자 답변으로서 접근성이 부족하므로 출처 링크 제공을 개선할 필요가 있다."
+    },
+    "TRAIN_Q316": {
+      "human_pass": "fail",
+      "risk_level": "medium",
+      "failure_reason": "문서 2와 5는 WebGUI 인증서 구성 및 교체를 뒷받침하지만, DataPower 장비를 반드시 재시작해야 한다는 근거는 없다. 또한 WebGUI에 접속할 수 없는 상태에서 인증서를 복구하는 구체적인 절차가 누락됐다.",
+      "root_cause_detail": "RAG가 인증서 만료 및 브라우저 신뢰 경고에 관한 문서를 바탕으로 WebGUI 접속 중단 상황의 복구 절차를 일반화했다. 근거에 없는 장비 재시작 단계도 추가했다.",
+      "proposed_fix": "WebGUI 접속 중단과 인증서 경고를 구분하여 검색하고, 접속 불가능한 상황의 복구 절차를 확인하도록 개선한다. 문서에 없는 장비 재시작은 필수 조치로 안내하지 않는다.",
+      "final_assessment": "FAIL. 인증서 교체 방향은 타당하지만 실제 WebGUI 접속 복구 방법이 불충분하고 장비 재시작 권고의 근거가 부족하다.",
+      "root_cause": "generation"
+    },
+    "DEV_Q203": {
+      "question_ko": "",
+      "failure_reason": "문서 1은 StaleConnectionException의 발생 원인을, 문서 5는 getConnection() 재시도를 명시한다. 그러나 RAG는 특정 Liberty Profile 사례의 서버 재시작 조치를 일반 WebSphere Application Server의 필수 해결 방법처럼 안내했다. Judge도 문서에 명시된 주장 2와 4를 NOT_FOUND로 잘못 판정했다.",
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "root_cause_detail": "RAG가 서로 다른 WebSphere 환경의 해결 방법을 일반화했다. Judge는 정확히 일치하는 문서 내용까지 근거 미발견으로 처리했으며, 근거 후보 추출 또는 전달 과정의 누락 가능성을 점검해야 한다.",
+      "proposed_fix": "RAG가 제품 환경별 해결 방법을 구분하고 서버 재시작을 필수 조치로 단정하지 않도록 개선한다. Judge는 NOT_FOUND 판정 전에 모든 관련 청크의 원문과 주장 일치 여부를 재검증하도록 한다.",
+      "final_assessment": "FAIL. 연결 무효화 원인과 getConnection() 재시도 권고는 정확하지만, 서버 재시작을 필수 해결책으로 제시한 부분은 근거가 부족하다. Judge 역시 명시적인 근거가 있는 주장들을 NOT_FOUND로 판정했다.",
+      "risk_level": "medium"
+    },
+    "TRAIN_Q282": {
+      "failure_reason": "문서 1에는 CVE-2017-1118의 요약, 취약점 설명, CVSS 점수, 영향받는 제품 및 버전이 명시되어 있다. 그러나 Judge는 해당 정보가 없다고 판단해 주장 2를 NOT_FOUND로 처리했다. 해결 방법의 실제 내용은 표시된 청크만으로 확인되지 않는다.",
+      "root_cause": "semantic",
+      "human_pass": "pass",
+      "risk_level": "low",
+      "root_cause_detail": "Judge가 문서 1에 명시된 정보를 제대로 인식하지 못했다. 근거 후보 추출 또는 모델의 근거 판정 과정에서 누락이 발생했을 가능성이 있다.",
+      "proposed_fix": "Judge가 NOT_FOUND로 판정하기 전에 문서의 주요 섹션과 주장을 다시 대조하도록 개선한다. 여러 정보를 포함하는 주장은 세부 항목별로 검증하고, RAG 답변에는 실제 문서 URL을 제공하도록 개선한다.",
+      "final_assessment": "PASS. RAG가 질문과 정확히 일치하는 IBM 보안 게시판을 검색했고, LLM도 해당 문서를 안내했다. Judge의 주장 2 NOT_FOUND 판정은 대부분의 세부 정보에 대해 잘못됐다. 다만 해결 방법의 존재 여부와 실제 문서 접근 링크는 추가 확인이 필요하다."
+    },
+    "DEV_Q157": {
+      "failure_reason": "질문은 IIB의 HTTP/SOAP 노드를 이용한 TLS/SSL 구성 방법이지만, 검색 문서는 Controller Web과 NLB의 인증서 설정을 설명한다. IIB에 동일한 인증서 구성이 필요하다는 근거는 없다. Judge는 이를 SUPPORTED로 잘못 판정했다.",
+      "human_pass": "fail",
+      "root_cause": "evidence",
+      "risk_level": "medium",
+      "root_cause_detail": "RAG가 TLS/SSL 및 HTTPS라는 공통 키워드만으로 다른 제품의 문서를 검색했고, LLM이 해당 설정을 IIB 환경에 적용했다. Judge도 문서의 실제 제품과 질문의 대상 제품이 다른 점을 검증하지 못했다.",
+      "proposed_fix": "검색 단계에서 제품명(IIB)과 구성 요소(HTTP/SOAP 노드)의 일치 여부를 강화한다. Judge가 주장과 근거의 제품 및 적용 환경을 비교하도록 개선하고, 직접적인 근거가 없으면 다른 제품의 설정을 일반화하지 않도록 한다.",
+      "final_assessment": "FAIL. 검색된 문서는 IIB와 관련이 없으며, LLM은 다른 제품의 SSL 설정을 IIB 구성 방법으로 잘못 안내했다. Judge의 주장 1 SUPPORTED 판정도 부적절하다. 주장 3의 문서 링크 자체는 근거에 존재하지만 질문에 적합한 참고 자료는 아니다."
+    },
+    "DEV_Q167": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "high",
+      "failure_reason": "문서 1은 drop_ctxsys_indexes.sql을 인덱스 삭제 스크립트라고 명시한다. 그러나 LLM은 삭제 명령만 안내하면서 인덱스가 다시 생성된다고 설명했다. 재생성 명령이 누락되어 있다. 또한 Judge는 문서에 명시된 스크립트 경로를 NOT_FOUND로 잘못 판정했다.",
+      "root_cause_detail": "RAG가 인덱스 삭제 절차를 재구축 절차 전체로 잘못 해석했다. Judge도 명시적인 스크립트 경로를 놓쳤다.",
+      "proposed_fix": "인덱스 삭제와 재생성 절차를 구분하고, 전체 절차가 확인되지 않으면 삭제 명령만 실행하도록 안내하지 않는다. 문서의 후속 청크까지 확인하도록 RAG 검색 및 생성 과정을 개선한다. Judge의 명시적 경로·명령어 검증도 보완한다.",
+      "final_assessment": "FAIL. 정확한 근거 문서를 검색했지만 인덱스 재생성 절차가 누락됐다. 삭제 스크립트만 실행하면 인덱스가 복구되지 않을 위험이 있다. Judge의 주장 2 NOT_FOUND 판정도 잘못됐다."
+    },
+    "DEV_Q028": {
+      "human_pass": "pass",
+      "root_cause": "semantic",
+      "risk_level": "low",
+      "failure_reason": "문서 1에 CVE-2015-4911의 취약점 설명, CVSS 점수 및 swg21969620 링크가 명시되어 있다. Judge가 주장 1을 NOT_FOUND로 판단한 것은 부적절하다. 다만 RAG 답변은 WSRR 보안 게시판과 링크된 WebSphere Application Server 보안 게시판을 혼동했다.",
+      "root_cause_detail": "Judge가 문서에 명시된 참고 링크를 주장과 연결하지 못했다. RAG는 원본 WSRR 게시판과 추가 참고용 WebSphere Application Server 게시판의 관계를 명확하게 설명하지 못했다.",
+      "proposed_fix": "Judge가 문서의 URL과 참조 관계를 검증하도록 개선한다. RAG는 원본 보안 게시판과 추가 참고 문서를 구분해 제목과 링크를 정확하게 안내하도록 한다.",
+      "final_assessment": "PASS. RAG가 CVE-2015-4911에 관한 정확한 IBM 보안 게시판을 검색하고 추가 정보를 확인할 수 있는 링크를 안내했다. 다만 두 보안 게시판의 관계를 일부 혼동했다. Judge의 주장 1 NOT_FOUND 판정도 명시된 링크를 고려하면 부적절하다."
+    },
+    "TRAIN_Q172": {
+      "human_pass": "pass",
+      "risk_level": "low",
+      "failure_reason": "오류 없음. 문서 1에 StoredIQ 7.6.0.5 이상에서 TLS 1.2를 지원하며, 애플리케이션 스택과 데이터 서버 모두 지원한다고 명시되어 있다.",
+      "root_cause_detail": "검색, 답변 생성, Judge 근거 판정 모두 정상이다. 질문과 일치하는 문서를 검색하여 핵심 정보를 정확하게 답변했다.",
+      "proposed_fix": "수정 불필요. 현재 검색 및 답변 생성 결과를 유지한다.",
+      "final_assessment": "PASS. IBM 원문과 RAG 답변이 정확히 일치하며, Judge의 두 주장 모두 적절하게 SUPPORTED로 판정되었다."
+    },
+    "TRAIN_Q236": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "medium",
+      "failure_reason": "문서 3에 macOS Sierra는 SPSS Statistics 24와 25만 공식 지원하며 이전 버전은 지원하지 않는다고 명시되어 있다. 그러나 RAG는 이 핵심 정보를 답변하지 않고 정보 부족으로 처리했다.",
+      "root_cause_detail": "RAG가 OS 호환성 문서보다 라이선스 인증 절차 문서를 중심으로 답변을 생성했다. 이후 Guardrails가 생성 후보를 차단하면서 최종 답변이 정보 부족으로 변경됐다. 차단 사유는 별도 로그 확인이 필요하다.",
+      "proposed_fix": "제품 버전과 운영체제 호환성 정보를 우선 확인하도록 RAG를 개선한다. Guardrails가 답변을 차단하더라도 문서에 명시된 지원 여부 등 검증 가능한 정보는 유지할 수 있도록 유보 정책을 점검한다.",
+      "final_assessment": "FAIL. RAG가 SPSS 19와 macOS Sierra의 비호환성을 확인할 수 있는 문서를 검색했으나 최종 답변에 반영하지 못했다. Judge의 주장 0건은 정상이며, 주요 개선 대상은 RAG 답변 생성과 Guardrails의 유보 처리다."
+    },
+    "TRAIN_Q326": {
+      "human_pass": "fail",
+      "root_cause": "evidence",
+      "risk_level": "medium",
+      "failure_reason": "문서 1은 WebSphere 설치 경로의 공백과 셀·노드·서버 이름의 밑줄에 관한 제약을 설명한다. 기존 WebSphere Portal 클러스터의 설치 디렉터리 및 셀 이름을 변경할 수 있다는 근거는 없다. Judge의 주장 2 CONTRADICTED 판정도 근거 문장 자체와 일치하지 않는다.",
+      "root_cause_detail": "RAG가 설치 경로 및 이름 관련 키워드가 유사한 문서를 검색했다. LLM은 다른 문제의 재설치 방법을 질문의 해결책으로 일반화했으며, Judge도 주장과 근거의 적용 상황을 정확히 구분하지 못했다.",
+      "proposed_fix": "WebSphere Portal, 기존 클러스터, 설치 디렉터리 변경, 셀 이름 변경 조건을 중심으로 검색 정확도를 개선한다. Judge는 문장의 표현뿐 아니라 대상 제품과 적용 상황까지 비교하도록 한다. 직접적인 근거가 없으면 변경 가능 여부를 단정하지 않도록 한다.",
+      "final_assessment": "FAIL. 검색된 문서는 기존 WebSphere Portal 클러스터의 설치 디렉터리 및 셀 이름 변경 가능 여부를 설명하지 않는다. LLM이 관련 없는 재설치 절차를 해결 방법으로 제시했으며, Judge의 주장 2 모순 판정도 부적절하다."
+    },
+    "TRAIN_Q307": {
+      "human_pass": "pass",
+      "risk_level": "low",
+      "failure_reason": "문서 1은 중복 DE 인스턴스로 인한 업그레이드 실패와 FQDN 관련 원인을 명시한다. 문서 4에는 기존 DE 디렉터리 이름을 변경하는 해결 방법이 있다. LLM의 핵심 설명은 근거와 일치한다. 다만 Judge의 주장 5 인용문에는 실제 변경 절차가 누락되어 있다.",
+      "root_cause_detail": "RAG 검색과 답변 생성은 정상이다. Judge의 주장 판정도 대체로 정확하지만, 주장 5의 근거 구절 선택이 불완전하다.",
+      "proposed_fix": "Judge가 해결 조치를 SUPPORTED로 판정할 때 실제 조치가 포함된 문장을 인용하도록 개선한다. RAG는 변경해야 할 DE 디렉터리를 구체적으로 안내하도록 보완한다.",
+      "final_assessment": "PASS. RAG가 정확한 IBM 문서를 검색했고 중복 DE 발생 원인과 디렉터리 이름 변경이라는 해결 방향을 올바르게 제시했다. Judge 판정도 대체로 적절하지만 주장 5의 인용 근거는 보완이 필요하다."
+    },
+    "DEV_Q198": {
+      "human_pass": "fail",
+      "root_cause": "evidence",
+      "risk_level": "medium",
+      "failure_reason": "검색 문서 1과 2는 CSQQCON2 모듈의 CSV002I 오류를 설명하지만, 실제 질문은 CSQADITB 모듈에 관한 것이다. 또한 문서 1에서는 명시적 MQDISC 호출로 문제가 해결되지 않는다고 설명한다. 따라서 LLM이 제시한 원인과 해결 방법은 질문의 문제에 대한 직접적인 근거가 없다.",
+      "root_cause_detail": "RAG가 CSV002I와 최대 사용 횟수 초과라는 공통 오류 문구를 중심으로 다른 모듈의 문서를 검색했다. LLM은 CSQADITB와 CSQQCON2의 차이 및 문서별 해결 조건을 검증하지 않고 MQDISC 호출을 해결책으로 제시했다.",
+      "proposed_fix": "RAG 검색 및 답변 생성 시 모듈명과 오류 코드를 함께 검증하도록 개선한다. 다른 모듈에 적용되는 해결 방법을 그대로 일반화하지 않으며, 명시적 근거가 없으면 원인과 해결 방법을 단정하지 않도록 한다.",
+      "final_assessment": "FAIL. RAG가 CSQADITB와 다른 CSQQCON2의 오류 문서를 근거로 답변했다. MQDISC 호출이 실제 질문의 오류를 해결한다는 근거는 없다. Judge의 두 NOT_FOUND 판정은 적절하다."
+    }
+  },
+  "global_notes": {},
+  "metric_ok_only": {
+    "tp": 3,
+    "fp": 0,
+    "tn": 6,
+    "fn": 3,
+    "n": 12,
+    "precision": 1,
+    "recall": 0.5,
+    "specificity": 1,
+    "far": 0,
+    "f1": 0.6666666666666666,
+    "accuracy": 0.75,
+    "kappa": 0.5,
+    "fnr": 0.5
+  },
+  "metric_all_nonapproved": {
+    "tp": 3,
+    "fp": 0,
+    "tn": 10,
+    "fn": 7,
+    "n": 20,
+    "precision": 1,
+    "recall": 0.3,
+    "specificity": 1,
+    "far": 0,
+    "f1": 0.46153846153846156,
+    "accuracy": 0.65,
+    "kappa": 0.30000000000000004,
+    "fnr": 0.7
+  },
+  "exported_at": "2026-11-24T02:48:58.729Z"
+}

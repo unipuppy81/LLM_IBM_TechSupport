@@ -1,0 +1,244 @@
+{
+  "schema": "judge-human-final2-v1",
+  "sample_size": 26,
+  "sample_seed": 20261126,
+  "sample_fingerprint": "3da9ce719ec017962d2521feffbe473771f26130923eba36ed341f142e76932a",
+  "frozen_judge_schema": "ibm-techqa-judge-claims-v3.10",
+  "reviews": {
+    "DEV_Q021": {
+      "human_pass": "pass",
+      "root_cause": "other",
+      "risk_level": "low",
+      "failure_reason": "WSDL을 WS-Proxy에서 제거한 뒤 다시 추가해야 재컴파일된다는 IBM 근거와 답변 절차가 직접 일치한다.",
+      "root_cause_detail": "저장 → 기존 WSDL 제거 → Apply/Save → Add WSDL 순서가 근거 문서와 동일하다.",
+      "proposed_fix": "현재 답변 수준을 유지한다.",
+      "final_assessment": "PASS. 로컬 WSDL 변경을 WS-Proxy에 반영하는 절차를 IBM 근거에 맞게 정확히 안내했다."
+    },
+    "DEV_Q026": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "high",
+      "failure_reason": "질문은 DataPower DNS 캐시인데 답변은 Sterling GIS와 iSeries의 설정을 조합해 적용했다.",
+      "root_cause_detail": "GIS의 java.security 설정과 iSeries CHGTCPDMN은 DataPower용 근거가 아니다. 또한 networkaddress.cache.ttl=-1은 근거 자체에서 무기한 캐시를 의미해 새 IP 반영 목적과도 맞지 않는다.",
+      "proposed_fix": "DataPower 자체 DNS cache/TTL/flush 기능을 직접 다루는 문서가 없으면 유보하고 다른 IBM 제품의 DNS 조치를 전용하지 않는다.",
+      "final_assessment": "FAIL. 다른 제품의 DNS 캐시 조치를 DataPower 해결책으로 잘못 결합했다."
+    },
+    "DEV_Q107": {
+      "human_pass": "fail",
+      "root_cause": "evidence",
+      "risk_level": "medium",
+      "failure_reason": "검색 근거는 다른 BO 직렬화 오류이며, IID publish 시 'BO Service is not supported or disabled'의 원인이나 해결책을 직접 지원하지 않는다.",
+      "root_cause_detail": "답변의 BO 서비스 미설치/비활성, 재설치, OS/미들웨어 업데이트, 권한 확인 등은 제시된 근거에서 확인되지 않는다.",
+      "proposed_fix": "해당 예외 문자열과 IID/local Process Server publish 실패를 직접 다루는 IBM 문서를 검색하고, 없으면 원인을 추정하지 않는다.",
+      "final_assessment": "FAIL. 현재 근거로 확인되지 않는 원인과 복구 절차를 추정해 제시했다."
+    },
+    "DEV_Q109": {
+      "human_pass": "pass",
+      "root_cause": "other",
+      "risk_level": "low",
+      "failure_reason": "CVE-2016-8918의 제품, 버전 범위, 비기본 구성에서 유효 자격증명 없이 인증될 수 있다는 내용이 정확한 IBM Security Bulletin과 일치한다.",
+      "root_cause_detail": "질문의 CVE와 동일한 문서가 검색되었고 핵심 취약점 설명을 정확히 요약했다.",
+      "proposed_fix": "가능하면 정확한 Bulletin 문서명을 명시해 안내하면 더 명확하다.",
+      "final_assessment": "PASS. 질문과 동일한 IIB CVE의 핵심 내용을 정확한 근거로 설명했다."
+    },
+    "DEV_Q154": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "medium",
+      "failure_reason": "답변은 USERPARAMETERS가 없어지는 현상을 원인처럼 설명하지만 실제 근거의 핵심 원인은 cluster replication 중 USERPARAMETERS 크기 제한으로 .type 파일이 잘리는 문제다.",
+      "root_cause_detail": "APAR 근거에는 약 16K 이상의 USERPARAMETERS 값에서 replication이 실패한다고 되어 있다. 답변은 이 원인을 명시하지 않고 추가해야 할 server property 이름도 제시하지 못했다.",
+      "proposed_fix": "USERPARAMETERS 크기 제한에 의한 replication/truncation 원인을 명시하고, 실제 property 이름이 근거에서 확인될 때만 설정 절차를 제공한다.",
+      "final_assessment": "FAIL. 관련 해결 방향은 찾았지만 실제 손상 원인을 충분히 설명하지 못했다."
+    },
+    "DEV_Q186": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "medium",
+      "failure_reason": "완전한 response-file 경로를 지정하라는 진단은 맞지만 예시 명령은 다시 상대 경로 MQ_Silent_Uninstall.txt를 사용한다.",
+      "root_cause_detail": "IBM 근거는 E:\\TEMP\\silent_response.txt처럼 전체 경로가 필요하다고 명시한다. 답변의 실행 예시는 문제를 그대로 재현할 수 있다.",
+      "proposed_fix": "예시에도 실제 절대 경로를 넣어 setup /z\"/sfC:\\...\\MQ_Silent_Uninstall.txt\" 형태로 안내한다.",
+      "final_assessment": "FAIL. 원인은 맞게 찾았지만 제시한 예시 명령이 해결 조건을 충족하지 않는다."
+    },
+    "DEV_Q210": {
+      "human_pass": "fail",
+      "root_cause": "evidence",
+      "risk_level": "medium",
+      "failure_reason": "WAS startNode/deployment 문제에 대해 Hadoop namenode와 다른 제품의 RMI channel 사례를 원인으로 결합했다.",
+      "root_cause_detail": "검색 문서는 'Too many open files'의 일반적/타제품 사례일 뿐 현재 WAS ADML3000E 상황의 직접 원인을 특정하지 않는다.",
+      "proposed_fix": "WAS deployment/startNode와 file descriptor exhaustion을 직접 다루는 근거가 없으면 OS nofile 확인 같은 일반 진단 범위만 제한적으로 제시한다.",
+      "final_assessment": "FAIL. 다른 제품의 사례를 현재 WebSphere 장애의 구체적 원인으로 잘못 전용했다."
+    },
+    "DEV_Q220": {
+      "human_pass": "pass",
+      "root_cause": "other",
+      "risk_level": "low",
+      "failure_reason": "질문의 PureApplication System CVE-2014-8730과 정확히 일치하는 Security Bulletin을 Document 1로 안내한다.",
+      "root_cause_detail": "다른 문서들은 동일 CVE의 타제품 사례로 구분해서 설명했으며 핵심 출처는 정확하다.",
+      "proposed_fix": "Document 1만 우선 안내하고 타제품 문서는 부가 참고로 최소화하면 더 간결하다.",
+      "final_assessment": "PASS. 정확한 PureApplication System 보안 게시판을 안내했다."
+    },
+    "DEV_Q223": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "medium",
+      "failure_reason": "Business Monitor 8.0.1 질문에 OpenPages에서 발생하는 Cognos 10.2.2.2 Chrome 문제의 해결책을 적용했다.",
+      "root_cause_detail": "OpenPages를 Cognos gateway의 trusted site로 설정하는 조치는 Business Monitor Report Viewer widget과 동일 문제라는 근거가 없다.",
+      "proposed_fix": "Business Monitor 8.0.1 + Cognos Report Viewer + Chrome 조합을 직접 다루는 근거만 사용하고, OpenPages 해결책을 전용하지 않는다.",
+      "final_assessment": "FAIL. 같은 Cognos/Chrome 계열이지만 다른 제품의 해결책을 Business Monitor에 적용했다."
+    },
+    "TRAIN_Q003": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "high",
+      "failure_reason": "IHS mutual SSL 구성 질문에 DataPower MQ와 WAS plug-in 문서를 근거로 일반적인 IHS 설정 절차를 생성했다.",
+      "root_cause_detail": "인증서 설치 위치, IHS 관리 콘솔의 SSL 설정, 재시작 절차 등 핵심 단계가 제시된 근거에서 직접 지원되지 않는다.",
+      "proposed_fix": "IBM HTTP Server v7의 client certificate/mutual authentication 설정을 직접 설명하는 문서를 검색한 뒤 그 지시만 사용한다.",
+      "final_assessment": "FAIL. 다른 제품의 mutual TLS 문서를 기반으로 IHS 설정 절차를 추정했다."
+    },
+    "TRAIN_Q077": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "medium",
+      "failure_reason": "질문의 오류는 sample.InputParameter 클래스 번역 실패인데 답변은 별도 XU.ERROR.10014 empty decision table 문제를 원인으로 단정했다.",
+      "root_cause_detail": "검색 문서의 empty decision table 오류 signature와 질문의 Cannot translate class 오류가 일치하지 않는다.",
+      "proposed_fix": "오류 코드와 핵심 exception signature가 같은 문서에서 원인이 확인될 때만 진단하고, 아니면 유보한다.",
+      "final_assessment": "FAIL. 다른 ruleset parsing 오류의 원인을 현재 오류에 잘못 적용했다."
+    },
+    "TRAIN_Q171": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "low",
+      "failure_reason": "정확한 CVE-2014-8730 문서는 Document 2인데, 답변은 다른 CVE-2014-0907의 Document 1도 해당 보안 게시판의 일반 정보 출처처럼 안내했다.",
+      "root_cause_detail": "핵심 출처를 찾기는 했지만 서로 다른 CVE 문서를 같은 문제의 출처로 묶어 provenance를 흐렸다.",
+      "proposed_fix": "CVE가 정확히 일치하는 Document 2만 우선 출처로 안내하고 다른 CVE 문서는 제외한다.",
+      "final_assessment": "FAIL. 정답 문서를 포함했지만 다른 CVE 문서까지 동일 보안 게시판의 근거처럼 안내했다."
+    },
+    "TRAIN_Q208": {
+      "human_pass": "pass",
+      "root_cause": "other",
+      "risk_level": "low",
+      "failure_reason": "IDz/RDz host-client가 서로 다른 수준으로 동작할 수 있고 호환되는 버전 조합을 정확한 IBM compatibility 문서에서 제시했다.",
+      "root_cause_detail": "v14.1.x, v14.0.x, RDz v9.5.x의 호환 관계가 근거와 직접 일치한다.",
+      "proposed_fix": "질문에 불필요한 fix pack 언급은 생략해도 된다.",
+      "final_assessment": "PASS. 서로 다른 host/client 버전의 지원 가능성과 호환 범위를 정확히 설명했다."
+    },
+    "TRAIN_Q233": {
+      "human_pass": "pass",
+      "root_cause": "other",
+      "risk_level": "low",
+      "failure_reason": "API Connect CVE-2018-1382와 정확히 일치하는 IBM Security Bulletin을 Document 1로 안내했다.",
+      "root_cause_detail": "CVE, 취약점 유형, 제품이 모두 일치한다.",
+      "proposed_fix": "현재 답변 수준을 유지한다.",
+      "final_assessment": "PASS. 질문과 동일한 API Connect XSS 보안 게시판을 정확히 안내했다."
+    },
+    "TRAIN_Q264": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "high",
+      "failure_reason": "WAS 7.0.0.37 업그레이드 후 문제에 대해 pre-V6.1과 SQL Server 2005의 비호환성을 원인으로 추가해 현재 환경과 맞지 않는 진단을 했다.",
+      "root_cause_detail": "xp_jdbc_open 누락 문서는 특정 오류가 있을 때 적용 가능하지만 질문에는 해당 오류가 제시되지 않았다. WAS v7 환경에 pre-V6.1 호환성 설명을 결합한 것도 부적절하다.",
+      "proposed_fix": "업그레이드 직후 실제 SQLException/error code와 WAS 7.0.0.37을 직접 다루는 근거가 없으면 원인을 단정하지 않는다.",
+      "final_assessment": "FAIL. 다른 버전/조건의 SQL Server 문제를 현재 WAS 7 업그레이드 장애 원인으로 결합했다."
+    },
+    "TRAIN_Q272": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "high",
+      "failure_reason": "질문은 WebSphere V7.0→V8.5.5 업그레이드인데 답변은 이를 WebSphere MQ V7.0→V8.5.5 업그레이드로 잘못 해석했다.",
+      "root_cause_detail": "검색 문서들은 MQRC 2035의 일반 원인을 설명하지만 질문에 제시된 WebSphere Application Server 업그레이드 맥락을 직접 설명하지 않는다.",
+      "proposed_fix": "WAS와 MQ 제품 버전을 구분하고, 질문의 원문 링크/환경과 직접 일치하는 문서에서 2035 원인을 확인한다.",
+      "final_assessment": "FAIL. 제품과 버전 맥락을 잘못 해석해 일반 MQ 인증 오류 설명으로 대체했다."
+    },
+    "TRAIN_Q295": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "high",
+      "failure_reason": "WebGUI의 Java 7u25 메시지는 IBM 문서상 경고이며 무시 가능하지만 답변은 Network IPS의 firmware 4.6.2 업데이트를 해결책으로 제시했다.",
+      "root_cause_detail": "firmware 4.6.2 조치는 다른 GX/Network IPS 제품의 Java 7u51 문제에 대한 해결책이다.",
+      "proposed_fix": "ITNM/Omnibus WebGUI 문서의 의미대로 7u25+의 manifest 경고임을 설명하고 타제품 firmware 조치를 제거한다.",
+      "final_assessment": "FAIL. 원인은 일부 맞지만 다른 제품의 firmware 해결책을 WebGUI에 잘못 적용했다."
+    },
+    "TRAIN_Q311": {
+      "human_pass": "fail",
+      "root_cause": "evidence",
+      "risk_level": "high",
+      "failure_reason": "질문은 OA45950 적용 후 S878 abend인데 답변은 오래된 PK13835의 APPLID/DFHPA1915/abend0208 문제를 설명한다.",
+      "root_cause_detail": "APAR, 증상, abend code가 모두 질문과 다르며 현재 S878의 원인을 뒷받침하지 않는다.",
+      "proposed_fix": "OA45950/PTF UA75818/UA75819/UA75838과 S878을 직접 연결하는 문서가 검색되지 않으면 유보한다.",
+      "final_assessment": "FAIL. 전혀 다른 CICS APAR의 원인을 현재 S878 문제에 적용했다."
+    },
+    "TRAIN_Q404": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "high",
+      "failure_reason": "질문은 WAS 8.x DataPower Appliance Manager에 scrypt3 firmware image를 업로드할 때의 오류인데 답변은 appliance CLI에서 scrypt tool을 실행할 때 사용하는 boot image 명령을 해결책으로 제시했다.",
+      "root_cause_detail": "근거 문서는 firmware image 업로드 호환성 문제가 아니라 scrypt 'tool' 실행 명령에 관한 내용이다.",
+      "proposed_fix": "Appliance Manager 8.x의 scrypt3/v7 firmware 지원 여부를 직접 다루는 근거를 사용하고 CLI tool workaround를 전용하지 않는다.",
+      "final_assessment": "FAIL. scrypt 형식이라는 공통점만으로 다른 실행 경로의 해결책을 적용했다."
+    },
+    "TRAIN_Q422": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "low",
+      "failure_reason": "CVE, 제품, 공격 설명과 CVSS 4.3은 맞지만 답변이 4.3을 'high severity'라고 추가로 분류했다.",
+      "root_cause_detail": "제시된 IBM 근거에는 high severity라는 분류가 없으며 수치에 대한 잘못된 의미 해석이 추가됐다.",
+      "proposed_fix": "CVSS 점수와 vector만 근거대로 전달하고 근거에 없는 severity label을 붙이지 않는다.",
+      "final_assessment": "FAIL. 보안 게시판 내용은 맞지만 CVSS 4.3의 심각도를 잘못 해석했다."
+    },
+    "TRAIN_Q431": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "medium",
+      "failure_reason": "공백 경로 문제를 올바르게 지적하면서도 대안으로 다시 공백이 포함된 C:\\Program Files (x86)\\IBM\\ITM을 제시했다.",
+      "root_cause_detail": "근거 문서 1은 해당 경로 자체가 실패 재현 조건이라고 명시하고, 문서 2는 D:\\IBM\\ITM처럼 공백 없는 경로를 권장한다.",
+      "proposed_fix": "공백 없는 경로를 사용하거나 NTFS 8.3 설정을 확인하도록 안내하고 Program Files 계열 경로를 대안으로 제시하지 않는다.",
+      "final_assessment": "FAIL. 핵심 위험을 설명했지만 해결 예시가 근거와 직접 모순된다."
+    },
+    "TRAIN_Q487": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "low",
+      "failure_reason": "정확한 Drupal 취약점 문서를 찾았지만 Document 3과 4까지 질문의 각 취약점 상세 출처라고 설명했다.",
+      "root_cause_detail": "Document 3은 CVE-2018-7600, Document 4는 PHP 취약점으로 질문의 CVE 목록과 무관하다.",
+      "proposed_fix": "질문의 CVE들이 실제 포함된 Document 1/2만 출처로 안내하고 관련 없는 후속 문서를 제외한다.",
+      "final_assessment": "FAIL. 정답 문서를 포함했지만 다른 취약점 문서까지 동일 CVE들의 상세 근거로 잘못 안내했다."
+    },
+    "TRAIN_Q498": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "medium",
+      "failure_reason": "-Xjit:disableDeadTreeElimination은 JIT 전체를 비활성화하는 옵션이 아닌데 답변은 JIT compiler를 끄는 방법처럼 설명했다.",
+      "root_cause_detail": "해당 옵션은 특정 Dead Tree Elimination 고CPU 패턴에만 근거가 있고 질문의 stack에는 그 signature가 제시되지 않았다. native stack 크기 조정도 현재 증상과 직접 연결되지 않는다.",
+      "proposed_fix": "JIT thread stack에서 fixUpTree/TR_EliminateDeadTrees가 확인될 때만 해당 옵션을 제시하고, 전체 JIT 비활성화와 구분한다.",
+      "final_assessment": "FAIL. 특정 JIT 최적화 문제의 workaround를 일반적인 JIT CPU 문제 해결책으로 과도하게 일반화했다."
+    },
+    "TRAIN_Q537": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "medium",
+      "failure_reason": "근거는 HSQLDB password가 반드시 double quoted여야 한다고 명시하지만 답변 예시는 SET PASSWORD 'new_password'로 single quote를 사용한다.",
+      "root_cause_detail": "답변은 '필요하면 double-quote'라고 했지만 근거상 선택 사항이 아니다.",
+      "proposed_fix": "근거의 정확한 SET PASSWORD 구문과 double quote 요구사항을 그대로 사용한다.",
+      "final_assessment": "FAIL. 핵심 명령의 quoting 규칙을 근거와 다르게 안내했다."
+    },
+    "TRAIN_Q583": {
+      "human_pass": "pass",
+      "root_cause": "other",
+      "risk_level": "low",
+      "failure_reason": "동일 launchpad.sh/silent_MS_linux.bin end-of-file 증상의 직접 IBM 문서가 있으며 원인을 missing Linux system libraries라고 정확히 설명했다.",
+      "root_cause_detail": "RHEL6/7 64-bit 환경과 오류 문자열이 근거 문서와 일치한다.",
+      "proposed_fix": "가능하면 필요한 라이브러리 또는 공식 설치 우회 절차까지 근거에서 확인해 추가하면 된다.",
+      "final_assessment": "PASS. ITCAM 설치 실패의 직접 원인을 정확한 IBM 문서에 근거해 설명했다."
+    },
+    "TRAIN_Q599": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "medium",
+      "failure_reason": "질문의 stack은 MD5CryptoServiceProvider인데 답변은 SHA-1 managed class 문제라고 바꿔 설명했다.",
+      "root_cause_detail": "SHA1Managed 사례는 IBM i2 Analyst's Notebook의 별도 문제 문서에서 가져온 것이다. ICC의 정확한 오류 문서는 찾았지만 실제 원인을 충분히 설명하지 못하고 Support 문의로 끝냈다.",
+      "proposed_fix": "ICC의 MD5CryptoServiceProvider와 Windows FIPS 정책 간 충돌을 직접 다루는 근거에서 원인과 조치를 설명하고 타제품 SHA-1 사례를 섞지 않는다.",
+      "final_assessment": "FAIL. 동일 FIPS 오류의 다른 제품 SHA-1 사례를 ICC의 MD5 오류에 잘못 적용했다."
+    }
+  },
+  "exported_at": "2026-11-24T07:03:43.420053+00:00"
+}

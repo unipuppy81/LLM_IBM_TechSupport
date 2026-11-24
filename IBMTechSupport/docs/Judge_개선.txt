@@ -1,0 +1,551 @@
+# IBM Tech Support LLM Judge 개선 과정
+
+## 1. RAG 개선 및 평가 데이터 정제
+
+IBM 기술지원 RAG에서 다음 항목을 우선 개선하였다.
+
+- Chunk 크기 / overlap
+- Dense / BM25 / Hybrid Search
+- RRF / Top-K
+- 검색 파라미터
+- RAG 프롬프트
+
+일부 개선은 있었지만 검색 지표만으로 실제 답변 품질을 정확히 판단하기 어려웠다.
+
+기존 평가 데이터 135건도 다시 검증하여 실제 평가 가능한 **106건**으로 정제하였다.
+
+```text
+135건
+→ 데이터 검증
+→ 106건
+```
+
+이에 따라 RAG 답변의 실제 기술적 정확성을 평가하기 위한 **LLM Judge**를 구축하였다.
+
+---
+
+## 2. 초기 LLM Judge 구축
+
+Judge는 RAG 답변을 Claim 단위로 나눈 후 IBM 근거 문서와 비교하도록 설계하였다.
+
+```text
+질문 + 답변 + IBM 근거
+→ Claim 추출
+→ Claim별 근거 검증
+→ SUPPORTED / CONTRADICTED / NOT_FOUND
+→ PASS / FAIL / REVIEW_REQUIRED
+```
+
+초기에는 다음 문제가 있었다.
+
+- 실제 근거가 있는데 NOT_FOUND 처리
+- 근거가 부족한 답변을 승인
+- Evidence ID / 인용 오류
+- 다른 제품의 해결책 혼합
+- 다른 버전의 절차 승인
+- 여러 문서의 내용을 임의로 결합
+
+---
+
+## 3. Evidence-first 구조로 개선
+
+LLM 판단에만 의존하지 않고 고신뢰 패턴은 Python에서 먼저 검증하도록 구조를 변경하였다.
+
+```text
+IBM 문서
+↓
+Python 고신뢰 검증
+↓
+확실하면 직접 판정
+↓
+애매한 Claim만 Qwen Judge
+↓
+제품 / 버전 / 오류 / 근거 검증
+↓
+최종 판정
+```
+
+주요 검증 대상:
+
+- 제품명
+- 버전
+- 오류 코드 / 증상
+- 명령어
+- 경로
+- 숫자
+- 근거 문서 혼합
+- 불확실한 경우 REVIEW_REQUIRED
+
+---
+
+## 4. Human Review 20건
+
+20건을 사람이 직접 검토해 Judge 결과와 비교하였다.
+
+초기:
+
+```text
+Accuracy 65%
+Recall 30%
+```
+
+개선 후:
+
+```text
+Accuracy 95%
+Recall 90%
+FP 0
+```
+
+기술지원에서는 틀린 답변을 PASS시키는 **False Positive를 가장 위험한 오류**로 보고 FP 최소화를 우선하였다.
+
+---
+
+## 5. 신규 30건 검증
+
+새로운 30건에서는 Judge가 지나치게 보수적으로 동작하면서 Recall이 0%까지 떨어졌다.
+
+다음 항목을 추가 개선하였다.
+
+- 정상적인 INSUFFICIENT_INFORMATION
+- 제품 불일치
+- 여러 문서에 분산된 근거
+- 근거가 있는데 과도하게 거부하는 문제
+
+이후 기존 20건 + 신규 30건, 총 50건에서:
+
+```text
+49 / 50
+
+Accuracy 98%
+FP 0
+FN 1
+```
+
+을 기록하였다.
+
+---
+
+## 6. 신규 30건 일반화 실패
+
+Judge를 동결한 뒤 새로운 30건에 적용하였다.
+
+```text
+TP 6
+FP 3
+TN 12
+FN 9
+
+Accuracy 60%
+Precision 66.7%
+Recall 40%
+FP Rate 20%
+```
+
+기존 데이터에서 높은 성능이 나왔지만 새로운 데이터에서는 크게 하락하였다.
+
+주요 실패 유형은 다음과 같았다.
+
+- 서로 다른 문서의 사실을 조합
+- 다른 제품의 해결책 사용
+- 다른 버전의 절차 사용
+- 경로 안 문자열을 제품 식별자로 오인
+- 명확한 IBM 근거를 LLM Judge가 놓침
+
+---
+
+## 7. v3.9 — 고신뢰 Python 검증 강화
+
+LLM이 명확한 근거도 놓치는 문제를 줄이기 위해 다음과 같은 패턴을 Python에서 직접 검증하였다.
+
+- IBM 문서 제목 직접 일치
+- Security Bulletin
+- DB2 object descriptor
+- silent install locked files
+- 동일 User ID 관련 동작
+- zonecfg / non-root 원인
+- IBM 원문과 거의 동일한 해결 문장
+
+또한 URL, 파일 경로, 디렉터리 내부 문자열은 hard identifier로 취급하지 않도록 수정하였다.
+
+v3.9 결과:
+
+```text
+80건
+
+Accuracy 96.25%
+Precision 94.12%
+Recall 96.97%
+
+FP 2
+FN 1
+```
+
+남은 주요 문제:
+
+1. 필수 선행 절차 누락
+2. 같은 제품 내부의 다른 장애 해결책 혼합
+
+---
+
+## 8. v3.10 — 절차 및 오류 Signature 검증
+
+### 필수 선행조건 검증
+
+IBM 문서가:
+
+```text
+Suspend
+→ Custodian 추가
+```
+
+처럼 필수 순서를 명시했는데 답변이 이를 생략하면:
+
+```text
+MANDATORY_PRECONDITION_MISSING
+```
+
+으로 차단하였다.
+
+### 동일 제품 내 다른 장애 해결책 차단
+
+질문의 오류와 해결책 문서의 오류가 다르면:
+
+```text
+REMEDY_ERROR_SIGNATURE_MISMATCH
+```
+
+으로 차단하였다.
+
+v3.10 결과:
+
+```text
+80건
+
+TP 32
+FP 0
+TN 47
+FN 1
+
+Accuracy 98.75%
+Precision 100%
+Recall 96.97%
+FP Rate 0%
+```
+
+---
+
+## 9. 독립 신규 26건 일반화 테스트
+
+v3.10을 당시 완전히 새로운 26건에 적용하였다.
+
+```text
+Accuracy 76.92%
+Precision 50%
+Recall 33.33%
+
+FP 2
+FN 4
+FP Rate 10%
+```
+
+80건에서는 98.75%였지만 새로운 데이터에서는 다시 성능이 크게 하락하였다.
+
+이를 통해 단순 Guard 추가만으로는 일반화가 부족하다는 점을 확인하였다.
+
+---
+
+## 10. 신규 실패 유형 분석
+
+### Task Context 불일치
+
+`TRAIN_Q404`에서는 `scrypt`라는 단어가 같다는 이유로:
+
+```text
+Appliance Manager firmware upload
+```
+
+과
+
+```text
+DataPower CLI boot image 실행
+```
+
+을 동일 문제로 판단하였다.
+
+따라서 단순 제품/키워드뿐 아니라:
+
+- 작업 목적
+- 실행 경로
+- 실제 Action
+
+까지 비교할 필요가 생겼다.
+
+### 숫자 의미 해석 오류
+
+`TRAIN_Q422`에서는 `CVSS 4.3`이라는 숫자는 맞았지만 이를 `high severity`라고 잘못 해석하였다.
+
+따라서:
+
+```text
+숫자
++
+단위
++
+등급
++
+의미
+```
+
+를 함께 검증해야 했다.
+
+### Claim 중요도 문제
+
+정답인 답변에서도 일부 부가 문장이 NOT_FOUND가 되면서 전체 FAIL이 발생하였다.
+
+따라서 Claim을:
+
+```text
+Essential
+Supporting
+Optional
+```
+
+로 구분하도록 구조를 변경하였다.
+
+---
+
+## 11. v3.11 — Judge 평가 구조 개선
+
+이 시점부터는 특정 케이스를 하나씩 차단하는 방식이 아니라 Judge 구조 자체를 개선하였다.
+
+평가 구조:
+
+```text
+Claim 검증
+↓
+제품 일치
+↓
+버전 일치
+↓
+오류 / 증상 일치
+↓
+작업 목적 / 실행 경로 일치
+↓
+숫자 / 등급 / 의미 검증
+↓
+Claim 중요도
+   Essential
+   Supporting
+   Optional
+↓
+Answer-Level 최종 판정
+```
+
+v3.11에서는 새로운 26건의 FP는 제거했지만 기존 데이터 일부에서 새로운 FN/FP가 발생하였다.
+
+106건 결과:
+
+```text
+Accuracy 92.45%
+FP 3
+FN 5
+```
+
+즉 구조 개선 방향은 맞았지만 회귀 안정성이 부족했다.
+
+---
+
+## 12. v3.12 — 일반 규칙 회귀 보정
+
+v3.11에서 발견된 오류를 ID별 예외가 아닌 일반 실패 유형으로 다시 정리하였다.
+
+추가한 주요 검증:
+
+- 다른 제품 검색 문법 혼합 차단
+- CVE 및 source 식별자 검증
+- 사용자의 목표와 반대되는 해결책 차단
+- 동일 오류코드 + IBM CAUSE 기반 검증
+- client/server compatibility 근거 검증
+- 정상 동작/무시 가능 근거 처리
+
+v3.12 결과:
+
+```text
+106건
+
+TP 36
+FP 0
+TN 67
+FN 3
+
+Accuracy 97.17%
+Precision 100%
+Recall 92.31%
+FP Rate 0%
+```
+
+남은 오류:
+
+- DEV_Q101 — 목표 방향 검증 오탐
+- TRAIN_Q583 — 목표 방향 검증 오탐
+- DEV_Q232 — 정상 abstention을 REVIEW_REQUIRED 처리
+
+---
+
+## 13. v3.13 — 마지막 보정
+
+마지막으로 `ANSWER_GOAL_DIRECTION_MISMATCH`가 지나치게 넓게 적용되는 문제만 수정하였다.
+
+기존에는 질문이나 답변에 `cannot`, `unable to` 등의 표현이 있으면 사용자의 목표와 반대 방향으로 잘못 판단할 가능성이 있었다.
+
+이를 좁혀 실제로:
+
+- 권한 제거
+- 기능 비활성화
+- 접근 차단
+- 사용자가 원하는 동작을 불가능하게 만드는 조치
+
+와 같이 **실제 해결 방향이 반대인 경우만 차단**하도록 변경하였다.
+
+---
+
+## 14. Judge v3.13 최종 회귀 결과
+
+총 106건:
+
+```text
+TP 38
+FP 0
+TN 67
+FN 1
+
+Accuracy 99.06%
+Precision 100%
+Recall 97.44%
+False Approval Rate 0%
+Kappa 0.9796
+```
+
+그룹별 결과:
+
+```text
+기존 20건
+→ 100%
+
+추가 Validation 30건
+→ 100%
+
+신규 30건
+→ 96.67%
+→ FN 1
+
+신규 26건
+→ 100%
+```
+
+유일하게 남은 오류:
+
+```text
+DEV_Q232
+```
+
+는 근거가 부족한 상황에서 답변이 `INSUFFICIENT_INFORMATION`을 선택한 정상적인 abstention이지만 Judge가 이를 자동 PASS하지 않고 `REVIEW_REQUIRED`로 보낸 경우이다.
+
+이는 틀린 답변을 승인하는 FP가 아니라 **보수적인 FN**이므로 그대로 유지하기로 하였다.
+
+---
+
+## 15. Overfitting 방지 원칙
+
+Judge 개선에서 가장 중요한 원칙은 다음과 같다.
+
+잘못된 방식:
+
+```text
+오류 발생
+→ 해당 ID 전용 조건 추가
+```
+
+올바른 방식:
+
+```text
+오류 발생
+→ 실패 원인 분석
+→ 일반 실패 유형 정의
+→ 일반 규칙 추가
+→ 전체 데이터 회귀 테스트
+→ 새로운 데이터 검증
+```
+
+현재까지 주요 실패 유형은 다음과 같이 압축되었다.
+
+```text
+제품 불일치
+버전 불일치
+다른 장애 해결책 혼합
+근거 없는 기능 지원
+필수 선행조건 누락
+오류 Signature 불일치
+작업 문맥 불일치
+숫자 / 등급 / 의미 오류
+답변 목표 방향 불일치
+과도한 거부
+Claim 중요도 미구분
+```
+
+---
+
+## 16. 현재 상태
+
+현재 106건은 모두 Judge 개발 및 회귀 데이터이다.
+
+```text
+기존 80건
++
+신규 26건
+=
+106건 개발 / 회귀 데이터
+```
+
+Judge는 현재:
+
+```text
+v3.13
+Accuracy 99.06%
+Precision 100%
+Recall 97.44%
+FP 0
+```
+
+상태에서 **동결**한다.
+
+최종 테스트 데이터는 별도로 정리한:
+
+```text
+test_clean.json
+120건
+```
+
+이며 아직 RAG 또는 Judge 개선에 사용하지 않는다.
+
+---
+
+## 17. 다음 단계
+
+Judge 개선 작업은 v3.13에서 종료한다.
+
+다음 작업은 RAG 2차 개선이다.
+
+```text
+1. Reranker
+2. 제품 / 버전 / 오류코드 필터
+3. Query Rewrite
+4. Retrieval Precision / Recall 재평가
+5. 개선된 RAG로 Validation 106건 답변 재생성
+6. 동결된 Judge v3.13으로 평가
+7. RAG 최종 동결
+8. 마지막에 test_clean 120건 최종 평가
+```
+
+최종 성능은 현재 106건의 99.06%가 아니라, **RAG와 Judge를 모두 동결한 후 untouched `test_clean.json` 120건에서 측정한 결과**로 판단한다.

@@ -1,0 +1,82 @@
+{
+  "schema": "judge-regression-80-v1",
+  "judge_schema_version": "ibm-techqa-judge-claims-v3.10",
+  "rubric_version": "ibm-techqa-claim-derived-v3.10",
+  "groups": {
+    "development_20": {
+      "n": 20,
+      "TP": 10,
+      "FP": 0,
+      "TN": 10,
+      "FN": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "accuracy": 1.0,
+      "false_approval_rate": 0.0,
+      "kappa": 1.0,
+      "errors": []
+    },
+    "validation_30": {
+      "n": 30,
+      "TP": 8,
+      "FP": 0,
+      "TN": 22,
+      "FN": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "accuracy": 1.0,
+      "false_approval_rate": 0.0,
+      "kappa": 1.0,
+      "errors": []
+    },
+    "final_30_now_development": {
+      "n": 30,
+      "TP": 14,
+      "FP": 0,
+      "TN": 15,
+      "FN": 1,
+      "precision": 1.0,
+      "recall": 0.9333,
+      "accuracy": 0.9667,
+      "false_approval_rate": 0.0,
+      "kappa": 0.9333,
+      "errors": [
+        {
+          "id": "DEV_Q232",
+          "type": "FN",
+          "judge_status": "REVIEW_REQUIRED",
+          "claim_verdicts": [],
+          "review_flags": [
+            "REFUSAL_REQUIRES_HUMAN_REVIEW"
+          ],
+          "human_assessment": "PASS. 현재 검색 근거만으로 지원 여부를 확정하지 않고 유보한 것은 적절하다."
+        }
+      ]
+    }
+  },
+  "total": {
+    "n": 80,
+    "TP": 32,
+    "FP": 0,
+    "TN": 47,
+    "FN": 1,
+    "precision": 1.0,
+    "recall": 0.9697,
+    "accuracy": 0.9875,
+    "false_approval_rate": 0.0,
+    "kappa": 0.9741,
+    "errors": [
+      {
+        "id": "DEV_Q232",
+        "type": "FN",
+        "judge_status": "REVIEW_REQUIRED",
+        "claim_verdicts": [],
+        "review_flags": [
+          "REFUSAL_REQUIRES_HUMAN_REVIEW"
+        ],
+        "human_assessment": "PASS. 현재 검색 근거만으로 지원 여부를 확정하지 않고 유보한 것은 적절하다."
+      }
+    ]
+  },
+  "note": "All 80 cases have now been used for development/regression; none is an independent final test."
+}

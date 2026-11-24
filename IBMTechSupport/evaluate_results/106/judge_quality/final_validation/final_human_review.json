@@ -1,0 +1,280 @@
+{
+  "schema": "judge-human-final-v1",
+  "sample_size": 30,
+  "sample_seed": 20261125,
+  "sample_fingerprint": "52c147f996a931db4c152126cc841a2163c453bf7f337133fa59e7ac0c1dad0b",
+  "frozen_judge_schema": "ibm-techqa-judge-claims-v3.8",
+  "reviews": {
+    "DEV_Q100": {
+      "human_pass": "fail",
+      "root_cause": "evidence",
+      "risk_level": "medium",
+      "failure_reason": "검색 근거에는 ITCAM Agent for DataPower 7.1이 TLS를 지원한다는 직접 근거가 없는데 답변이 지원한다고 단정했다.",
+      "root_cause_detail": "문서 1의 7.1.0.3.8/7.1.0.4 조건은 ITCAM for AD WebSphere Agent의 support file/heap 문제이며 DataPower TLS 지원 여부와 다른 내용이다. DataPower 관련 문서들도 TLS 지원을 직접 확인하지 않는다.",
+      "proposed_fix": "제품명과 질문 핵심 속성(TLS support)이 같은 근거에서 직접 확인될 때만 긍정 답변하고, 없으면 유보한다.",
+      "final_assessment": "FAIL. DataPower 7.1의 TLS 지원을 뒷받침하는 근거 없이 다른 ITCAM 제품의 버전 조건을 결합해 답했다."
+    },
+    "DEV_Q101": {
+      "human_pass": "pass",
+      "root_cause": "other",
+      "risk_level": "low",
+      "failure_reason": "질문의 CVE와 정확히 일치하는 IBM Security Bulletin을 직접 안내한다.",
+      "root_cause_detail": "문서 1이 CVE-2015-0118, WMB/IIB Toolkit, TLS-compliant cipher 문제를 정확히 다룬다.",
+      "proposed_fix": "현재처럼 정확한 CVE/제품 일치 문서를 우선 안내하면 된다.",
+      "final_assessment": "PASS. 질문과 동일한 CVE 및 제품의 IBM Security Bulletin을 정확히 안내했다."
+    },
+    "DEV_Q122": {
+      "human_pass": "pass",
+      "root_cause": "other",
+      "risk_level": "low",
+      "failure_reason": "오류 원인과 neworgid 포함 필요 조건이 근거 문서와 직접 일치한다.",
+      "root_cause_detail": "문서 1은 BMXAA4198E가 APAR IV67500 수정 이후 발생하며 메시지에 neworgid가 필요하다고 명시한다.",
+      "proposed_fix": "현재 답변 수준을 유지한다.",
+      "final_assessment": "PASS. 오류 원인과 필요한 조치가 IBM 근거와 일치한다."
+    },
+    "DEV_Q224": {
+      "human_pass": "pass",
+      "root_cause": "other",
+      "risk_level": "low",
+      "failure_reason": "PolicyAtlas.ear의 weblogic.xml 수정 절차와 설정값이 근거 문서와 직접 일치한다.",
+      "root_cause_detail": "cookie-secure, cookie-http-only, url-rewriting-enabled 설정과 undeploy/redeploy 절차가 문서 1에 그대로 제시된다.",
+      "proposed_fix": "현재 답변 수준을 유지한다.",
+      "final_assessment": "PASS. IBM Atlas의 HttpOnly/Secure 설정 절차를 정확히 제시했다."
+    },
+    "DEV_Q232": {
+      "human_pass": "pass",
+      "root_cause": "other",
+      "risk_level": "low",
+      "failure_reason": "검색 문서만으로는 CICS TS 특정 릴리스가 Java 8을 지원한다는 직접적인 호환성 근거가 충분하지 않아 유보가 적절하다.",
+      "root_cause_detail": "검색 결과에는 CICS 릴리스와 Java 8 제품명이 함께 나타나는 목록은 있으나 둘 사이의 직접 지원 관계를 확정하는 문장이 없다.",
+      "proposed_fix": "CICS TS 릴리스별 Java 8 지원을 직접 명시한 시스템 요구사항 문서가 검색되면 그때 답변한다.",
+      "final_assessment": "PASS. 현재 검색 근거만으로 지원 여부를 확정하지 않고 유보한 것은 적절하다."
+    },
+    "DEV_Q233": {
+      "human_pass": "fail",
+      "root_cause": "evidence",
+      "risk_level": "medium",
+      "failure_reason": "근거 문서는 hung thread detector의 동작을 설명하지만 CPU/메모리 오버헤드나 성능 개선·저하 정도를 뒷받침하지 않는다.",
+      "root_cause_detail": "답변은 모니터링이 CPU와 메모리를 소비하고 로그가 시스템을 압박할 수 있으며 안정성이 개선된다고 서술하지만 검색 문서에는 해당 성능 영향 근거가 없다.",
+      "proposed_fix": "성능 영향에 대한 직접 근거가 없으면 detector의 동작과 javacore 생성 사실만 설명하고 성능 영향은 확인 불가로 유보한다.",
+      "final_assessment": "FAIL. hung thread detection의 성능 영향에 대해 근거 없는 일반론을 생성했다."
+    },
+    "DEV_Q252": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "medium",
+      "failure_reason": "질문의 ORA-02396 idle-time 초과 상황을 구체적으로 해결하지 못하고 일반적인 StaleConnectionException 조언을 나열했다.",
+      "root_cause_detail": "문서는 외부 요인으로 pool의 연결이 무효화되는 원인을 설명하지만 답변은 DB idle timeout과 현재 Oracle 오류에 맞춘 조치 대신 광범위한 원인과 연결 관리 조언을 제시하며 일부 조언은 직접 근거가 없다.",
+      "proposed_fix": "질문에 포함된 ORA-02396과 idle connection 조건을 우선 인식하고, 검색 근거가 직접 지원하는 범위에서 원인 및 pool/DB 설정 확인 방향을 제시한다.",
+      "final_assessment": "FAIL. 관련 개념은 설명했지만 현재 오류의 핵심 원인과 해결을 충분히 특정하지 못했다."
+    },
+    "DEV_Q266": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "high",
+      "failure_reason": "답변은 Packaging Utility fix pack을 이용해 설치하라고 하지만 근거 문서는 해당 fix pack으로 Packaging Utility를 설치할 수 없다고 명시한다.",
+      "root_cause_detail": "pu.update_version.zip은 기존 Packaging Utility 업데이트용이며 신규 설치용이 아니다. 답변이 install과 update를 혼동했다.",
+      "proposed_fix": "신규 설치와 기존 설치 업데이트 절차를 분리하고, 신규 설치는 IBM 온라인 Packaging Utility repository를 Installation Manager에서 사용하도록 안내한다.",
+      "final_assessment": "FAIL. IBM 문서가 금지한 fix pack 신규 설치 방법을 설치 절차로 제시했다."
+    },
+    "DEV_Q295": {
+      "human_pass": "fail",
+      "root_cause": "evidence",
+      "risk_level": "medium",
+      "failure_reason": "WebSphere Compute Grid의 BatchFileLoggerInfo.getDirectoryList에서 발생한 고CPU/WSVR0605W의 원인을 idle thread라고 단정할 근거가 없다.",
+      "root_cause_detail": "검색 문서는 일반적으로 thread dump의 wait/idle 상태가 오해될 수 있음을 설명할 뿐 이 사례의 특정 stack과 원인이 동일하다고 확인하지 않는다.",
+      "proposed_fix": "특정 stack trace와 Compute Grid 문제를 직접 다루는 근거가 없으면 원인을 단정하지 말고 MustGather/javacore 수집 등 진단 절차만 안내한다.",
+      "final_assessment": "FAIL. 일반적인 idle-thread 설명을 특정 Compute Grid 장애의 원인처럼 적용했다."
+    },
+    "TRAIN_Q061": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "high",
+      "failure_reason": "ORB.init 관련 WAS 문제와 Sterling mailbox 문제의 해결책을 서로 결합했다.",
+      "root_cause_detail": "ORB.init이 많은 ORB thread와 OOM을 유발할 수 있다는 문서와 updateMailboxLastModification=false workaround 문서는 서로 다른 제품/원인의 사례다. 답변은 두 원인을 한 문제의 진단과 해결책처럼 연결했다.",
+      "proposed_fix": "제품과 stack signature가 확인되는 문서만 사용하고 서로 다른 문제의 workaround를 결합하지 않는다.",
+      "final_assessment": "FAIL. 서로 다른 제품과 원인의 문서를 섞어 잘못된 workaround를 제시했다."
+    },
+    "TRAIN_Q075": {
+      "human_pass": "pass",
+      "root_cause": "other",
+      "risk_level": "low",
+      "failure_reason": "요청한 정확한 fix pack 문서를 IBM URL로 안내한다.",
+      "root_cause_detail": "문서 1의 제품명과 fix ID 6.2.0-TIV-ITM_SYB-FP0002가 질문과 정확히 일치한다.",
+      "proposed_fix": "현재 답변 수준을 유지한다.",
+      "final_assessment": "PASS. 요청한 Sybase Agent FP0002의 정확한 IBM 다운로드 문서를 안내했다."
+    },
+    "TRAIN_Q086": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "medium",
+      "failure_reason": "사용자는 DB2 10.1 JDBC driver를 어디서 다운로드하는지 물었지만 답변은 다운로드 위치를 제공하지 않고 일반적인 업데이트 절차만 제시한다.",
+      "root_cause_detail": "검색 문서도 최신 DB vendor driver를 사용하라는 원칙만 제공한다. 답변은 connection string 확인 등 질문과 직접 관련 없는 조언까지 추가했다.",
+      "proposed_fix": "다운로드 위치를 뒷받침하는 근거가 검색되지 않았으면 명확히 유보하고, 확인 가능한 IBM DB2 driver 배포 문서를 추가 검색해야 한다.",
+      "final_assessment": "FAIL. 핵심 질문인 JDBC driver 다운로드 위치에 답하지 못했다."
+    },
+    "TRAIN_Q111": {
+      "human_pass": "pass",
+      "root_cause": "other",
+      "risk_level": "low",
+      "failure_reason": "db2diag.log의 object descriptor에서 tablespace/object/type 정보를 확인하는 방법을 근거에 맞게 설명한다.",
+      "root_cause_detail": "문서 1과 2는 Obj={pool;obj;type} 형식을 보여주고 type:1이 index corruption임을 설명한다. LOB 문서도 object type/ID 예시를 제공한다.",
+      "proposed_fix": "현재 핵심 설명을 유지하되 실제 객체명 조회 명령이 근거에 있다면 추가할 수 있다.",
+      "final_assessment": "PASS. db2diag.log의 객체 식별 정보를 이용해 손상 객체 유형을 파악하는 방향이 근거와 일치한다."
+    },
+    "TRAIN_Q157": {
+      "human_pass": "pass",
+      "root_cause": "other",
+      "risk_level": "low",
+      "failure_reason": "질문의 CVE와 정확히 일치하는 IBM Security Bulletin을 안내한다.",
+      "root_cause_detail": "문서 1이 CVE-2015-2013, WebSphere MQ 7.0.1, DoS, 영향 버전 및 APAR IV73860을 직접 포함한다.",
+      "proposed_fix": "현재 답변 수준을 유지한다.",
+      "final_assessment": "PASS. 정확한 보안 게시판을 안내했다."
+    },
+    "TRAIN_Q221": {
+      "human_pass": "pass",
+      "root_cause": "other",
+      "risk_level": "low",
+      "failure_reason": "Case Analyzer 증상과 batch update mode를 BATCH로 변경하는 해결책이 근거 문서와 일치한다.",
+      "root_cause_detail": "문서 1은 동일한 SQL Server query-plan resource 오류와 동일한 해결 방법을 명시한다.",
+      "proposed_fix": "현재 답변 수준을 유지한다.",
+      "final_assessment": "PASS. 동일 증상에 대한 IBM 문서의 해결책을 정확히 제시했다."
+    },
+    "TRAIN_Q222": {
+      "human_pass": "pass",
+      "root_cause": "other",
+      "risk_level": "low",
+      "failure_reason": "CPIT와 ITDS 6.3/RHEL 6.1의 문제 및 idsldif2db 누락 증상을 정확히 설명한다.",
+      "root_cause_detail": "문서 제목과 증상이 질문의 환경 및 오류와 직접 일치한다.",
+      "proposed_fix": "현재 답변 수준을 유지한다.",
+      "final_assessment": "PASS. 질문의 설치 실패 원인을 IBM 근거와 일치하게 설명했다."
+    },
+    "TRAIN_Q234": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "high",
+      "failure_reason": "질문은 WAS 7 Windows service 생성 도구를 묻는데 답변이 먼저 WAS 6.1 service 제거 절차를 해결 방법처럼 제시한다.",
+      "root_cause_detail": "문서 3의 WASServiceCmd.exe가 실제 자동 생성 도구이지만 답변은 관련 없는 WASService.exe -remove 절차를 함께 섞어 사용자에게 불필요한 service 삭제를 유도할 수 있다.",
+      "proposed_fix": "WASServiceCmd.exe를 install_root\\bin에 두고 실행하면 WASService.exe 파라미터를 대화식으로 구성해 service를 생성한다는 내용만 제시한다.",
+      "final_assessment": "FAIL. 올바른 도구를 언급했지만 관련 없는 서비스 제거 절차를 핵심 해결 단계로 섞었다."
+    },
+    "TRAIN_Q256": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "medium",
+      "failure_reason": "검색 근거에 ORA-00942에 대한 직접 workaround가 있는데 INSUFFICIENT_INFORMATION으로 유보했다.",
+      "root_cause_detail": "문서 2는 Oracle 10.1.0.2에서 krzgrant.sql 실행 시 ORA-00942가 발생할 경우 6.3.1-TIV-ITM_KRZ-FP0001의 krzgrant.sql을 실행하라고 명시한다.",
+      "proposed_fix": "동일 오류 코드와 동일 스크립트의 직접 해결 문서를 우선 사용해 FP0001 버전의 krzgrant.sql 실행을 안내한다.",
+      "final_assessment": "FAIL. 직접적인 해결 근거가 검색되었는데 답변을 유보했다."
+    },
+    "TRAIN_Q299": {
+      "human_pass": "pass",
+      "root_cause": "other",
+      "risk_level": "low",
+      "failure_reason": "WAS V8.0부터 WAS와 Java SDK 업데이트가 하나의 설치 패키지로 제공된다는 답이 근거와 정확히 일치한다.",
+      "root_cause_detail": "문서 1과 3 모두 V8 이상에서 단일 bundle이라는 정책을 명시한다.",
+      "proposed_fix": "현재 답변 수준을 유지한다.",
+      "final_assessment": "PASS. 변경 시점을 WebSphere Application Server V8.0으로 정확히 답했다."
+    },
+    "TRAIN_Q336": {
+      "human_pass": "pass",
+      "root_cause": "other",
+      "risk_level": "low",
+      "failure_reason": "silent install이 실행 중인 product file을 덮어쓰지 않기 위해 locked file에서 종료된다는 설명이 문서와 일치한다.",
+      "root_cause_detail": "문서 1은 모든 ITM component를 종료한 뒤 silent upgrade를 수행하는 것이 best practice라고 명시한다.",
+      "proposed_fix": "현재 답변 수준을 유지한다.",
+      "final_assessment": "PASS. locked files로 silent install이 중단되는 원인과 사전 조치를 정확히 설명했다."
+    },
+    "TRAIN_Q360": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "medium",
+      "failure_reason": "답변은 HMC agent가 Memory/LPAR metrics를 모니터링할 수 있다고 단정하지만 근거는 HMC Base agent에 대해 CPU metrics만 명시한다.",
+      "root_cause_detail": "문서 1은 HMC Base agent가 server/LPAR CPU metrics를 모니터링하고, 모든 LPAR metrics는 각 LPAR의 UNIX OS agent가 담당한다고 구분한다.",
+      "proposed_fix": "HMC Base agent는 CPU 중심의 server/LPAR metrics를 제공하며 전체 LPAR/메모리 metrics는 UNIX OS agent가 필요하다고 구분해 답한다.",
+      "final_assessment": "FAIL. HMC agent의 지원 범위를 근거보다 넓게 확장했다."
+    },
+    "TRAIN_Q380": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "medium",
+      "failure_reason": "Custodian Notes를 보는 핵심 절차는 맞지만, 추가로 제시한 On Hold 상태에서 custodian을 추가하는 절차가 IBM 문서와 반대다.",
+      "root_cause_detail": "문서 4는 On Hold 상태에서는 먼저 plan을 suspend해야 custodian 추가가 가능하다고 명시한다. 답변은 On Hold로 이동한 뒤 바로 추가하라고 잘못 안내한다.",
+      "proposed_fix": "질문과 직접 관련된 Show Custodian Notes/Show Plan Notes 절차만 답하고, 불필요한 custodian 추가 절차를 제거한다.",
+      "final_assessment": "FAIL. 핵심 답변은 맞지만 추가한 관리 절차에 명백한 오류가 있다."
+    },
+    "TRAIN_Q414": {
+      "human_pass": "pass",
+      "root_cause": "other",
+      "risk_level": "low",
+      "failure_reason": "WebSphere MQ V7.0 client와 FTE agent가 server와 같은 시점에 지원 종료된다는 근거를 그대로 전달한다.",
+      "root_cause_detail": "문서 1이 동일 내용을 명시한다.",
+      "proposed_fix": "가능하면 server의 실제 EOS 날짜 근거가 검색되었을 때 날짜도 함께 제공한다.",
+      "final_assessment": "PASS. MQ V7.0 관련 구성요소의 지원 종료 관계를 근거에 맞게 답했다."
+    },
+    "TRAIN_Q415": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "high",
+      "failure_reason": "질문의 Illegal key size 암호화 오류와 직접 일치하는 문서가 있는데, 답변은 별도의 Office Integration 로그인 문제에서 나온 Generic JVM argument를 해결책으로 적용했다.",
+      "root_cause_detail": "문서 1은 동일 256-bit EncryptionException을 다루지만 문서 2의 JVM argument 문제는 다른 증상인 0x80040794/E_NOT_AUTHENTICATED에 해당한다. 두 문제를 같은 원인으로 결합할 근거가 없다.",
+      "proposed_fix": "동일 EncryptionException 문서의 해결 절차만 사용하고, 별도 Office Integration 인증 오류의 JVM argument 조치는 섞지 않는다.",
+      "final_assessment": "FAIL. 동일 제품의 다른 로그인 장애 해결책을 현재 암호화 오류에 잘못 적용했다."
+    },
+    "TRAIN_Q456": {
+      "human_pass": "pass",
+      "root_cause": "other",
+      "risk_level": "low",
+      "failure_reason": "Solaris에서 WAS를 non-root로 실행할 때 zonecfg native command가 실패한다는 원인과 조치가 문서와 직접 일치한다.",
+      "root_cause_detail": "문서 1은 root로 실행하거나 비가상화 환경에서는 시작 시 오류를 무시할 수 있다고 명시한다.",
+      "proposed_fix": "현재 답변 수준을 유지한다.",
+      "final_assessment": "PASS. zonecfg 오류의 원인과 영향 범위를 IBM 근거에 맞게 설명했다."
+    },
+    "TRAIN_Q463": {
+      "human_pass": "pass",
+      "root_cause": "other",
+      "risk_level": "low",
+      "failure_reason": "WebSphere Portal에 동시 로그인 횟수를 제한하는 built-in 설정이 없고 custom tracking code가 필요할 수 있다는 답이 근거와 일치한다.",
+      "root_cause_detail": "문서 1이 동일 질문에 대해 내장 제한 기능이 없으며 IBM Services와 custom tracking code를 고려하라고 명시한다.",
+      "proposed_fix": "현재 답변 수준을 유지한다.",
+      "final_assessment": "PASS. Portal의 동시 로그인 제한 기능 여부와 대안을 정확히 설명했다."
+    },
+    "TRAIN_Q504": {
+      "human_pass": "pass",
+      "root_cause": "other",
+      "risk_level": "low",
+      "failure_reason": "MTTrapd가 특정 trap을 drop하는 원인을 확인하는 진단 절차가 직접 근거와 일치한다.",
+      "root_cause_detail": "문서 1은 정상 부하 확인, snoop/tcpdump/Wireshark capture, enterprise-oid/uptime 확인, Protocol=ALL 점검을 동일하게 권고한다.",
+      "proposed_fix": "현재 답변 수준을 유지한다.",
+      "final_assessment": "PASS. malformed/dropped trap을 확인하는 방법을 IBM 근거에 맞게 제시했다."
+    },
+    "TRAIN_Q541": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "medium",
+      "failure_reason": "사용자는 custom role 사용자가 Report Studio를 열 수 없는 문제를 해결하려는데 답변은 오히려 Express Authors를 제거해 Report Studio capability를 없애라고 안내한다.",
+      "root_cause_detail": "문서 3은 custom role에서 Report Studio를 열려면 Professional User Interface Profile에 Traverse/Execute 권한이 필요함을 설명한다. 답변은 반대 방향의 문서 1을 선택했다.",
+      "proposed_fix": "custom role의 Report Studio capability와 Professional User Interface Profile 권한을 확인하도록 안내한다.",
+      "final_assessment": "FAIL. 사용자가 필요한 기능을 활성화하는 대신 기능을 제거하는 절차를 제시했다."
+    },
+    "TRAIN_Q581": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "high",
+      "failure_reason": "ITCAM for WAS Data Collector의 config.sh OOM에 WebSphere Commerce deployEar.xml의 wsadmin 설정을 적용했다.",
+      "root_cause_detail": "문서 1은 ITCAM agent on AIX의 동일 Jython/Java heap 오류를 다루지만, 답변의 jvmMaxMemory/deployEar.xml 조치는 문서 2의 WebSphere Commerce EAR 배포 문제에 해당한다.",
+      "proposed_fix": "ITCAM AIX configuration 문제에 직접 대응하는 문서의 JAVA_OPTS/heap 조정 절차만 사용하고 다른 제품의 deployEar.xml 조치를 배제한다.",
+      "final_assessment": "FAIL. 다른 제품의 OOM 해결책을 ITCAM Data Collector 설정 문제에 잘못 적용했다."
+    },
+    "TRAIN_Q594": {
+      "human_pass": "fail",
+      "root_cause": "generation",
+      "risk_level": "high",
+      "failure_reason": "AMQ9776/AMQ9777 Channel was blocked 원인을 shared conversations로 설명하고 SHARECNV(0)을 해결책으로 제시한 것은 근거와 맞지 않는다.",
+      "root_cause_detail": "문서 2의 AMQ9777은 CHLAUTH record가 USERSRC(NOACCESS)와 일치해 channel이 차단되는 사례다. SHARECNV(0)은 문서 1의 별도 MQ internal error/MQSUB 문제에 대한 workaround다.",
+      "proposed_fix": "AMQ9776/AMQ9777의 active channel values와 CHLAUTH rule, USERSRC(NOACCESS), CLNTUSER 등을 확인하도록 안내하고 unrelated SHARECNV workaround를 제거한다.",
+      "final_assessment": "FAIL. 서로 다른 MQ 문제를 결합해 channel security 오류에 잘못된 조치를 제시했다."
+    }
+  },
+  "exported_at": "2026-11-24T06:11:28.252537+00:00"
+}

@@ -1,0 +1,49 @@
+{
+  "schema": "judge-human-audit-v3.8",
+  "source_judge_version": "v3.6",
+  "evaluated_judge_schema_version": "ibm-techqa-judge-claims-v3.8",
+  "evaluated_rubric_version": "ibm-techqa-claim-derived-v3.8",
+  "counts": {
+    "n": 20,
+    "TP": 9,
+    "FP": 0,
+    "TN": 10,
+    "FN": 1,
+    "unlabeled": 0
+  },
+  "accuracy": 0.95,
+  "precision": 1.0,
+  "recall": 0.9,
+  "specificity": 1.0,
+  "false_approval_rate": 0.0,
+  "kappa": 0.9,
+  "root_causes": {
+    "evidence": 6,
+    "unclassified": 5,
+    "semantic": 5,
+    "generation": 4
+  },
+  "judge_status_counts": {
+    "OK": 14,
+    "REVIEW_REQUIRED": 6
+  },
+  "mismatched_ids": [],
+  "misclassified": [
+    {
+      "id": "TRAIN_Q282",
+      "type": "FN",
+      "judge_status": "REVIEW_REQUIRED",
+      "claim_verdicts": [
+        "SUPPORTED",
+        "SUPPORTED"
+      ],
+      "review_flags": [
+        "CLAIM_VERIFICATION_UNRESOLVED",
+        "ESSENTIAL_CLAIM_NOT_SUPPORTED",
+        "SUPPORTED_QUOTE_WEAK_ALIGNMENT"
+      ],
+      "human_assessment": "PASS. RAG가 질문과 정확히 일치하는 IBM 보안 게시판을 검색했고, LLM도 해당 문서를 안내했다. Judge의 주장 2 NOT_FOUND 판정은 대부분의 세부 정보에 대해 잘못됐다. 다만 해결 방법의 존재 여부와 실제 문서 접근 링크는 추가 확인이 필요하다."
+    }
+  ],
+  "note": "Fresh development-set evaluation; every nonapproval counted as negative; not independent held-out validation."
+}

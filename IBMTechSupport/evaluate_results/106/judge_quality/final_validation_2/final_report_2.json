@@ -1,0 +1,118 @@
+{
+  "schema": "judge-final-validation-2-v1",
+  "sample_size": 26,
+  "sample_seed": 20261126,
+  "sample_fingerprint": "3da9ce719ec017962d2521feffbe473771f26130923eba36ed341f142e76932a",
+  "excluded_previous_ids": 80,
+  "judge_schema_version": "ibm-techqa-judge-claims-v3.10",
+  "rubric_version": "ibm-techqa-claim-derived-v3.10",
+  "counts": {
+    "n": 26,
+    "TP": 2,
+    "FP": 2,
+    "TN": 18,
+    "FN": 4
+  },
+  "accuracy": 0.7692,
+  "precision": 0.5,
+  "recall": 0.3333,
+  "specificity": 0.9,
+  "false_approval_rate": 0.1,
+  "kappa": 0.2642,
+  "misclassified": [
+    {
+      "id": "DEV_Q021",
+      "type": "FN",
+      "judge_status": "OK",
+      "claim_verdicts": [
+        "SUPPORTED",
+        "SUPPORTED",
+        "SUPPORTED",
+        "SUPPORTED",
+        "SUPPORTED",
+        "NOT_FOUND",
+        "SUPPORTED",
+        "NOT_FOUND"
+      ],
+      "review_flags": [
+        "ESSENTIAL_CLAIM_NOT_SUPPORTED",
+        "CONTEXT_CLAIM_NOT_SUPPORTED"
+      ],
+      "human_assessment": "PASS. 로컬 WSDL 변경을 WS-Proxy에 반영하는 절차를 IBM 근거에 맞게 정확히 안내했다."
+    },
+    {
+      "id": "DEV_Q109",
+      "type": "FN",
+      "judge_status": "OK",
+      "claim_verdicts": [
+        "SUPPORTED",
+        "SUPPORTED",
+        "NOT_FOUND",
+        "SUPPORTED"
+      ],
+      "review_flags": [
+        "CONTEXT_CLAIM_NOT_SUPPORTED"
+      ],
+      "human_assessment": "PASS. 질문과 동일한 IIB CVE의 핵심 내용을 정확한 근거로 설명했다."
+    },
+    {
+      "id": "TRAIN_Q208",
+      "type": "FN",
+      "judge_status": "OK",
+      "claim_verdicts": [
+        "SUPPORTED",
+        "SUPPORTED",
+        "SUPPORTED",
+        "NOT_FOUND"
+      ],
+      "review_flags": [
+        "CONTEXT_CLAIM_NOT_SUPPORTED"
+      ],
+      "human_assessment": "PASS. 서로 다른 host/client 버전의 지원 가능성과 호환 범위를 정확히 설명했다."
+    },
+    {
+      "id": "TRAIN_Q404",
+      "type": "FP",
+      "judge_status": "OK",
+      "claim_verdicts": [
+        "SUPPORTED",
+        "SUPPORTED",
+        "SUPPORTED"
+      ],
+      "review_flags": [],
+      "human_assessment": "FAIL. scrypt 형식이라는 공통점만으로 다른 실행 경로의 해결책을 적용했다."
+    },
+    {
+      "id": "TRAIN_Q422",
+      "type": "FP",
+      "judge_status": "OK",
+      "claim_verdicts": [
+        "SUPPORTED",
+        "SUPPORTED",
+        "SUPPORTED"
+      ],
+      "review_flags": [],
+      "human_assessment": "FAIL. 보안 게시판 내용은 맞지만 CVSS 4.3의 심각도를 잘못 해석했다."
+    },
+    {
+      "id": "TRAIN_Q583",
+      "type": "FN",
+      "judge_status": "OK",
+      "claim_verdicts": [
+        "SUPPORTED",
+        "SUPPORTED",
+        "NOT_FOUND",
+        "SUPPORTED"
+      ],
+      "review_flags": [
+        "ESSENTIAL_CLAIM_NOT_SUPPORTED"
+      ],
+      "human_assessment": "PASS. ITCAM 설치 실패의 직접 원인을 정확한 IBM 문서에 근거해 설명했다."
+    }
+  ],
+  "human_label_counts": {
+    "pass": 6,
+    "fail": 20
+  },
+  "note": "Independent final test #2 with frozen v3.10 Judge. Do not tune on this sample before reporting the generalization result."
+}

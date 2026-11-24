@@ -1,0 +1,152 @@
+{
+  "schema": "judge-heldout-validation-v1",
+  "sample_size": 30,
+  "sample_seed": 20261124,
+  "sample_fingerprint": "341d562c2c74891bee232e9dd2341c251176f9bb802c9d9fee3eba209f21e8bd",
+  "excluded_development_ids": 20,
+  "judge_schema_version": "ibm-techqa-judge-claims-v3.8",
+  "rubric_version": "ibm-techqa-claim-derived-v3.8",
+  "counts": {
+    "n": 30,
+    "TP": 0,
+    "FP": 0,
+    "TN": 22,
+    "FN": 8
+  },
+  "accuracy": 0.7333,
+  "precision": null,
+  "recall": 0.0,
+  "specificity": 1.0,
+  "false_approval_rate": 0.0,
+  "kappa": -0.0,
+  "confidence_intervals": {
+    "recall_95pct_bootstrap": [
+      0.0,
+      0.0
+    ],
+    "kappa_95pct_bootstrap": [
+      -0.0,
+      0.0
+    ]
+  },
+  "human_label_counts": {
+    "fail": 22,
+    "pass": 8
+  },
+  "rag_sampling_buckets": {
+    "verified_answer": 20,
+    "refusal": 10
+  },
+  "misclassified": [
+    {
+      "id": "DEV_Q184",
+      "type": "FN",
+      "judge_status": "REVIEW_REQUIRED",
+      "claim_verdicts": [
+        "SUPPORTED",
+        "SUPPORTED",
+        "SUPPORTED"
+      ],
+      "review_flags": [
+        "CLAIM_VERIFICATION_UNRESOLVED",
+        "ESSENTIAL_CLAIM_NOT_SUPPORTED",
+        "SUPPORTED_QUOTE_WEAK_ALIGNMENT"
+      ],
+      "human_assessment": "PASS. 문서 1이 CWSXM0100E의 원인을 중복 wiring으로 직접 설명하며, 답변의 원인과 중복 연결 제거 조치가 문서와 일치한다."
+    },
+    {
+      "id": "DEV_Q185",
+      "type": "FN",
+      "judge_status": "REVIEW_REQUIRED",
+      "claim_verdicts": [
+        "SUPPORTED",
+        "NOT_FOUND",
+        "SUPPORTED",
+        "SUPPORTED",
+        "SUPPORTED",
+        "SUPPORTED",
+        "SUPPORTED",
+        "NOT_FOUND"
+      ],
+      "review_flags": [
+        "CLAIM_VERIFICATION_UNRESOLVED",
+        "ESSENTIAL_CLAIM_NOT_SUPPORTED",
+        "CONTEXT_CLAIM_NOT_SUPPORTED",
+        "SUPPORTED_ACTION_NOT_IN_QUOTE",
+        "SUPPORTED_QUOTE_WEAK_ALIGNMENT"
+      ],
+      "human_assessment": "PASS. Service53의 CWZIP9602E/CWZIP9604W 확인 방법과 Service and Support Manager의 connection 설정 변경 절차가 문서 1의 LOCAL FIX와 일치한다."
+    },
+    {
+      "id": "TRAIN_Q063",
+      "type": "FN",
+      "judge_status": "REVIEW_REQUIRED",
+      "claim_verdicts": [],
+      "review_flags": [
+        "REFUSAL_REQUIRES_HUMAN_REVIEW"
+      ],
+      "human_assessment": "PASS. 검색 문서들은 ODM 8.5.1.2를 8.5.1.1에서 받는 정확한 방법을 제공하지 않으며 다른 ODM 버전 fix pack이 대부분이므로 정보 부족 응답이 안전하다."
+    },
+    {
+      "id": "TRAIN_Q071",
+      "type": "FN",
+      "judge_status": "REVIEW_REQUIRED",
+      "claim_verdicts": [
+        "SUPPORTED",
+        "SUPPORTED",
+        "NOT_FOUND"
+      ],
+      "review_flags": [
+        "CLAIM_VERIFICATION_UNRESOLVED",
+        "ESSENTIAL_CLAIM_NOT_SUPPORTED",
+        "SUPPORTED_QUOTE_WEAK_ALIGNMENT"
+      ],
+      "human_assessment": "PASS. 장시간의 대부분이 DB 업그레이드에 사용되고 BESAdmin이 계속 실행 중이면 취소하지 말고 기다리라는 설명이 문서 2와 직접 일치한다."
+    },
+    {
+      "id": "TRAIN_Q343",
+      "type": "FN",
+      "judge_status": "REVIEW_REQUIRED",
+      "claim_verdicts": [],
+      "review_flags": [
+        "REFUSAL_REQUIRES_HUMAN_REVIEW"
+      ],
+      "human_assessment": "PASS. 제공 문서는 WSRR에서 사용되는 WAS Network Deployment 버전만 명시하고 Liberty의 CVE-2017-1681 영향 여부를 직접 확인해 주지 않으므로 단정하지 않고 정보 부족으로 처리한 것이 안전하다."
+    },
+    {
+      "id": "TRAIN_Q526",
+      "type": "FN",
+      "judge_status": "REVIEW_REQUIRED",
+      "claim_verdicts": [],
+      "review_flags": [
+        "REFUSAL_REQUIRES_HUMAN_REVIEW"
+      ],
+      "human_assessment": "PASS. ReporterPLUS 관련 문서는 Rhapsody 7.5.2.1 또는 오래된 license 문제를 다루며 질문의 Rhapsody 8.1.2 x64에서 메뉴가 보이지 않는 이유를 직접 확인하지 못하므로 안전한 abstention이다."
+    },
+    {
+      "id": "TRAIN_Q558",
+      "type": "FN",
+      "judge_status": "REVIEW_REQUIRED",
+      "claim_verdicts": [],
+      "review_flags": [
+        "REFUSAL_REQUIRES_HUMAN_REVIEW"
+      ],
+      "human_assessment": "PASS. 검색 문서에는 IPAS template import의 다른 문제는 있지만 UCD 6.0.1.3의 SSL handshake_failure 원인과 해결책을 직접 설명하는 근거가 없어 추측하지 않은 것이 적절하다."
+    },
+    {
+      "id": "TRAIN_Q592",
+      "type": "FN",
+      "judge_status": "OK",
+      "claim_verdicts": [
+        "SUPPORTED",
+        "SUPPORTED",
+        "NOT_FOUND"
+      ],
+      "review_flags": [
+        "ESSENTIAL_CLAIM_NOT_SUPPORTED"
+      ],
+      "human_assessment": "PASS. 문서 3이 WebSphere MQ Hypervisor Edition의 RHEL이 Bash/Shellshock 취약점의 영향을 받으며 Red Hat에서 fix를 받아 설치하라고 직접 명시해 답변의 핵심 결론과 remediation이 일치한다."
+    }
+  ],
+  "note": "Held-out validation: previous 20 development Human IDs and duplicate questions excluded; Judge logic frozen before labels were revealed."
+}

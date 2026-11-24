@@ -1,0 +1,46 @@
+{
+  "development": {
+    "n": 20,
+    "TP": 9,
+    "FP": 0,
+    "TN": 10,
+    "FN": 1,
+    "precision": 1.0,
+    "recall": 0.9,
+    "accuracy": 0.95,
+    "false_approval_rate": 0.0,
+    "kappa": 0.9
+  },
+  "held_out": {
+    "n": 30,
+    "TP": 8,
+    "FP": 0,
+    "TN": 22,
+    "FN": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "accuracy": 1.0,
+    "false_approval_rate": 0.0,
+    "kappa": 1.0
+  },
+  "development_errors": [
+    {
+      "id": "TRAIN_Q282",
+      "type": "FN",
+      "judge_status": "REVIEW_REQUIRED",
+      "claim_verdicts": [
+        "SUPPORTED",
+        "SUPPORTED"
+      ],
+      "review_flags": [
+        "CLAIM_VERIFICATION_UNRESOLVED",
+        "ESSENTIAL_CLAIM_NOT_SUPPORTED",
+        "SUPPORTED_QUOTE_WEAK_ALIGNMENT"
+      ],
+      "human_assessment": "PASS. RAG가 질문과 정확히 일치하는 IBM 보안 게시판을 검색했고, LLM도 해당 문서를 안내했다. Judge의 주장 2 NOT_FOUND 판정은 대부분의 세부 정보에 대해 잘못됐다. 다만 해결 방법의 존재 여부와 실제 문서 접근 링크는 추가 확인이 필요하다."
+    }
+  ],
+  "held_out_errors": [],
+  "held_out_fingerprint": "341d562c2c74891bee232e9dd2341c251176f9bb802c9d9fee3eba209f21e8bd",
+  "judge_schema_version": "ibm-techqa-judge-claims-v3.8"
+}

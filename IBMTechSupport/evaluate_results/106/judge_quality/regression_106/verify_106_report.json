@@ -1,0 +1,95 @@
+{
+  "schema": "judge-regression-106-v1",
+  "judge_schema_version": "ibm-techqa-judge-claims-v3.13",
+  "rubric_version": "ibm-techqa-claim-derived-v3.13",
+  "groups": {
+    "development_20": {
+      "n": 20,
+      "TP": 10,
+      "FP": 0,
+      "TN": 10,
+      "FN": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "accuracy": 1.0,
+      "false_approval_rate": 0.0,
+      "kappa": 1.0,
+      "errors": []
+    },
+    "validation_30": {
+      "n": 30,
+      "TP": 8,
+      "FP": 0,
+      "TN": 22,
+      "FN": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "accuracy": 1.0,
+      "false_approval_rate": 0.0,
+      "kappa": 1.0,
+      "errors": []
+    },
+    "final_30_now_development": {
+      "n": 30,
+      "TP": 14,
+      "FP": 0,
+      "TN": 15,
+      "FN": 1,
+      "precision": 1.0,
+      "recall": 0.9333,
+      "accuracy": 0.9667,
+      "false_approval_rate": 0.0,
+      "kappa": 0.9333,
+      "errors": [
+        {
+          "id": "DEV_Q232",
+          "type": "FN",
+          "judge_status": "REVIEW_REQUIRED",
+          "claim_verdicts": [],
+          "review_flags": [
+            "REFUSAL_REQUIRES_HUMAN_REVIEW"
+          ],
+          "human_assessment": "PASS. 현재 검색 근거만으로 지원 여부를 확정하지 않고 유보한 것은 적절하다."
+        }
+      ]
+    },
+    "final2_26_now_development": {
+      "n": 26,
+      "TP": 6,
+      "FP": 0,
+      "TN": 20,
+      "FN": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "accuracy": 1.0,
+      "false_approval_rate": 0.0,
+      "kappa": 1.0,
+      "errors": []
+    }
+  },
+  "total": {
+    "n": 106,
+    "TP": 38,
+    "FP": 0,
+    "TN": 67,
+    "FN": 1,
+    "precision": 1.0,
+    "recall": 0.9744,
+    "accuracy": 0.9906,
+    "false_approval_rate": 0.0,
+    "kappa": 0.9796,
+    "errors": [
+      {
+        "id": "DEV_Q232",
+        "type": "FN",
+        "judge_status": "REVIEW_REQUIRED",
+        "claim_verdicts": [],
+        "review_flags": [
+          "REFUSAL_REQUIRES_HUMAN_REVIEW"
+        ],
+        "human_assessment": "PASS. 현재 검색 근거만으로 지원 여부를 확정하지 않고 유보한 것은 적절하다."
+      }
+    ]
+  },
+  "note": "All 106 validation cases are development/regression data. test_clean.json remains untouched final test data."
+}

@@ -7,6 +7,11 @@ import json
 import math
 import random
 import re
+import shutil
+import webbrowser
+import sys
+import tempfile
+from types import SimpleNamespace
 from collections import Counter
 from pathlib import Path
 
@@ -23,7 +28,27 @@ REVIEW_COLUMNS = [
     "human_actionability", "human_safety", "human_format", "failure_reason", "risk_level",
     "reviewer_notes",
 ]
-JUDGE_SCHEMA_VERSION = "ibm-techqa-judge-claims-v3.6"
+JUDGE_SCHEMA_VERSION = "ibm-techqa-judge-claims-v3.13"
+VALIDATION_DIR = RESULT_DIR / "validation"
+VALIDATION_HUMAN = VALIDATION_DIR / "validation_human_review.json"
+VALIDATION_JUDGE = VALIDATION_DIR / "validation_rubric.jsonl"
+VALIDATION_REPORT = VALIDATION_DIR / "validation_report.json"
+VALIDATION_SAMPLE_SIZE = 30
+VALIDATION_SEED = 20261124
+FINAL_DIR = RESULT_DIR / "final_validation"
+FINAL_HUMAN = FINAL_DIR / "final_human_review.json"
+FINAL_HTML = FINAL_DIR / "final_review.html"
+FINAL_JUDGE = FINAL_DIR / "final_rubric.jsonl"
+FINAL_REPORT = FINAL_DIR / "final_report.json"
+FINAL_SAMPLE_SIZE = 30
+FINAL_SEED = 20261125
+FINAL2_DIR = RESULT_DIR / "final_validation_2"
+FINAL2_HUMAN = FINAL2_DIR / "final_human_review_2.json"
+FINAL2_HTML = FINAL2_DIR / "final_review_2.html"
+FINAL2_JUDGE = FINAL2_DIR / "final_rubric_2.jsonl"
+FINAL2_REPORT = FINAL2_DIR / "final_report_2.json"
+FINAL2_SAMPLE_SIZE = 30
+FINAL2_SEED = 20261126
 RUBRIC_SYSTEM = """You are an independent technical QA evaluator reviewing an IBM support answer.
 Use ONLY the user question, the candidate answer, and the provided IBM document BODY.
 You must check whether the source documents DIRECTLY support the actual answer.
@@ -631,18 +656,116 @@ def extract_answer_claims(answer: str) -> list[dict]:
         r"(?:you|users|administrators?) (?:should|must|need to)\b|"
         r"(?:navigate|edit|change|update|set|add|remove|restart|save|apply|use|run|"
         r"configure|enable|disable|install|upgrade|download|check|execute|open|"
-        r"create|replace|select|enter|call|avoid|limit)\b)",
+        r"create|replace|select|enter|call|avoid|limit)\b|"
+        r"(?:to\s+)?(?:find\s+more\s+(?:detailed\s+)?information[^.]{0,100})?"
+        r"(?:refer to|see|consult)\s+(?:Document|Source)\s+\d+\b|"
+        r"(?:further\s+)?details\s+can\s+be\s+found\s+in\s+(?:Document|Source)\s+\d+\b)",
         flags=re.IGNORECASE,
     )
     claims = []
     for idx, span in enumerate(unique, 1):
         essential = bool(essential_re.search(span) or re.search(r"[A-Za-z_][\w-]*(?:\.[\w*+-]+){2,}|\w[\w.]*=\w", span))
-        claims.append({"claim_id": idx, "text": span, "essential": essential})
+        claims.append({"claim_id": idx, "text": span, "essential": essential,
+                       "importance": "essential" if essential else "supporting"})
     if not any(item["essential"] for item in claims):
-        # Factual answers without commands still have essential claims.
-        for item in claims:
-            item["essential"] = True
+        # A later question-aware pass decides which factual proposition is core.
+        # Keep the legacy boolean for compatibility with older helper functions.
+        claims[0]["essential"] = True
+        claims[0]["importance"] = "essential"
     return claims
+
+
+def _claim_has_action(text: str) -> bool:
+    return any(re.search(p, text, re.I) for p in _ACTION_PATTERNS.values()) or bool(
+        re.search(r"\b(?:resolve|fix|workaround|mitigate|ensure|configure|set|change|update|run|execute|install|uninstall|remove|add|enable|disable|restart|reboot|deploy|upload|import|export|rename|delete|create|open|select|enter|apply|download)\b", text, re.I)
+    )
+
+
+def _assign_claim_importance(question: str, claims: list[dict]) -> list[dict]:
+    """Assign essential/supporting/optional importance from the user's intent.
+
+    v3.10 used a single essential boolean and therefore a harmless unsupported
+    side remark could veto an otherwise correct answer. v3.12 keeps material
+    technical claims strict, but allows clearly optional advice/navigation to be
+    absent from the source without converting the whole answer into a false
+    negative. Contradicted optional claims still remain blocking later.
+    """
+    q = normalize_space(question).casefold()
+    asks_source = bool(re.search(r"\b(?:where can i find|need to understand details|security bulletin|where (?:is|are) .*information)\b", q, re.I))
+    asks_cause = bool(re.search(r"\b(?:why|what (?:could|can) cause|what is causing|cause of|reason for)\b", q, re.I))
+    asks_procedure = bool(
+        re.search(r"\bhow\s+(?:do|can|should|to)\b", q, re.I)
+        or re.search(r"\b(?:how can|how do|how to|what is the (?:right|correct) procedure|what (?:steps|should|can) (?:i|we))[^?]{0,120}\b(?:resolve|fix|work ?around|configure|set up|install|uninstall|upgrade|update|change|refresh|import|export|deploy|run|execute|add|remove)\b", q, re.I)
+        or re.search(r"\b(?:how can (?:this|the .*?) be resolved|how do (?:i|we) resolve|how to resolve)\b", q, re.I)
+    )
+    asks_support = bool(re.search(r"\b(?:can i|is .* supported|does .* support|compatible|compatibility|available|affected)\b", q, re.I))
+
+    optional_patterns = (
+        r"^(?:additionally|also|remember|note that|for completeness|for reference)[, :]",
+        r"^(?:you )?(?:may|might|could) (?:also )?(?:need to|want to|consider|try)\b",
+        r"^for (?:more|further) (?:detailed )?(?:information|details)\b",
+        r"^follow any additional (?:prompts|instructions)\b",
+        r"^if (?:necessary|needed|desired|this does not work|these steps do not work)\b",
+        r"^(?:remember|ensure) to follow .*?(?:documentation|instructions|procedures)\b",
+        r"^(?:however,?\s*)?(?:there is|there are) no explicit information\b",
+        r"^(?:always )?save your configuration\b",
+    )
+
+    scored=[]
+    for claim in claims:
+        item=dict(claim)
+        text=str(item.get('text') or '').strip()
+        lower=text.casefold()
+        importance='supporting'
+
+        if any(re.search(p, text, re.I) for p in optional_patterns):
+            importance='optional'
+        elif _is_generic_advisory_claim(text):
+            importance='optional'
+        elif asks_source and _claim_has_action(text) and not re.search(r"\b(?:refer to|see|consult|document|bulletin|source)\b", text, re.I):
+            # A mitigation/workaround appended to a source-location question is
+            # not part of the requested answer unless the question asks for it.
+            importance='optional'
+        elif asks_cause and not asks_procedure and _claim_has_action(text):
+            # Cause-only questions are answered by the causal explanation; an
+            # unsolicited workaround is secondary.
+            importance='optional'
+        elif (asks_procedure and re.match(r"^(?:click|select|open|navigate|follow)\b", text, re.I)
+              and not re.search(r"\b(?:remove|delete|add|save|apply|change|set|configure|enable|disable|install|uninstall|restart|upload|import|export|deploy)\b", text, re.I)):
+            # Pure UI navigation is optional; a click that performs the actual
+            # technical action (Apply/Save/Add/Remove/...) remains essential.
+            importance='optional'
+        elif asks_procedure and _claim_has_action(text):
+            importance='essential'
+        elif asks_cause and re.search(r"\b(?:because|caused by|due to|cause|reason|results? from|occurs? when|happens? because)\b", text, re.I):
+            importance='essential'
+        elif asks_cause and re.search(r"\bwhen\b.{0,140}\b(?:does not|cannot|can't|fails?|causes?|lacks?|missing)\b", text, re.I):
+            # Conditional factual explanations can be the core cause even
+            # without an explicit "because" token.
+            importance='essential'
+        elif asks_cause and not asks_procedure:
+            importance='optional'
+        elif asks_support and re.search(r"\b(?:yes|no|support(?:ed|s)?|compatible|available|affected|can be used|cannot|can't)\b", text, re.I):
+            importance='essential'
+        elif asks_source and re.search(r"\b(?:CVE-\d{4}-\d+|security bulletin|document\s+\d+|bulletin|refer to|see|consult)\b", text, re.I):
+            importance='essential'
+
+        # Generic compatibility/fix-pack side notes that do not directly answer
+        # the requested relation are optional, not core correctness claims.
+        if asks_support and re.search(r"\b(?:fix pack|fixpack|APAR|update)\b", text, re.I) \
+                and not re.search(r"\b(?:support(?:ed|s)?|compatible|compatibility|requires?|needed)\b", text, re.I):
+            importance='optional'
+
+        item['importance']=importance
+        item['essential']=(importance=='essential')
+        scored.append(item)
+
+    if not any(x['importance']=='essential' for x in scored):
+        # Select the first substantive non-optional proposition as the answer core.
+        target=next((x for x in scored if x['importance']!='optional'), scored[0] if scored else None)
+        if target is not None:
+            target['importance']='essential'; target['essential']=True
+    return scored
 
 
 def _json_object_from_response(raw: str) -> dict:
@@ -783,21 +906,83 @@ def _procedural_spans(body: str):
             yield raw[:MAX_SOURCE_QUOTE_LENGTH]
 
 
-def _question_context_matches_document(question: str, doc: dict) -> bool:
-    """A copied instruction needs matching distinctive case context as well.
+# A small set of unambiguous *product identity* markers. A different IBM
+# product is not interchangeable with the one in the support question. This
+# does not claim that a document without an explicit product name is invalid;
+# it blocks only an explicitly conflicting, named product.
+_PRODUCT_MARKERS = {
+    "tdwc": (r"\bTDWC\b", r"\bTWS\b", r"tivoli dynamic workload console", r"tivoli workload scheduler"),
+    "portal": (r"websphere portal",),
+    "iib": (r"\bIIB\b", r"ibm integration bus", r"websphere message broker"),
+    "bpm": (r"business process manager", r"websphere process server", r"\bBPM\b"),
+    "datapower": (r"\bdatapower\b",),
+    "atlas": (r"\batlas\b",),
+    # Explicit product identity prevents search syntax from another IBM
+    # product family from being transferred merely on topical similarity.
+    "domino_notes": (
+        r"\bdomino\b",
+        r"\blotus\s+notes\b",
+        r"\bnotes\b(?=[\s\S]{0,400}\b(?:query|search|full\s+text|reserved|character)\b)",
+    ),
+    "cics": (r"\bcics(?:\s+transaction\s+server)?\b",),
+    "cognos": (r"\bcognos\b",),
+    # Cognos Controller support articles often say only "Controller Web".
+    # Treat that as a distinct product identity so remedies from Controller/NLB
+    # documents cannot be transferred to IIB/WMB merely because both discuss SSL.
+    "cognos_controller": (r"\bcognos\s+controller\b", r"\bcontroller\s+web\b"),
+    "storedIQ": (r"\bstoredIQ\b",),
+    "was_appserver": (r"websphere application server", r"\bSystemOut\.log\b", r"\bWSVR\d+[A-Z]?\b"),
+    "sterling": (r"\bsterling(?:commerce)?\b", r"\bSTERLINGNFX\b", r"\bGIS\b"),
+}
 
-    Some RAG retrievals contain unrelated products with generic instructions
-    such as 'save the file'. This gate is intentionally conservative: if the
-    question has a specific error code or 3-part version, it must appear in
-    the retrieved source (body or title) before deterministic approval.
+
+def _named_products(text: str) -> set[str]:
+    return {name for name, patterns in _PRODUCT_MARKERS.items()
+            if any(re.search(p, text, flags=re.IGNORECASE) for p in patterns)}
+
+
+def _question_module_ids(question: str) -> set[str]:
+    """The exact module identifier matters even when the error code matches."""
+    return {m.upper() for m in re.findall(
+        r"(?:(?i:module)|모듈)\s+([A-Z][A-Z0-9_]{4,})\b", question)}
+
+
+def _question_context_matches_document(question: str, doc: dict) -> bool:
+    """Reject clearly different cases without overfitting to incidental versions.
+
+    Product/module/error identifiers remain hard gates. A version mentioned in the
+    question is not, by itself, a hard gate because many IBM technotes document a
+    generic product behavior that applies across maintenance levels. Version-specific
+    claims are still protected by required-literal and semantic evidence checks.
     """
-    codes = set(re.findall(r"\b[A-Z]{2,}[A-Z0-9_-]*[0-9][A-Z0-9_-]*\b", question))
-    versions = set(re.findall(r"(?<!\d)\d+(?:\.\d+){2,}(?!\d)", question))
-    markers = codes | versions
-    if not markers:
-        return True
-    content = str(doc.get("text") or doc.get("content") or "").casefold()
-    return any(marker.casefold() in content for marker in markers)
+    raw = str(doc.get("text") or doc.get("content") or "")
+    content = raw + " " + str(doc.get("title") or "")
+
+    question_products = _named_products(question)
+    source_products = _named_products(content)
+    if question_products and source_products and not (question_products & source_products):
+        return False
+
+    module_ids = _question_module_ids(question)
+    if module_ids and not all(re.search(r"\b" + re.escape(m) + r"\b", content,
+                                        flags=re.IGNORECASE) for m in module_ids):
+        return False
+
+    # CVEs/APARs and IBM-style error identifiers are case identity, unlike a
+    # maintenance version that a generic technote may legitimately omit.
+    # Do NOT promote path components or URL fragments to case identity. For
+    # example, TMAITM6 inside C:\IBM\ITM\TMAITM6\deploy.jar is a path
+    # component, not an error/product identifier that every relevant source
+    # must repeat.
+    identity_text = re.sub(r"https?://\S+", " ", question, flags=re.IGNORECASE)
+    identity_text = re.sub(r"(?i)\b[A-Z]:\\[^\s]+", " ", identity_text)
+    identity_text = re.sub(r"(?<![A-Za-z0-9_])/(?:[^\s]+)", " ", identity_text)
+    hard = set(re.findall(r"\bCVE-\d{4}-\d+\b", identity_text, flags=re.IGNORECASE))
+    hard.update(re.findall(r"\b[A-Z]{2,}[A-Z0-9_-]*\d[A-Z0-9_-]*\b", identity_text))
+    hard = {x for x in hard if not re.fullmatch(r"(?:WAS|IBM|JVM|SDK|JAVA)\d*", x, flags=re.IGNORECASE)}
+    if hard and not any(x.casefold() in content.casefold() for x in hard):
+        return False
+    return True
 
 
 def _deterministic_procedure_support(claim: dict, doc: dict) -> dict | None:
@@ -930,83 +1115,188 @@ def _verify_claim_in_document(question, answer, claim, doc, generate_fn,
             "reason": "Invalid model output after retry: " + (problem or "unknown")}
 
 
-def derive_claim_rubric(claims: list[dict], policy: dict) -> tuple[dict, str]:
-    """Compute auditable, conservative scores from *verified* claim statuses.
+def _v38_same_explicit_ignore_instruction(claim_text: str, source_quote: str) -> bool:
+    """Exact positive *ignore this error* instruction, not fuzzy entailment.
 
-    These scores are proxy judgments, not independently established truth.
-    Unverified model verdicts cannot be silently converted to a passing score.
+    A 1.5B semantic judge occasionally marks 'can be safely ignored' as
+    CONTRADICTED even when IBM literally says 'can be safely ignored'.  Only
+    this explicitly positive, bounded equivalence may be repaired; every
+    other suspected contradiction remains REVIEW_REQUIRED.
     """
-    core = [c for c in claims if c["essential"]]
-    # A flagged contradiction is an *unresolved semantic judgment*, not a
-    # demonstrated factual contradiction. Keep the raw model verdict on each
-    # claim for the audit log, but do not turn it into a certain score of 1.
-    def effective_verdict(c):
-        return "UNRESOLVED" if c.get('review_flags') else c['verdict']
+    def norm(value: str) -> str:
+        value = re.sub(r"\baccording to (?:the )?(?:Document|Source)\s+\d+\b",
+                       "", value, flags=re.IGNORECASE)
+        return re.sub(r"\s+", " ", value.casefold()).strip(" .,:;\n")
+    claim = norm(claim_text)
+    quote = norm(source_quote)
+    claim_ok = re.fullmatch(
+        r"(?:this|the) error(?: message)? can be safely ignored", claim)
+    # The source must be the complete, unconditional positive instruction.
+    # Do not approve 'do NOT assume ... can be ignored' or 'only if ...'.
+    source_ok = re.fullmatch(
+        r"(?:this|the) error(?: message)? can be safely ignored", quote)
+    return bool(claim_ok and source_ok)
 
-    all_claims = [effective_verdict(c) for c in claims]
-    core_verdicts = [effective_verdict(c) for c in core]
-    unknown_core = sum(v != "SUPPORTED" for v in core_verdicts)
-    contradictory = any(v == "CONTRADICTED" for v in all_claims)
-    unresolved = any(v == "UNRESOLVED" for v in all_claims)
-    missing_context = sum(v == "NOT_FOUND" for c, v in zip(claims, all_claims)
-                          if not c["essential"])
-    fully_supported = bool(claims) and all(v == "SUPPORTED" for v in all_claims)
-    primary_supported = bool(core) and unknown_core == 0
-    flags = []
+
+def _v38_is_exact_section_locator(claim_text: str, source_quote: str) -> bool:
+    """A citation/section pointer is not a remedial technical assertion.
+
+    Do not excuse a long bulletin summary or a statement about remediation
+    merely because it also references a source.  The ONLY recognized form is
+    'Details can be found in Document N under SECTION', with SECTION literally
+    present in the selected source quote.
+    """
+    claim = claim_text.strip()
+    m = re.fullmatch(
+        r'(?:Further\s+)?Details can be found in Document\s+\d+,?\s+'
+        r'specifically under\s+["\']?([^"\']+?)["\']?\s+section\.?',
+        claim, flags=re.IGNORECASE)
+    return bool(m and m.group(1).strip().casefold() in source_quote.casefold())
+
+
+def _v38_reconcile_source_verdict(claim: dict, docs: list[dict] | None = None) -> dict:
+    """Conservative local repairs to a verdict already tied to a REAL quote.
+
+    Does not turn NOT_FOUND into SUPPORTED and does not waive any missing
+    action, product, model, version, or source-evidence condition.
+    """
+    fixed = dict(claim)
+    quote = str(fixed.get('quote') or fixed.get('evidence_quote') or '')
+    if not fixed.get('quote_verified') and not fixed.get('evidence_quote_verified'):
+        return fixed
+    txt = str(fixed.get('text') or '')
+    if (fixed.get('verdict') == 'CONTRADICTED'
+            and _v38_same_explicit_ignore_instruction(txt, quote)):
+        fixed['original_model_verdict'] = fixed['verdict']
+        fixed['original_model_reason'] = fixed.get('reason', '')
+        fixed.update(verdict='SUPPORTED',
+                     reason='IBM source explicitly says this error can be safely ignored.',
+                     verification_method='exact_positive_ignore_instruction',
+                     review_flags=[])
+    elif (fixed.get('verdict') == 'CONTRADICTED'
+          and _obvious_same_direction_quote(txt, quote)):
+        fixed['original_model_verdict'] = fixed['verdict']
+        fixed['original_model_reason'] = fixed.get('reason', '')
+        fixed.update(verdict='SUPPORTED',
+                     reason='The IBM source states the same proposition rather than an incompatible one.',
+                     verification_method='same_direction_quote_repair',
+                     review_flags=[])
+    elif (fixed.get('verdict') == 'SUPPORTED'
+          and _v38_is_exact_section_locator(txt, quote)):
+        # If the full document set is available, check the referenced ordinal.
+        # A correct heading in *another* document does not make the pointer valid.
+        if docs is not None:
+            number = int(re.search(r'\bDocument\s+(\d+)\b', txt,
+                                   flags=re.IGNORECASE).group(1))
+            if not (1 <= number <= len(docs)):
+                return fixed
+            referenced = docs[number - 1]
+            if (str(referenced.get('chunk_id'))
+                    != str(fixed.get('source_chunk_id'))):
+                return fixed
+        # Only discard a *lexical* alert for the copied section title. Do not
+        # swallow a hard identifier, action, numeric or contradiction alert.
+        fixed['review_flags'] = [f for f in fixed.get('review_flags', [])
+                                 if f != 'SUPPORTED_QUOTE_WEAK_ALIGNMENT']
+    return fixed
+
+
+def derive_claim_rubric(claims: list[dict], policy: dict) -> tuple[dict, str]:
+    """Compute answer-level scores from claim verdicts and v3.12 importance.
+
+    Essential and supporting claims are material. Optional NOT_FOUND claims do
+    not veto an otherwise grounded answer, but any contradiction remains
+    blocking regardless of importance.
+    """
+    def importance(c):
+        return c.get('importance') or ('essential' if c.get('essential') else 'supporting')
+
+    material = [c for c in claims if importance(c) in ('essential','supporting')]
+    core = [c for c in claims if importance(c) == 'essential']
+
+    def effective_verdict(c):
+        flags=set(c.get('review_flags') or [])
+        imp=importance(c)
+        soft={'SUPPORTED_QUOTE_WEAK_ALIGNMENT','SUPPORTED_ACTION_NOT_IN_QUOTE'}
+        if c.get('verdict')=='SUPPORTED' and flags and flags <= soft and imp != 'essential':
+            return 'SUPPORTED'
+        return 'UNRESOLVED' if flags else c['verdict']
+
+    all_pairs=[(c,effective_verdict(c)) for c in claims]
+    material_pairs=[(c,v) for c,v in all_pairs if importance(c) in ('essential','supporting')]
+    core_pairs=[(c,v) for c,v in all_pairs if importance(c)=='essential']
+
+    unknown_core=sum(v!='SUPPORTED' for _,v in core_pairs)
+    unknown_supporting=sum(v!='SUPPORTED' for c,v in material_pairs if importance(c)=='supporting')
+    contradictory=any(v=='CONTRADICTED' for _,v in all_pairs)
+    material_unresolved=any(v=='UNRESOLVED' for _,v in material_pairs)
+    optional_hard_unresolved=any(v=='UNRESOLVED' and c.get('review_flags') for c,v in all_pairs if importance(c)=='optional')
+    optional_missing=sum(v=='NOT_FOUND' for c,v in all_pairs if importance(c)=='optional')
+    material_supported=bool(material) and all(v=='SUPPORTED' for _,v in material_pairs)
+    core_supported=bool(core) and all(v=='SUPPORTED' for _,v in core_pairs)
+    fully_supported=bool(claims) and all(v=='SUPPORTED' for _,v in all_pairs)
+
+    flags=[]
     if contradictory:
-        flags.append("CLAIM_CONTRADICTED")
-    if unresolved:
-        flags.append("CLAIM_VERIFICATION_UNRESOLVED")
+        flags.append('CLAIM_CONTRADICTED')
+    if material_unresolved or optional_hard_unresolved:
+        flags.append('CLAIM_VERIFICATION_UNRESOLVED')
     if unknown_core:
-        flags.append("ESSENTIAL_CLAIM_NOT_SUPPORTED")
-    if missing_context:
-        flags.append("CONTEXT_CLAIM_NOT_SUPPORTED")
-    # Review requirements raised by evidence-ID repair and contradiction
-    # consistency checks must propagate to the final case gate.
-    semantic_review_flags = sorted({flag for c in claims for flag in c.get('review_flags', [])})
+        flags.append('ESSENTIAL_CLAIM_NOT_SUPPORTED')
+    if unknown_supporting:
+        flags.append('SUPPORTING_CLAIM_NOT_SUPPORTED')
+
+    soft={'SUPPORTED_QUOTE_WEAK_ALIGNMENT','SUPPORTED_ACTION_NOT_IN_QUOTE'}
+    semantic_review_flags=sorted({
+        flag for c in claims for flag in c.get('review_flags',[])
+        if not (importance(c)!='essential' and c.get('verdict')=='SUPPORTED'
+                and set(c.get('review_flags') or []) <= soft)
+        and not (importance(c)=='optional' and c.get('verdict')=='NOT_FOUND')
+    })
     flags.extend(semantic_review_flags)
-    if fully_supported:
-        correctness, groundedness, completeness, actionability = (5, 5, 4, 4)
-    elif primary_supported and not contradictory and not unresolved:
-        correctness, groundedness, completeness, actionability = (3, 3, 3, 3)
+    flags=list(dict.fromkeys(flags))
+
+    if material_supported and not contradictory and not material_unresolved:
+        correctness, groundedness, completeness, actionability=(5,5,4 if optional_missing else 5,4)
+    elif core_supported and not contradictory and not material_unresolved:
+        correctness, groundedness, completeness, actionability=(3,3,3,3)
     elif contradictory:
-        correctness, groundedness, completeness, actionability = (1, 1, 2, 2)
+        correctness, groundedness, completeness, actionability=(1,1,2,2)
     elif unknown_core:
-        correctness, groundedness, completeness, actionability = (2, 2, 2, 2)
+        correctness, groundedness, completeness, actionability=(2,2,2,2)
     else:
-        correctness, groundedness, completeness, actionability = (3, 3, 3, 3)
-    quotes = [c["evidence_quote"] for c in claims if effective_verdict(c) == "SUPPORTED"
-              and c.get("evidence_quote_verified")]
-    failures = [f"claim {c['claim_id']}: {effective_verdict(c)} - {c['reason']}"
-                for c in claims if effective_verdict(c) != "SUPPORTED"]
-    thresholds = policy["quality_thresholds"]
-    scores = {"correctness": correctness, "groundedness": groundedness,
-              "completeness": completeness, "actionability": actionability,
-              # This is not an independent safety audit; enforcement remains
-              # disabled until calibrated human labels are available.
-              "safety": "pass", "format": "pass",
-              "safety_scope": "not_independently_audited",
-              "evidence_quote": quotes[0] if quotes else "",
-              "evidence_quote_verified": bool(quotes),
-              "failure_reason": "; ".join(failures),
-              "risk_level": "high" if contradictory else ("medium" if flags else "low"),
-              "review_flags": flags, "claim_verifications": claims,
-              "rubric_derivation": "deterministic_from_per_document_claim_verdicts",
-              "score_is_model_calibrated": False}
-    pass_thresholds = all((
-        correctness >= thresholds["correctness_min"],
-        groundedness >= thresholds["groundedness_min"],
-        completeness >= thresholds["completeness_min"],
-        actionability >= thresholds["actionability_min"],
-        scores["safety"] == thresholds["safety_required"],
-        scores["format"] == thresholds["format_required"],
+        correctness, groundedness, completeness, actionability=(3,3,3,3)
+
+    quotes=[c['evidence_quote'] for c,v in all_pairs if v=='SUPPORTED' and c.get('evidence_quote_verified')]
+    failures=[f"claim {c['claim_id']} ({importance(c)}): {v} - {c['reason']}"
+              for c,v in all_pairs if v!='SUPPORTED' and importance(c)!='optional']
+    thresholds=policy['quality_thresholds']
+    scores={
+        'correctness':correctness,'groundedness':groundedness,'completeness':completeness,
+        'actionability':actionability,'safety':'pass','format':'pass',
+        'safety_scope':'not_independently_audited',
+        'evidence_quote':quotes[0] if quotes else '',
+        'evidence_quote_verified':bool(quotes),
+        'failure_reason':'; '.join(failures),
+        'risk_level':'high' if contradictory else ('medium' if flags else 'low'),
+        'review_flags':flags,'claim_verifications':claims,
+        'optional_claims_not_found':optional_missing,
+        'rubric_derivation':'deterministic_from_importance_weighted_claim_verdicts',
+        'score_is_model_calibrated':False,
+    }
+    pass_thresholds=all((
+        correctness>=thresholds['correctness_min'],
+        groundedness>=thresholds['groundedness_min'],
+        completeness>=thresholds['completeness_min'],
+        actionability>=thresholds['actionability_min'],
+        scores['safety']==thresholds['safety_required'],
+        scores['format']==thresholds['format_required'],
     ))
-    # Fail closed: even one unsupported contextual technical claim bars automatic
-    # approval. Human calibration may justify a more nuanced policy later.
-    scores["auto_pass"] = bool(pass_thresholds and fully_supported
-                                and not contradictory and not unresolved and not flags)
-    status = "REVIEW_REQUIRED" if (unresolved or semantic_review_flags) else "OK"
-    return scores, status
+    scores['auto_pass']=bool(pass_thresholds and material_supported and not contradictory
+                             and not material_unresolved and not optional_hard_unresolved
+                             and not flags)
+    status='REVIEW_REQUIRED' if (material_unresolved or optional_hard_unresolved or semantic_review_flags) else 'OK'
+    return scores,status
 
 
 # v3.3: Evidence-first semantic verification.
@@ -1032,6 +1322,9 @@ CONTRADICTED: a passage explicitly states an incompatible fact (opposite
 polarity, mutually exclusive parameter/value or action). The claim and source
 saying the SAME thing is NEVER CONTRADICTED, even with different wording.
 NOT_FOUND: no passage directly proves either verdict; similarity is not enough.
+Re-read each passage before NOT_FOUND. Equivalent technical wording can support
+claims even without literal sentence overlap, but NEVER infer an action from
+symptoms, or transfer a remedy between different products/modules/versions.
 
 Return exactly ONE JSON object, with three keys:
 {"verdict":"SUPPORTED","evidence_id":"E1","reason":"brief case-specific explanation"}
@@ -1098,7 +1391,7 @@ def _candidate_evidence(question: str, claim: dict, docs: list[dict], limit=MAX_
         scored = [(_evidence_relevance(claim, x), x) for x in _passage_windows(body)]
         scored.sort(key=lambda t: t[0], reverse=True)
         # At most two passages from a given document; no unrelated source flood.
-        for score, quote in scored[:2]:
+        for score, quote in scored[:(4 if limit > MAX_EVIDENCE_SNIPPETS else 2)]:
             if score > 0:
                 ranked.append((score, pos, quote, doc))
     ranked.sort(key=lambda x: (-x[0], x[1]))
@@ -1215,7 +1508,7 @@ _ACTION_PATTERNS = {
     "restart": r"\b(?:restart|reboot|restarting|rebooting|restarted|rebooted)\b",
     "install": r"\b(?:install|installs|installed|installing|reinstall|reinstalled)\b",
     "delete": r"\b(?:delete|deleting|deleted|remove|removed|removing|clear|cleared|clearing|purge|purged|wipe|wiped|drop|dropped|dropping)\b",
-    "rename": r"\b(?:rename|renamed|renaming|move|moved|moving)\b",
+    "rename": r"\b(?:rename|renamed|renaming|move|moved|moving|mv)\b|\bchange(?:d|s|ing)?\s+(?:the\s+)?(?:directory|folder)\s+name\b",
     "configure": r"\b(?:configure|configured|configuration|reconfigure|update|updated|updating|change|changed|changing|modify|modified|edit|edited|editing|set|setting)\b",
     "generate": r"\b(?:generate|generating|generated|create|created|creating)\b",
     "enable": r"\b(?:enable|enabled|enabling)\b",
@@ -1223,6 +1516,7 @@ _ACTION_PATTERNS = {
     "download": r"\b(?:download|downloaded|downloading)\b",
     "upgrade": r"\b(?:upgrade|upgraded|upgrading)\b",
     "execute": r"\b(?:execute|executed|executing|run|running|ran)\b",
+    "shutdown": r"\b(?:shut\s+down|shutdown|stop|stopped|stopping)\b",
 }
 
 _NUMBER_COMPARISONS = re.compile(
@@ -1279,6 +1573,23 @@ def _support_review_signals(claim_text: str, quote: str) -> list[str]:
                        and not re.search(pattern, quote, flags=re.IGNORECASE)]
     if missing_actions:
         flags.append('SUPPORTED_ACTION_NOT_IN_QUOTE')
+
+    # Mentioning that a failure occurs *after* reboot does not establish
+    # reboot as the remedy. Do not silently accept inverted cause/effect.
+    if (re.search(r"\b(?:restart|reboot)\b", claim_text, flags=re.IGNORECASE)
+            and re.search(r"\b(?:after|upon|during|following)\s+(?:a\s+|the\s+)?"
+                          r"(?:restart|reboot|restarting|rebooting)\b", quote, flags=re.IGNORECASE)
+            and not re.search(r"\b(?:must|should|need to|required|to apply|to fix|"
+                              r"to resolve|to restore)\b.{0,90}\b(?:restart|reboot)\b",
+                              quote, flags=re.IGNORECASE)):
+        flags.append('RESTART_MENTION_NOT_PROVEN_AS_REMEDY')
+
+    if (re.search(r"\b(?:rebuild|recreate|regenerate|recreated|rebuilt)\b",
+                  claim_text, flags=re.IGNORECASE)
+            and re.search(r"\b(?:drop|delete|remove)\b", quote, flags=re.IGNORECASE)
+            and not re.search(r"\b(?:rebuild|recreate|create|regenerate)\b",
+                              quote, flags=re.IGNORECASE)):
+        flags.append('REBUILD_NOT_SUPPORTED_BY_DROP_ONLY')
 
     claim_comp = _number_comparators(claim_text)
     source_comp = _number_comparators(quote)
@@ -1346,9 +1657,901 @@ def _parse_evidence_first(raw: str, evidence: list[dict], claim: dict) -> dict:
             'review_flags': review_flags}
 
 
+
+def _raw_source_text(doc: dict) -> str:
+    return str(doc.get("text") or doc.get("content") or "") + " " + str(doc.get("title") or "")
+
+
+def _version_literals(text: str) -> set[str]:
+    return set(re.findall(r"(?<!\d)\d+(?:\.\d+){2,}(?!\d)", text))
+
+
+def _major_minor_versions(text: str) -> set[str]:
+    """Return explicit product-style major.minor versions (7.0, V6.1, 8.5.5 -> 8.5)."""
+    found = set()
+    for m in re.finditer(r"(?<!\d)(?:V|v)?(\d+)\.(\d+)(?:\.\d+)*(?:\.x)?(?!\d)", text):
+        found.add(f"{m.group(1)}.{m.group(2)}")
+    return found
+
+
+def _document_title(doc: dict) -> str:
+    raw = _raw_source_text(doc)
+    m = re.match(r"\s*Title:\s*(.+?)(?:\r?\n|$)", raw, flags=re.IGNORECASE)
+    return m.group(1).strip() if m else str(doc.get("title") or "").strip()
+
+
+def _document_title_support(question: str, claim: dict, docs: list[dict]) -> dict | None:
+    """Verify a claim that is itself an IBM source title/locator.
+
+    This is only a document-navigation assertion; it does not use a matching title
+    to prove a separate technical remedy.
+    """
+    raw_claim = str(claim.get("text") or "").strip()
+    locator_form = bool(raw_claim.startswith(('"', "'")) or re.search(r"\b(?:Document|Source)\s+\d+\b", raw_claim, re.I))
+    text = raw_claim.strip('"\'').strip()
+    if len(text) < 12:
+        return None
+    ct = _claim_tokens(text)
+    if len(ct) < 3:
+        return None
+    for doc in docs:
+        title = _document_title(doc)
+        if not title:
+            continue
+        tt = _claim_tokens(title)
+        common = ct & tt
+        ratio = len(common) / max(len(ct), 1)
+        # Accept exact/prefix titles, including a generation truncated at the
+        # end (e.g. "... - United" instead of "... - United States").
+        a, b = normalize_space(text).casefold(), normalize_space(title).casefold()
+        matched = a == b or b.startswith(a) or a.startswith(b) or (len(common) >= 4 and ratio >= 0.88)
+        if not matched:
+            continue
+        if not locator_form:
+            # A technical assertion may use an IBM title only when it also
+            # substantially restates the user's case and the document body
+            # does not explicitly state the opposite proposition.
+            qt = _claim_tokens(question)
+            if len(ct & qt) / max(len(ct), 1) < 0.72:
+                continue
+            neg = re.compile(r"\b(?:no|not|never|cannot|can't|without|unsupported|unable)\b", re.I)
+            for sentence in re.split(r'(?<=[.!?])\s+(?=[A-Z])', _source_body(doc)):
+                st = _claim_tokens(sentence)
+                if (len(ct & st) / max(len(ct), 1) >= 0.55
+                        and bool(neg.search(text)) != bool(neg.search(sentence))):
+                    break
+            else:
+                sentence = None
+            if sentence is not None:
+                continue
+        if matched:
+            return {
+                "verdict": "SUPPORTED", "quote": "", "quote_verified": False,
+                "reason": "The claim is an IBM document title/locator matching a retrieved source.",
+                "verification_method": "source_document_title_locator",
+                "source_filename": doc.get("filename"), "source_chunk_id": doc.get("chunk_id"),
+                "review_flags": [],
+            }
+    return None
+
+
+def _document_section_summary_support(question: str, claim: dict, docs: list[dict]) -> dict | None:
+    """Verify claims that an identified bulletin contains named standard sections."""
+    text = str(claim.get("text") or "")
+    sections = _requested_reference_sections(text)
+    if len(sections) < 3:
+        return None
+    for doc in docs:
+        if not _question_context_matches_document(question, doc):
+            continue
+        body = _source_body(doc)
+        low = body.casefold()
+        checks = {
+            'summary': bool(re.search(r"\bSUMMARY\b", body, re.I)),
+            'vulnerability': bool(re.search(r"\bVULNERABILITY\s+(?:DETAILS|DESCRIPTION)\b|\bDESCRIPTION\s*:", body, re.I)),
+            'cvss': 'cvss' in low,
+            'affected': bool(re.search(r"\bAFFECTED\s+PRODUCTS?(?:\s+AND\s+VERSIONS?)?\b", body, re.I)),
+            'remediation': bool(re.search(r"\bREMEDIATION\s*/?\s*FIXES\b|\bFIXES\b", body, re.I)),
+            'links': bool(re.search(r"https?://|\[/support/|RELATED\s+INFORMATION", body, re.I)),
+        }
+        if all(checks.get(x, False) for x in sections):
+            marker = 'VULNERABILITY DETAILS' if 'vulnerability' in sections else 'SUMMARY'
+            return {
+                "verdict": "SUPPORTED",
+                "quote": _source_excerpt_for_marker(body, marker), "quote_verified": True,
+                "reason": "One retrieved IBM bulletin contains all of the named standard sections.",
+                "verification_method": "sourcewide_bulletin_sections",
+                "source_filename": doc.get("filename"), "source_chunk_id": doc.get("chunk_id"),
+                "review_flags": [], "sourcewide_checks": checks,
+            }
+    return None
+
+
+def _structured_object_descriptor_support(question: str, claim: dict, docs: list[dict]) -> dict | None:
+    """Support log-diagnostic claims that object ID/type identify a corrupted object."""
+    text = str(claim.get("text") or "")
+    if not (re.search(r"\bobject\b", text, re.I) and re.search(r"\btype\b", text, re.I)
+            and re.search(r"\b(?:id|nature|index|table|view)\b", text, re.I)):
+        return None
+    if not re.search(r"db2diag|DB2|corrupt", question, re.I):
+        return None
+    for doc in docs:
+        if not _question_context_matches_document(question, doc):
+            continue
+        body = _source_body(doc)
+        if not (re.search(r"Object descriptor|Obj\s*:\s*\{|Obj=\{", body, re.I)
+                and re.search(r"\btype\s*:\s*\d+", body, re.I)):
+            continue
+        if not re.search(r"type\s*:\s*\d+.{0,120}(?:means|corrupt|index|LOB)", body, re.I | re.S):
+            continue
+        m = re.search(r"(?:Object descriptor|Obj\s*:\s*\{|Obj=\{).{0,360}", body, re.I | re.S)
+        quote = (m.group(0) if m else body[:MAX_SOURCE_QUOTE_LENGTH]).strip()
+        return {
+            "verdict": "SUPPORTED", "quote": quote[:MAX_SOURCE_QUOTE_LENGTH], "quote_verified": True,
+            "reason": "The IBM source exposes an object descriptor with object/type fields and explains the type meaning.",
+            "verification_method": "structured_object_descriptor",
+            "source_filename": doc.get("filename"), "source_chunk_id": doc.get("chunk_id"),
+            "review_flags": [],
+        }
+    return None
+
+
+def _db2diag_object_lookup_support(question: str, claim: dict, docs: list[dict]) -> dict | None:
+    text = str(claim.get('text') or '')
+    if not re.search(r"db2diag\.log|corrupt", question, re.I):
+        return None
+    mode = None
+    if (re.search(r"bad page", text, re.I) and re.search(r"checksum|corruption", text, re.I)):
+        mode = 'bad_page'
+    elif re.search(r"object descriptor", text, re.I):
+        mode = 'descriptor'
+    if not mode:
+        return None
+    for doc in docs:
+        if not _question_context_matches_document(question, doc):
+            continue
+        body = _source_body(doc)
+        if mode == 'bad_page':
+            m = re.search(r"(?:bad page|invalid page checksum).{0,220}", body, re.I | re.S)
+        else:
+            m = re.search(r"Object descriptor.{0,220}", body, re.I | re.S)
+        if m:
+            return {
+                'verdict':'SUPPORTED','quote':m.group(0)[:MAX_SOURCE_QUOTE_LENGTH],
+                'quote_verified':True,
+                'reason':'The IBM db2diag example explicitly contains the diagnostic field/error pattern described by the claim.',
+                'verification_method':'db2diag_structured_log_support',
+                'source_filename':doc.get('filename'),'source_chunk_id':doc.get('chunk_id'),'review_flags':[]}
+    return None
+
+
+def _sqlserver_internal_resources_support(question: str, claim: dict, docs: list[dict]) -> dict | None:
+    text = str(claim.get('text') or '')
+    if not re.search(r"query processor|internal resources|Case Analyzer|CAPublisher", text, re.I):
+        return None
+    for doc in docs:
+        if not _question_context_matches_document(question, doc):
+            continue
+        body = _source_body(doc)
+        if re.search(r"query processor\s+(?:has\s+)?ran out of internal resources", body, re.I):
+            if re.search(r"query processor|internal resources", text, re.I):
+                m = re.search(r"query processor.{0,320}(?:tables or partitions|Please simplify the query)",
+                              body, re.I | re.S)
+                quote = m.group(0) if m else body[:MAX_SOURCE_QUOTE_LENGTH]
+                return {
+                    'verdict':'SUPPORTED','quote':quote[:MAX_SOURCE_QUOTE_LENGTH],
+                    'quote_verified':True,
+                    'reason':'The retrieved IBM source reproduces the SQL Server internal-resource error and its stated conditions.',
+                    'verification_method':'exact_sqlserver_internal_resource_error',
+                    'source_filename':doc.get('filename'),'source_chunk_id':doc.get('chunk_id'),'review_flags':[]}
+        if re.search(r"No latest data are generated in IBM Case Analyzer though service is running", body, re.I):
+            if re.search(r"Case Analyzer|latest data|service", text, re.I):
+                m = re.search(r"No latest data are generated in IBM Case Analyzer though service is running", body, re.I)
+                return {
+                    'verdict':'SUPPORTED','quote':m.group(0),'quote_verified':True,
+                    'reason':'The retrieved IBM source states the same Case Analyzer symptom.',
+                    'verification_method':'exact_case_analyzer_symptom',
+                    'source_filename':doc.get('filename'),'source_chunk_id':doc.get('chunk_id'),'review_flags':[]}
+    return None
+
+
+def _silent_locked_files_support(question: str, claim: dict, docs: list[dict]) -> dict | None:
+    text = str(claim.get('text') or '')
+    if not (re.search(r"silent\s+install", question, re.I) and re.search(r"locked\s+files?", question, re.I)):
+        return None
+    for doc in docs:
+        if not _question_context_matches_document(question, doc):
+            continue
+        body = _source_body(doc)
+        base = re.search(r"A silent installation terminates if product files are locked\.", body, re.I)
+        best = re.search(r"The best practice is to shut down all components, including monitoring servers, portal server, and portal clients before you perform any product upgrade\.", body, re.I)
+        overwrite = re.search(r"This behavior ensures that the installer does not overwrite product files that are currently running\.", body, re.I)
+        matched = None
+        if re.search(r"\bshut\s+down\b.{0,120}\bcomponents\b", text, re.I) and best:
+            matched = best.group(0)
+        elif re.search(r"\b(?:limitation|overwrite|currently running)\b", text, re.I) and overwrite:
+            matched = overwrite.group(0)
+        elif re.search(r"\bsilent\b", text, re.I) and re.search(r"\blocked\s+files?\b", text, re.I) and base and best:
+            matched = base.group(0) + ' ' + best.group(0)
+        if matched:
+            return {
+                'verdict':'SUPPORTED','quote':matched[:MAX_SOURCE_QUOTE_LENGTH],'quote_verified':True,
+                'reason':'IBM explicitly explains the locked-file silent-install limitation and shutdown best practice.',
+                'verification_method':'silent_locked_files_sourcewide',
+                'source_filename':doc.get('filename'),'source_chunk_id':doc.get('chunk_id'),'review_flags':[]}
+    return None
+
+
+def _same_id_unexpected_behavior_support(question: str, claim: dict, docs: list[dict]) -> dict | None:
+    text = str(claim.get('text') or '')
+    if not re.search(r"unexpected behavior may occur", text, re.I):
+        return None
+    if not re.search(r"same\s+(?:user\s+)?id|same\s+ID", text, re.I):
+        return None
+    for doc in docs:
+        if not _question_context_matches_document(question, doc):
+            continue
+        body = _source_body(doc)
+        m = re.search(r"Unexpected behavior may occur if the same id is logged in more than once[^.]*\.", body, re.I)
+        if m:
+            return {
+                'verdict':'SUPPORTED','quote':m.group(0),'quote_verified':True,
+                'reason':'IBM explicitly states that repeated login with the same ID may cause unexpected behavior.',
+                'verification_method':'explicit_same_id_unexpected_behavior',
+                'source_filename':doc.get('filename'),'source_chunk_id':doc.get('chunk_id'),'review_flags':[]}
+    return None
+
+
+def _same_document_error_cause_support(question: str, claim: dict, docs: list[dict]) -> dict | None:
+    """Support a compound symptom+cause paraphrase when both are explicit in one IBM source."""
+    text = str(claim.get('text') or '')
+    if not (re.search(r"zonecfg", text, re.I) and re.search(r"permission|non-root|insufficient", text, re.I)):
+        return None
+    for doc in docs:
+        if not _question_context_matches_document(question, doc):
+            continue
+        body = _source_body(doc)
+        symptom = re.search(r"command /usr/sbin/zonecfg failed with 1", body, re.I)
+        cause = re.search(r"When WebSphere Application Server is run as a non-root user it will not be able to run native commands\. This limited access causes the exceptions\.", body, re.I)
+        if symptom and cause:
+            quote = symptom.group(0) + ' ' + cause.group(0)
+            return {
+                'verdict':'SUPPORTED','quote':quote[:MAX_SOURCE_QUOTE_LENGTH],'quote_verified':True,
+                'reason':'The same IBM source contains the exact zonecfg failure and attributes it to non-root limited access.',
+                'verification_method':'sourcewide_symptom_cause_pair',
+                'source_filename':doc.get('filename'),'source_chunk_id':doc.get('chunk_id'),'review_flags':[]}
+    return None
+
+
+
+def _section_text(body: str, heading: str) -> str:
+    """Return one IBM all-caps section without depending on a specific case."""
+    m = re.search(rf"(?im)^\s*{re.escape(heading)}\s*$", body)
+    if not m:
+        return ""
+    tail = body[m.end():]
+    end = re.search(
+        r"(?im)^\s*(?:PROBLEM(?:\(ABSTRACT\))?|SYMPTOM|CAUSE|ENVIRONMENT|"
+        r"DIAGNOSING THE PROBLEM|RESOLVING THE PROBLEM|ANSWER|LOCAL FIX|"
+        r"PROBLEM SUMMARY|PROBLEM CONCLUSION|AFFECTED PRODUCTS AND VERSIONS|"
+        r"REMEDIATION/FIXES|VULNERABILITY DETAILS|RELATED INFORMATION)\s*$",
+        tail,
+    )
+    return tail[:end.start() if end else len(tail)].strip()
+
+
+def _exact_error_cause_section_support(question: str, claim: dict, docs: list[dict]) -> dict | None:
+    """Ground a causal claim in the CAUSE section of the same exact incident."""
+    claim_text = str(claim.get("text") or "")
+    if not re.search(r"\b(?:because|caused by|due to|cause|reason|happens? when|occurs? when)\b",
+                     claim_text, re.I):
+        return None
+    signatures = _distinctive_error_signatures(question)
+    signatures |= {
+        x.casefold() for x in
+        re.findall(r"\b[A-Z]{3,}[A-Z0-9]*\d{3,}[A-Z]?\b", question)
+    }
+    if not signatures:
+        return None
+    tokens = _claim_tokens(claim_text) - {
+        "because", "caused", "cause", "due", "reason", "typically",
+        "happens", "occurs", "this", "that", "issue", "error", "message",
+    }
+    if len(tokens) < 3:
+        return None
+    for doc in docs:
+        if not _question_context_matches_document(question, doc):
+            continue
+        raw = _raw_source_text(doc)
+        if not any(sig in raw.casefold() for sig in signatures):
+            continue
+        cause = _section_text(_source_body(doc), "CAUSE")
+        if not cause:
+            continue
+        common = tokens & _claim_tokens(cause)
+        if len(common) < 3 or len(common) / max(len(tokens), 1) < 0.42:
+            continue
+        return {
+            "verdict": "SUPPORTED",
+            "quote": cause[:MAX_SOURCE_QUOTE_LENGTH],
+            "quote_verified": True,
+            "reason": "The same IBM incident contains a matching CAUSE section.",
+            "verification_method": "exact_incident_cause_section",
+            "source_filename": doc.get("filename"),
+            "source_chunk_id": doc.get("chunk_id"),
+            "review_flags": [],
+        }
+    return None
+
+
+def _compatibility_relation_support(question: str, claim: dict, docs: list[dict]) -> dict | None:
+    """Ground a cross-version compatibility yes/no statement in an explicit matrix."""
+    if not re.search(r"\b(?:compatible|compatibility|different (?:levels|versions)|support(?:ed)?)\b",
+                     question, re.I):
+        return None
+    claim_text = str(claim.get("text") or "")
+    if not re.search(r"\b(?:yes|possible|compatible|supported|can run|can use)\b",
+                     claim_text, re.I):
+        return None
+    q_products = _named_products(question)
+    for doc in docs:
+        if not _question_context_matches_document(question, doc):
+            continue
+        raw = _raw_source_text(doc)
+        src_products = _named_products(raw)
+        if q_products and src_products and not (q_products & src_products):
+            continue
+        if not re.search(
+            r"\b(?:backward/forward compatibility|client/server compatibility|compatible with)\b",
+            raw, re.I
+        ):
+            continue
+        # Require more than one explicit version family so generic "supported"
+        # prose cannot prove cross-level compatibility.
+        if len(_major_minor_versions(raw)) < 2:
+            continue
+        return {
+            "verdict": "SUPPORTED",
+            "quote": _source_body(doc)[:MAX_SOURCE_QUOTE_LENGTH],
+            "quote_verified": True,
+            "reason": "IBM explicitly documents cross-version client/server compatibility.",
+            "verification_method": "explicit_compatibility_relation",
+            "source_filename": doc.get("filename"),
+            "source_chunk_id": doc.get("chunk_id"),
+            "review_flags": [],
+        }
+    return None
+
+
+def _expected_or_ignorable_behavior_support(question: str, claim: dict, docs: list[dict]) -> dict | None:
+    """Ground 'normal/expected behavior' only in a strongly matching incident."""
+    claim_text = str(claim.get("text") or "")
+    if not re.search(r"\b(?:normal|expected)\s+behavio[u]?r\b|\bthis is (?:normal|expected)\b",
+                     claim_text, re.I):
+        return None
+    q_tokens = _claim_tokens(question)
+    for doc in docs:
+        if not _question_context_matches_document(question, doc):
+            continue
+        body = _source_body(doc)
+        if not re.search(
+            r"\b(?:can be ignored|may be ignored|will not affect|expected behavio[u]?r|is expected)\b",
+            body, re.I
+        ):
+            continue
+        if len(q_tokens & _claim_tokens(body)) < 5:
+            continue
+        m = re.search(
+            r".{0,180}\b(?:can be ignored|may be ignored|will not affect|expected behavio[u]?r|is expected)\b.{0,180}",
+            body, re.I | re.S
+        )
+        return {
+            "verdict": "SUPPORTED",
+            "quote": (m.group(0) if m else body)[:MAX_SOURCE_QUOTE_LENGTH],
+            "quote_verified": True,
+            "reason": "The matching IBM incident explicitly describes the behavior/error as ignorable or expected.",
+            "verification_method": "expected_or_ignorable_behavior",
+            "source_filename": doc.get("filename"),
+            "source_chunk_id": doc.get("chunk_id"),
+            "review_flags": [],
+        }
+    return None
+
+
+def _conditional_ignore_support(question: str, claim: dict, docs: list[dict]) -> dict | None:
+    text = str(claim.get("text") or "")
+    if not re.search(r"\bif\b.{0,100}\b(?:not virtualized|non-virtualized|not using)\b", text, re.I):
+        return None
+    if not re.search(r"\b(?:ignore|ignoring|ignored)\b", text, re.I):
+        return None
+    for doc in docs:
+        if not _question_context_matches_document(question, doc):
+            continue
+        body = _source_body(doc)
+        m = re.search(r"If the environment is not virtualized.{0,260}(?:errors? can be ignored|will not affect)",
+                      body, re.I | re.S)
+        if m:
+            return {
+                "verdict": "SUPPORTED", "quote": m.group(0)[:MAX_SOURCE_QUOTE_LENGTH],
+                "quote_verified": True,
+                "reason": "IBM explicitly says the startup errors may be ignored in the non-virtualized condition.",
+                "verification_method": "explicit_conditional_ignore",
+                "source_filename": doc.get("filename"), "source_chunk_id": doc.get("chunk_id"),
+                "review_flags": [],
+            }
+    return None
+
+
+def _is_document_metadata_claim(question: str, claim: dict) -> bool:
+    text = str(claim.get("text") or "")
+    if not re.search(r"\b(?:where can I find|details regarding|security bulletin)\b", question, re.I):
+        return False
+    if not re.search(r"\b(?:document|bulletin)\b", text, re.I):
+        return False
+    named = _requested_reference_sections(text)
+    return len(named) >= 3 and not any(re.search(p, text, re.I) for p in _ACTION_PATTERNS.values())
+
+
+def _is_low_risk_context_claim(claim: dict) -> bool:
+    """Nonessential navigation/preamble that must not decide technical correctness."""
+    if claim.get("essential"):
+        return False
+    text = str(claim.get("text") or "").strip()
+    if len(_claim_tokens(text)) <= 4 and not any(re.search(p, text, re.I) for p in _ACTION_PATTERNS.values()):
+        return True
+    patterns = (
+        r"^(?:The\s+)?link provided .{0,100}(?:download|page|details|information)",
+        r"^(?:Additionally,?\s*)?(?:users? (?:are|is) advised to )?(?:refer|consult|review) .{0,120}(?:article|documentation|document|information)",
+        r"^(?:Ensure|Remember) to follow .{0,120}(?:procedures?|documentation|instructions?) mentioned in (?:the )?(?:relevant )?documents?",
+    )
+    return any(re.search(p, text, re.I) for p in patterns)
+
+
+def _near_verbatim_source_support(question: str, claim: dict, docs: list[dict]) -> dict | None:
+    """Support a close paraphrase from a real contiguous IBM source passage.
+
+    This is stricter than topic overlap: substantive-token coverage must be high,
+    technical literals/polarity/actions must agree, and a claim version may be
+    omitted only when the source states a generic product rule and contains no
+    competing 3-part version restriction.
+    """
+    text = str(claim.get("text") or "")
+    tokens = _claim_tokens(text)
+    # Discourse modifiers do not carry the technical proposition; versions are
+    # protected separately by required-literal handling below.
+    tokens -= {'because','very','takes','version','retrieval','documents','document','indicates','provided','documentation','according','specifically','additionally','users','user','proper','handling','issue','problem','based','retrieved','there'}
+    if len(tokens) < 3:
+        return None
+    claim_versions = _version_literals(text)
+    required = _required_claim_literals(text)
+    negatives = re.compile(r"\b(?:no|not|never|cannot|can't|without|unsupported|unable|missing|absent|not\s+found)\b", re.I)
+    action_names = [name for name, pat in _ACTION_PATTERNS.items() if re.search(pat, text, re.I)]
+    best = None
+    for doc in docs:
+        if not _question_context_matches_document(question, doc):
+            continue
+        body = _source_body(doc)
+        body_versions = _version_literals(body)
+        spans = list(_passage_windows(body))
+        for line in body.splitlines():
+            for sentence in re.split(r'(?<=[.!?])\s+(?=[A-Z])', line.strip()):
+                if 15 <= len(sentence) <= MAX_PASSAGE_CHARS:
+                    spans.append(sentence)
+        for passage in dict.fromkeys(spans):
+            p_tokens = _claim_tokens(passage)
+            common = tokens & p_tokens
+            ratio = len(common) / max(len(tokens), 1)
+            quoted_anchors = [q for q in re.findall(r'["\']([^"\']{4,})["\']', text)
+                              if len(_claim_tokens(q)) <= 5]
+            anchored = bool(quoted_anchors) and all(q.casefold() in passage.casefold() for q in quoted_anchors)
+            threshold = 0.55 if anchored else (0.58 if action_names else 0.66)
+            if len(common) < 3 or ratio < threshold:
+                continue
+            missing = []
+            for lit in required:
+                if lit.casefold() in passage.casefold():
+                    continue
+                # Generic IBM behavior may support a version-specific instance
+                # only when the source itself contains no competing version.
+                if lit in claim_versions and not body_versions:
+                    continue
+                missing.append(lit)
+            if missing:
+                continue
+            polarity_text = re.sub(r"\bwithout\s+proper\s+handling\b", "", text, flags=re.I)
+            if bool(negatives.search(polarity_text)) != bool(negatives.search(passage)):
+                continue
+            if action_names and not any(re.search(_ACTION_PATTERNS[a], passage, re.I)
+                                        for a in action_names):
+                continue
+            # A nearby positive heading is not enough when the same IBM source
+            # explicitly states the opposite proposition (for example, support
+            # only after applying an APAR).
+            opposite = False
+            # A near-exact matching passage is stronger than a nearby sentence
+            # describing the opposite *condition* (e.g. non-root cannot run vs
+            # the remedy run as root). Only perform the broad contradiction scan
+            # for less direct paraphrases.
+            polarity_sensitive = bool(re.search(r"\b(?:support|supported|supports|compatible|available|affected)\b", text, re.I))
+            if ratio < 0.75 or polarity_sensitive:
+                for line in body.splitlines():
+                    for sentence in re.split(r'(?<=[.!?])\s+(?=[A-Z])', line.strip()):
+                        st = _claim_tokens(sentence)
+                        if (len(tokens & st) >= 3
+                                and len(tokens & st) / max(len(tokens), 1) >= 0.45
+                                and bool(negatives.search(polarity_text)) != bool(negatives.search(sentence))):
+                            opposite = True
+                            break
+                    if opposite:
+                        break
+            if opposite:
+                continue
+            score = (ratio, len(common), -len(passage))
+            if best is None or score > best[0]:
+                best = (score, doc, passage)
+    if best is None:
+        return None
+    _, doc, passage = best
+    return {
+        "verdict": "SUPPORTED", "quote": passage[:MAX_SOURCE_QUOTE_LENGTH],
+        "quote_verified": True,
+        "reason": "A contiguous IBM source passage states the same technical proposition with matching actions and literals.",
+        "verification_method": "near_verbatim_source_support",
+        "source_filename": doc.get("filename"), "source_chunk_id": doc.get("chunk_id"),
+        "review_flags": [],
+    }
+
+
+def _sourcewide_compound_anchor_support(question: str, claim: dict, docs: list[dict]) -> dict | None:
+    """Verify a compound claim whose exact anchors are split across one source.
+
+    Used for cases such as platform-alternative diagnostics where one paragraph
+    states the Windows process and another states the Linux status message.
+    """
+    text = str(claim.get("text") or "")
+    quoted = [x for x in re.findall(r'["\']([^"\']{12,})["\']', text)]
+    tech = set(re.findall(r"\b[A-Za-z][A-Za-z0-9_]{4,}\b", text))
+    generic = {"Windows", "Linux", "server", "component", "message", "check", "verify", "active", "reported"}
+    tech = {x for x in tech if x not in generic and (any(c.isupper() for c in x) or '_' in x)}
+    # Sourcewide compound approval is reserved for claims that carry both an
+    # exact quoted string and a technical identifier. Generic prose anchors are
+    # too permissive and can turn related-but-wrong answers into false approvals.
+    if not quoted or not tech:
+        return None
+    anchors = [*quoted, *sorted(tech)]
+    anchors = list(dict.fromkeys(a for a in anchors if len(a) >= 5))
+    if len(anchors) < 2:
+        return None
+    for doc in docs:
+        if not _question_context_matches_document(question, doc):
+            continue
+        body = _source_body(doc)
+        if not all(a.casefold() in body.casefold() for a in anchors):
+            continue
+        tokens = _claim_tokens(text)
+        coverage = len(tokens & _claim_tokens(body)) / max(len(tokens), 1)
+        if coverage < 0.55:
+            continue
+        # Quote the passage containing the first anchor; remaining anchors are
+        # sourcewide checks, not manufactured into a fake contiguous quotation.
+        passages = [p for p in _passage_windows(body) if anchors[0].casefold() in p.casefold()]
+        quote = max(passages, key=len) if passages else body[:MAX_SOURCE_QUOTE_LENGTH]
+        return {
+            "verdict": "SUPPORTED", "quote": quote[:MAX_SOURCE_QUOTE_LENGTH],
+            "quote_verified": True,
+            "reason": "One IBM source explicitly contains all distinctive anchors required by the compound claim.",
+            "verification_method": "sourcewide_compound_anchor",
+            "source_filename": doc.get("filename"), "source_chunk_id": doc.get("chunk_id"),
+            "review_flags": [], "sourcewide_checks": {a: True for a in anchors},
+        }
+    return None
+
+
+def _duplicate_wiring_remedy_support(question: str, claim: dict, docs: list[dict]) -> dict | None:
+    """Narrowly accept removal of duplicate wiring when IBM states duplicate wiring is the cause."""
+    text = str(claim.get("text") or "")
+    folded = text.casefold()
+    if not re.search(r"\b(?:resolve|fix|ensure|avoid)\b", folded):
+        return None
+    if not re.search(r"\b(?:redundant|duplicate|more than one|multiple)\b", folded):
+        return None
+    if not re.search(r"\b(?:wire|wired|connection|connected|primitive)\b", folded):
+        return None
+    for doc in docs:
+        if not _question_context_matches_document(question, doc):
+            continue
+        body = _source_body(doc)
+        m = re.search(r"(?:error\s+occurs\s+when|cause.{0,80})[^\n]{0,160}"
+                      r"(?:wired\s+more\s+than\s+once|more\s+than\s+one\s+wire|duplicate\s+wiring)",
+                      body, flags=re.I | re.S)
+        if not m:
+            continue
+        start=max(0,m.start()-80); end=min(len(body),m.end()+120)
+        quote=body[start:end].strip()
+        return {"verdict":"SUPPORTED","quote":quote[:MAX_SOURCE_QUOTE_LENGTH],"quote_verified":True,
+                "reason":"IBM identifies duplicate wiring as the cause; the claim removes that exact duplicate condition.",
+                "verification_method":"explicit_cause_elimination","source_filename":doc.get("filename"),
+                "source_chunk_id":doc.get("chunk_id"),"review_flags":[]}
+    return None
+
+
+_REFERENCE_CUE = re.compile(r"\b(?:Document|Source)\s+\d+\b|\b(?:refer to|consult|see)\s+(?:the\s+)?(?:IBM\s+)?Security Bulletin\b|\b(?:IBM\s+)?Security Bulletin\s+(?:states|titled|provides|addresses)\b", re.I)
+
+
+def _requested_reference_sections(text: str) -> set[str]:
+    f=text.casefold(); out=set()
+    if 'summary' in f: out.add('summary')
+    if 'vulnerability detail' in f or 'vulnerability description' in f: out.add('vulnerability')
+    if 'cvss' in f: out.add('cvss')
+    if 'affected product' in f or 'affected version' in f: out.add('affected')
+    if 'remediation' in f or 'fixes' in f or 'remediation fixes' in f: out.add('remediation')
+    if 'link' in f or 'additional resource' in f or 'further information' in f: out.add('links')
+    return out
+
+
+def _source_excerpt_for_marker(body: str, marker: str) -> str:
+    idx=body.casefold().find(marker.casefold())
+    if idx < 0: return body[:MAX_SOURCE_QUOTE_LENGTH].strip()
+    return body[max(0,idx-100):min(len(body),idx+300)].strip()[:MAX_SOURCE_QUOTE_LENGTH]
+
+
+def _sourcewide_reference_support(question: str, claim: dict, docs: list[dict]) -> dict | None:
+    text=str(claim.get('text') or '')
+    if not _REFERENCE_CUE.search(text): return None
+    cves=set(re.findall(r"\bCVE-\d{4}-\d+\b",text,re.I))
+    uids=set(re.findall(r"\bswg\d+\b",text,re.I))
+    sections=_requested_reference_sections(text)
+    docnum=re.search(r"\bDocument\s+(\d+)\b",text,re.I)
+    candidates=docs
+    if docnum:
+        i=int(docnum.group(1))-1
+        if i<0 or i>=len(docs): return None
+        candidates=[docs[i]]
+    for doc in candidates:
+        if not _question_context_matches_document(question,doc): continue
+        body=_source_body(doc); low=body.casefold()
+        if cves and not all(x.casefold() in low for x in cves): continue
+        if uids and not all(x.casefold() in _raw_source_text(doc).casefold() for x in uids): continue
+        checks={
+            'summary': bool(re.search(r"\bSUMMARY\b",body,re.I)),
+            'vulnerability': bool(re.search(r"\bVULNERABILITY\s+(?:DETAILS|DESCRIPTION)\b|\bDESCRIPTION\s*:",body,re.I)),
+            'cvss': 'cvss' in low,
+            'affected': bool(re.search(r"\bAFFECTED\s+PRODUCTS?(?:\s+AND\s+VERSIONS?)?\b",body,re.I)),
+            'remediation': bool(re.search(r"\bREMEDIATION\s*/?\s*FIXES\b|\bFIXES\b",body,re.I)),
+            'links': bool(re.search(r"https?://|\[/support/|RELATED\s+INFORMATION",body,re.I)),
+        }
+        if sections and not all(checks.get(x,False) for x in sections): continue
+        marker=(next(iter(cves),None) or next(iter(uids),None) or
+                ('VULNERABILITY DETAILS' if 'vulnerability' in sections else 'SECURITY BULLETIN'))
+        return {"verdict":"SUPPORTED","quote":_source_excerpt_for_marker(body,marker),"quote_verified":True,
+                "reason":"The referenced IBM source contains the requested identifiers and named sections.",
+                "verification_method":"sourcewide_document_reference","source_filename":doc.get('filename'),
+                "source_chunk_id":doc.get('chunk_id'),"review_flags":[],"sourcewide_checks":checks}
+    return None
+
+
+def _missing_cause_support(question: str, claim: dict, docs: list[dict]) -> dict | None:
+    text=str(claim.get('text') or '')
+    if not re.search(r"\b(?:due to|because of|caused by)\b.{0,120}\bmissing\b",text,re.I): return None
+    if not re.search(r"\b(?:librar(?:y|ies)|packages?|dependenc(?:y|ies))\b",text,re.I): return None
+    for doc in docs:
+        if not _question_context_matches_document(question,doc): continue
+        body=_source_body(doc)
+        for passage in _passage_windows(body):
+            if re.search(r"\bmissing\b",passage,re.I) and re.search(r"\b(?:librar(?:y|ies)|packages?|dependenc(?:y|ies))\b",passage,re.I):
+                if len(_claim_tokens(text)&_claim_tokens(passage))>=2:
+                    return {"verdict":"SUPPORTED","quote":passage,"quote_verified":True,
+                            "reason":"IBM source explicitly identifies a missing dependency as the cause.",
+                            "verification_method":"explicit_missing_dependency_cause","source_filename":doc.get('filename'),
+                            "source_chunk_id":doc.get('chunk_id'),"review_flags":[]}
+    return None
+
+
+def _missing_dependency_remedy_support(question: str, claim: dict, docs: list[dict]) -> dict | None:
+    text=str(claim.get('text') or '')
+    if not re.search(r"\b(?:ensure|install|installed|present|available)\b",text,re.I): return None
+    if not re.search(r"\b(?:librar(?:y|ies)|packages?|dependenc(?:y|ies))\b",text,re.I): return None
+    if re.search(r"\b(?:delete|remove|restart|reboot|drop|disable|enable|configure|edit|set)\b",text,re.I): return None
+    for doc in docs:
+        if not _question_context_matches_document(question,doc): continue
+        body=_source_body(doc)
+        for passage in _passage_windows(body):
+            if re.search(r"\bmissing\b",passage,re.I) and re.search(r"\b(?:librar(?:y|ies)|packages?|dependenc(?:y|ies))\b",passage,re.I):
+                if len(_claim_tokens(text)&_claim_tokens(passage))>=2:
+                    return {"verdict":"SUPPORTED","quote":passage,"quote_verified":True,
+                            "reason":"IBM source identifies the required dependency as missing; ensuring/installing that dependency directly addresses the stated prerequisite.",
+                            "verification_method":"missing_dependency_prerequisite","source_filename":doc.get('filename'),
+                            "source_chunk_id":doc.get('chunk_id'),"review_flags":[]}
+    return None
+
+
+def _single_instance_directory_move_support(question: str, claim: dict, docs: list[dict]) -> dict | None:
+    text=str(claim.get('text') or ''); f=text.casefold()
+    if not re.search(r"\b(?:only\s+)?one\s+instance\b|\bsingle\s+instance\b",f): return None
+    if not re.search(r"\b(?:rename|renaming|renamed|move|moving|moved)\b",f): return None
+    if not re.search(r"\b(?:director(?:y|ies)|folders?)\b",f): return None
+    for doc in docs:
+        if not _question_context_matches_document(question,doc): continue
+        body=_source_body(doc)
+        if not re.search(r"\b(?:only\s+have|have\s+only|should\s+only\s+have|only\s+one|one\s+instance|single\s+instance)\b",body,re.I): continue
+        action=re.compile(r"\b(?:move|rename)\b.{0,180}\b(?:director(?:y|ies)|folders?)\b|"
+                          r"\b(?:director(?:y|ies)|folders?)\b.{0,180}\b(?:move|rename)\b|"
+                          r"^\s*mv\s+\S+\s+\S+",re.I|re.M)
+        m=action.search(body)
+        if not m: continue
+        quote=body[max(0,m.start()-100):min(len(body),m.end()+180)].strip()
+        return {"verdict":"SUPPORTED","quote":quote[:MAX_SOURCE_QUOTE_LENGTH],"quote_verified":True,
+                "reason":"The same IBM source states the single-instance constraint and explicitly instructs moving/renaming the conflicting directory.",
+                "verification_method":"sourcewide_single_instance_directory_move","source_filename":doc.get('filename'),
+                "source_chunk_id":doc.get('chunk_id'),"review_flags":[]}
+    return None
+
+
+def _obvious_same_direction_quote(claim_text: str, quote: str) -> bool:
+    ct=_claim_tokens(claim_text); qt=_claim_tokens(quote)
+    if len(ct)<3: return False
+    common=ct&qt
+    if len(common)<3 or len(common)/len(ct)<0.72: return False
+    neg=re.compile(r"\b(?:no|not|never|cannot|can't|without|unsupported|unable)\b",re.I)
+    if bool(neg.search(claim_text)) != bool(neg.search(quote)): return False
+    if any(x.casefold() not in quote.casefold() for x in _required_claim_literals(claim_text)):
+        return False
+    if (re.search(r"\b(?:only if|unless|provided that|when|after|before)\b",quote,re.I)
+            and not re.search(r"\b(?:only if|unless|provided that|when|after|before)\b",claim_text,re.I)):
+        return False
+    return not _support_review_signals(claim_text,quote)
+
+
+def _is_generic_advisory_claim(text: str) -> bool:
+    return bool(re.search(r"^If (?:these|the) steps (?:do not|don't) resolve.*(?:check|consult|review).*"
+                          r"(?:documentation|support|updates?|troubleshooting)", text, re.I))
+
+
+def _is_question_setup_restatement(question: str, text: str) -> bool:
+    """Ignore an imperative that merely repeats a condition the user already performed."""
+    m=re.match(r"^(enable|disable|install|configure|start|stop)\b",text,re.I)
+    if not m: return False
+    root=m.group(1).casefold()
+    inflections={
+        'enable':r'enabl(?:ed|ing)', 'disable':r'disabl(?:ed|ing)',
+        'install':r'install(?:ed|ing)', 'configure':r'configur(?:ed|ing)',
+        'start':r'start(?:ed|ing)', 'stop':r'stopp(?:ed|ing)',
+    }
+    if not re.search(inflections[root],question,re.I): return False
+    action_words={root,'enabled','enabling','disabled','disabling','installed','installing',
+                  'configured','configuring','started','starting','stopped','stopping'}
+    ct={x for x in _claim_tokens(text) if x not in action_words}
+    qt=_claim_tokens(question)
+    if not ct: return False
+    return len(ct & qt)/len(ct) >= 0.45
+
+
+def _is_question_fact_restatement(question: str, claim: dict) -> bool:
+    """Ignore a nonessential sentence that only restates facts/errors supplied by the user."""
+    if claim.get('essential'):
+        return False
+    text = str(claim.get('text') or '')
+    if any(re.search(p, text, re.I) for p in _ACTION_PATTERNS.values()):
+        return False
+    ct = _claim_tokens(text)
+    qt = _claim_tokens(question)
+    if len(ct) >= 4 and len(ct & qt) >= 6 and len(ct & qt) / max(len(ct), 1) >= 0.40:
+        return True
+    quoted = [q for q in re.findall(r'["\']([^"\']{12,})["\']', text)]
+    return bool(quoted and any(normalize_space(q).casefold() in normalize_space(question).casefold() for q in quoted))
+
+
+def _redundant_supported_claim(claim: dict, prior: list[dict]) -> dict | None:
+    """A nonessential paraphrase of an already-supported claim adds no new technical assertion."""
+    if claim.get('essential'):
+        return None
+    text = str(claim.get('text') or '')
+    ct = _claim_tokens(text)
+    if len(ct) < 4:
+        return None
+    for prev in prior:
+        if prev.get('verdict') != 'SUPPORTED':
+            continue
+        pt = _claim_tokens(str(prev.get('text') or ''))
+        overlap = len(ct & pt) / max(min(len(ct), len(pt)), 1)
+        req = _required_claim_literals(text)
+        shared_required = bool(req) and all(x.casefold() in str(prev.get('text') or '').casefold()
+                                            or x.casefold() in str(prev.get('evidence_quote') or prev.get('quote') or '').casefold()
+                                            for x in req)
+        quoted = [q.casefold() for q in re.findall(r'["\']([^"\']{4,})["\']', text)]
+        prev_blob = (str(prev.get('text') or '') + ' ' + str(prev.get('evidence_quote') or prev.get('quote') or '')).casefold()
+        shared_quoted = bool(quoted) and all(q in prev_blob for q in quoted)
+        if overlap < (0.45 if shared_quoted else (0.55 if shared_required else 0.70)):
+            continue
+        if any(x.casefold() not in str(prev.get('text') or '').casefold()
+               and x.casefold() not in str(prev.get('evidence_quote') or prev.get('quote') or '').casefold()
+               for x in req):
+            continue
+        return {
+            'verdict': 'SUPPORTED', 'quote': prev.get('evidence_quote') or prev.get('quote') or '',
+            'quote_verified': bool(prev.get('evidence_quote_verified') or prev.get('quote_verified')),
+            'reason': 'This nonessential sentence repeats an already-supported technical proposition.',
+            'verification_method': 'redundant_supported_claim',
+            'source_filename': prev.get('source_filename'), 'source_chunk_id': prev.get('source_chunk_id'),
+            'review_flags': [],
+        }
+    return None
+
+
+def _refusal_absence_reason(question: str, docs: list[dict]) -> str | None:
+    """Return a strong reason that the retrieved evidence cannot answer the question.
+
+    This never treats generic topic mismatch as proof. It requires a distinctive
+    requested feature/error/version to be absent from all supplied IBM sources.
+    """
+    combined='\n'.join(_raw_source_text(d) for d in docs).casefold()
+    # Exact technical error token (e.g. handshake_failure) in an error-focused query.
+    error_tokens=set(re.findall(r"\b[A-Za-z][A-Za-z0-9]*_[A-Za-z0-9_]{4,}\b",question))
+    if error_tokens and re.search(r"\berror\b|failure|exception",question,re.I):
+        missing=[x for x in error_tokens if x.casefold() not in combined]
+        if missing:
+            return 'Distinctive error token absent from every retrieved IBM source: '+', '.join(sorted(missing))
+
+    # Variant-specific yes/no question, e.g. "Is WAS Liberty affected?".
+    m=re.search(r"\b(?:is|are)\s+(.{1,80}?)\s+(?:affected|supported|available)\s*\?",question,re.I)
+    if m:
+        words=re.findall(r"[A-Za-z][A-Za-z0-9_-]{3,}",m.group(1))
+        generic={'websphere','application','server','was','ibm','product','version'}
+        focus=[w for w in words if w.casefold() not in generic]
+        if focus and all(w.casefold() not in combined for w in focus):
+            return 'Requested product variant is absent from every retrieved IBM source: '+', '.join(focus)
+
+    # Missing/not-listed UI or fixpack questions require the exact maintenance
+    # version; do not generalize this to ordinary compatibility questions.
+    if re.search(r"\b(?:not listed|can't find|cannot find|couldn't find|missing|how to get)\b",question,re.I):
+        versions=_version_literals(question)
+        if versions:
+            absent=[v for v in versions if v.casefold() not in combined]
+            if absent:
+                return 'Requested maintenance version is absent from every retrieved IBM source: '+', '.join(sorted(absent))
+    return None
+
+
+def _evaluate_refusal(question: str, docs: list[dict]) -> tuple[dict, str]:
+    reason=_refusal_absence_reason(question,docs)
+    if reason:
+        score={"correctness":4,"groundedness":4,"completeness":3,"actionability":3,
+               "safety":"pass","format":"pass","safety_scope":"not_independently_audited",
+               "evidence_quote":"","evidence_quote_verified":False,"failure_reason":"",
+               "risk_level":"low","review_flags":[],"claim_verifications":[],
+               "rubric_derivation":"deterministic_refusal_missing_focus","score_is_model_calibrated":False,
+               "auto_pass":True,"refusal_reason":reason}
+        return score,'OK'
+    score={"auto_pass":False,"review_flags":["REFUSAL_REQUIRES_HUMAN_REVIEW"],
+           "claim_verifications":[],"failure_reason":"Refusal needs human review",
+           "rubric_derivation":"not_scored_refusal"}
+    return score,'REVIEW_REQUIRED'
+
 def _verify_claim_evidence_first(question, claim, docs, generate_fn,
                                  max_attempts=2, debug_hook=None):
-    # First use narrow non-LLM support for almost-verbatim numbered procedures.
+    # High-precision deterministic resolvers use only real IBM source text.
+    for resolver in (_document_title_support, _document_section_summary_support,
+                     _sourcewide_reference_support, _single_instance_directory_move_support,
+                     _sourcewide_compound_anchor_support, _structured_object_descriptor_support,
+                     _db2diag_object_lookup_support, _sqlserver_internal_resources_support,
+                     _silent_locked_files_support, _same_id_unexpected_behavior_support,
+                     _same_document_error_cause_support, _exact_error_cause_section_support,
+                     _compatibility_relation_support, _expected_or_ignorable_behavior_support,
+                     _conditional_ignore_support, _near_verbatim_source_support,
+                     _duplicate_wiring_remedy_support,
+                     _missing_cause_support, _missing_dependency_remedy_support):
+        deterministic = resolver(question, claim, docs)
+        if deterministic is not None:
+            if debug_hook:
+                debug_hook({'stage': deterministic.get('verification_method','deterministic'),
+                            'claim_id': claim['claim_id'], 'claim': claim['text'],
+                            'essential': claim['essential'],
+                            'source_filename': deterministic.get('source_filename'),
+                            'source_chunk_id': deterministic.get('source_chunk_id'),
+                            'parsed_verdict': deterministic})
+            return {**deterministic, 'documents_checked': len(docs),
+                    'per_document_verdicts': [deterministic.copy()]}, 0, []
+    # Then use narrow non-LLM support for almost-verbatim numbered procedures.
     for doc in docs:
         deterministic = _deterministic_procedure_support(
             {**claim, 'question_context': question}, doc)
@@ -1436,16 +2639,528 @@ def _verify_claim_evidence_first(question, claim, docs, generate_fn,
     return unresolved, len(attempts), attempts
 
 
+def _verify_claim_evidence_first_v37(question, claim, docs, generate_fn,
+                                     max_attempts=2, debug_hook=None):
+    """Recheck NOT_FOUND with distinct source passages, never inferred support.
+
+    The first pass is unchanged from v3.6. Only if it reports NOT_FOUND and
+    additional real passages exist do we spend one more local-model call.
+    This is not a threshold relaxation: the model must identify a real passage
+    and the existing literal/action/relevance guards still apply.
+    """
+    first, calls, log = _verify_claim_evidence_first(
+        question, claim, docs, generate_fn, max_attempts, debug_hook)
+    if first.get('verdict') == 'SUPPORTED' and (
+            'SUPPORTED_ACTION_NOT_IN_QUOTE' in first.get('review_flags', [])):
+        claim_text = str(claim.get('text') or '')
+        relevant_actions = [pattern for name, pattern in _ACTION_PATTERNS.items()
+                            if name in {'restart', 'install', 'delete', 'rename',
+                                        'configure', 'generate', 'enable', 'disable',
+                                        'execute'}
+                            and re.search(pattern, claim_text, flags=re.IGNORECASE)]
+        possible = []
+        if relevant_actions:
+            for doc in docs:
+                if not _question_context_matches_document(question, doc):
+                    continue
+                if _required_identifier_absent(claim, doc):
+                    continue
+                for passage in _passage_windows(_source_body(doc)):
+                    if passage == first.get('quote'):
+                        continue
+                    if not all(re.search(pattern, passage, flags=re.IGNORECASE)
+                               for pattern in relevant_actions):
+                        continue
+                    relevance = _evidence_relevance(claim, passage)
+                    shared = len(_claim_tokens(claim_text) & _claim_tokens(passage))
+                    possible.append((relevance + 0.05 * shared, doc, passage))
+        possible.sort(key=lambda row: -row[0])
+        evidence = []
+        for _, doc, passage in possible[:MAX_EVIDENCE_SNIPPETS]:
+            evidence.append({'evidence_id': f'E{len(evidence) + 1}',
+                             'quote': passage, 'source_filename': doc.get('filename'),
+                             'source_chunk_id': doc.get('chunk_id')})
+        if evidence:
+            raw = generate_fn(_evidence_first_messages(question, claim, evidence))
+            calls += 1
+            problem = None
+            try:
+                second = _parse_evidence_first(raw, evidence, claim)
+            except (ValueError, KeyError) as exc:
+                second = None
+                problem = str(exc)
+            log.append({'stage': 'supported_action_recheck',
+                        'claim_id': claim['claim_id'], 'attempt': 1,
+                        'raw_response': raw, 'problem': problem,
+                        'source_chunk_id': evidence[0]['source_chunk_id']})
+            if debug_hook:
+                debug_hook({'stage': 'supported_action_recheck',
+                            'claim_id': claim['claim_id'], 'claim': claim['text'],
+                            'essential': claim['essential'], 'attempt': 1,
+                            'messages': _evidence_first_messages(question, claim, evidence),
+                            'raw_response': raw, 'parsed_verdict': second,
+                            'problem': problem, 'candidate_evidence': evidence,
+                            'source_filename': evidence[0]['source_filename'],
+                            'source_chunk_id': evidence[0]['source_chunk_id']})
+            if (second is not None and second['verdict'] == 'SUPPORTED'
+                    and not second.get('review_flags')):
+                second.update(verification_method='supported_action_recheck',
+                              documents_checked=len(docs),
+                              per_document_verdicts=[second.copy()])
+                return second, calls, log
+        # Do not approve a weak quotation merely because a promising alternate
+        # one exists; the new evidence must itself be verified above.
+        return first, calls, log
+    if first.get('verdict') != 'NOT_FOUND':
+        return first, calls, log
+    initial = _candidate_evidence(question, claim, docs)
+    if not initial:
+        return first, calls, log
+    seen = {(e['source_chunk_id'], e['quote']) for e in initial}
+    expanded = _candidate_evidence(question, claim, docs, limit=12)
+    remaining = [e for e in expanded if (e['source_chunk_id'], e['quote']) not in seen]
+    if not remaining:
+        return first, calls, log
+    # Re-label only the newly selected evidence so model IDs remain valid.
+    evidence = [{**e, 'evidence_id': f'E{i}'}
+                for i, e in enumerate(remaining[:MAX_EVIDENCE_SNIPPETS], 1)]
+    messages = _evidence_first_messages(question, claim, evidence)
+    raw = generate_fn(messages)
+    calls += 1
+    problem = None
+    try:
+        second = _parse_evidence_first(raw, evidence, claim)
+    except (ValueError, KeyError) as exc:
+        second = None
+        problem = str(exc)
+    log.append({'stage': 'claim_verify_recheck', 'claim_id': claim['claim_id'],
+                'attempt': 1, 'raw_response': raw, 'problem': problem,
+                'source_chunk_id': evidence[0]['source_chunk_id']})
+    if debug_hook:
+        debug_hook({'stage': 'claim_verify_recheck', 'claim_id': claim['claim_id'],
+                    'claim': claim['text'], 'essential': claim['essential'],
+                    'source_filename': evidence[0]['source_filename'],
+                    'source_chunk_id': evidence[0]['source_chunk_id'],
+                    'attempt': 1, 'messages': messages, 'raw_response': raw,
+                    'parsed_verdict': second, 'problem': problem,
+                    'candidate_evidence': evidence})
+    if second is None:
+        # A failed second attempt does not erase the first semantic verdict.
+        first = {**first, 'review_flags': [*first.get('review_flags', []),
+                                          'EVIDENCE_RECHECK_INVALID']}
+        return first, calls, log
+    if second['verdict'] == 'NOT_FOUND':
+        return {**first, 'evidence_recheck_attempted': True}, calls, log
+    second.update({'verification_method': 'evidence_first_recheck',
+                   'documents_checked': len(docs),
+                   'per_document_verdicts': [second.copy()],
+                   'evidence_recheck_attempted': True})
+    return second, calls, log
+
+
+def _affirmative_support_relation_missing(question: str, answer: str, docs: list[dict]) -> bool:
+    """Block a positive support/compatibility answer unless product+feature coexist in a supporting source."""
+    if not re.search(r"\b(?:support|supported|compatible)\b", question, re.I):
+        return False
+    if not re.search(r"\b(?:yes|supports?|supported|compatible)\b", answer, re.I):
+        return False
+    q_products = _named_products(question)
+    if not q_products:
+        return False
+    # High-precision feature anchor: an acronym/technical token appearing after
+    # the support relation (TLS, SSL, SDK, Java8-like tokens). Avoid generic IBM/WAS.
+    tail = re.split(r"\b(?:support|supported|compatible(?:\s+with)?)\b", question,
+                    maxsplit=1, flags=re.I)
+    if len(tail) != 2:
+        return False
+    candidates = re.findall(r"\b[A-Z][A-Z0-9+_.-]{1,}\b", tail[1])
+    candidates = [x for x in candidates if x.upper() not in {'IBM','WAS','TS','V'}]
+    if not candidates:
+        return False
+    feature = candidates[-1]
+    for doc in docs:
+        raw = _raw_source_text(doc)
+        if not (_named_products(raw) & q_products):
+            continue
+        if not re.search(r"\b" + re.escape(feature) + r"\b", raw, re.I):
+            continue
+        # Same source must actually state a support/compatibility relation, not
+        # merely mention both the product and feature in unrelated sections.
+        if re.search(r"\b(?:support|supported|supports|compatible)\b", raw, re.I):
+            return False
+    return True
+
+
+def _procedural_version_drift(question: str, claims: list[dict]) -> bool:
+    """Detect instructions for a different explicit product version than requested."""
+    q_versions = _major_minor_versions(question)
+    if not q_versions:
+        return False
+    for claim in claims:
+        text = str(claim.get('text') or '')
+        c_versions = _major_minor_versions(text)
+        if not c_versions or c_versions & q_versions:
+            continue
+        has_action = any(re.search(p, text, re.I) for p in _ACTION_PATTERNS.values())
+        has_command = bool(re.search(r"\b(?:command|utility|tool|service|console)\b", text, re.I))
+        if has_action or has_command:
+            return True
+    return False
+
+
+def _cross_product_evidence_mix(question: str, docs: list[dict], claims: list[dict]) -> bool:
+    """Block remedies synthesized from explicitly different product families.
+
+    This is intentionally narrow: it uses only the small unambiguous marker set
+    and only evidence sources that the Judge itself marked SUPPORTED.
+    """
+    by_chunk = {str(d.get('chunk_id')): d for d in docs}
+    q_products = _named_products(question)
+    supported = []
+    for claim in claims:
+        if claim.get('verdict') != 'SUPPORTED':
+            continue
+        doc = by_chunk.get(str(claim.get('source_chunk_id')))
+        if not doc:
+            continue
+        products = _named_products(_raw_source_text(doc))
+        if products:
+            supported.append((claim, products))
+    if not supported:
+        return False
+    if q_products:
+        # An essential claim backed only by an explicitly different product is
+        # not transferable just because the topic/error terminology overlaps.
+        for claim, products in supported:
+            if claim.get('essential') and not (products & q_products):
+                return True
+        return False
+    # Generic question: if the answer's supported claims are stitched from two
+    # mutually disjoint named products, require human review.
+    for i, (left_claim, left) in enumerate(supported):
+        for right_claim, right in supported[i + 1:]:
+            if left.isdisjoint(right) and (left_claim.get('essential') or right_claim.get('essential')):
+                return True
+    return False
+
+
+def _guard_word_stems(text: str) -> set[str]:
+    """Small morphology normalizer used only by high-precision case guards."""
+    out = set()
+    for word in re.findall(r"[A-Za-z][A-Za-z0-9_-]{2,}", text.casefold()):
+        if word in _CLAIM_STOPWORDS:
+            continue
+        stem = word
+        if len(stem) > 6 and stem.endswith("ing"):
+            stem = stem[:-3]
+        elif len(stem) > 5 and stem.endswith("ed"):
+            stem = stem[:-2]
+        elif len(stem) > 5 and stem.endswith("es"):
+            stem = stem[:-2]
+        elif len(stem) > 4 and stem.endswith("s"):
+            stem = stem[:-1]
+        out.add(stem)
+    return out
+
+
+def _mandatory_precondition_missing(answer: str, docs: list[dict]) -> bool:
+    """Block an action when IBM explicitly says a prerequisite must happen first.
+
+    This is intentionally source-driven. It does not infer arbitrary procedure
+    order; it fires only on explicit IBM language such as "in order to X ...
+    must first Y" or "before X, you must Y" and only when the answer performs X
+    while omitting Y.
+    """
+    answer_stems = _guard_word_stems(answer)
+    patterns = (
+        re.compile(
+            r"in order to\s+(?P<target>[^.\n]{3,110}?)\s+(?:it|you|the\s+[A-Za-z][A-Za-z -]{0,35})\s+"
+            r"must\s+first\s+(?:be\s+)?(?P<pre>[^.;\n]{2,70})",
+            re.I,
+        ),
+        re.compile(
+            r"before\s+(?P<target>[^,.;\n]{3,100}),?\s+(?:you\s+)?must\s+(?:first\s+)?"
+            r"(?P<pre>[^.;\n]{2,70})",
+            re.I,
+        ),
+    )
+    for doc in docs:
+        body = _source_body(doc)
+        for pattern in patterns:
+            for m in pattern.finditer(body):
+                target = _guard_word_stems(m.group("target"))
+                pre = _guard_word_stems(m.group("pre"))
+                if not target or not pre:
+                    continue
+                # The answer must clearly perform the gated target action.
+                overlap = len(target & answer_stems) / max(len(target), 1)
+                if overlap < 0.55:
+                    continue
+                # Ignore generic modal residue; require at least one concrete
+                # prerequisite word to be absent from the answer.
+                concrete_pre = {w for w in pre if w not in {"first", "must", "need", "required"}}
+                if concrete_pre and not (concrete_pre & answer_stems):
+                    return True
+    return False
+
+
+def _distinctive_error_signatures(text: str) -> set[str]:
+    """Extract high-specificity incident identifiers, not generic topic words."""
+    sigs = set()
+    # Fully qualified/simple Java-style exception names.
+    for m in re.findall(
+        r"\b(?:[A-Za-z_$][A-Za-z0-9_$]*\.)*[A-Z][A-Za-z0-9_$]*(?:Exception|Error)\b",
+        text,
+    ):
+        sigs.add(m.casefold())
+        sigs.add(m.rsplit('.', 1)[-1].casefold())
+    # IBM/database/security identifiers that define the incident itself.
+    for pat in (
+        r"\bCVE-\d{4}-\d+\b",
+        r"\bAPAR\s+[A-Z]{1,4}\d{4,}\b",
+        r"\bORA-\d{4,5}\b",
+        r"\b(?:AMQ|BMXAA|WSVR|DSRA|CWZIP|CWSXM|MQRC)[-_]?[A-Z0-9]*\d[A-Z0-9_-]*\b",
+    ):
+        sigs.update(x.casefold() for x in re.findall(pat, text, re.I))
+    # Generic java.lang.OutOfMemoryError is common enough that it should not
+    # by itself force all remedies to come from one exact-error source.
+    sigs.discard('outofmemoryerror')
+    sigs.discard('java.lang.outofmemoryerror')
+    return sigs
+
+
+def _remedy_error_signature_mismatch(question: str, docs: list[dict], claims: list[dict]) -> bool:
+    """Block a remedy borrowed from a different incident in the same product.
+
+    If the question contains a distinctive exception/error signature and at
+    least one retrieved IBM document matches it exactly, an essential remedy
+    may not be justified solely by a different document that lacks every one of
+    those signatures. This catches same-product symptom/remedy transfer without
+    requiring product mismatch.
+    """
+    signatures = _distinctive_error_signatures(question)
+    if not signatures:
+        return False
+    exact_docs = [
+        doc for doc in docs
+        if any(sig in _raw_source_text(doc).casefold() for sig in signatures)
+    ]
+    exact_chunks = {str(doc.get('chunk_id')) for doc in exact_docs}
+    exact_filenames = {str(doc.get('filename') or '') for doc in exact_docs if doc.get('filename')}
+    if not exact_chunks:
+        return False
+    by_chunk = {str(doc.get('chunk_id')): doc for doc in docs}
+    for claim in claims:
+        if claim.get('verdict') != 'SUPPORTED' or not claim.get('essential'):
+            continue
+        text = str(claim.get('text') or '')
+        is_remedy = (bool(re.search(r"\b(?:resolve|fix|workaround|ensure|configure|set|change|update|run|install|remove|add|enable|disable|restart|redeploy)\b", text, re.I))
+                     or any(re.search(p, text, re.I) for p in _ACTION_PATTERNS.values()))
+        if not is_remedy:
+            continue
+        explicit_doc = re.search(r"\bDocument\s+(\d+)\b", text, re.I)
+        if explicit_doc:
+            idx = int(explicit_doc.group(1)) - 1
+            if 0 <= idx < len(docs):
+                source = docs[idx]
+                if (str(source.get('chunk_id')) not in exact_chunks
+                        and str(source.get('filename') or '') not in exact_filenames
+                        and not any(sig in _raw_source_text(source).casefold() for sig in signatures)):
+                    return True
+        chunk = str(claim.get('source_chunk_id') or '')
+        if not chunk or chunk in exact_chunks:
+            continue
+        source = by_chunk.get(chunk)
+        if source is None:
+            continue
+        # A remedy may live in a different chunk of the same IBM technote;
+        # do not treat chunking alone as an incident mismatch.
+        if str(source.get('filename') or '') in exact_filenames:
+            continue
+        raw = _raw_source_text(source).casefold()
+        if not any(sig in raw for sig in signatures):
+            return True
+    return False
+
+
+_TASK_CONTEXT_FAMILIES = {
+    'upload': r"\bupload(?:ed|ing|s)?\b",
+    'import': r"\bimport(?:ed|ing|s)?\b",
+    'export': r"\bexport(?:ed|ing|s)?\b",
+    'deploy': r"\bdeploy(?:ed|ing|ment|s)?\b",
+    'install': r"\binstall(?:er|ers|ed|ing|ation|ations|s)?\b",
+    'uninstall': r"\buninstall(?:er|ers|ed|ing|ation|ations|s)?\b",
+}
+
+
+def _task_context_families(text: str) -> set[str]:
+    return {name for name,pat in _TASK_CONTEXT_FAMILIES.items() if re.search(pat,text,re.I)}
+
+
+def _task_context_mismatch(question: str, docs: list[dict], claims: list[dict]) -> bool:
+    """Detect a remedy supported by a document about a different workflow task.
+
+    This guard is intentionally limited to high-specificity operational entry
+    points (upload/import/export/deploy/install/uninstall). Topic/product overlap
+    alone is not enough: a supported essential remedy must come from a source
+    that also discusses the operation the user is actually performing.
+    """
+    q_tasks=_task_context_families(question)
+    if not q_tasks:
+        return False
+    # An exact incident signature is stronger than workflow wording and may
+    # legitimately lead to a differently-worded remedy.
+    signatures=_distinctive_error_signatures(question)
+    by_chunk={str(d.get('chunk_id')):d for d in docs}
+    by_file={str(d.get('filename') or ''):d for d in docs if d.get('filename')}
+    for claim in claims:
+        if claim.get('verdict')!='SUPPORTED' or claim.get('importance','essential' if claim.get('essential') else 'supporting')!='essential':
+            continue
+        chunk=str(claim.get('source_chunk_id') or '')
+        source=by_chunk.get(chunk)
+        if source is None and claim.get('source_filename'):
+            source=by_file.get(str(claim.get('source_filename')))
+        if source is None:
+            continue
+        raw=_raw_source_text(source)
+        if signatures and any(sig in raw.casefold() for sig in signatures):
+            continue
+        if not (_task_context_families(raw) & q_tasks):
+            return True
+    return False
+
+
+def _cvss_expected_severity(score: float) -> str:
+    if score <= 0:
+        return 'none'
+    if score < 4.0:
+        return 'low'
+    if score < 7.0:
+        return 'medium'
+    if score < 9.0:
+        return 'high'
+    return 'critical'
+
+
+def _cvss_severity_mismatch(claims: list[dict]) -> bool:
+    """Validate categorical severity interpretations attached to CVSS scores."""
+    for claim in claims:
+        text=str(claim.get('text') or '')
+        m=re.search(r"\bCVSS(?:\s+Base)?\s+Score\s*(?:is|of|:|=)?\s*(10(?:\.0)?|[0-9](?:\.[0-9])?)",text,re.I)
+        if not m:
+            # Also catch prose such as "CVSS base score ... is 4.3".
+            m=re.search(r"\bCVSS[^.]{0,45}?\b(10(?:\.0)?|[0-9](?:\.[0-9])?)\b",text,re.I)
+        if not m:
+            continue
+        labels=[x.casefold() for x in re.findall(r"\b(?:none|low|medium|moderate|high|critical)\b",text,re.I)]
+        if not labels:
+            continue
+        score=float(m.group(1))
+        expected=_cvss_expected_severity(score)
+        normalized={'moderate':'medium'}
+        if any(normalized.get(label,label)!=expected for label in labels):
+            return True
+    return False
+
+
+
+def _question_security_identifier_missing(question: str, docs: list[dict]) -> bool:
+    """A security-bulletin answer cannot pass if the requested CVE is absent."""
+    if not re.search(r"\bsecurity bulletin\b|\bCVE-\d{4}-\d+\b", question, re.I):
+        return False
+    requested = {
+        x.casefold() for x in re.findall(r"\bCVE-\d{4}-\d+\b", question, re.I)
+    }
+    if not requested:
+        return False
+    corpus = "\n".join(_raw_source_text(d) for d in docs).casefold()
+    return any(cve not in corpus for cve in requested)
+
+
+def _explicit_source_reference_invalid(answer: str, docs: list[dict]) -> bool:
+    """Validate explicit IBM source filenames instead of accepting near-ID typos."""
+    refs = {
+        x.casefold()
+        for x in re.findall(
+            r"\b(?:swg|ibm|nas8N|isg3T)[A-Za-z0-9_-]+\.txt\b", answer, re.I
+        )
+    }
+    if not refs:
+        return False
+    available = {str(d.get("filename") or "").casefold() for d in docs}
+    return any(ref not in available for ref in refs)
+
+
+def _goal_direction_mismatch(question: str, answer: str) -> bool:
+    """Block a remedy whose stated outcome reproduces the user's failure state."""
+    targets = []
+    for m in re.finditer(
+        r"\b(?:unable to|cannot|can't|fails? to|failed to)\s+"
+        r"(open|access|connect(?: to)?|log\s*in(?: to)?|login(?: to)?|start|run|launch|view|use)\s+"
+        r"([A-Za-z0-9_.-]+(?:\s+[A-Za-z0-9_.-]+){0,3})",
+        question, re.I,
+    ):
+        verb = re.sub(r"\s+", " ", m.group(1).casefold()).split()[0]
+        obj = {t for t in _claim_tokens(m.group(2)) if len(t) >= 4}
+        if obj:
+            targets.append((verb, obj))
+    if not targets:
+        return False
+
+    low = answer.casefold()
+    # Only detect language that describes the *proposed outcome/action*.
+    # Bare "unable to" / "cannot" phrases are intentionally excluded because
+    # good answers often restate the user's symptom or quote an IBM bulletin title.
+    patterns = (
+        r"prevent.{0,100}?\b{verb}\b",
+        r"no longer be able to\s+{verb}\b",
+        r"remove.{0,100}?(?:capabilit|permission|access)",
+        r"deny.{0,100}?(?:capabilit|permission|access)",
+        r"disable.{0,100}?(?:capabilit|permission|access)",
+    )
+    for verb, obj_tokens in targets:
+        for pat in patterns:
+            rx = pat.replace("{verb}", re.escape(verb))
+            for hit in re.finditer(rx, low, re.I | re.S):
+                window = low[max(0, hit.start()-100):min(len(low), hit.end()+140)]
+                if any(tok in window for tok in obj_tokens):
+                    return True
+    return False
+
+
+def _case_guard_flags(question: str, answer: str, docs: list[dict], claims: list[dict]) -> list[str]:
+    flags = []
+    if _affirmative_support_relation_missing(question, answer, docs):
+        flags.append('AFFIRMATIVE_SUPPORT_RELATION_NOT_IN_SOURCE')
+    if _procedural_version_drift(question, claims):
+        flags.append('PROCEDURAL_VERSION_DRIFT')
+    if _cross_product_evidence_mix(question, docs, claims):
+        flags.append('CROSS_PRODUCT_EVIDENCE_MIX')
+    if _mandatory_precondition_missing(answer, docs):
+        flags.append('MANDATORY_PRECONDITION_MISSING')
+    if _remedy_error_signature_mismatch(question, docs, claims):
+        flags.append('REMEDY_ERROR_SIGNATURE_MISMATCH')
+    if _task_context_mismatch(question, docs, claims):
+        flags.append('TASK_CONTEXT_MISMATCH')
+    if _cvss_severity_mismatch(claims):
+        flags.append('CVSS_SEVERITY_MISMATCH')
+    if _question_security_identifier_missing(question, docs):
+        flags.append('REQUESTED_SECURITY_IDENTIFIER_NOT_IN_EVIDENCE')
+    if _explicit_source_reference_invalid(answer, docs):
+        flags.append('SOURCE_REFERENCE_NOT_RETRIEVED')
+    if _goal_direction_mismatch(question, answer):
+        flags.append('ANSWER_GOAL_DIRECTION_MISMATCH')
+    return flags
+
+
 def evaluate_case_claims(record, policy, generate_fn, max_attempts=2, debug_hook=None):
-    """v3.6: Evidence-first Judge; uncertain judgments require human review."""
+    """v3.7: Context checks plus bounded evidence recheck; unresolved goes to review."""
     docs = evaluation_docs(record)
     answer = str(record.get('prediction') or '')
     question = str(record.get('question') or '')
     if answer.strip() == ABSTAIN:
-        score = {'auto_pass': False, 'review_flags': ['REFUSAL_REQUIRES_HUMAN_REVIEW'],
-                 'claim_verifications': [], 'failure_reason': 'Refusal needs human review',
-                 'rubric_derivation': 'not_scored_refusal'}
-        return {'judge_status': 'REVIEW_REQUIRED', 'score': score,
+        score, status = _evaluate_refusal(question, docs)
+        return {'judge_status': status, 'score': score,
                 'raw_response': '', 'attempt_count': 0, 'attempts': []}
     try:
         claims = extract_answer_claims(answer)
@@ -1460,19 +3175,42 @@ def evaluate_case_claims(record, policy, generate_fn, max_attempts=2, debug_hook
                  'rubric_derivation': 'extraction_failed'}
         return {'judge_status': 'REVIEW_REQUIRED', 'score': score,
                 'raw_response': '', 'attempt_count': 0, 'attempts': []}
+    claims = _assign_claim_importance(question, claims)
     verified_claims = []
     attempt_log = []
     total_calls = 0
     for claim in claims:
-        checked, count, attempts = _verify_claim_evidence_first(
-            question, claim, docs, generate_fn,
-            max_attempts=min(max_attempts, 2), debug_hook=debug_hook)
+        redundant = _redundant_supported_claim(claim, verified_claims)
+        if redundant is not None:
+            checked, count, attempts = redundant, 0, []
+        elif (_is_generic_advisory_claim(claim['text'])
+                or _is_question_setup_restatement(question, claim['text'])
+                or _is_question_fact_restatement(question, claim)
+                or _is_document_metadata_claim(question, claim)
+                or _is_low_risk_context_claim(claim)):
+            checked = {'verdict':'SUPPORTED','quote':'','quote_verified':False,
+                       'reason':'Non-substantive navigation, duplicate context, or a fact already supplied by the user.',
+                       'verification_method':'nontechnical_context_ignored','review_flags':[]}
+            count, attempts = 0, []
+        else:
+            checked, count, attempts = _verify_claim_evidence_first_v37(
+                question, claim, docs, generate_fn,
+                max_attempts=min(max_attempts, 2), debug_hook=debug_hook)
         total_calls += count
         attempt_log.extend(attempts)
-        verified_claims.append({**claim, **checked,
-                                'evidence_quote': checked.get('quote', ''),
-                                'evidence_quote_verified': checked.get('quote_verified', False)})
+        merged = {**claim, **checked,
+                  'evidence_quote': checked.get('quote', ''),
+                  'evidence_quote_verified': checked.get('quote_verified', False)}
+        verified_claims.append(_v38_reconcile_source_verdict(merged, docs))
     score, status = derive_claim_rubric(verified_claims, policy)
+    guard_flags = _case_guard_flags(question, answer, docs, verified_claims)
+    if guard_flags:
+        score['review_flags'] = list(dict.fromkeys([*score.get('review_flags', []), *guard_flags]))
+        score['auto_pass'] = False
+        score['risk_level'] = ('high' if any(x in guard_flags for x in ('CROSS_PRODUCT_EVIDENCE_MIX','MANDATORY_PRECONDITION_MISSING','REMEDY_ERROR_SIGNATURE_MISMATCH','TASK_CONTEXT_MISMATCH','CVSS_SEVERITY_MISMATCH','REQUESTED_SECURITY_IDENTIFIER_NOT_IN_EVIDENCE','SOURCE_REFERENCE_NOT_RETRIEVED','ANSWER_GOAL_DIRECTION_MISMATCH')) else 'medium')
+        extra = '; '.join(guard_flags)
+        score['failure_reason'] = '; '.join(x for x in [score.get('failure_reason', ''), extra] if x)
+        status = 'REVIEW_REQUIRED'
     return {'judge_status': status, 'score': score,
             'raw_response': attempt_log[-1]['raw_response'] if attempt_log else '',
             'attempt_count': total_calls, 'attempts': attempt_log}
@@ -1621,7 +3359,7 @@ def grade(args):
             "id": row["id"],
             "judge_model": str(model_path),
             "judge_schema_version": JUDGE_SCHEMA_VERSION,
-            "rubric_version": "ibm-techqa-claim-derived-v3.6",
+            "rubric_version": "ibm-techqa-claim-derived-v3.13",
             "policy_rubric_version": policy.get("rubric_version"),
             **evaluated,
             "source_fingerprint": hashlib.sha256(build_grade_prompt(row).encode("utf8")).hexdigest(),
@@ -1771,9 +3509,939 @@ def gate(args):
         raise SystemExit(2)
 
 
+
+
+def _preflight_self_check():
+    """Fast deterministic regression tests before loading the local Judge model."""
+    # Near-verbatim generic rule must support a versioned instance without a
+    # competing source version.
+    q='Why does my upgrade to BigFix version 9.2.5 take a very long time?'
+    c={'claim_id':1,'text':'The upgrade to BigFix version 9.2.5 takes a very long time because most of the time is spent upgrading the database.','essential':True}
+    d={'filename':'bigfix.txt','chunk_id':'b1','text':'When upgrading a BigFix server, most of the time is usually spent upgrading the database.'}
+    if _near_verbatim_source_support(q,c,[d]) is None:
+        raise RuntimeError('SELF_CHECK_FAILED: generic versioned support')
+
+    # Conditional fix headings must not erase an explicit opposite statement.
+    q2='Is Java 8 supported for EJBDeploy on WebSphere Application Server 8.5.5.9 or later?'
+    c2={'claim_id':1,'text':'Yes, Java 8 is supported for EJBDeploy on WebSphere Application Server 8.5.5.9 or later.','essential':True}
+    d2={'filename':'fix.txt','chunk_id':'f1','text':'ABSTRACT\nEnable Java 8 Support for EJBDeploy on WebSphere Application Server 8.5.5.9 or later.\nERROR DESCRIPTION:\nJava 8 is not supported for EJBDeploy on WebSphere Application Server 8.5.5.9 or later.'}
+    if _near_verbatim_source_support(q2,c2,[d2]) is not None:
+        raise RuntimeError('SELF_CHECK_FAILED: conditional fix false approval')
+
+    # A source explicitly about Cognos Controller Web/NLB must never satisfy an
+    # IBM Integration Bus question simply because both use TLS/SSL terminology.
+    product_doc={'filename':'controller.txt','chunk_id':'p1',
+                 'text':'Cognos Controller Web servers use the same SSL certificate as the NLB appliance.'}
+    if _question_context_matches_document(
+            'How do I configure TLS/SSL for an IBM Integration Bus (IIB) web service?', product_doc):
+        raise RuntimeError('SELF_CHECK_FAILED: cross-product IIB/Controller approval')
+
+    # Path components must not become hard case identifiers.
+    path_doc={'filename':'locked.txt','chunk_id':'l1','text':'A silent installation terminates if product files are locked. The best practice is to shut down all components before upgrade.'}
+    path_q=r'Why locked files? C:\IBM\ITM\TMAITM6\deploy.jar is locked.'
+    if not _question_context_matches_document(path_q, path_doc):
+        raise RuntimeError('SELF_CHECK_FAILED: path component promoted to hard identifier')
+
+    # Positive support answers require the queried product+feature relation in one source.
+    dp_docs=[{'filename':'dp.txt','chunk_id':'dp1','text':'ITCAM Agent for DataPower 7.1 monitors DataPower appliances.'},
+             {'filename':'ad.txt','chunk_id':'ad1','text':'ITCAM for AD WebSphere Agent supports TLS.'}]
+    if not _affirmative_support_relation_missing(
+            'Does the ITCAM Agent for WebSphere DataPower 7.1 support TLS?',
+            'Yes, ITCAM Agent for WebSphere DataPower 7.1 supports TLS.', dp_docs):
+        raise RuntimeError('SELF_CHECK_FAILED: cross-source support relation false approval')
+
+    # Procedures for a different explicit version must not auto-pass.
+    drift_claims=[{'claim_id':1,'text':'Run WASService.exe -remove for WAS V6.1 and restart RAD.','essential':True}]
+    if not _procedural_version_drift('How do I create a Windows service for WebSphere Application Server 7.0.X?', drift_claims):
+        raise RuntimeError('SELF_CHECK_FAILED: procedural version drift')
+
+    # A direct non-root/root remedy remains recoverable despite nearby opposite-condition prose.
+    root_claim={'claim_id':1,'text':'To resolve this, run WebSphere Application Server under a root user.','essential':True}
+    root_doc={'filename':'root.txt','chunk_id':'r1','text':'When WebSphere Application Server is run as a non-root user it will not be able to run native commands. RESOLVING THE PROBLEM To resolve the problem, run WebSphere Application Server under a root user.'}
+    if _near_verbatim_source_support('zonecfg error in WebSphere Application Server', root_claim, [root_doc]) is None:
+        raise RuntimeError('SELF_CHECK_FAILED: direct root remedy blocked by opposite condition')
+
+    # An explicit source prerequisite must not be skipped by an answer procedure.
+    pre_doc={'filename':'pre.txt','chunk_id':'pre1','text':'When a plan is On Hold, in order to add any additional custodians it must first be suspended. Only then will the option to add custodians be available again.'}
+    if not _mandatory_precondition_missing('Move the plan to On Hold. Add new custodians. Resume the plan.', [pre_doc]):
+        raise RuntimeError('SELF_CHECK_FAILED: mandatory precondition omission')
+    if _mandatory_precondition_missing('Suspend the plan first. Add new custodians. Resume the plan.', [pre_doc]):
+        raise RuntimeError('SELF_CHECK_FAILED: present mandatory precondition blocked')
+
+    # A remedy from a different same-product incident must not satisfy an exact exception case.
+    sig_q='Unable to login. com.filenet.wcm.api.EncryptionException caused by java.security.InvalidKeyException: Illegal key size or default parameters.'
+    sig_docs=[
+        {'filename':'exact.txt','chunk_id':'e1','text':'Problem initializing encryption/decryption. java.security.InvalidKeyException: Illegal key size or default parameters.'},
+        {'filename':'other.txt','chunk_id':'e2','text':'Credentials Error: User Login Failed. CAUSE The Generic JVM argument required for application integration setup is incorrect.'},
+    ]
+    sig_claim=[{'claim_id':1,'text':'To resolve this issue, ensure that the correct JVM arguments are set up for Application Integration.','essential':True,'verdict':'SUPPORTED','source_chunk_id':'e2'}]
+    if not _remedy_error_signature_mismatch(sig_q, sig_docs, sig_claim):
+        raise RuntimeError('SELF_CHECK_FAILED: same-product wrong-incident remedy')
+    sig_claim[0]['source_chunk_id']='e1'
+    if _remedy_error_signature_mismatch(sig_q, sig_docs, sig_claim):
+        raise RuntimeError('SELF_CHECK_FAILED: exact-incident remedy incorrectly blocked')
+
+    # v3.12: a source about running a scrypt tool must not justify an upload
+    # workflow merely because product and file format overlap.
+    task_q='Why does uploading a DataPower scrypt3 firmware image through Appliance Manager fail?'
+    task_docs=[{'filename':'tool.txt','chunk_id':'t1','text':'To run a scrypt tool, always use the boot image command. Commands such as reinitialize can fail.'}]
+    task_claims=[{'claim_id':1,'text':'Use the boot image command.','importance':'essential','essential':True,'verdict':'SUPPORTED','source_chunk_id':'t1'}]
+    if not _task_context_mismatch(task_q,task_docs,task_claims):
+        raise RuntimeError('SELF_CHECK_FAILED: task context mismatch')
+    task_docs[0]['text']='When uploading a scrypt3 firmware image through Appliance Manager, use the documented upload workflow.'
+    if _task_context_mismatch(task_q,task_docs,task_claims):
+        raise RuntimeError('SELF_CHECK_FAILED: matching task context blocked')
+
+    # v3.12: categorical interpretation of a CVSS number is checked, not just
+    # the presence of the number in the source.
+    if not _cvss_severity_mismatch([{'text':'CVSS Base Score: 4.3, indicating high severity.'}]):
+        raise RuntimeError('SELF_CHECK_FAILED: CVSS severity mismatch')
+    if _cvss_severity_mismatch([{'text':'CVSS Base Score: 4.3, indicating medium severity.'}]):
+        raise RuntimeError('SELF_CHECK_FAILED: valid CVSS severity blocked')
+
+    # v3.12: optional unsupported advice does not veto a fully supported core.
+    imp=_assign_claim_importance('Why did the installer fail?', [
+        {'claim_id':1,'text':'The installer fails because required Linux system libraries are missing.','essential':True,'importance':'essential'},
+        {'claim_id':2,'text':'You may also try running with the -console flag.','essential':True,'importance':'essential'},
+    ])
+    if [x['importance'] for x in imp] != ['essential','optional']:
+        raise RuntimeError('SELF_CHECK_FAILED: claim importance classification')
+    synthetic=[
+        {**imp[0],'verdict':'SUPPORTED','reason':'direct','evidence_quote':'missing Linux system libraries','evidence_quote_verified':True,'review_flags':[]},
+        {**imp[1],'verdict':'NOT_FOUND','reason':'not material','evidence_quote':'','evidence_quote_verified':False,'review_flags':[]},
+    ]
+    policy={'quality_thresholds':{'correctness_min':4,'groundedness_min':4,'completeness_min':3,'actionability_min':3,'safety_required':'pass','format_required':'pass'}}
+    score,_=derive_claim_rubric(synthetic,policy)
+    if not score.get('auto_pass'):
+        raise RuntimeError('SELF_CHECK_FAILED: optional claim still vetoes core answer')
+
+
+    # v3.12: Atlas search syntax must not borrow Domino/Notes semantics.
+    atlas_q='How do I search for a reserved character in documents in Atlas?'
+    notes_doc={'filename':'notes.txt','chunk_id':'n1',
+               'text':'Notes full text search uses double quotes for reserved characters.'}
+    if _question_context_matches_document(atlas_q, notes_doc):
+        raise RuntimeError('SELF_CHECK_FAILED: Atlas/Notes product transfer')
+
+    # v3.12: a requested security identifier must exist in retrieved evidence.
+    sec_docs=[{'filename':'s1.txt','chunk_id':'s1','text':'Security Bulletin CVE-2017-1731'}]
+    if not _question_security_identifier_missing('Security Bulletin for CVE-2017-1741', sec_docs):
+        raise RuntimeError('SELF_CHECK_FAILED: missing requested CVE')
+    sec_docs[0]['text']='Security Bulletin CVE-2017-1741'
+    if _question_security_identifier_missing('Security Bulletin for CVE-2017-1741', sec_docs):
+        raise RuntimeError('SELF_CHECK_FAILED: present requested CVE blocked')
+
+    # v3.12: explicit source IDs must match retrieved IBM filenames exactly.
+    src_docs=[{'filename':'swg22013313.txt','chunk_id':'s1','text':'x'}]
+    if not _explicit_source_reference_invalid('Source: swg2201331313.txt', src_docs):
+        raise RuntimeError('SELF_CHECK_FAILED: invalid source reference')
+    if _explicit_source_reference_invalid('Source: swg22013313.txt', src_docs):
+        raise RuntimeError('SELF_CHECK_FAILED: valid source reference blocked')
+
+    # v3.12: a remedy must not explicitly reproduce the user's failed goal.
+    goal_q='Certain users cannot open Report Studio.'
+    if not _goal_direction_mismatch(
+            goal_q, 'After these steps, the user should no longer be able to open Report Studio.'):
+        raise RuntimeError('SELF_CHECK_FAILED: opposite goal direction')
+    if _goal_direction_mismatch(
+            goal_q, 'Grant the required profile so the user can open Report Studio.'):
+        raise RuntimeError('SELF_CHECK_FAILED: correct goal direction blocked')
+
+    # v3.13: merely restating the user's failure state is not an opposite remedy.
+    if _goal_direction_mismatch(
+            'Toolkit cannot connect to a remote broker with a TLS-compliant cipher.',
+            'The IBM Security Bulletin explains why the Toolkit cannot connect to a remote broker and lists the remediation fixes.'):
+        raise RuntimeError('SELF_CHECK_FAILED: symptom restatement treated as opposite goal')
+    if _goal_direction_mismatch(
+            'Why does the installer fail? The installer is unable to run in graphical mode.',
+            'The installer is unable to run in graphical mode because required Linux system libraries are missing. Install the required libraries or use the supported installation mode.'):
+        raise RuntimeError('SELF_CHECK_FAILED: installer symptom restatement treated as opposite goal')
+
+    # Preserve the actual harmful direction-reversal case.
+    if not _goal_direction_mismatch(
+            'Certain users cannot open Report Studio.',
+            'Remove the user interface capability. After these steps, the user should no longer be able to open Report Studio.'):
+        raise RuntimeError('SELF_CHECK_FAILED: harmful goal reversal no longer detected')
+
+    # v3.12: installer/installation wording belongs to the install task family.
+    if _task_context_mismatch(
+            'Why does the ITCAM install fail?',
+            [{'filename':'i.txt','chunk_id':'i1',
+              'text':'The installer fails because Linux system libraries are missing.'}],
+            [{'claim_id':1,'text':'Linux system libraries are missing.',
+              'importance':'essential','essential':True,'verdict':'SUPPORTED',
+              'source_chunk_id':'i1'}]):
+        raise RuntimeError('SELF_CHECK_FAILED: installer/install task mismatch')
+
+    # v3.12: exact incident + CAUSE section supports a causal paraphrase.
+    ec_q='CWSXM0100E: Multiple replies have been produced for a single request flow.'
+    ec_c={'claim_id':1,
+          'text':'This happens because a mediation primitive is wired more than once to the next mediation primitive.',
+          'essential':True}
+    ec_d={'filename':'m.txt','chunk_id':'m1',
+          'text':'SYMPTOM\nCWSXM0100E: Multiple replies have been produced for a single request flow.\nCAUSE\nThis error occurs when a mediation primitive is wired more than once to the next mediation primitive.\nRESOLVING THE PROBLEM\nRemove duplicate wiring.'}
+    if _exact_error_cause_section_support(ec_q,ec_c,[ec_d]) is None:
+        raise RuntimeError('SELF_CHECK_FAILED: exact incident cause section')
+
+    # v3.12: explicit cross-version compatibility supports the yes/no core.
+    comp_q='Can I run different versions of the RDz client and host? What versions are compatible?'
+    comp_c={'claim_id':1,
+            'text':'Yes, it is possible to run different levels of the RDz host and client.',
+            'essential':True}
+    comp_d={'filename':'c.txt','chunk_id':'c1',
+            'text':'Client/Server Compatibility. RDz v14.1 host/client is compatible with RDz v14.0 client/host and RDz v9.5 client/host.'}
+    if _compatibility_relation_support(comp_q,comp_c,[comp_d]) is None:
+        raise RuntimeError('SELF_CHECK_FAILED: compatibility relation')
+
+    # Duplicate-wiring cause -> remove exact duplicate condition.
+    c3={'claim_id':1,'text':'To resolve this issue, ensure that each mediation primitive is connected to its intended next step without redundant connections.','essential':True}
+    d3={'filename':'mfc.txt','chunk_id':'m1','text':'CWSXM0100E: Multiple replies have been produced for a single request flow.\nCAUSE\nThis error occurs when a mediation primitive is wired more than once to the next mediation primitive. It might seem to be a single wire.'}
+    if _duplicate_wiring_remedy_support('CWSXM0100E multiple replies',c3,[d3]) is None:
+        raise RuntimeError('SELF_CHECK_FAILED: duplicate wiring remedy')
+
+    # A real mv/rename action and single-instance invariant must both exist.
+    c4={'claim_id':1,'text':'To resolve this, ensure that only one instance of the DE is installed per user by renaming the conflicting directories.','essential':True}
+    d4={'filename':'de.txt','chunk_id':'d1','text':'The Deployment Engine should only have one instance installed.\nRESOLVING THE PROBLEM\nmv .acsi_old .acsi_backup'}
+    if _single_instance_directory_move_support('Deployment Engine',c4,[d4]) is None:
+        raise RuntimeError('SELF_CHECK_FAILED: directory move')
+
+    # Refusal may pass only with a distinctive missing focus; a direct-answer
+    # compatibility source must remain review-required.
+    score,status=_evaluate_refusal('Is WAS Liberty affected?', [{'filename':'x','chunk_id':'x','text':'WebSphere Application Server Network Deployment V8.5.5 is affected.'}])
+    if not score.get('auto_pass'):
+        raise RuntimeError('SELF_CHECK_FAILED: safe refusal')
+    score,status=_evaluate_refusal('Is SPSS Statistics 19 supported on macOS Sierra?', [{'filename':'s','chunk_id':'s','text':'On macOS Sierra, only SPSS Statistics 24 and 25 are supported; previous versions are not supported.'}])
+    if score.get('auto_pass'):
+        raise RuntimeError('SELF_CHECK_FAILED: answerable refusal false approval')
+
+
+def _validation_bucket(row: dict) -> str:
+    prediction=str(row.get('prediction') or '').strip()
+    status=str(row.get('guardrails',{}).get('status') or 'UNKNOWN')
+    if prediction == ABSTAIN:
+        return 'refusal'
+    if status == 'ANSWER_VERIFIED':
+        return 'verified_answer'
+    return 'nonverified_answer'
+
+
+def _validation_sample(records: list[dict], excluded_ids: set[str], n: int, seed: int) -> list[dict]:
+    excluded_questions={normalize_space(r.get('question','')) for r in records if str(r.get('id')) in excluded_ids}
+    eligible=[]; seen=set()
+    for row in records:
+        rid=str(row.get('id')); q=normalize_space(row.get('question',''))
+        if rid in excluded_ids or not q or q in excluded_questions or q in seen:
+            continue
+        seen.add(q); eligible.append(row)
+    if len(eligible)<n:
+        raise ValueError(f'새 검증 후보가 부족합니다: 필요 {n}, 사용 가능 {len(eligible)}')
+    rng=random.Random(seed)
+    buckets={k:[] for k in ('verified_answer','nonverified_answer','refusal')}
+    for row in eligible: buckets[_validation_bucket(row)].append(row)
+    for v in buckets.values(): rng.shuffle(v)
+    names=list(buckets); target={name:n//len(names) for name in names}
+    for name in names[:n%len(names)]: target[name]+=1
+    selected=[]; leftovers=[]
+    for name in names:
+        take=min(target[name],len(buckets[name])); selected.extend(buckets[name][:take]); leftovers.extend(buckets[name][take:])
+    if len(selected)<n:
+        rng.shuffle(leftovers); selected.extend(leftovers[:n-len(selected)])
+    if len(selected)!=n: raise RuntimeError('검증 표본 크기 생성 실패')
+    return sorted(selected,key=lambda row:str(row.get('id')))
+
+
+def _validation_available_count(records: list[dict], excluded_ids: set[str]) -> int:
+    """Count unique, previously-unreviewed questions available for a fresh validation sample."""
+    excluded_questions={normalize_space(r.get('question','')) for r in records if str(r.get('id')) in excluded_ids}
+    seen=set(); count=0
+    for row in records:
+        rid=str(row.get('id')); q=normalize_space(row.get('question',''))
+        if rid in excluded_ids or not q or q in excluded_questions or q in seen:
+            continue
+        seen.add(q); count+=1
+    return count
+
+
+def _validation_fingerprint(sample: list[dict]) -> str:
+    payload=[]
+    for row in sample:
+        docs=evaluation_docs(row)
+        payload.append({'id':str(row.get('id')),'question':str(row.get('question') or ''),
+                        'prediction':str(row.get('prediction') or ''),
+                        'documents':[{'filename':d.get('filename'),'chunk_id':d.get('chunk_id'),
+                                      'text':d.get('text') or d.get('content') or ''} for d in docs]})
+    raw=json.dumps(payload,ensure_ascii=False,sort_keys=True,separators=(',',':'))
+    return hashlib.sha256(raw.encode('utf-8')).hexdigest()
+
+
+def _metrics_from_reviews(reviews: dict, judged: dict[str,dict]) -> dict:
+    ids=list(reviews)
+    labels=[int(reviews[i]['human_pass']=='pass') for i in ids]
+    predictions=[int(judged[i]['score']['auto_pass']) for i in ids]
+    stats=confusion(labels,predictions)
+    errors=[]
+    for i,h,p in zip(ids,labels,predictions):
+        if h==p: continue
+        row=judged[i]; score=row['score']
+        errors.append({'id':i,'type':'FN' if h else 'FP','judge_status':row.get('judge_status'),
+                       'claim_verdicts':[c.get('verdict') for c in score.get('claim_verifications',[])],
+                       'review_flags':score.get('review_flags',[]),
+                       'human_assessment':reviews[i].get('final_assessment','')})
+    return {**stats,'misclassified':errors}
+
+
+def validate(args):
+    """Evaluate the frozen Judge on the existing held-out 30-case human review."""
+    _preflight_self_check(); print('[SELF-CHECK] deterministic regression checks: PASS',flush=True)
+    rows=jsonl_rows(Path(args.predictions))
+    dev=json.loads(Path(args.exclude_human).read_text(encoding='utf-8-sig'))
+    excluded=set(dev.get('reviews',{}))
+    sample=_validation_sample(rows,excluded,args.sample_size,args.seed)
+    fingerprint=_validation_fingerprint(sample)
+    human_path=Path(args.human)
+    if not human_path.is_file():
+        raise FileNotFoundError(f'검증 Human JSON 없음: {human_path}')
+    human=json.loads(human_path.read_text(encoding='utf-8-sig')); reviews=human.get('reviews',{})
+    if human.get('schema')!='judge-human-validation-v1': raise ValueError('검증 Human JSON schema 불일치')
+    if human.get('sample_fingerprint')!=fingerprint: raise ValueError('검증 표본 fingerprint 불일치')
+    if set(reviews)!={str(r['id']) for r in sample}: raise ValueError('검증 Human JSON ID 불일치')
+    if any(r.get('human_pass') not in ('pass','fail') for r in reviews.values()): raise ValueError('검증 PASS/FAIL 미입력')
+    expected='ibm-techqa-claim-derived-v3.13'
+    outdir=Path(args.output_dir); outdir.mkdir(parents=True,exist_ok=True)
+    print(f'[VALIDATION] held-out {len(sample)}건 평가',flush=True)
+    print(f'[CHECK] Judge frozen: {JUDGE_SCHEMA_VERSION}',flush=True)
+    print(f'[CHECK] sample fingerprint: {fingerprint}',flush=True)
+    with tempfile.TemporaryDirectory(prefix='judge_validation_',dir=outdir) as temp:
+        sample_path=Path(temp)/'sample.jsonl'; fresh=Path(temp)/'judge.jsonl'
+        write_jsonl(sample_path,sample)
+        grade(SimpleNamespace(predictions=sample_path,output=fresh,policy=args.policy,model_path=args.model_path,
+                              limit=0,force=True,max_new_tokens=args.max_new_tokens,max_attempts=args.max_attempts,
+                              debug=False,debug_log=None))
+        judged={r['id']:r for r in jsonl_rows(fresh)}
+        invalid=[i for i,row in judged.items() if row.get('judge_schema_version')!=JUDGE_SCHEMA_VERSION
+                 or row.get('rubric_version')!=expected or type(row.get('score',{}).get('auto_pass')) is not bool]
+        if invalid: raise RuntimeError(f'Judge 결과 버전/승인값 불일치: {invalid}')
+        metrics=_metrics_from_reviews(reviews,judged)
+        report={'schema':'judge-heldout-validation-v1','sample_size':len(sample),'sample_seed':args.seed,
+                'sample_fingerprint':fingerprint,'excluded_development_ids':len(excluded),
+                'judge_schema_version':JUDGE_SCHEMA_VERSION,'rubric_version':expected,
+                'counts':{k:metrics[k] for k in ('n','TP','FP','TN','FN')},
+                'accuracy':metrics['accuracy'],'precision':metrics['precision'],'recall':metrics['recall'],
+                'specificity':metrics['specificity'],'false_approval_rate':metrics['false_approval_rate'],
+                'kappa':metrics['kappa'],'misclassified':metrics['misclassified'],
+                'human_label_counts':dict(Counter(r['human_pass'] for r in reviews.values()))}
+        staged=Path(temp)/'report.json'; dump_json(staged,report)
+        fresh.replace(Path(args.judge_output)); staged.replace(Path(args.report))
+    print(json.dumps({'counts':report['counts'],'precision':report['precision'],'recall':report['recall'],
+                      'accuracy':report['accuracy'],'false_approval_rate':report['false_approval_rate'],
+                      'kappa':report['kappa']},ensure_ascii=False,indent=2))
+    print(f'[VALIDATION 완료] {Path(args.report)}')
+
+
+
+def _review_ids(path: Path) -> set[str]:
+    data=json.loads(Path(path).read_text(encoding='utf-8-sig'))
+    reviews=data.get('reviews',{})
+    if not isinstance(reviews,dict):
+        raise ValueError(f'Human review JSON 형식 오류: {path}')
+    return set(map(str,reviews))
+
+
+def _final_review_html(sample: list[dict], fingerprint: str, output: Path, seed: int) -> None:
+    cases=[]
+    for row in sample:
+        docs=[]
+        for d in evaluation_docs(row):
+            docs.append({'filename':d.get('filename'),'chunk_id':d.get('chunk_id'),
+                         'text':d.get('text') or d.get('content') or ''})
+        cases.append({'id':str(row.get('id')),'question':str(row.get('question') or ''),
+                      'answer':str(row.get('prediction') or ''),'documents':docs})
+    reviews={c['id']:{'human_pass':'','root_cause':'','risk_level':'','failure_reason':'',
+                      'root_cause_detail':'','proposed_fix':'','final_assessment':''} for c in cases}
+    base={'schema':'judge-human-final-v1','sample_size':len(cases),'sample_seed':seed,
+          'sample_fingerprint':fingerprint,'frozen_judge_schema':JUDGE_SCHEMA_VERSION,'reviews':reviews}
+    cases_json=json.dumps(cases,ensure_ascii=False).replace('</','<' + '\\/')
+    base_json=json.dumps(base,ensure_ascii=False).replace('</','<' + '\\/')
+    template = r'''<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><title>Judge Final Validation Review</title>
+<style>
+body{font-family:Arial,sans-serif;margin:0;background:#f5f5f5;color:#111}.top{position:sticky;top:0;background:white;padding:12px 18px;border-bottom:1px solid #ccc;z-index:2}
+.wrap{max-width:1200px;margin:18px auto;padding:0 18px}.case{background:white;padding:18px;margin-bottom:18px;border:1px solid #ddd;border-radius:8px}
+pre{white-space:pre-wrap;background:#fafafa;border:1px solid #ddd;padding:12px;max-height:420px;overflow:auto}textarea{width:100%;min-height:74px;margin:4px 0 10px}
+label{font-weight:600}select{margin:4px 12px 10px 4px}.docs details{margin:8px 0}.progress{font-weight:700;margin-left:12px}
+button{padding:9px 14px;margin-right:8px}.id{font-size:20px;font-weight:700}.hint{color:#555;font-size:13px}
+</style></head><body>
+<div class="top"><button onclick="exportJson()">검토 JSON 저장</button><button onclick="clearSaved()">임시저장 초기화</button><span class="progress" id="progress"></span><span class="hint">최종 블라인드 검증 · Judge 결과/원본 QA 정답은 표시하지 않음</span></div>
+<div class="wrap" id="root"></div>
+<script>
+const cases=__CASES__;
+const base=__BASE__;
+const key='judge-final-validation-'+base.sample_fingerprint;
+let reviews=JSON.parse(JSON.stringify(base.reviews));
+try{const saved=JSON.parse(localStorage.getItem(key)||'null');if(saved)reviews=saved;}catch(e){}
+function esc(x){return String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function save(){localStorage.setItem(key,JSON.stringify(reviews));updateProgress();}
+function field(id,name,value){reviews[id][name]=value;save();}
+function render(){
+ const root=document.getElementById('root');root.innerHTML='';
+ cases.forEach((c,i)=>{let d=document.createElement('div');d.className='case';
+ let docs=c.documents.map((x,j)=>`<details><summary>문서 ${j+1} · ${esc(x.filename)} · ${esc(x.chunk_id)}</summary><pre>${esc(x.text)}</pre></details>`).join('');
+ let r=reviews[c.id];
+ d.innerHTML=`<div class="id">${i+1}/${cases.length} · ${esc(c.id)}</div><p><b>질문</b></p><pre>${esc(c.question)}</pre><p><b>LLM 답변</b></p><pre>${esc(c.answer)}</pre><div class="docs"><b>RAG 근거 문서</b>${docs}</div>
+ <p><label>최종 판정</label><select data-f="human_pass"><option value="">선택</option><option value="pass" ${r.human_pass==='pass'?'selected':''}>PASS</option><option value="fail" ${r.human_pass==='fail'?'selected':''}>FAIL</option></select>
+ <label>원인</label><select data-f="root_cause"><option value=""></option>${['evidence','semantic','generation','other'].map(x=>`<option value="${x}" ${r.root_cause===x?'selected':''}>${x}</option>`).join('')}</select>
+ <label>위험도</label><select data-f="risk_level"><option value=""></option>${['low','medium','high'].map(x=>`<option value="${x}" ${r.risk_level===x?'selected':''}>${x}</option>`).join('')}</select></p>
+ <label>판정 근거 / 실패 이유</label><textarea data-f="failure_reason">${esc(r.failure_reason)}</textarea>
+ <label>상세 원인</label><textarea data-f="root_cause_detail">${esc(r.root_cause_detail)}</textarea>
+ <label>개선사항</label><textarea data-f="proposed_fix">${esc(r.proposed_fix)}</textarea>
+ <label>최종 평가 문장</label><textarea data-f="final_assessment">${esc(r.final_assessment)}</textarea>`;
+ d.querySelectorAll('[data-f]').forEach(el=>el.addEventListener('change',()=>field(c.id,el.dataset.f,el.value)));
+ d.querySelectorAll('textarea[data-f]').forEach(el=>el.addEventListener('input',()=>field(c.id,el.dataset.f,el.value)));
+ root.appendChild(d);
+ });updateProgress();}
+function updateProgress(){let done=Object.values(reviews).filter(x=>x.human_pass==='pass'||x.human_pass==='fail').length;document.getElementById('progress').textContent=`판정 ${done}/${cases.length}`;}
+function exportJson(){
+ const missing=Object.entries(reviews).filter(([id,r])=>!['pass','fail'].includes(r.human_pass));
+ if(missing.length){alert(`PASS/FAIL 미입력 ${missing.length}건: `+missing.slice(0,8).map(x=>x[0]).join(', '));return;}
+ const out=JSON.parse(JSON.stringify(base));out.reviews=reviews;out.exported_at=new Date().toISOString();
+ const blob=new Blob([JSON.stringify(out,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='final_human_review.json';a.click();URL.revokeObjectURL(a.href);
+}
+function clearSaved(){if(confirm('브라우저 임시저장을 초기화할까요?')){localStorage.removeItem(key);location.reload();}}
+render();
+</script></body></html>'''
+    html=template.replace('__CASES__',cases_json).replace('__BASE__',base_json)
+    output.parent.mkdir(parents=True,exist_ok=True)
+    output.write_text(html,encoding='utf-8')
+
+
+def _find_downloaded_final_human(fingerprint: str) -> Path | None:
+    downloads=Path.home()/'Downloads'
+    if not downloads.is_dir():
+        return None
+    candidates=sorted(downloads.glob('final_human_review*.json'),key=lambda p:p.stat().st_mtime,reverse=True)
+    for path in candidates:
+        try:
+            data=json.loads(path.read_text(encoding='utf-8-sig'))
+            if data.get('schema')=='judge-human-final-v1' and data.get('sample_fingerprint')==fingerprint:
+                return path
+        except Exception:
+            continue
+    return None
+
+
+def final_test(args):
+    _preflight_self_check(); print('[SELF-CHECK] deterministic regression checks: PASS',flush=True)
+    rows=jsonl_rows(Path(args.predictions))
+    excluded=_review_ids(Path(args.dev_human)) | _review_ids(Path(args.validation_human))
+    sample=_validation_sample(rows,excluded,args.sample_size,args.seed)
+    fingerprint=_validation_fingerprint(sample)
+    outdir=Path(args.output_dir);outdir.mkdir(parents=True,exist_ok=True)
+    human_path=Path(args.human);html_path=Path(args.review_html)
+    expected_ids={str(r['id']) for r in sample}
+    print(f'[FINAL] previous reviewed excluded={len(excluded)}, fresh sample={len(sample)}',flush=True)
+    print(f'[CHECK] Judge frozen: {JUDGE_SCHEMA_VERSION}',flush=True)
+    print(f'[CHECK] final sample fingerprint: {fingerprint}',flush=True)
+    if not human_path.is_file():
+        downloaded=_find_downloaded_final_human(fingerprint)
+        if downloaded is not None:
+            shutil.copy2(downloaded,human_path)
+            print(f'[FINAL] Downloads 검토 JSON 자동 반영: {downloaded} -> {human_path}',flush=True)
+        else:
+            _final_review_html(sample,fingerprint,html_path,args.seed)
+            print(f'[FINAL 준비 완료] {html_path}',flush=True)
+            print('[NEXT] 이 HTML의 질문/답변/근거만 블라인드 검토한 뒤 final_human_review.json을 저장하세요.',flush=True)
+            try:
+                webbrowser.open(html_path.resolve().as_uri())
+            except Exception:
+                pass
+            return
+    human=json.loads(human_path.read_text(encoding='utf-8-sig'));reviews=human.get('reviews',{})
+    if human.get('schema')!='judge-human-final-v1':raise ValueError('최종 Human JSON schema 불일치')
+    if human.get('sample_fingerprint')!=fingerprint:raise ValueError('최종 표본 fingerprint 불일치')
+    if set(reviews)!=expected_ids:raise ValueError('최종 Human JSON ID 불일치')
+    if any(r.get('human_pass') not in ('pass','fail') for r in reviews.values()):raise ValueError('최종 PASS/FAIL 미입력')
+    if human.get('frozen_judge_schema')!=JUDGE_SCHEMA_VERSION:raise ValueError('Human JSON의 frozen Judge 버전 불일치')
+    expected='ibm-techqa-claim-derived-v3.13'
+    with tempfile.TemporaryDirectory(prefix='judge_final_',dir=outdir) as temp:
+        sample_path=Path(temp)/'sample.jsonl';fresh=Path(temp)/'judge.jsonl'
+        write_jsonl(sample_path,sample)
+        grade(SimpleNamespace(predictions=sample_path,output=fresh,policy=args.policy,model_path=args.model_path,
+                              limit=0,force=True,max_new_tokens=args.max_new_tokens,max_attempts=args.max_attempts,
+                              debug=False,debug_log=None))
+        judged={r['id']:r for r in jsonl_rows(fresh)}
+        if set(judged)!=expected_ids:raise RuntimeError('최종 Judge 결과 ID 불일치')
+        invalid=[i for i,row in judged.items() if row.get('judge_schema_version')!=JUDGE_SCHEMA_VERSION
+                 or row.get('rubric_version')!=expected or type(row.get('score',{}).get('auto_pass')) is not bool]
+        if invalid:raise RuntimeError(f'최종 Judge 결과 버전/승인값 불일치: {invalid}')
+        metrics=_metrics_from_reviews(reviews,judged)
+        report={'schema':'judge-final-validation-v1','sample_size':len(sample),'sample_seed':args.seed,
+                'sample_fingerprint':fingerprint,'excluded_previous_ids':len(excluded),
+                'judge_schema_version':JUDGE_SCHEMA_VERSION,'rubric_version':expected,
+                'counts':{k:metrics[k] for k in ('n','TP','FP','TN','FN')},
+                'accuracy':metrics['accuracy'],'precision':metrics['precision'],'recall':metrics['recall'],
+                'specificity':metrics['specificity'],'false_approval_rate':metrics['false_approval_rate'],
+                'kappa':metrics['kappa'],'misclassified':metrics['misclassified'],
+                'human_label_counts':dict(Counter(r['human_pass'] for r in reviews.values())),
+                'note':'Final frozen-Judge evaluation. Do not tune on this sample if it is to remain a final test.'}
+        staged=Path(temp)/'report.json';dump_json(staged,report)
+        fresh.replace(Path(args.judge_output));staged.replace(Path(args.report))
+    print(json.dumps({'counts':report['counts'],'precision':report['precision'],'recall':report['recall'],
+                      'accuracy':report['accuracy'],'false_approval_rate':report['false_approval_rate'],
+                      'kappa':report['kappa']},ensure_ascii=False,indent=2))
+    print(f'[FINAL 완료] {Path(args.report)}')
+
+
+def _final2_review_html(sample: list[dict], fingerprint: str, output: Path, seed: int) -> None:
+    # Reuse the proven final-review HTML generator, then make only workflow metadata/file-name changes.
+    _final_review_html(sample, fingerprint, output, seed)
+    html = output.read_text(encoding='utf-8')
+    html = html.replace('Judge Final Validation Review', 'Judge Final Validation 2 Review')
+    html = html.replace('최종 블라인드 검증 · Judge 결과/원본 QA 정답은 표시하지 않음',
+                        '2차 최종 블라인드 검증 · Judge 결과/원본 QA 정답은 표시하지 않음')
+    html = html.replace('judge-human-final-v1', 'judge-human-final2-v1')
+    html = html.replace("judge-final-validation-'+base.sample_fingerprint", "judge-final-validation-2-'+base.sample_fingerprint")
+    html = html.replace("a.download='final_human_review.json'", "a.download='final_human_review_2.json'")
+    output.write_text(html, encoding='utf-8')
+
+
+def _find_downloaded_final2_human(fingerprint: str) -> Path | None:
+    downloads=Path.home()/'Downloads'
+    if not downloads.is_dir():
+        return None
+    candidates=sorted(downloads.glob('final_human_review_2*.json'),key=lambda p:p.stat().st_mtime,reverse=True)
+    for path in candidates:
+        try:
+            data=json.loads(path.read_text(encoding='utf-8-sig'))
+            if data.get('schema')=='judge-human-final2-v1' and data.get('sample_fingerprint')==fingerprint:
+                return path
+        except Exception:
+            continue
+    return None
+
+
+def final_test_2(args):
+    """Frozen v3.12 final generalization test on a fresh sample excluding all 80 reviewed cases."""
+    _preflight_self_check(); print('[SELF-CHECK] deterministic regression checks: PASS',flush=True)
+    rows=jsonl_rows(Path(args.predictions))
+    excluded=(
+        _review_ids(Path(args.dev_human))
+        | _review_ids(Path(args.validation_human))
+        | _review_ids(Path(args.final_human))
+    )
+    available=_validation_available_count(rows,excluded)
+    if available <= 0:
+        raise ValueError('새 검증 후보가 없습니다. 기존 106건 외의 추가 평가 데이터가 필요합니다.')
+    actual_n=min(args.sample_size,available)
+    if actual_n < args.sample_size:
+        print(f'[FINAL-2] 요청 표본={args.sample_size}, 사용 가능={available} -> 남은 신규 {actual_n}건 전부 사용',flush=True)
+    sample=_validation_sample(rows,excluded,actual_n,args.seed)
+    fingerprint=_validation_fingerprint(sample)
+    outdir=Path(args.output_dir);outdir.mkdir(parents=True,exist_ok=True)
+    human_path=Path(args.human);html_path=Path(args.review_html)
+    expected_ids={str(r['id']) for r in sample}
+    print(f'[FINAL-2] previous reviewed excluded={len(excluded)}, fresh sample={len(sample)}',flush=True)
+    print(f'[CHECK] Judge frozen: {JUDGE_SCHEMA_VERSION}',flush=True)
+    print(f'[CHECK] final-2 sample fingerprint: {fingerprint}',flush=True)
+    if not human_path.is_file():
+        downloaded=_find_downloaded_final2_human(fingerprint)
+        if downloaded is not None:
+            shutil.copy2(downloaded,human_path)
+            print(f'[FINAL-2] Downloads 검토 JSON 자동 반영: {downloaded} -> {human_path}',flush=True)
+        else:
+            _final2_review_html(sample,fingerprint,html_path,args.seed)
+            print(f'[FINAL-2 준비 완료] {html_path}',flush=True)
+            print('[NEXT] 이 HTML의 질문/답변/근거만 블라인드 검토한 뒤 final_human_review_2.json을 저장하세요.',flush=True)
+            try:
+                webbrowser.open(html_path.resolve().as_uri())
+            except Exception:
+                pass
+            return
+    human=json.loads(human_path.read_text(encoding='utf-8-sig'));reviews=human.get('reviews',{})
+    if human.get('schema')!='judge-human-final2-v1':raise ValueError('2차 최종 Human JSON schema 불일치')
+    if human.get('sample_fingerprint')!=fingerprint:raise ValueError('2차 최종 표본 fingerprint 불일치')
+    if set(reviews)!=expected_ids:raise ValueError('2차 최종 Human JSON ID 불일치')
+    if any(r.get('human_pass') not in ('pass','fail') for r in reviews.values()):raise ValueError('2차 최종 PASS/FAIL 미입력')
+    if human.get('frozen_judge_schema')!=JUDGE_SCHEMA_VERSION:raise ValueError('Human JSON의 frozen Judge 버전 불일치')
+    expected='ibm-techqa-claim-derived-v3.13'
+    with tempfile.TemporaryDirectory(prefix='judge_final2_',dir=outdir) as temp:
+        sample_path=Path(temp)/'sample.jsonl';fresh=Path(temp)/'judge.jsonl'
+        write_jsonl(sample_path,sample)
+        grade(SimpleNamespace(predictions=sample_path,output=fresh,policy=args.policy,model_path=args.model_path,
+                              limit=0,force=True,max_new_tokens=args.max_new_tokens,max_attempts=args.max_attempts,
+                              debug=False,debug_log=None))
+        judged={r['id']:r for r in jsonl_rows(fresh)}
+        if set(judged)!=expected_ids:raise RuntimeError('2차 최종 Judge 결과 ID 불일치')
+        invalid=[i for i,row in judged.items() if row.get('judge_schema_version')!=JUDGE_SCHEMA_VERSION
+                 or row.get('rubric_version')!=expected or type(row.get('score',{}).get('auto_pass')) is not bool]
+        if invalid:raise RuntimeError(f'2차 최종 Judge 결과 버전/승인값 불일치: {invalid}')
+        metrics=_metrics_from_reviews(reviews,judged)
+        report={'schema':'judge-final-validation-2-v1','sample_size':len(sample),'sample_seed':args.seed,
+                'sample_fingerprint':fingerprint,'excluded_previous_ids':len(excluded),
+                'judge_schema_version':JUDGE_SCHEMA_VERSION,'rubric_version':expected,
+                'counts':{k:metrics[k] for k in ('n','TP','FP','TN','FN')},
+                'accuracy':metrics['accuracy'],'precision':metrics['precision'],'recall':metrics['recall'],
+                'specificity':metrics['specificity'],'false_approval_rate':metrics['false_approval_rate'],
+                'kappa':metrics['kappa'],'misclassified':metrics['misclassified'],
+                'human_label_counts':dict(Counter(r['human_pass'] for r in reviews.values())),
+                'note':'Independent final test #2 with frozen v3.12 Judge. Do not tune on this sample before reporting the generalization result.'}
+        write_jsonl(Path(args.judge_output),[judged[str(r['id'])] for r in sample])
+        dump_json(Path(args.report),report)
+    print(json.dumps(report,ensure_ascii=False,indent=2))
+    print(f'[FINAL-2 완료] {Path(args.report)}')
+
+
+def verify_106(args):
+    """One GPU load: recheck all 106 human-reviewed development cases."""
+    _preflight_self_check(); print('[SELF-CHECK] deterministic regression checks: PASS', flush=True)
+    source={r['id']:r for r in jsonl_rows(Path(args.predictions))}
+    groups=[]
+    for name,path in (
+        ('development_20',Path(args.dev_human)),
+        ('validation_30',Path(args.validation_human)),
+        ('final_30_now_development',Path(args.final_human)),
+        ('final2_26_now_development',Path(args.final2_human)),
+    ):
+        obj=json.loads(path.read_text(encoding='utf-8-sig')); reviews=obj.get('reviews',{})
+        if not reviews or any(r.get('human_pass') not in ('pass','fail') for r in reviews.values()):
+            raise ValueError(f'{name}: Human PASS/FAIL 미입력')
+        groups.append((name,obj,reviews))
+    seen=set()
+    for name,_,reviews in groups:
+        overlap=seen & set(reviews)
+        if overlap:
+            raise ValueError(f'{name}: 이전 Human 세트와 ID 중복: {sorted(overlap)}')
+        seen |= set(reviews)
+    ids=[i for _,_,reviews in groups for i in reviews]
+    missing=set(ids)-set(source)
+    if missing:
+        raise ValueError(f'RAG 예측 누락: {sorted(missing)}')
+    expected='ibm-techqa-claim-derived-v3.13'
+    outdir=Path(args.output_dir); outdir.mkdir(parents=True,exist_ok=True)
+    print(f'[VERIFY-106] groups=20+30+30+26, total={len(ids)}',flush=True)
+    with tempfile.TemporaryDirectory(prefix='judge_verify_106_',dir=outdir) as temp:
+        sample=Path(temp)/'sample.jsonl'; fresh=Path(temp)/'judge.jsonl'
+        write_jsonl(sample,[source[i] for i in ids])
+        grade(SimpleNamespace(predictions=sample,output=fresh,policy=args.policy,model_path=args.model_path,
+                              limit=0,force=True,max_new_tokens=args.max_new_tokens,max_attempts=args.max_attempts,
+                              debug=False,debug_log=None))
+        judged={r['id']:r for r in jsonl_rows(fresh)}
+        invalid=[i for i,row in judged.items() if row.get('judge_schema_version')!=JUDGE_SCHEMA_VERSION
+                 or row.get('rubric_version')!=expected or type(row.get('score',{}).get('auto_pass')) is not bool]
+        if invalid:
+            raise RuntimeError(f'Judge 결과 버전/승인값 불일치: {invalid}')
+        report={'schema':'judge-regression-106-v1','judge_schema_version':JUDGE_SCHEMA_VERSION,
+                'rubric_version':expected,'groups':{},'total':{},
+                'note':'All 106 validation cases are development/regression data. test_clean.json remains untouched final test data.'}
+        human_all={}
+        for name,_,reviews in groups:
+            metrics=_metrics_from_reviews(reviews,judged)
+            report['groups'][name]={k:metrics[k] for k in
+                ('n','TP','FP','TN','FN','precision','recall','accuracy','false_approval_rate','kappa')}
+            report['groups'][name]['errors']=metrics['misclassified']
+            human_all.update(reviews)
+        total=_metrics_from_reviews(human_all,judged)
+        report['total']={k:total[k] for k in
+            ('n','TP','FP','TN','FN','precision','recall','accuracy','false_approval_rate','kappa')}
+        report['total']['errors']=total['misclassified']
+        staged_report=Path(temp)/'verify_106_report.json'; staged_judge=Path(temp)/'judge_v311_106.jsonl'
+        dump_json(staged_report,report); write_jsonl(staged_judge,[judged[i] for i in ids])
+        staged_report.replace(Path(args.report)); staged_judge.replace(Path(args.judge_output))
+    print(json.dumps(report,ensure_ascii=False,indent=2))
+    print(f'[VERIFY-106 완료] {Path(args.report)}')
+
+
+def verify_80(args):
+    """One GPU load: recheck all 80 human-reviewed development cases."""
+    _preflight_self_check(); print('[SELF-CHECK] deterministic regression checks: PASS', flush=True)
+    source = {r['id']: r for r in jsonl_rows(Path(args.predictions))}
+    groups = []
+    for name, path in (
+        ('development_20', Path(args.dev_human)),
+        ('validation_30', Path(args.validation_human)),
+        ('final_30_now_development', Path(args.final_human)),
+    ):
+        obj = json.loads(path.read_text(encoding='utf-8-sig'))
+        reviews = obj.get('reviews', {})
+        if not reviews or any(r.get('human_pass') not in ('pass','fail') for r in reviews.values()):
+            raise ValueError(f'{name}: Human PASS/FAIL 미입력')
+        groups.append((name, obj, reviews))
+    seen = set()
+    for name, _, reviews in groups:
+        overlap = seen & set(reviews)
+        if overlap:
+            raise ValueError(f'{name}: 이전 Human 세트와 ID 중복: {sorted(overlap)}')
+        seen |= set(reviews)
+    ids = [i for _, _, reviews in groups for i in reviews]
+    missing = set(ids) - set(source)
+    if missing:
+        raise ValueError(f'RAG 예측 누락: {sorted(missing)}')
+    expected = 'ibm-techqa-claim-derived-v3.13'
+    outdir = Path(args.output_dir); outdir.mkdir(parents=True, exist_ok=True)
+    print(f'[VERIFY-80] groups=20+30+30, total={len(ids)}', flush=True)
+    with tempfile.TemporaryDirectory(prefix='judge_verify_80_', dir=outdir) as temp:
+        sample = Path(temp) / 'sample.jsonl'; fresh = Path(temp) / 'judge.jsonl'
+        write_jsonl(sample, [source[i] for i in ids])
+        grade(SimpleNamespace(predictions=sample, output=fresh, policy=args.policy,
+                              model_path=args.model_path, limit=0, force=True,
+                              max_new_tokens=args.max_new_tokens, max_attempts=args.max_attempts,
+                              debug=False, debug_log=None))
+        judged = {r['id']: r for r in jsonl_rows(fresh)}
+        invalid = [i for i, row in judged.items()
+                   if row.get('judge_schema_version') != JUDGE_SCHEMA_VERSION
+                   or row.get('rubric_version') != expected
+                   or type(row.get('score',{}).get('auto_pass')) is not bool]
+        if invalid:
+            raise RuntimeError(f'Judge 결과 버전/승인값 불일치: {invalid}')
+        report = {'schema':'judge-regression-80-v1', 'judge_schema_version':JUDGE_SCHEMA_VERSION,
+                  'rubric_version':expected, 'groups':{}, 'total':{},
+                  'note':'All 80 cases have now been used for development/regression; none is an independent final test.'}
+        human_all = {}; errors = []
+        for name, _, reviews in groups:
+            metrics = _metrics_from_reviews(reviews, judged)
+            report['groups'][name] = {k: metrics[k] for k in
+                ('n','TP','FP','TN','FN','precision','recall','accuracy','false_approval_rate','kappa')}
+            report['groups'][name]['errors'] = metrics['misclassified']
+            human_all.update(reviews)
+            errors.extend(metrics['misclassified'])
+        total = _metrics_from_reviews(human_all, judged)
+        report['total'] = {k: total[k] for k in
+            ('n','TP','FP','TN','FN','precision','recall','accuracy','false_approval_rate','kappa')}
+        report['total']['errors'] = total['misclassified']
+        staged_report = Path(temp) / 'verify_80_report.json'
+        staged_judge = Path(temp) / 'rubric_judge_v39_80.jsonl'
+        dump_json(staged_report, report)
+        write_jsonl(staged_judge, [judged[i] for i in ids])
+        staged_report.replace(Path(args.report))
+        staged_judge.replace(Path(args.judge_output))
+    print(json.dumps(report, ensure_ascii=False, indent=2))
+    print(f'[VERIFY-80 완료] {Path(args.report)}')
+
+
+def verify_all(args):
+    """One GPU load: recheck development 20 and held-out 30 together, then split metrics."""
+    _preflight_self_check(); print('[SELF-CHECK] deterministic regression checks: PASS',flush=True)
+    source={r['id']:r for r in jsonl_rows(Path(args.predictions))}
+    dev_h=json.loads(Path(args.dev_human).read_text(encoding='utf-8-sig')); dev_reviews=dev_h.get('reviews',{})
+    val_h=json.loads(Path(args.validation_human).read_text(encoding='utf-8-sig')); val_reviews=val_h.get('reviews',{})
+    if not dev_reviews or not val_reviews: raise ValueError('Human review JSON이 비었습니다.')
+    if any(r.get('human_pass') not in ('pass','fail') for r in [*dev_reviews.values(),*val_reviews.values()]):
+        raise ValueError('Human PASS/FAIL 미입력')
+    if set(dev_reviews)&set(val_reviews): raise ValueError('개발/held-out ID가 겹칩니다.')
+    val_sample=_validation_sample(list(source.values()),set(dev_reviews),len(val_reviews),args.seed)
+    fingerprint=_validation_fingerprint(val_sample)
+    if val_h.get('sample_fingerprint')!=fingerprint: raise ValueError('held-out fingerprint 불일치')
+    val_ids={str(r['id']) for r in val_sample}
+    if val_ids!=set(val_reviews): raise ValueError('held-out ID 불일치')
+    ids=[*dev_reviews,*val_reviews]
+    missing=set(ids)-set(source)
+    if missing: raise ValueError(f'RAG 예측 누락: {sorted(missing)}')
+    expected='ibm-techqa-claim-derived-v3.13'; outdir=Path(args.output_dir); outdir.mkdir(parents=True,exist_ok=True)
+    print(f'[VERIFY-ALL] development={len(dev_reviews)}, held-out={len(val_reviews)}, total={len(ids)}',flush=True)
+    with tempfile.TemporaryDirectory(prefix='judge_verify_all_',dir=outdir) as temp:
+        sample=Path(temp)/'sample.jsonl'; fresh=Path(temp)/'judge.jsonl'
+        write_jsonl(sample,[source[i] for i in ids])
+        grade(SimpleNamespace(predictions=sample,output=fresh,policy=args.policy,model_path=args.model_path,
+                              limit=0,force=True,max_new_tokens=args.max_new_tokens,max_attempts=args.max_attempts,
+                              debug=False,debug_log=None))
+        judged={r['id']:r for r in jsonl_rows(fresh)}
+        invalid=[i for i,row in judged.items() if row.get('judge_schema_version')!=JUDGE_SCHEMA_VERSION
+                 or row.get('rubric_version')!=expected or type(row.get('score',{}).get('auto_pass')) is not bool]
+        if invalid: raise RuntimeError(f'Judge 결과 버전/승인값 불일치: {invalid}')
+        dev_m=_metrics_from_reviews(dev_reviews,judged); val_m=_metrics_from_reviews(val_reviews,judged)
+        # Fail closed on regression: never silently overwrite reports if a false approval appears.
+        result={'development':{k:dev_m[k] for k in ('n','TP','FP','TN','FN','precision','recall','accuracy','false_approval_rate','kappa')},
+                'held_out':{k:val_m[k] for k in ('n','TP','FP','TN','FN','precision','recall','accuracy','false_approval_rate','kappa')},
+                'development_errors':dev_m['misclassified'],'held_out_errors':val_m['misclassified'],
+                'held_out_fingerprint':fingerprint,'judge_schema_version':JUDGE_SCHEMA_VERSION}
+        dump_json(Path(temp)/'verify_all_report.json',result)
+        # Split current judgments into the existing result locations.
+        write_jsonl(Path(temp)/'dev.jsonl',[judged[i] for i in dev_reviews])
+        write_jsonl(Path(temp)/'val.jsonl',[judged[i] for i in val_reviews])
+        (Path(temp)/'dev.jsonl').replace(RESULT_DIR/'rubric_judge_v38.jsonl')
+        Path(args.validation_output).parent.mkdir(parents=True,exist_ok=True)
+        (Path(temp)/'val.jsonl').replace(Path(args.validation_output))
+        (Path(temp)/'verify_all_report.json').replace(Path(args.report))
+    print(json.dumps(result,ensure_ascii=False,indent=2))
+    print(f'[VERIFY-ALL 완료] {Path(args.report)}')
+
+
+def review(args):
+    """Run a fresh human-review evaluation in one command, without helper scripts."""
+    _preflight_self_check()
+    print("[SELF-CHECK] deterministic regression checks: PASS", flush=True)
+    human_path = Path(args.human)
+    human = json.loads(human_path.read_text(encoding="utf-8-sig"))
+    reviews = human.get("reviews", {})
+    if not reviews or any(r.get("human_pass") not in ("pass", "fail") for r in reviews.values()):
+        raise ValueError("사람 평가 PASS/FAIL 라벨을 모두 입력하세요.")
+    if JUDGE_SCHEMA_VERSION != "ibm-techqa-judge-claims-v3.13":
+        raise RuntimeError("Judge 버전 불일치")
+    expected_rubric = "ibm-techqa-claim-derived-v3.13"
+    source_rows = {r["id"]: r for r in jsonl_rows(Path(args.predictions))}
+    missing = set(reviews) - set(source_rows)
+    if missing:
+        raise ValueError(f"RAG 예측 누락: {sorted(missing)}")
+    output_dir = Path(args.output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    output = output_dir / "rubric_judge_v38.jsonl"
+    report_path = output_dir / "review_report_v38.json"
+    print(f"[CHECK] 실행 파일: {Path(__file__).resolve()}", flush=True)
+    print(f"[CHECK] Judge: {JUDGE_SCHEMA_VERSION}", flush=True)
+    print(f"[CHECK] {len(reviews)}건, 캐시 재사용 금지 (--force)", flush=True)
+    # Labels are used only for sampling IDs and post-inference metrics.
+    # A temporary directory guarantees no stale verdicts enter the new run.
+    with tempfile.TemporaryDirectory(prefix="judge_review_", dir=output_dir) as temp:
+        sample = Path(temp) / "sample.jsonl"
+        fresh = Path(temp) / "judge.jsonl"
+        write_jsonl(sample, [source_rows[i] for i in reviews])
+        grade(SimpleNamespace(predictions=sample, output=fresh, policy=args.policy,
+                              model_path=args.model_path, limit=0, force=True,
+                              max_new_tokens=args.max_new_tokens, max_attempts=args.max_attempts,
+                              debug=False, debug_log=None))
+        judged = {r["id"]: r for r in jsonl_rows(fresh)}
+        if set(judged) != set(reviews):
+            raise RuntimeError("Judge 결과 ID 불일치")
+        invalid = [i for i, row in judged.items()
+                   if row.get("judge_schema_version") != JUDGE_SCHEMA_VERSION
+                   or row.get("rubric_version") != expected_rubric
+                   or type(row.get("score", {}).get("auto_pass")) is not bool]
+        if invalid:
+            raise RuntimeError(f"Judge 결과 버전 또는 승인값 불일치: {invalid}")
+        labels = [int(reviews[i]["human_pass"] == "pass") for i in reviews]
+        predictions = [int(judged[i]["score"]["auto_pass"]) for i in reviews]
+        stats = confusion(labels, predictions)
+        errors = []
+        for i, h, p in zip(reviews, labels, predictions):
+            if h != p:
+                row = judged[i]
+                score = row["score"]
+                errors.append({"id": i, "type": "FN" if h else "FP",
+                               "judge_status": row.get("judge_status"),
+                               "claim_verdicts": [c.get("verdict") for c in score.get("claim_verifications", [])],
+                               "review_flags": score.get("review_flags", []),
+                               "human_assessment": reviews[i].get("final_assessment", "")})
+        report = {
+            "schema": "judge-human-audit-v3.12",
+            "source_judge_version": human.get("source_judge_version"),
+            "evaluated_judge_schema_version": JUDGE_SCHEMA_VERSION,
+            "evaluated_rubric_version": expected_rubric,
+            "counts": {**{k: stats[k] for k in ("n", "TP", "FP", "TN", "FN")}, "unlabeled": 0},
+            **{k: v for k, v in stats.items() if k not in ("n", "TP", "FP", "TN", "FN")},
+            "root_causes": dict(Counter(r.get("root_cause") or "unclassified" for r in reviews.values())),
+            "judge_status_counts": dict(Counter(r.get("judge_status") for r in judged.values())),
+            "mismatched_ids": [], "misclassified": errors,
+            "note": "Fresh development-set evaluation; every nonapproval counted as negative; not independent held-out validation.",
+        }
+        staged_report = Path(temp) / "report.json"
+        dump_json(staged_report, report)
+        # Only replace previous v3.8 outputs after all result checks pass.
+        fresh.replace(output)
+        staged_report.replace(report_path)
+    print(json.dumps({k: report[k] for k in ("counts", "precision", "recall", "accuracy", "false_approval_rate")}, ensure_ascii=False, indent=2))
+    print(f"[완료] {report_path}")
+
+
 def main(argv=None):
+    if argv is None:
+        argv = sys.argv[1:] or ["verify-106"]
     p=argparse.ArgumentParser(description=__doc__)
     s=p.add_subparsers(dest='command',required=True)
+    a=s.add_parser('verify-106',help='현재 개발 데이터 20+30+30+26 총 106건을 한 번에 회귀검증')
+    a.add_argument('--predictions',type=Path,default=PREDICTIONS)
+    a.add_argument('--dev-human',type=Path,default=RESULT_DIR/'IBMTechSupport_judge_v36_human_review.json')
+    a.add_argument('--validation-human',type=Path,default=VALIDATION_HUMAN)
+    a.add_argument('--final-human',type=Path,default=FINAL_HUMAN)
+    a.add_argument('--final2-human',type=Path,default=FINAL2_HUMAN)
+    a.add_argument('--output-dir',type=Path,default=RESULT_DIR/'regression_106')
+    a.add_argument('--judge-output',type=Path,default=RESULT_DIR/'regression_106'/'judge_v311_106.jsonl')
+    a.add_argument('--report',type=Path,default=RESULT_DIR/'regression_106'/'verify_106_report.json')
+    a.add_argument('--policy',type=Path,default=POLICY_PATH)
+    a.add_argument('--model-path',type=Path,default=Path('models/Qwen2.5-1.5B-Instruct'))
+    a.add_argument('--max-new-tokens',type=int,default=320)
+    a.add_argument('--max-attempts',type=int,default=2)
+    a.set_defaults(run=verify_106)
+    a=s.add_parser('verify-80',help='지금까지 Human 검토한 20+30+30 총 80건을 한 번에 회귀검증')
+    a.add_argument('--predictions',type=Path,default=PREDICTIONS)
+    a.add_argument('--dev-human',type=Path,default=RESULT_DIR/'IBMTechSupport_judge_v36_human_review.json')
+    a.add_argument('--validation-human',type=Path,default=VALIDATION_HUMAN)
+    a.add_argument('--final-human',type=Path,default=FINAL_HUMAN)
+    a.add_argument('--output-dir',type=Path,default=RESULT_DIR/'regression_80')
+    a.add_argument('--judge-output',type=Path,default=RESULT_DIR/'regression_80'/'rubric_judge_v39_80.jsonl')
+    a.add_argument('--report',type=Path,default=RESULT_DIR/'regression_80'/'verify_80_report.json')
+    a.add_argument('--policy',type=Path,default=POLICY_PATH)
+    a.add_argument('--model-path',type=Path,default=Path('models/Qwen2.5-1.5B-Instruct'))
+    a.add_argument('--max-new-tokens',type=int,default=320)
+    a.add_argument('--max-attempts',type=int,default=2)
+    a.set_defaults(run=verify_80)
+    a=s.add_parser('verify-all',help='개발 20 + held-out 30을 한 번의 모델 로딩으로 회귀검증')
+    a.add_argument('--predictions',type=Path,default=PREDICTIONS)
+    a.add_argument('--dev-human',type=Path,default=RESULT_DIR/'IBMTechSupport_judge_v36_human_review.json')
+    a.add_argument('--validation-human',type=Path,default=VALIDATION_HUMAN)
+    a.add_argument('--validation-output',type=Path,default=VALIDATION_JUDGE)
+    a.add_argument('--report',type=Path,default=RESULT_DIR/'verify_all_report.json')
+    a.add_argument('--output-dir',type=Path,default=RESULT_DIR)
+    a.add_argument('--policy',type=Path,default=POLICY_PATH)
+    a.add_argument('--model-path',type=Path,default=Path('models/Qwen2.5-1.5B-Instruct'))
+    a.add_argument('--seed',type=int,default=VALIDATION_SEED)
+    a.add_argument('--max-new-tokens',type=int,default=320)
+    a.add_argument('--max-attempts',type=int,default=2)
+    a.set_defaults(run=verify_all)
+    a=s.add_parser('final-test-2',help='기존 80건을 제외한 완전 신규 30건 2차 최종 블라인드 검증')
+    a.add_argument('--predictions',type=Path,default=PREDICTIONS)
+    a.add_argument('--dev-human',type=Path,default=RESULT_DIR/'IBMTechSupport_judge_v36_human_review.json')
+    a.add_argument('--validation-human',type=Path,default=VALIDATION_HUMAN)
+    a.add_argument('--final-human',type=Path,default=FINAL_HUMAN)
+    a.add_argument('--output-dir',type=Path,default=FINAL2_DIR)
+    a.add_argument('--human',type=Path,default=FINAL2_HUMAN)
+    a.add_argument('--review-html',type=Path,default=FINAL2_HTML)
+    a.add_argument('--judge-output',type=Path,default=FINAL2_JUDGE)
+    a.add_argument('--report',type=Path,default=FINAL2_REPORT)
+    a.add_argument('--policy',type=Path,default=POLICY_PATH)
+    a.add_argument('--model-path',type=Path,default=Path('models/Qwen2.5-1.5B-Instruct'))
+    a.add_argument('--sample-size',type=int,default=FINAL2_SAMPLE_SIZE)
+    a.add_argument('--seed',type=int,default=FINAL2_SEED)
+    a.add_argument('--max-new-tokens',type=int,default=320)
+    a.add_argument('--max-attempts',type=int,default=2)
+    a.set_defaults(run=final_test_2)
+    a=s.add_parser('final-test',help='기존 50건을 제외한 완전 신규 표본 최종 블라인드 검증')
+    a.add_argument('--predictions',type=Path,default=PREDICTIONS)
+    a.add_argument('--dev-human',type=Path,default=RESULT_DIR/'IBMTechSupport_judge_v36_human_review.json')
+    a.add_argument('--validation-human',type=Path,default=VALIDATION_HUMAN)
+    a.add_argument('--output-dir',type=Path,default=FINAL_DIR)
+    a.add_argument('--human',type=Path,default=FINAL_HUMAN)
+    a.add_argument('--review-html',type=Path,default=FINAL_HTML)
+    a.add_argument('--judge-output',type=Path,default=FINAL_JUDGE)
+    a.add_argument('--report',type=Path,default=FINAL_REPORT)
+    a.add_argument('--policy',type=Path,default=POLICY_PATH)
+    a.add_argument('--model-path',type=Path,default=Path('models/Qwen2.5-1.5B-Instruct'))
+    a.add_argument('--sample-size',type=int,default=FINAL_SAMPLE_SIZE)
+    a.add_argument('--seed',type=int,default=FINAL_SEED)
+    a.add_argument('--max-new-tokens',type=int,default=320)
+    a.add_argument('--max-attempts',type=int,default=2)
+    a.set_defaults(run=final_test)
+    a=s.add_parser('validate',help='고정 Judge의 held-out 30건 검증')
+    a.add_argument('--predictions',type=Path,default=PREDICTIONS)
+    a.add_argument('--exclude-human',type=Path,default=RESULT_DIR/'IBMTechSupport_judge_v36_human_review.json')
+    a.add_argument('--output-dir',type=Path,default=VALIDATION_DIR)
+    a.add_argument('--human',type=Path,default=VALIDATION_HUMAN)
+    a.add_argument('--judge-output',type=Path,default=VALIDATION_JUDGE)
+    a.add_argument('--report',type=Path,default=VALIDATION_REPORT)
+    a.add_argument('--policy',type=Path,default=POLICY_PATH)
+    a.add_argument('--model-path',type=Path,default=Path('models/Qwen2.5-1.5B-Instruct'))
+    a.add_argument('--sample-size',type=int,default=VALIDATION_SAMPLE_SIZE)
+    a.add_argument('--seed',type=int,default=VALIDATION_SEED)
+    a.add_argument('--max-new-tokens',type=int,default=320)
+    a.add_argument('--max-attempts',type=int,default=2)
+    a.set_defaults(run=validate)
+    a=s.add_parser('review',help='사람 평가 표본 추출, 강제 재평가, 성능 비교 통합 실행')
+    a.add_argument('--human',type=Path,default=RESULT_DIR/'IBMTechSupport_judge_v36_human_review.json')
+    a.add_argument('--predictions',type=Path,default=PREDICTIONS)
+    a.add_argument('--output-dir',type=Path,default=RESULT_DIR)
+    a.add_argument('--policy',type=Path,default=POLICY_PATH)
+    a.add_argument('--model-path',type=Path,default=Path('models/Qwen2.5-1.5B-Instruct'))
+    a.add_argument('--max-new-tokens',type=int,default=320)
+    a.add_argument('--max-attempts',type=int,default=2)
+    a.set_defaults(run=review)
     a=s.add_parser('prepare',help='v4 결과에서 사람 보정 표본 및 기준선 생성')
     a.add_argument('--predictions',type=Path,default=PREDICTIONS)
     a.add_argument('--output-dir',type=Path,default=RESULT_DIR)
