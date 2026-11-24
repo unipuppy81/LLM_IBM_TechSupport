@@ -1,0 +1,90 @@
+{
+  "schema": "rag-stage2-final-test-v1",
+  "dataset": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\test_clean.json",
+  "dataset_sha256": "40854124e7ca9a6fc953543034221317d6cc2010e1fb6823c300cf167a2213f4",
+  "retrieval_config": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\configs\\rag\\retrieval_stage2_selected.yaml",
+  "retrieval_config_sha256": "ff04ed84d035d1f4921362d4c40ec53ca17fd497c4981097c3aa4fb41778adf9",
+  "validation_report_sha256": "4c857b6950ce895eed92741a1b3ec7bd95dc0c6bfe3ff988696d71f6bfa34155",
+  "predictions": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\test_120\\stage2_final\\predictions.jsonl",
+  "predictions_sha256": "151b867bd0ee5e734af3e4e872bb89d7ac2a2cfa9c123726355a23aca859635b",
+  "generation_metrics": {
+    "model": "Qwen2.5-1.5B-Instruct",
+    "dataset": "clean",
+    "total": 120,
+    "batch_size": 1,
+    "max_new_tokens": 160,
+    "answerable": 80,
+    "impossible": 40,
+    "exact_match_percent": 0.0,
+    "token_f1_percent": 23.52,
+    "abstention_rate_percent": 20.0,
+    "false_refusal_rate_percent": 17.5,
+    "retriever": "stage2",
+    "top_k": 5,
+    "retrieval_seconds": 25.407,
+    "generation_seconds": 678.544,
+    "avg_input_tokens": 1339.9,
+    "peak_gpu_memory_gb": 3.84,
+    "guardrails_enabled": true,
+    "judge_seconds": 72.817,
+    "verification_seconds": 30.53,
+    "guardrail_status_counts": {
+      "ANSWER_VERIFIED": 98,
+      "ANSWER_NO": 13,
+      "GENERATOR_ABSTAINED": 6,
+      "ANSWER_UNCERTAIN": 2,
+      "EVIDENCE_NO": 1
+    }
+  },
+  "retrieval_metrics": {
+    "answerable_evaluated": 80,
+    "hit_at_1_percent": 50.0,
+    "hit_at_3_percent": 56.25,
+    "hit_at_5_percent": 61.25,
+    "hit_at_10_percent": 76.25,
+    "recall_at_5_percent": 61.25,
+    "precision_at_5": 0.1225,
+    "mrr_at_10": 0.561071,
+    "ndcg_at_5": 0.557687
+  },
+  "frozen_judge_v313": {
+    "n": 120,
+    "auto_pass": 34,
+    "auto_pass_rate_percent": 28.33,
+    "judge_status_counts": {
+      "OK": 54,
+      "REVIEW_REQUIRED": 66
+    },
+    "risk_counts": {
+      "low": 34,
+      "medium": 61,
+      "high": 4,
+      "unknown": 21
+    },
+    "review_flag_counts": {
+      "ESSENTIAL_CLAIM_NOT_SUPPORTED": 55,
+      "CLAIM_VERIFICATION_UNRESOLVED": 43,
+      "CONTRADICTION_NOT_INDEPENDENTLY_CONFIRMED": 25,
+      "SUPPORTING_CLAIM_NOT_SUPPORTED": 24,
+      "REFUSAL_REQUIRES_HUMAN_REVIEW": 21,
+      "SUPPORTED_QUOTE_WEAK_ALIGNMENT": 20,
+      "SUPPORTED_ACTION_NOT_IN_QUOTE": 7,
+      "CROSS_PRODUCT_EVIDENCE_MIX": 2,
+      "TASK_CONTEXT_MISMATCH": 2,
+      "PROCEDURAL_VERSION_DRIFT": 2,
+      "REQUESTED_SECURITY_IDENTIFIER_NOT_IN_EVIDENCE": 1,
+      "VERDICT_REASON_INCONSISTENT": 1
+    },
+    "by_original_answerability_label": {
+      "answerable": {
+        "auto_pass": 27,
+        "not_auto_pass": 53
+      },
+      "impossible": {
+        "not_auto_pass": 33,
+        "auto_pass": 7
+      }
+    }
+  },
+  "warning": "This is the final untouched test result. Do not tune retrieval/Judge on these 120 cases."
+}

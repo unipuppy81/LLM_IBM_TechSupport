@@ -1,0 +1,969 @@
+﻿# RAG개선_2
+
+## 1. 현재 Retrieval Baseline 측정
+
+RAG 2차 개선을 시작하기 전에 현재 검색 파이프라인의 기준 성능을 다시 측정하였다.
+
+평가 데이터는 기존 RAG / Judge 개발 및 회귀에 사용 중인 **Validation 106건**이며,
+이 중 검색 성능 평가는 정답 근거 문서가 존재하는 **답변 가능 77건**을 기준으로 수행하였다.
+
+```text
+Validation 전체: 106건
+답변 가능: 77건
+답변 불가능: 29건
+```
+
+현재 검색 구조:
+
+```text
+사용자 질문
+↓
+BM25 + Dense Search
+↓
+Weighted RRF
+↓
+문서별 중복 청크 제한
+↓
+Reranker
+↓
+Top-K
+```
+
+먼저 Hybrid Search의 성능을 측정하였다.
+
+```text
+Hybrid Baseline
+
+Hit@1      57.14%
+Hit@3      72.73%
+Hit@5      77.92%
+Hit@10     89.61%
+
+Recall@5   76.62%
+Precision@5 0.1558
+MRR@10     0.6662
+nDCG@5     0.6755
+```
+
+77건 중 Gold 문서가 Top-5 안에 포함된 질문은 **60건**이었다.
+
+기존 Reranker까지 적용한 결과:
+
+```text
+Reranker Baseline
+
+Hit@1      53.25%
+Hit@3      76.62%
+Hit@5      84.42%
+Hit@10     89.61%
+
+Recall@5   83.12%
+Precision@5 0.1688
+MRR@10     0.6603
+nDCG@5     0.6935
+```
+
+Gold 문서 Top-5 성공 질문은:
+
+```text
+Hybrid
+60 / 77
+
+↓
+
+Reranker
+65 / 77
+```
+
+로 증가하였다.
+
+Reranker는 Hit@1과 MRR@10에서는 Hybrid보다 일부 낮았지만,
+검색 목표인 Gold 문서 Top-5 포함률과 Recall@5, nDCG@5는 개선되었다.
+
+따라서 RAG 2차 개선의 기준 검색기는 기존 **Reranker 파이프라인**으로 설정하였다.
+
+---
+
+## 2. 제품 / 버전 / 오류코드 필터 추가
+
+Judge 개선 과정에서 반복적으로 확인된 RAG 실패 유형은 다음과 같았다.
+
+- 다른 제품 문서 혼입
+- 다른 버전의 해결 절차 사용
+- 동일하거나 유사한 오류 문자열을 가진 다른 장애 문서 검색
+- CVE / APAR / 오류코드 불일치
+- 키워드는 비슷하지만 실제 문제 문맥이 다른 문서 검색
+
+기존 검색은 BM25, Dense, Reranker가 질문과 문서의 전체적인 관련도를 판단하지만,
+제품명이나 오류 식별자의 정확한 일치 여부를 별도의 제약 조건으로 사용하지 않았다.
+
+따라서 RRF 이후 후보 문서에 대해 다음 식별자를 비교하는 **soft filter**를 추가하였다.
+
+```text
+제품명
+버전
+CVE
+APAR
+오류코드
+```
+
+검색 구조는 다음과 같이 변경하였다.
+
+```text
+BM25 + Dense
+↓
+Weighted RRF
+↓
+제품 / 버전 / CVE / APAR / 오류코드 비교
+↓
+불일치 후보 감점
+↓
+Reranker
+↓
+Top-K
+```
+
+필터는 처음부터 문서를 제거하는 Hard Filter 방식으로 구현하지 않았다.
+
+```text
+명확한 불일치
+→ 점수 감점
+
+일치 또는 불확실
+→ 후보 유지
+```
+
+이 방식을 선택한 이유는 IBM 기술문서에서 제품명이나 버전이 모든 청크에 반복해서
+표시되는 것은 아니기 때문에, 단순 문자열 미검출만으로 문서를 삭제하면
+정답 문서 Recall이 떨어질 수 있기 때문이다.
+
+또한 다음 식별자는 표기 차이를 정규화하여 비교하도록 하였다.
+
+```text
+SQLCODE=-911
+SQLCODE -911
+SQL -911
+```
+
+CVE / APAR / 오류코드는 명확한 식별자이므로 불일치 시 더 강한 감점을 적용하고,
+제품 / 버전은 오탐으로 정답 문서를 제거하지 않도록 보수적인 soft penalty를 사용하였다.
+
+최종 최적화에서 선택된 값:
+
+```text
+filter_enabled: true
+filter_strength: 1.0
+```
+
+즉 제품 / 버전 / 오류 식별자 필터는 실제 Retrieval 개선에 기여하여 최종 설정에 포함되었다.
+
+---
+
+## 3. 기존 Reranker 튜닝
+
+기존 Reranker는 다음 모델을 사용하고 있었다.
+
+```text
+cross-encoder/ms-marco-MiniLM-L6-v2
+```
+
+Reranker는 Hybrid Search에서 검색한 후보를 질문과 다시 비교하여
+관련성 점수를 계산하고 순서를 재정렬한다.
+
+기존 설정의 핵심 후보 수:
+
+```text
+Hybrid candidate_k: 50
+Reranker candidate_k: 10
+```
+
+RAG 2차 개선에서는 Reranker에 전달하는 후보 수를 다시 비교하였다.
+
+실험 대상:
+
+```text
+candidate_k = 10
+candidate_k = 20
+candidate_k = 30
+candidate_k = 50
+```
+
+비교 기준은 다음 순서로 설정하였다.
+
+```text
+1. Hit@5
+2. Recall@5
+3. MRR@10
+4. nDCG@5
+5. Precision@5
+```
+
+또한 후보 수를 늘렸을 때 Gold 문서 Recall이 개선되지 않으면
+불필요한 CrossEncoder 연산만 증가하므로 더 작은 candidate_k를 우선하도록 하였다.
+
+실험 결과 최종 선택:
+
+```text
+reranker_candidate_k: 10
+```
+
+즉 기존에 사용하던 10개 후보가 20 / 30 / 50개보다 최종 검색 조합에 더 적합하다고 판단되었다.
+
+후보 수를 무조건 늘리는 것이 성능 개선으로 이어지지 않는 이유는,
+관련성이 낮은 문서까지 Reranker 입력에 포함되면서 CrossEncoder가
+유사하지만 다른 장애 문서를 높은 순위로 재배치할 가능성이 있기 때문이다.
+
+따라서 최종 구조는:
+
+```text
+Hybrid에서 넓게 후보 검색
+↓
+식별자 기반 soft filter
+↓
+상위 10개만 Reranker
+↓
+최종 Top-K
+```
+
+로 유지하였다.
+
+---
+
+## 4. Query Rewrite 실험
+
+다음 단계로 원 질문을 검색에 더 적합한 형태로 정리하는 Query Rewrite를 실험하였다.
+
+검색 질의에서 보존해야 하는 핵심 정보는 다음과 같이 정의하였다.
+
+```text
+제품명
+버전
+CVE / APAR
+오류코드
+증상
+핵심 작업
+```
+
+Query Rewrite가 원 질문을 완전히 대체하면
+CVE, 오류코드, 버전처럼 검색에 중요한 exact token이 사라질 수 있다.
+
+따라서 다음과 같은 보수적인 Multi-query 구조로 구현하였다.
+
+```text
+원 질문
++
+검색용 Rewrite Query
+↓
+각각 검색
+↓
+검색 결과 결합
+```
+
+즉 Rewrite가 잘못되더라도 원 질문 검색 결과를 완전히 잃지 않도록 설계하였다.
+
+또한 Query Rewrite 과정에서 다음 정보가 삭제되지 않도록 보호하였다.
+
+- 제품 식별자
+- 버전 문자열
+- CVE
+- APAR
+- 오류코드
+
+실험 후 전체 Retrieval 지표와 회귀 조건을 비교한 결과,
+Query Rewrite를 활성화한 조합이 현재 최적 조합보다 우수하지 않았다.
+
+따라서 최종 선택은:
+
+```text
+query_rewrite_enabled: false
+```
+
+로 결정하였다.
+
+즉 이번 데이터에서는 질문을 다시 작성하는 것보다
+기존 질문을 유지하고 **제품 / 버전 / 오류 식별자 필터와 Reranker를 개선하는 방식**이 더 안정적이었다.
+
+---
+
+## 5. 전체 Retrieval Precision / Recall 재평가
+
+제품 / 버전 / 오류코드 필터와 Reranker 후보 수 튜닝,
+Query Rewrite 실험을 모두 수행한 뒤 전체 Retrieval 성능을 다시 평가하였다.
+
+최종 선택된 조합:
+
+```text
+Reranker              ON
+제품/버전/오류 필터   ON
+filter_strength        1.0
+reranker candidate_k   10
+Query Rewrite          OFF
+```
+
+최종 Retrieval 결과:
+
+```text
+Stage2 Final
+
+Hit@1      58.44%
+Hit@3      79.22%
+Hit@5      85.71%
+Hit@10     90.91%
+
+Recall@5   83.77%
+Precision@5 0.1714
+MRR@10     0.6994
+nDCG@5     0.7236
+```
+
+기존 Hybrid 대비:
+
+```text
+                Hybrid      Stage2
+Hit@5           77.92%  →   85.71%
+Recall@5        76.62%  →   83.77%
+Precision@5     0.1558  →   0.1714
+MRR@10          0.6662  →   0.6994
+nDCG@5          0.6755  →   0.7236
+```
+
+Gold 문서 Top-5 성공 질문 수:
+
+```text
+Hybrid
+60 / 77
+
+↓
+
+Stage2
+66 / 77
+```
+
+즉 기존 Hybrid 대비 **6건의 질문에서 Gold 문서 Top-5 검색을 추가로 성공**하였다.
+
+기존 Reranker와 비교하면:
+
+```text
+                    Reranker    Stage2
+Hit@5               84.42%  →   85.71%
+Recall@5            83.12%  →   83.77%
+Precision@5         0.1688  →   0.1714
+MRR@10              0.6603  →   0.6994
+nDCG@5              0.6935  →   0.7236
+```
+
+기존 Reranker 대비 Gold 문서 Top-5 성공은:
+
+```text
+65 / 77
+→
+66 / 77
+```
+
+로 1건 증가하였다.
+
+단, 기존 Reranker에서는 Top-5에 존재했지만 최종 Stage2에서 손실된 질문도 확인되었다.
+
+```text
+TRAIN_Q165
+```
+
+따라서 최종 개선은 모든 질문에서 일괄적으로 좋아진 것이 아니라,
+일부 회귀 1건이 발생했지만 전체 기준에서는 더 많은 Gold 문서를 상위에 배치한 결과이다.
+
+---
+
+## 6. 최적 RAG Retrieval 조합 고정
+
+1~5단계의 실험 결과를 기반으로 RAG 2차 Retrieval 설정을 다음과 같이 확정하였다.
+
+```text
+selected_stage:
+filter_s1_k10
+```
+
+최종 설정:
+
+```text
+Reranker
+→ 사용
+
+제품 / 버전 / 오류코드 필터
+→ 사용
+
+filter_strength
+→ 1.0
+
+Reranker candidate_k
+→ 10
+
+Query Rewrite
+→ 사용하지 않음
+```
+
+최종 검색 흐름:
+
+```text
+사용자 질문
+↓
+BM25 + Dense Search
+↓
+Weighted RRF
+↓
+제품 / 버전 / CVE / APAR / 오류코드 soft filter
+↓
+Reranker Top-10 후보 재정렬
+↓
+Top-K 문서 선택
+↓
+RAG 답변 생성
+```
+
+최종 성능:
+
+```text
+Validation 106건 중
+Retrieval 평가 대상: 77건
+
+Hit@5       85.71%
+Recall@5    83.77%
+Precision@5 0.1714
+MRR@10      0.6994
+nDCG@5      0.7236
+```
+
+이번 1~6단계에서는 Retrieval 개선만 수행하였으며,
+최종 테스트 데이터인 `test_clean.json` 120건은 사용하지 않았다.
+
+```text
+test_clean_touched: false
+```
+
+따라서 현재 상태는:
+
+```text
+RAG 2차 Retrieval 개선 완료
+↓
+최적 Retrieval 설정 동결
+↓
+Validation 106건 답변 재생성 예정
+↓
+동결된 Judge v3.13 평가 예정
+↓
+RAG 최종 동결
+↓
+마지막에 test_clean.json 120건 최종 평가
+```
+
+이다.
+
+현재까지의 결론은 Query Rewrite보다
+**제품 / 버전 / 오류 식별자 기반 soft filter + 기존 Reranker 조합**이
+IBM 기술지원 검색에서 더 안정적인 개선을 보였다는 것이다.
+
+
+## 7. Validation 106건 답변 재생성
+
+1~6단계에서 확정한 Stage2 Retrieval 설정을 사용하여 Validation 106건의 RAG 답변을 모두 다시 생성하였다.
+
+사용한 최종 Retrieval 설정:
+
+```text
+Reranker              ON
+제품/버전/오류 필터   ON
+filter_strength        1.0
+reranker candidate_k   10
+Query Rewrite          OFF
+```
+
+전체 데이터:
+
+```text
+Validation 전체: 106건
+답변 가능: 77건
+답변 불가능: 29건
+```
+
+새 Retrieval 설정으로 다시 측정한 결과:
+
+```text
+Hit@1       58.44%
+Hit@3       79.22%
+Hit@5       85.71%
+Hit@10      90.91%
+
+Recall@5    83.77%
+Precision@5 0.1714
+MRR@10      0.6994
+nDCG@5      0.7236
+```
+
+1~6단계에서 선택한 Retrieval 성능이 실제 RAG 답변 생성 과정에서도 동일하게 재현되었다.
+
+RAG Generation 결과:
+
+```text
+Token F1              32.01%
+Abstention Rate       17.24%
+False Refusal Rate    10.39%
+```
+
+기존 v4와 비교하면:
+
+```text
+                     기존 v4      Stage2
+
+Token F1             31.67%   →   32.01%
+Abstention Rate      10.34%   →   17.24%
+False Refusal Rate   12.99%   →   10.39%
+```
+
+즉 Stage2에서는:
+
+```text
+답변 가능한 질문을 잘못 거부하는 비율 감소
++
+답변 불가능한 질문에서 abstention 증가
++
+Token F1 소폭 증가
+```
+
+가 확인되었다.
+
+Guardrail 최종 상태:
+
+```text
+ANSWER_VERIFIED       93
+ANSWER_NO              7
+EVIDENCE_NO            2
+GENERATOR_ABSTAINED    3
+ANSWER_UNCERTAIN       1
+```
+
+총 106건 중 93건은 RAG 내부 evidence / answer verification 단계를 통과하였다.
+
+다만 처리 비용은 증가하였다.
+
+```text
+기존 v4
+
+Retrieval    5.772초
+Generation   267.533초
+
+Stage2
+
+Retrieval    22.091초
+Generation   591.323초
+```
+
+이번 단계에서는 최종 품질 개선을 우선하였기 때문에 현재 설정을 유지하고,
+추론 속도 및 latency 최적화는 이후 서비스 배포 단계의 별도 과제로 남긴다.
+
+---
+
+## 8. 동결된 Judge v3.13 평가
+
+Stage2 Retrieval로 새로 생성한 106건의 답변을
+이전에 최종 동결한 **Judge v3.13**으로 평가하였다.
+
+Judge 로직은 RAG 2차 개선 과정에서 수정하지 않았다.
+
+```text
+RAG Stage2 답변
+↓
+Frozen Judge v3.13
+↓
+Claim 검증
+↓
+제품 / 버전 / 오류 Signature 검증
+↓
+Task Context / 절차 / 숫자 의미 검증
+↓
+PASS 가능 여부 판정
+```
+
+평가 결과:
+
+```text
+전체               106건
+
+auto_pass            38건
+auto_pass rate       35.85%
+
+OK                    59건
+REVIEW_REQUIRED       47건
+```
+
+기존 v4 RAG 답변의 Judge 결과:
+
+```text
+auto_pass 38 / 106
+```
+
+Stage2 결과:
+
+```text
+auto_pass 38 / 106
+```
+
+로 동일하였다.
+
+즉 Retrieval 성능을 개선하면서 기존 Judge 승인 수준이 악화되지는 않았다.
+
+다만 여기서:
+
+```text
+auto_pass rate 35.85%
+```
+
+는 RAG의 정확도 35.85%를 의미하지 않는다.
+
+이번 106건에 대한 기존 Human PASS / FAIL 평가는
+이전 RAG가 생성한 답변을 대상으로 작성된 것이므로,
+새로운 Stage2 답변의 정답 라벨로 재사용하지 않았다.
+
+따라서 이번 단계에서는:
+
+```text
+기존 Human Label
+≠
+새 Stage2 답변의 Human Label
+```
+
+로 처리하였다.
+
+Judge 결과는 새로운 답변의 자동 품질 검사와
+기존 RAG 대비 회귀 여부를 확인하는 용도로만 사용하였다.
+
+주요 Judge Review Flag는 다음과 같았다.
+
+```text
+ESSENTIAL_CLAIM_NOT_SUPPORTED
+CLAIM_VERIFICATION_UNRESOLVED
+SUPPORTED_QUOTE_WEAK_ALIGNMENT
+SUPPORTING_CLAIM_NOT_SUPPORTED
+CONTRADICTION_NOT_INDEPENDENTLY_CONFIRMED
+REFUSAL_REQUIRES_HUMAN_REVIEW
+```
+
+이는 검색된 문서가 개선되더라도 생성 답변의 모든 Claim이
+항상 IBM 근거에 직접적으로 연결되는 것은 아니라는 점을 보여준다.
+
+현재까지 결과를 종합하면:
+
+```text
+Retrieval 성능 개선
++
+Token F1 소폭 개선
++
+False Refusal 감소
++
+Judge auto_pass 수 유지
+```
+
+가 확인되었다.
+
+따라서 Stage2 RAG 설정은 이 상태에서 추가 튜닝하지 않고 **동결**한다.
+
+또한 Validation 106건 평가까지는 최종 테스트 데이터인:
+
+```text
+test_clean.json
+120건
+```
+
+을 사용하지 않았다.
+
+```text
+test_clean_touched: false
+```
+
+따라서 현재 상태는:
+
+```text
+1. Retrieval Baseline 측정           완료
+2. 제품 / 버전 / 오류코드 필터       완료
+3. Reranker 튜닝                     완료
+4. Query Rewrite 실험                완료
+5. Retrieval 재평가                  완료
+6. 최적 Retrieval 설정 동결          완료
+7. Validation 106건 답변 재생성      완료
+8. Frozen Judge v3.13 평가           완료
+9. test_clean 120건 최종 평가        예정
+```
+
+이다.
+
+다음 단계부터는 RAG와 Judge 모두 수정하지 않고,
+untouched `test_clean.json` 120건에서 최종 일반화 성능을 측정한다.
+
+
+## 9. Untouched test_clean 120건 최종 평가
+
+RAG Stage2와 Judge v3.13을 모두 동결한 뒤,
+개발 및 개선 과정에서 한 번도 사용하지 않은 `test_clean.json` 120건으로 최종 평가를 수행하였다.
+
+최종 테스트 데이터:
+
+```text
+전체: 120건
+답변 가능: 80건
+답변 불가능: 40건
+```
+
+사용한 시스템은 Validation 단계에서 확정한 설정 그대로이며,
+최종 테스트 결과를 보고 Retrieval 또는 Judge를 추가 수정하지 않는다.
+
+```text
+Stage2 Retrieval
++
+Frozen Judge v3.13
++
+Untouched test_clean.json
+```
+
+### Retrieval 최종 결과
+
+```text
+Hit@1       50.00%
+Hit@3       56.25%
+Hit@5       61.25%
+Hit@10      76.25%
+
+Recall@5    61.25%
+Precision@5 0.1225
+MRR@10      0.5611
+nDCG@5      0.5577
+```
+
+Validation 106건과 비교하면:
+
+```text
+                         Validation     Final Test
+
+Hit@5                    85.71%     →   61.25%
+Recall@5                 83.77%     →   61.25%
+Precision@5              0.1714     →   0.1225
+MRR@10                   0.6994     →   0.5611
+nDCG@5                   0.7236     →   0.5577
+```
+
+즉 개발 / Validation 데이터에서는 높은 Retrieval 성능을 보였지만,
+완전히 새로운 테스트 데이터에서는 성능이 크게 하락하였다.
+
+80개의 답변 가능 질문 중 Gold 문서가 Top-5 안에 검색된 질문은:
+
+```text
+49 / 80
+```
+
+이다.
+
+따라서 최종 일반화 성능에서는 여전히 **Retrieval 실패가 가장 큰 병목**으로 남아 있음을 확인하였다.
+
+---
+
+### RAG Generation 결과
+
+최종 120건의 Generation 결과:
+
+```text
+Token F1              23.52%
+Abstention Rate       20.00%
+False Refusal Rate    17.50%
+```
+
+Validation 결과와 비교하면:
+
+```text
+                         Validation     Final Test
+
+Token F1                32.01%      →   23.52%
+Abstention Rate         17.24%      →   20.00%
+False Refusal Rate      10.39%      →   17.50%
+```
+
+새로운 데이터에서는 검색 성능 하락과 함께
+Generation 품질도 감소하였다.
+
+Guardrail 결과:
+
+```text
+ANSWER_VERIFIED        98
+ANSWER_NO              13
+GENERATOR_ABSTAINED     6
+ANSWER_UNCERTAIN        2
+EVIDENCE_NO             1
+```
+
+총 120건 중 98건이 내부 Answer Verification을 통과하였다.
+
+하지만 내부 Guardrail의 `ANSWER_VERIFIED`는
+사람 기준의 최종 정답을 의미하지 않으므로 별개의 품질 지표로 해석한다.
+
+---
+
+### Frozen Judge v3.13 결과
+
+동결된 Judge v3.13으로 최종 120건을 평가하였다.
+
+```text
+전체               120건
+
+auto_pass            34건
+auto_pass rate       28.33%
+
+OK                    54건
+REVIEW_REQUIRED       66건
+```
+
+원래 데이터의 answerability label 기준 분포:
+
+```text
+답변 가능 80건
+
+auto_pass       27
+not_auto_pass   53
+
+
+답변 불가능 40건
+
+auto_pass        7
+not_auto_pass   33
+```
+
+주요 Review Flag:
+
+```text
+ESSENTIAL_CLAIM_NOT_SUPPORTED              55
+CLAIM_VERIFICATION_UNRESOLVED              43
+CONTRADICTION_NOT_INDEPENDENTLY_CONFIRMED 25
+SUPPORTING_CLAIM_NOT_SUPPORTED             24
+REFUSAL_REQUIRES_HUMAN_REVIEW              21
+SUPPORTED_QUOTE_WEAK_ALIGNMENT             20
+```
+
+또한 일부 사례에서는:
+
+```text
+CROSS_PRODUCT_EVIDENCE_MIX
+TASK_CONTEXT_MISMATCH
+PROCEDURAL_VERSION_DRIFT
+REQUESTED_SECURITY_IDENTIFIER_NOT_IN_EVIDENCE
+```
+
+와 같은 기존에 정의했던 실패 유형도 다시 확인되었다.
+
+다만 `auto_pass 28.33%`는 최종 정답률 28.33%를 의미하지 않는다.
+
+이번 120건에는 새 Stage2 답변에 대한 Human PASS / FAIL 라벨이 없기 때문에:
+
+```text
+Judge auto_pass rate
+≠
+RAG Accuracy
+```
+
+이다.
+
+따라서 현재 자동 평가만으로는 최종 Answer Accuracy,
+Precision, Recall을 계산할 수 없다.
+
+---
+
+## 최종 결과
+
+전체 개발 과정은 다음과 같이 종료하였다.
+
+```text
+RAG 1차 개선
+↓
+Judge v3.13 개발 및 동결
+↓
+RAG 2차 Retrieval 개선
+↓
+Validation 106건
+↓
+RAG Stage2 동결
+↓
+Frozen Judge v3.13
+↓
+Untouched test_clean 120건 최종 평가
+```
+
+최종 untouched test의 Retrieval 성능:
+
+```text
+Hit@5       61.25%
+Recall@5    61.25%
+MRR@10      0.5611
+nDCG@5      0.5577
+```
+
+Generation 결과:
+
+```text
+Token F1           23.52%
+False Refusal      17.50%
+```
+
+Judge 결과:
+
+```text
+auto_pass          34 / 120
+REVIEW_REQUIRED    66 / 120
+```
+
+최종 테스트에서 Validation보다 성능이 크게 하락한 것을 통해,
+현재 시스템은 개발 데이터에서는 충분히 최적화되었지만
+새로운 IBM 기술지원 질문에 대한 **Retrieval 일반화 성능은 아직 제한적**임을 확인하였다.
+
+특히 최종 시스템의 주요 병목은:
+
+```text
+1. Gold 문서 검색 실패
+2. 검색된 근거의 Claim 직접 지원 부족
+3. 새로운 질문에서 False Refusal 증가
+4. 제품 / Task Context / 절차 차이
+```
+
+로 정리할 수 있다.
+
+이 120건은 최종 untouched test이므로,
+이 결과를 기준으로 현재 RAG 또는 Judge를 다시 수정하지 않는다.
+
+추가 개선을 진행하려면 이 120건을 새로운 개발 데이터로 전환한 뒤
+별도의 새로운 untouched test set을 다시 확보해야 한다.
+
+
+
+
+============
+결론
+106건(Validation)  vs  120건(Test)
+
+지표			Validation 106	Test 120	변화
+전체 데이터		106			120	-
+Answerable		77			80	-
+Impossible		29			40	-
+Hit@1			58.44%		50.00%	-8.44%p
+Hit@3			79.22%		56.25%	-22.97%p
+Hit@5			85.71%		61.25%	-24.46%p
+Hit@10		90.91%		76.25%	-14.66%p
+Recall@5		83.77%		61.25%	-22.52%p
+Precision@5		0.1714			0.1225		-0.0489
+MRR@10		0.6994			0.5611		-0.1383
+nDCG@5		0.7236			0.5577		-0.1659
+Token F1		32.01%		23.52%	-8.49%p
+Abstention Rate	17.24%		20.00%	+2.76%p
+False Refusal Rate	10.39%		17.50%	+7.11%p 악화
+ANSWER_VERIFIED	93 / 106		98 / 120	87.74% → 81.67%
+Judge Auto Pass	38 / 106		34 / 120	35.85% → 28.33%
+Judge OK		59 / 106		54 / 120	55.66% → 45.00%
+REVIEW_REQUIRED	47 / 106		66 / 120	44.34% → 55.00%
+
+
+
+validation 106건 기준으로
+hit@5, Recalll@5 비율을 더 높이는 방법으로 
+test120 다시 진행 예정

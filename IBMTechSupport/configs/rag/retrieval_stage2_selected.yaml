@@ -1,0 +1,34 @@
+version: stage2-v1
+frozen: true
+source_dataset: C:\Projects\LLM_IBM_TechSupport\IBMTechSupport\data\processed\val_106.json
+selection_policy: No Hit@5/Recall@5 regression; then maximize nDCG@5/MRR@10.
+selected:
+  reranker_enabled: true
+  filter_enabled: true
+  filter_strength: 1.0
+  reranker_candidate_k: 10
+  query_rewrite_enabled: false
+  rewrite_weight: 0.7
+runtime:
+  reranker_batch_size: 8
+  max_candidates: 50
+selected_metrics:
+  answerable_evaluated: 77
+  hit_at_1_percent: 58.4416
+  hit_at_3_percent: 79.2208
+  hit_at_5_percent: 85.7143
+  hit_at_10_percent: 90.9091
+  recall_at_5_percent: 83.7662
+  precision_at_5: 0.171429
+  mrr_at_10: 0.699351
+  ndcg_at_5: 0.723575
+baseline_reranker_metrics:
+  answerable_evaluated: 77
+  hit_at_1_percent: 53.2468
+  hit_at_3_percent: 76.6234
+  hit_at_5_percent: 84.4156
+  hit_at_10_percent: 89.6104
+  recall_at_5_percent: 83.1169
+  precision_at_5: 0.168831
+  mrr_at_10: 0.660281
+  ndcg_at_5: 0.693502

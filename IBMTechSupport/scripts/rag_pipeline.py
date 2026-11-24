@@ -1,21 +1,18 @@
 import argparse
 import time
-import json
-import re
-
 from pathlib import Path
 
 import torch
 import yaml
 from load_base_model import load_model
 
-from answerability_detection import detect_answerability, select_evidence_documents
-from rag_guardrails import answer_with_guardrails
+from answerability_detection import select_evidence_documents
 from rag_guardrails_per_document import choose_guardrail_runner
 
 PROJECT_DIR = Path(__file__).resolve().parents[1]
 ABSTAIN = "INSUFFICIENT_INFORMATION"
 TOP_K = 5
+
 
 # region 검색 시스템 로드
 
@@ -23,42 +20,44 @@ def load_search_system():
     from dense_search import load_retriever
     from hybrid_search import load_bm25
 
-    # Dense Retrieval: 임베딩 모델 + FAISS + 청크
     embedding_model, faiss_index, chunks = load_retriever()
-
-    # BM25: 키워드 검색
     bm25_index = load_bm25(chunks)
-
     return embedding_model, faiss_index, bm25_index, chunks
+
 
 def retrieve_all(questions, method, top_k, search_system=None):
     from dense_search import chunk_filename
     from hybrid_search import search_all, BM25_INDEX_DIR
     from reranker_search import load_reranker, rerank_candidates, get_chunk_text
 
-    if method not in ("hybrid", "reranker"):
+    if method not in ("hybrid", "reranker", "stage2"):
         raise ValueError("지원하지 않는 검색 방식입니다.")
+    if top_k < 1:
+        raise ValueError("top_k는 1 이상이어야 합니다.")
 
     if search_system is None:
         if not (BM25_INDEX_DIR / "params.index.json").is_file():
             raise FileNotFoundError("Hybrid BM25 인덱스가 없습니다.")
-
         search_system = load_search_system()
+
+    if method == "stage2":
+        from stage2_retrieval import retrieve_all_stage2
+        return retrieve_all_stage2(
+            questions=questions,
+            top_k=top_k,
+            search_system=search_system,
+        )
 
     embedding_model, faiss_index, bm25_index, chunks = search_system
     reranker = load_reranker() if method == "reranker" else None
     start = time.perf_counter()
     results = search_all(embedding_model, faiss_index, bm25_index, questions)
-
     hybrid_rankings = [result[2] for result in results]
 
     if reranker is None:
         selected = [
             [
-                {
-                    "row_id": row_id,
-                    "score": result[3][row_id],
-                }
+                {"row_id": row_id, "score": result[3][row_id]}
                 for row_id in result[2][:top_k]
             ]
             for result in results
@@ -68,14 +67,11 @@ def retrieve_all(questions, method, top_k, search_system=None):
         selected = [items[:top_k] for items in reranked]
 
     documents_by_question = []
-
     for items in selected:
         documents = []
-
         for item in items:
             row_id = item["row_id"]
             chunk = chunks[row_id]
-
             documents.append({
                 "row_id": row_id,
                 "chunk_id": chunk.get("chunk_id"),
@@ -83,32 +79,30 @@ def retrieve_all(questions, method, top_k, search_system=None):
                 "text": get_chunk_text(chunk),
                 "score": float(item["score"]),
             })
-
         documents_by_question.append(documents)
 
-    elapsed = time.perf_counter() - start
-
-    return documents_by_question, elapsed
+    return documents_by_question, time.perf_counter() - start
 
 # endregion
 
 
 # region 관련 문서 검색
+
 def retrieve_documents(question, embedding_model, faiss_index, bm25_index, chunks, method, top_k):
     search_system = (embedding_model, faiss_index, bm25_index, chunks)
-
     documents_by_question, _ = retrieve_all(
         questions=[question],
         method=method,
         top_k=top_k,
         search_system=search_system,
     )
-
     return documents_by_question[0]
+
 # endregion
 
 
 # region RAG 프롬프트 생성
+
 def build_rag_prompt(question, documents, prompt_config):
     contexts = "\n\n".join(
         f"Document {index}\n"
@@ -116,18 +110,10 @@ def build_rag_prompt(question, documents, prompt_config):
         f"Content:\n{document['text']}"
         for index, document in enumerate(documents, start=1)
     )
-
     user_prompt = prompt_config["user_template"].format(question=question, contexts=contexts)
-
     return [
-        {
-            "role": "system",
-            "content": prompt_config["system"],
-        },
-        {
-            "role": "user",
-            "content": user_prompt,
-        },
+        {"role": "system", "content": prompt_config["system"]},
+        {"role": "user", "content": user_prompt},
     ]
 
 # endregion
@@ -136,11 +122,7 @@ def build_rag_prompt(question, documents, prompt_config):
 # region Qwen RAG 답변 생성
 
 def generate_rag_answer(model, tokenizer, generation_config, question, documents, prompt_config):
-
-    # 1. 질문 + 검색 문서로 프롬프트 생성
     messages = build_rag_prompt(question, documents, prompt_config)
-
-    # 2. Chat Template 적용 및 토큰화
     inputs = tokenizer.apply_chat_template(
         messages,
         tokenize=True,
@@ -148,26 +130,23 @@ def generate_rag_answer(model, tokenizer, generation_config, question, documents
         return_dict=True,
         return_tensors="pt",
     ).to(model.device)
-
     input_tokens = inputs["input_ids"].shape[1]
 
-    # 3. 모델 추론
-    torch.cuda.synchronize()
+    if torch.cuda.is_available():
+        torch.cuda.synchronize()
     start = time.perf_counter()
-
     with torch.inference_mode():
         outputs = model.generate(**inputs, generation_config=generation_config)
-
-    torch.cuda.synchronize()
+    if torch.cuda.is_available():
+        torch.cuda.synchronize()
     generation_seconds = time.perf_counter() - start
 
-    # 4. 입력 프롬프트를 제외한 생성 토큰만 디코딩
     generated_tokens = outputs[0, input_tokens:]
     answer = tokenizer.decode(generated_tokens, skip_special_tokens=True).strip()
-
     return answer, generation_seconds, input_tokens
 
 # endregion
+
 
 # region RAG 실행
 
@@ -176,31 +155,30 @@ def run_rag(question, method, top_k, config_path=None):
     with open(config_path, "r", encoding="utf-8") as f:
         config = yaml.safe_load(f)
 
-    # 검색 시스템 로드
     embedding_model, faiss_index, bm25_index, chunks = load_search_system()
 
-    # 질문과 관련된 문서 검색
     search_start = time.perf_counter()
-    retry_top_k = int(config.get('guardrails', {}).get('retry_top_k', top_k))
+    retry_top_k = int(config.get("guardrails", {}).get("retry_top_k", top_k))
     if retry_top_k < top_k:
-        raise ValueError('guardrails.retry_top_k must be >= top_k')
-    documents = retrieve_documents(question, embedding_model, faiss_index, bm25_index, chunks, method, retry_top_k)
+        raise ValueError("guardrails.retry_top_k must be >= top_k")
+    documents = retrieve_documents(
+        question, embedding_model, faiss_index, bm25_index, chunks,
+        method, retry_top_k,
+    )
     search_seconds = time.perf_counter() - search_start
 
-    # 검색 결과 출력
     print("\n[Retrieved Documents]")
-
     for rank, document in enumerate(documents, start=1):
         print(f"\n[Rank {rank}]")
         print("Filename:", document["filename"])
         print("Chunk ID:", document["chunk_id"])
         print("Score:", round(document["score"], 4))
+        if "constraint_reasons" in document:
+            print("Retrieval Signals:", document["constraint_reasons"])
         print("Text:", document["text"][:300])
 
-    # Qwen 모델 로드
     model, tokenizer, generation_config = load_model(config)
 
-    # Optional production/evaluation-aligned evidence gates (enabled in v3).
     if config.get("guardrails", {}).get("enabled", False):
         guarded_result = choose_guardrail_runner(config)(
             question=question,
@@ -222,12 +200,11 @@ def run_rag(question, method, top_k, config_path=None):
         print("Judge Seconds:", guarded_result["judge_seconds"])
         print("Verification Seconds:", guarded_result["verification_seconds"])
     else:
-        # Legacy behavior retained when running older config versions.
         evidence_documents = select_evidence_documents(model, tokenizer, question, documents)
-        answerable = bool(evidence_documents)
-        if answerable:
+        if evidence_documents:
             answer, generation_seconds, input_tokens = generate_rag_answer(
-                model, tokenizer, generation_config, question, evidence_documents, config["prompt"]
+                model, tokenizer, generation_config, question,
+                evidence_documents, config["prompt"],
             )
         else:
             answer = ABSTAIN
@@ -239,37 +216,29 @@ def run_rag(question, method, top_k, config_path=None):
     print("Retriever:", method)
     print("Retrieved Documents:", len(documents))
     print("Input Tokens:", input_tokens)
-
     print("\nAnswer:")
     print(answer)
-
     print("\n[Performance]")
     print("Search Seconds:", round(search_seconds, 3))
     print("Generation Seconds:", round(generation_seconds, 3))
     print("Abstained:", answer == ABSTAIN)
-
     print("\nRAG Pipeline: OK")
 
 # endregion
 
 
-
 def main():
     parser = argparse.ArgumentParser()
-
     parser.add_argument("--question", required=True, type=str)
-    parser.add_argument("--retriever", choices=("hybrid", "reranker"), default="reranker")
+    parser.add_argument("--retriever", choices=("hybrid", "reranker", "stage2"), default="reranker")
     parser.add_argument("--top-k", type=int, default=TOP_K)
     parser.add_argument("--config", type=Path, default=PROJECT_DIR / "configs/rag/v3.yaml")
-
     args = parser.parse_args()
 
     if not 1 <= args.top_k <= 50:
         parser.error("--top-k는 1~50 사이여야 합니다.")
-
-    run_rag(question=args.question, method=args.retriever, top_k=args.top_k, config_path=args.config)
+    run_rag(args.question, args.retriever, args.top_k, args.config)
 
 
 if __name__ == "__main__":
     main()
-

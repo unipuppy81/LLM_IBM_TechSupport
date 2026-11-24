@@ -1,0 +1,5 @@
+{
+  "predictions": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\test_120\\stage2_final\\predictions.jsonl",
+  "predictions_sha256": "151b867bd0ee5e734af3e4e872bb89d7ac2a2cfa9c123726355a23aca859635b",
+  "judge_schema_version": "ibm-techqa-judge-claims-v3.13"
+}

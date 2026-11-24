@@ -1,0 +1,6 @@
+{
+  "dataset_sha256": "40854124e7ca9a6fc953543034221317d6cc2010e1fb6823c300cf167a2213f4",
+  "rag_config_sha256": "b9221fef217dbd7d78d828b90e2dacf33acd74f642f9d2c9069fbedb4aef0273",
+  "retrieval_config_sha256": "ff04ed84d035d1f4921362d4c40ec53ca17fd497c4981097c3aa4fb41778adf9",
+  "expected_count": 120
+}

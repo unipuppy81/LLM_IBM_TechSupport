@@ -1,0 +1,514 @@
+{
+  "schema": "rag-stage2-optimization-v1",
+  "dataset": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\val_106.json",
+  "dataset_sha256": "51740842406b7f8e6814dc5a57c57d09da4b72fc0c94e62b430e8cf8ccfb45ae",
+  "total_records": 106,
+  "answerable_evaluated": 77,
+  "stages": [
+    {
+      "name": "baseline_hybrid",
+      "metrics": {
+        "answerable_evaluated": 77,
+        "hit_at_1_percent": 57.1429,
+        "hit_at_3_percent": 72.7273,
+        "hit_at_5_percent": 77.9221,
+        "hit_at_10_percent": 89.6104,
+        "recall_at_5_percent": 76.6234,
+        "precision_at_5": 0.155844,
+        "mrr_at_10": 0.666156,
+        "ndcg_at_5": 0.675521
+      }
+    },
+    {
+      "name": "baseline_reranker_k10",
+      "metrics": {
+        "answerable_evaluated": 77,
+        "hit_at_1_percent": 53.2468,
+        "hit_at_3_percent": 76.6234,
+        "hit_at_5_percent": 84.4156,
+        "hit_at_10_percent": 89.6104,
+        "recall_at_5_percent": 83.1169,
+        "precision_at_5": 0.168831,
+        "mrr_at_10": 0.660281,
+        "ndcg_at_5": 0.693502
+      },
+      "vs_hybrid": {
+        "gained_hit5_ids": [
+          "TRAIN_Q006",
+          "TRAIN_Q236",
+          "TRAIN_Q071",
+          "TRAIN_Q498",
+          "DEV_Q186",
+          "TRAIN_Q081"
+        ],
+        "lost_hit5_ids": [
+          "TRAIN_Q003"
+        ],
+        "improved_first_gold_rank_ids": [
+          "TRAIN_Q006",
+          "TRAIN_Q316",
+          "TRAIN_Q236",
+          "DEV_Q154",
+          "TRAIN_Q171",
+          "TRAIN_Q071",
+          "TRAIN_Q498",
+          "TRAIN_Q256",
+          "DEV_Q186",
+          "TRAIN_Q415",
+          "DEV_Q074",
+          "TRAIN_Q081",
+          "TRAIN_Q299",
+          "TRAIN_Q487"
+        ],
+        "worsened_first_gold_rank_ids": [
+          "TRAIN_Q037",
+          "TRAIN_Q581",
+          "TRAIN_Q431",
+          "TRAIN_Q003",
+          "TRAIN_Q592",
+          "TRAIN_Q422",
+          "TRAIN_Q165",
+          "DEV_Q147",
+          "TRAIN_Q234",
+          "DEV_Q076",
+          "DEV_Q021",
+          "TRAIN_Q583",
+          "TRAIN_Q541"
+        ]
+      }
+    },
+    {
+      "name": "filter_s0.5_k10",
+      "metrics": {
+        "answerable_evaluated": 77,
+        "hit_at_1_percent": 59.7403,
+        "hit_at_3_percent": 79.2208,
+        "hit_at_5_percent": 84.4156,
+        "hit_at_10_percent": 89.6104,
+        "recall_at_5_percent": 82.4675,
+        "precision_at_5": 0.168831,
+        "mrr_at_10": 0.704762,
+        "ndcg_at_5": 0.720957
+      },
+      "vs_previous": {
+        "gained_hit5_ids": [
+          "TRAIN_Q594"
+        ],
+        "lost_hit5_ids": [
+          "TRAIN_Q165"
+        ],
+        "improved_first_gold_rank_ids": [
+          "TRAIN_Q171",
+          "TRAIN_Q594",
+          "TRAIN_Q592",
+          "TRAIN_Q553",
+          "DEV_Q252",
+          "TRAIN_Q256",
+          "TRAIN_Q081"
+        ],
+        "worsened_first_gold_rank_ids": [
+          "TRAIN_Q581",
+          "TRAIN_Q165"
+        ]
+      }
+    },
+    {
+      "name": "filter_s1_k10",
+      "metrics": {
+        "answerable_evaluated": 77,
+        "hit_at_1_percent": 58.4416,
+        "hit_at_3_percent": 79.2208,
+        "hit_at_5_percent": 85.7143,
+        "hit_at_10_percent": 90.9091,
+        "recall_at_5_percent": 83.7662,
+        "precision_at_5": 0.171429,
+        "mrr_at_10": 0.699351,
+        "ndcg_at_5": 0.723575
+      },
+      "vs_previous": {
+        "gained_hit5_ids": [
+          "TRAIN_Q594",
+          "TRAIN_Q272"
+        ],
+        "lost_hit5_ids": [
+          "TRAIN_Q165"
+        ],
+        "improved_first_gold_rank_ids": [
+          "TRAIN_Q171",
+          "TRAIN_Q594",
+          "TRAIN_Q592",
+          "TRAIN_Q272",
+          "TRAIN_Q553",
+          "TRAIN_Q436",
+          "TRAIN_Q081"
+        ],
+        "worsened_first_gold_rank_ids": [
+          "TRAIN_Q581",
+          "TRAIN_Q165",
+          "DEV_Q252"
+        ]
+      }
+    },
+    {
+      "name": "filter_s1.5_k10",
+      "metrics": {
+        "answerable_evaluated": 77,
+        "hit_at_1_percent": 57.1429,
+        "hit_at_3_percent": 80.5195,
+        "hit_at_5_percent": 84.4156,
+        "hit_at_10_percent": 90.9091,
+        "recall_at_5_percent": 83.1169,
+        "precision_at_5": 0.171429,
+        "mrr_at_10": 0.693089,
+        "ndcg_at_5": 0.716163
+      },
+      "vs_previous": {
+        "gained_hit5_ids": [
+          "TRAIN_Q594",
+          "TRAIN_Q272"
+        ],
+        "lost_hit5_ids": [
+          "TRAIN_Q581",
+          "TRAIN_Q165"
+        ],
+        "improved_first_gold_rank_ids": [
+          "TRAIN_Q171",
+          "TRAIN_Q003",
+          "TRAIN_Q594",
+          "TRAIN_Q592",
+          "TRAIN_Q272",
+          "TRAIN_Q553",
+          "DEV_Q252",
+          "TRAIN_Q081"
+        ],
+        "worsened_first_gold_rank_ids": [
+          "TRAIN_Q581",
+          "TRAIN_Q165",
+          "TRAIN_Q071",
+          "TRAIN_Q537"
+        ]
+      }
+    },
+    {
+      "name": "reranker_k10",
+      "metrics": {
+        "answerable_evaluated": 77,
+        "hit_at_1_percent": 58.4416,
+        "hit_at_3_percent": 79.2208,
+        "hit_at_5_percent": 85.7143,
+        "hit_at_10_percent": 90.9091,
+        "recall_at_5_percent": 83.7662,
+        "precision_at_5": 0.171429,
+        "mrr_at_10": 0.699351,
+        "ndcg_at_5": 0.723575
+      },
+      "vs_previous": {
+        "gained_hit5_ids": [],
+        "lost_hit5_ids": [],
+        "improved_first_gold_rank_ids": [],
+        "worsened_first_gold_rank_ids": []
+      }
+    },
+    {
+      "name": "reranker_k20",
+      "metrics": {
+        "answerable_evaluated": 77,
+        "hit_at_1_percent": 55.8442,
+        "hit_at_3_percent": 75.3247,
+        "hit_at_5_percent": 80.5195,
+        "hit_at_10_percent": 90.9091,
+        "recall_at_5_percent": 78.5714,
+        "precision_at_5": 0.161039,
+        "mrr_at_10": 0.674273,
+        "ndcg_at_5": 0.686652
+      },
+      "vs_previous": {
+        "gained_hit5_ids": [
+          "TRAIN_Q222"
+        ],
+        "lost_hit5_ids": [
+          "TRAIN_Q037",
+          "TRAIN_Q236",
+          "TRAIN_Q581",
+          "TRAIN_Q234",
+          "TRAIN_Q436"
+        ],
+        "improved_first_gold_rank_ids": [
+          "TRAIN_Q222"
+        ],
+        "worsened_first_gold_rank_ids": [
+          "TRAIN_Q037",
+          "TRAIN_Q236",
+          "TRAIN_Q581",
+          "TRAIN_Q165",
+          "TRAIN_Q071",
+          "TRAIN_Q498",
+          "TRAIN_Q234",
+          "TRAIN_Q256",
+          "DEV_Q266",
+          "TRAIN_Q436",
+          "TRAIN_Q299",
+          "TRAIN_Q537"
+        ]
+      }
+    },
+    {
+      "name": "reranker_k30",
+      "metrics": {
+        "answerable_evaluated": 77,
+        "hit_at_1_percent": 55.8442,
+        "hit_at_3_percent": 72.7273,
+        "hit_at_5_percent": 77.9221,
+        "hit_at_10_percent": 87.013,
+        "recall_at_5_percent": 76.6234,
+        "precision_at_5": 0.155844,
+        "mrr_at_10": 0.659627,
+        "ndcg_at_5": 0.672428
+      },
+      "vs_previous": {
+        "gained_hit5_ids": [
+          "TRAIN_Q222"
+        ],
+        "lost_hit5_ids": [
+          "TRAIN_Q037",
+          "TRAIN_Q236",
+          "TRAIN_Q581",
+          "TRAIN_Q071",
+          "TRAIN_Q234",
+          "DEV_Q252",
+          "TRAIN_Q436"
+        ],
+        "improved_first_gold_rank_ids": [
+          "TRAIN_Q222"
+        ],
+        "worsened_first_gold_rank_ids": [
+          "TRAIN_Q037",
+          "TRAIN_Q236",
+          "TRAIN_Q581",
+          "TRAIN_Q003",
+          "TRAIN_Q165",
+          "TRAIN_Q071",
+          "TRAIN_Q498",
+          "DEV_Q147",
+          "TRAIN_Q234",
+          "DEV_Q252",
+          "TRAIN_Q256",
+          "DEV_Q266",
+          "TRAIN_Q436",
+          "TRAIN_Q583",
+          "TRAIN_Q299",
+          "TRAIN_Q537"
+        ]
+      }
+    },
+    {
+      "name": "reranker_k50",
+      "metrics": {
+        "answerable_evaluated": 77,
+        "hit_at_1_percent": 54.5455,
+        "hit_at_3_percent": 72.7273,
+        "hit_at_5_percent": 76.6234,
+        "hit_at_10_percent": 83.1169,
+        "recall_at_5_percent": 75.3247,
+        "precision_at_5": 0.153247,
+        "mrr_at_10": 0.644496,
+        "ndcg_at_5": 0.659772
+      },
+      "vs_previous": {
+        "gained_hit5_ids": [
+          "TRAIN_Q222"
+        ],
+        "lost_hit5_ids": [
+          "TRAIN_Q037",
+          "TRAIN_Q236",
+          "TRAIN_Q581",
+          "TRAIN_Q071",
+          "TRAIN_Q498",
+          "TRAIN_Q234",
+          "DEV_Q252",
+          "TRAIN_Q436"
+        ],
+        "improved_first_gold_rank_ids": [
+          "TRAIN_Q222"
+        ],
+        "worsened_first_gold_rank_ids": [
+          "TRAIN_Q037",
+          "TRAIN_Q236",
+          "TRAIN_Q581",
+          "TRAIN_Q456",
+          "TRAIN_Q003",
+          "TRAIN_Q592",
+          "TRAIN_Q165",
+          "TRAIN_Q071",
+          "TRAIN_Q498",
+          "DEV_Q147",
+          "TRAIN_Q234",
+          "DEV_Q252",
+          "TRAIN_Q256",
+          "DEV_Q266",
+          "TRAIN_Q436",
+          "TRAIN_Q583",
+          "TRAIN_Q299",
+          "TRAIN_Q537"
+        ]
+      }
+    },
+    {
+      "name": "query_rewrite_augment",
+      "metrics": {
+        "answerable_evaluated": 77,
+        "hit_at_1_percent": 58.4416,
+        "hit_at_3_percent": 76.6234,
+        "hit_at_5_percent": 81.8182,
+        "hit_at_10_percent": 87.013,
+        "recall_at_5_percent": 80.5195,
+        "precision_at_5": 0.163636,
+        "mrr_at_10": 0.686797,
+        "ndcg_at_5": 0.706589
+      },
+      "changed_queries": 77,
+      "vs_previous": {
+        "gained_hit5_ids": [],
+        "lost_hit5_ids": [
+          "TRAIN_Q236",
+          "TRAIN_Q498",
+          "DEV_Q252"
+        ],
+        "improved_first_gold_rank_ids": [
+          "TRAIN_Q431"
+        ],
+        "worsened_first_gold_rank_ids": [
+          "TRAIN_Q236",
+          "DEV_Q154",
+          "TRAIN_Q498",
+          "DEV_Q252",
+          "TRAIN_Q436",
+          "TRAIN_Q299"
+        ]
+      }
+    }
+  ],
+  "selected_stage": "filter_s1_k10",
+  "selected_config": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\configs\\rag\\retrieval_stage2_selected.yaml",
+  "selected_config_sha256": "ff04ed84d035d1f4921362d4c40ec53ca17fd497c4981097c3aa4fb41778adf9",
+  "selected": {
+    "reranker_enabled": true,
+    "filter_enabled": true,
+    "filter_strength": 1.0,
+    "reranker_candidate_k": 10,
+    "query_rewrite_enabled": false,
+    "rewrite_weight": 0.7
+  },
+  "baseline_hybrid": {
+    "answerable_evaluated": 77,
+    "hit_at_1_percent": 57.1429,
+    "hit_at_3_percent": 72.7273,
+    "hit_at_5_percent": 77.9221,
+    "hit_at_10_percent": 89.6104,
+    "recall_at_5_percent": 76.6234,
+    "precision_at_5": 0.155844,
+    "mrr_at_10": 0.666156,
+    "ndcg_at_5": 0.675521
+  },
+  "baseline_reranker_k10": {
+    "answerable_evaluated": 77,
+    "hit_at_1_percent": 53.2468,
+    "hit_at_3_percent": 76.6234,
+    "hit_at_5_percent": 84.4156,
+    "hit_at_10_percent": 89.6104,
+    "recall_at_5_percent": 83.1169,
+    "precision_at_5": 0.168831,
+    "mrr_at_10": 0.660281,
+    "ndcg_at_5": 0.693502
+  },
+  "final": {
+    "answerable_evaluated": 77,
+    "hit_at_1_percent": 58.4416,
+    "hit_at_3_percent": 79.2208,
+    "hit_at_5_percent": 85.7143,
+    "hit_at_10_percent": 90.9091,
+    "recall_at_5_percent": 83.7662,
+    "precision_at_5": 0.171429,
+    "mrr_at_10": 0.699351,
+    "ndcg_at_5": 0.723575
+  },
+  "comparisons": {
+    "final_vs_hybrid": {
+      "gained_hit5_ids": [
+        "TRAIN_Q006",
+        "TRAIN_Q236",
+        "TRAIN_Q594",
+        "TRAIN_Q272",
+        "TRAIN_Q071",
+        "TRAIN_Q498",
+        "DEV_Q186",
+        "TRAIN_Q081"
+      ],
+      "lost_hit5_ids": [
+        "TRAIN_Q003",
+        "TRAIN_Q165"
+      ],
+      "improved_first_gold_rank_ids": [
+        "TRAIN_Q006",
+        "TRAIN_Q316",
+        "TRAIN_Q236",
+        "DEV_Q154",
+        "TRAIN_Q171",
+        "TRAIN_Q594",
+        "TRAIN_Q272",
+        "TRAIN_Q071",
+        "TRAIN_Q553",
+        "TRAIN_Q498",
+        "TRAIN_Q256",
+        "TRAIN_Q436",
+        "DEV_Q186",
+        "TRAIN_Q415",
+        "DEV_Q074",
+        "TRAIN_Q081",
+        "TRAIN_Q299",
+        "TRAIN_Q487"
+      ],
+      "worsened_first_gold_rank_ids": [
+        "TRAIN_Q037",
+        "TRAIN_Q581",
+        "TRAIN_Q431",
+        "TRAIN_Q003",
+        "TRAIN_Q422",
+        "TRAIN_Q165",
+        "DEV_Q147",
+        "TRAIN_Q234",
+        "DEV_Q252",
+        "DEV_Q076",
+        "DEV_Q021",
+        "TRAIN_Q583",
+        "TRAIN_Q541"
+      ]
+    },
+    "final_vs_reranker_k10": {
+      "gained_hit5_ids": [
+        "TRAIN_Q594",
+        "TRAIN_Q272"
+      ],
+      "lost_hit5_ids": [
+        "TRAIN_Q165"
+      ],
+      "improved_first_gold_rank_ids": [
+        "TRAIN_Q171",
+        "TRAIN_Q594",
+        "TRAIN_Q592",
+        "TRAIN_Q272",
+        "TRAIN_Q553",
+        "TRAIN_Q436",
+        "TRAIN_Q081"
+      ],
+      "worsened_first_gold_rank_ids": [
+        "TRAIN_Q581",
+        "TRAIN_Q165",
+        "DEV_Q252"
+      ]
+    }
+  },
+  "selection_rule": "Never reduce Hit@5 or Recall@5 at a stage; among safe candidates maximize nDCG@5, MRR@10, Hit@3, Precision@5.",
+  "elapsed_seconds": 78.264,
+  "test_clean_touched": false
+}

@@ -1,0 +1,29 @@
+{
+  "model": "Qwen2.5-1.5B-Instruct",
+  "dataset": "clean",
+  "total": 120,
+  "batch_size": 1,
+  "max_new_tokens": 160,
+  "answerable": 80,
+  "impossible": 40,
+  "exact_match_percent": 0.0,
+  "token_f1_percent": 23.52,
+  "abstention_rate_percent": 20.0,
+  "false_refusal_rate_percent": 17.5,
+  "retriever": "stage2",
+  "top_k": 5,
+  "retrieval_seconds": 25.407,
+  "generation_seconds": 678.544,
+  "avg_input_tokens": 1339.9,
+  "peak_gpu_memory_gb": 3.84,
+  "guardrails_enabled": true,
+  "judge_seconds": 72.817,
+  "verification_seconds": 30.53,
+  "guardrail_status_counts": {
+    "ANSWER_VERIFIED": 98,
+    "ANSWER_NO": 13,
+    "GENERATOR_ABSTAINED": 6,
+    "ANSWER_UNCERTAIN": 2,
+    "EVIDENCE_NO": 1
+  }
+}

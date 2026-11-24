@@ -1,0 +1,127 @@
+{
+  "schema": "rag-stage2-validation-v1",
+  "retrieval_config": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\configs\\rag\\retrieval_stage2_selected.yaml",
+  "retrieval_config_sha256": "ff04ed84d035d1f4921362d4c40ec53ca17fd497c4981097c3aa4fb41778adf9",
+  "predictions": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\rag\\v5_stage2\\predictions.jsonl",
+  "predictions_sha256": "235052f8bf3e4bc50d6d9fb45b21503ec2d70ac2366cf592332a36acbab6550d",
+  "generation_metrics": {
+    "model": "Qwen2.5-1.5B-Instruct",
+    "dataset": "clean",
+    "total": 106,
+    "batch_size": 1,
+    "max_new_tokens": 160,
+    "answerable": 77,
+    "impossible": 29,
+    "exact_match_percent": 0.0,
+    "token_f1_percent": 32.01,
+    "abstention_rate_percent": 17.24,
+    "false_refusal_rate_percent": 10.39,
+    "retriever": "stage2",
+    "top_k": 5,
+    "retrieval_seconds": 22.091,
+    "generation_seconds": 591.323,
+    "avg_input_tokens": 1396.9,
+    "peak_gpu_memory_gb": 3.88,
+    "guardrails_enabled": true,
+    "judge_seconds": 64.137,
+    "verification_seconds": 28.085,
+    "guardrail_status_counts": {
+      "ANSWER_VERIFIED": 93,
+      "ANSWER_NO": 7,
+      "EVIDENCE_NO": 2,
+      "GENERATOR_ABSTAINED": 3,
+      "ANSWER_UNCERTAIN": 1
+    }
+  },
+  "retrieval_metrics": {
+    "answerable_evaluated": 77,
+    "hit_at_1_percent": 58.4416,
+    "hit_at_3_percent": 79.2208,
+    "hit_at_5_percent": 85.7143,
+    "hit_at_10_percent": 90.9091,
+    "recall_at_5_percent": 83.7662,
+    "precision_at_5": 0.171429,
+    "mrr_at_10": 0.699351,
+    "ndcg_at_5": 0.723575
+  },
+  "frozen_judge_v313": {
+    "n": 106,
+    "auto_pass": 38,
+    "auto_pass_rate_percent": 35.85,
+    "judge_status_counts": {
+      "OK": 59,
+      "REVIEW_REQUIRED": 47
+    },
+    "risk_counts": {
+      "medium": 51,
+      "low": 38,
+      "unknown": 11,
+      "high": 6
+    },
+    "review_flag_counts": {
+      "ESSENTIAL_CLAIM_NOT_SUPPORTED": 50,
+      "CLAIM_VERIFICATION_UNRESOLVED": 29,
+      "SUPPORTED_QUOTE_WEAK_ALIGNMENT": 20,
+      "SUPPORTING_CLAIM_NOT_SUPPORTED": 17,
+      "CONTRADICTION_NOT_INDEPENDENTLY_CONFIRMED": 15,
+      "REFUSAL_REQUIRES_HUMAN_REVIEW": 11,
+      "SUPPORTED_ACTION_NOT_IN_QUOTE": 6,
+      "AFFIRMATIVE_SUPPORT_RELATION_NOT_IN_SOURCE": 2,
+      "TASK_CONTEXT_MISMATCH": 2,
+      "SUPPORTED_PATH_MISSING_FROM_QUOTE": 1,
+      "MANDATORY_PRECONDITION_MISSING": 1,
+      "CVSS_SEVERITY_MISMATCH": 1,
+      "PROCEDURAL_VERSION_DRIFT": 1,
+      "POTENTIAL_FALSE_CONTRADICTION": 1,
+      "ANSWER_GOAL_DIRECTION_MISMATCH": 1,
+      "REQUESTED_SECURITY_IDENTIFIER_NOT_IN_EVIDENCE": 1
+    },
+    "by_original_answerability_label": {
+      "answerable": {
+        "auto_pass": 37,
+        "not_auto_pass": 40
+      },
+      "impossible": {
+        "not_auto_pass": 28,
+        "auto_pass": 1
+      }
+    }
+  },
+  "baseline": {
+    "v4_generation_metrics": {
+      "model": "Qwen2.5-1.5B-Instruct",
+      "dataset": "clean",
+      "total": 106,
+      "batch_size": 1,
+      "max_new_tokens": 160,
+      "answerable": 77,
+      "impossible": 29,
+      "exact_match_percent": 0.0,
+      "token_f1_percent": 31.67,
+      "abstention_rate_percent": 10.34,
+      "false_refusal_rate_percent": 12.99,
+      "retriever": "reranker",
+      "top_k": 5,
+      "retrieval_seconds": 5.772,
+      "generation_seconds": 267.533,
+      "avg_input_tokens": 1364.3,
+      "peak_gpu_memory_gb": 3.88,
+      "guardrails_enabled": true,
+      "judge_seconds": 60.091,
+      "verification_seconds": 35.349,
+      "guardrail_status_counts": {
+        "ANSWER_VERIFIED": 93,
+        "ANSWER_NO": 6,
+        "GENERATOR_ABSTAINED": 5,
+        "EVIDENCE_NO": 2
+      }
+    },
+    "v4_frozen_judge": {
+      "n": 106,
+      "auto_pass": 38,
+      "auto_pass_rate_percent": 35.85
+    }
+  },
+  "test_clean_touched": false,
+  "note": "Judge v3.13 is frozen. Human PASS/FAIL labels from old answers are not reused as labels for newly generated answers."
+}
