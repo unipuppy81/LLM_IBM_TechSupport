@@ -223,7 +223,15 @@ __marimo__/
 IBMTechSupport/.venv/
 IBMTechSupport/models/
 IBMTechSupport/data/raw/
-IBMTechSupport/data/processed/
+
+# processed 폴더는 기본적으로 무시
+IBMTechSupport/data/processed/*
+
+# 작은 평가 데이터만 Git에 포함
+!IBMTechSupport/data/processed/val_106.json
+!IBMTechSupport/data/processed/val_clean.json
+!IBMTechSupport/data/processed/test_clean.json
+
 IBMTechSupport/**/__pycache__/
 
 # MiniGPT exported model weights
