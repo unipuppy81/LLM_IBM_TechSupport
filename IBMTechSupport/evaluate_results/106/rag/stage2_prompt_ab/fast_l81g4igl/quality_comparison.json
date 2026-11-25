@@ -1,0 +1,94 @@
+{
+  "baseline": {
+    "total": 106,
+    "answerable": 77,
+    "impossible": 29,
+    "answer_correctness": {
+      "definition": "Strict CORRECT / all answerable questions (refusals and uncertain are not credited)",
+      "counts": {
+        "CORRECT": 56,
+        "REFUSED": 8,
+        "UNCERTAIN": 11,
+        "INCORRECT": 2
+      },
+      "denominator": 77,
+      "strict_percent": 72.73,
+      "strict_among_emitted_answerable_percent": 81.16,
+      "adjudicated_only_percent": 96.55,
+      "uncertain_percent_of_answerable": 14.29
+    },
+    "faithfulness": {
+      "definition": "Answer-level all-material-claims-supported rate, NOT claim-level ratio",
+      "counts": {
+        "UNCERTAIN": 37,
+        "SUPPORTED": 33,
+        "UNSUPPORTED": 23
+      },
+      "emitted_denominator": 93,
+      "strict_percent": 35.48,
+      "adjudicated_only_percent": 58.93,
+      "uncertain_or_unscorable_percent": 39.78,
+      "refusals_excluded": 13
+    },
+    "policy": {
+      "answerable_false_refusals": 8,
+      "false_refusal_percent": 10.39,
+      "impossible_responses": 24,
+      "correct_refusal_percent": 17.24
+    },
+    "evaluator_invalid_outputs": {
+      "correctness": 11,
+      "faithfulness": 37
+    },
+    "human_review_required": true
+  },
+  "candidate": {
+    "total": 106,
+    "answerable": 77,
+    "impossible": 29,
+    "answer_correctness": {
+      "definition": "Strict CORRECT / all answerable questions (refusals and uncertain are not credited)",
+      "counts": {
+        "REFUSED": 19,
+        "CORRECT": 44,
+        "UNCERTAIN": 8,
+        "INCORRECT": 6
+      },
+      "denominator": 77,
+      "strict_percent": 57.14,
+      "strict_among_emitted_answerable_percent": 75.86,
+      "adjudicated_only_percent": 88.0,
+      "uncertain_percent_of_answerable": 10.39
+    },
+    "faithfulness": {
+      "definition": "Answer-level all-material-claims-supported rate, NOT claim-level ratio",
+      "counts": {
+        "UNCERTAIN": 15,
+        "SUPPORTED": 48,
+        "UNSUPPORTED": 5
+      },
+      "emitted_denominator": 68,
+      "strict_percent": 70.59,
+      "adjudicated_only_percent": 90.57,
+      "uncertain_or_unscorable_percent": 22.06,
+      "refusals_excluded": 38
+    },
+    "policy": {
+      "answerable_false_refusals": 19,
+      "false_refusal_percent": 24.68,
+      "impossible_responses": 10,
+      "correct_refusal_percent": 65.52
+    },
+    "evaluator_invalid_outputs": {
+      "correctness": 8,
+      "faithfulness": 15
+    },
+    "human_review_required": true
+  },
+  "cache_stats": {
+    "quality_miss": 285,
+    "quality_hit": 3
+  },
+  "historical_quality_seeded": false,
+  "note": "Historical quality reuse assumes unchanged evaluator prompts and model weights; same-base automated judge requires human review."
+}

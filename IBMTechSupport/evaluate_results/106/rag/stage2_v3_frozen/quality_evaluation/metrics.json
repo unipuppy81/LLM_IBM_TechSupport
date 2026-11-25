@@ -1,0 +1,147 @@
+{
+  "total": 106,
+  "answerable": 77,
+  "impossible": 29,
+  "answer_correctness": {
+    "definition": "Strict CORRECT / all answerable questions (refusals and uncertain are not credited)",
+    "counts": {
+      "REFUSED": 19,
+      "CORRECT": 44,
+      "UNCERTAIN": 8,
+      "INCORRECT": 6
+    },
+    "denominator": 77,
+    "strict_percent": 57.14,
+    "strict_among_emitted_answerable_percent": 75.86,
+    "adjudicated_only_percent": 88.0,
+    "uncertain_percent_of_answerable": 10.39
+  },
+  "faithfulness": {
+    "definition": "Answer-level all-material-claims-supported rate, NOT claim-level ratio",
+    "counts": {
+      "UNCERTAIN": 15,
+      "SUPPORTED": 48,
+      "UNSUPPORTED": 5
+    },
+    "emitted_denominator": 68,
+    "strict_percent": 70.59,
+    "adjudicated_only_percent": 90.57,
+    "uncertain_or_unscorable_percent": 22.06,
+    "refusals_excluded": 38
+  },
+  "policy": {
+    "answerable_false_refusals": 19,
+    "false_refusal_percent": 24.68,
+    "impossible_responses": 10,
+    "correct_refusal_percent": 65.52
+  },
+  "evaluator_invalid_outputs": {
+    "correctness": 8,
+    "faithfulness": 15
+  },
+  "human_review_required": true,
+  "dataset": "val_106.json",
+  "source": "saved frozen V3 predictions",
+  "predictions_sha256": "5acefb8255d87bcf40bd36c87a47261e8365929527207870ed7871f915677e61",
+  "dataset_sha256": "51740842406b7f8e6814dc5a57c57d09da4b72fc0c94e62b430e8cf8ccfb45ae",
+  "generation_manifest_dataset_verified": false,
+  "answerability_prompt_sha256_reported": "f64397ff47417761a44d4e0512939e0608bf1dec7def48ed39ef1b8d48031511",
+  "retrieval_config_sha256_reported": "ff04ed84d035d1f4921362d4c40ec53ca17fd497c4981097c3aa4fb41778adf9",
+  "quality_evaluator_source_sha256": "d08f7181806ccdbf6d97ec7626a43647442a6dc4df396eb6f3d7dde2e2852820",
+  "judge_model": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\Qwen2.5-1.5B-Instruct",
+  "judge_independence": "Separate evaluator prompts; same base weights as generator",
+  "generation_metrics": {
+    "model": "Qwen2.5-1.5B-Instruct",
+    "dataset": "val_106.json",
+    "total": 106,
+    "batch_size": 1,
+    "max_new_tokens": 160,
+    "answerable": 77,
+    "impossible": 29,
+    "exact_match_percent": 0.0,
+    "token_f1_percent": 28.49,
+    "abstention_rate_percent": 65.52,
+    "false_refusal_rate_percent": 24.68
+  },
+  "retrieval_metrics": {
+    "retriever": "stage2",
+    "source": "saved V3 retrieved_documents",
+    "answerable_evaluated": 77,
+    "impossible_skipped": 29,
+    "hit_at_1_percent": 58.44,
+    "hit_at_3_percent": 79.22,
+    "hit_at_5_percent": 85.71,
+    "hit_at_10_percent": 90.91,
+    "recall_at_5_percent": 83.77,
+    "precision_at_5": 0.1714,
+    "mrr_at_10": 0.6994,
+    "ndcg_at_5": 0.7236
+  },
+  "correct_and_supported_answerable_count": 31,
+  "correct_and_supported_answerable_percent": 40.26,
+  "regression_comparison": {
+    "generation": {
+      "exact_match_percent": {
+        "expected": 0.0,
+        "actual": 0.0,
+        "match": true
+      },
+      "token_f1_percent": {
+        "expected": 28.49,
+        "actual": 28.49,
+        "match": true
+      },
+      "abstention_rate_percent": {
+        "expected": 65.52,
+        "actual": 65.52,
+        "match": true
+      },
+      "false_refusal_rate_percent": {
+        "expected": 24.68,
+        "actual": 24.68,
+        "match": true
+      }
+    },
+    "retrieval": {
+      "hit_at_5_percent": {
+        "expected": 85.71,
+        "actual": 85.71,
+        "match": true
+      },
+      "recall_at_5_percent": {
+        "expected": 83.77,
+        "actual": 83.77,
+        "match": true
+      },
+      "precision_at_5": {
+        "expected": 0.1714,
+        "actual": 0.1714,
+        "match": true
+      },
+      "mrr_at_10": {
+        "expected": 0.6994,
+        "actual": 0.6994,
+        "match": true
+      },
+      "ndcg_at_5": {
+        "expected": 0.7236,
+        "actual": 0.7236,
+        "match": true
+      }
+    },
+    "quality": {
+      "answer_correctness_percent": {
+        "expected": 57.14,
+        "actual": 57.14,
+        "match": true
+      },
+      "faithfulness_percent": {
+        "expected": 70.59,
+        "actual": 70.59,
+        "match": true
+      }
+    }
+  },
+  "no_test_access": true,
+  "elapsed_seconds": 478.839
+}

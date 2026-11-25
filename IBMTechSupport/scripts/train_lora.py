@@ -15,7 +15,7 @@ DATA_DIR = PROJECT_DIR / "data" / "processed"
 RESULT_DIR = PROJECT_DIR / "training_results"
 
 TRAIN_PATH = DATA_DIR / "train_clean.json"
-VAL_PATH = DATA_DIR / "val_clean.json"
+VAL_PATH = DATA_DIR / "val_106.json"
 
 LORA_DIR = MODEL_DIR.parent / "Qwen2.5-1.5B-Instruct-LoRA"
 
@@ -30,6 +30,10 @@ MAX_QUESTION_TOKENS = 192
 
 
 # region 데이터 로드
+
+SYSTEM_PROMPT = 'You are an IBM technical support assistant. Answer technical questions using only your existing knowledge. If you cannot provide a reliable answer, respond with exactly INSUFFICIENT_INFORMATION. Otherwise, provide a concise technical answer in English.'
+
+ABSTAIN = 'INSUFFICIENT_INFORMATION'
 
 def load_records(path, limit=0):
     if not path.is_file():
@@ -96,7 +100,7 @@ class QADataset(Dataset):
             ]
 
             # 모델에 입력할 질문 부분
-            prompt_ids = tokenizer.apply_chat_template(messages, tokenize=True, add_generation_prompt=True)
+            prompt_ids = tokenizer.apply_chat_template(messages, tokenize=True, add_generation_prompt=True, return_dict=False)
 
             # 정답이 없으면 답변 거부 문자열을 학습
             if record["is_impossible"]:

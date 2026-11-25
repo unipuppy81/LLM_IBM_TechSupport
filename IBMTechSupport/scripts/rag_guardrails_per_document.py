@@ -21,6 +21,29 @@ def choose_guardrail_runner(config):
         return answer_with_stage3_adaptive_guardrails
     if mode == "per_document":
         return answer_with_per_document_guardrails
+    if mode == "per_document_v3":
+        from functools import partial
+        from hashlib import sha256
+        from pathlib import Path
+        from rag_guardrails import _llm_decision, _render_documents
+
+        settings = config["guardrails"]
+        prompt = settings["answerability_prompt"]
+        if sha256(prompt.encode("utf-8")).hexdigest() != settings["answerability_prompt_sha256"]:
+            raise ValueError("Frozen V3 answerability prompt hash mismatch")
+        if config["retrieval"]["method"] != "stage2" or config["retrieval"]["top_k"] != 5 or settings["retry_top_k"] != 10:
+            raise ValueError("Frozen V3 requires Stage2 retrieval, top_k=5, retry_top_k=10")
+        retrieval_path = Path(__file__).resolve().parents[1] / "configs/rag/retrieval_stage2_selected.yaml"
+        if sha256(retrieval_path.read_bytes()).hexdigest() != settings["retrieval_config_sha256"]:
+            raise ValueError("Frozen V3 retrieval config hash mismatch")
+
+        def judge_v3(model, tokenizer, question, documents):
+            if len(documents) != 1:
+                raise ValueError("V3 Judge expects exactly one document")
+            user = f"Question:\n{question}\n\nRetrieved Documents:\n{_render_documents(documents)}"
+            return _llm_decision(model, tokenizer, prompt, user)
+
+        return partial(answer_with_per_document_guardrails, judge_fn=judge_v3)
     raise ValueError(f"Unknown guardrails.judge_mode: {mode!r}")
 
 

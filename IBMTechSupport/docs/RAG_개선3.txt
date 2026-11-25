@@ -1311,3 +1311,357 @@ V2를 다음 프롬프트 개선 후보로 유지하며 기존 Stage2 운영 설
 반복 평가에 따른 과적합 가능성이 있으므로 독립 Test 일반화 성능은 별도 검증한다.
 V1 품질 비교와 상세 거부 원인 분석, V2 End-to-End 및 품질 평가는 결과가 제공되지 않아
 미측정 또는 미확인 상태로 기록한다.
+
+
+---
+
+## 26. 프롬프트 V3 — 기술적 조건 일치 및 요청 작업 검증
+
+V2는 V1보다 올바른 차단을 늘리고 잘못된 차단을 줄였으나,
+답변 가능한 질문 77건 중 16건이 여전히 Judge에서 차단되었다.
+이에 기술적 조건의 일치 여부와 사용자 요청 작업의 판단 관계를 명확하게 변경하였다.
+
+V2 기존 문장:
+
+```text
+After validating the technical conditions, identify the user's requested operation.
+Matching the product or error code alone is insufficient to determine answerability.
+```
+
+V3 변경 문장:
+
+```text
+Identify the user's requested operation only when the technical conditions are satisfied.
+Technical conditions are considered satisfied only when all product, version, error code, and environment conditions extracted from the user's input match the applicable conditions in the retrieved documents.
+Conditions not specified in the user's input are excluded from the matching requirements.
+```
+
+나머지 V2 프롬프트는 유지하였다. 질문에 명시된 제품, 버전, 오류 코드,
+환경을 문서의 적용 조건과 비교하고, 명시되지 않은 항목은 검사 대상에서 제외한다.
+문서의 정보 누락은 명시적인 불일치와 구분한다.
+모든 핵심 답변 요구사항을 뒷받침하는 근거가 있어야 YES로 판단한다.
+
+실험에서 변경한 변수는 Answerability Judge 프롬프트뿐이다.
+Retrieval, Reranker, Generator, Grounding Verifier 및 모델 가중치는 유지하였다.
+per_document 모드의 제약으로 다중 문서 결합 지시는 Judge에 직접 적용되지 않는다.
+또한 명시된 조건의 일치 여부를 문서에서 확인할 수 없는 경우의 판단에는 여전히 모호성이 남는다.
+
+---
+
+## 27. V1 / V2 / V3 Judge 비교 및 V3 선정
+
+동일한 val_106.json (전체 106건, 답변 가능 77건, 불가능 29건)에서
+기존 Stage2와 프롬프트 V1, V2, V3의 Judge 단독 성능을 비교하였다.
+
+```text
+평가 지표                       Stage2 A     V1        V2        V3
+YES                               104건      71건      72건      75건
+NO                                  2건      29건      32건      29건
+UNCERTAIN                           0건       6건       2건       2건
+답변 가능 질문 통과                76건      59건      61건      64건
+답변 가능 질문 차단                 1건      18건      16건      13건
+답변 불가능 질문 통과              28건      12건      11건      11건
+답변 불가능 질문 차단               1건      17건      18건      18건
+올바른 차단율                      3.45%    58.62%    62.07%    62.07%
+잘못된 차단율                      1.30%    23.38%    20.78%    16.88%
+판정 일치율                       72.64%    71.70%    74.53%    77.36%
+```
+
+YES를 답변 허용, NO 및 UNCERTAIN을 차단으로 집계하였다.
+판정 일치율은 (답변 가능 질문 통과 + 답변 불가능 질문 차단) / 106이다.
+실제 검색 근거 충분성에 대한 정답 라벨이 아니라 데이터셋 라벨 기반 대리 지표이다.
+
+V3 선정 근거:
+
+```text
+비교 항목                     V1 → V3                 V2 → V3
+올바른 차단 건수              17 → 18 (+1건)          18 → 18 (동일)
+잘못된 차단 건수              18 → 13 (-5건)          16 → 13 (-3건)
+올바른 차단율 변화            +3.45%p                   0.00%p
+잘못된 차단율 변화            -6.50%p                  -3.90%p
+```
+
+V3는 V1보다 두 차단율이 모두 개선되었고,
+V2와 동일한 올바른 차단율을 유지하면서 잘못된 차단율을 낮췄다.
+따라서 V1~V3 중 Judge 단독 평가의 두 목표를 가장 잘 충족한 V3를
+End-to-End 및 답변 품질 평가 대상으로 선정하였다.
+건수 변화는 순증감이며 개별 질문의 판정 유지 및 복구를 보장하지 않는다.
+
+V3 Judge 단독 평가 기록:
+
+```text
+결과 폴더     stage2_prompt_ab/fast_jn56833u/
+Judge 미적중  720회
+실행 시간     138.19초
+```
+
+---
+
+## 28. V3 End-to-End 및 품질 재평가
+
+2026-11-25, V3 프롬프트를 사용하여 전체 106건을 다시 평가하였다.
+기존 Stage2의 검색 후보 및 순서는 유지하여 프롬프트의 영향만 비교하였다.
+기존 캐시를 재사용하지 않도록 한 뒤 V3 Judge, Generator, Verifier를 신규 실행하였다.
+비교 기준인 기존 Stage2의 답변은 저장된 기록을 사용하였으며,
+두 시스템의 Answer Correctness 및 Faithfulness를 동일 평가 코드로 평가하였다.
+
+실행:
+
+```powershell
+python IBMTechSupport/scripts/evaluate/evaluate_stage2_prompt_fast.py --prompt IBMTechSupport/evaluate_results/106/rag/stage2_prompt_ab/fast_jn56833u/candidate_prompt.txt --full --quality --no-historical-cache
+```
+
+```text
+평가 모드                     full + quality
+Judge 신규 추론               720회
+Generator 신규 추론             75회
+Grounding Verifier 신규 추론    74회
+품질 평가 캐시 미적중          285회
+품질 평가 캐시 적중              3회
+과거 품질 평가 캐시 주입       False
+전체 실행 시간                1,611.39초 (약 26분 51초)
+```
+
+V3의 Judge 집계는 기존 단독 평가와 동일하게 재현되었다.
+품질 평가에서는 동일 평가 입력에 대한 캐시 적중 3회가 발생하였다.
+전체 실행 시간은 품질 평가까지 포함하고 Retrieval을 제외하므로
+실서비스 요청당 Latency 또는 기존 Judge 단독 실행 시간과 직접 비교하지 않는다.
+
+### 28-1. 최종 시스템 성능 비교
+
+```text
+평가 지표                         Stage2 A      V1         V2        V3
+Retrieval Hit@5                    85.71%     85.71%     동일*     85.71%
+Token F1                           32.01%     27.70%     미측정    28.49%
+Exact Match                         0.00%      0.00%     미측정     0.00%
+올바른 거부율                      17.24%     65.52%     미측정    65.52%
+잘못된 거부율                      10.39%     25.97%     미측정    24.68%
+Answer Correctness                 72.73%     미측정     미측정    57.14%
+Faithfulness                       35.48%     미측정     미측정    70.59%
+```
+
+* V2는 동일한 저장 검색 결과를 이용한 Judge 단독 실험이며 End-to-End 미측정이다.
+검색 성능은 기존 Stage2의 검색 기록을 사용한 값으로 신규 Retrieval 실험 결과가 아니다.
+기존 15절에서 Stage2 Faithfulness는 34.41% (32/93)였으나,
+이번 비교 평가에서는 35.48% (33/93)로 측정되었다.
+원인은 상세 평가 기록 비교 전까지 확정하지 않으며, 같은 평가 실행의 수치를 비교한다.
+
+V3의 최종 답변 반환 및 거부 건수:
+
+```text
+항목                         Stage2 A     V1       V3       A → V3
+답변 가능 질문 응답             69건      57건     58건       -11건
+답변 가능 질문 거부              8건      20건     19건       +11건
+답변 불가능 질문 응답           24건      10건     10건       -14건
+답변 불가능 질문 거부            5건      19건     19건       +14건
+전체 답변 반환                  93건      67건     68건       -25건
+전체 거부                       13건      39건     38건       +25건
+```
+
+V3는 V1과 동일한 최종 정상 거부율을 유지하면서 잘못된 거부를 1건 줄였고,
+Token F1을 27.70%에서 28.49%로 0.79%p 개선하였다.
+V1 및 V2의 의미적 품질은 미측정이므로 V3가 해당 지표에서도 우수하다고 단정하지 않는다.
+
+### 28-2. V3 단계별 최종 처리 상태
+
+```text
+최종 상태                     Stage2 A       V3
+EVIDENCE_NO                        2건       29건
+EVIDENCE_UNCERTAIN                 0건        2건
+GENERATOR_ABSTAINED                3건        1건
+ANSWER_NO                          7건        5건
+ANSWER_UNCERTAIN                   1건        1건
+ANSWER_VERIFIED                   93건       68건
+```
+
+V3의 Judge 차단 31건 중 18건은 답변 불가능, 13건은 답변 가능 질문이다.
+Judge 통과 75건 중 추가로 7건이 Generator 및 Verifier에서 차단되었다.
+추가 차단은 답변 불가능 질문 1건과 답변 가능 질문 6건이다.
+최종적으로 38건이 거부되고 68건의 답변이 반환되었다.
+ANSWER_VERIFIED는 내부 검증 통과이며 실제 정답을 보장하지 않는다.
+
+### 28-3. 답변 가능 여부 분류 지표
+
+답변 가능한 질문에 대한 허용 또는 최종 응답을 양성으로 정의하였다.
+Judge 단계와 End-to-End의 응답/거부 분류를 구분한다.
+
+```text
+평가 지표                     Stage2 Judge   V3 Judge   Stage2 E2E   V3 E2E
+TP / FP / FN / TN               76/28/1/1    64/11/13/18   69/24/8/5   58/10/19/19
+Accuracy                          72.64%      77.36%       69.81%      72.64%
+Precision                         73.08%      85.33%       74.19%      85.29%
+Recall                            98.70%      83.12%       89.61%      75.32%
+Classification F1                 83.98%      84.21%       81.18%      80.00%
+Specificity                        3.45%      62.07%       17.24%      65.52%
+Balanced Accuracy                 51.07%      72.59%       53.43%      70.42%
+```
+
+Classification F1은 답변 가능 여부 분류 지표이며 생성 답변의 Token F1과 다르다.
+Precision은 답변을 허용하거나 반환한 질문 중 데이터셋상 답변 가능한 질문의 비율이다.
+따라서 의미적 정답률과 동일하지 않다.
+
+---
+
+## 29. Answer Correctness 및 Faithfulness 분석
+
+### 29-1. Answer Correctness (의미적·기술적 정확성)
+
+답변 가능 질문 77건 전체를 기준으로 평가하였다.
+거부 및 UNCERTAIN을 정답으로 인정하지 않는다.
+
+```text
+평가 항목                          Stage2 A       V3       변화
+CORRECT                               56건      44건      -12건
+PARTIAL                                0건       0건        0건
+INCORRECT                              2건       6건       +4건
+UNCERTAIN                             11건       8건       -3건
+REFUSED                                8건      19건      +11건
+Strict Correctness                   72.73%    57.14%    -15.59%p
+응답한 답변 가능 질문의 정답률       81.16%    75.86%     -5.30%p
+확정 판정만의 정답률                 96.55%    88.00%     -8.55%p
+```
+
+V3는 과도한 차단으로 인해 답변 가능 질문의 응답 범위가 줄었다.
+실제로 응답한 답변 가능 질문만 비교해도 자동 평가 정답률은 낮아졌다.
+따라서 의미적 정확성의 하락을 거부 증가만으로 설명할 수 없다.
+Judge가 정답에 필요한 청크를 제외했을 가능성이 있으나,
+정답 청크, 실제 사용 청크 및 생성 답변을 사례별로 비교해야 원인을 확정할 수 있다.
+
+### 29-2. Faithfulness (근거 충실도)
+
+실제 답변을 반환한 사례를 분모로 하며, Generator에 전달된 청크만을 근거로 평가한다.
+모든 핵심 기술적 주장이 근거에 의해 뒷받침되는 답변의 비율이다.
+
+```text
+평가 항목                         Stage2 A          V3          변화
+전체 반환 답변                       93건          68건         -25건
+SUPPORTED                        33 (35.48%)   48 (70.59%)      +15건
+UNSUPPORTED                      23 (24.73%)    5 (7.35%)       -18건
+UNCERTAIN                        37 (39.78%)   15 (22.06%)      -22건
+Strict Faithfulness                  35.48%        70.59%       +35.11%p
+확정 판정 기준 Faithfulness          58.93%        90.57%       +31.64%p
+UNSUPPORTED 비율                     24.73%         7.35%       -17.38%p
+```
+
+V3는 답변 반환 수가 25건 감소했음에도 SUPPORTED 판정 답변이 15건 증가하였다.
+UNSUPPORTED 판정 답변은 23건에서 5건으로 감소하였다.
+이는 반환 답변의 분모 감소만으로 설명되지 않는 개선이며,
+검색 후보 중 생성에 사용되는 근거의 선별이 달라진 효과와 부합한다.
+다만 SUPPORTED는 정답 또는 질문에 대한 완전한 해결책과 동일하지 않으며,
+UNSUPPORTED도 반드시 사실과 다른 답변이라는 뜻은 아니다.
+
+### 29-3. 평가 신뢰성 및 추가 검증
+
+```text
+평가 출력 형식 오류                 Stage2 A     V3
+Correctness                            11건      8건
+Faithfulness                           37건     15건
+```
+
+자동 평가기의 형식 오류는 UNCERTAIN으로 처리되었다.
+이번 결과에서 형식 오류 건수와 UNCERTAIN 건수가 일치한다.
+확정 판정 기준 지표는 이러한 사례를 제외하므로 전체 성능으로 해석하지 않는다.
+평가 프롬프트는 서비스 Judge 및 Verifier와 별개이지만 동일한 Qwen2.5-1.5B-Instruct
+가중치를 사용하므로 평가 편향 및 판정 오류 가능성이 있다.
+정확하면서 근거 충실한 답변의 교집합은 집계 수치만으로 계산할 수 없다.
+질문별 quality_cases.jsonl을 결합하여 별도 산출하고 사람의 검증을 진행해야 한다.
+
+---
+
+## 30. Stage2 대비 V3 선택의 Trade-off 및 최종 결정
+
+IBM 기술지원 챗봇은 제품, 버전, 실행 환경 및 오류 상황에 맞지 않는 해결책을 제공할 경우
+잘못된 설정 변경이나 장애 해결 지연을 유발할 수 있다.
+따라서 답변을 많이 생성하는 것뿐 아니라 근거에 기반한 답변을 반환하고,
+답변 불가능한 질문에 무리하게 해결책을 제공하지 않는 것을 우선한다.
+
+Stage2 → Stage2 + V3 비교:
+
+```text
+개선 항목                             기존 Stage2       V3          변화
+근거 충실도 (Faithfulness)               35.48%        70.59%       +35.11%p
+올바른 최종 거부율                       17.24%        65.52%       +48.28%p
+근거 충분 판정 답변                       33건          48건        +15건
+근거 부족 판정 답변                       23건           5건        -18건
+답변 불가능 질문에 대한 응답              24건          10건        -14건
+최종 응답/거부 분류 Accuracy             69.81%        72.64%        +2.83%p
+
+하락 항목                             기존 Stage2       V3          변화
+의미적 정확성 (Answer Correctness)       72.73%        57.14%       -15.59%p
+답변 가능한 질문의 응답률                89.61%        75.32%       -14.29%p
+응답한 답변 가능 질문의 정답률           81.16%        75.86%        -5.30%p
+잘못된 최종 거부율                       10.39%        24.68%       +14.29%p (악화)
+Token F1                                 32.01%        28.49%        -3.52%p
+최종 응답/거부 Classification F1         81.18%        80.00%        -1.18%p
+
+유지 항목                             기존 Stage2       V3
+Retrieval Hit@5                         85.71%        85.71%
+Retrieval Hit@10                        90.91%        90.91%
+Exact Match                              0.00%         0.00%
+```
+
+Trade-off:
+
+기존 Stage2는 답변 가능 질문에 대한 응답률과 의미적 정답률에서 우세하지만,
+답변 불가능 질문 29건 중 24건에 답변하는 문제가 있었다.
+V3는 이 수를 10건으로 줄였고 근거 부족으로 평가된 답변도 크게 줄였다.
+그 대신 답변 가능 질문의 거부가 11건 늘고 의미적 정답 판정 답변이 12건 감소하였다.
+즉 정확성의 모든 측면이 개선된 것이 아니라 근거 충실성과 불가능 질문 차단을
+우선한 결과이며, 응답 범위와 의미적 정확성의 손실을 감수하는 선택이다.
+실제 잘못된 해결책으로 인한 피해 감소는 별도로 검증되지 않았다.
+
+최종 선정 이유:
+
+```text
+1. V1~V3 중 올바른 Judge 차단율을 유지하면서 잘못된 차단율을 가장 낮춤.
+2. V1 대비 최종 올바른 거부율 유지, 잘못된 거부율 및 Token F1 개선.
+3. 기존 Stage2 대비 Faithfulness 개선 및 답변 불가능 질문 응답 감소.
+4. 기존 Retrieval 및 모델 가중치를 유지하므로 검색 구조나 학습 변경 없이 적용 가능.
+5. 기술지원 서비스에서 근거 없는 답변의 위험을 응답 범위보다 우선적으로 고려.
+```
+
+최종 결정:
+
+```text
+후속 모델 비교용 RAG 후보      Stage2 Retrieval + Answerability Judge V3
+기존 Stage2                    비교 기준 및 이전 설정으로 보존
+Generator / Grounding Verifier 기존 Stage2 유지
+프롬프트 V1 / V2                실험 기록 보존
+서비스 적용                    독립 Test 및 품질 검증 전 미확정
+```
+
+V3는 현재 검증된 범위에서 위험 관리 목적에 부합하는 후보로 선택한다.
+모든 지표에서 기존 Stage2보다 우수하거나 실서비스 정확성이 보장된다는 의미는 아니다.
+이 결정은 Faithfulness와 올바른 거부율에 우선순위를 둔 설계 선택이며,
+실제 업무에서의 오답 비용과 거부 비용을 정량화한 최적화 결과는 아니다.
+
+후속 작업:
+
+```text
+1. V3의 최종 잘못된 거부 19건 및 답변 불가능 질문 응답 10건 분석
+2. Correctness / Faithfulness 평가 출력 형식 오류 및 실제 오답 검증
+3. 의미적으로 정확하면서 근거 충실한 답변의 교집합 산출
+4. V3 설정을 고정한 뒤 Base / RAG / LoRA / QLoRA / 조합 모델 비교
+5. 새로운 독립 Test 데이터로 일반화 성능 검증
+```
+
+동일한 val_106을 이용해 프롬프트를 선정했으므로 일반화 성능은 아직 검증되지 않았다.
+이번 개선 실험에는 test_clean.json을 사용하지 않았다.
+
+최종 V3 평가 결과 경로:
+
+```text
+evaluate_results/106/rag/stage2_prompt_ab/fast_l81g4igl/
+    candidate_prompt.txt
+    experiment.json
+    comparison.json
+    judge_cases.jsonl
+    predictions.jsonl
+    generation_manifest.json
+    quality_comparison.json
+    baseline_quality_cases.jsonl
+    candidate_quality_cases.jsonl
+```
+
+기존 1~25절은 당시 실험 이력으로 유지하며,
+후속 RAG 후보 선정 및 최신 품질 비교는 26~30절의 결정을 기준으로 한다.

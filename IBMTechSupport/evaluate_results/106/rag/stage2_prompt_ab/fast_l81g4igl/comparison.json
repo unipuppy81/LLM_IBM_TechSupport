@@ -1,0 +1,97 @@
+{
+  "status": "COMPLETED",
+  "mode": "full",
+  "judge_only_proxy": {
+    "baseline": {
+      "total": 106,
+      "answerable": 77,
+      "impossible": 29,
+      "decisions": {
+        "YES": 104,
+        "NO": 2
+      },
+      "answerable_blocked": 1,
+      "impossible_blocked": 1,
+      "answerable_blocked_percent": 1.3,
+      "impossible_blocked_percent": 3.45
+    },
+    "candidate": {
+      "total": 106,
+      "answerable": 77,
+      "impossible": 29,
+      "decisions": {
+        "NO": 29,
+        "YES": 75,
+        "UNCERTAIN": 2
+      },
+      "answerable_blocked": 13,
+      "impossible_blocked": 18,
+      "answerable_blocked_percent": 16.88,
+      "impossible_blocked_percent": 62.07
+    }
+  },
+  "cache_stats": {
+    "judge_miss": 720,
+    "generation_miss": 75,
+    "verification_miss": 74
+  },
+  "note": "Judge-only blocked rates use dataset labels as proxies, not actual evidence sufficiency or final refusal rates. Screening is not a generalization test. Cached timing fields are zero; do not use them for latency comparisons.",
+  "baseline": {
+    "model": "Qwen2.5-1.5B-Instruct",
+    "dataset": "val_106.json",
+    "total": 106,
+    "batch_size": 1,
+    "max_new_tokens": 160,
+    "answerable": 77,
+    "impossible": 29,
+    "exact_match_percent": 0.0,
+    "token_f1_percent": 32.01,
+    "abstention_rate_percent": 17.24,
+    "false_refusal_rate_percent": 10.39
+  },
+  "new_prompt": {
+    "model": "Qwen2.5-1.5B-Instruct",
+    "dataset": "val_106.json",
+    "total": 106,
+    "batch_size": 1,
+    "max_new_tokens": 160,
+    "answerable": 77,
+    "impossible": 29,
+    "exact_match_percent": 0.0,
+    "token_f1_percent": 28.49,
+    "abstention_rate_percent": 65.52,
+    "false_refusal_rate_percent": 24.68
+  },
+  "delta_pp": {
+    "token_f1_percent": -3.52,
+    "abstention_rate_percent": 48.28,
+    "false_refusal_rate_percent": 14.29
+  },
+  "counts": {
+    "baseline": {
+      "answerable_refused": 8,
+      "impossible_answered": 24,
+      "statuses": {
+        "ANSWER_VERIFIED": 93,
+        "ANSWER_NO": 7,
+        "EVIDENCE_NO": 2,
+        "GENERATOR_ABSTAINED": 3,
+        "ANSWER_UNCERTAIN": 1
+      }
+    },
+    "new_prompt": {
+      "answerable_refused": 19,
+      "impossible_answered": 10,
+      "statuses": {
+        "EVIDENCE_NO": 29,
+        "ANSWER_VERIFIED": 68,
+        "EVIDENCE_UNCERTAIN": 2,
+        "ANSWER_NO": 5,
+        "ANSWER_UNCERTAIN": 1,
+        "GENERATOR_ABSTAINED": 1
+      }
+    }
+  },
+  "quality_file": "quality_comparison.json",
+  "wall_seconds": 1611.39
+}

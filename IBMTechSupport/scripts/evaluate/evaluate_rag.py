@@ -31,6 +31,8 @@ def create_predictions(records, config):
     if retry_top_k < top_k:
         raise ValueError("guardrails.retry_top_k must be >= retrieval.top_k")
 
+    guardrail_runner = choose_guardrail_runner(config) if guarded else None
+
     questions = [record["question"] for record in records]
     # Fetch the full fallback window once, but initially judge only top_k.
     documents_by_question, retrieval_seconds = retrieve_all(questions, method, retry_top_k)
@@ -50,7 +52,7 @@ def create_predictions(records, config):
 
     for index, (record, documents) in enumerate(zip(records, documents_by_question), start=1):
         if guarded:
-            guarded_result = choose_guardrail_runner(config)(
+            guarded_result = guardrail_runner(
                 question=record["question"],
                 retrieved_documents=documents,
                 model=model,
@@ -107,6 +109,10 @@ def create_predictions(records, config):
     if guarded:
         stats.update({
             "guardrails_enabled": True,
+            "judge_mode": guardrails.get("judge_mode", "strict"),
+            **({"answerability_prompt_sha256": guardrails["answerability_prompt_sha256"],
+                "retrieval_config_sha256": guardrails["retrieval_config_sha256"]}
+               if guardrails.get("judge_mode") == "per_document_v3" else {}),
             "judge_seconds": round(judge_seconds, 3),
             "verification_seconds": round(verification_seconds, 3),
             "guardrail_status_counts": dict(guardrail_counts),
