@@ -1,0 +1,239 @@
+{
+  "schema": "retrieval-stage3-optimization-v1",
+  "dataset": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\val_106.json",
+  "answerable": 77,
+  "stage2_baseline": {
+    "hit5_count": 66,
+    "hit_at_5_percent": 85.7143
+  },
+  "target": {
+    "percent": 95.0,
+    "minimum_hit5_count": 74
+  },
+  "search_space": {
+    "wide_k": 100,
+    "rrf_k": [
+      5,
+      10,
+      20,
+      40
+    ],
+    "bm25_weight": [
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "dense_weight": 1.0,
+    "filter_strength": [
+      0.0,
+      0.5,
+      1.0
+    ],
+    "candidate_k": [
+      20,
+      30,
+      50
+    ],
+    "prior_alpha": [
+      0.25,
+      0.5,
+      0.75,
+      1.0,
+      1.5,
+      2.0
+    ],
+    "reranker_input": [
+      "text",
+      "metadata"
+    ],
+    "total_configs": 1728,
+    "workers": 12,
+    "mp_batch_size": 12
+  },
+  "best": {
+    "config": {
+      "wide_k": 100,
+      "rrf_k": 20,
+      "bm25_weight": 0.5,
+      "dense_weight": 1.0,
+      "filter_strength": 1.0,
+      "candidate_k": 20,
+      "prior_alpha": 1.0,
+      "reranker_input": "metadata"
+    },
+    "metrics": {
+      "answerable_evaluated": 77,
+      "hit_at_1_percent": 58.4416,
+      "hit_at_3_percent": 72.7273,
+      "hit_at_5_percent": 88.3117,
+      "hit_at_10_percent": 89.6104,
+      "recall_at_5_percent": 87.013,
+      "precision_at_5": 0.179221,
+      "mrr_at_10": 0.688745,
+      "ndcg_at_5": 0.728232,
+      "hit5_count": 68
+    },
+    "failed_hit5_ids": [
+      "TRAIN_Q526",
+      "TRAIN_Q343",
+      "TRAIN_Q222",
+      "TRAIN_Q360",
+      "TRAIN_Q498",
+      "DEV_Q210",
+      "TRAIN_Q493",
+      "TRAIN_Q299",
+      "TRAIN_Q063"
+    ],
+    "target_reached": false
+  },
+  "cross_validation": {
+    "folds": 5,
+    "aggregate_heldout_metrics": {
+      "answerable_evaluated": 77,
+      "hit_at_1_percent": 62.3377,
+      "hit_at_3_percent": 77.9221,
+      "hit_at_5_percent": 81.8182,
+      "hit_at_10_percent": 88.3117,
+      "recall_at_5_percent": 79.8701,
+      "precision_at_5": 0.163636,
+      "mrr_at_10": 0.71008,
+      "ndcg_at_5": 0.719364,
+      "hit5_count": 63
+    },
+    "fold_selections": [
+      {
+        "fold": 1,
+        "validation_size": 16,
+        "selected_config": {
+          "wide_k": 100,
+          "rrf_k": 20,
+          "bm25_weight": 0.5,
+          "dense_weight": 1.0,
+          "filter_strength": 1.0,
+          "candidate_k": 20,
+          "prior_alpha": 1.5,
+          "reranker_input": "metadata"
+        },
+        "heldout_metrics": {
+          "answerable_evaluated": 16,
+          "hit_at_1_percent": 68.75,
+          "hit_at_3_percent": 75.0,
+          "hit_at_5_percent": 75.0,
+          "hit_at_10_percent": 81.25,
+          "recall_at_5_percent": 71.875,
+          "precision_at_5": 0.15,
+          "mrr_at_10": 0.729167,
+          "ndcg_at_5": 0.702755,
+          "hit5_count": 12
+        }
+      },
+      {
+        "fold": 2,
+        "validation_size": 16,
+        "selected_config": {
+          "wide_k": 100,
+          "rrf_k": 5,
+          "bm25_weight": 0.25,
+          "dense_weight": 1.0,
+          "filter_strength": 1.0,
+          "candidate_k": 30,
+          "prior_alpha": 0.75,
+          "reranker_input": "text"
+        },
+        "heldout_metrics": {
+          "answerable_evaluated": 16,
+          "hit_at_1_percent": 75.0,
+          "hit_at_3_percent": 87.5,
+          "hit_at_5_percent": 87.5,
+          "hit_at_10_percent": 87.5,
+          "recall_at_5_percent": 84.375,
+          "precision_at_5": 0.175,
+          "mrr_at_10": 0.802083,
+          "ndcg_at_5": 0.808594,
+          "hit5_count": 14
+        }
+      },
+      {
+        "fold": 3,
+        "validation_size": 15,
+        "selected_config": {
+          "wide_k": 100,
+          "rrf_k": 5,
+          "bm25_weight": 0.5,
+          "dense_weight": 1.0,
+          "filter_strength": 1.0,
+          "candidate_k": 20,
+          "prior_alpha": 2.0,
+          "reranker_input": "metadata"
+        },
+        "heldout_metrics": {
+          "answerable_evaluated": 15,
+          "hit_at_1_percent": 40.0,
+          "hit_at_3_percent": 73.3333,
+          "hit_at_5_percent": 80.0,
+          "hit_at_10_percent": 93.3333,
+          "recall_at_5_percent": 80.0,
+          "precision_at_5": 0.16,
+          "mrr_at_10": 0.581746,
+          "ndcg_at_5": 0.621564,
+          "hit5_count": 12
+        }
+      },
+      {
+        "fold": 4,
+        "validation_size": 15,
+        "selected_config": {
+          "wide_k": 100,
+          "rrf_k": 20,
+          "bm25_weight": 0.5,
+          "dense_weight": 1.0,
+          "filter_strength": 1.0,
+          "candidate_k": 20,
+          "prior_alpha": 1.0,
+          "reranker_input": "text"
+        },
+        "heldout_metrics": {
+          "answerable_evaluated": 15,
+          "hit_at_1_percent": 80.0,
+          "hit_at_3_percent": 86.6667,
+          "hit_at_5_percent": 86.6667,
+          "hit_at_10_percent": 93.3333,
+          "recall_at_5_percent": 86.6667,
+          "precision_at_5": 0.173333,
+          "mrr_at_10": 0.844444,
+          "ndcg_at_5": 0.842062,
+          "hit5_count": 13
+        }
+      },
+      {
+        "fold": 5,
+        "validation_size": 15,
+        "selected_config": {
+          "wide_k": 100,
+          "rrf_k": 20,
+          "bm25_weight": 0.5,
+          "dense_weight": 1.0,
+          "filter_strength": 1.0,
+          "candidate_k": 20,
+          "prior_alpha": 1.0,
+          "reranker_input": "metadata"
+        },
+        "heldout_metrics": {
+          "answerable_evaluated": 15,
+          "hit_at_1_percent": 46.6667,
+          "hit_at_3_percent": 66.6667,
+          "hit_at_5_percent": 80.0,
+          "hit_at_10_percent": 86.6667,
+          "recall_at_5_percent": 76.6667,
+          "precision_at_5": 0.16,
+          "mrr_at_10": 0.585556,
+          "ndcg_at_5": 0.617002,
+          "hit5_count": 12
+        }
+      }
+    ]
+  },
+  "elapsed_grid_seconds": 2837.306,
+  "note": "This optimizer uses only val_106. test_clean is not read. The candidate YAML is not a production freeze until its result is reviewed."
+}

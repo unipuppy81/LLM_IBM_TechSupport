@@ -1,0 +1,36 @@
+version: stage3-candidate-v1
+frozen: false
+source_dataset: C:\Projects\LLM_IBM_TechSupport\IBMTechSupport\data\processed\val_106.json
+target_hit5_percent: 95.0
+selected:
+  wide_k: 100
+  rrf_k: 20
+  bm25_weight: 0.5
+  dense_weight: 1.0
+  filter_strength: 1.0
+  candidate_k: 20
+  prior_alpha: 1.0
+  reranker_input: metadata
+selected_metrics:
+  answerable_evaluated: 77
+  hit_at_1_percent: 58.4416
+  hit_at_3_percent: 72.7273
+  hit_at_5_percent: 88.3117
+  hit_at_10_percent: 89.6104
+  recall_at_5_percent: 87.013
+  precision_at_5: 0.179221
+  mrr_at_10: 0.688745
+  ndcg_at_5: 0.728232
+  hit5_count: 68
+cross_validation_heldout_metrics:
+  answerable_evaluated: 77
+  hit_at_1_percent: 62.3377
+  hit_at_3_percent: 77.9221
+  hit_at_5_percent: 81.8182
+  hit_at_10_percent: 88.3117
+  recall_at_5_percent: 79.8701
+  precision_at_5: 0.163636
+  mrr_at_10: 0.71008
+  ndcg_at_5: 0.719364
+  hit5_count: 63
+warning: Candidate only. Do not use in final-test until reviewed and frozen.

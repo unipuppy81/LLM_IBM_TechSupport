@@ -1,0 +1,73 @@
+{
+  "false_refusals": 20,
+  "newly_refused": 17,
+  "retained_refusals": 3,
+  "restored_non_abstentions": 5,
+  "final_status_counts": {
+    "EVIDENCE_NO": 16,
+    "ANSWER_NO": 2,
+    "EVIDENCE_UNCERTAIN": 2
+  },
+  "newly_refused_status_counts": {
+    "EVIDENCE_NO": 13,
+    "ANSWER_NO": 2,
+    "EVIDENCE_UNCERTAIN": 2
+  },
+  "lexical_evidence_checks": {
+    "gold_filename_in_top5": 17,
+    "gold_filename_in_top10": 17,
+    "reference_substring_in_top5": 8,
+    "reference_substring_in_top10": 8
+  },
+  "transitions": [
+    {
+      "is_impossible": false,
+      "baseline": "answered",
+      "new_prompt": "answered",
+      "count": 52
+    },
+    {
+      "is_impossible": false,
+      "baseline": "answered",
+      "new_prompt": "refused",
+      "count": 17
+    },
+    {
+      "is_impossible": false,
+      "baseline": "refused",
+      "new_prompt": "answered",
+      "count": 5
+    },
+    {
+      "is_impossible": false,
+      "baseline": "refused",
+      "new_prompt": "refused",
+      "count": 3
+    },
+    {
+      "is_impossible": true,
+      "baseline": "answered",
+      "new_prompt": "answered",
+      "count": 9
+    },
+    {
+      "is_impossible": true,
+      "baseline": "answered",
+      "new_prompt": "refused",
+      "count": 15
+    },
+    {
+      "is_impossible": true,
+      "baseline": "refused",
+      "new_prompt": "answered",
+      "count": 1
+    },
+    {
+      "is_impossible": true,
+      "baseline": "refused",
+      "new_prompt": "refused",
+      "count": 4
+    }
+  ],
+  "note": "Exact filename/substring matches are diagnostic clues, not sufficient proof. Prompt instruction responsible for NO is not observable from one-word judgments. Manual review required."
+}

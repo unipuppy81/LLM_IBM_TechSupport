@@ -101,8 +101,11 @@ def limit_chunks_per_document(ranking, source_keys, max_chunks):
     return filtered
 
 
-def search_all(model, faiss_index, bm25_index, questions):
+def search_all(model, faiss_index, bm25_index, questions, *, document_fusion=False, depth=100):
     """각 질문에 대해 (BM25 순위, Dense 순위, Hybrid 순위, RRF 점수) 반환."""
+    if document_fusion:
+        return _search_all_stage3_documents(model, faiss_index, bm25_index,
+                                            questions, depth=depth)
     k = min(CANDIDATE_K, faiss_index.ntotal)
     retriever, tokenizer, chunk_id_to_row_id = bm25_index
 
@@ -153,6 +156,59 @@ def search_all(model, faiss_index, bm25_index, questions):
     return all_results
 
 
+def _search_all_stage3_documents(model, faiss_index, bm25_index, questions, *, depth=100):
+    """Fuse unique source-document ranks, select one evidence chunk per document.
+
+    Only the small final shortlist is scored by a single CrossEncoder model.
+    This function does not use gold labels or any validation-specific identifiers.
+    """
+    k = min(max(1, int(depth)), int(faiss_index.ntotal))
+    retriever, tokenizer, chunk_id_to_row_id = bm25_index
+    vectors = encode_questions(model, questions)
+    _, dense_ids = faiss_index.search(vectors, k)
+    source_keys = chunk_id_to_row_id.source_keys
+    results = []
+    # Standard, stable RRF offset without changing the frozen Stage2 setting.
+    stage3_rrf_k = 60
+
+    for question, ids in zip(questions, dense_ids):
+        lexical = bm25_retrieve(question, retriever, tokenizer, k)
+        bm25_rows = [chunk_id_to_row_id[item["chunk_id"]]
+                     for item in lexical if item["score"] > 0]
+        dense_rows = [int(row_id) for row_id in ids if row_id >= 0]
+
+        def unique_documents(rows):
+            best = {}
+            for row_id in rows:
+                key = source_keys[row_id]
+                if key not in best:
+                    best[key] = (len(best) + 1, row_id)
+            return best
+
+        b_docs = unique_documents(bm25_rows)
+        d_docs = unique_documents(dense_rows)
+        by_document = {}
+        for key in b_docs.keys() | d_docs.keys():
+            b = b_docs.get(key)
+            d = d_docs.get(key)
+            bm25_component = BM25_WEIGHT / (stage3_rrf_k + b[0]) if b else 0.0
+            dense_component = DENSE_WEIGHT / (stage3_rrf_k + d[0]) if d else 0.0
+            # Prefer a chunk ranking strongly in either retrieval channel,
+            # rather than blindly choosing the first chunk of a document.
+            row_id = (b[1] if b and (not d or bm25_component >= dense_component)
+                      else d[1])
+            by_document[key] = (row_id, bm25_component + dense_component)
+
+        # Deterministic tie-break, one representative chunk per source document.
+        chosen = sorted(by_document.values(), key=lambda item: (-item[1], item[0]))
+        ranking = [row_id for row_id, _ in chosen]
+        scores = {row_id: float(score) for row_id, score in chosen}
+        results.append((bm25_rows, dense_rows, ranking, scores))
+
+    return results
+
+
+# STAGE3_LIGHT_RUNTIME_V1
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--question", required=True, type=str)

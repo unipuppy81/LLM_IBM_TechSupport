@@ -1,0 +1,37 @@
+{
+  "status": "COMPLETED",
+  "mode": "screen",
+  "judge_only_proxy": {
+    "baseline": {
+      "total": 20,
+      "answerable": 12,
+      "impossible": 8,
+      "decisions": {
+        "YES": 20
+      },
+      "answerable_blocked": 0,
+      "impossible_blocked": 0,
+      "answerable_blocked_percent": 0.0,
+      "impossible_blocked_percent": 0.0
+    },
+    "candidate": {
+      "total": 20,
+      "answerable": 12,
+      "impossible": 8,
+      "decisions": {
+        "NO": 6,
+        "YES": 11,
+        "UNCERTAIN": 3
+      },
+      "answerable_blocked": 4,
+      "impossible_blocked": 5,
+      "answerable_blocked_percent": 33.33,
+      "impossible_blocked_percent": 62.5
+    }
+  },
+  "cache_stats": {
+    "judge_hit": 145
+  },
+  "note": "Judge-only blocked rates use dataset labels as proxies, not actual evidence sufficiency or final refusal rates. Screening is not a generalization test. Cached timing fields are zero; do not use them for latency comparisons.",
+  "wall_seconds": 8.04
+}

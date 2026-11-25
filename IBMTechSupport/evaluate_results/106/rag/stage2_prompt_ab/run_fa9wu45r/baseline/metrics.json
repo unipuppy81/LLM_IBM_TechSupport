@@ -1,0 +1,13 @@
+{
+  "model": "Qwen2.5-1.5B-Instruct",
+  "dataset": "val_106.json",
+  "total": 106,
+  "batch_size": 1,
+  "max_new_tokens": 160,
+  "answerable": 77,
+  "impossible": 29,
+  "exact_match_percent": 0.0,
+  "token_f1_percent": 32.01,
+  "abstention_rate_percent": 17.24,
+  "false_refusal_rate_percent": 10.39
+}

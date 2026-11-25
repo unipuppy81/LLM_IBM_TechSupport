@@ -1,0 +1,362 @@
+[
+  {
+    "rank": 1,
+    "config": {
+      "wide_k": 100,
+      "rrf_k": 20,
+      "bm25_weight": 0.5,
+      "dense_weight": 1.0,
+      "filter_strength": 1.0,
+      "candidate_k": 20,
+      "prior_alpha": 1.0,
+      "reranker_input": "metadata"
+    },
+    "metrics": {
+      "answerable_evaluated": 77,
+      "hit_at_1_percent": 58.4416,
+      "hit_at_3_percent": 72.7273,
+      "hit_at_5_percent": 88.3117,
+      "hit_at_10_percent": 89.6104,
+      "recall_at_5_percent": 87.013,
+      "precision_at_5": 0.179221,
+      "mrr_at_10": 0.688745,
+      "ndcg_at_5": 0.728232,
+      "hit5_count": 68
+    },
+    "failed_hit5_ids": [
+      "TRAIN_Q526",
+      "TRAIN_Q343",
+      "TRAIN_Q222",
+      "TRAIN_Q360",
+      "TRAIN_Q498",
+      "DEV_Q210",
+      "TRAIN_Q493",
+      "TRAIN_Q299",
+      "TRAIN_Q063"
+    ]
+  },
+  {
+    "rank": 2,
+    "config": {
+      "wide_k": 100,
+      "rrf_k": 5,
+      "bm25_weight": 0.25,
+      "dense_weight": 1.0,
+      "filter_strength": 1.0,
+      "candidate_k": 30,
+      "prior_alpha": 0.75,
+      "reranker_input": "text"
+    },
+    "metrics": {
+      "answerable_evaluated": 77,
+      "hit_at_1_percent": 54.5455,
+      "hit_at_3_percent": 80.5195,
+      "hit_at_5_percent": 88.3117,
+      "hit_at_10_percent": 89.6104,
+      "recall_at_5_percent": 86.3636,
+      "precision_at_5": 0.176623,
+      "mrr_at_10": 0.679654,
+      "ndcg_at_5": 0.719803,
+      "hit5_count": 68
+    },
+    "failed_hit5_ids": [
+      "TRAIN_Q236",
+      "TRAIN_Q526",
+      "TRAIN_Q343",
+      "TRAIN_Q222",
+      "TRAIN_Q360",
+      "DEV_Q210",
+      "TRAIN_Q493",
+      "TRAIN_Q299",
+      "TRAIN_Q063"
+    ]
+  },
+  {
+    "rank": 3,
+    "config": {
+      "wide_k": 100,
+      "rrf_k": 10,
+      "bm25_weight": 0.25,
+      "dense_weight": 1.0,
+      "filter_strength": 1.0,
+      "candidate_k": 30,
+      "prior_alpha": 0.75,
+      "reranker_input": "text"
+    },
+    "metrics": {
+      "answerable_evaluated": 77,
+      "hit_at_1_percent": 54.5455,
+      "hit_at_3_percent": 79.2208,
+      "hit_at_5_percent": 88.3117,
+      "hit_at_10_percent": 90.9091,
+      "recall_at_5_percent": 86.3636,
+      "precision_at_5": 0.176623,
+      "mrr_at_10": 0.674892,
+      "ndcg_at_5": 0.715281,
+      "hit5_count": 68
+    },
+    "failed_hit5_ids": [
+      "TRAIN_Q236",
+      "TRAIN_Q526",
+      "TRAIN_Q343",
+      "TRAIN_Q222",
+      "TRAIN_Q360",
+      "DEV_Q210",
+      "TRAIN_Q493",
+      "TRAIN_Q299",
+      "TRAIN_Q063"
+    ]
+  },
+  {
+    "rank": 4,
+    "config": {
+      "wide_k": 100,
+      "rrf_k": 5,
+      "bm25_weight": 0.25,
+      "dense_weight": 1.0,
+      "filter_strength": 1.0,
+      "candidate_k": 50,
+      "prior_alpha": 0.75,
+      "reranker_input": "text"
+    },
+    "metrics": {
+      "answerable_evaluated": 77,
+      "hit_at_1_percent": 53.2468,
+      "hit_at_3_percent": 77.9221,
+      "hit_at_5_percent": 88.3117,
+      "hit_at_10_percent": 89.6104,
+      "recall_at_5_percent": 86.3636,
+      "precision_at_5": 0.176623,
+      "mrr_at_10": 0.670996,
+      "ndcg_at_5": 0.713209,
+      "hit5_count": 68
+    },
+    "failed_hit5_ids": [
+      "TRAIN_Q236",
+      "TRAIN_Q526",
+      "TRAIN_Q343",
+      "TRAIN_Q222",
+      "TRAIN_Q360",
+      "DEV_Q210",
+      "TRAIN_Q493",
+      "TRAIN_Q299",
+      "TRAIN_Q063"
+    ]
+  },
+  {
+    "rank": 5,
+    "config": {
+      "wide_k": 100,
+      "rrf_k": 10,
+      "bm25_weight": 0.25,
+      "dense_weight": 1.0,
+      "filter_strength": 1.0,
+      "candidate_k": 50,
+      "prior_alpha": 0.75,
+      "reranker_input": "text"
+    },
+    "metrics": {
+      "answerable_evaluated": 77,
+      "hit_at_1_percent": 53.2468,
+      "hit_at_3_percent": 77.9221,
+      "hit_at_5_percent": 88.3117,
+      "hit_at_10_percent": 90.9091,
+      "recall_at_5_percent": 86.3636,
+      "precision_at_5": 0.176623,
+      "mrr_at_10": 0.669481,
+      "ndcg_at_5": 0.711288,
+      "hit5_count": 68
+    },
+    "failed_hit5_ids": [
+      "TRAIN_Q236",
+      "TRAIN_Q526",
+      "TRAIN_Q343",
+      "TRAIN_Q222",
+      "TRAIN_Q360",
+      "DEV_Q210",
+      "TRAIN_Q493",
+      "TRAIN_Q299",
+      "TRAIN_Q063"
+    ]
+  },
+  {
+    "rank": 6,
+    "config": {
+      "wide_k": 100,
+      "rrf_k": 5,
+      "bm25_weight": 0.25,
+      "dense_weight": 1.0,
+      "filter_strength": 1.0,
+      "candidate_k": 20,
+      "prior_alpha": 0.75,
+      "reranker_input": "text"
+    },
+    "metrics": {
+      "answerable_evaluated": 77,
+      "hit_at_1_percent": 51.9481,
+      "hit_at_3_percent": 77.9221,
+      "hit_at_5_percent": 88.3117,
+      "hit_at_10_percent": 89.6104,
+      "recall_at_5_percent": 86.3636,
+      "precision_at_5": 0.176623,
+      "mrr_at_10": 0.664502,
+      "ndcg_at_5": 0.708764,
+      "hit5_count": 68
+    },
+    "failed_hit5_ids": [
+      "TRAIN_Q236",
+      "TRAIN_Q526",
+      "TRAIN_Q343",
+      "TRAIN_Q222",
+      "TRAIN_Q360",
+      "DEV_Q210",
+      "TRAIN_Q493",
+      "TRAIN_Q299",
+      "TRAIN_Q063"
+    ]
+  },
+  {
+    "rank": 7,
+    "config": {
+      "wide_k": 100,
+      "rrf_k": 5,
+      "bm25_weight": 0.25,
+      "dense_weight": 1.0,
+      "filter_strength": 1.0,
+      "candidate_k": 30,
+      "prior_alpha": 0.5,
+      "reranker_input": "text"
+    },
+    "metrics": {
+      "answerable_evaluated": 77,
+      "hit_at_1_percent": 55.8442,
+      "hit_at_3_percent": 76.6234,
+      "hit_at_5_percent": 88.3117,
+      "hit_at_10_percent": 89.6104,
+      "recall_at_5_percent": 86.3636,
+      "precision_at_5": 0.176623,
+      "mrr_at_10": 0.678066,
+      "ndcg_at_5": 0.717925,
+      "hit5_count": 68
+    },
+    "failed_hit5_ids": [
+      "TRAIN_Q236",
+      "TRAIN_Q526",
+      "TRAIN_Q343",
+      "TRAIN_Q222",
+      "TRAIN_Q360",
+      "DEV_Q210",
+      "TRAIN_Q493",
+      "TRAIN_Q299",
+      "TRAIN_Q063"
+    ]
+  },
+  {
+    "rank": 8,
+    "config": {
+      "wide_k": 100,
+      "rrf_k": 5,
+      "bm25_weight": 0.25,
+      "dense_weight": 1.0,
+      "filter_strength": 1.0,
+      "candidate_k": 20,
+      "prior_alpha": 0.5,
+      "reranker_input": "text"
+    },
+    "metrics": {
+      "answerable_evaluated": 77,
+      "hit_at_1_percent": 54.5455,
+      "hit_at_3_percent": 75.3247,
+      "hit_at_5_percent": 88.3117,
+      "hit_at_10_percent": 89.6104,
+      "recall_at_5_percent": 86.3636,
+      "precision_at_5": 0.176623,
+      "mrr_at_10": 0.672655,
+      "ndcg_at_5": 0.713932,
+      "hit5_count": 68
+    },
+    "failed_hit5_ids": [
+      "TRAIN_Q236",
+      "TRAIN_Q526",
+      "TRAIN_Q343",
+      "TRAIN_Q222",
+      "TRAIN_Q360",
+      "DEV_Q210",
+      "TRAIN_Q493",
+      "TRAIN_Q299",
+      "TRAIN_Q063"
+    ]
+  },
+  {
+    "rank": 9,
+    "config": {
+      "wide_k": 100,
+      "rrf_k": 10,
+      "bm25_weight": 0.25,
+      "dense_weight": 1.0,
+      "filter_strength": 1.0,
+      "candidate_k": 30,
+      "prior_alpha": 0.5,
+      "reranker_input": "text"
+    },
+    "metrics": {
+      "answerable_evaluated": 77,
+      "hit_at_1_percent": 55.8442,
+      "hit_at_3_percent": 74.026,
+      "hit_at_5_percent": 88.3117,
+      "hit_at_10_percent": 90.9091,
+      "recall_at_5_percent": 86.3636,
+      "precision_at_5": 0.176623,
+      "mrr_at_10": 0.674387,
+      "ndcg_at_5": 0.714203,
+      "hit5_count": 68
+    },
+    "failed_hit5_ids": [
+      "TRAIN_Q236",
+      "TRAIN_Q526",
+      "TRAIN_Q343",
+      "TRAIN_Q222",
+      "TRAIN_Q360",
+      "DEV_Q210",
+      "TRAIN_Q493",
+      "TRAIN_Q299",
+      "TRAIN_Q063"
+    ]
+  },
+  {
+    "rank": 10,
+    "config": {
+      "wide_k": 100,
+      "rrf_k": 10,
+      "bm25_weight": 0.25,
+      "dense_weight": 1.0,
+      "filter_strength": 1.0,
+      "candidate_k": 20,
+      "prior_alpha": 0.5,
+      "reranker_input": "text"
+    },
+    "metrics": {
+      "answerable_evaluated": 77,
+      "hit_at_1_percent": 54.5455,
+      "hit_at_3_percent": 74.026,
+      "hit_at_5_percent": 88.3117,
+      "hit_at_10_percent": 90.9091,
+      "recall_at_5_percent": 86.3636,
+      "precision_at_5": 0.176623,
+      "mrr_at_10": 0.672872,
+      "ndcg_at_5": 0.71338,
+      "hit5_count": 68
+    },
+    "failed_hit5_ids": [
+      "TRAIN_Q236",
+      "TRAIN_Q526",
+      "TRAIN_Q343",
+      "TRAIN_Q222",
+      "TRAIN_Q360",
+      "DEV_Q210",
+      "TRAIN_Q493",
+      "TRAIN_Q299",
+      "TRAIN_Q063"
+    ]
+  }
+]

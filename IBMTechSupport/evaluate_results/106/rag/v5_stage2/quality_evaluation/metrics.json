@@ -1,0 +1,65 @@
+{
+  "total": 106,
+  "answerable": 77,
+  "impossible": 29,
+  "answer_correctness": {
+    "definition": "Strict CORRECT / all answerable questions (refusals and uncertain are not credited)",
+    "counts": {
+      "CORRECT": 56,
+      "REFUSED": 8,
+      "UNCERTAIN": 11,
+      "INCORRECT": 2
+    },
+    "denominator": 77,
+    "strict_percent": 72.73,
+    "strict_among_emitted_answerable_percent": 81.16,
+    "adjudicated_only_percent": 96.55,
+    "uncertain_percent_of_answerable": 14.29
+  },
+  "faithfulness": {
+    "definition": "Answer-level all-material-claims-supported rate, NOT claim-level ratio",
+    "counts": {
+      "UNCERTAIN": 38,
+      "SUPPORTED": 32,
+      "UNSUPPORTED": 23
+    },
+    "emitted_denominator": 93,
+    "strict_percent": 34.41,
+    "adjudicated_only_percent": 58.18,
+    "uncertain_or_unscorable_percent": 40.86,
+    "refusals_excluded": 13
+  },
+  "policy": {
+    "answerable_false_refusals": 8,
+    "false_refusal_percent": 10.39,
+    "impossible_responses": 24,
+    "correct_refusal_percent": 17.24
+  },
+  "evaluator_invalid_outputs": {
+    "correctness": 11,
+    "faithfulness": 38
+  },
+  "human_review_required": true,
+  "dataset": "val_106.json",
+  "source": "saved Stage2 predictions",
+  "predictions_sha256": "235052f8bf3e4bc50d6d9fb45b21503ec2d70ac2366cf592332a36acbab6550d",
+  "dataset_sha256": "51740842406b7f8e6814dc5a57c57d09da4b72fc0c94e62b430e8cf8ccfb45ae",
+  "generation_manifest_dataset_verified": true,
+  "judge_model": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\Qwen2.5-1.5B-Instruct",
+  "judge_independence": "Separate evaluation prompts; default uses same base weights as generator",
+  "baseline_metrics": {
+    "model": "Qwen2.5-1.5B-Instruct",
+    "dataset": "val_106.json",
+    "total": 106,
+    "batch_size": 1,
+    "max_new_tokens": 160,
+    "answerable": 77,
+    "impossible": 29,
+    "exact_match_percent": 0.0,
+    "token_f1_percent": 32.01,
+    "abstention_rate_percent": 17.24,
+    "false_refusal_rate_percent": 10.39
+  },
+  "no_test_access": true,
+  "elapsed_seconds": 724.579
+}

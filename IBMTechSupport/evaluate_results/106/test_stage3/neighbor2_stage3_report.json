@@ -1,0 +1,54 @@
+{
+  "status": "COMPLETED",
+  "dataset": "val_106.json",
+  "same_top10_search_for_both": true,
+  "source_chunk_mode": "original_vs_neighbor2_on_first_refusal",
+  "no_test_access": true,
+  "baseline": {
+    "model": "Qwen2.5-1.5B-Instruct",
+    "dataset": "val_106.json",
+    "total": 106,
+    "batch_size": 1,
+    "max_new_tokens": 160,
+    "answerable": 77,
+    "impossible": 29,
+    "exact_match_percent": 0.0,
+    "token_f1_percent": 12.82,
+    "abstention_rate_percent": 82.76,
+    "false_refusal_rate_percent": 67.53
+  },
+  "controlled": {
+    "model": "Qwen2.5-1.5B-Instruct",
+    "dataset": "val_106.json",
+    "total": 106,
+    "batch_size": 1,
+    "max_new_tokens": 160,
+    "answerable": 77,
+    "impossible": 29,
+    "exact_match_percent": 0.0,
+    "token_f1_percent": 13.26,
+    "abstention_rate_percent": 82.76,
+    "false_refusal_rate_percent": 66.23
+  },
+  "strict_52_reproduced": true,
+  "strict_answerable_false_refusals": 52,
+  "original_strict_impossible_wrong_count": 5,
+  "original_strict_impossible_wrong_5_reproduced": true,
+  "controlled_impossible_wrong_count": 5,
+  "delta_impossible_wrong_count": 0,
+  "baseline_false_refusals_restored_to_non_abstention": 1,
+  "restored_ids": [
+    "TRAIN_Q282"
+  ],
+  "restored_strict_18_count": 0,
+  "restored_strict_18_ids": [],
+  "validation_gates_passed": true,
+  "human_answer_correctness_review_required": true,
+  "note": "Restored means emitted and LLM-verified, NOT independently proven correct. Review recovered answers against full source and reference manually. No new judge is enabled in production.",
+  "files": {
+    "cases": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\test_stage3\\neighbor2_stage3_cases.jsonl",
+    "full_inputs_18": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\test_stage3\\neighbor2_strict_18_full_inputs.jsonl"
+  },
+  "retrieval_seconds": 22.601,
+  "wall_seconds": 522.59
+}

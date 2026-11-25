@@ -366,6 +366,7 @@ def score_reranker_candidates(
     *,
     candidate_k: int,
     batch_size: int,
+    metadata_input: bool = False,
 ) -> list[dict[int, float]]:
     import numpy as np
 
@@ -378,7 +379,9 @@ def score_reranker_candidates(
     positions: list[tuple[int, int]] = []
     for q_idx, (question, ranking) in enumerate(zip(questions, rankings)):
         for row_id in ranking[:candidate_k]:
-            pairs.append((question, get_chunk_text(chunks[row_id])))
+            evidence = (document_search_text(chunks[row_id]) if metadata_input
+                        else get_chunk_text(chunks[row_id]))
+            pairs.append((question, evidence))
             positions.append((q_idx, row_id))
 
     if not pairs:
@@ -451,6 +454,111 @@ def rerank_with_constraints(
     return results
 
 
+def rerank_stage3_light(question, candidate_ranking, reranker_scores, chunks,
+                        prior_scores, *, candidate_k):
+    """One MiniLM pass, calibrated source-RRF prior, conservative identifier score.
+
+    All signals depend only on the query and candidates, never on ground-truth
+    labels. Empty candidate features are neutral rather than penalized.
+    """
+    subset = [rid for rid in candidate_ranking[:candidate_k] if rid in reranker_scores]
+    if not subset:
+        return []
+    priors = {rid: float(prior_scores.get(rid, 0.0)) for rid in subset}
+    prior_z = _zscore_map(priors, subset)
+    signals = extract_signals(question)
+    has_exact_id = bool(signals.cves or signals.apars or signals.errors)
+    results = []
+    for rank, row_id in enumerate(subset):
+        assessment = assess_constraints(question, document_search_text(chunks[row_id]))
+        # MiniLM outputs unbounded logits, not probabilities.
+        semantic = float(reranker_scores[row_id]) / 5.0
+        source_prior = 0.2 * prior_z[row_id]
+        # Do not over-penalize product/version ambiguity; explicit code matches
+        # can be trusted more strongly than inferred product families.
+        correction = (0.16 if has_exact_id else 0.06) * assessment.score
+        hard_penalty = 0.25 if has_exact_id and assessment.hard_conflict else 0.0
+        score = semantic + source_prior + correction - hard_penalty
+        results.append({
+            "row_id": row_id,
+            "score": score,
+            "reranker_score": float(reranker_scores[row_id]),
+            "original_rank": rank,
+            "constraint_score": float(assessment.score),
+            "constraint_reasons": list(assessment.reasons),
+            "hard_conflict": bool(assessment.hard_conflict),
+        })
+    results.sort(key=lambda x: (-x["score"], x["original_rank"], x["row_id"]))
+    return results
+
+
+def _stage3_evidence_index(chunks):
+    from collections import defaultdict
+    result = defaultdict(list)
+    for row_id, chunk in enumerate(chunks):
+        key = chunk.get("document_id") or str(chunk.get("filename") or row_id).casefold()
+        result[str(key)].append((int(chunk.get("chunk_index", 0)), row_id))
+    for group in result.values():
+        group.sort()
+    return result
+
+
+def _stage3_expand_evidence(row_id, chunks, evidence_index, *, max_chars=2400):
+    """Complete the selected chunk using its contiguous source-document text.
+
+    First include the next chunk (answer sections often follow problem sections),
+    then use remaining budget for the preceding chunk.  Overlap is eliminated
+    through original character offsets.  Never mix different source documents.
+    """
+    original = chunks[row_id]
+    text = get_chunk_text(original)
+    if len(text) >= max_chars:
+        return text[:max_chars]
+    key = str(original.get("document_id") or str(original.get("filename") or row_id).casefold())
+    group = evidence_index.get(key, [])
+    index = next((i for i, (_, rid) in enumerate(group) if rid == row_id), None)
+    if index is None:
+        return text
+    selected_start = int(original.get("start_char", 0))
+    selected_end = int(original.get("end_char", selected_start + len(text)))
+    if selected_end - selected_start != len(text):
+        return text
+
+    # Add content that starts after the selected chunk.  Limit to its actual
+    # continuation, not a repeated overlap segment.
+    end = selected_end
+    for _, neighbor_id in group[index+1:index+3]:
+        neighbor = chunks[neighbor_id]
+        neighbor_start = int(neighbor.get("start_char", -1))
+        neighbor_end = int(neighbor.get("end_char", -1))
+        neighbor_text = get_chunk_text(neighbor)
+        if neighbor_start > end or neighbor_end - neighbor_start != len(neighbor_text):
+            break
+        suffix = neighbor_text[max(0, end - neighbor_start):]
+        remaining = max_chars - len(text)
+        if remaining <= 0:
+            break
+        text += suffix[:remaining]
+        end += min(len(suffix), remaining)
+        if len(suffix) > remaining:
+            break
+
+    # Recover the preceding answer/title boundary only if room remains.
+    if index > 0 and len(text) < max_chars:
+        neighbor = chunks[group[index-1][1]]
+        previous_start = int(neighbor.get("start_char", -1))
+        previous_end = int(neighbor.get("end_char", -1))
+        previous_text = get_chunk_text(neighbor)
+        if (previous_start >= 0 and previous_end >= selected_start
+                and previous_end - previous_start == len(previous_text)):
+            prefix = previous_text[:max(0, selected_start - previous_start)]
+            text = prefix[-(max_chars-len(text)):] + text
+    return text
+
+
+# STAGE3_EVIDENCE_V2
+
+# STAGE3_LIGHT_RUNTIME_V1
 def load_selected_config(path: Path | None = None) -> dict:
     config_path = Path(path) if path is not None else DEFAULT_SELECTED_CONFIG
     if not config_path.is_file():
@@ -477,8 +585,9 @@ def retrieve_all_stage2(
     search_system=None,
     selected_config_path: Path | None = None,
     reranker=None,
+    stage3_light: bool = False,
 ):
-    """Production retrieval path selected by the offline Stage2 experiment."""
+    """Stage2 baseline and optional lightweight Stage3 route."""
     if top_k < 1:
         raise ValueError("top_k must be >= 1")
 
@@ -503,22 +612,27 @@ def retrieve_all_stage2(
         reranker = load_reranker()
 
     start = time.perf_counter()
-    original_results = search_all(embedding_model, faiss_index, bm25_index, questions)
+    original_results = search_all(embedding_model, faiss_index, bm25_index, questions,
+        document_fusion=True, depth=100) if stage3_light else search_all(
+        embedding_model, faiss_index, bm25_index, questions)
 
     rewritten_questions = [rewrite_query(q) for q in questions]
     rewrite_enabled = bool(selected["query_rewrite_enabled"])
     rewritten_results = None
     if rewrite_enabled and any(a != b for a, b in zip(questions, rewritten_questions)):
-        rewritten_results = search_all(embedding_model, faiss_index, bm25_index, rewritten_questions)
+        rewritten_results = search_all(embedding_model, faiss_index, bm25_index, rewritten_questions,
+            document_fusion=True, depth=100) if stage3_light else search_all(
+            embedding_model, faiss_index, bm25_index, rewritten_questions)
 
     max_candidates = int(runtime.get("max_candidates", 50))
     if max_candidates < top_k:
         raise ValueError("runtime.max_candidates must be >= top_k")
 
     candidate_rankings: list[list[int]] = []
+    prior_maps: list[dict[int, float]] = []
     for idx, question in enumerate(questions):
         rewrite_result = rewritten_results[idx] if rewritten_results is not None and rewritten_questions[idx] != question else None
-        merged, _ = merge_hybrid_results(
+        merged, prior_scores = merge_hybrid_results(
             original_results[idx], rewrite_result, chunks,
             rewrite_weight=float(selected["rewrite_weight"]),
         )
@@ -532,25 +646,35 @@ def retrieve_all_stage2(
                 strength=float(selected["filter_strength"]),
             )
         candidate_rankings.append(merged)
+        prior_maps.append(prior_scores)
 
     candidate_k = int(selected["reranker_candidate_k"])
     if reranker_enabled:
         score_maps = score_reranker_candidates(
             reranker, questions, candidate_rankings, chunks,
             candidate_k=max(candidate_k, top_k), batch_size=batch_size,
+            metadata_input=stage3_light,
         )
     else:
         score_maps = [None for _ in questions]
 
+    evidence_index = _stage3_evidence_index(chunks) if stage3_light else None
     docs_by_question = []
-    for question, ranking, score_map in zip(questions, candidate_rankings, score_maps):
+    for question, ranking, score_map, prior_map in zip(
+            questions, candidate_rankings, score_maps, prior_maps):
         if reranker_enabled:
-            ranked = rerank_with_constraints(
-                question, ranking, score_map, chunks,
-                candidate_k=max(candidate_k, top_k),
-                filter_enabled=bool(selected["filter_enabled"]),
-                filter_strength=float(selected["filter_strength"]),
-            )
+            if stage3_light:
+                ranked = rerank_stage3_light(
+                    question, ranking, score_map, chunks, prior_map,
+                    candidate_k=max(candidate_k, top_k),
+                )
+            else:
+                ranked = rerank_with_constraints(
+                    question, ranking, score_map, chunks,
+                    candidate_k=max(candidate_k, top_k),
+                    filter_enabled=bool(selected["filter_enabled"]),
+                    filter_strength=float(selected["filter_strength"]),
+                )
         else:
             ranked = []
             for rank, row_id in enumerate(ranking[:top_k], 1):
@@ -570,7 +694,9 @@ def retrieve_all_stage2(
                 "row_id": item["row_id"],
                 "chunk_id": chunk.get("chunk_id"),
                 "filename": chunk_filename(chunk),
-                "text": get_chunk_text(chunk),
+                "text": (_stage3_expand_evidence(item["row_id"], chunks, evidence_index,
+                    max_chars=(2400 if len(documents) < 5 else 1400))
+                    if stage3_light else get_chunk_text(chunk)),
                 "score": float(item["score"]),
                 "constraint_score": float(item["constraint_score"]),
                 "constraint_reasons": item["constraint_reasons"],

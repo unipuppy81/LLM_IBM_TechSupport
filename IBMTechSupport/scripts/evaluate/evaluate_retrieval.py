@@ -1,3 +1,4 @@
+# STAGE3_LIGHT_RUNTIME_V1
 """
 Dense
 BM25
@@ -21,6 +22,10 @@ from .common import check_output, load_jsonl, load_records, report, retrieval_sc
 
 def retrieve(records, method, count):
     questions = [r["question"] for r in records]
+    if method == "stage3":
+        from stage2_retrieval import retrieve_all_stage2
+        documents, _ = retrieve_all_stage2(questions, count, stage3_light=True)
+        return [[filename_key(doc["filename"]) for doc in row] for row in documents]
     if method == "bm25":
         from bm25_search import load_index, retrieve as search, normalize_filename
         index, tokenizer = load_index()
@@ -51,7 +56,7 @@ def retrieve(records, method, count):
 
 
 def evaluate(method="hybrid", k=5, dataset="clean", limit=0, predictions=None, output=None):
-    if method not in ("bm25", "dense", "hybrid", "reranker") or not 1 <= k <= 50:
+    if method not in ("bm25", "dense", "hybrid", "reranker", "stage3") or not 1 <= k <= 50:
         raise ValueError("Invalid retriever or K (1..50)")
     
     check_output(output)
@@ -120,7 +125,7 @@ def evaluate(method="hybrid", k=5, dataset="clean", limit=0, predictions=None, o
 
 def main(argv=None):
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--retriever", choices=("bm25", "dense", "hybrid", "reranker"), default="hybrid")
+    p.add_argument("--retriever", choices=("bm25", "dense", "hybrid", "reranker", "stage3"), default="hybrid")
     p.add_argument("--top-k", type=int, default=5)
     p.add_argument("--dataset", default="clean")
     p.add_argument("--limit", type=int, default=0)

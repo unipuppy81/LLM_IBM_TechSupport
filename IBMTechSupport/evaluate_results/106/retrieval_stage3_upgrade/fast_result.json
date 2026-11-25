@@ -1,0 +1,2875 @@
+{
+  "schema": "retrieval-stage3-fast-offline-v2",
+  "source": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\retrieval_stage3_upgrade\\result.json",
+  "dataset": "val_106.json",
+  "n": 77,
+  "configuration_count": 4050,
+  "models_executed": 0,
+  "additional_gpu_inference": 0,
+  "reference_stage2": {
+    "hit1": 0.584416,
+    "hit3": 0.792208,
+    "hit5": 0.857143,
+    "hit10": 0.909091,
+    "recall5": 0.837662,
+    "precision5": 0.171429,
+    "mrr10": 0.699351,
+    "ndcg5": 0.723575,
+    "hit5_count": 66,
+    "n": 77
+  },
+  "reference_large_stage3": {
+    "hit1": 0.636364,
+    "hit3": 0.818182,
+    "hit5": 0.896104,
+    "hit10": 0.909091,
+    "recall5": 0.88961,
+    "precision5": 0.184416,
+    "mrr10": 0.737771,
+    "ndcg5": 0.770321,
+    "hit5_count": 69,
+    "n": 77
+  },
+  "source_large_stage3_grouped_cv": [
+    0.883117,
+    0.831169,
+    0.831169
+  ],
+  "comparisons": [
+    {
+      "candidate_k": 10,
+      "best_config_on_full_validation": {
+        "candidate_k": 10,
+        "rrf_k": 60,
+        "bm25_weight": 0.5,
+        "fusion": "maxblend",
+        "prefilter_weight": 0.25,
+        "model_input": "mini_metadata",
+        "chunks_per_document": 1,
+        "ce_normalization": "raw",
+        "prior_weight": 0.2,
+        "constraint_weight": 0.16
+      },
+      "validation": {
+        "hit1": 0.597403,
+        "hit3": 0.792208,
+        "hit5": 0.896104,
+        "hit10": 0.896104,
+        "recall5": 0.883117,
+        "precision5": 0.181818,
+        "mrr10": 0.703896,
+        "ndcg5": 0.744472,
+        "hit5_count": 69,
+        "n": 77
+      },
+      "retrieval_pool_hit_count": 69,
+      "grouped_cv": [
+        {
+          "seed": 42,
+          "hit5": 0.87013,
+          "hit5_count": 67,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 30,
+                "bm25_weight": 0.7,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 10,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 123,
+          "hit5": 0.844156,
+          "hit5_count": 65,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 30,
+                "bm25_weight": 0.7,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.5,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.06
+              },
+              "heldout_hit5_count": 11,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 2026,
+          "hit5": 0.883117,
+          "hit5_count": 68,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 16,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 30,
+                "bm25_weight": 0.7,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 10,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 7,
+          "hit5": 0.857143,
+          "hit5_count": 66,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 30,
+                "bm25_weight": 0.7,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 11,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.5,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.06
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 11,
+          "hit5": 0.883117,
+          "hit5_count": 68,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 30,
+                "bm25_weight": 0.7,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 777,
+          "hit5": 0.831169,
+          "hit5_count": 64,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 20,
+                "bm25_weight": 0.7,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.0,
+                "constraint_weight": 0.1
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.5,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 10,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 30,
+                "bm25_weight": 0.7,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.0,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 314,
+          "hit5": 0.883117,
+          "hit5_count": 68,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 30,
+                "bm25_weight": 0.7,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 818,
+          "hit5": 0.87013,
+          "hit5_count": 67,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 30,
+                "bm25_weight": 0.7,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 30,
+                "bm25_weight": 0.7,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 99,
+          "hit5": 0.857143,
+          "hit5_count": 66,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.06
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 2027,
+          "hit5": 0.844156,
+          "hit5_count": 65,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.06
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.5,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.06
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 30,
+                "bm25_weight": 0.7,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.0,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 10,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.2,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 15
+            }
+          ]
+        }
+      ],
+      "grouped_cv_mean_hit5": 0.862338,
+      "grouped_cv_first_three_mean_hit5": 0.865801,
+      "grouped_cv_worst_hit5": 0.831169,
+      "nominal_minilm_pairs_per_question": 10,
+      "failures": {
+        "missing_from_shortlist": [
+          "TRAIN_Q526",
+          "TRAIN_Q343",
+          "TRAIN_Q222",
+          "TRAIN_Q360",
+          "DEV_Q210",
+          "DEV_Q186",
+          "TRAIN_Q493",
+          "TRAIN_Q063"
+        ],
+        "in_shortlist_but_not_top5": [],
+        "improved_over_stage2": [
+          "TRAIN_Q316",
+          "TRAIN_Q003",
+          "TRAIN_Q165",
+          "TRAIN_Q299"
+        ],
+        "regressed_from_stage2": [
+          "DEV_Q186"
+        ]
+      }
+    },
+    {
+      "candidate_k": 20,
+      "best_config_on_full_validation": {
+        "candidate_k": 20,
+        "rrf_k": 20,
+        "bm25_weight": 0.5,
+        "fusion": "maxblend",
+        "prefilter_weight": 0.25,
+        "model_input": "mini_metadata",
+        "chunks_per_document": 1,
+        "ce_normalization": "raw",
+        "prior_weight": 0.5,
+        "constraint_weight": 0.16
+      },
+      "validation": {
+        "hit1": 0.623377,
+        "hit3": 0.792208,
+        "hit5": 0.883117,
+        "hit10": 0.909091,
+        "recall5": 0.876623,
+        "precision5": 0.181818,
+        "mrr10": 0.72047,
+        "ndcg5": 0.752499,
+        "hit5_count": 68,
+        "n": 77
+      },
+      "retrieval_pool_hit_count": 72,
+      "grouped_cv": [
+        {
+          "seed": 42,
+          "hit5": 0.844156,
+          "hit5_count": 65,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 1.0,
+                "fusion": "rrf",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 1.0,
+                "constraint_weight": 0.1
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 9,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 123,
+          "hit5": 0.844156,
+          "hit5_count": 65,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 1.0,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 1.0,
+                "fusion": "rrf",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.06
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 2026,
+          "hit5": 0.857143,
+          "hit5_count": 66,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 16,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.7,
+                "fusion": "rrf",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.1
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 9,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 7,
+          "hit5": 0.844156,
+          "hit5_count": 65,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 1.0,
+                "fusion": "rrf",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 1.0,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 11,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 11,
+          "hit5": 0.844156,
+          "hit5_count": 65,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 11,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 1.0,
+                "fusion": "rrf",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 1.0,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 777,
+          "hit5": 0.831169,
+          "hit5_count": 64,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 1.0,
+                "fusion": "rrf",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 1.0,
+                "constraint_weight": 0.1
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 10,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 314,
+          "hit5": 0.857143,
+          "hit5_count": 66,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.7,
+                "fusion": "rrf",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.1
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 818,
+          "hit5": 0.857143,
+          "hit5_count": 66,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.7,
+                "fusion": "rrf",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.1
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 99,
+          "hit5": 0.857143,
+          "hit5_count": 66,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 1.0,
+                "fusion": "rrf",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 1.0,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 11,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 2027,
+          "hit5": 0.857143,
+          "hit5_count": 66,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 1.0,
+                "fusion": "rrf",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 1.0,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 20,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 15
+            }
+          ]
+        }
+      ],
+      "grouped_cv_mean_hit5": 0.849351,
+      "grouped_cv_first_three_mean_hit5": 0.848485,
+      "grouped_cv_worst_hit5": 0.831169,
+      "nominal_minilm_pairs_per_question": 20,
+      "failures": {
+        "missing_from_shortlist": [
+          "TRAIN_Q526",
+          "TRAIN_Q343",
+          "TRAIN_Q360",
+          "DEV_Q210",
+          "TRAIN_Q493"
+        ],
+        "in_shortlist_but_not_top5": [
+          "TRAIN_Q316",
+          "TRAIN_Q222",
+          "TRAIN_Q498",
+          "TRAIN_Q063"
+        ],
+        "improved_over_stage2": [
+          "TRAIN_Q003",
+          "TRAIN_Q165",
+          "TRAIN_Q299"
+        ],
+        "regressed_from_stage2": [
+          "TRAIN_Q498"
+        ]
+      }
+    },
+    {
+      "candidate_k": 30,
+      "best_config_on_full_validation": {
+        "candidate_k": 30,
+        "rrf_k": 20,
+        "bm25_weight": 0.5,
+        "fusion": "rrf",
+        "prefilter_weight": 0.25,
+        "model_input": "mini_metadata",
+        "chunks_per_document": 1,
+        "ce_normalization": "raw",
+        "prior_weight": 0.5,
+        "constraint_weight": 0.16
+      },
+      "validation": {
+        "hit1": 0.623377,
+        "hit3": 0.779221,
+        "hit5": 0.883117,
+        "hit10": 0.922078,
+        "recall5": 0.876623,
+        "precision5": 0.181818,
+        "mrr10": 0.720831,
+        "ndcg5": 0.751599,
+        "hit5_count": 68,
+        "n": 77
+      },
+      "retrieval_pool_hit_count": 74,
+      "grouped_cv": [
+        {
+          "seed": 42,
+          "hit5": 0.857143,
+          "hit5_count": 66,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 1.0,
+                "fusion": "rrf",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 1.0,
+                "constraint_weight": 0.1
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 10,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 123,
+          "hit5": 0.831169,
+          "hit5_count": 64,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 60,
+                "bm25_weight": 0.7,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.5,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.5,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.06
+              },
+              "heldout_hit5_count": 11,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 2026,
+          "hit5": 0.844156,
+          "hit5_count": 65,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 16,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.5,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.06
+              },
+              "heldout_hit5_count": 11,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 9,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 7,
+          "hit5": 0.857143,
+          "hit5_count": 66,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 1.0,
+                "fusion": "rrf",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 1.0,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 11,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 11,
+          "hit5": 0.844156,
+          "hit5_count": 65,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 11,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 60,
+                "bm25_weight": 0.7,
+                "fusion": "maxblend",
+                "prefilter_weight": 0.5,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.06
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 777,
+          "hit5": 0.844156,
+          "hit5_count": 65,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 1.0,
+                "fusion": "rrf",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 1.0,
+                "constraint_weight": 0.1
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 10,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 314,
+          "hit5": 0.87013,
+          "hit5_count": 67,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.7,
+                "fusion": "rrf",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.1
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 818,
+          "hit5": 0.87013,
+          "hit5_count": 67,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 15,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.7,
+                "fusion": "rrf",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.1
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 99,
+          "hit5": 0.844156,
+          "hit5_count": 65,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 60,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.5,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.06
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 11,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 15
+            }
+          ]
+        },
+        {
+          "seed": 2027,
+          "hit5": 0.857143,
+          "hit5_count": 66,
+          "n": 77,
+          "folds": [
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 1.0,
+                "fusion": "rrf",
+                "prefilter_weight": 0.0,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 1.0,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 16
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.25
+              },
+              "heldout_hit5_count": 12,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 13,
+              "heldout_n": 15
+            },
+            {
+              "config": {
+                "candidate_k": 30,
+                "rrf_k": 20,
+                "bm25_weight": 0.5,
+                "fusion": "rrf",
+                "prefilter_weight": 0.25,
+                "model_input": "mini_metadata",
+                "chunks_per_document": 1,
+                "ce_normalization": "raw",
+                "prior_weight": 0.5,
+                "constraint_weight": 0.16
+              },
+              "heldout_hit5_count": 14,
+              "heldout_n": 15
+            }
+          ]
+        }
+      ],
+      "grouped_cv_mean_hit5": 0.851948,
+      "grouped_cv_first_three_mean_hit5": 0.844156,
+      "grouped_cv_worst_hit5": 0.831169,
+      "nominal_minilm_pairs_per_question": 30,
+      "failures": {
+        "missing_from_shortlist": [
+          "TRAIN_Q526",
+          "TRAIN_Q343",
+          "TRAIN_Q493"
+        ],
+        "in_shortlist_but_not_top5": [
+          "TRAIN_Q316",
+          "TRAIN_Q222",
+          "TRAIN_Q360",
+          "TRAIN_Q498",
+          "DEV_Q210",
+          "TRAIN_Q063"
+        ],
+        "improved_over_stage2": [
+          "TRAIN_Q003",
+          "TRAIN_Q165",
+          "TRAIN_Q299"
+        ],
+        "regressed_from_stage2": [
+          "TRAIN_Q498"
+        ]
+      }
+    }
+  ],
+  "recommended_speed_first": {
+    "candidate_k": 10,
+    "rrf_k": 60,
+    "bm25_weight": 0.5,
+    "fusion": "maxblend",
+    "prefilter_weight": 0.25,
+    "model_input": "mini_metadata",
+    "chunks_per_document": 1,
+    "ce_normalization": "raw",
+    "prior_weight": 0.2,
+    "constraint_weight": 0.16
+  },
+  "recommended_cv_best_candidate_k": 10,
+  "target_hit5_count": 74,
+  "target_reached": false,
+  "elapsed_seconds": 0.66,
+  "caveats": [
+    "Exploratory tuning on development validation only; independent test untouched.",
+    "Grouped CV mitigates but cannot eliminate overfitting or design-selection bias.",
+    "RRF candidate selection is simulated within cached 200 documents from top600 retrieval; not an end-to-end retrieval rerun.",
+    "Metadata prefilter uses cached per-document first-evidence constraint, not an online pipeline modification.",
+    "Only one existing MiniLM model per candidate; 'mini_text' vs 'mini_metadata' is input formatting, not a comparison of different models.",
+    "Candidate/pair counts are computational proxies; actual inference latency is not measured.",
+    "Changing current production retrieval.py, stage2_retrieval.py, or RAG configuration requires a separate validated integration and real rerun."
+  ]
+}

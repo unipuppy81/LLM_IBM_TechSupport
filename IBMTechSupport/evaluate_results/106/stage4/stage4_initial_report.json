@@ -1,0 +1,52 @@
+{
+  "dataset": "val_106.json",
+  "baseline": {
+    "model": "Qwen2.5-1.5B-Instruct",
+    "dataset": "val_106.json",
+    "total": 106,
+    "batch_size": 1,
+    "max_new_tokens": 160,
+    "answerable": 77,
+    "impossible": 29,
+    "exact_match_percent": 0.0,
+    "token_f1_percent": 32.01,
+    "abstention_rate_percent": 17.24,
+    "false_refusal_rate_percent": 10.39
+  },
+  "first_turn_direct_answers_only": {
+    "model": "Qwen2.5-1.5B-Instruct",
+    "dataset": "val_106.json",
+    "total": 106,
+    "batch_size": 1,
+    "max_new_tokens": 160,
+    "answerable": 77,
+    "impossible": 29,
+    "exact_match_percent": 0.0,
+    "token_f1_percent": 17.86,
+    "abstention_rate_percent": 100.0,
+    "false_refusal_rate_percent": 53.25
+  },
+  "actions_by_original_qa_label": {
+    "answerable": {
+      "ANSWER": 36,
+      "HANDOFF": 41
+    },
+    "impossible": {
+      "HANDOFF": 29
+    }
+  },
+  "initial_impossible_answer_count": 0,
+  "answerable_handoff_count": 41,
+  "answerable_pending_clarification_count": 0,
+  "clarification_reason_counts": {
+    "INVALID_JSON": 65,
+    "V313_AUTO_PASS": 36,
+    "INVALID_FIELD_OR_RANK": 5
+  },
+  "pending_is_not_resolved": true,
+  "first_turn_metrics_count_all_nonanswers_as_abstentions": true,
+  "final_resolution_metrics": null,
+  "human_review_required": true,
+  "initial_judge_manifest_sha256_verified": true,
+  "initial_judge_id_only_matching_allowed": false
+}

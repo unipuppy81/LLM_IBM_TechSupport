@@ -1,0 +1,70 @@
+{
+  "status": "COMPLETED",
+  "judge_mode": "per_document",
+  "changed_prompt_variable": "RELAXED_ANSWERABILITY_SYSTEM",
+  "historical_stage2_metrics_reproduced": true,
+  "historical_stage2_exact_prediction_matches": 106,
+  "historical_expected": {
+    "token_f1_percent": 32.01,
+    "abstention_rate_percent": 17.24,
+    "false_refusal_rate_percent": 10.39
+  },
+  "baseline": {
+    "model": "Qwen2.5-1.5B-Instruct",
+    "dataset": "val_106.json",
+    "total": 106,
+    "batch_size": 1,
+    "max_new_tokens": 160,
+    "answerable": 77,
+    "impossible": 29,
+    "exact_match_percent": 0.0,
+    "token_f1_percent": 32.01,
+    "abstention_rate_percent": 17.24,
+    "false_refusal_rate_percent": 10.39
+  },
+  "new_prompt": {
+    "model": "Qwen2.5-1.5B-Instruct",
+    "dataset": "val_106.json",
+    "total": 106,
+    "batch_size": 1,
+    "max_new_tokens": 160,
+    "answerable": 77,
+    "impossible": 29,
+    "exact_match_percent": 0.0,
+    "token_f1_percent": 27.7,
+    "abstention_rate_percent": 65.52,
+    "false_refusal_rate_percent": 25.97
+  },
+  "delta_pp": {
+    "token_f1_percent": -4.31,
+    "abstention_rate_percent": 48.28,
+    "false_refusal_rate_percent": 15.58
+  },
+  "counts": {
+    "baseline": {
+      "answerable_refused": 8,
+      "impossible_answered": 24,
+      "statuses": {
+        "ANSWER_VERIFIED": 93,
+        "ANSWER_NO": 7,
+        "EVIDENCE_NO": 2,
+        "GENERATOR_ABSTAINED": 3,
+        "ANSWER_UNCERTAIN": 1
+      }
+    },
+    "new_prompt": {
+      "answerable_refused": 20,
+      "impossible_answered": 10,
+      "statuses": {
+        "EVIDENCE_NO": 29,
+        "ANSWER_VERIFIED": 67,
+        "EVIDENCE_UNCERTAIN": 6,
+        "ANSWER_NO": 3,
+        "GENERATOR_ABSTAINED": 1
+      }
+    }
+  },
+  "both_refusal_rates_improved": false,
+  "wall_seconds": 1267.88,
+  "note": "If historical baseline differs, compare paired runs only. Non-abstention does not establish correctness. Retrieval was reused, not timed."
+}

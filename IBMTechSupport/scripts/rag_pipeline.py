@@ -1,3 +1,5 @@
+# STAGE3_ADAPTIVE_JUDGE_V2
+# STAGE3_LIGHT_RUNTIME_V1
 import argparse
 import time
 from pathlib import Path
@@ -30,7 +32,7 @@ def retrieve_all(questions, method, top_k, search_system=None):
     from hybrid_search import search_all, BM25_INDEX_DIR
     from reranker_search import load_reranker, rerank_candidates, get_chunk_text
 
-    if method not in ("hybrid", "reranker", "stage2"):
+    if method not in ("hybrid", "reranker", "stage2", "stage3"):
         raise ValueError("지원하지 않는 검색 방식입니다.")
     if top_k < 1:
         raise ValueError("top_k는 1 이상이어야 합니다.")
@@ -40,12 +42,13 @@ def retrieve_all(questions, method, top_k, search_system=None):
             raise FileNotFoundError("Hybrid BM25 인덱스가 없습니다.")
         search_system = load_search_system()
 
-    if method == "stage2":
+    if method in ("stage2", "stage3"):
         from stage2_retrieval import retrieve_all_stage2
         return retrieve_all_stage2(
             questions=questions,
             top_k=top_k,
             search_system=search_system,
+            stage3_light=(method == "stage3"),
         )
 
     embedding_model, faiss_index, bm25_index, chunks = search_system
@@ -155,6 +158,11 @@ def run_rag(question, method, top_k, config_path=None):
     with open(config_path, "r", encoding="utf-8") as f:
         config = yaml.safe_load(f)
 
+    if method == "stage3" and config.get("guardrails", {}).get("enabled", False):
+        # Stage2 and existing RAG modes remain unchanged.
+        config["guardrails"] = dict(config["guardrails"])
+        config["guardrails"].setdefault("judge_mode", "strict")
+
     embedding_model, faiss_index, bm25_index, chunks = load_search_system()
 
     search_start = time.perf_counter()
@@ -230,7 +238,7 @@ def run_rag(question, method, top_k, config_path=None):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--question", required=True, type=str)
-    parser.add_argument("--retriever", choices=("hybrid", "reranker", "stage2"), default="reranker")
+    parser.add_argument("--retriever", choices=("hybrid", "reranker", "stage2", "stage3"), default="reranker")
     parser.add_argument("--top-k", type=int, default=TOP_K)
     parser.add_argument("--config", type=Path, default=PROJECT_DIR / "configs/rag/v3.yaml")
     args = parser.parse_args()
