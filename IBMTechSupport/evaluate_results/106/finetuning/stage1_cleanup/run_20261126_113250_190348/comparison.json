@@ -1,0 +1,114 @@
+{
+  "baseline_run": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage0\\run_20261126_102956_686113",
+  "baseline_lora": {
+    "token_f1_percent": 0.0,
+    "exact_match_percent": 0.0,
+    "answer_correctness_percent": 0.0,
+    "correct_refusal_rate_percent": 100.0,
+    "false_refusal_rate_percent": 100.0,
+    "reference_contradiction_percent": null,
+    "reference_unsupported_percent": null,
+    "claim_review_denominator": 0,
+    "impossible_non_refusal_count": 0,
+    "inference_gpu_gib": 2.94,
+    "generation_seconds": 15.662,
+    "questions_per_second": 6.768,
+    "failure_categories": {
+      "correct_refusal": 29,
+      "false_refusal": 77
+    },
+    "best_val_loss": 1.7856,
+    "training_seconds": 371.488,
+    "training_gpu_gib": 3.642,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 1.8633,
+        "val_loss": 1.8058,
+        "optimizer_steps": 69
+      },
+      {
+        "epoch": 2,
+        "train_loss": 1.7436,
+        "val_loss": 1.7856,
+        "optimizer_steps": 69
+      }
+    ],
+    "training_samples_per_second": 2.966
+  },
+  "candidate_lora": {
+    "token_f1_percent": 0.0,
+    "answer_correctness_percent": 0.0,
+    "correct_refusal_rate_percent": 100.0,
+    "false_refusal_rate_percent": 100.0,
+    "exact_match_percent": 0.0,
+    "reference_contradiction_percent": null,
+    "reference_unsupported_percent": null,
+    "best_val_loss": 1.7882,
+    "training_seconds": 364.106,
+    "training_gpu_gib": 3.642,
+    "inference_gpu_gib": 2.94,
+    "questions_per_second": 3.867,
+    "train_samples": 539
+  },
+  "candidate": {
+    "exact_duplicate_ids": [
+      "TRAIN_Q076",
+      "TRAIN_Q286"
+    ],
+    "conflicting_label_ids": [
+      "DEV_Q195",
+      "DEV_Q228",
+      "DEV_Q276",
+      "DEV_Q298",
+      "TRAIN_Q022",
+      "TRAIN_Q138",
+      "TRAIN_Q156",
+      "TRAIN_Q248",
+      "TRAIN_Q333",
+      "TRAIN_Q340"
+    ],
+    "removed_ids": [
+      "DEV_Q195",
+      "DEV_Q228",
+      "DEV_Q276",
+      "DEV_Q298",
+      "TRAIN_Q022",
+      "TRAIN_Q076",
+      "TRAIN_Q138",
+      "TRAIN_Q156",
+      "TRAIN_Q248",
+      "TRAIN_Q286",
+      "TRAIN_Q333",
+      "TRAIN_Q340"
+    ],
+    "counts": {
+      "total": 539,
+      "answerable": 367,
+      "impossible": 172
+    },
+    "changed_answer_ids": [],
+    "candidate_content_sha256": "73e206e76bf2abd21c21604d07481ce2fda84dd50355d85c5fda5fc97356a090"
+  },
+  "provisional_selection": "baseline",
+  "selection_rule": "Provisional screen: correct refusal >= 50%; lower false refusal; F1 and correctness nondecreasing, at least one strictly improved. Human review required.",
+  "delta": {
+    "token_f1_percent": 0.0,
+    "answer_correctness_percent": 0.0,
+    "correct_refusal_rate_percent": 0.0,
+    "false_refusal_rate_percent": 0.0,
+    "exact_match_percent": 0.0,
+    "best_val_loss": 0.0026,
+    "training_seconds": -7.382,
+    "training_gpu_gib": 0.0,
+    "inference_gpu_gib": 0.0,
+    "questions_per_second": -2.901,
+    "reference_contradiction_percent": null,
+    "reference_unsupported_percent": null
+  },
+  "quality_edits": "NOT RUN",
+  "qlora": "NOT RUN",
+  "human_review_required": true,
+  "hallucination_rate_percent": null,
+  "limitation": "Joint cleanup effect only; individual duplicate and conflict removal effects are not isolated."
+}

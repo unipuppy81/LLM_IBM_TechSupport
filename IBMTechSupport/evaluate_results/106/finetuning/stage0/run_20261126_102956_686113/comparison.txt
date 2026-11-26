@@ -1,0 +1,18 @@
+[Stage 0 Baseline Comparison]
+Metric                                      Base         LoRA        QLoRA
+token_f1_percent                           22.24          0.0          0.0
+answer_correctness_percent                 50.65          0.0          0.0
+correct_refusal_rate_percent               27.59        100.0        100.0
+false_refusal_rate_percent                  9.09        100.0        100.0
+exact_match_percent                          0.0          0.0          0.0
+reference_contradiction_percent              0.0          N/A          N/A
+reference_unsupported_percent              35.71          N/A          N/A
+inference_gpu_gib                          2.936         2.94        1.147
+questions_per_second                       0.163        6.768        3.002
+best_val_loss                                N/A       1.7856        1.808
+training_seconds                             N/A      371.488      464.163
+training_gpu_gib                             N/A        3.642        2.745
+training_samples_per_second                  N/A        2.966        2.374
+
+Automated quality verdicts require human review. No verified hallucination rate.
+Results: C:\Projects\LLM_IBM_TechSupport\IBMTechSupport\evaluate_results\106\finetuning\stage0\run_20261126_102956_686113

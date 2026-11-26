@@ -1,0 +1,13 @@
+{
+  "files": {
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage3_test2\\run_20261126_163045_370144\\A_epoch_1\\lora\\adapter_config.json": "5112f6b7360d7d4b39ebbc7a4c94032dbed778c71cd8b11235515599c8aa4364",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage3_test2\\run_20261126_163045_370144\\A_epoch_1\\lora\\adapter_model.safetensors": "f2581c69eb4eef017e3d146f14d9aba887e61c9822551fa6b15d8dd02eaae752",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage3_test2\\run_20261126_163045_370144\\A_epoch_1\\lora\\chat_template.jinja": "8aa40ce145adb73cb3a75194dc0224702a95850ec5275cabb728496bbd749fc6",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage3_test2\\run_20261126_163045_370144\\A_epoch_1\\lora\\README.md": "9540121682a6fe35c7786bfd2f67d64f70bc9bff50d7d7cd6d1ff585946dacd9",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage3_test2\\run_20261126_163045_370144\\A_epoch_1\\lora\\tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage3_test2\\run_20261126_163045_370144\\A_epoch_1\\lora\\tokenizer_config.json": "b3d4aae9670f7c2de3e3b32675b0118e7e7b517544f5ab32efe04bd74f2238c1",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test2\\run_20261126_163045_370144\\experiments\\A_epoch_1\\training\\epoch_audit.json": "22b58535ed8ced435d8bd1cbca1d6a378106bdf706867b38c843f5d099675ed0",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test2\\run_20261126_163045_370144\\experiments\\A_epoch_1\\training\\lora_train_metrics.json": "0ad4e7b45da6da2dd80445159f4300b1f886403dbf7be14869a43553a8db1aee",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test2\\run_20261126_163045_370144\\experiments\\A_epoch_1\\training\\weight_audit.json": "ecb32990f0e9e8240f019adfea3c86991ba71f59c9a505a1a911993e13468a1b"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "baseline_lora": {
+    "token_f1_percent": 7.03,
+    "answer_correctness_percent": 16.88,
+    "correct_refusal_rate_percent": 75.86,
+    "false_refusal_rate_percent": 63.64,
+    "exact_match_percent": 0.0,
+    "reference_contradiction_percent": 0.0,
+    "reference_unsupported_percent": 14.29,
+    "best_val_loss": 1.7973,
+    "training_seconds": 535.475,
+    "training_gpu_gib": 4.87,
+    "inference_gpu_gib": 3.096,
+    "questions_per_second": 1.135,
+    "train_samples": 539
+  },
+  "baseline_epochs": 2,
+  "epochs": {
+    "A_epoch_1": 1,
+    "B_epoch_3": 3
+  },
+  "candidates": {
+    "A_epoch_1": {
+      "token_f1_percent": 17.53,
+      "answer_correctness_percent": null,
+      "correct_refusal_rate_percent": 13.79,
+      "false_refusal_rate_percent": 11.69,
+      "exact_match_percent": 0.0,
+      "best_val_loss": 1.8677,
+      "training_seconds": 269.695,
+      "training_gpu_gib": 4.869,
+      "inference_gpu_gib": 3.096,
+      "questions_per_second": 0.412,
+      "reference_contradiction_percent": null,
+      "reference_unsupported_percent": null,
+      "train_samples": 539
+    },
+    "B_epoch_3": {
+      "token_f1_percent": 6.27,
+      "answer_correctness_percent": null,
+      "correct_refusal_rate_percent": 72.41,
+      "false_refusal_rate_percent": 67.53,
+      "exact_match_percent": 0.0,
+      "best_val_loss": 1.7897,
+      "training_seconds": 797.8,
+      "training_gpu_gib": 4.87,
+      "inference_gpu_gib": 3.096,
+      "questions_per_second": 1.185,
+      "reference_contradiction_percent": null,
+      "reference_unsupported_percent": null,
+      "train_samples": 539
+    }
+  },
+  "quality_status": {
+    "A_epoch_1": "SKIPPED: Correct refusal < 50%; Youden's J decreased",
+    "B_epoch_3": "SKIPPED: False refusal did not decrease; Token F1 decreased; Youden's J decreased"
+  },
+  "youden_j_percent_points": {
+    "baseline": 12.22,
+    "A_epoch_1": 2.1,
+    "B_epoch_3": 4.88
+  },
+  "provisional_selection": "baseline",
+  "complete": true,
+  "best_checkpoint_epochs": {
+    "A_epoch_1": 1,
+    "B_epoch_3": 3
+  },
+  "prefix_history_matches_baseline": true,
+  "human_review_required": true,
+  "qlora": "NOT RUN",
+  "hallucination_rate_percent": null,
+  "notes": [
+    "One 3-epoch training trajectory; A is the saved first-epoch adapter.",
+    "B selects minimum unweighted validation loss over epochs 1-3, not necessarily epoch 3.",
+    "A training seconds are measured at epoch 1; B seconds are cumulative and include snapshot-copy overhead.",
+    "Quality screen/selection unchanged from Stage3 Test1. No independent test evaluation."
+  ]
+}

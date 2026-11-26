@@ -1,0 +1,19 @@
+[Stage 3 Test4 Inference Prompt Comparison]
+Metric                                             Baseline_E         A_short_original  B_concise_answerability
+token_f1_percent                                         7.03                     3.97                    15.95
+answer_correctness_percent                              16.88                      N/A                      N/A
+correct_refusal_rate_percent                            75.86                    79.31                    10.34
+false_refusal_rate_percent                              63.64                    75.32                    27.27
+youden_j_percent_points                                 12.22                     3.99                   -16.93
+exact_match_percent                                         0                        0                        0
+generation_seconds                                      93.41                   88.824                   221.19
+questions_per_second                                    1.135                    1.193                    0.479
+inference_gpu_gib                                       3.096                     2.94                    2.949
+reference_contradiction_percent                             0                      N/A                      N/A
+reference_unsupported_percent                           14.29                      N/A                      N/A
+Quality: {'A_short_original': "SKIPPED: False refusal did not decrease; Token F1 decreased; Youden's J decreased", 'B_concise_answerability': "SKIPPED: Correct refusal < 50%; Youden's J decreased"}
+Provisional selection: baseline
+Complete: False
+New training: NONE | LoRA adapter fixed | QLoRA: NOT RUN
+Automated quality verdicts require human review.
+Results: C:\Projects\LLM_IBM_TechSupport\IBMTechSupport\evaluate_results\106\finetuning\stage3_test4_prompt\run_20261126_172342_145347

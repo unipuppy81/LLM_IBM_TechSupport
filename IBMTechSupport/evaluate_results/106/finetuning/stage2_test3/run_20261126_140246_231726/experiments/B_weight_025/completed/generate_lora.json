@@ -1,0 +1,7 @@
+{
+  "files": {
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage2_test3\\run_20261126_140246_231726\\experiments\\B_weight_025\\lora\\generation_manifest.json": "9dfe0340faf529f486757bb4a7bf32b35983bf0fd93d59ac9952bb76118472af",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage2_test3\\run_20261126_140246_231726\\experiments\\B_weight_025\\lora\\metrics.json": "a6f172e8e8a2e7d5b65daba5d1a137963e1832529fe8efc1d07dca4cb8bc786b",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage2_test3\\run_20261126_140246_231726\\experiments\\B_weight_025\\lora\\predictions.jsonl": "7df3dfd39291495b8a6253c58dfe52f74d8a8772ef19035ee22f721db7ded35b"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "files": {
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test5\\run_20261126_173316_296155\\experiments\\A_base\\prompt_config.yaml": "abd13d1cf7f4eeb37e7c54713e6c0481112738a35d895b429624ac2344366d06",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test5\\run_20261126_173316_296155\\experiments\\A_base\\base\\predictions.jsonl": "641f04e3d8b9fbbf788e6a965414ada69cae93d8c38ef6583207b92ccb1c0950",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test5\\run_20261126_173316_296155\\experiments\\A_base\\base\\metrics.json": "6949abc3784850f8db4352dbc0675af07fd1ce7c7b35aac242802950af95fa53",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test5\\run_20261126_173316_296155\\experiments\\A_base\\base\\generation_manifest.json": "5f802fd83b779c27b6adab1788d40314494276066bf97787d0b2beb47e0c9b1d"
+  }
+}

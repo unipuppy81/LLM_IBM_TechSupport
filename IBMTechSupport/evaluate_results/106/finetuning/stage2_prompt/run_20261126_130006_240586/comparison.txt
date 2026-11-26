@@ -1,0 +1,18 @@
+[Test3 System Prompt Comparison]
+Metric                                  Stage 1-2       Prompt        Delta
+token_f1_percent                                0            0            0
+answer_correctness_percent                      0            0            0
+correct_refusal_rate_percent                  100          100            0
+false_refusal_rate_percent                    100          100            0
+exact_match_percent                             0            0            0
+best_val_loss                              1.7873       1.7831      -0.0042
+training_seconds                          374.446      364.035      -10.411
+training_gpu_gib                            3.642        3.679        0.037
+inference_gpu_gib                            2.94        2.943        0.003
+questions_per_second                        2.991        3.662        0.671
+reference_contradiction_percent               N/A          N/A          N/A
+reference_unsupported_percent                 N/A          N/A          N/A
+Provisional selection: baseline
+QLoRA: NOT RUN
+Validation loss uses different prompts. Automated quality verdicts require human review.
+Results: C:\Projects\LLM_IBM_TechSupport\IBMTechSupport\evaluate_results\106\finetuning\stage2_prompt\run_20261126_130006_240586

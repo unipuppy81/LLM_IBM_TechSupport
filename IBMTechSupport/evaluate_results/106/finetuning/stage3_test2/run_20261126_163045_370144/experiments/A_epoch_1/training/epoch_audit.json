@@ -1,0 +1,7 @@
+{
+  "epochs": 1,
+  "best_epoch": 1,
+  "shared_trajectory": true,
+  "source": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test2\\run_20261126_163045_370144\\experiments\\B_epoch_3\\training\\epoch1_snapshot",
+  "source_marker_sha256": "e1f3f11954018d4dc01d8b3ec417b1c86ba64e2183f965e270b549123d03e77f"
+}

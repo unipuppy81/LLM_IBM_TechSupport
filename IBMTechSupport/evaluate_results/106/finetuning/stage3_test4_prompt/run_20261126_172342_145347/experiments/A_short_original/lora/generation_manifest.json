@@ -1,0 +1,23 @@
+{
+  "dataset_sha256": "51740842406b7f8e6814dc5a57c57d09da4b72fc0c94e62b430e8cf8ccfb45ae",
+  "expected_count": 106,
+  "predictions_sha256": "8b7cc8a21b877354cc7011e9d63a5d03b5f8e3f9928a764189930b54b15879f7",
+  "base_config_sha256": "9c668d9abfe9d11a10dd9783d3dbc2b5d68d1b023c4d08e26e265ebf0ad7b3aa",
+  "adapter_sha256": {
+    "adapter_config.json": "7ac9bdb0da3a5fb323cc2ca522738bb79a5675240c6a7254f05717899ac4ea4a",
+    "adapter_model.safetensors": "5d432933bb7b4534bc750edde4cbb546b5d17c9ac7b73888a383eb837b323eb6"
+  },
+  "inference": {
+    "batch_size": 1,
+    "max_new_tokens": 160,
+    "do_sample": false,
+    "num_beams": 1,
+    "temperature": null,
+    "top_p": null,
+    "top_k": null
+  },
+  "prompt": {
+    "system": "You are an IBM technical support assistant. Answer technical questions using only your existing knowledge. If you cannot provide a reliable answer, respond with exactly INSUFFICIENT_INFORMATION. Otherwise, provide a concise technical answer in English.",
+    "user_template": "{question}"
+  }
+}

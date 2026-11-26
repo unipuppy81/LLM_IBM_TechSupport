@@ -1,0 +1,23 @@
+[Stage 3 Test5 Base vs LoRA Comparison]
+Metric                                        A_Base        B_LoRA_E       LoRA-Base
+token_f1_percent                                  25            7.03          -17.97
+answer_correctness_percent                     62.34           16.88          -45.46
+correct_refusal_rate_percent                       0           75.86           75.86
+false_refusal_rate_percent                         0           63.64           63.64
+youden_j_percent_points                            0           12.22           12.22
+exact_match_percent                                0               0               0
+generation_seconds                           708.327           93.41        -614.917
+questions_per_second                            0.15           1.135           0.985
+inference_gpu_gib                              3.092           3.096           0.004
+reference_contradiction_percent                    0               0               0
+reference_unsupported_percent                  24.68           14.29          -10.39
+[Paired Refusal Transitions: Base -> LoRA]
+Transition                          Answerable (77)    Impossible (29)
+refuse_to_refuse                                  0                  0
+refuse_to_non_refuse                              0                  0
+non_refuse_to_refuse                             49                 22
+non_refuse_to_non_refuse                         28                  7
+Complete: True
+New training: NONE | LoRA result: REUSED | QLoRA: NOT RUN
+Automated quality verdicts require human review.
+Results: C:\Projects\LLM_IBM_TechSupport\IBMTechSupport\evaluate_results\106\finetuning\stage3_test5\run_20261126_173316_296155

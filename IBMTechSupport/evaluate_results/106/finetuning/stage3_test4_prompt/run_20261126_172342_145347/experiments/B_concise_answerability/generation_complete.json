@@ -1,0 +1,8 @@
+{
+  "files": {
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test4_prompt\\run_20261126_172342_145347\\experiments\\B_concise_answerability\\prompt_config.yaml": "ec9331f543c7c69cd3207e94878dec292f0f3f3c86a01ed95afa9b8f8e3ab446",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test4_prompt\\run_20261126_172342_145347\\experiments\\B_concise_answerability\\lora\\predictions.jsonl": "226dea0ed5871c4859c9b9b2bb02340a9137592b9fdb13a2fbc3ae1125d77864",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test4_prompt\\run_20261126_172342_145347\\experiments\\B_concise_answerability\\lora\\metrics.json": "e059e1cc1c8ab9693e1a030a516be0c877141a2677a8e35d43b577c8b859f946",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test4_prompt\\run_20261126_172342_145347\\experiments\\B_concise_answerability\\lora\\generation_manifest.json": "72ac638b1b44e041c2c8995217e843be3a095f65930a5f7e25610fef238723f7"
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "baseline_lora": {
+    "token_f1_percent": 3.07,
+    "answer_correctness_percent": 9.09,
+    "correct_refusal_rate_percent": 93.1,
+    "false_refusal_rate_percent": 83.12,
+    "exact_match_percent": 0.0,
+    "reference_contradiction_percent": 0.0,
+    "reference_unsupported_percent": 15.38,
+    "best_val_loss": 1.7882,
+    "training_seconds": 525.775,
+    "training_gpu_gib": 4.87,
+    "inference_gpu_gib": 3.096,
+    "questions_per_second": 1.534,
+    "train_samples": 539
+  },
+  "candidates": {
+    "C_weight_010": {
+      "token_f1_percent": 14.0,
+      "answer_correctness_percent": 33.77,
+      "correct_refusal_rate_percent": 27.59,
+      "false_refusal_rate_percent": 29.87,
+      "exact_match_percent": 0.0,
+      "reference_contradiction_percent": 0.0,
+      "reference_unsupported_percent": 24.07,
+      "best_val_loss": 1.8204,
+      "training_seconds": 532.958,
+      "training_gpu_gib": 4.87,
+      "inference_gpu_gib": 3.096,
+      "questions_per_second": 0.595,
+      "train_samples": 539
+    },
+    "D_weight_005": {
+      "token_f1_percent": 18.49,
+      "answer_correctness_percent": 41.56,
+      "correct_refusal_rate_percent": 0.0,
+      "false_refusal_rate_percent": 3.9,
+      "exact_match_percent": 0.0,
+      "reference_contradiction_percent": 0.0,
+      "reference_unsupported_percent": 29.73,
+      "best_val_loss": 1.8708,
+      "training_seconds": 584.896,
+      "training_gpu_gib": 4.87,
+      "inference_gpu_gib": 3.096,
+      "questions_per_second": 0.452,
+      "train_samples": 539
+    }
+  },
+  "delta_vs_baseline": {
+    "C_weight_010": {
+      "token_f1_percent": 10.93,
+      "answer_correctness_percent": 24.68,
+      "correct_refusal_rate_percent": -65.51,
+      "false_refusal_rate_percent": -53.25,
+      "exact_match_percent": 0.0,
+      "best_val_loss": 0.0322,
+      "training_seconds": 7.183,
+      "training_gpu_gib": 0.0,
+      "inference_gpu_gib": 0.0,
+      "questions_per_second": -0.939,
+      "reference_contradiction_percent": 0.0,
+      "reference_unsupported_percent": 8.69
+    },
+    "D_weight_005": {
+      "token_f1_percent": 15.42,
+      "answer_correctness_percent": 32.47,
+      "correct_refusal_rate_percent": -93.1,
+      "false_refusal_rate_percent": -79.22,
+      "exact_match_percent": 0.0,
+      "best_val_loss": 0.0826,
+      "training_seconds": 59.121,
+      "training_gpu_gib": 0.0,
+      "inference_gpu_gib": 0.0,
+      "questions_per_second": -1.082,
+      "reference_contradiction_percent": 0.0,
+      "reference_unsupported_percent": 14.35
+    }
+  },
+  "weights": {
+    "C_weight_010": 0.1,
+    "D_weight_005": 0.05
+  },
+  "baseline_weight": 0.25,
+  "provisional_selection": "baseline",
+  "complete": true,
+  "human_review_required": true,
+  "hallucination_rate_percent": null,
+  "qlora": "NOT RUN",
+  "notes": [
+    "Independent training from base weights for each candidate.",
+    "Only training loss is weighted; validation loss is unweighted.",
+    "Absolute gradient scale may also change because the sample-count denominator is unchanged.",
+    "Correct-refusal floor 50%; F1 and correctness must not decline, at least one must improve, and false-refusal must decrease."
+  ]
+}

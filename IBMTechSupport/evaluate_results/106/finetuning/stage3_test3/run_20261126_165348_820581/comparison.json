@@ -1,0 +1,80 @@
+{
+  "baseline_lora": {
+    "token_f1_percent": 7.03,
+    "answer_correctness_percent": 16.88,
+    "correct_refusal_rate_percent": 75.86,
+    "false_refusal_rate_percent": 63.64,
+    "exact_match_percent": 0.0,
+    "reference_contradiction_percent": 0.0,
+    "reference_unsupported_percent": 14.29,
+    "best_val_loss": 1.7973,
+    "training_seconds": 535.475,
+    "training_gpu_gib": 4.87,
+    "inference_gpu_gib": 3.096,
+    "questions_per_second": 1.135,
+    "train_samples": 539
+  },
+  "baseline_grad_accum": 8,
+  "accumulation_steps": {
+    "A_accum_4": 4,
+    "B_accum_16": 16
+  },
+  "candidates": {
+    "A_accum_4": {
+      "token_f1_percent": 1.89,
+      "answer_correctness_percent": null,
+      "correct_refusal_rate_percent": 89.66,
+      "false_refusal_rate_percent": 92.21,
+      "exact_match_percent": 0.0,
+      "best_val_loss": 1.7799,
+      "training_seconds": 528.84,
+      "training_gpu_gib": 4.87,
+      "inference_gpu_gib": 3.096,
+      "questions_per_second": 2.137,
+      "reference_contradiction_percent": null,
+      "reference_unsupported_percent": null,
+      "train_samples": 539
+    },
+    "B_accum_16": {
+      "token_f1_percent": 14.43,
+      "answer_correctness_percent": null,
+      "correct_refusal_rate_percent": 27.59,
+      "false_refusal_rate_percent": 27.27,
+      "exact_match_percent": 0.0,
+      "best_val_loss": 1.8374,
+      "training_seconds": 525.158,
+      "training_gpu_gib": 4.87,
+      "inference_gpu_gib": 3.096,
+      "questions_per_second": 0.536,
+      "reference_contradiction_percent": null,
+      "reference_unsupported_percent": null,
+      "train_samples": 539
+    }
+  },
+  "quality_status": {
+    "A_accum_4": "SKIPPED: False refusal did not decrease; Token F1 decreased; Youden's J decreased",
+    "B_accum_16": "SKIPPED: Correct refusal < 50%; Youden's J decreased"
+  },
+  "youden_j_percent_points": {
+    "baseline": 12.22,
+    "A_accum_4": -2.55,
+    "B_accum_16": 0.32
+  },
+  "planned_update_windows_per_epoch": {
+    "baseline": 68,
+    "A_accum_4": 135,
+    "B_accum_16": 34
+  },
+  "provisional_selection": "baseline",
+  "complete": true,
+  "human_review_required": true,
+  "qlora": "NOT RUN",
+  "hallucination_rate_percent": null,
+  "notes": [
+    "Same E data, prompt, loss weighting, seed and training settings except gradient accumulation.",
+    "Quality skipped for failed generation screens unless explicitly overridden.",
+    "Selection: 50% correct-refusal floor, nondecreasing F1/J/correctness, lower false refusal; rank by J first.",
+    "Validation loss is unweighted.",
+    "Update windows change along with effective batch size; AMP can skip actual updates."
+  ]
+}

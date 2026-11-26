@@ -1,0 +1,46 @@
+{
+  "base": {
+    "token_f1_percent": 25.0,
+    "answer_correctness_percent": null,
+    "correct_refusal_rate_percent": 0.0,
+    "false_refusal_rate_percent": 0.0,
+    "exact_match_percent": 0.0,
+    "generation_seconds": 708.327,
+    "questions_per_second": 0.15,
+    "inference_gpu_gib": 3.092,
+    "reference_contradiction_percent": null,
+    "reference_unsupported_percent": null,
+    "youden_j_percent_points": 0.0
+  },
+  "lora": {
+    "token_f1_percent": 7.03,
+    "answer_correctness_percent": 16.88,
+    "correct_refusal_rate_percent": 75.86,
+    "false_refusal_rate_percent": 63.64,
+    "exact_match_percent": 0.0,
+    "reference_contradiction_percent": 0.0,
+    "reference_unsupported_percent": 14.29,
+    "best_val_loss": 1.7973,
+    "training_seconds": 535.475,
+    "training_gpu_gib": 4.87,
+    "inference_gpu_gib": 3.096,
+    "questions_per_second": 1.135,
+    "train_samples": 539,
+    "generation_seconds": 93.41,
+    "youden_j_percent_points": 12.22
+  },
+  "paired_refusal_transitions": {
+    "answerable": {
+      "refuse_to_refuse": 0,
+      "refuse_to_non_refuse": 0,
+      "non_refuse_to_refuse": 49,
+      "non_refuse_to_non_refuse": 28
+    },
+    "impossible": {
+      "refuse_to_refuse": 0,
+      "refuse_to_non_refuse": 0,
+      "non_refuse_to_refuse": 22,
+      "non_refuse_to_non_refuse": 7
+    }
+  }
+}

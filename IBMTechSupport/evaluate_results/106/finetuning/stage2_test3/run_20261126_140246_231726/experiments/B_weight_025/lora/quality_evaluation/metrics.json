@@ -1,0 +1,34 @@
+{
+  "answer_correctness_percent": 9.09,
+  "answer_correctness_counts": {
+    "CORRECT": 7,
+    "INCORRECT": 4,
+    "REFUSED": 64,
+    "UNCERTAIN": 2
+  },
+  "answer_correctness_denominator": 77,
+  "claim_review_counts": {
+    "UNCERTAIN": 11,
+    "UNSUPPORTED": 2
+  },
+  "claim_review_denominator": 13,
+  "reference_contradiction_percent": 0.0,
+  "reference_unsupported_percent": 15.38,
+  "impossible_non_refusal_count": 2,
+  "failure_categories": {
+    "correct_refusal": 27,
+    "correct": 7,
+    "incorrect": 4,
+    "false_refusal": 64,
+    "uncertain": 2,
+    "impossible_non_refusal": 2
+  },
+  "hallucination_rate_percent": null,
+  "hallucination_note": "Reference-based flags are proxies, not independently verified hallucination rates. Impossible non-refusals are unverified.",
+  "human_review_required": true,
+  "judge_model": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\Qwen2.5-1.5B-Instruct",
+  "dataset_sha256": "51740842406b7f8e6814dc5a57c57d09da4b72fc0c94e62b430e8cf8ccfb45ae",
+  "predictions_sha256": "7df3dfd39291495b8a6253c58dfe52f74d8a8772ef19035ee22f721db7ded35b",
+  "evaluator_invalid_outputs": 13,
+  "elapsed_seconds": 116.701
+}

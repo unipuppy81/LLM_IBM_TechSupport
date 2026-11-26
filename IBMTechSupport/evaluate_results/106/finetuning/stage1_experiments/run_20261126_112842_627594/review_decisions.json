@@ -1,0 +1,79 @@
+{
+  "different_answer_groups": [
+    {
+      "ids": [
+        "TRAIN_Q489",
+        "DEV_Q029"
+      ],
+      "decision": "retain",
+      "reason": "Same two connection pool settings; link and bullet layout differ."
+    },
+    {
+      "ids": [
+        "TRAIN_Q047",
+        "DEV_Q156"
+      ],
+      "decision": "retain technical content",
+      "reason": "Same CVE, description, score and vector; link and label formatting differ."
+    },
+    {
+      "ids": [
+        "TRAIN_Q206",
+        "DEV_Q129"
+      ],
+      "decision": "retain technical content",
+      "reason": "Same two CVEs, scores and vectors; hyperlink display differs."
+    },
+    {
+      "ids": [
+        "DEV_Q290",
+        "TRAIN_Q189"
+      ],
+      "decision": "retain",
+      "reason": "Same unsupported Windows service conclusion; longer answer explains why."
+    },
+    {
+      "ids": [
+        "TRAIN_Q042",
+        "DEV_Q225"
+      ],
+      "decision": "candidate answer_alignment",
+      "reason": "Question requests cause; add documented CAUSE before existing remedy. swg21664629.txt."
+    },
+    {
+      "ids": [
+        "DEV_Q155",
+        "TRAIN_Q056"
+      ],
+      "decision": "retain",
+      "reason": "Same wpcollector definition; longer answer adds support workflow detail."
+    }
+  ],
+  "nonverbatim_review": [
+    {
+      "ids": [
+        "DEV_Q156",
+        "DEV_Q129",
+        "DEV_Q029"
+      ],
+      "decision": "retain",
+      "reason": "Formatting and link differences, not established technical errors."
+    },
+    {
+      "ids": [
+        "DEV_Q291"
+      ],
+      "decision": "candidate answer_quality",
+      "reason": "Historical source swg21639640.txt lists BPM V8.6 Java 8 and BPEL Java 6 construct restriction. Existing version-specific answer retained and completed."
+    }
+  ],
+  "format_review": {
+    "ids": [
+      "TRAIN_Q047",
+      "TRAIN_Q206"
+    ],
+    "decision": "candidate answer_format",
+    "reason": "Normalize prose label spacing and redundant URL display while preserving URLs and technical values."
+  },
+  "scope": "Only reviewed training evidence; not a full semantic audit of all 551 rows. No external answers or validation content added."
+}

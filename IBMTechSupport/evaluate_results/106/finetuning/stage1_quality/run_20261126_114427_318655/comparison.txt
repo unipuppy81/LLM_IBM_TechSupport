@@ -1,0 +1,18 @@
+[Stage 1 Quality Comparison]
+Metric                                  Stage 1-1      Quality        Delta
+token_f1_percent                                0            0            0
+answer_correctness_percent                      0            0            0
+correct_refusal_rate_percent                  100          100            0
+false_refusal_rate_percent                    100          100            0
+exact_match_percent                             0            0            0
+best_val_loss                              1.7882       1.7873      -0.0009
+training_seconds                          364.106      374.446        10.34
+training_gpu_gib                            3.642        3.642            0
+inference_gpu_gib                            2.94         2.94            0
+questions_per_second                        3.867        2.991       -0.876
+reference_contradiction_percent               N/A          N/A          N/A
+reference_unsupported_percent                 N/A          N/A          N/A
+Provisional selection: cleanup
+Quality edits: APPLIED | QLoRA: NOT RUN
+539 rows retained even if edits do not improve performance. Joint answer-edit effect only. Automated quality verdicts require human review.
+Results: C:\Projects\LLM_IBM_TechSupport\IBMTechSupport\evaluate_results\106\finetuning\stage1_quality\run_20261126_114427_318655

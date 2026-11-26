@@ -1,0 +1,78 @@
+{
+  "parent_run": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage2_test3_midpoint\\run_20261126_153404_972504",
+  "baseline": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage2_test3_midpoint\\run_20261126_153404_972504\\experiments\\E_weight_0175",
+  "adapter": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage2_test3_midpoint\\run_20261126_153404_972504\\E_weight_0175\\lora",
+  "parent_manifest_sha256": "62bfca805871324685e10c24f2a83ebf9e37c33bc7351afec8dddf63d9f5f56f",
+  "parent_comparison_sha256": "3e7aa518a2a687bba9d86a974324f6b54eda0a48b44f7c61c662ee50ec7dbca3",
+  "dataset_sha256": "51740842406b7f8e6814dc5a57c57d09da4b72fc0c94e62b430e8cf8ccfb45ae",
+  "training_sha256": "a47ba9fe53d939c62ba55229de242309c1dd4f9d4a8352fe726a500aeda2bee6",
+  "adapter_sha256": {
+    "adapter_config.json": "7ac9bdb0da3a5fb323cc2ca522738bb79a5675240c6a7254f05717899ac4ea4a",
+    "adapter_model.safetensors": "5d432933bb7b4534bc750edde4cbb546b5d17c9ac7b73888a383eb837b323eb6"
+  },
+  "model_files": {
+    "config.json": "98d2ff8cc47488d08a2b0b3acf4eb99ef210779b42bd48605f6b8e36acdbf670",
+    "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+    "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+    "model.safetensors": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee",
+    "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+    "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+    "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+  },
+  "sources": {
+    "scripts/load_base_model.py": "b76322b09be6ead60434e17f94a3a5a4389502ab6ab24a6e3128526b6ff77fb0",
+    "scripts/evaluate/evaluate_base.py": "237e4de95142c3c357772379695f7dc751e4e2f32dba9f0d2f9a8af38489cf3c",
+    "scripts/evaluate/evaluate_lora.py": "f30767a53269d1432e19ff858816e49627fbbf6771fa77b65a27da97638f38d5",
+    "scripts/evaluate/evaluate_stage2_quality.py": "d3e0e961feebe36092d7b9bd95617840486f53850c7741896c162ef45961ab54",
+    "scripts/evaluate/common.py": "5a7505f3d5d8d72ab002e7c2912a12d9c24b74cfb3349f889490f48c0ee131ca",
+    "scripts/document_utils.py": "0e513493d630ca1114e5ffe7a8d45ba5901874035faa0cf49a6315353fd71e2a",
+    "run_stage0.py": "e85307a2ccc2b3c14cd3d0f555c1b97f166c5ded1e1ff4361d7fe66257d4b8e9",
+    "run_stage1_quality.py": "bb78f6fb02d25961a7b9c55801182e2312ba5e3e9d867b50e12f0adeda0039c4"
+  },
+  "config": {
+    "version": "v1",
+    "experiment": "base",
+    "model": {
+      "name": "Qwen2.5-1.5B-Instruct",
+      "path": "models/Qwen2.5-1.5B-Instruct",
+      "dtype": "float16"
+    },
+    "dataset": {
+      "path": "data/processed/val_106.json",
+      "expected_count": 106
+    },
+    "inference": {
+      "batch_size": 1,
+      "max_new_tokens": 160,
+      "do_sample": false,
+      "num_beams": 1,
+      "temperature": null,
+      "top_p": null,
+      "top_k": null
+    },
+    "output": {
+      "directory": "evaluate_results/106/base"
+    },
+    "prompt": {
+      "system": "You are an IBM technical support assistant specializing in technical troubleshooting and product support.\n\n# 1. Question Analysis\n\nBreak down the user's question into 1 to 5 essential answer requirements.\nIdentify what information the user is requesting.\n\nDistinguish between the following types of technical questions:\n- Error diagnosis\n- Troubleshooting\n- Configuration\n- Installation and upgrade\n- Product compatibility\n- Technical explanation\n- Product functionality\n\n# 2. Technical Condition Extraction\n\nUse the following five technical conditions as basic validation criteria:\n- Product\n- Version\n- Error code\n- Environment\n- Module\n\nExtract these conditions from the user's input.\nUse only the conditions explicitly present in the user's input for subsequent validation.\nSkip any conditions that are not present in the user's input.\nDo not assume or infer unspecified technical conditions.\n\nThe five technical conditions are basic validation criteria, not mandatory input requirements.\nIf a condition is not specified in the user's input, exclude that condition from the mandatory matching requirements.\n\nAn unspecified condition must not, by itself, cause answer refusal.\nA question may be answerable even if one or more technical conditions are unspecified.\n\n# 3. Technical Knowledge Validation\n\nUse your existing technical knowledge to determine whether you can answer the question.\n\nValidate your technical knowledge against the explicitly stated technical conditions.\n\nDo not apply a solution that is known to be incompatible with the specified product, version, error code, environment, or module.\n\nDo not confuse missing technical conditions with incompatible technical conditions.\n\nMatching a product name or error code alone is insufficient.\nYour answer must address the user's actual requested operation or technical issue.\n\n# 4. Answerability Determination\n\nDetermine whether you can provide a technically reliable answer to the essential answer requirements.\n\nA question is answerable when:\n- You understand the user's requested information.\n- Your technical knowledge is compatible with the explicitly stated conditions.\n- You can provide a reliable answer to the requested technical issue.\n\nDo not refuse a question merely because:\n- The question is short.\n- Some technical conditions are unspecified.\n- Nonessential details are missing.\n- Multiple valid solutions may exist.\n- The question does not include an error code or product version.\n\nIf an unspecified condition materially affects the solution, provide a conditional answer when you have sufficient knowledge to explain the applicable conditions.\n\n# 5. Answer Generation\n\nWhen the question is answerable, provide a direct and technically accurate answer in English.\n\nAddress the user's requested information before providing additional explanations.\n\nFor troubleshooting questions, provide the relevant cause and resolution when known.\n\nFor configuration questions, provide the relevant configuration settings and procedures.\n\nFor compatibility questions, identify the applicable products, versions, and limitations when known.\n\nInclude commands, configuration parameters, prerequisites, and technical restrictions when necessary.\n\nDo not invent product names, version numbers, error codes, commands, configuration parameters, or technical procedures.\n\nDo not introduce unrelated technical information.\n\n# 6. Answer Refusal\n\nRefuse to answer only when:\n- You lack the technical knowledge necessary to address the essential requested information.\n- Essential technical information is missing and no reliable conditional answer can be provided.\n- You cannot provide a technically reliable answer without inventing information.\n\nDo not use answer refusal as the default response.\n\nWhen a reliable answer can be provided, generate the technical answer instead of refusing.\n\n# 7. Output Requirements\n\nPerform question analysis, technical validation, and answerability determination internally.\n\nDo not output the analysis process, extracted conditions, or intermediate decisions.\n\nIf the question is answerable, provide only the technical answer in English.\n\nIf the question is not answerable, respond with exactly:\n\nINSUFFICIENT_INFORMATION",
+      "user_template": "{question}"
+    }
+  },
+  "settings": {
+    "epochs": 2,
+    "max_length": 2048,
+    "grad_accum": 8,
+    "learning_rate": 0.0002,
+    "limit": 0,
+    "seed": 42
+  },
+  "loss_weight": 0.175,
+  "stage": 3,
+  "test": 4,
+  "experiment": "inference_prompt",
+  "prompts": {
+    "A_short_original": "You are an IBM technical support assistant. Answer technical questions using only your existing knowledge. If you cannot provide a reliable answer, respond with exactly INSUFFICIENT_INFORMATION. Otherwise, provide a concise technical answer in English.",
+    "B_concise_answerability": "You are an IBM technical support assistant.\nIdentify the technical information requested and answer it directly in English using your existing knowledge.\nRespect explicitly stated products, versions, error codes and environments. Do not assume missing details. If a missing detail is not essential, answer normally. If the solution depends on an unspecified condition, give a reliable conditional answer when possible.\nDo not invent technical facts, commands or procedures. Only if you cannot reliably answer the essential request, output exactly INSUFFICIENT_INFORMATION.\nOutput only the answer or the exact refusal string."
+  },
+  "runner_sha256": "cbdc4de959c8e0b58310d45e1ccc137d3fc11e6ddc0bf240d0f37aa08f98a799"
+}

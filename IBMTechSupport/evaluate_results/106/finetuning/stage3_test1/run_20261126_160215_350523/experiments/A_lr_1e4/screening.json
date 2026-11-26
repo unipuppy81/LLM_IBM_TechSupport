@@ -1,0 +1,22 @@
+{
+  "metrics": {
+    "token_f1_percent": 9.93,
+    "answer_correctness_percent": null,
+    "correct_refusal_rate_percent": 51.72,
+    "false_refusal_rate_percent": 51.95,
+    "exact_match_percent": 0.0,
+    "best_val_loss": 1.825,
+    "training_seconds": 592.963,
+    "training_gpu_gib": 4.87,
+    "inference_gpu_gib": 3.096,
+    "questions_per_second": 0.593,
+    "reference_contradiction_percent": null,
+    "reference_unsupported_percent": null,
+    "train_samples": 539
+  },
+  "youden_j_percent_points": -0.23,
+  "reasons": [
+    "Youden's J decreased"
+  ],
+  "passed": false
+}

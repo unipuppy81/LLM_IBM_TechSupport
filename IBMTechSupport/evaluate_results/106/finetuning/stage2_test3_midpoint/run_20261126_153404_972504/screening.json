@@ -1,0 +1,19 @@
+{
+  "metrics": {
+    "token_f1_percent": 7.03,
+    "answer_correctness_percent": null,
+    "correct_refusal_rate_percent": 75.86,
+    "false_refusal_rate_percent": 63.64,
+    "exact_match_percent": 0.0,
+    "best_val_loss": 1.7973,
+    "training_seconds": 535.475,
+    "training_gpu_gib": 4.87,
+    "inference_gpu_gib": 3.096,
+    "questions_per_second": 1.135,
+    "reference_contradiction_percent": null,
+    "reference_unsupported_percent": null,
+    "train_samples": 539
+  },
+  "reasons": [],
+  "passed": true
+}

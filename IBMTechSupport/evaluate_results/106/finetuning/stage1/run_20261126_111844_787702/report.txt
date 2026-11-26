@@ -1,0 +1,26 @@
+[Stage 1 Audit Summary]
+Train / Validation: 551 / 106
+Cross-split ID / normalized overlap: 0 / 0
+exact_content_extra_rows: 2
+exact_sft_extra_rows: 2
+normalized_extra_rows: 17
+conflicting_label_groups: 5
+conflicting_label_rows: 10
+same_answer_groups: 6
+different_answer_groups: 6
+System prompt identical: True
+Label masking errors (train/val): 0/0
+EOS errors (train/val): 0/0
+train token flags: {"answer_truncated": 57, "question_truncated": 42, "train_inference_prefix_differs": 42}
+train target token lengths: {"impossible": {"count": 177, "min": 4, "max": 4, "mean": 4, "median": 4, "total": 708}, "answerable": {"count": 374, "min": 7, "max": 160, "mean": 75.13, "median": 60.0, "total": 28100}}
+train implementation error rows: 0
+validation token flags: {"question_truncated": 11, "train_inference_prefix_differs": 11, "answer_truncated": 14}
+validation target token lengths: {"impossible": {"count": 29, "min": 4, "max": 4, "mean": 4, "median": 4, "total": 116}, "answerable": {"count": 77, "min": 6, "max": 160, "mean": 94.19, "median": 96, "total": 7253}}
+validation implementation error rows: 0
+Quality flags: {"reference_not_verbatim_in_context": 4}
+Raw impossible answer values: {"-": 177}
+Candidate exact_dedup: {'total': 549, 'answerable': 372, 'impossible': 177}
+Candidate conflict_quarantine: {'total': 541, 'answerable': 369, 'impossible': 172}
+Review rows: 23
+Training: NOT RUN
+Results: C:\Projects\LLM_IBM_TechSupport\IBMTechSupport\evaluate_results\106\finetuning\stage1\run_20261126_111844_787702

@@ -1,0 +1,96 @@
+{
+  "exact_dedup": {
+    "counts": {
+      "total": 549,
+      "answerable": 372,
+      "impossible": 177
+    },
+    "sha256": "539d6e6e17afcb79c3d7516a18472fdf101eeeb5ce4a695281bdb47255cc6533",
+    "removed_ids": [
+      "TRAIN_Q076",
+      "TRAIN_Q286"
+    ],
+    "edited_ids": []
+  },
+  "conflict_quarantine": {
+    "counts": {
+      "total": 541,
+      "answerable": 369,
+      "impossible": 172
+    },
+    "sha256": "c573569a5a5d1cc3efcc2f6ec71b5401503777f6b615abb5876e97db37520915",
+    "removed_ids": [
+      "DEV_Q195",
+      "DEV_Q228",
+      "DEV_Q276",
+      "DEV_Q298",
+      "TRAIN_Q022",
+      "TRAIN_Q138",
+      "TRAIN_Q156",
+      "TRAIN_Q248",
+      "TRAIN_Q333",
+      "TRAIN_Q340"
+    ],
+    "edited_ids": []
+  },
+  "combined": {
+    "counts": {
+      "total": 539,
+      "answerable": 367,
+      "impossible": 172
+    },
+    "sha256": "c9c6a509cb02a2359155b767fdc6960dff3bc4a58c76ad304502bbdcd5f05809",
+    "removed_ids": [
+      "DEV_Q195",
+      "DEV_Q228",
+      "DEV_Q276",
+      "DEV_Q298",
+      "TRAIN_Q022",
+      "TRAIN_Q076",
+      "TRAIN_Q138",
+      "TRAIN_Q156",
+      "TRAIN_Q248",
+      "TRAIN_Q286",
+      "TRAIN_Q333",
+      "TRAIN_Q340"
+    ],
+    "edited_ids": []
+  },
+  "answer_alignment": {
+    "counts": {
+      "total": 551,
+      "answerable": 374,
+      "impossible": 177
+    },
+    "sha256": "f08150f3769c766689be516860f535664e9b5241c8ab7e4c28dbe105b23743d8",
+    "removed_ids": [],
+    "edited_ids": [
+      "TRAIN_Q042"
+    ]
+  },
+  "answer_quality": {
+    "counts": {
+      "total": 551,
+      "answerable": 374,
+      "impossible": 177
+    },
+    "sha256": "734dc0b5c67a6990b786b3aacb1e93fb2edea786bee51ecc20a5fdca1ecd6b99",
+    "removed_ids": [],
+    "edited_ids": [
+      "DEV_Q291"
+    ]
+  },
+  "answer_format": {
+    "counts": {
+      "total": 551,
+      "answerable": 374,
+      "impossible": 177
+    },
+    "sha256": "531f93eb5c5d687ad72983b0b0c19f47aee31b371fc06879cb11d1580469c920",
+    "removed_ids": [],
+    "edited_ids": [
+      "TRAIN_Q047",
+      "TRAIN_Q206"
+    ]
+  }
+}

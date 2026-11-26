@@ -1,0 +1,97 @@
+{
+  "base": {
+    "token_f1_percent": 22.24,
+    "exact_match_percent": 0.0,
+    "answer_correctness_percent": 50.65,
+    "correct_refusal_rate_percent": 27.59,
+    "false_refusal_rate_percent": 9.09,
+    "reference_contradiction_percent": 0.0,
+    "reference_unsupported_percent": 35.71,
+    "claim_review_denominator": 70,
+    "impossible_non_refusal_count": 21,
+    "inference_gpu_gib": 2.936,
+    "generation_seconds": 648.485,
+    "questions_per_second": 0.163,
+    "failure_categories": {
+      "impossible_non_refusal": 21,
+      "uncertain": 21,
+      "correct": 39,
+      "false_refusal": 7,
+      "correct_refusal": 8,
+      "incorrect": 9,
+      "partial": 1
+    }
+  },
+  "lora": {
+    "token_f1_percent": 0.0,
+    "exact_match_percent": 0.0,
+    "answer_correctness_percent": 0.0,
+    "correct_refusal_rate_percent": 100.0,
+    "false_refusal_rate_percent": 100.0,
+    "reference_contradiction_percent": null,
+    "reference_unsupported_percent": null,
+    "claim_review_denominator": 0,
+    "impossible_non_refusal_count": 0,
+    "inference_gpu_gib": 2.94,
+    "generation_seconds": 15.662,
+    "questions_per_second": 6.768,
+    "failure_categories": {
+      "correct_refusal": 29,
+      "false_refusal": 77
+    },
+    "best_val_loss": 1.7856,
+    "training_seconds": 371.488,
+    "training_gpu_gib": 3.642,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 1.8633,
+        "val_loss": 1.8058,
+        "optimizer_steps": 69
+      },
+      {
+        "epoch": 2,
+        "train_loss": 1.7436,
+        "val_loss": 1.7856,
+        "optimizer_steps": 69
+      }
+    ],
+    "training_samples_per_second": 2.966
+  },
+  "qlora": {
+    "token_f1_percent": 0.0,
+    "exact_match_percent": 0.0,
+    "answer_correctness_percent": 0.0,
+    "correct_refusal_rate_percent": 100.0,
+    "false_refusal_rate_percent": 100.0,
+    "reference_contradiction_percent": null,
+    "reference_unsupported_percent": null,
+    "claim_review_denominator": 0,
+    "impossible_non_refusal_count": 0,
+    "inference_gpu_gib": 1.147,
+    "generation_seconds": 35.316,
+    "questions_per_second": 3.002,
+    "failure_categories": {
+      "correct_refusal": 29,
+      "false_refusal": 77
+    },
+    "best_val_loss": 1.808,
+    "training_seconds": 464.163,
+    "training_gpu_gib": 2.745,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 1.9242,
+        "val_loss": 1.8353,
+        "optimizer_steps": 69
+      },
+      {
+        "epoch": 2,
+        "train_loss": 1.779,
+        "val_loss": 1.808,
+        "optimizer_steps": 69
+      }
+    ],
+    "training_samples_per_second": 2.374
+  }
+}

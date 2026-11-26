@@ -1,0 +1,12 @@
+{
+  "observed_forward_counts": {
+    "answerable": 734,
+    "impossible": 344,
+    "validation": 212
+  },
+  "answerable_weight": 1.0,
+  "impossible_weight": 0.5,
+  "validation_weight": 1.0,
+  "normalization": "original sample-count denominator",
+  "training_loss_is_weighted": true
+}

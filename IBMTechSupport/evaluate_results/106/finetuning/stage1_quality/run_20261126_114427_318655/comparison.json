@@ -1,0 +1,158 @@
+{
+  "baseline_run": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage1_cleanup\\run_20261126_113250_190348",
+  "baseline_lora": {
+    "token_f1_percent": 0.0,
+    "answer_correctness_percent": 0.0,
+    "correct_refusal_rate_percent": 100.0,
+    "false_refusal_rate_percent": 100.0,
+    "exact_match_percent": 0.0,
+    "reference_contradiction_percent": null,
+    "reference_unsupported_percent": null,
+    "best_val_loss": 1.7882,
+    "training_seconds": 364.106,
+    "training_gpu_gib": 3.642,
+    "inference_gpu_gib": 2.94,
+    "questions_per_second": 3.867,
+    "train_samples": 539
+  },
+  "stage0_run": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage0\\run_20261126_102956_686113",
+  "stage0_lora": {
+    "token_f1_percent": 0.0,
+    "exact_match_percent": 0.0,
+    "answer_correctness_percent": 0.0,
+    "correct_refusal_rate_percent": 100.0,
+    "false_refusal_rate_percent": 100.0,
+    "reference_contradiction_percent": null,
+    "reference_unsupported_percent": null,
+    "claim_review_denominator": 0,
+    "impossible_non_refusal_count": 0,
+    "inference_gpu_gib": 2.94,
+    "generation_seconds": 15.662,
+    "questions_per_second": 6.768,
+    "failure_categories": {
+      "correct_refusal": 29,
+      "false_refusal": 77
+    },
+    "best_val_loss": 1.7856,
+    "training_seconds": 371.488,
+    "training_gpu_gib": 3.642,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 1.8633,
+        "val_loss": 1.8058,
+        "optimizer_steps": 69
+      },
+      {
+        "epoch": 2,
+        "train_loss": 1.7436,
+        "val_loss": 1.7856,
+        "optimizer_steps": 69
+      }
+    ],
+    "training_samples_per_second": 2.966
+  },
+  "candidate_lora": {
+    "token_f1_percent": 0.0,
+    "answer_correctness_percent": 0.0,
+    "correct_refusal_rate_percent": 100.0,
+    "false_refusal_rate_percent": 100.0,
+    "exact_match_percent": 0.0,
+    "reference_contradiction_percent": null,
+    "reference_unsupported_percent": null,
+    "best_val_loss": 1.7873,
+    "training_seconds": 374.446,
+    "training_gpu_gib": 3.642,
+    "inference_gpu_gib": 2.94,
+    "questions_per_second": 2.991,
+    "train_samples": 539
+  },
+  "candidate": {
+    "removed_ids": [
+      "DEV_Q195",
+      "DEV_Q228",
+      "DEV_Q276",
+      "DEV_Q298",
+      "TRAIN_Q022",
+      "TRAIN_Q076",
+      "TRAIN_Q138",
+      "TRAIN_Q156",
+      "TRAIN_Q248",
+      "TRAIN_Q286",
+      "TRAIN_Q333",
+      "TRAIN_Q340"
+    ],
+    "counts": {
+      "total": 539,
+      "answerable": 367,
+      "impossible": 172
+    },
+    "parent_content_sha256": "73e206e76bf2abd21c21604d07481ce2fda84dd50355d85c5fda5fc97356a090",
+    "changed_answer_ids": [
+      "DEV_Q291",
+      "TRAIN_Q042",
+      "TRAIN_Q047",
+      "TRAIN_Q206"
+    ],
+    "answer_changes": [
+      {
+        "id": "TRAIN_Q047",
+        "reason": "Normalize reviewed prose spacing and duplicate URL display",
+        "before": "CVEID:CVE-2016-9693 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9693]\nDESCRIPTION:IBM Business Process Manager has a file download capability that is vulnerable to a set of attacks. Ultimately, an attacker can cause an unauthenticated victim to download a malicious payload. An existing file type restriction can be bypassed so that the payload might be considered executable and cause damage on the victim's machine.\nCVSS Base Score: 7.1\nCVSS Temporal Score: Seehttps://exchange.xforce.ibmcloud.com/vulnerabilities/119517 [https://exchange.xforce.ibmcloud.com/vulnerabilities/119517]for the current score\nCVSS Environmental Score*: Undefined\nCVSS Vector: (CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L)",
+        "after": "CVEID: CVE-2016-9693 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9693]\nDESCRIPTION: IBM Business Process Manager has a file download capability that is vulnerable to a set of attacks. Ultimately, an attacker can cause an unauthenticated victim to download a malicious payload. An existing file type restriction can be bypassed so that the payload might be considered executable and cause damage on the victim's machine.\nCVSS Base Score: 7.1\nCVSS Temporal Score: See https://exchange.xforce.ibmcloud.com/vulnerabilities/119517for the current score\nCVSS Environmental Score*: Undefined\nCVSS Vector: (CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L)",
+        "source_filenames": [
+          "swg21998655.txt"
+        ]
+      },
+      {
+        "id": "TRAIN_Q206",
+        "reason": "Normalize reviewed prose spacing and duplicate URL display",
+        "before": "CVEID: CVE-2015-0410 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-0410]\nDESCRIPTION: An unspecified vulnerability related to the Security component could allow a remote attacker to cause a denial of service.\nCVSS Base Score: 5\nCVSS Temporal Score: See https://exchange.xforce.ibmcloud.com/vulnerabilities/100151 [https://exchange.xforce.ibmcloud.com/vulnerabilities/100151] for the current score\nCVSS Environmental Score*: Undefined\nCVSS Vector: (AV:N/AC:L/Au:N/C:N/I:N/A:P) \n\nCVEID: CVE-2014-6593 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6593]\nDESCRIPTION: An unspecified vulnerability related to the JSSE component has partial confidentiality impact, partial integrity impact, and no availability impact.\nCVSS Base Score: 4\nCVSS Temporal Score: See https://exchange.xforce.ibmcloud.com/vulnerabilities/100153 [https://exchange.xforce.ibmcloud.com/vulnerabilities/100153] for the current score\nCVSS Environmental Score*: Undefined\nCVSS Vector: (AV:N/AC:H/Au:N/C:P/I:P/A:N)",
+        "after": "CVEID: CVE-2015-0410 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-0410]\nDESCRIPTION: An unspecified vulnerability related to the Security component could allow a remote attacker to cause a denial of service.\nCVSS Base Score: 5\nCVSS Temporal Score: See https://exchange.xforce.ibmcloud.com/vulnerabilities/100151 for the current score\nCVSS Environmental Score*: Undefined\nCVSS Vector: (AV:N/AC:L/Au:N/C:N/I:N/A:P) \n\nCVEID: CVE-2014-6593 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6593]\nDESCRIPTION: An unspecified vulnerability related to the JSSE component has partial confidentiality impact, partial integrity impact, and no availability impact.\nCVSS Base Score: 4\nCVSS Temporal Score: See https://exchange.xforce.ibmcloud.com/vulnerabilities/100153 for the current score\nCVSS Environmental Score*: Undefined\nCVSS Vector: (AV:N/AC:H/Au:N/C:P/I:P/A:N)",
+        "source_filenames": [
+          "swg21962588.txt"
+        ]
+      },
+      {
+        "id": "TRAIN_Q042",
+        "reason": "Add documented cause before existing remediation",
+        "before": "Create/update the store.puma_default.user.fbadefault.filter custom property for the WP PumaStoreService Resource Environment Provider via the Integrated Solutions Console to an attribute that exists for all Portal users in the backend user registry (for example, \"cn\").",
+        "after": "Authenticated user does not have the attribute defined in the backend user registry which matches the attribute defined in the store.puma_default.user.fbadefault.filter property in WP PumaStoreService Resource Environment Provider.\n\nCreate/update the store.puma_default.user.fbadefault.filter custom property for the WP PumaStoreService Resource Environment Provider via the Integrated Solutions Console to an attribute that exists for all Portal users in the backend user registry (for example, \"cn\").",
+        "source_filenames": [
+          "swg21664629.txt"
+        ]
+      },
+      {
+        "id": "DEV_Q291",
+        "reason": "Complete version-specific Java support using the supplied historical IBM document",
+        "before": "IBM BPM V8.5.6 and V8.5.7 support Java 6 and Java 7, but do not support Java 8.",
+        "after": "IBM BPM V8.5.6 and V8.5.7 support Java 6 and Java 7, but do not support Java 8.\n\nIBM BPM V8.6 supports Java 8. Java snippets, Java conditions, and Java expressions in BPEL processes must use Java 6 constructs instead of Java 7 or Java 8 constructs.",
+        "source_filenames": [
+          "swg21639640.txt"
+        ]
+      }
+    ],
+    "candidate_content_sha256": "f7d04670ac9e4aaee70fd70802b813ced05d734086ab8c78f7658b1fb5dc2a28"
+  },
+  "provisional_selection": "cleanup",
+  "selection_rule": "Provisional screen: correct refusal >= 50%; lower false refusal; F1 and correctness nondecreasing, at least one strictly improved. Human review required.",
+  "delta": {
+    "token_f1_percent": 0.0,
+    "answer_correctness_percent": 0.0,
+    "correct_refusal_rate_percent": 0.0,
+    "false_refusal_rate_percent": 0.0,
+    "exact_match_percent": 0.0,
+    "best_val_loss": -0.0009,
+    "training_seconds": 10.34,
+    "training_gpu_gib": 0.0,
+    "inference_gpu_gib": 0.0,
+    "questions_per_second": -0.876,
+    "reference_contradiction_percent": null,
+    "reference_unsupported_percent": null
+  },
+  "quality_edits": "APPLIED",
+  "qlora": "NOT RUN",
+  "human_review_required": true,
+  "hallucination_rate_percent": null,
+  "limitation": "Incremental joint effect of four reviewed answer edits on 539 cleaned rows; individual edit effects are not isolated. No claim of comprehensive semantic validation."
+}

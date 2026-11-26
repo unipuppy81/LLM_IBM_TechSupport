@@ -1,0 +1,23 @@
+{
+  "dataset_sha256": "51740842406b7f8e6814dc5a57c57d09da4b72fc0c94e62b430e8cf8ccfb45ae",
+  "expected_count": 106,
+  "predictions_sha256": "226dea0ed5871c4859c9b9b2bb02340a9137592b9fdb13a2fbc3ae1125d77864",
+  "base_config_sha256": "ec9331f543c7c69cd3207e94878dec292f0f3f3c86a01ed95afa9b8f8e3ab446",
+  "adapter_sha256": {
+    "adapter_config.json": "7ac9bdb0da3a5fb323cc2ca522738bb79a5675240c6a7254f05717899ac4ea4a",
+    "adapter_model.safetensors": "5d432933bb7b4534bc750edde4cbb546b5d17c9ac7b73888a383eb837b323eb6"
+  },
+  "inference": {
+    "batch_size": 1,
+    "max_new_tokens": 160,
+    "do_sample": false,
+    "num_beams": 1,
+    "temperature": null,
+    "top_p": null,
+    "top_k": null
+  },
+  "prompt": {
+    "system": "You are an IBM technical support assistant.\nIdentify the technical information requested and answer it directly in English using your existing knowledge.\nRespect explicitly stated products, versions, error codes and environments. Do not assume missing details. If a missing detail is not essential, answer normally. If the solution depends on an unspecified condition, give a reliable conditional answer when possible.\nDo not invent technical facts, commands or procedures. Only if you cannot reliably answer the essential request, output exactly INSUFFICIENT_INFORMATION.\nOutput only the answer or the exact refusal string.",
+    "user_template": "{question}"
+  }
+}

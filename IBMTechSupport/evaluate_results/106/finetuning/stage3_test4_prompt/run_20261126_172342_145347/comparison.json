@@ -1,0 +1,61 @@
+{
+  "baseline_lora": {
+    "token_f1_percent": 7.03,
+    "answer_correctness_percent": 16.88,
+    "correct_refusal_rate_percent": 75.86,
+    "false_refusal_rate_percent": 63.64,
+    "exact_match_percent": 0.0,
+    "reference_contradiction_percent": 0.0,
+    "reference_unsupported_percent": 14.29,
+    "best_val_loss": 1.7973,
+    "training_seconds": 535.475,
+    "training_gpu_gib": 4.87,
+    "inference_gpu_gib": 3.096,
+    "questions_per_second": 1.135,
+    "train_samples": 539,
+    "generation_seconds": 93.41,
+    "youden_j_percent_points": 12.22
+  },
+  "candidates": {
+    "A_short_original": {
+      "token_f1_percent": 3.97,
+      "answer_correctness_percent": null,
+      "correct_refusal_rate_percent": 79.31,
+      "false_refusal_rate_percent": 75.32,
+      "exact_match_percent": 0.0,
+      "generation_seconds": 88.824,
+      "questions_per_second": 1.193,
+      "inference_gpu_gib": 2.94,
+      "reference_contradiction_percent": null,
+      "reference_unsupported_percent": null,
+      "youden_j_percent_points": 3.99
+    },
+    "B_concise_answerability": {
+      "token_f1_percent": 15.95,
+      "answer_correctness_percent": null,
+      "correct_refusal_rate_percent": 10.34,
+      "false_refusal_rate_percent": 27.27,
+      "exact_match_percent": 0.0,
+      "generation_seconds": 221.19,
+      "questions_per_second": 0.479,
+      "inference_gpu_gib": 2.949,
+      "reference_contradiction_percent": null,
+      "reference_unsupported_percent": null,
+      "youden_j_percent_points": -16.93
+    }
+  },
+  "quality_status": {
+    "A_short_original": "SKIPPED: False refusal did not decrease; Token F1 decreased; Youden's J decreased",
+    "B_concise_answerability": "SKIPPED: Correct refusal < 50%; Youden's J decreased"
+  },
+  "provisional_selection": "baseline",
+  "complete": false,
+  "training": "NOT RUN",
+  "qlora": "NOT RUN",
+  "human_review_required": true,
+  "notes": [
+    "Only inference system prompt changed. Baseline metrics reused.",
+    "Quality evaluation of only the highest-ranked passing candidate by default.",
+    "Missing quality metrics are null, not zero. Repeated validation tuning is not an independent test."
+  ]
+}

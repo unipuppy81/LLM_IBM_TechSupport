@@ -1,0 +1,104 @@
+{
+  "stage": 1,
+  "experiment": "combined_cleanup",
+  "baseline": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage0\\run_20261126_102956_686113",
+  "baseline_manifest_sha256": "60f0714a7f917c209be124fd81a948232864c9a09369a8325ae13289a6f4ed8a",
+  "baseline_comparison_sha256": "ce66d1261c9cda2a1437ac400d7f62c34108ee902db826b2ec774923c7d4fc65",
+  "data": {
+    "train": {
+      "total": 551,
+      "answerable": 374,
+      "impossible": 177,
+      "duplicate_ids": 0,
+      "normalized_question_duplicate_rows": 17
+    },
+    "validation": {
+      "total": 106,
+      "answerable": 77,
+      "impossible": 29,
+      "duplicate_ids": 0,
+      "normalized_question_duplicate_rows": 0
+    },
+    "train_sha256": "21b24eee94a8531a790f0feb659ea79435db2de83812233ac3434363b5914b5b",
+    "val_sha256": "51740842406b7f8e6814dc5a57c57d09da4b72fc0c94e62b430e8cf8ccfb45ae",
+    "cross_split_id_matches": [],
+    "cross_split_normalized_question_matches": [],
+    "cross_split_exact_question_matches": [],
+    "semantic_near_duplicates_checked": false
+  },
+  "sources": {
+    "scripts/train_lora.py": "78bf1e20465c82cde4017a9d249dd916c7225167f687d4d9ef4b821679ded2f3",
+    "scripts/train_qlora.py": "45eb77c69ed446ab98ff7b4392908ac2e8ccf0746e84a14d44d87bbf9215f86b",
+    "scripts/load_base_model.py": "b76322b09be6ead60434e17f94a3a5a4389502ab6ab24a6e3128526b6ff77fb0",
+    "scripts/evaluate/evaluate_base.py": "237e4de95142c3c357772379695f7dc751e4e2f32dba9f0d2f9a8af38489cf3c",
+    "scripts/evaluate/evaluate_lora.py": "f30767a53269d1432e19ff858816e49627fbbf6771fa77b65a27da97638f38d5",
+    "scripts/evaluate/evaluate_qlora.py": "28e0ff27d78b1562ef39f2f1dc7d4744df1c035fa2febb693ac82409b973a6cd",
+    "scripts/evaluate/evaluate_stage2_quality.py": "d3e0e961feebe36092d7b9bd95617840486f53850c7741896c162ef45961ab54",
+    "scripts/evaluate/common.py": "5a7505f3d5d8d72ab002e7c2912a12d9c24b74cfb3349f889490f48c0ee131ca",
+    "scripts/document_utils.py": "0e513493d630ca1114e5ffe7a8d45ba5901874035faa0cf49a6315353fd71e2a",
+    "configs/base/v1_106.yaml": "74f0b201ea85ad6f0f0e60b15a3aff96a497b22a69bd23ab68e235b50dd4ea27"
+  },
+  "model_files": {
+    "config.json": "98d2ff8cc47488d08a2b0b3acf4eb99ef210779b42bd48605f6b8e36acdbf670",
+    "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+    "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+    "model.safetensors": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee",
+    "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+    "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+    "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+  },
+  "runner_sha256": {
+    "run_stage1_cleanup.py": "1cc0c9f0357d1e3bd6fc4928101862c76d33f47be6050d33986c01c7788068aa",
+    "run_stage0.py": "e85307a2ccc2b3c14cd3d0f555c1b97f166c5ded1e1ff4361d7fe66257d4b8e9",
+    "run_stage1.py": "037a1dfba518c668a15b8829ed84c1667a24294f16db409abf17f24c08c93a5d"
+  },
+  "settings": {
+    "epochs": 2,
+    "max_length": 512,
+    "grad_accum": 8,
+    "learning_rate": 0.0002,
+    "limit": 0,
+    "seed": 42
+  },
+  "candidate": {
+    "exact_duplicate_ids": [
+      "TRAIN_Q076",
+      "TRAIN_Q286"
+    ],
+    "conflicting_label_ids": [
+      "DEV_Q195",
+      "DEV_Q228",
+      "DEV_Q276",
+      "DEV_Q298",
+      "TRAIN_Q022",
+      "TRAIN_Q138",
+      "TRAIN_Q156",
+      "TRAIN_Q248",
+      "TRAIN_Q333",
+      "TRAIN_Q340"
+    ],
+    "removed_ids": [
+      "DEV_Q195",
+      "DEV_Q228",
+      "DEV_Q276",
+      "DEV_Q298",
+      "TRAIN_Q022",
+      "TRAIN_Q076",
+      "TRAIN_Q138",
+      "TRAIN_Q156",
+      "TRAIN_Q248",
+      "TRAIN_Q286",
+      "TRAIN_Q333",
+      "TRAIN_Q340"
+    ],
+    "counts": {
+      "total": 539,
+      "answerable": 367,
+      "impossible": 172
+    },
+    "changed_answer_ids": [],
+    "candidate_content_sha256": "73e206e76bf2abd21c21604d07481ce2fda84dd50355d85c5fda5fc97356a090"
+  },
+  "selection": "Provisional screen: correct refusal >= 50%; lower false refusal; F1 and correctness nondecreasing, at least one strictly improved. Human review required.",
+  "limitation": "Joint cleanup effect only; individual duplicate and conflict removal effects are not isolated."
+}

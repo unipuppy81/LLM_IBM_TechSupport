@@ -1,0 +1,74 @@
+{
+  "baseline_lora": {
+    "token_f1_percent": 7.03,
+    "answer_correctness_percent": 16.88,
+    "correct_refusal_rate_percent": 75.86,
+    "false_refusal_rate_percent": 63.64,
+    "exact_match_percent": 0.0,
+    "reference_contradiction_percent": 0.0,
+    "reference_unsupported_percent": 14.29,
+    "best_val_loss": 1.7973,
+    "training_seconds": 535.475,
+    "training_gpu_gib": 4.87,
+    "inference_gpu_gib": 3.096,
+    "questions_per_second": 1.135,
+    "train_samples": 539
+  },
+  "baseline_learning_rate": 0.0002,
+  "learning_rates": {
+    "A_lr_1e4": 0.0001,
+    "B_lr_5e4": 0.0005
+  },
+  "candidates": {
+    "A_lr_1e4": {
+      "token_f1_percent": 9.93,
+      "answer_correctness_percent": null,
+      "correct_refusal_rate_percent": 51.72,
+      "false_refusal_rate_percent": 51.95,
+      "exact_match_percent": 0.0,
+      "best_val_loss": 1.825,
+      "training_seconds": 592.963,
+      "training_gpu_gib": 4.87,
+      "inference_gpu_gib": 3.096,
+      "questions_per_second": 0.593,
+      "reference_contradiction_percent": null,
+      "reference_unsupported_percent": null,
+      "train_samples": 539
+    },
+    "B_lr_5e4": {
+      "token_f1_percent": 1.47,
+      "answer_correctness_percent": null,
+      "correct_refusal_rate_percent": 96.55,
+      "false_refusal_rate_percent": 94.81,
+      "exact_match_percent": 0.0,
+      "best_val_loss": 1.7844,
+      "training_seconds": 532.569,
+      "training_gpu_gib": 4.87,
+      "inference_gpu_gib": 3.096,
+      "questions_per_second": 2.45,
+      "reference_contradiction_percent": null,
+      "reference_unsupported_percent": null,
+      "train_samples": 539
+    }
+  },
+  "quality_status": {
+    "A_lr_1e4": "SKIPPED: Youden's J decreased",
+    "B_lr_5e4": "SKIPPED: False refusal did not decrease; Token F1 decreased; Youden's J decreased"
+  },
+  "youden_j_percent_points": {
+    "baseline": 12.22,
+    "A_lr_1e4": -0.23,
+    "B_lr_5e4": 1.74
+  },
+  "provisional_selection": "baseline",
+  "complete": true,
+  "human_review_required": true,
+  "qlora": "NOT RUN",
+  "hallucination_rate_percent": null,
+  "notes": [
+    "Same E data, prompt, loss weighting, seed and training settings except LR.",
+    "Quality skipped for failed generation screens unless explicitly overridden.",
+    "Selection: 50% correct-refusal floor, nondecreasing F1/J/correctness, lower false refusal; rank by J first.",
+    "Validation loss is unweighted."
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "exact_duplicate_ids": [
+    "TRAIN_Q076",
+    "TRAIN_Q286"
+  ],
+  "conflicting_label_ids": [
+    "DEV_Q195",
+    "DEV_Q228",
+    "DEV_Q276",
+    "DEV_Q298",
+    "TRAIN_Q022",
+    "TRAIN_Q138",
+    "TRAIN_Q156",
+    "TRAIN_Q248",
+    "TRAIN_Q333",
+    "TRAIN_Q340"
+  ],
+  "removed_ids": [
+    "DEV_Q195",
+    "DEV_Q228",
+    "DEV_Q276",
+    "DEV_Q298",
+    "TRAIN_Q022",
+    "TRAIN_Q076",
+    "TRAIN_Q138",
+    "TRAIN_Q156",
+    "TRAIN_Q248",
+    "TRAIN_Q286",
+    "TRAIN_Q333",
+    "TRAIN_Q340"
+  ],
+  "counts": {
+    "total": 539,
+    "answerable": 367,
+    "impossible": 172
+  },
+  "changed_answer_ids": [],
+  "candidate_content_sha256": "73e206e76bf2abd21c21604d07481ce2fda84dd50355d85c5fda5fc97356a090",
+  "file_sha256": "c9c6a509cb02a2359155b767fdc6960dff3bc4a58c76ad304502bbdcd5f05809"
+}

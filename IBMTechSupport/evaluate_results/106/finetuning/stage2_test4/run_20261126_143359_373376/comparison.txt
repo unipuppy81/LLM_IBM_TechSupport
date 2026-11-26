@@ -1,0 +1,18 @@
+[Stage 2 Test4 Loss Weighting Comparison]
+Metric                               B_weight_025   C_weight_010   D_weight_005
+token_f1_percent                             3.07             14          18.49
+answer_correctness_percent                   9.09          33.77          41.56
+correct_refusal_rate_percent                 93.1          27.59              0
+false_refusal_rate_percent                  83.12          29.87            3.9
+exact_match_percent                             0              0              0
+best_val_loss                              1.7882         1.8204         1.8708
+training_seconds                          525.775        532.958        584.896
+training_gpu_gib                             4.87           4.87           4.87
+inference_gpu_gib                           3.096          3.096          3.096
+questions_per_second                        1.534          0.595          0.452
+reference_contradiction_percent                 0              0              0
+reference_unsupported_percent               15.38          24.07          29.73
+Provisional selection: baseline
+Validation loss: unweighted. Training loss: weighted.
+Automated quality verdicts require human review. QLoRA: NOT RUN
+Results: C:\Projects\LLM_IBM_TechSupport\IBMTechSupport\evaluate_results\106\finetuning\stage2_test4\run_20261126_143359_373376

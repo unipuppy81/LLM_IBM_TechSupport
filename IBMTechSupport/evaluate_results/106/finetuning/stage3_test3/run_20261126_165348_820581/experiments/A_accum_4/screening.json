@@ -1,0 +1,24 @@
+{
+  "metrics": {
+    "token_f1_percent": 1.89,
+    "answer_correctness_percent": null,
+    "correct_refusal_rate_percent": 89.66,
+    "false_refusal_rate_percent": 92.21,
+    "exact_match_percent": 0.0,
+    "best_val_loss": 1.7799,
+    "training_seconds": 528.84,
+    "training_gpu_gib": 4.87,
+    "inference_gpu_gib": 3.096,
+    "questions_per_second": 2.137,
+    "reference_contradiction_percent": null,
+    "reference_unsupported_percent": null,
+    "train_samples": 539
+  },
+  "youden_j_percent_points": -2.55,
+  "reasons": [
+    "False refusal did not decrease",
+    "Token F1 decreased",
+    "Youden's J decreased"
+  ],
+  "passed": false
+}

@@ -1,0 +1,22 @@
+{
+  "train": {
+    "total": 551,
+    "answerable": 374,
+    "impossible": 177,
+    "duplicate_ids": 0,
+    "normalized_question_duplicate_rows": 17
+  },
+  "validation": {
+    "total": 106,
+    "answerable": 77,
+    "impossible": 29,
+    "duplicate_ids": 0,
+    "normalized_question_duplicate_rows": 0
+  },
+  "train_sha256": "21b24eee94a8531a790f0feb659ea79435db2de83812233ac3434363b5914b5b",
+  "val_sha256": "51740842406b7f8e6814dc5a57c57d09da4b72fc0c94e62b430e8cf8ccfb45ae",
+  "cross_split_id_matches": [],
+  "cross_split_normalized_question_matches": [],
+  "cross_split_exact_question_matches": [],
+  "semantic_near_duplicates_checked": false
+}

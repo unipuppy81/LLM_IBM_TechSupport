@@ -1,0 +1,11 @@
+{
+  "answerable_weight": 1.0,
+  "impossible_weight": 0.175,
+  "validation_weight": 1.0,
+  "observed_forward_counts": {
+    "answerable": 367,
+    "impossible": 172,
+    "validation": 106
+  },
+  "source": "first epoch of verified three-epoch run"
+}

@@ -1,0 +1,22 @@
+{
+  "model": "Qwen2.5-1.5B-Instruct",
+  "method": "LoRA",
+  "train_samples": 539,
+  "val_samples": 106,
+  "epochs": 1,
+  "learning_rate": 0.0002,
+  "max_length": 2048,
+  "grad_accum": 8,
+  "lora_rank": 8,
+  "best_val_loss": 1.8677,
+  "training_seconds": 269.695,
+  "peak_gpu_memory_gb": 4.869,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.8485,
+      "val_loss": 1.8677,
+      "optimizer_steps": 68
+    }
+  ]
+}

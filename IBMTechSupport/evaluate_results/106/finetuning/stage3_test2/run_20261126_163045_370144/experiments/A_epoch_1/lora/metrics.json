@@ -1,0 +1,20 @@
+{
+  "model": "Qwen2.5-1.5B-Instruct-LoRA",
+  "dataset": "val_106.json",
+  "total": 106,
+  "batch_size": 1,
+  "max_new_tokens": 160,
+  "answerable": 77,
+  "impossible": 29,
+  "exact_match_percent": 0.0,
+  "token_f1_percent": 17.53,
+  "abstention_rate_percent": 13.79,
+  "false_refusal_rate_percent": 11.69,
+  "method": "LoRA",
+  "generation_seconds": 257.54,
+  "mean_generation_seconds_per_question": 2.4296,
+  "questions_per_second": 0.412,
+  "peak_gpu_memory_gb": 3.096,
+  "retrieval": null,
+  "faithfulness_percent": null
+}

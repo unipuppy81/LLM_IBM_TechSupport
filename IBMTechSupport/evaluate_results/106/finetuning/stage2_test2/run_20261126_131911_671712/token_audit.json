@@ -1,0 +1,221 @@
+{
+  "raw_lengths": {
+    "train": {
+      "question": {
+        "min": 4,
+        "median": 71,
+        "p95": 228,
+        "max": 773
+      },
+      "answer": {
+        "min": 4,
+        "median": 34,
+        "p95": 212,
+        "max": 634
+      }
+    },
+    "validation": {
+      "question": {
+        "min": 12,
+        "median": 75,
+        "p95": 231,
+        "max": 385
+      },
+      "answer": {
+        "min": 4,
+        "median": 56,
+        "p95": 195,
+        "max": 352
+      }
+    }
+  },
+  "variants": {
+    "baseline": {
+      "system_prompt_tokens": 43,
+      "splits": {
+        "train": {
+          "samples": 539,
+          "question_truncated": 40,
+          "answer_truncated": 55,
+          "max_sequence_tokens": 409,
+          "answer_tokens_used": {
+            "min": 4,
+            "median": 34,
+            "p95": 160,
+            "max": 160
+          },
+          "tensor_sha256": "a7ea1928a6bdf09c2a82614c6b5a387b69d0f8743004e6ed7ae2cb88eb41a7bb"
+        },
+        "validation": {
+          "samples": 106,
+          "question_truncated": 11,
+          "answer_truncated": 14,
+          "max_sequence_tokens": 407,
+          "answer_tokens_used": {
+            "min": 4,
+            "median": 56,
+            "p95": 160,
+            "max": 160
+          },
+          "tensor_sha256": "6837299aac752a9ad0a8df17f5a0961a7ab8bb35ebf5a6f5b2d8efcb1184db5d"
+        }
+      }
+    },
+    "A_length": {
+      "system_prompt_tokens": 43,
+      "splits": {
+        "train": {
+          "samples": 539,
+          "question_truncated": 40,
+          "answer_truncated": 55,
+          "max_sequence_tokens": 409,
+          "answer_tokens_used": {
+            "min": 4,
+            "median": 34,
+            "p95": 160,
+            "max": 160
+          },
+          "tensor_sha256": "a7ea1928a6bdf09c2a82614c6b5a387b69d0f8743004e6ed7ae2cb88eb41a7bb"
+        },
+        "validation": {
+          "samples": 106,
+          "question_truncated": 11,
+          "answer_truncated": 14,
+          "max_sequence_tokens": 407,
+          "answer_tokens_used": {
+            "min": 4,
+            "median": 56,
+            "p95": 160,
+            "max": 160
+          },
+          "tensor_sha256": "6837299aac752a9ad0a8df17f5a0961a7ab8bb35ebf5a6f5b2d8efcb1184db5d"
+        }
+      }
+    },
+    "B_prompt": {
+      "system_prompt_tokens": 730,
+      "splits": {
+        "train": {
+          "samples": 539,
+          "question_truncated": 40,
+          "answer_truncated": 55,
+          "max_sequence_tokens": 1096,
+          "answer_tokens_used": {
+            "min": 4,
+            "median": 34,
+            "p95": 160,
+            "max": 160
+          },
+          "tensor_sha256": "d65b1917b2ea76ff509f24b5a269d234b1671f18c4ae8d91d8ab08357cdcf063"
+        },
+        "validation": {
+          "samples": 106,
+          "question_truncated": 11,
+          "answer_truncated": 14,
+          "max_sequence_tokens": 1094,
+          "answer_tokens_used": {
+            "min": 4,
+            "median": 56,
+            "p95": 160,
+            "max": 160
+          },
+          "tensor_sha256": "bcd521162653c76793539a3074d04bd504e1fcef7470f40b77978b3da2303ee6"
+        }
+      }
+    },
+    "C_question": {
+      "system_prompt_tokens": 730,
+      "splits": {
+        "train": {
+          "samples": 539,
+          "question_truncated": 3,
+          "answer_truncated": 55,
+          "max_sequence_tokens": 1310,
+          "answer_tokens_used": {
+            "min": 4,
+            "median": 34,
+            "p95": 160,
+            "max": 160
+          },
+          "tensor_sha256": "9246ee141f0c4b7f7819054f595ba69b9885ef534779063a8bbeaf6789f5078d"
+        },
+        "validation": {
+          "samples": 106,
+          "question_truncated": 0,
+          "answer_truncated": 14,
+          "max_sequence_tokens": 1287,
+          "answer_tokens_used": {
+            "min": 4,
+            "median": 56,
+            "p95": 160,
+            "max": 160
+          },
+          "tensor_sha256": "7285b56cca74fa7650ef3ee9c60d77f5c66a865649c60772db7be775437e89d5"
+        }
+      }
+    },
+    "D_answer": {
+      "system_prompt_tokens": 730,
+      "splits": {
+        "train": {
+          "samples": 539,
+          "question_truncated": 3,
+          "answer_truncated": 1,
+          "max_sequence_tokens": 1474,
+          "answer_tokens_used": {
+            "min": 4,
+            "median": 34,
+            "p95": 212,
+            "max": 512
+          },
+          "tensor_sha256": "411573d80178522f7d4c41886dde15014381b2fcc11a23afc00446ad7a81c993"
+        },
+        "validation": {
+          "samples": 106,
+          "question_truncated": 0,
+          "answer_truncated": 0,
+          "max_sequence_tokens": 1287,
+          "answer_tokens_used": {
+            "min": 4,
+            "median": 56,
+            "p95": 195,
+            "max": 352
+          },
+          "tensor_sha256": "aa845cd7fdded1c6a4a41aa7f821c62d2dcc8557d0f601d56b2de294d751ce8e"
+        }
+      }
+    },
+    "E_generation": {
+      "system_prompt_tokens": 730,
+      "splits": {
+        "train": {
+          "samples": 539,
+          "question_truncated": 3,
+          "answer_truncated": 1,
+          "max_sequence_tokens": 1474,
+          "answer_tokens_used": {
+            "min": 4,
+            "median": 34,
+            "p95": 212,
+            "max": 512
+          },
+          "tensor_sha256": "411573d80178522f7d4c41886dde15014381b2fcc11a23afc00446ad7a81c993"
+        },
+        "validation": {
+          "samples": 106,
+          "question_truncated": 0,
+          "answer_truncated": 0,
+          "max_sequence_tokens": 1287,
+          "answer_tokens_used": {
+            "min": 4,
+            "median": 56,
+            "p95": 195,
+            "max": 352
+          },
+          "tensor_sha256": "aa845cd7fdded1c6a4a41aa7f821c62d2dcc8557d0f601d56b2de294d751ce8e"
+        }
+      }
+    }
+  },
+  "manifest_sha256": "9919f61702f9abc3a09e417b87c6da124792b71475fdcd3c440ebb530ae378ce"
+}

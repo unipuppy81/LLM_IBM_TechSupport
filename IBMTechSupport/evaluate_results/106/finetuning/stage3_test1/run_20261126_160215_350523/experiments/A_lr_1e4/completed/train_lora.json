@@ -1,0 +1,13 @@
+{
+  "files": {
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage3_test1\\run_20261126_160215_350523\\A_lr_1e4\\lora\\adapter_config.json": "7ac9bdb0da3a5fb323cc2ca522738bb79a5675240c6a7254f05717899ac4ea4a",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage3_test1\\run_20261126_160215_350523\\A_lr_1e4\\lora\\adapter_model.safetensors": "7bebd2dee5ea96f8259495dff8ccd218cddd52bd4811feefa37f915261cc5bc8",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage3_test1\\run_20261126_160215_350523\\A_lr_1e4\\lora\\chat_template.jinja": "8aa40ce145adb73cb3a75194dc0224702a95850ec5275cabb728496bbd749fc6",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage3_test1\\run_20261126_160215_350523\\A_lr_1e4\\lora\\README.md": "9540121682a6fe35c7786bfd2f67d64f70bc9bff50d7d7cd6d1ff585946dacd9",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage3_test1\\run_20261126_160215_350523\\A_lr_1e4\\lora\\tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage3_test1\\run_20261126_160215_350523\\A_lr_1e4\\lora\\tokenizer_config.json": "b3d4aae9670f7c2de3e3b32675b0118e7e7b517544f5ab32efe04bd74f2238c1",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test1\\run_20261126_160215_350523\\experiments\\A_lr_1e4\\training\\lora_train_metrics.json": "6cff125a5b297fe8a7392dadd8cb85c2e27ff5d11bc8ce8bde8ea7d4cdc3e016",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test1\\run_20261126_160215_350523\\experiments\\A_lr_1e4\\training\\lr_audit.json": "cbb48de899c1ae5696e0bd4d17b9093c19612a09394f11cc667542229a541546",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test1\\run_20261126_160215_350523\\experiments\\A_lr_1e4\\training\\weight_audit.json": "054f3f99a840784572f4904b2bfe1eac0f2f4fd79aa9983e6b2a490eb04d2308"
+  }
+}

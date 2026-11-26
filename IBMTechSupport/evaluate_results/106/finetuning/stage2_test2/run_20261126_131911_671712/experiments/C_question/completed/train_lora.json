@@ -1,0 +1,11 @@
+{
+  "files": {
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage2_test2\\run_20261126_131911_671712\\C_question\\lora\\adapter_config.json": "7ac9bdb0da3a5fb323cc2ca522738bb79a5675240c6a7254f05717899ac4ea4a",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage2_test2\\run_20261126_131911_671712\\C_question\\lora\\adapter_model.safetensors": "23ce934177b2260d15025ffae5bfb88a98a7bd2ba3f012a23aca651fc203a8b0",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage2_test2\\run_20261126_131911_671712\\C_question\\lora\\chat_template.jinja": "8aa40ce145adb73cb3a75194dc0224702a95850ec5275cabb728496bbd749fc6",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage2_test2\\run_20261126_131911_671712\\C_question\\lora\\README.md": "9540121682a6fe35c7786bfd2f67d64f70bc9bff50d7d7cd6d1ff585946dacd9",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage2_test2\\run_20261126_131911_671712\\C_question\\lora\\tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage2_test2\\run_20261126_131911_671712\\C_question\\lora\\tokenizer_config.json": "b3d4aae9670f7c2de3e3b32675b0118e7e7b517544f5ab32efe04bd74f2238c1",
+    "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage2_test2\\run_20261126_131911_671712\\experiments\\C_question\\training\\lora_train_metrics.json": "7088031ceee5e37ba96520f4e5b820e0609c04ab785caeefd3427b2a4e1a1e5b"
+  }
+}

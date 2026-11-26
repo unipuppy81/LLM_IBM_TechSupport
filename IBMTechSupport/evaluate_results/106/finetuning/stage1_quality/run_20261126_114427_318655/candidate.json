@@ -1,0 +1,68 @@
+{
+  "removed_ids": [
+    "DEV_Q195",
+    "DEV_Q228",
+    "DEV_Q276",
+    "DEV_Q298",
+    "TRAIN_Q022",
+    "TRAIN_Q076",
+    "TRAIN_Q138",
+    "TRAIN_Q156",
+    "TRAIN_Q248",
+    "TRAIN_Q286",
+    "TRAIN_Q333",
+    "TRAIN_Q340"
+  ],
+  "counts": {
+    "total": 539,
+    "answerable": 367,
+    "impossible": 172
+  },
+  "parent_content_sha256": "73e206e76bf2abd21c21604d07481ce2fda84dd50355d85c5fda5fc97356a090",
+  "changed_answer_ids": [
+    "DEV_Q291",
+    "TRAIN_Q042",
+    "TRAIN_Q047",
+    "TRAIN_Q206"
+  ],
+  "answer_changes": [
+    {
+      "id": "TRAIN_Q047",
+      "reason": "Normalize reviewed prose spacing and duplicate URL display",
+      "before": "CVEID:CVE-2016-9693 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9693]\nDESCRIPTION:IBM Business Process Manager has a file download capability that is vulnerable to a set of attacks. Ultimately, an attacker can cause an unauthenticated victim to download a malicious payload. An existing file type restriction can be bypassed so that the payload might be considered executable and cause damage on the victim's machine.\nCVSS Base Score: 7.1\nCVSS Temporal Score: Seehttps://exchange.xforce.ibmcloud.com/vulnerabilities/119517 [https://exchange.xforce.ibmcloud.com/vulnerabilities/119517]for the current score\nCVSS Environmental Score*: Undefined\nCVSS Vector: (CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L)",
+      "after": "CVEID: CVE-2016-9693 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9693]\nDESCRIPTION: IBM Business Process Manager has a file download capability that is vulnerable to a set of attacks. Ultimately, an attacker can cause an unauthenticated victim to download a malicious payload. An existing file type restriction can be bypassed so that the payload might be considered executable and cause damage on the victim's machine.\nCVSS Base Score: 7.1\nCVSS Temporal Score: See https://exchange.xforce.ibmcloud.com/vulnerabilities/119517for the current score\nCVSS Environmental Score*: Undefined\nCVSS Vector: (CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L)",
+      "source_filenames": [
+        "swg21998655.txt"
+      ]
+    },
+    {
+      "id": "TRAIN_Q206",
+      "reason": "Normalize reviewed prose spacing and duplicate URL display",
+      "before": "CVEID: CVE-2015-0410 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-0410]\nDESCRIPTION: An unspecified vulnerability related to the Security component could allow a remote attacker to cause a denial of service.\nCVSS Base Score: 5\nCVSS Temporal Score: See https://exchange.xforce.ibmcloud.com/vulnerabilities/100151 [https://exchange.xforce.ibmcloud.com/vulnerabilities/100151] for the current score\nCVSS Environmental Score*: Undefined\nCVSS Vector: (AV:N/AC:L/Au:N/C:N/I:N/A:P) \n\nCVEID: CVE-2014-6593 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6593]\nDESCRIPTION: An unspecified vulnerability related to the JSSE component has partial confidentiality impact, partial integrity impact, and no availability impact.\nCVSS Base Score: 4\nCVSS Temporal Score: See https://exchange.xforce.ibmcloud.com/vulnerabilities/100153 [https://exchange.xforce.ibmcloud.com/vulnerabilities/100153] for the current score\nCVSS Environmental Score*: Undefined\nCVSS Vector: (AV:N/AC:H/Au:N/C:P/I:P/A:N)",
+      "after": "CVEID: CVE-2015-0410 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-0410]\nDESCRIPTION: An unspecified vulnerability related to the Security component could allow a remote attacker to cause a denial of service.\nCVSS Base Score: 5\nCVSS Temporal Score: See https://exchange.xforce.ibmcloud.com/vulnerabilities/100151 for the current score\nCVSS Environmental Score*: Undefined\nCVSS Vector: (AV:N/AC:L/Au:N/C:N/I:N/A:P) \n\nCVEID: CVE-2014-6593 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6593]\nDESCRIPTION: An unspecified vulnerability related to the JSSE component has partial confidentiality impact, partial integrity impact, and no availability impact.\nCVSS Base Score: 4\nCVSS Temporal Score: See https://exchange.xforce.ibmcloud.com/vulnerabilities/100153 for the current score\nCVSS Environmental Score*: Undefined\nCVSS Vector: (AV:N/AC:H/Au:N/C:P/I:P/A:N)",
+      "source_filenames": [
+        "swg21962588.txt"
+      ]
+    },
+    {
+      "id": "TRAIN_Q042",
+      "reason": "Add documented cause before existing remediation",
+      "before": "Create/update the store.puma_default.user.fbadefault.filter custom property for the WP PumaStoreService Resource Environment Provider via the Integrated Solutions Console to an attribute that exists for all Portal users in the backend user registry (for example, \"cn\").",
+      "after": "Authenticated user does not have the attribute defined in the backend user registry which matches the attribute defined in the store.puma_default.user.fbadefault.filter property in WP PumaStoreService Resource Environment Provider.\n\nCreate/update the store.puma_default.user.fbadefault.filter custom property for the WP PumaStoreService Resource Environment Provider via the Integrated Solutions Console to an attribute that exists for all Portal users in the backend user registry (for example, \"cn\").",
+      "source_filenames": [
+        "swg21664629.txt"
+      ]
+    },
+    {
+      "id": "DEV_Q291",
+      "reason": "Complete version-specific Java support using the supplied historical IBM document",
+      "before": "IBM BPM V8.5.6 and V8.5.7 support Java 6 and Java 7, but do not support Java 8.",
+      "after": "IBM BPM V8.5.6 and V8.5.7 support Java 6 and Java 7, but do not support Java 8.\n\nIBM BPM V8.6 supports Java 8. Java snippets, Java conditions, and Java expressions in BPEL processes must use Java 6 constructs instead of Java 7 or Java 8 constructs.",
+      "source_filenames": [
+        "swg21639640.txt"
+      ]
+    }
+  ],
+  "candidate_content_sha256": "f7d04670ac9e4aaee70fd70802b813ced05d734086ab8c78f7658b1fb5dc2a28",
+  "file_sha256": "a47ba9fe53d939c62ba55229de242309c1dd4f9d4a8352fe726a500aeda2bee6"
+}

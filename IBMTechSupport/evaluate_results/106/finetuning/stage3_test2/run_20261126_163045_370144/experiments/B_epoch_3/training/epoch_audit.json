@@ -1,0 +1,12 @@
+{
+  "epochs": 3,
+  "best_epoch": 3,
+  "validation_losses": [
+    1.8677207791018036,
+    1.7972708097746912,
+    1.7897271736050553
+  ],
+  "epoch1_snapshot": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test2\\run_20261126_163045_370144\\experiments\\B_epoch_3\\training\\epoch1_snapshot",
+  "checkpoint_selection": "minimum unweighted validation loss; earliest on ties",
+  "shared_trajectory": true
+}
