@@ -1,0 +1,20 @@
+[Data Composition Test2 Comparison]
+Metric                                   Baseline_367         Expanded
+train_samples                                     367              532
+token_f1_percent                                 21.7             21.5
+answer_correctness_percent                      58.44            53.25
+correct_refusal_rate_percent                        0                0
+false_refusal_rate_percent                          0                0
+exact_match_percent                                 0                0
+best_val_loss                                  2.2382           2.2794
+training_seconds                              504.117          485.461
+training_gpu_gib                                4.872            4.872
+inference_gpu_gib                                2.99             2.99
+questions_per_second                             0.42             0.37
+reference_contradiction_percent                     0                0
+reference_unsupported_percent                   16.88            19.48
+youden_j_percent_points                             0                0
+trainable_parameters                          1089536          1089536
+Quality: COMPLETE | Complete: True
+Diagnostic only; no automatic selection.
+Results: C:\Users\unipu\Documents\GitHub\LLM_IBM_TechSupport\IBMTechSupport\evaluate_results\106\finetuning\data_composition_test2\run_20261127_000005_052233

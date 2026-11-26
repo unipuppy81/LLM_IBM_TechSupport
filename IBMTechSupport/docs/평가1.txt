@@ -1,0 +1,454 @@
+IBMTechSupport LLM / RAG 개발 및 평가 기록 1
+작성 기준: 2026-11-26
+진행 범위: 1~3단계 완료 / 4단계부터 재개
+
+================================================================
+0. 전체 개발 순서
+================================================================
+[완료] 1. RAG V3 설정 동결 및 실제 평가 코드에 반영
+[완료] 2. LoRA 학습 및 Validation 평가
+[완료] 3. QLoRA 학습 및 Validation 평가
+[대기] 4. LoRA / QLoRA 학습 설정 최적화
+[대기] 5. Combination 구성
+[대기] 6. 6개 모델 동일 조건 비교 평가
+[대기] 7. 최종 모델 선정
+[대기] 8. 새로운 독립 Test 데이터로 일반화 검증
+[대기] 9. 서비스 배포
+[대기] 10. LLMOps 및 모니터링 구축
+
+※ 2, 3단계 완료는 기본 학습 및 평가 실행 완료를 의미한다.
+  LoRA와 QLoRA의 답변 성능은 모두 실패했으며 최적화가 필요하다.
+
+공통 개발 환경
+- Base Model: Qwen2.5-1.5B-Instruct
+- GPU: NVIDIA GeForce RTX 3060 Ti
+- Python / PyTorch / Transformers / PEFT / bitsandbytes
+- Train: data/processed/train_clean.json (632건)
+  Answerable 422건(66.77%), Impossible 210건(33.23%)
+- Validation: data/processed/val_106.json (106건)
+  Answerable 77건, Impossible 29건
+- Validation SHA-256:
+  51740842406b7f8e6814dc5a57c57d09da4b72fc0c94e62b430e8cf8ccfb45ae
+- 독립 Test 데이터는 이번 1~3단계 평가에 사용하지 않음.
+- 답변 거부 문자열: INSUFFICIENT_INFORMATION
+
+================================================================
+1. RAG V3 설정 동결 및 실제 평가 코드 반영 [완료]
+================================================================
+
+1-1. 최종 선택
+- RAG V3는 Stage2 Retrieval + Answerability Judge 프롬프트 V3이다.
+- 기존 configs/rag/v3.yaml 및 Stage3 Retrieval과는 다른 구성이다.
+- 기존 Stage2 Generator와 Grounding Verifier는 변경하지 않았다.
+- 이전 실험에서 정답성보다 근거 충실도 및 답변 불가능 질문의 거부를
+  우선하여 V3를 선택했다. 모든 지표에서 우월한 모델이라는 뜻은 아니다.
+- 별도의 평가용 Judge v3.13 설정도 기존 동결 상태를 유지한다.
+  아래 Answer Correctness / Faithfulness는 별도 Stage2 품질 평가 프롬프트와
+  Qwen2.5-1.5B-Instruct로 계산한 자동 판정이며 v3.13과 구분한다.
+
+1-2. 동결 설정
+- Retrieval: Stage2, BM25 + Dense Weighted RRF
+- Embedding: BAAI/bge-small-en-v1.5
+- FAISS: HNSW, 벡터 111,023개
+- PCA: 384 -> 192차원
+- HNSW M=32, efSearch=128, FAISS CPU threads=4
+- 제품/버전/CVE/APAR/오류 코드 Soft Filter: ON, strength=1.0
+- Reranker: cross-encoder/ms-marco-MiniLM-L6-v2
+- Reranker Candidate K: 10
+- Query Rewrite: OFF
+- Judge Mode: per_document_v3
+- Top K: 5, Retry Top K: 10
+- Base / Generator / Runtime Judge / Grounding Verifier: Qwen2.5-1.5B-Instruct
+- Generation: batch_size=1, max_new_tokens=160, do_sample=False, num_beams=1
+- 원본 Stage2 설정: configs/rag/v5_stage2_106.yaml
+- 최종 동결 설정: configs/rag/stage2_v3_frozen.yaml
+- 선택된 Retrieval 설정: configs/rag/retrieval_stage2_selected.yaml
+
+처리 순서:
+  질문 -> Hybrid Search -> Soft Filter -> Reranker -> Top5 개별 청크 Judge
+  -> YES 청크가 없으면 6~10위 추가 Judge
+  -> YES 청크만 Generator에 전달 -> Grounding Verifier
+  -> 검증 YES면 답변 반환, 그 외 거부
+  -> YES 근거가 없으면 생성하지 않고 거부
+
+1-3. 코드 반영 및 재현
+- freeze_rag_v3.py: 최종 실험 프롬프트와 기존 설정의 SHA-256 검증,
+  V3 전용 YAML 생성 및 기존 평가/추론 경로에 전용 모드 연결.
+- 수정: scripts/rag_guardrails_per_document.py
+- 수정: scripts/evaluate/evaluate_rag.py
+- 신규: configs/rag/stage2_v3_frozen.yaml
+- 신규: scripts/evaluate/evaluate_rag_v3_quality.py
+- 기존 Stage2 실험 결과는 보존.
+- 최종 실험 프롬프트 원본:
+  evaluate_results/106/rag/stage2_prompt_ab/fast_l81g4igl/candidate_prompt.txt
+- Answerability Prompt SHA-256:
+  f64397ff47417761a44d4e0512939e0608bf1dec7def48ed39ef1b8d48031511
+- Retrieval Config SHA-256 (평가 로그 기준):
+  ff04ed84d035d1f4921362d4c40ec53ca17fd497c4981097c3aa4fb41778adf9
+
+실행 명령 (IBMTechSupport 기준):
+  cd scripts
+  python -m evaluate.evaluate_rag --config ../configs/rag/stage2_v3_frozen.yaml
+  python evaluate/evaluate_rag_v3_quality.py
+  cd ..
+
+※ 최초 평가에서 bge-small-en-v1.5 로컬 모델 누락으로 실패했다.
+  모델 다운로드 후 실제 Retrieval부터 재실행하여 정상 평가 완료.
+  품질 평가는 저장된 predictions.jsonl 및 retrieved_documents를 사용했다.
+
+1-4. 최종 Validation 결과 (기존 V3 / 동결 V3)
+지표                              기존 V3       동결 V3
+----------------------------------------------------------------
+Hit@1                              58.44%        58.44%
+Hit@3                              79.22%        79.22%
+Hit@5                              85.71%        85.71%
+Hit@10                             90.91%        90.91%
+Recall@5                           83.77%        83.77%
+Precision@5                       0.1714        0.1714
+MRR@10                            0.6994        0.6994
+nDCG@5                            0.7236        0.7236
+Exact Match                         0.00%         0.00%
+Token F1                           28.49%        28.49%
+Answer Correctness                 57.14%        57.14%
+Faithfulness                       70.59%        70.59%
+올바른 거부율                      65.52%        65.52%
+잘못된 거부율                      24.68%        24.68%
+답변 반환                             68건          68건
+답변 거부                             38건          38건
+
+- 주요 집계 지표가 모두 일치하여 재현 성공으로 판단했다.
+- 질문별 출력 전체의 바이트 단위 일치 여부는 별도로 확인하지 않았다.
+- Retrieval 지표는 Answerable 77건만 대상으로 계산했다.
+
+1-5. 품질 평가 상세
+Answer Correctness (Answerable 77건 기준)
+  CORRECT: 44건
+  INCORRECT: 6건
+  UNCERTAIN: 8건
+  REFUSED: 19건
+  Strict Correctness: 44/77 = 57.14%
+
+Faithfulness (실제 반환한 답변 68건 기준)
+  SUPPORTED: 48건
+  UNSUPPORTED: 5건
+  UNCERTAIN: 15건
+  Strict Faithfulness: 48/68 = 70.59%
+
+정확성과 근거 충실도를 모두 충족한 Answerable 질문: 31/77 = 40.26%
+Answerable: 58건 답변, 19건 거부
+Impossible: 10건 답변, 19건 거부
+
+Guardrail Status:
+  EVIDENCE_NO: 29
+  EVIDENCE_UNCERTAIN: 2
+  ANSWER_VERIFIED: 68
+  ANSWER_NO: 5
+  ANSWER_UNCERTAIN: 1
+  GENERATOR_ABSTAINED: 1
+
+1-6. 추론 성능
+- Retrieval: 22.512초
+- Answerability Judge: 127.647초
+- Generation: 377.353초
+- Grounding Verifier: 15.895초
+- 평균 Generator 입력 토큰: 741.9
+- Peak GPU Memory (평가 코드 측정 범위): 3.126GB
+
+1-7. 결과 경로
+  evaluate_results/106/rag/stage2_v3_frozen/
+    predictions.jsonl
+    metrics.json
+    quality_evaluation/
+      cases.jsonl
+      metrics.json
+
+결론: RAG V3 동결 및 주요 지표 재현 완료. 추가 RAG 튜닝은 종료하고
+      이후 Combination 및 6개 모델 비교의 공통 RAG 기준으로 사용한다.
+      자동 품질 평가 결과는 Human Evaluation을 대체하지 않으며,
+      실제 서비스 수준의 품질이나 독립 데이터 일반화는 검증되지 않았다.
+
+================================================================
+2. LoRA 학습 및 Validation 평가 [완료 / 품질 실패]
+================================================================
+
+2-1. 코드 및 데이터 준비
+- scripts/prepare_lora_stage2.py 생성 및 실행용으로 제공.
+- scripts/train_lora.py의 Validation 경로를 val_clean.json에서
+  val_106.json으로 변경.
+- Base 설정(configs/base/v1_106.yaml)의 SYSTEM_PROMPT 및 ABSTAIN 정의.
+- Chat Template 반환 형식 명시 및 Train / Validation 중복 검사 추가.
+- scripts/evaluate/evaluate_lora.py 신규 작성.
+- Smoke Test는 사용자 요청에 따라 생략하고 전체 학습 진행.
+
+2-2. 공통 학습 설정 (LoRA / QLoRA)
+- Train 632건, Validation 106건
+- Rank=8, Alpha=16, Dropout=0.05
+- Target Modules: q_proj, v_proj
+- Learning Rate: 2e-4
+- Epochs: 2
+- Max Length: 512
+- Max Question Tokens: 192, Max Answer Tokens: 160
+- Batch Size: 1, Gradient Accumulation: 8
+- Optimizer: AdamW, Gradient Clipping: 1.0
+- Gradient Checkpointing: ON, 학습 중 KV Cache: OFF
+- Compute Precision: FP16, GradScaler 사용
+- Seed: 42
+- 질문/프롬프트 토큰은 labels=-100으로 Loss에서 제외.
+- Answerable은 reference answer, Impossible은 거부 문자열을 target으로 사용.
+- 각 샘플 평균 Loss를 누적하고 가장 낮은 Validation Loss의 Adapter 저장.
+
+LoRA는 FP16 Base 가중치를 고정하고 Adapter만 학습한다.
+
+실행 명령 (IBMTechSupport 기준):
+  python scripts/prepare_lora_stage2.py
+  python scripts/train_lora.py --epochs 2 --max-length 512 --grad-accum 8 --learning-rate 2e-4 --seed 42
+  python scripts/evaluate/evaluate_lora.py
+
+2-3. 학습 결과
+Epoch     Train Loss     Validation Loss     Optimizer Steps
+1         1.8186         1.7960              79
+2         1.6844         1.7657              79
+
+- 최적 Adapter: Epoch 2, Best Val Loss 1.7657
+- 전체 파라미터: 1,544,803,840
+- 학습 파라미터: 1,089,536 (0.0705%)
+- Optimizer Steps 합계(로그 기준): 158
+- 학습 시간: 478.012초
+- Peak GPU Memory: 3.642GB
+
+2-4. Validation 결과
+- 평가 데이터: val_106.json, 106건
+- Base와 동일한 비검색용 프롬프트 및 Greedy Decoding
+- Batch Size=1, Max New Tokens=160
+- Exact Match: 0.00%
+- Token F1: 0.00%
+- Answer Correctness: 0.00% (REFUSED 77건)
+- 올바른 거부율: 100.00% (29/29)
+- 잘못된 거부율: 100.00% (77/77)
+- 답변 반환: 0건, 답변 거부: 106건
+- Generation: 35.743초
+- 평균 생성 시간: 0.3372초/질문
+- 처리량: 2.966 questions/s
+- 추론 Peak GPU Memory: 2.929GB
+- Retrieval / Faithfulness: N/A (검색 근거 미사용)
+
+2-5. 결과 경로
+  models/Qwen2.5-1.5B-Instruct-LoRA/
+  training_results/lora_train_metrics.json
+  evaluate_results/106/lora/
+    predictions.jsonl
+    metrics.json
+    generation_manifest.json
+    quality_evaluation/cases.jsonl
+    quality_evaluation/metrics.json
+
+결론: 학습 및 평가 파이프라인은 정상 작동했으나 모든 질문에 거부를
+      출력하는 응답 붕괴가 발생했다. Loss 감소가 실제 답변 품질 향상을
+      보장하지 않는 사례다. 최적화 이전 Baseline으로 결과를 보존한다.
+
+================================================================
+3. QLoRA 학습 및 Validation 평가 [완료 / 품질 실패]
+================================================================
+
+3-1. 설정
+- scripts/train_qlora.py는 수정된 train_lora.py의 데이터 경로와
+  QADataset, Loss 평가 함수, 공통 하이퍼파라미터를 재사용.
+- Base 가중치: 4-bit NF4, Double Quantization=True
+- Compute Dtype: FP16
+- 4-bit Linear Layers: 196개
+- prepare_model_for_kbit_training 적용.
+- 나머지 학습 설정은 LoRA와 동일.
+- 추론 시에도 4-bit NF4 양자화 적용.
+- scripts/evaluate/evaluate_qlora.py 신규 작성.
+
+실행 명령 (IBMTechSupport 기준):
+  python scripts/train_qlora.py --epochs 2 --max-length 512 --grad-accum 8 --learning-rate 2e-4 --seed 42
+  python scripts/evaluate/evaluate_qlora.py
+
+3-2. 학습 결과
+Epoch     Train Loss     Validation Loss     Optimizer Steps
+1         1.8898         1.8327              79
+2         1.7261         1.7968              79
+
+- 최적 Adapter: Epoch 2, Best Val Loss 1.7968
+- 전체 파라미터: 1,544,803,840
+- 학습 파라미터: 1,089,536 (0.0705%)
+- Optimizer Steps 합계(로그 기준): 158
+- 학습 시간: 745.571초
+- Peak GPU Memory: 2.743GB
+
+3-3. Validation 결과
+- 평가 데이터: val_106.json, 106건
+- Batch Size=1, Max New Tokens=160, Greedy Decoding
+- Exact Match: 0.00%
+- Token F1: 0.00%
+- Answer Correctness: 0.00% (REFUSED 77건)
+- 올바른 거부율: 100.00% (29/29)
+- 잘못된 거부율: 100.00% (77/77)
+- 답변 반환: 0건, 답변 거부: 106건
+- Generation: 50.031초
+- 평균 생성 시간: 0.4720초/질문
+- 처리량: 2.119 questions/s
+- 추론 Peak GPU Memory: 1.147GB
+- Retrieval / Faithfulness: N/A
+
+3-4. 결과 경로
+  models/Qwen2.5-1.5B-Instruct-QLoRA/
+  training_results/qlora_train_metrics.json
+  evaluate_results/106/qlora/
+    predictions.jsonl
+    metrics.json
+    generation_manifest.json
+    quality_evaluation/cases.jsonl
+    quality_evaluation/metrics.json
+
+결론: QLoRA도 동일한 전체 답변 거부 현상을 보였다.
+      메모리는 감소했지만 해당 환경에서는 학습/추론이 느려졌다.
+      최적화 이전 Baseline으로 결과를 보존한다.
+
+================================================================
+4. 현재까지의 비교 평가 및 문제 분석
+================================================================
+
+지표                         RAG V3       LoRA          QLoRA
+----------------------------------------------------------------
+Exact Match (%)                0.00        0.00          0.00
+Token F1 (%)                  28.49        0.00          0.00
+Answer Correctness (%)        57.14        0.00          0.00
+Faithfulness (%)              70.59        N/A           N/A
+Hit@5 (%)                     85.71        N/A           N/A
+Recall@5 (%)                  83.77        N/A           N/A
+Precision@5                   0.1714       N/A           N/A
+MRR@10                        0.6994       N/A           N/A
+nDCG@5                        0.7236       N/A           N/A
+올바른 거부율 (%)             65.52       100.00        100.00
+잘못된 거부율 (%)             24.68       100.00        100.00
+답변 반환 (건)                   68           0             0
+답변 거부 (건)                   38         106           106
+Best Validation Loss           N/A         1.7657        1.7968
+학습 시간 (초)                 N/A       478.012       745.571
+학습 Peak GPU Memory (GB)      N/A         3.642         2.743
+추론 Peak GPU Memory (GB)      3.126       2.929         1.147
+
+※ RAG와 비검색 모델은 처리 경로 및 GPU 측정 범위가 다를 수 있으므로
+  위 추론 메모리를 완전히 동일한 조건의 최종 벤치마크로 해석하지 않는다.
+※ Base 단독 및 Combination 모델을 포함하는 최종 6개 모델 비교는 미수행.
+
+LoRA 대비 QLoRA:
+- 학습 GPU 메모리 약 24.68% 감소
+- 학습 시간 약 55.97% 증가
+- 동일한 학습 파라미터 수
+- 저장된 두 predictions.jsonl의 SHA-256 일치:
+  9b35ea08f2d00261bd3504470d610bd185acecc586ce404c2d77155caafdd141
+- 두 모델의 예측 결과 파일이 동일하지만 가중치가 동일하다는 뜻은 아니다.
+
+확인된 문제:
+- LoRA/QLoRA 모두 Validation 106건 전체에 거부 문자열 출력.
+- Train/Validation Loss는 감소했으나 실제 Answer Correctness는 0%.
+- Train 데이터는 Answerable 422건, Impossible 210건으로,
+  단순 클래스 개수 불균형만으로는 응답 붕괴를 설명하기 어렵다.
+
+검증할 원인 가설 (아직 확정되지 않음):
+- 샘플별 평균 Loss로 인해 짧고 반복적인 거부 답변이 상대적으로
+  큰 학습 영향을 미쳤을 가능성.
+- 거부 문자열의 일관된 토큰 패턴 및 정답 토큰 길이/절단 분포 영향.
+- 학습/추론 프롬프트, 답변 라벨 마스킹, EOS 처리 등의 영향.
+- Learning Rate 및 Adapter 용량 영향.
+- 전체 Validation Loss만으로 최적 체크포인트를 선정한 영향.
+- 공통 학습 및 평가 코드 문제 가능성도 배제하지 않음.
+
+================================================================
+5. 다음 작업: 4단계 LoRA / QLoRA 학습 설정 최적화
+================================================================
+
+4-1. 데이터 및 토큰 분포 분석
+     - Answerable/Impossible별 답변 길이, 학습 대상 토큰 수, 절단 여부.
+     - 학습 프롬프트와 추론 프롬프트 및 라벨 마스킹 일치 확인.
+     - Base 단독 평가 결과와 기존 Adapter 평가 설정 비교.
+4-2. Loss 및 Gradient Accumulation 검토
+     - 샘플 평균 Loss / 토큰 평균 Loss의 실제 학습 영향 비교.
+     - Answerable / Impossible별 Loss 기록.
+4-3. 클래스별 학습 가중치 및 샘플링 조정 실험
+4-4. Learning Rate 최적화
+4-5. LoRA Rank / Alpha 최적화
+4-6. Target Modules 최적화
+4-7. Epoch 및 체크포인트 선정 기준 개선
+     - Loss뿐 아니라 Token F1, Answer Correctness, 거부율 함께 확인.
+4-8. LoRA / QLoRA 재학습 및 동일 Validation 평가
+4-9. 최적 설정 선정 및 동결
+
+원칙:
+- 기존 결과 및 설정을 덮어쓰지 않고 실험별 경로에 저장.
+- 가능한 한 한 번에 하나의 설정을 변경하여 영향 확인.
+- 106건 Validation 기준으로만 최적화하며 새 독립 Test는 8단계에서 사용.
+- Smoke Test는 생략.
+- 위 최적화 순서는 계획이며 아직 실행하지 않았다.
+
+================================================================
+6. 이후 6개 모델 비교 계획
+================================================================
+1) Base LLM
+2) Base LLM + RAG V3
+3) LoRA
+4) QLoRA
+5) LoRA + RAG V3
+6) QLoRA + RAG V3
+
+공통 평가 지표:
+- Exact Match, Token F1, Answer Correctness
+- 올바른 거부율, 잘못된 거부율
+- Inference Latency, Peak GPU Memory
+
+RAG 전용 평가 지표:
+- Hit@5, Recall@5, Precision@5, MRR@10, nDCG@5
+- Faithfulness
+- 비검색 모델은 N/A 처리.
+
+정의:
+- Answer Correctness: 엄격한 CORRECT 판정 수 / 전체 Answerable 질문 수.
+- Faithfulness: 모든 중요 기술 주장이 실제 Generator 입력 근거로
+  지지된 답변 수 / 실제 반환한 답변 수 (답변 단위).
+- 올바른 거부율: Impossible 중 거부한 비율.
+- 잘못된 거부율: Answerable 중 거부한 비율.
+- 기존 품질 평가 함수와 동일한 평가 모델을 유지.
+- 자동 판정 결과를 사람의 검증을 거친 실제 정확도로 간주하지 않음.
+- 최종 비교에서는 공통 데이터, decoding, batch size 및 시간/메모리
+  측정 범위를 통일하고 모델별 필요한 양자화 및 RAG 차이를 명시.
+
+================================================================
+7. GitHub 커밋 및 회사 PC 작업 재개
+================================================================
+
+커밋 메시지 예시:
+  RAG V3 설정 동결 및 LoRA/QLoRA 학습·평가 완료
+  Freeze RAG V3 and complete LoRA/QLoRA baseline evaluation
+
+원격 .gitignore 확인 기준:
+- scripts/, configs/, evaluate_results/, training_results/는 기본 포함 대상.
+- val_106.json, val_clean.json, test_clean.json은 예외로 포함 대상.
+- train_clean.json, models/, data/raw/, FAISS/BM25 인덱스, PCA 파일,
+  .venv/는 기본 제외 대상.
+- 실제 로컬 staging/commit/push 상태는 확인되지 않았다.
+
+train_clean.json을 Git에 포함하려면 공개 가능 여부 확인 후
+루트 .gitignore에 예외 추가:
+  !IBMTechSupport/data/processed/train_clean.json
+
+회사 PC 재개 시 확인사항:
+- Git pull 후 소스 코드, 동결 YAML, train_clean.json, val_106.json,
+  evaluate_results/106/{rag/stage2_v3_frozen,lora,qlora}/ 및 training_results 확인.
+- Base/Embedding 모델은 회사 PC에 이미 있거나 다시 다운로드할 수 있음.
+- 기존 LoRA/QLoRA Adapter는 Git에서 제외됨. 기존 결과 재현이나 재평가가
+  필요하면 별도 보존해야 하며, 4단계에서 새로 학습할 경우 필수는 아님.
+- RAG 재실행 시 기존 FAISS/BM25/PCA/청크 파일이 있어야 한다.
+- 공개 저장소이므로 데이터/평가 결과의 공개 가능 여부와 대용량 파일을
+  확인한 뒤 업로드한다.
+- 기존 평가 스크립트는 결과 덮어쓰기를 제한하므로 기존 결과가 있는 상태에서
+  같은 경로로 다시 실행하지 않는다.
+
+다음 시작 위치: IBMTechSupport/
+다음 시작 작업: 4-1. 학습 데이터 및 토큰 분포 분석
+
+================================================================
+기록 끝
+================================================================

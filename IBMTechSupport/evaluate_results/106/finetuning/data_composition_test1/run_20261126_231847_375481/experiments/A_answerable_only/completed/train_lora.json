@@ -1,0 +1,16 @@
+{
+  "files": {
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\data_composition_test1\\run_20261126_231847_375481\\A_answerable_only\\lora\\adapter_config.json": "c7dd481e38b35a660840cf48a59278eccd8958474e03c4f9dde0a1faf370cbf1",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\data_composition_test1\\run_20261126_231847_375481\\A_answerable_only\\lora\\adapter_model.safetensors": "6fe442e1b0a1a785d9ebed33ac5fab9597d6d7d316cff6f73c30ed8e58a0bc2f",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\data_composition_test1\\run_20261126_231847_375481\\A_answerable_only\\lora\\added_tokens.json": "f0acedf99e19ec0a5b797ffbd0b94328172ccd90f7f385bbc521cda2701b03ab",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\data_composition_test1\\run_20261126_231847_375481\\A_answerable_only\\lora\\chat_template.jinja": "8aa40ce145adb73cb3a75194dc0224702a95850ec5275cabb728496bbd749fc6",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\data_composition_test1\\run_20261126_231847_375481\\A_answerable_only\\lora\\merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\data_composition_test1\\run_20261126_231847_375481\\A_answerable_only\\lora\\README.md": "6b4d557a36125979294f381a541d092b1f63a866351198e850c4234e20bf8944",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\data_composition_test1\\run_20261126_231847_375481\\A_answerable_only\\lora\\special_tokens_map.json": "57255613bbe23c9497211ca68561ff429a51e871dbaf5a59998fa4c8f7fe168a",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\data_composition_test1\\run_20261126_231847_375481\\A_answerable_only\\lora\\tokenizer.json": "9c5ae00e602b8860cbd784ba82a8aa14e8feecec692e7076590d014d7b7fdafa",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\data_composition_test1\\run_20261126_231847_375481\\A_answerable_only\\lora\\tokenizer_config.json": "5fd4cea2574beb6b70ba31582179880d331b723f5b5119ee67c29d45b983f7be",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\data_composition_test1\\run_20261126_231847_375481\\A_answerable_only\\lora\\vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\data_composition_test1\\run_20261126_231847_375481\\experiments\\A_answerable_only\\training\\composition_audit.json": "d8f59ae756ab411e6583d01debf27732ab3292ddd07182b86aaf03162dbe08e7",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\data_composition_test1\\run_20261126_231847_375481\\experiments\\A_answerable_only\\training\\lora_train_metrics.json": "1a1766e76599b3e7a418ec4108051d3d0fd7284f53b5f2c6f2722ca35c6f2280"
+  }
+}

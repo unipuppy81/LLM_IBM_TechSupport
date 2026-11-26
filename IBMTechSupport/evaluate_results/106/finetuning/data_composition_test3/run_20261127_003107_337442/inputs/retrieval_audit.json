@@ -1,0 +1,8 @@
+{
+  "method": "existing stage3, top5, frozen shared retrieval",
+  "seconds": 19.770598999999493,
+  "gold_document_hit_count": 68,
+  "reference_verbatim_visible_count": 31,
+  "answerable_count": 77,
+  "note": "Gold-document hit does not guarantee answer-bearing evidence; no gold text or labels passed to retriever."
+}

@@ -1,0 +1,20 @@
+{
+  "training_records": 367,
+  "training_impossible": 0,
+  "validation_records": 106,
+  "validation_impossible": 29,
+  "trainable_parameters": 1089536,
+  "training_weight": 1.0,
+  "validation_weight": 1.0,
+  "optimizer_updates_per_epoch": 46,
+  "dataset_construction_counts": [
+    [
+      367,
+      0
+    ],
+    [
+      106,
+      29
+    ]
+  ]
+}

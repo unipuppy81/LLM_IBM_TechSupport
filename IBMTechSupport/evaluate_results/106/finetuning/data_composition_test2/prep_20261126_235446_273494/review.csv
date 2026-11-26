@@ -1,0 +1,829 @@
+﻿id,decision,section,source_filename,question,answer
+SYN_14b41290deb226f33f52,accept,ERROR DESCRIPTION,swg1PI34677.txt,"Under what technical conditions does the issue occur in ""IBM PI34677: MBEANSTARTER LOADEXTENSIONS FAILED TO LOAD EXTENSION""?","*  During Portal Start-Up following error is shown:
+   --------------------
+   0000005e MBeanStarter  E com.ibm.wps.
+   
+   scripting.server.MBeanStarter loadExtensions failed to load
+   extension:
+   key: ServerExt.applications / value:
+   com.ibm.wps.scripting.server.
+   ApplicationServerExtensions"
+SYN_815c2f76a819c65a4c6a,accept,LOCAL FIX,swg1PI34677.txt,"What local workaround is available for ""IBM PI34677: MBEANSTARTER LOADEXTENSIONS FAILED TO LOAD EXTENSION""?","*  1) open the WAS admin console
+   2) navigate to Resources > Resource environment providers > WP
+   ScriptingService > Custom properties
+   3) you should see an entry with the name
+   ""ServerExt.applications"" and value
+   ""com.ibm.wps.scripting.server.ApplicationServerExtensions""
+   4) delete this entry, save and restart the server."
+SYN_5d05199c30e5d6322ff4,reject,PROBLEM CONCLUSION,swg1PI34677.txt,"What permanent correction or fix is described for ""IBM PI34677: MBEANSTARTER LOADEXTENSIONS FAILED TO LOAD EXTENSION""?","*  Added a task to remove the outdate resource environment
+   provider entry."
+SYN_f804ddcea2785bbf86e5,accept,PROBLEM CONCLUSION,swg1PI37248.txt,"What permanent correction or fix is described for ""IBM PI37248: A PROPERTY FILE BASED CONFIGURATION (PFBC) FILE MIGHT FAIL TO AP PLY.""?","*  The parsing code is updated so the problem no longer occurs.
+   
+   The fix for this APAR is currently targeted for inclusion in
+   fix pack 8.5.5.6.  Please refer to the Recommended Updates
+   page for delivery information:
+   http://www.ibm.com/support/docview.wss?rs=180&uid=swg27004980 [http://www.ibm.com/support/docview.wss?rs=180&uid=swg27004980]"
+SYN_5a2712c432e5caf62e0e,accept,ERROR DESCRIPTION,swg1PI47826.txt,"Under what technical conditions does the issue occur in ""IBM PI47826: VMM DOES NOT CLEAR THE CACHE IF CLEARENTITY MODE IS USED.""?","*  If base entry and name in repository is different and
+   clearCache functionality is used with clearEntity mode then
+   virtual member manager (VMM) still looks in the cache and gets
+   the entity from the cache instead of fetching it from the LDAP
+   server."
+SYN_06bd844e83f1c3b34ca4,accept,ERROR DESCRIPTION,swg1PI53566.txt,"Under what technical conditions does the issue occur in ""IBM PI53566: ON DEMAND ROUTER MEMORY LEAK WHEN UPGRADING APPLICATIONS UNDER LOAD""?","*  The On Demand Router (ODR) has a memory leak related to
+   HttpRouteAction objects such that when the system is under load
+   and there are configuration changes such as uninstalling and
+   installing applications it is possible that multiple, redundant
+   HttpRouteAction objects can be created with registered
+   listeners for ODC tree changes but never removed.  This will
+   eventually fill up the available heap space and cause an Out Of
+   Memory issue on the ODR.  Restarting the ODR will correct the
+   problem."
+SYN_8088eecd01b71cffd86a,accept,PROBLEM CONCLUSION,swg1PI53566.txt,"What permanent correction or fix is described for ""IBM PI53566: ON DEMAND ROUTER MEMORY LEAK WHEN UPGRADING APPLICATIONS UNDER LOAD""?","*  The area of code was corrected to release the HttpRouteAction
+   objects. This fix supercedes PI51978 [http://www-01.ibm.com/support/docview.wss?uid=swg1PI51978].
+   
+   The fix for this APAR is currently targeted for inclusion in
+   fix pack 8.5.5.9.  Please refer to the Recommended Updates
+   page for delivery information:
+   http://www.ibm.com/support/docview.wss?rs=180&uid=swg27004980 [http://www.ibm.com/support/docview.wss?rs=180&uid=swg27004980]"
+SYN_f573f4b31f1cbeff5fc4,reject,ERROR DESCRIPTION,swg1PI54477.txt,"Under what technical conditions does the issue occur in ""IBM PI54477: ADD ABILITY TO DISABLE LOGGING OF SECJ0371W EXPIRED LTPA TOKEN MESSAGES""?","*  SECJ0371W messages fill the logs and the customer does not find
+   them useful. They would like to turn off the logging of these
+   messages.
+   
+   WL3SEC"
+SYN_dc6d2ef7055c83495595,accept,CAUSE,swg21066791.txt,"What causes the issue described as ""IBM Java.io.NotSerializableException thrown when persistent sessions or PMI is enabled""?","The class name at the end of the exception is the object that does not implement the java.io.Serializable or java.io.Externalizable interface. In most instances, this object is the attribute that was put into the session object; however, sometimes this object is referenced by an attribute of the session object. 
+
+ To determine which attribute of the session object references this non-serializable object, access the SessionInspectServlet."
+SYN_0e13e0d786ba56968978,reject,SYMPTOM,swg21162896.txt,"What symptoms identify the issue described as ""IBM Diagnosing a java.lang.StackOverflowError""?","A stack overflow can result from: 
+
+ * A deeply nested application 
+ * An infinite loop within an application 
+ * A problem in just-in-time (JIT) compiled code 
+ * Applications requiring a larger stack size, especially ones relying on XML, GUI, or java2D classes. 
+ * Native method calls
+
+
+Stack overflow issues are frequently masked by Out of Memory exceptions. By resolving the memory constraints, the stack overflow can be resolved."
+SYN_1d4a397071e39c7f109f,accept,DIAGNOSING THE PROBLEM,swg21162896.txt,"How can an administrator diagnose the issue described as ""IBM Diagnosing a java.lang.StackOverflowError""?","Look for either Out of Memory messages or java.lang.StackOverflow in the server logs. The process may continue to run after either of these messages are seen. 
+
+
+If a crash did occur, a javacore should have generated on IBM SDK. You will either see the signal as SIGSEGV, SIGILL, SIGABRT, or SIGBUS. Usually the current thread will indicate the following
+
+
+
+
+pending=java.lang.StackOverflowError"
+SYN_a155f644ddef4818c8b6,reject,CAUSE,swg21197705.txt,"What causes the issue described as ""IBM Using Oracle JDBC driver specific properties through a datasource""?",The Oracle JDBC driver has added support for a new Custom Property under connectionProperties..
+SYN_8675efe2e863086d3b2b,accept,RESOLVING THE PROBLEM,swg21197705.txt,"How can an administrator resolve the issue described as ""IBM Using Oracle JDBC driver specific properties through a datasource""?","The method used with datasources is to set a Custom Property in the datasource as follows: 
+
+Name: connectionProperties 
+Value: propertyA=valueA;propertyB=valueB
+
+
+For example, if you wish to set the property oracle.jdbc.V8Compatible=true, then you would specify the following. 
+Name: connectionProperties 
+Value: oracle.jdbc.V8Compatible=true"
+SYN_b258436bb97a986a9058,accept,CAUSE,swg21209523.txt,"What causes the issue described as ""IBM Application running on a DB2 client performs poorly due to low level semget calls issued by DB2""?","DB2® Universal Database™ (DB2 UDB) has an internal trace facility called ""db2trc"". This trace facility acquires Inter Process Communication (IPC) resources (both semaphore and shared memory). Even though a DB2 trace is not turned on, it may issue semget() calls to the operating system. These calls will fail, though, since no IPC resources were acquired."
+SYN_91024c6c9da396e5f12b,accept,SYMPTOM,swg21220832.txt,"What symptoms identify the issue described as ""IBM Purging the connection pool of a WebSphere Application Server data source using the data source MBean""?","Changes to the application or environment may invalidate cached connections in the Connection Manager pool. Although these connections will eventually be discarded through the normal processing of the connection requests, it may be desirable to purge them all at once and allow the pool to refill with new, valid connections."
+SYN_1cc59c426ada56e04803,accept,CAUSE,swg21249798.txt,"What causes the issue described as ""IBM MQJMS1068 error occurs when trying to create an XA connection from WebSphere Application Server to MQ""?","The reason why it is not possible to use the CCDT with XA connections is related to transaction recovery. 
+
+ If the application server stops while there are still active transactions, there is no way with the current implementation to ensure that it will connect to the same queue manager when it restarts. This can lead to in-doubt transactions being left dangling, and never resolved. 
+
+ It is hoped that this restriction will be resolved in future releases of WebSphere Application Server and WebSphere MQ."
+SYN_be5f900e931ac976373b,accept,CAUSE,swg21260969.txt,"What causes the issue described as ""IBM ITCAM Data Collector connection to the Managing Server fails with Connection Refused.""?","The DC obtains the MS kernel’s network address from the MS. If a host name is specified for the kernel, and any of it’s resolved IP addresses cannot reach the MS from the DC, ITCAM’s connection attempt will fail if one of these ""invalid” IP’s is used."
+SYN_f25623eef730957d9c41,reject,CAUSE,swg21269136.txt,"What causes the issue described as ""IBM DataPower off-device logging: a configuration example""?","The DataPower device has a finite amount of space to hold larger than average log files or long term logging needs in production environment. 
+
+It should be noted that if used while debugging at load or in a capacity issue, log events may be dropped. There is a prioritization of events within the device and client traffic always comes first. Log events dropped can be confirmed or counted from the Status>Log Targets menu in the WebGUI."
+SYN_24728d2e7ec4da08eac0,accept,FAQ,swg21308281.txt,Can IBM® Installation Manager be installed on a UNIX® or Linux® NFS mounted disk?,"Do not install the IBM Installation Manager on an NFS mounted disk. 
+
+On AIX® for example, some of the JRE folders are not being deleted when the IBM Installation Manager uninstalls but is deleted after waiting for 10 minutes. This causes the JRE folder to not be uninstalled during an uninstall operation. Other UNIX and Linux operating systems have similar issues. 
+
+Only install the Installation Manager on a local disk."
+SYN_9150266ada0562a28524,accept,CAUSE,swg21318593.txt,"What causes the issue described as ""IBM Handling 302 redirect error message in a Web Application Firewall""?","302,HTTP Redirect and failed due to non idempotent request method - RFC 2616 sec 10.3 message.
+
+This is caused by the adherence to the HTTP RFC 2616 by the Datapower Appliance. 
+For additional information on the RFC you may see this page RFC2616 [http://www.w3.org/Protocols/rfc2616/rfc2616.html]"
+SYN_2f91a18cc337393b359f,reject,DIAGNOSING THE PROBLEM,swg21318593.txt,"How can an administrator diagnose the issue described as ""IBM Handling 302 redirect error message in a Web Application Firewall""?",Backside header failed to parse due to: Failed to establish a backside connection failed due to non idempotent request method. (RFC 2616 sec 10.3)
+SYN_710b8f65c72f1c9a5b0c,accept,SYMPTOM,swg21320206.txt,"What symptoms identify the issue described as ""IBM ERROR: Default DB path is not set, when adding database set on RHEL 5""?","When running the command cqreg add_dbset, this error occurs:
+
+""Default DB path is not set""
+""Default version is 7.0.0""
+/opt/rational/clearquest/CQDB_rgys/cqdb_registry/7.0.0 does not exist. Use cqreg initialize first."
+SYN_9d5ca0aeff035716f831,accept,DIAGNOSING THE PROBLEM,swg21320206.txt,"How can an administrator diagnose the issue described as ""IBM ERROR: Default DB path is not set, when adding database set on RHEL 5""?","Verify that the CQDB_rgys directory exists, as defined in the installation options. The following is the default registry location: 
+
+
+/opt/rational/clearquest/CQDB_rgys/cqdb_registry/
+
+If not present, then the cqreg initialize command was not successful."
+SYN_f2b06bea32b02b8d4fae,reject,CAUSE,swg21330011.txt,"What causes the issue described as ""IBM Non Administrator usage must be manually cleaned up""?",This issue has been identified as Eclipse defect 255268 [https://bugs.eclipse.org/bugs/show_bug.cgi?id=255268]. Review the Bug report for more details.
+SYN_5dc03b745966ac2c5bc2,accept,CAUSE,swg21365841.txt,"What causes the issue described as ""IBM EJB WIMServiceHome cannot be found even after .ear file is installed successfully""?","In a cluster, the .ear file must be installed on the Deployment Manager (DMGR). For more information, refer to Document #1358381 [http://www.ibm.com/support/docview.wss?rs=899&uid=swg21358381]. If originally installed elsewhere, subsequent attempts to install it on the DMGR will appear to succeed but attempts to add properties (ConfigEngine task, wp-add-property) continue to fail with a ""Cannot find EJB"" message similar to the one above."
+SYN_295c90cb55f718f23e3f,accept,CAUSE,swg21380213.txt,"What causes the issue described as ""IBM WebSphere DataPower SOA Appliance MQ Manager Object's connections are not closed as expected.""?",DataPower MQ manager object's idle connection is not closed when using default cache timeout.
+SYN_2a64cc3e0af7617875f6,accept,SYMPTOM,swg21395327.txt,"What symptoms identify the issue described as ""IBM The Key Management Utility bundled with IBM HTTP Server V7.0 32-bit, and the WebSphere Application Server Web server plug-in 32-bit V7.0, displays an error when creating a PKCS12 keystore file""?","An error message displays when performing the following steps: 
+
+ 1. Start the Key Management Utility.
+    
+    
+ 2. Select Key Database File > New. For Key database type, select PKCS12 and then click OK.
+    
+    [/support/docview.wss?uid=swg21395327&amp;aid=1]
+    
+    
+ 3. Enter a new password and click OK.
+
+
+The following error message is displayed: 
+
+The command cannot complete because your JRE is using restricted policy files."
+SYN_c56050fc968926f4820b,reject,RESOLVING THE PROBLEM,swg21405302.txt,"How can an administrator resolve the issue described as ""IBM Disabling WebSphere administrative security when admin console is not accessible""?","WARNING: Please use this as the last resort and make sure the server is not in the middle of processing any transactions. 
+
+To disable security, please perform the following steps via wsadmin:
+
+
+ 1. <WAS_INSTALL_DIR>/bin/>wsadmin -conntype NONE 
+ 2. wsadmin>securityoff 
+ 3. wsadmin>exit 
+ 4. Restart the servers. 
+ 5. Enable the security from administrative console. 
+ 6. Once the needed corrections are made, you can re-enable security in the admin console and then restart WebSphere.
+
+
+NOTE: To restart the servers, you will first need to manually kill the java process since security is still enabled in the currently running process."
+SYN_42ea84e77123c59003fb,accept,SYMPTOM,swg21412846.txt,"What symptoms identify the issue described as ""IBM Wrong codepoints for non-ASCII characters inserted in UTF-8 database using CLP""?","Error executing Select SQL statement. Caught by java.io.CharConversionException. ERRORCODE=-4220 
+
+ Caused by: 
+java.nio.charset.MalformedInputException: Input length = 4759 
+at com.ibm.db2.jcc.b.u.a(u.java:19) 
+at com.ibm.db2.jcc.b.bc.a(bc.java:1762)"
+SYN_e700b91757f357b77ccf,accept,DIAGNOSING THE PROBLEM,swg21412846.txt,"How can an administrator diagnose the issue described as ""IBM Wrong codepoints for non-ASCII characters inserted in UTF-8 database using CLP""?",Verify that non-ASCII data have a proper Unicode codepoints in Unicode database
+SYN_f982d0950000c6aa26f0,reject,SYMPTOM,swg21417765.txt,"What symptoms identify the issue described as ""IBM Configuring defaultRowPrefetch for an Oracle JDBC driver""?","If defaultRowPrefetch is set as a custom property on the datasource, this will not work as the defaultRowPrefetch is not a datasource property but a property on the connection itself ."
+SYN_20eedb72c969d78ca747,accept,CAUSE,swg21417765.txt,"What causes the issue described as ""IBM Configuring defaultRowPrefetch for an Oracle JDBC driver""?",defaultRowPrefetch is a property of the connection and not of the datasource
+SYN_6093cd686b37665b96ea,accept,ENVIRONMENT,swg21417765.txt,"What environment is relevant to the issue described as ""IBM Configuring defaultRowPrefetch for an Oracle JDBC driver""?",WebSphere Application Server using an Oracle JDBC driver
+SYN_fbff7defbfefa8a5ecd4,reject,DIAGNOSING THE PROBLEM,swg21417765.txt,"How can an administrator diagnose the issue described as ""IBM Configuring defaultRowPrefetch for an Oracle JDBC driver""?",Customer sets this property and does not see it work. This may result in longer times to getting the full result set and more round trips to the database.
+SYN_84a631ee042703141138,accept,SYMPTOM,swg21424808.txt,"What symptoms identify the issue described as ""IBM Health Check events Node and Domain and their interactions.""?","Although both the Primary and Backup domains are up and (according to their mutual VirtualDomain processes) are healthy, each is sending Health Check Failed events for the other domain."
+SYN_68b2ff4ec9e1c4d8826e,accept,CAUSE,swg21424808.txt,"What causes the issue described as ""IBM Health Check events Node and Domain and their interactions.""?","This document only applies to those installations where the nco_p_ncpmonitor.rules file has been edited to modify the inserted value for @Node in alerts.status or where @Node is being modified for health check events by some other external process. 
+
+Each ITNM Gateway (ncp_ncogate) in the Primary and Backup domain retrieves health check events from alerts.status and constructs an update into the state.domains table in the VirtualDomain process. Please review the documentation in the 'Related Information' section below for more information on the Health Check process."
+SYN_8b21584003d3d54c777f,accept,DIAGNOSING THE PROBLEM,swg21424808.txt,"How can an administrator diagnose the issue described as ""IBM Health Check events Node and Domain and their interactions.""?","When you run the ncp_ncogate process in debug you can see the update that the gateway makes in state.domains. The value for m_Domain should be the same as the Domain name for the Primary or the Backup domain. It should not be the name of the Virtual domain. 
+
+
+ProcessHealthCheck sent:update state.domains set m_HealthStatus=1 where m_Domain='ITNM';"
+SYN_d889f65a94b3b779b4a1,reject,CAUSE,swg21433278.txt,"What causes the issue described as ""IBM Obtaining debug information during Decision Warehouse trace capture""?","To minimize the impact of Decision Warehouse (DW) monitoring on the processing of ruleset executions, possible failures to save the trace to the database may remain silent (no stack trace in the logs of the application server)."
+SYN_e0b41674c7ae46b2d673,accept,SYMPTOM,swg21449103.txt,"What symptoms identify the issue described as ""IBM Limitations when deploying more than one Rule Execution Server console""?","When a RES component makes an attempt to interact with a RES Console management stack (through a JMX invocation) the following exception may occur if more than one RES Console is deployed within an administrative cell: 
+
+...
+java.lang.IllegalStateException 
+at ilog.rules.res.mbean.util.IlrSingleMBeanInvocationHandler.invoke(Unknown Source)
+...
+
+Note: a similar exception can be seen when no RES Console is found so the first thing to verify is that a RES Console is completely deployed and that it passes the diagnostic properly before considering the issue in this present note."
+SYN_4daf7fcbbf4dff177490,accept,CAUSE,swg21449103.txt,"What causes the issue described as ""IBM Limitations when deploying more than one Rule Execution Server console""?","The scope of the management API (JMX) is typically that of the Cell (WebSphere), Domain (Weblogic) or Partition(JBoss). RES components that interact directly with the RES Console management stack normally expect to find exactly one RES Console within the this management scope : an error can arise from not finding a RES Console management stack, as well as finding more than one."
+SYN_50c949cc086f46407436,accept,CAUSE,swg21486143.txt,"What causes the issue described as ""IBM Error message: 'authorization failed' and 'authorization code entered is not for this product/version' when attempting to license IBM SPSS Statistics or Modeler/""?",The authorization code product and/or version does not match that of your installed product.
+SYN_84b5bddda2dc696525cf,accept,CAUSE,swg21495799.txt,"What causes the issue described as ""IBM FileNet Workplace XT NullPointerException when bootstrapping the object store or accessing Site Preferences/Access Role""?","This behavior may occur if an invalid entry has been specified in the User Display Name Attribute or Group Display Name Attribute setting in the Directory Services Configuration in FileNet Enterprise Manager (FEM). 
+
+Workplace XT attempts to resolve the user names and groups defined within the Access Roles based on the Directory Service configuration defined in FEM. If the user name query resolves to null or if there is an invalid entry a NullPointerException error may occur."
+SYN_631a5344027aba5a1d84,accept,SYMPTOM,swg21496354.txt,"What symptoms identify the issue described as ""IBM JRules or ODM module fails to access database with StaleConnectionException""?","The problem may occur when a JRules or ODM module accesses its data source after a period of database access inactivity. For example: 
+
+ * The first user accessing a RTS / DC server that remained idle overnight experiences a failure upon logging and the server log shows an com.ibm.websphere.ce.cm.StaleConnectionException occurred at that time. 
+ * After a RES server has been processing execution requests normally for some time, an attempt to deploy a ruleset update fails and the server log shows an com.ibm.websphere.ce.cm.StaleConnectionException occurred upon an attempt to invalidate a ruleset or to retrieve its definition."
+SYN_dcb076140f241f31044d,accept,CAUSE,swg21496354.txt,"What causes the issue described as ""IBM JRules or ODM module fails to access database with StaleConnectionException""?","The underlying network connection for a data source is no longer valid although the data source itself remains considered active from the WebSphere Application Server data source connection pool management perspective. An attempt by a JRules module to try and access its data base through one such data source connection provided by the Application Server may then fail. 
+The network connection of a data source may become invalid for a number of reasons, one typical example is that a firewall between the Application Server and the Database has a policy to discard network connections that remain idle for some time."
+SYN_3dc7bd00a644ec944c77,accept,ENVIRONMENT,swg21496354.txt,"What environment is relevant to the issue described as ""IBM JRules or ODM module fails to access database with StaleConnectionException""?","The exception com.ibm.websphere.ce.cm.StaleConnectionException is specific to WebSphere Application Server environments. But a similar issue can be experienced with Weblogic, see: Rule Execution Server on WebLogic unable to load ruleset after period of inactivity [http://www-01.ibm.com/support/docview.wss?uid=swg21615801]"
+SYN_c6a40e013f0a7a2cca6f,reject,DIAGNOSING THE PROBLEM,swg21497604.txt,"How can an administrator diagnose the issue described as ""IBM NoClassDefFoundError running Java class selected from server plugin jar""?",A runtime exception is detected in the server log naming a class and method called from a visual snippet in the application.
+SYN_3a5fcb47f4f5e7a15803,accept,SYMPTOM,swg21499280.txt,"What symptoms identify the issue described as ""IBM Unable to start Ping Probe by non-root user on AIX""?","The following error is seen in the probe's log: 
+
+Error: E-P_P-002-038: Could not change euid: Operation not permitted
+Error: E-P_P-002-017: IPv4 socket failed: specified action does not have access permission of the file
+Error: E-P_P-002-037: This program can only be run by root, or it must be setuid root."
+SYN_192a0b79544208b40405,reject,CAUSE,swg21500046.txt,"What causes the issue described as ""IBM Replacement of an expiring certificate on the IBM WebSphere DataPower SOA Appliance""?","Once you have obtained a new certificate from your certificate authority and are ready to replace the expiring one currently in use by your DataPower configuration with this new certificate, there is no single prescribed manner in which to perform the replacement operation. The following information presents some options for formulating an approach that best fits your environment."
+SYN_5027fe5ae9e32cd891f4,accept,SYMPTOM,swg21500151.txt,"What symptoms identify the issue described as ""IBM Remote scanning freezes or stops with IBM Datacap Taskmaster Capture""?","Additional symptoms include: 
+
+ * The web page may crash and recover (close and quickly reopen). 
+ * The freeze may occur during or after scanning the first page."
+SYN_9f3e0613a09b0401ef2e,reject,RESOLVING THE PROBLEM,swg21500151.txt,"How can an administrator resolve the issue described as ""IBM Remote scanning freezes or stops with IBM Datacap Taskmaster Capture""?","To disable DEP: 
+
+ 1. In the browser, open the Tools menu, and select Internet Options. 
+ 2. Select the Advanced tab. 
+ 3. Uncheck Enable memory protection to mitigate online attacks. 
+ 4. Close all windows, restart the browser and start scanning again.
+
+
+Note: If using Datacap 8.1, this issue has been fixed in 8.1 Fix Pack 1."
+SYN_327526c70d0c18072846,accept,CAUSE,swg21502037.txt,"What causes the issue described as ""IBM Unable to add Centera Device in FileNet Content  Engine""?",Changes made to the setCenteraLibPath.sh or setCenteraLibPath were not picked up by the WAS startup script. The WAS Content Engine instance was restarted from within the WAS console and not from the command line. In this Instance the setCenteraLibPath.sh file was added to the setupcmdLine.sh file but was not recognized . This caused the CenteraSDK path to not be loaded.
+SYN_fffc56b3419e315b7af5,accept,DIAGNOSING THE PROBLEM,swg21502037.txt,"How can an administrator diagnose the issue described as ""IBM Unable to add Centera Device in FileNet Content  Engine""?","Following error is received when ""Test Connection"" is clicked: 
+
+File = .\FnFCSMGR.cpp, Line = 359, Rev.= $Revision: 1.20 $ 
+
+ 
+
+The [initialize]operation on the fixed content provider [com.filenet.engine.content.fcprovider.centera.CenterFCP(0)]failed. FPLibrary (Not found in java.library.path)."
+SYN_2d8bab6efc197cbe7da9,reject,CAUSE,swg21502095.txt,"What causes the issue described as ""IBM Distribute Decision Validation Service tests on different Rule Execution Server instances""?",With a Rule Execution Server environment defined on a domain with multiple servers it is possible to define which Rule Execution Server instances will be used to execute the Rule Team Server Decision Services
+SYN_b13e22999946a31e1221,reject,CAUSE,swg21509510.txt,"What causes the issue described as ""IBM How to delete a document hierarchy node in IBM Datacap Taskmaster Capture""?","It is sometimes desired to remove pages or documents from a batch, as they are no longer needed or to simplify processing for a Verify operator."
+SYN_98ec2d518310e533897a,reject,CAUSE,swg21511831.txt,"What causes the issue described as ""IBM DOORS module fails to open in exclusive edit mode results in error ""unable to open module ...no such file or directory""""?",This issue has been identified as a product defect under APAR PM50525 [http://ibm.com/support/docview.wss?uid=swg1PM31236].
+SYN_d48669894ae64f79bf8f,accept,SYMPTOM,swg21515420.txt,"What symptoms identify the issue described as ""IBM Starting WebSphere Application Server gives warning message - Could not lock User prefs""?","The following message can be seen in the systemout.log: 
+
+[9/11/11 18:03:19:921 EDT] 00000001 prefs W java.util.prefs.FileSystemPreferences syncWorld Couldn't flush user prefs: java.util.prefs.BackingStoreException: Couldn't get file lock.
+[9/11/11 18:03:49:929 EDT] 00000001 prefs W java.util.prefs.FileSystemPreferences checkLockFile0ErrorCode Could not lock User prefs. Unix error code 2."
+SYN_604fb1f2e3e584d0a927,accept,DIAGNOSING THE PROBLEM,swg21515420.txt,"How can an administrator diagnose the issue described as ""IBM Starting WebSphere Application Server gives warning message - Could not lock User prefs""?","For non-root, you can confirm this issue by trying to start WebSphere using the ""root"" ID. Review the Websphere_Home/profiles/<profile_name>/logs/<failing server_name/systemout.log to verify that you no longer see the warning messages. 
+
+
+For root, verify if the /etc/.java/.systemPrefs exists"
+SYN_290d5cb88707dcaed296,accept,SYMPTOM,swg21529563.txt,"What symptoms identify the issue described as ""IBM DB2 SQL error from Sterling B2B Integrator: SQLCODE: -1585, SQLSTATE: 54048""?","com.sterlingcommerce.woodstock.profile.ProfileFinderException: listAllByEntityName: Finder Exception occurred: 
+
+SQLState: 54048
+Message: DB2 SQL error: SQLCODE: -1585, SQLSTATE: 54048, SQLERRMC: null
+Vendor: -1585"
+SYN_9d25869c4b01392c4888,reject,CAUSE,swg21567091.txt,"What causes the issue described as ""IBM JMSListener AutoReconnect properties misconception""?","Properties for the JMSListener in the file: 
+
+$NCHOME/impact/etc/[ImpactServerName]_[JMSListenerName].props
+
+have been set as:
+
+impact.[JMSListenerName].jms.autoreconnect=true
+impact.[JMSListenerName].jms.autoreconnect.pollinterval=[TimeValue]"
+SYN_082472e9bf1de30f16fa,accept,CAUSE,swg21572905.txt,"What causes the issue described as ""IBM Exported dates to IBM FileNet Content Engine are one day off in IBM Datacap Taskmaster Capture""?","IBM FileNet Content Engine stores all time stamps using UTC format. If a date is passed into IBM FileNet Content Engine with no time component then the time defaults to midnight UTC, which may indicate the prior date when converted back into local time.
+Taskmaster does not convert or handle dates in GMT/UTC and thus any date values must be formatted by the application rules prior to export to IBM FileNet Content Engine"
+SYN_59292706c3ac3a34dfe9,accept,SYMPTOM,swg21579319.txt,"What symptoms identify the issue described as ""IBM SelfMonitoring events incorrectly cleared""?","A Service is stopped and a SelfMonitoring (problem) event is sent to the ObjectServer. 
+
+Another Service is stopped and that too creates a SelfMonitoring (problem) event in the ObjectServer.
+
+The second Service is then restarted and SelfMonitoring sends a resolution (Service started) events to the ObjectServer and this results in BOTH Service stopped events being set to Severity 0."
+SYN_86b5eba0cb0b188c86b8,accept,CAUSE,swg21579319.txt,"What causes the issue described as ""IBM SelfMonitoring events incorrectly cleared""?",SelfMonitoring Service events do not include any details of the Service in question in the fields used by the GenericClear Automation in the ObjectServer to uniquely identify and correlate Problem and Resolution events - so any single SelfMonitoring Service Resolution event will correlate with ALL SelfMonitoring Service Problem events and set the Severity to 0 for the DeleteClears Automation to mop up.
+SYN_82a9dcaeffb79bb9d50d,reject,DIAGNOSING THE PROBLEM,swg21579319.txt,"How can an administrator diagnose the issue described as ""IBM SelfMonitoring events incorrectly cleared""?",SelfMonitoring Service events for known stopped Services are vanishing when they shouldn't.
+SYN_e5480d1f61bcc34e7c54,accept,CAUSE,swg21585678.txt,"What causes the issue described as ""IBM Increasing Java Heap Memory in IBM Tivoli Common Reporting 2.1/2.1.1""?",Running a large scale report with Default java heap settings might result in OutOfMemory error
+SYN_29899602d8beda535ac4,reject,FAQ,swg21592093.txt,Where do I get support for IBM SPSS Student Version or Graduate Pack software?,"Step 1: 
+For installation & licensing issues on Student version and Graduate pack, contact your vendor. 
+
+ * Hearne [http://www.hearne.software/Software/SPSS-Grad-Packs-for-Students-by-IBM/FAQ] 
+ * On the Hub [http://onthehub.com/] 
+ * StudentDiscounts.com [http://studentdiscounts.com/contact-us.aspx] 
+ * JourneyEd [https://www.journeyed.com/contact] 
+ * thinkEDU [https://thinkedu.desk.com/] 
+ * Studica [http://www.studica.com/technical-support]"
+SYN_d79e31bd93504fea900c,accept,RESOLVING THE PROBLEM,swg21598974.txt,"How can an administrator resolve the issue described as ""IBM Insufficient Access Error adding documents to FileNet Content Engine""?","Steps to resolve issue: 
+
+ 1. Log in to FileNet Enterprise Manager. 
+ 2. Grant the user CREATE_INSTANCE rights to the Security permission of the ReferentialContainmentRelationship and DynamicReferentialContainmentRelationship classes. 
+ 3. Re-try adding the document."
+SYN_f7866162faa9c003e78c,accept,SYMPTOM,swg21600618.txt,"What symptoms identify the issue described as ""IBM web server Plugin may need LD_LIBRARY_PATH when used with Apache 2.2""?","During web server start-up, errors like the following will be logged into the Plug-in log file (http_plugin.log): 
+
+ERROR: lib_security: loadSecurityLibrary: Failed to load gsk library from /opt/IBM/WebSphere/Plugins/gsk8/gsk8_64
+ERROR: ws_transport: transportInitializeSecurity: Unable to load security library
+ERROR: ws_server: serverAddTransport: Failed to initialize security
+ERROR: ws_server: serverAddTransport: HTTPS Transport is skipped"
+SYN_bcc04dc21c6df87b7520,reject,CAUSE,swg21606028.txt,"What causes the issue described as ""IBM License features incorporated in ""Tools and Utilities"" key while generating Rational Rhapsody licenses""?",You would like to know all the features of the Tools and Utilities license key
+SYN_29f907ed00c88d8dd659,accept,CAUSE,swg21606716.txt,"What causes the issue described as ""IBM Message RT7507E: Unable to initialize Repository: Default occurs in SystemOut.log after successful database transfer from Derby to DB2""?","Root cause was having another copy of icm.properties in .\wp_profile\PortalServer\jcr\lib\com\ibm\icm, in this case by making a backup copy in the same directory with name icm-copy.properties"
+SYN_00a21a8dc5fa3a77fd85,reject,FAQ,swg21607690.txt,MTTrapd probe : How can you troubleshoot configuration issues?,"The MTTrapd (SNMP) probe is a Generic probe used to process SNMP traps.
+It is a multi-threaded probe and supports both UDP and TCP traps/informs.
+
+The attached Support's guide to the SNMP probe provides details on how best to configure the probe, troubleshoot issues and how to use third party products to test the probes behaviour.
+
+The latest probe version is:
+Release ID: 20.0.2
+Or higher."
+SYN_97a9dd9d66003a2ee215,accept,SYMPTOM,swg21610844.txt,"What symptoms identify the issue described as ""IBM EventReader stops reading events, StateChange value too high""?",The EventReader stops acquiring events that are pertinent for processing because it is using a StateChange value that is too high.
+SYN_68a55d1f8e8d96892482,accept,CAUSE,swg21610844.txt,"What causes the issue described as ""IBM EventReader stops reading events, StateChange value too high""?","An event has had its StateChange value artificially increased by some unknown component (Probe, Trigger, etc) to reflect a future date. The EventReader captures the event and then uses the highest captured StateChange value in its outgoing SQL to capture pertinent events."
+SYN_737a725ec74ed3738719,accept,DIAGNOSING THE PROBLEM,swg21610844.txt,"How can an administrator diagnose the issue described as ""IBM EventReader stops reading events, StateChange value too high""?","Pertinent events are not being processed. Looking in the EventReader log file the number of events being captured in each Read is 0. Testing the SQL being used in an nco_sql session produces a 0 result too. Testing the SQL again in an nco_sql session without the ""and StateChange >= 1234567890"" clause returns all the unprocessed rows."
+SYN_77cf8362e7fb792bca00,accept,CAUSE,swg21611073.txt,"What causes the issue described as ""IBM Deletion of virtual portal fails with transaction timeout""?","With the introduction of Managed Pages in WebSphere Portal 8.0, virtual portal deletions require more transaction time when removing from the system. This increased transaction time can lead to an error situation if either of the following timeouts is exceeded: 
+
+ * the total and/or maximum transaction lifetime timeout value(s) for the server 
+ * the WCM component's transaction timeout"
+SYN_bc89e2ec3e18877d29c8,accept,DIAGNOSING THE PROBLEM,swg21611699.txt,"How can an administrator diagnose the issue described as ""IBM JDBC driver or database insufficiencies cause administration portlets to fail.""?","Check SystemOut.log for the database server version and JDBC driver version: 
+
+
+DSRA8204I: Database product version : ...
+InternalGener I DSRA8205I: JDBC driver name : ...
+InternalGener I DSRA8206I: JDBC driver version : ...
+
+Compare these to WebSphere Portal v8's prerequisites. Refer to the WebSphere Portal V8.0 detailed system requirements link below."
+SYN_65fb5362255388703b01,accept,CAUSE,swg21612222.txt,"What causes the issue described as ""IBM How to Proxy SSL request from DataPower to Remote Proxy Server?""?","Many common forward proxy servers expect requests in different formats depending on if they are proxying non-SSL or SSL requests.
+
+For example, a non-SSL request to be proxied may come in the form of GET hostname:port/URI.
+
+For SSL requests to be proxied, remote proxy servers are commonly configured to tunnel the request from the client to the backend server.
+
+In the SSL request scenario, remote proxy servers will typically expect a CONNECT request and then tunnel the SSL request from the client to the backend server.
+
+Users configuring DataPower may need a way to implement this CONNECT method for SSL tunneling to a remote Proxy Server."
+SYN_d3d6db888d1a86782f49,accept,RESOLVING THE PROBLEM,swg21612222.txt,"How can an administrator resolve the issue described as ""IBM How to Proxy SSL request from DataPower to Remote Proxy Server?""?","Non-SSL Proxy requests will work using either:
+
+a) an XML Firewall when configuring in the HTTP Options tab, where the user can configure the Proxy Host and Port
+
+b) a Multi-Protocol Gateway when configuring an HTTP Proxy Policy in the User Agent
+
+SSL Proxy requests will work using the CONNECT method for SSL Tunneling when using a Multi-Protocol Gateway when configuring in a User Agent's HTTP Proxy Policy.
+
+The XML Firewall service is not designed to use the CONNECT method for SSL Tunneling."
+SYN_826c05552d7a43eb0e1e,reject,CAUSE,swg21614208.txt,"What causes the issue described as ""IBM Support's Guide to IBM CORBA probes""?",Visibroker was replaced by the IBM CORBA integration
+SYN_91e6079d8a76a22f6375,accept,CAUSE,swg21620875.txt,"What causes the issue described as ""IBM Recognition gives Word too tall error with IBM Datacap Taskmaster Capture""?",This error can occur when the height of the word in pixels exceeds the configured limit. It can also occur when the recognition engine cannot identify the boundaries of the word.
+SYN_7a16878358c21da1824f,accept,SYMPTOM,swg21624136.txt,"What symptoms identify the issue described as ""IBM BMT-IMP-0002 Failed to execute metadata request insufficient""?","User receives one of the following error messages: 
+
+1. BMT-IMP-0002 Failed to execute metadata request insufficient capabilities 
+
+2 BMT-IMP-0002 Failed to execute metadata request. insufficentCapabilities DPR-ERR-2082 An error has occurred. Please contact your administrator. The complete error has been logged by CAF with SecureErrorID... 
+
+3. BMT-IMP-0002 Execution of task for metadata failed. InsufficientCapabilities..."
+SYN_6d9f9faa99f8651c6320,accept,CAUSE,swg21624136.txt,"What causes the issue described as ""IBM BMT-IMP-0002 Failed to execute metadata request insufficient""?","One possible reason is that the user does not have the required ""Import relational metadata"" capability."
+SYN_d660bd34c407925fbd5f,accept,RESOLVING THE PROBLEM,swg21624136.txt,"How can an administrator resolve the issue described as ""IBM BMT-IMP-0002 Failed to execute metadata request insufficient""?","Grant user the required ""Import relational metadata"" capability. 
+
+
+Steps:
+1. In Cognos Connection choose menu 'Launch > IBM Cognos Administration'.
+2. Select tab 'Security'
+3. Select 'Capabilities' on the left side.
+4. Click ""Actions"" > Set Properties beside ""'Import relational metadata'.
+5. Select the 'Permissions' tab.
+6. Add the required user, group or role to the capability granting them Read, Execute and Traverse permissions."
+SYN_ee3f34781d25e3b81936,accept,SYMPTOM,swg21624731.txt,"What symptoms identify the issue described as ""IBM JMSExceptions CWSIT0006E and CWSIA0241E on bus connect""?","Application throws the following JMS exceptions in the stack trace while trying to connect to the SIBus: 
+
+JMSException caught
+javax.jms.JMSException: CWSIA0241E: An exception was received during the call to the method
+JmsManagedConnectionFactoryImpl.createConnection:
+com.ibm.websphere.sib.exception.SIResourceException: CWSIT0006E: It is not possible to contact
+a messaging engine in bus YOURBUS..
+at
+com.ibm.ws.sib.api.jms.impl.JmsManagedConnectionFactoryImpl.createConnection(JmsManagedConnectionFactoryImpl.java:225)
+at
+com.ibm.ws.sib.api.jms.impl.JmsManagedConnectionFactoryImpl.createConnection(JmsManagedConnectionFactoryImpl.java:148)"
+SYN_7e7a32b250d50522f814,accept,CAUSE,swg21624731.txt,"What causes the issue described as ""IBM JMSExceptions CWSIT0006E and CWSIA0241E on bus connect""?","This can be caused by a stopped messaging engine, a wrong or misspelled bus name (case-sensitive) in the connection factory settings or, the HA manager is not able to find the running messaging engine."
+SYN_97cc00f450fc1cc923c7,accept,RESOLVING THE PROBLEM,swg21628092.txt,"How can an administrator resolve the issue described as ""IBM Installation Manager does not work if symbolic links are used for Installation Manager of installed product locations""?","When choosing locations for the agent data directory, the Installation Manager binaries, shared resources directory, and the installation directories for products, do not use paths that include symbolic links. 
+
+
+If Installation Manager is using paths that no longer exist, create the old paths manually and mount the affected file systems at the original locations that are used by Installation Manager. Verify that the user IDs for Installation Manager have read access to each level of the recreated paths."
+SYN_f67a5f43156c9de9c88e,reject,SYMPTOM,swg21634612.txt,"What symptoms identify the issue described as ""IBM Use""isolate the resource provider"" to establish data source connections using a different JDBC driver from the same database vendor""?","Due to multiple JDBC drivers from the same vendor were configured in different scopes, the wrong driver class was loaded."
+SYN_a2357885471f28807cfb,accept,CAUSE,swg21635341.txt,"What causes the issue described as ""IBM Portal 8 installation unable to detect the WebSphere Application Server""?",The issue is caused by Portal files that are not correctly removed from the AppServer folder structure when Portal is uninstalled.
+SYN_57b8821015f4cd755080,accept,SYMPTOM,swg21636093.txt,"What symptoms identify the issue described as ""IBM 2035 MQRC_NOT_AUTHORIZED Connecting to WebSphere MQ from WebSphere Application Server via CLIENT Bindings""?",JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2035' ('MQRC_NOT_AUTHORIZED')
+SYN_1ce9b56aaa3399a909c8,reject,CAUSE,swg21636533.txt,"What causes the issue described as ""IBM Writing Verbose GC To A Specified Log In Solaris and HP-UX""?","By default, Solaris and HP-UX do not write verbose GC to a log file. This must be configured."
+SYN_b7c142d5204ce2d6633d,accept,CAUSE,swg21638268.txt,"What causes the issue described as ""IBM Supported Upgrade and Downgrade paths for DataPower Virtual Edition""?","Not all scrypt4 fix packs are compatible with the 5.0.0.0 OVA files that were released in November 2012 and March 2013. If you upgrade or downgrade with an incompatible fix pack, unexpected errors might occur."
+SYN_18106dcb5da373bde683,reject,CAUSE,swg21642839.txt,"What causes the issue described as ""IBM How do I adjust the number of batches that DotEdit displays in IBM Datacap Taskmaster Capture?""?","The default limit is 100 rows, but this number can be modified by editing the file \Datacap\DotEdit\apps.ini file."
+SYN_8de3c942caaac85e8884,accept,DIAGNOSING THE PROBLEM,swg21647026.txt,"How can an administrator diagnose the issue described as ""IBM Batch job fails with ABEND 102 REASON 00000000""?",In IPCS you can view level of CSQBSRV in the batch job address space.
+SYN_d125364a6c7909d14ddc,accept,FAQ,swg21648471.txt,Does IBM Content Navigator support Workplace XT created stored searches and search templates?,"Workplace XT created stored searches are supported in IBM Content Navigator (ICN). 
+ICN can be used to only run these stored searches with the following restriction: 
+- stored searches that return both documents and folders are not supported.
+These stored searches cannot be edited in ICN.
+
+Workplace XT created search templates are also supported in ICN with the restriction that the search template cannot be edited in ICN.
+
+Please also note that ICN can only create native search templates, but not stored searches."
+SYN_9a42c1d3d7015e348e63,accept,SYMPTOM,swg21648497.txt,"What symptoms identify the issue described as ""IBM Insufficient ulimit Value Causes Native OutOfMemory""?","An out of memory Dump Event such as: 
+
+""systhrow"" (00040000) Detail ""java/lang/OutOfMemoryError""
+""Failed to create a thread: retVal -1073741830, errno 11"" received
+
+Note: This detailed message will appear only in javacores."
+SYN_1db425561020db493667,accept,CAUSE,swg21648986.txt,"What causes the issue described as ""IBM Unable to decrypt the FIPS key error when exporting keys from IBM Datacap Taskmaster Capture""?","Enabling the Use FIPS compliant algorithms for encryption, hashing and signing security policy can cause this error"
+SYN_fbd903836a28b953bd66,accept,FAQ,swg21649798.txt,Is there a way to Export the Scan Results (Detailed Security Issues) into XML format in IBM Security AppScan Enterprise?,"The answer to the question is 'no'. 
+In AppScan Enterprise Console, there are functions, Export to XML and Export detailed Security issues to PDF, but there is no function Export detailed Security issues to XML. 
+
+We strongly suggest to submit an enhancement request (RFE) for the AppScan Enterprise products as described in How to submit enhancement requests for IBM Security products [http://www.ibm.com/support/docview.wss?uid=swg21682719]. The requests there are submitted directly to the AppScan management team."
+SYN_5c1d97afed10bd9e7e0f,reject,DIAGNOSING THE PROBLEM,swg21651225.txt,"How can an administrator diagnose the issue described as ""IBM Performance issue on Mac OS X Launching and Closing SPSS Statistics 21 or 22.""?","One or more of the following symptoms might occur that this resolution can solve. 
+
+(1) Statistics takes an abnormally longer time to start and close than when the software was initially installed. 
+
+(2) Very slow response and performance with using the software. 
+
+(3) The 'Data Editor' menu no longer appears under the Main menu bar."
+SYN_d5980b7bddbaf3fa3e04,accept,SYMPTOM,swg21654520.txt,"What symptoms identify the issue described as ""IBM Datacap Taskmaster Capture ICR error code 12""?","From log file:
+
+Executing 'RecognizeFieldEx' from 'Datacap.Recognition.Recostar.ICRCWrapperClass'. Parameter : <FieldName>
+Recognition return status: 12(Not defined (not used))"
+SYN_99d9d334088814c29c41,accept,CAUSE,swg21654520.txt,"What causes the issue described as ""IBM Datacap Taskmaster Capture ICR error code 12""?",The c_cr variable for ICR_C recognition is not set for the engine.
+SYN_2d3d16e8ed09d39e6466,accept,FAQ,swg21655808.txt,"Is there a way to configure the TIP installer to use an alternate directory if the installation user ID has insufficient access rights to ""/tmp""?","TIP L3 has examined the TIP installer and found that /tmp is hard coded in both the TIP and Websphere installers. There is no option available to override /tmp. To pursue a change to the TIP installer to accommodate an alternate tmp location, please submit an enhancement request via the RFE site here:
+
+http://www.ibm.com/developerworks/rfe/?BRAND_ID=90 [http://www.ibm.com/developerworks/rfe/?BRAND_ID=90]"
+SYN_4a3c10068341a0cf925f,accept,SYMPTOM,swg21657452.txt,"What symptoms identify the issue described as ""IBM Tivoli Integrated Portal hangs because of Argus java.lang.OutOfMemory.""?","TIP hangs. SystemOut.log file shows Java.lang.OutOfMemoryError: 
+
+[10/2/13 9:27:54:838 CDT] 0000002a webapp E com.ibm.ws.webcontainer.webapp.WebApp logServletError SRVE0293E: 
+[Servlet Error]-[/secure/isclite/tiles/nop.jsp]: java.lang.OutOfMemoryError: Java heap space at java.lang.Object.clone(Native Method)"
+SYN_db3bbf356606b6b2b922,accept,RESOLVING THE PROBLEM,swg21657452.txt,"How can an administrator resolve the issue described as ""IBM Tivoli Integrated Portal hangs because of Argus java.lang.OutOfMemory.""?","The cacheTime value in config.xml is in milliseconds. TIP is shipped with the initial value of -1, which means the Argus cache will not be cleared out unless TIP restart. To resolve this issue you need to configure 'cacheTime' to non -1 value. Initially we suggest setting the value to 1200000, which is 20 minutes. After the change you will have to restart the TIP server, normally server1. 
+
+NOTE: The cacheTime variable was added in TIP version 2.2.0.0."
+SYN_e3379d66fda722ccac6b,accept,CAUSE,swg21664629.txt,"What causes the issue described as ""IBM Policy (EJQAB0067E) and JCR Login (WSP0005E) exceptions in System*.logs""?",Authenticated user does not have the attribute defined in the backend user registry which matches the attribute defined in the store.puma_default.user.fbadefault.filter property in WP PumaStoreService Resource Environment Provider. Such attribute is used by JCR when querying for theme policy information.
+SYN_f7cb3625f78929e1a900,reject,SYMPTOM,swg21666402.txt,"What symptoms identify the issue described as ""IBM Why does IBM Datacap 8.1 appear to hang, requiring a restart of all components?""?","The Datacap system appears to become non-responsive, requiring a restart of all components to get it working again."
+SYN_65f314811675c70613da,accept,DIAGNOSING THE PROBLEM,swg21666402.txt,"How can an administrator diagnose the issue described as ""IBM Why does IBM Datacap 8.1 appear to hang, requiring a restart of all components?""?","Collect and examine the TMServer log. Look for multiple instances (6-12) of an ADO error, indicating a bad query was executed. This information can be used to identify the user that is causing the problem"
+SYN_339f376a9c009e67168b,accept,SYMPTOM,swg21672071.txt,"What symptoms identify the issue described as ""IBM Netcool conf pack command""?","The command fails and the following error is received: Tool in menu but not found, menu: AlertsMenu, tool: CLEAR_LWY."
+SYN_48eb643df943e4c053eb,accept,SYMPTOM,swg21672402.txt,"What symptoms identify the issue described as ""IBM What happens if I run arssyscr -I instance_name -r  without having Report Distribution enabled or installed?""?","You will see errors similar to (depending on database brand) 
+DB Error: ORA-00942: table or view does not exist -- SQLSTATE=, SQLCODE=942, File=arsrddb.c, 
+Line=951 in your systemlog"
+SYN_793d0a3a391bdd02944b,reject,RESOLVING THE PROBLEM,swg21672402.txt,"How can an administrator resolve the issue described as ""IBM What happens if I run arssyscr -I instance_name -r  without having Report Distribution enabled or installed?""?","You will need to rename the Report Distribution tables and delete the Application, Application Group and Folders by performing the steps below:
+
+You are going to want to change the Report Distribution table name: 
+
+This test is done on DB2, but It should be the same for (Oracle or SQL 
+Server). 
+That is [2] and [3], to rename to object name, you need to log on your 
+database command session: 
+
+
+[1] Shutdown arssockd 
+
+[2] Rename the Application Group name 
+
+c:\>db2 ""select agid, name, agid_name from arsag where name = 'System 
+Report Distribution'"""
+SYN_11cc4e7d2e5ce604edf3,accept,CAUSE,swg21675316.txt,"What causes the issue described as ""IBM Exit() action within User Defined Function in Impact Policy Language""?","Using the Exit() parser function within a User Defined (or Custom) Function in Impact Policy Language (IPL) will not exit the Policy process, it will only exit the User Defined Function."
+SYN_d85b69d22bc37b9bb24c,accept,AFFECTED PRODUCTS AND VERSIONS,swg21679979.txt,"Which products and versions are affected by ""IBM Security Bulletin: Insufficient control over MIME types in Business Process Manager (BPM) and WebSphere Lombardi Edition document feature (CVE-2014-3075)""?","* IBM Business Process Manager Standard V7.5.x, 8.0.x, and 8.5.x 
+ * IBM Business Process Manager Express V7.5.x, 8.0.x, and 8.5.x 
+ * IBM Business Process Manager Advanced V7.5.x, 8.0.x, and 8.5.x 
+ * IBM WebSphere Lombardi Edition V7.2.0.x"
+SYN_99521c008e43ebab8522,accept,SYMPTOM,swg21680391.txt,"What symptoms identify the issue described as ""IBM Content Collector Configuration Store is corrupted""?",Cannot start the IBM Content Collector Configuration Store Service
+SYN_c526d45fd1d458a53fc2,accept,CAUSE,swg21681464.txt,"What causes the issue described as ""IBM Syndicating to VP with exclusive realms does not work.""?","The Admin user exists on Base Portal but not the Realm which is configured to Virtual Portal.
+
+The Administrator User who is listed as the Domain Admin retrieved with:
+com.presence.connect.wmmcomms.UserManagementServiceImpl.getPortalAdministrator() does not have access to the Virtual Portal."
+SYN_2f4591cf416bce8486ee,accept,SYMPTOM,swg21684365.txt,"What symptoms identify the issue described as ""IBM SqlException with message ""Caught java.io.CharConversionException."" and ERRORCODE=-4220""?","An exception is thrown similar to this: 
+
+ com.ibm.db2.jcc.am.SqlException: [jcc][t4][1065][12306][XXX.XXX.XXX] Caught java.io.CharConversionException. See attached Throwable for details. ERRORCODE=-4220, SQLSTATE=null
+[...]
+Caused by: java.nio.charset.MalformedInputException: Input length = XXX
+[...]
+Caused by: sun.io.MalformedInputException
+at sun.io.ByteToCharUTF8.convert(ByteToCharUTF8.java:XXX)
+[...]"
+SYN_ca2f9bd034bfd53fc488,accept,DIAGNOSING THE PROBLEM,swg21684365.txt,"How can an administrator diagnose the issue described as ""IBM SqlException with message ""Caught java.io.CharConversionException."" and ERRORCODE=-4220""?","You can use the HEX function to find out what are the byte values in a character column. 
+
+For example, to find out the byte values in column COL1 in table TAB1, run: 
+SELECT HEX(col1) FROM tab1"
+SYN_c311eecc652f19907bb5,accept,CAUSE,swg21685441.txt,"What causes the issue described as ""IBM No data visible in Web Sites workspace for ITCAM for IIS (Q7) Agent""?",The required IIS role services and the IIS v6.0 Management Compatibility pack are not installed.
+SYN_36b9177848c1958c206f,accept,AFFECTED PRODUCTS AND VERSIONS,swg21687172.txt,"Which products and versions are affected by ""IBM Security Bulletin: Vulnerability in SSLv3 affects IBM HTTP Server (CVE-2014-3566)""?",This vulnerability affects all versions and releases of IBM HTTP Server (IHS) component in all editions of WebSphere Application Server and bundling products.
+SYN_6c35218b9c8b04b4d93a,accept,AFFECTED PRODUCTS AND VERSIONS,swg21688949.txt,"Which products and versions are affected by ""IBM Security Bulletin: IBM WebSphere MQ is affected by a vulnerability in GSKit (CVE-2014-0076)""?","IBM WebSphere MQ 8.0, including all maintenance levels. 
+
+IBM WebSphere MQ 7.5, including all maintenance levels. 
+
+IBM WebSphere MQ 7.1, including all maintenance levels. 
+
+IBM WebSphere MQ 7.0.1, maintenance levels from 7.0.1.4 onwards, using GSKit version 8.0."
+SYN_b7c21370e7db944027be,accept,REMEDIATION/FIXES,swg21688949.txt,"What remediation is recommended for ""IBM Security Bulletin: IBM WebSphere MQ is affected by a vulnerability in GSKit (CVE-2014-0076)""?","IBM strongly recommends that Elliptic Curve CipherSpecs are not used. These CipherSpecs have names starting with 'EC'. 
+
+A summary of MQ CipherSpecs and protocols can be found in the IBM Knowledge Center Specifying CipherSpecs [http://www-01.ibm.com/support/knowledgecenter/SSFKSJ_8.0.0/com.ibm.mq.sec.doc/q014260_.htm] topic.
+
+GET NOTIFIED ABOUT FUTURE SECURITY BULLETINS
+ Subscribe to My Notifications [ http://www-01.ibm.com/software/support/einfo.html] to be notified of important product support alerts like this."
+SYN_ce8bdaec1fe452d7e213,accept,CAUSE,swg21691034.txt,"What causes the issue described as ""IBM Error TASK001X while upgrading Portal 8.0.0.1 to 8.0.0.1 CF14 during import-nodes sub-task""?",The customer had previously disabled the autostart on several applications to improve the Portal startup time
+SYN_a9c66a3d7dcc7d875d7e,accept,CAUSE,swg21695194.txt,"What causes the issue described as ""IBM IV67523 Move local data from CANDLEHOME to another file system""?","Since its inception, IBM Tivoli Monitoring (ITM) has stored local data such as configuration files, log files, and historical data together with the installation files in CANDLEHOME. For example, ITM normally installs in a directory named /opt/IBM/ITM. Within that directory, it stores programs in subdirectory names like /opt/IBM/ITM/bin and /opt/IBM/ITM/classes. It also stores local data in subdirectory names like /opt/IBM/ITM/config and /opt/IBM/ITM/logs. This homogeneous design is a problem for installations that require an approach that keeps code in /opt and stores data in the /var file system."
+SYN_4a95a1f49470104e4e8f,accept,AFFECTED PRODUCTS AND VERSIONS,swg21696640.txt,"Which products and versions are affected by ""IBM Security Bulletin: GNU C library (glibc) vulnerability affects IBM DataPower Gateway appliances (CVE-2015-0235)""?","All DataPower versions through 6.0.0.11, 6.0.1.7, 7.0.0.4, 7.1.0.2"
+SYN_1e53d910cfadce7f6bf0,accept,REMEDIATION/FIXES,swg21696640.txt,"What remediation is recommended for ""IBM Security Bulletin: GNU C library (glibc) vulnerability affects IBM DataPower Gateway appliances (CVE-2015-0235)""?","Fix is available in versions 6.0.0.12, 6.0.1.8, 7.0.0.5, 7.1.0.3. Refer to APAR IT06941 [http://www-01.ibm.com/support/docview.wss?uid=swg1IT06941] for URLs to download the fix. Customers using DataPower firmware version 5.0.x, contact customer support.
+
+IBM recommends that you review your entire environment to identify vulnerable releases of glibc including your Operating Systems and take appropriate mitigation and remediation actions. Please contact your Operating System provider for more information."
+SYN_a2ae9b3373ea7eab4d79,reject,WORKAROUNDS AND MITIGATIONS,swg21696640.txt,"What workarounds or mitigations are available for ""IBM Security Bulletin: GNU C library (glibc) vulnerability affects IBM DataPower Gateway appliances (CVE-2015-0235)""?","None known
+
+GET NOTIFIED ABOUT FUTURE SECURITY BULLETINS
+ Subscribe to My Notifications [ http://www-01.ibm.com/software/support/einfo.html] to be notified of important product support alerts like this."
+SYN_4dc0c4335560d1ca8e56,accept,WORKAROUNDS AND MITIGATIONS,swg21697944.txt,"What workarounds or mitigations are available for ""IBM Security Bulletin: Cross-site scripting vulnerabilities in IBM Business Process Manager (BPM) and WebSphere Lombardi Edition (WLE) error handling (CVE-2015-0193)""?","As a pre-caution, advise users not to click links in email.
+
+GET NOTIFIED ABOUT FUTURE SECURITY BULLETINS
+ Subscribe to My Notifications [ http://www-01.ibm.com/software/support/einfo.html] to be notified of important product support alerts like this."
+SYN_6e61f7e330d292afd735,reject,SYMPTOM,swg21701910.txt,"What symptoms identify the issue described as ""IBM NormalizeCCO merging lines with IBM Datacap Taskmaster Capture""?","In the following image, Word 1 and Word 2 are on separate lines, but after NormalizeCCO is run may show in a single line as Word Word 1 2. 
+
+[/support/docview.wss?uid=swg21701910&amp;aid=1]"
+SYN_1402b3ccb0d2b644f500,accept,CAUSE,swg21701910.txt,"What causes the issue described as ""IBM NormalizeCCO merging lines with IBM Datacap Taskmaster Capture""?","When text is not cleanly printed in lines, such as when the font varies or the text is vertically offset, Datacap may not always be able to locate text when loading field values. The NormalizeCCO goes through the CCO file, and cleans up all the entries so they appear in regular lines. For most images this improves ultimate recognition results, but for some complex images, NormalizeCCO cannot determine where to separate the lines and merges all words into a single line."
+SYN_30991eea06ead0199dd1,accept,CAUSE,swg21902438.txt,"What causes the issue described as ""IBM Command Line configuration for J2EE Data Collector""?","Interactive CLI configuration is not supported with ITCAM J2EE 7.1.1, including last available level 7.1.1.0.4."
+SYN_c60ff197f88683f456d7,reject,CAUSE,swg21902654.txt,"What causes the issue described as ""IBM Restoring missing xml files from backup in DASH""?",Some of these files could have gotten corrupted.
+SYN_b013650e3ea9f00a7487,reject,FAQ,swg21903536.txt,Support Guide : Are there any rules file examples?,"The Netcool Technical Support Guide to rules file processing is provided as a collection of commonly used rules file techniques. 
+
+Please refer to the Netcool/OMNIbus Probe and Gateway Guide for general guidance to rules file processing.
+
+RulesfileProcessing_SupportsGuide_30.pdf [/support/docview.wss?uid=swg21903536&aid=2]RulesfileProcessing_SupportsGuide_30.pdf [/support/docview.wss?uid=swg21903536&aid=1]"
+SYN_8209dc6d7c66b33ac862,accept,AFFECTED PRODUCTS AND VERSIONS,swg21959412.txt,"Which products and versions are affected by ""IBM Security Bulletin: Vulnerability with Diffie-Hellman ciphers may affect IBM SOA Policy Gateway Pattern for Red Hat Enterprise Linux Server 2.5 (CVE-2015-4000)""?",IBM SOA Policy Gateway Pattern for Red Hat Enterprise Linux Server version 2.5
+SYN_9cfa82679fe5843d9869,reject,WORKAROUNDS AND MITIGATIONS,swg21959412.txt,"What workarounds or mitigations are available for ""IBM Security Bulletin: Vulnerability with Diffie-Hellman ciphers may affect IBM SOA Policy Gateway Pattern for Red Hat Enterprise Linux Server 2.5 (CVE-2015-4000)""?","Customers should follow the mitigation advice contained in the WebSphere Application Server security bulletin, located at http://www.ibm.com/support/docview.wss?uid=swg21957980 [http://www-01.ibm.com/support/docview.wss?uid=swg21957980] .
+
+GET NOTIFIED ABOUT FUTURE SECURITY BULLETINS
+ Subscribe to My Notifications [ http://www-01.ibm.com/software/support/einfo.html] to be notified of important product support alerts like this."
+SYN_7c31cdeefcb171332c1b,accept,DIAGNOSING THE PROBLEM,swg21959714.txt,"How can an administrator diagnose the issue described as ""IBM Maximo fails to start with error BMXAA4087E""?","Connect to database back end and check the result of this query :-
+
+
+select propvalue from maximo.maxpropvalue where propname='mxe.db.format.nullvalue'; 
+
+If you are using DB2 database, the result should be 'COALESCE'."
+SYN_76e46696cb6f40ddd3a0,accept,SYMPTOM,swg21959723.txt,"What symptoms identify the issue described as ""IBM UDX compilation error""?","nzudxcompile command returns an ""Argument list too long"" error and aborts."
+SYN_f52a76fb249a09098de6,accept,CAUSE,swg21959723.txt,"What causes the issue described as ""IBM UDX compilation error""?",ARG_MAX configuration parameter limits the number of argument list in command line. In this case the client used more than 131072 argument with many program *.c files.
+SYN_0e30f8dd93ec1cc0b797,accept,DIAGNOSING THE PROBLEM,swg21959723.txt,"How can an administrator diagnose the issue described as ""IBM UDX compilation error""?","Check ARG_MAX value in the command line: 
+
+$ getconf ARG_MAX
+131072"
+SYN_984cc878261863d883d2,accept,AFFECTED PRODUCTS AND VERSIONS,swg21959745.txt,"Which products and versions are affected by ""IBM Security Bulletin: Vulnerability in Diffie-Hellman ciphers affects IBM WebSphere MQ Internet Passthru (CVE-2015-4000)""?",The affected ciphersuite is available in all versions of IBM WebSphere MQ Internet Pass-thru (MQIPT) prior to 2.1.0.2
+SYN_6f0011e2e68ce0f790ba,accept,REMEDIATION/FIXES,swg21959745.txt,"What remediation is recommended for ""IBM Security Bulletin: Vulnerability in Diffie-Hellman ciphers affects IBM WebSphere MQ Internet Passthru (CVE-2015-4000)""?","SupportPac MS81: IBM WebSphere MQ Internet Pass-Thru
+Users of IBM WebSphere MQ Internet Pass-Thru 2.1.0.1, 2.0 and older releases should first upgrade to IBM WebSphere MQ Internet Pass-Thru 2.1.0.2 [http://www.ibm.com/support/docview.wss?uid=swg24006386]."
+SYN_fb58d9806f7f1a11e401,reject,CAUSE,swg21960133.txt,"What causes the issue described as ""IBM Does the RRT agent support TLS 1.1/1.2 and 256-bit ciphers?""?","Support for TLS 1.1/1.2 and 256-bit ciphers is determined by the underlying JRE (Java Runtime Environment). Consequently, in order to support TLS 1.1/1.2 and 256-bit ciphers, patch the RPT workbench JRE, and patch the RRT agent JRE. Both JREs must support the same level of TLS."
+SYN_118fcca8570d3b31d80e,accept,CAUSE,swg21960526.txt,"What causes the issue described as ""IBM How to enable the snippet results cache in the Netezza Platform Software releases""?","Starting with the June 2015 fix packs for NPS 7.1.0.6 and 7.2.0.5, and the NPS 7.2.1 release, the snippet results cache is disabled by default because it was optimized for specific workloads. Starting in the March fix packs 7.1.0.9, 7.2.0.8, and 7.2.1.2, the feature is enabled by default because it is optimized for most workloads."
+SYN_00a96a397447272460c2,accept,ENVIRONMENT,swg21960526.txt,"What environment is relevant to the issue described as ""IBM How to enable the snippet results cache in the Netezza Platform Software releases""?","Netezza Platform Software releases 7.1.0.6 through 7.1.0.8-P1, 7.2.0.5 through 7.2.0.7-P1 and 7.2.1 through 7.2.1.1-P1"
+SYN_025bdb9ad8202ae75356,reject,DIAGNOSING THE PROBLEM,swg21960526.txt,"How can an administrator diagnose the issue described as ""IBM How to enable the snippet results cache in the Netezza Platform Software releases""?",Queries that take advantage of the snippet results cache have longer runtimes after upgrades from any 7.x release to a release listed in the Environment section.
+SYN_85fa31513fa116b3d509,accept,AFFECTED PRODUCTS AND VERSIONS,swg21962370.txt,"Which products and versions are affected by ""IBM Security Bulletin: Multiple vulnerabilities in IBM Java SDK affect IBM Image Construction and Composition Tool (CVE-2015-0410 and CVE-2014-6593)""?","IBM Image Construction and Composition Tool v2.2.1.3 
+IBM Image Construction and Composition Tool v2.3.1.0 
+IBM Image Construction and Composition Tool v2.3.2.0"
+SYN_9654ad4720d4171e22a2,accept,AFFECTED PRODUCTS AND VERSIONS,swg21962588.txt,"Which products and versions are affected by ""IBM Security Bulletin: Multiple vulnerabilities in IBM Java SDK affect IBM OS Images for Red Hat Linux Systems and AIX (CVE-2015-0410 and CVE-2014-6593)""?","IBM OS Image for Red Hat Linux Systems 2.0.0.1 and earlier.
+IBM OS Image for AIX 2.0.0.1 and earlier."
+SYN_694bb37fe74c1450f1c8,reject,AFFECTED PRODUCTS AND VERSIONS,swg21964025.txt,"Which products and versions are affected by ""IBM Security Bulletin: IBM PureApplication System is affected by a security vulnerability. (CVE-2015-1890)""?","This vulnerability affects IBM PureApplication Server and the GPFS pattern type included in: 
+
+ * 
+ * 
+ *"
+SYN_5022814989018ff224d9,accept,CAUSE,swg21964407.txt,"What causes the issue described as ""IBM Datacap Rulerunner server stops after several aborted batches""?","Rulerunner has a thread control feature that acts as a safety to prevent all pending batches from aborting. When it detects a certain number of consecutively aborted batches on a single thread, Rulerunner shuts down all threads. By default, the threshold is three batches, so shutdown occurs if four batches abort consecutively."
+SYN_8ff5c5601292d25f84c1,accept,DIAGNOSING THE PROBLEM,swg21964407.txt,"How can an administrator diagnose the issue described as ""IBM Datacap Rulerunner server stops after several aborted batches""?","With Rulerunner logging turned on, aborting batches will show in the rulerunnerX.log files (where X is the thread number. If there is a question as to whether a Rulerunner shutdown is being caused by this feature, check the rulerunnerX logs for each thread to see if there are four consecutive aborts followed by a shutdown."
+SYN_0ffad6a31afa652e2918,accept,AFFECTED PRODUCTS AND VERSIONS,swg21965955.txt,"Which products and versions are affected by ""IBM Security Bulletin: Multiple vulnerabilities in IBM® Java SDK affect WebSphere Application Server that ships with WebSphere Enterprise Service Bus (CVE-2015-2613, CVE-2015-2601, CVE-2015-4749, CVE-2015-2625, CVE-2015-1931)""?","WebSphere Enterprise Service Bus 6.2
+WebSphere Enterprise Service Bus 7.0
+WebSphere Enterprise Service Bus 7.5"
+SYN_aab82530e21be26532e2,reject,REMEDIATION/FIXES,swg21965955.txt,"What remediation is recommended for ""IBM Security Bulletin: Multiple vulnerabilities in IBM® Java SDK affect WebSphere Application Server that ships with WebSphere Enterprise Service Bus (CVE-2015-2613, CVE-2015-2601, CVE-2015-4749, CVE-2015-2625, CVE-2015-1931)""?","Please consult the security bulletin Multiple vulnerabilities in IBM® Java SDK affect WebSphere Application Server July 2015 CPU [http://www-01.ibm.com/support/docview.wss?uid=swg21962931] for vulnerability details and information about fixes.
+
+GET NOTIFIED ABOUT FUTURE SECURITY BULLETINS
+ Subscribe to My Notifications [ http://www-01.ibm.com/software/support/einfo.html] to be notified of important product support alerts like this."
+SYN_10c5639cdf74de6e94d1,accept,CAUSE,swg21966881.txt,"What causes the issue described as ""IBM Business Process Manager users receive errors that session has expired""?","WebSphere Application Server has session security integration enabled by default. Enabling this feature guards against the possibility of session data being hijacked by another user. 
+The Wily Introscope agent might try to access an active user session to monitoring purposes. Because Wily does not have the same authenticated user, the session security integration feature prevents Wily from accessing that user session. 
+
+By having a custom property named InvalidateOnUnauthorizedSessionRequestException set to true, the session manager will invalidate the active user session. This causes the ""session expired"" messages for the IBM BPM user. (The default value for InvalidateOnUnauthorizedSessionRequestException is false.)"
+SYN_5d9db81f41d60405b239,reject,DIAGNOSING THE PROBLEM,swg21967312.txt,"How can an administrator diagnose the issue described as ""IBM Error when launching Scan task from Datacap Desktop.""?","The panel for TravelDocs contained a value with all upper-case letter [eg. TRAVELDOCS], which caused the error to occur when attempting to launch the Scan task from Datacap Desktop"
+SYN_9a296633fb8fc49af925,accept,AFFECTED PRODUCTS AND VERSIONS,swg21968399.txt,"Which products and versions are affected by ""IBM Security Bulletin: IBM WebSphere MQ MQXR insecure passwords (CVE-2015-2012)""?","IBM WebSphere MQ 8.0 
+
+ * 8.0.0.3 and earlier maintenance levels
+
+
+IBM WebSphere MQ 7.5  * 7.5.0.5 and earlier maintenance levels
+
+
+IBM WebSphere MQ 7.1  * 7.1.0.6 and earlier maintenance levels"
+SYN_a461086ca8b69155c853,accept,CAUSE,swg21968518.txt,"What causes the issue described as ""IBM SDA does not work for TEPS support files on ITCAM for SOA 7.2 FP1 ifix 5""?",SOA includes an SDA package for the TEMS but not for TEPS.
+SYN_14af75a1d86aea5457d0,accept,SYMPTOM,swg21968549.txt,"What symptoms identify the issue described as ""IBM Couldn't validate parameters error logging in with IBM Datacap""?",This is most commonly seen on a new installed Taskmaster Server. Users attempting to login will receive a message stating that they cannot connect to the admin database.
+SYN_34295b2b8f98977317a2,accept,CAUSE,swg21968549.txt,"What causes the issue described as ""IBM Couldn't validate parameters error logging in with IBM Datacap""?","Encryption is not yet fully set up, so FIPS key information cannot be located."
+SYN_2a1ecc713c6d99eb043b,accept,DIAGNOSING THE PROBLEM,swg21971485.txt,"How can an administrator diagnose the issue described as ""IBM .NET API error when installing IBM Content Collector (ICC) 4.0.1""?","1. Check in ""Programs and features""
+2. .NET API will not be listed there"
+SYN_87469b7ee150b24a36da,accept,SYMPTOM,swg21972681.txt,"What symptoms identify the issue described as ""IBM In FileNet Workplace XT .csv files open as a text file instead of using MS Excel""?",The .csv file can be opened as the Excel from ACCE and outside of WorkplaceXT but not from inside of the WorkplaceXT
+SYN_ed860bc4f76f03d228c6,accept,DIAGNOSING THE PROBLEM,swg21972681.txt,"How can an administrator diagnose the issue described as ""IBM In FileNet Workplace XT .csv files open as a text file instead of using MS Excel""?","When creating a .csv document through ACCE, the mime Type is ""application/vnd.ms-excel"" shown under the Properties tab and Content Element tab. 
+
+ * When adding a .csv document through WorkplaceXT, the mime Type shows ""text/csv"" from the Properties tab and Content Element tab in ACCE. 
+ * Verify if the .csv document with the mime Type ""application/vnd.ms-excel"" is opened as Excel file in WorkplaceXT"
+SYN_fb22001833653c5657e2,reject,REMEDIATION/FIXES,swg21974598.txt,"What remediation is recommended for ""IBM Security Bulletin: A vulnerability in the GSKit component of IBM MQ Appliance (CVE-2016-0201)""?","Apply the ifix for APAR IT13023 [http://www-933.ibm.com/support/fixcentral/swg/selectFix?product=ibm/WebSphere/IBM%20MQ%20Appliance%20M2000&fixids=8.0.0.4-IBM-MQ-Appliance-M2000-IT13223&function=fixId&parent=ibm/WebSphere].
+
+GET NOTIFIED ABOUT FUTURE SECURITY BULLETINS
+ Subscribe to My Notifications [ http://www-01.ibm.com/software/support/einfo.html] to be notified of important product support alerts like this."
+SYN_2d778392a7a1d0d12641,accept,AFFECTED PRODUCTS AND VERSIONS,swg21975233.txt,"Which products and versions are affected by ""IBM Security Bulletin: Vulnerability in MD5 Signature and Hash Algorithm affects WebSphere Message Broker and IBM Integration Bus (CVE-2015-7575)""?","IBM Integration Bus V9, V10 
+
+WebSphere Message Broker V8"
+SYN_7030d94ce2085a118305,accept,RESOLVING THE PROBLEM,swg21975568.txt,"How can an administrator resolve the issue described as ""IBM 'Save and Close' and 'Save' buttons grayed out in desktop configuration""?","IBM Content Navigator configuration tabs that contain required fields are flagged with a red asterisk to the side of the tab label. For a desktop configuration, General, Repositories, Layout, and Menus tabs contain required fields. Make sure all these fields have a value. The following screen shot provides an illustration of the tabs that contain required fields. 
+
+[/support/docview.wss?uid=swg21975568&aid=1] [/support/docview.wss?uid=swg21975568&aid=1]"
+SYN_78048cd46140f1385f55,reject,CAUSE,swg21976589.txt,"What causes the issue described as ""IBM LDAP allows authentication for only some users in Atlas.""?","Atlas login fails with ""Authentication failed: Unknown user (or) password"""
+SYN_9f543b73726181c54a2b,accept,AFFECTED PRODUCTS AND VERSIONS,swg21976896.txt,"Which products and versions are affected by ""IBM Security Bulletin: Multiple vulnerabilities in IBM Java Runtime affect IBM WebSphere MQ (CVE-2016-0475, CVE-2015-7575, CVE-2016-0448)""?","IBM JRE 7, Java Technology Edition, Version 7 provided by IBM WebSphere MQ 8.0.0.4 and earlier on all platforms (except IBM i and z/OS) 
+
+IBM JRE 6, Java Technology Edition, Version 6 provided by IBM WebSphere MQ 7.5.0.5, IBM WebSphere MQ 7.1.0.7 and earlier on all platforms (except IBM i and z/OS)"
+SYN_89fb3371c655e00d3889,accept,SYMPTOM,swg21977398.txt,"What symptoms identify the issue described as ""IBM After restoring BigFix server database, ILMT/BFI/SUA server may not import all the data since the restore correctly""?","Not all data reported already by endpoints to BigFix server are visible in LMT/BFI console. This may include scan results, capacity data, etc."
+SYN_e70f9c78b0929566b46c,accept,CAUSE,swg21978390.txt,"What causes the issue described as ""IBM Unable to open a profile in FileNet Content Engine Configuration Manager User Interface (CMUI) on Redhat Linux 7.x""?","""adwaita-gtk2-theme"" (32 and 64 bit) and ""adwaita-gtk3-theme"" 64 bit libraries were missing."
+SYN_d4e5f7a02c1eee83ce3d,accept,RESOLVING THE PROBLEM,swg21978641.txt,"How can an administrator resolve the issue described as ""IBM EIF probe not receiving itm events""?","The solution is to set the connection_mode in your om_tec.config on the ITM Server (TEMS) to use 
+
+
+connection_less 
+
+instead of 
+
+connection oriented.
+
+That is, change this line in your om_tec.config
+
+ConnectionMode=co
+to
+ConnectionMode=connection_less
+
+You will need to restart the EIF on your ITM. (tacmd refreshTECinfo -t eif)"
+SYN_bab2d5ba9b1a4d92d225,accept,SYMPTOM,swg21980860.txt,"What symptoms identify the issue described as ""IBM RDz TSO EXIT IKJEESX0 TERMINATES with RC04""?","Issuing the TSO SEND command in a batch job may terminate with this message: 
+
+IKJ79154I INSTALLATION EXIT IKJEESX0 REQUESTED TERMINATION. 
+IKJ79154I REASON CODE X'00000004'."
+SYN_c5f0f3bbdd40c5f5b2a1,accept,CAUSE,swg21980860.txt,"What causes the issue described as ""IBM RDz TSO EXIT IKJEESX0 TERMINATES with RC04""?","The RDz TSO Send command will invoke a TSO exit, IKJEESX0 (FEKEESX0) that will terminate with a reason code of 4 if you have not coded a facility class for the FEK.CMD.SEND and FEK.CMD.SEND.CLEAR.
+
+The exit provided by RDz checks to see if the user has the authority to issue the TSO Send command by executing the RACROUTE macro:
+
+
+RACROUTE REQUEST=AUTH,CLASS=(R5),ENTITYX=(rEntityBL), *
+WORKA=(R0),RELEASE=2.2,ATTR=READ,LOG=NOSTAT, *
+MF=(E,AUTHCHK)"
+SYN_81b4a04f51b26ec0048e,accept,SYMPTOM,swg21981870.txt,"What symptoms identify the issue described as ""IBM Missing Icon pulldown options in DASH main menu after 3.1.2.1 Install""?","After successful installation of JazzSM 1.1.2.1/DASH 3.1.2.1 with WebSphere 8.5.5.9, some of the icons in the main DASH window are missing on the left."
+SYN_93c3297439a52db0a7d1,accept,DIAGNOSING THE PROBLEM,swg21981870.txt,"How can an administrator diagnose the issue described as ""IBM Missing Icon pulldown options in DASH main menu after 3.1.2.1 Install""?","After you login to DASH and select ""Console Settings"", the displayed window, which should have several lines, is blank:
+
+
+[/support/docview.wss?uid=swg21981870&amp;aid=1]
+
+Also, in this case there wasn't any icons in the upper left portion of the main DASH window."
+SYN_041931f76b8d4c5e235e,accept,CAUSE,swg21981877.txt,"What causes the issue described as ""IBM Scroll bar in search results resets to the top position in Internet Explorer V9, V10, and V11""?",This is a Microsoft Internet Explorer issue which has been fixed in the Microsoft Edge browser.
+SYN_4430be412dc760596f15,accept,SYMPTOM,swg21982008.txt,"What symptoms identify the issue described as ""IBM Transformation Extender Oracle adapter does not support SYS_REFCURSOR return type in an Oracle stored procedure / function""?","The Oracle database adapter log (.dbl) reports the following error:
+
+Unsupported datatype returned is being treated as text."
+SYN_227047a5431cee390b76,accept,ENVIRONMENT,swg21982008.txt,"What environment is relevant to the issue described as ""IBM Transformation Extender Oracle adapter does not support SYS_REFCURSOR return type in an Oracle stored procedure / function""?",IBM WebSphere TX / IBM TX Oracle adapter on any valid execution platform
+SYN_2c7ebccbfdbaee33d4e9,accept,DIAGNOSING THE PROBLEM,swg21982008.txt,"How can an administrator diagnose the issue described as ""IBM Transformation Extender Oracle adapter does not support SYS_REFCURSOR return type in an Oracle stored procedure / function""?",LASTERRORMSG() reports 'Failed to execute the SQL statement' and the database adapter log reports 'Unsupported datatype returned is being treated as text.'
+SYN_8c9a285db425cd5e9401,reject,CAUSE,swg21983638.txt,"What causes the issue described as ""IBM Can an update query be run against the C&DS repository to update job results?""?",Currently all results are written to a specific file system and the server is full. We would like to change the location the results of the output.
+SYN_15b7a1ad17ca411da670,accept,SYMPTOM,swg21983739.txt,"What symptoms identify the issue described as ""IBM Data Server Manager (DSM) showing SQLCODE=-206 ""<name> is not valid in the context where it is used.""""?","The symptoms can vary depending on each installation. 
+
+Most common scenario, DSM shows Data Pending status for the monitored database."
+SYN_77e0be6a9747f9728536,reject,SYMPTOM,swg21983904.txt,"What symptoms identify the issue described as ""IBM SCM check analyses are showing as <not activated> the SCA user interface""?",Check analyses in the SCA interface are showing as <not activated> in the SCA user interface where at one point they were activated and returning data. Now they are not activated and not returning data.
+SYN_1de2a04b3ba6c1a246b1,accept,CAUSE,swg21983904.txt,"What causes the issue described as ""IBM SCM check analyses are showing as <not activated> the SCA user interface""?",The operator who activated the analysis has been deleted. The audit trail cleaner tool was run and it removed the operator and de-activated the analysis.
+SYN_4288f5b69a8b2952adde,reject,CAUSE,swg21983912.txt,"What causes the issue described as ""IBM Identifying people in scope across Matters in Atlas""?",Query to identify people in scope across matters in Atlas
+SYN_66b179e82fa9c85dca54,accept,SYMPTOM,swg21984540.txt,"What symptoms identify the issue described as ""IBM Can't disable DASH TimeSet and dataRefresh in Events configuration""?","TimeSet and dataRefresh Events can't be disabled after any ""Save"" for previous added Widgets on a Page."
+SYN_c51626fab7595bd92ce4,accept,ENVIRONMENT,swg21984540.txt,"What environment is relevant to the issue described as ""IBM Can't disable DASH TimeSet and dataRefresh in Events configuration""?","Any DASH version, this was a problem since DASH 3.1.0"
+SYN_9ec17243ae6b74b4ccc8,accept,DIAGNOSING THE PROBLEM,swg21984540.txt,"How can an administrator diagnose the issue described as ""IBM Can't disable DASH TimeSet and dataRefresh in Events configuration""?","Create a Page in DASH, add Widgets then save and exit. Access the Page again, edit the page to add another Widget, Edit the Events in the new Widget then unselect the TimeSet and dataRefresh options. Save the changes.
+
+
+Edit the new Page:
+
+[/support/docview.wss?uid=swg21984540&amp;aid=1]
+
+Unselect the TimeSet and dataRefresh options.
+
+[/support/docview.wss?uid=swg21984540&amp;aid=2]
+
+After a ""save"" or ""save and exit"" you will see that they are enabled again. 
+
+
+[/support/docview.wss?uid=swg21984540&amp;aid=3]"
+SYN_dc6ab6e71f1110611ac0,accept,CAUSE,swg21985946.txt,"What causes the issue described as ""IBM Upgrading to Jazz for Service Management Version 1.1.3.0 using Installation Manager results in a permission denied error""?","During the upgrade process the non-root user does not have the correct permissions to run the shell script. This is due to the following:
+1. Jazz for Service Management is installed as a non-root user
+2. Installation Manager is installed in user mode through root user"
+SYN_af0349b26ae93b3ef46e,reject,SYMPTOM,swg21986219.txt,"What symptoms identify the issue described as ""IBM Launcher failure when 'On Success' is set to Delete and 'On Failure' is set to Commit""?",Launcher fails to load a watch when On Success = Delete and On Failure = Commit are used.
+SYN_87ddbf37b025dd5a8244,reject,ENVIRONMENT,swg21986219.txt,"What environment is relevant to the issue described as ""IBM Launcher failure when 'On Success' is set to Delete and 'On Failure' is set to Commit""?",Using the IBM Transformation Extender (ITX) Launcher and 'On Success' is set to Delete and 'On Failure' is set to Commit.
+SYN_f059e723e3e2230b910f,accept,DIAGNOSING THE PROBLEM,swg21986219.txt,"How can an administrator diagnose the issue described as ""IBM Launcher failure when 'On Success' is set to Delete and 'On Failure' is set to Commit""?","The Compound system log reports the following Launcher FATAL error :
+
+File Trigger FATAL Error : ValidateEKDirectories: Cannot find correct card index for watch #."
+SYN_0127d158925819638b74,accept,SYMPTOM,swg21986534.txt,"What symptoms identify the issue described as ""IBM Newly accessed tables result in increasing of dbheap""?","From output of command ""db2pd -db <db name> -mempools"" you can find LogSz/PhySz of the memory pool named ""dbh"" keeps on increasing."
+SYN_ad1f81ab8cd818fd7583,accept,RESOLVING THE PROBLEM,swg21986534.txt,"How can an administrator resolve the issue described as ""IBM Newly accessed tables result in increasing of dbheap""?","This is the expected result, once all tables in the database are accessed for at least one time, the memory increasing will stop."
+SYN_6bd93f0a594e93a7d934,accept,SYMPTOM,swg21988389.txt,"What symptoms identify the issue described as ""IBM Map does not complete when using xmllib functions on z/OS""?","Map execution is incomplete and JOBLOG reports the following error:
+
+1CEE3501S The module libxslt4c.1_11_0q.dll was not found."
+SYN_58dabdf8cba2be3fa60d,reject,CAUSE,swg21989702.txt,"What causes the issue described as ""IBM DB2 LUW precompile, prep may write different code to DB2 z/OS""?",It is an expected current DB2 LUW behavior.
+SYN_58b1f4198301daa80c74,accept,WORKAROUNDS AND MITIGATIONS,swg21995099.txt,"What workarounds or mitigations are available for ""IBM Security Bulletin: IBM MQ and IBM MQ Appliance are vulnerable to SWEET32 Birthday attack (CVE-2016-2183)""?","All versions of MQ can mitigate the vulnerability either by switching to an alternative CipherSpec or by enabling secret key reset. 
+Resetting SSL/TLS secret keys [http://www.ibm.com/support/knowledgecenter/SSFKSJ_9.0.0/com.ibm.mq.sec.doc/q014310_.htm]
+
+GET NOTIFIED ABOUT FUTURE SECURITY BULLETINS
+ Subscribe to My Notifications [ http://www-01.ibm.com/software/support/einfo.html] to be notified of important product support alerts like this."
+SYN_a90f350e49c5612315f7,accept,AFFECTED PRODUCTS AND VERSIONS,swg21998655.txt,"Which products and versions are affected by ""IBM Security Bulletin: Malicious File Download vulnerability in IBM Business Process Manager (BPM) and WebSphere Lombardi Edition (WLE) - CVE-2016-9693""?","- WebSphere Lombardi Edition V7.2.0.0 - V7.2.0.5
+- IBM Business Process Manager Advanced V7.5.0.0 - V7.5.1.2
+- IBM Business Process Manager Advanced V8.0.0.0 - V8.0.1.3
+- IBM Business Process Manager Advanced V8.5.0.0 - V8.5.7.0 including cumulative fix 2016.12"
+SYN_1034846f44953b87b425,accept,AFFECTED PRODUCTS AND VERSIONS,swg21998663.txt,"Which products and versions are affected by ""IBM Security Bulletin: IBM MQ administration command could cause denial of service (CVE-2016-8971)""?","IBM MQ V9.0 Long Term Support Release 
+
+IBM MQ V9.0.0.0 only. 
+
+IBM MQ V8.0 
+
+IBM MQ V8.0.0.0 - V8.0.0.5 maintenance levels."
+SYN_da644b82d0f522bcc8f0,accept,REMEDIATION/FIXES,swg21998663.txt,"What remediation is recommended for ""IBM Security Bulletin: IBM MQ administration command could cause denial of service (CVE-2016-8971)""?","IBM MQ V9.0 Long Term Support Release 
+
+Apply 9.0.0.1 [https://www-945.ibm.com/support/fixcentral/swg/selectFixes?parent=ibm%7EWebSphere&product=ibm/WebSphere/WebSphere+MQ&release=9.0.0.1&platform=All&function=all&useReleaseAsTarget=true] maintenance level. 
+
+IBM MQ V8.0 
+
+Apply 8.0.0.6 [http://www-01.ibm.com/support/docview.wss?uid=swg21995100] maintenance level."
+SYN_d10dc13929fa68f2f989,accept,AFFECTED PRODUCTS AND VERSIONS,swg21999724.txt,"Which products and versions are affected by ""IBM Security Bulletin: Vulnerabilities in OpenSSL affect IBM MQ Advanced Message Security (CVE-2016-2177, CVE-2016-2178)""?","IBM MQ V8 
+
+Maintenance versions 8.0.0.0 through 8.0.0.5 are affected. 
+
+IBM MQ V9 
+
+9.0.0.0 only"
+SYN_f644b4377677e3210f10,accept,REMEDIATION/FIXES,swg21999724.txt,"What remediation is recommended for ""IBM Security Bulletin: Vulnerabilities in OpenSSL affect IBM MQ Advanced Message Security (CVE-2016-2177, CVE-2016-2178)""?","IBM MQ V8 
+
+Apply fixpack 8.0.0.6 [http://www-01.ibm.com/support/docview.wss?uid=swg21995100] 
+
+IBM MQ V9 
+
+Apply fixpack 9.0.0.1 [http://www-01.ibm.com/support/docview.wss?uid=swg27048059]
+
+GET NOTIFIED ABOUT FUTURE SECURITY BULLETINS
+ Subscribe to My Notifications [ http://www-01.ibm.com/software/support/einfo.html] to be notified of important product support alerts like this."
+SYN_433310bb80701631996a,accept,AFFECTED PRODUCTS AND VERSIONS,swg22002975.txt,"Which products and versions are affected by ""IBM Security Bulletin: A security vulnerability has been identified in IBM Tivoli Network Manager IP Edition shipped with WebSphere Application Server (CVE-2017-1194)""?","IBM Tivoli Network Manager 3.9, 4.1, 4.1.1 and 4.2"
+SYN_f7363f4dff8f75918547,accept,AFFECTED PRODUCTS AND VERSIONS,swg22003510.txt,"Which products and versions are affected by ""IBM Security Bulletin: Incorrect saved channel status enquiry could cause denial of service for IBM MQ (CVE-2017-1236)""?","IBM MQ 9.0.2 Continuous Delivery 
+
+IBM MQ Appliance 9.0.x Continuous Delivery 
+
+IBM MQ 9.0 LTS 
+
+IBM MQ 8.0 
+
+IBM MQ 8.0 Appliance"
+SYN_791dec932791d9f4ac58,accept,WORKAROUNDS AND MITIGATIONS,swg22003510.txt,"What workarounds or mitigations are available for ""IBM Security Bulletin: Incorrect saved channel status enquiry could cause denial of service for IBM MQ (CVE-2017-1236)""?","IBM MQ Appliance; Affected Queue manager must be restarted. 
+
+IBM MQ 9.0.2 CD : Restart the failed command server on the queue manager. 
+
+IBM MQ 9.0 LTS : Restart the failed command server on the queue manager. 
+
+IBM MQ 8.0 : Restart the failed command server on the queue manager.
+
+GET NOTIFIED ABOUT FUTURE SECURITY BULLETINS
+ Subscribe to My Notifications [ http://www-01.ibm.com/software/support/einfo.html] to be notified of important product support alerts like this."
+SYN_9293dde1d1fedc5b1060,accept,AFFECTED PRODUCTS AND VERSIONS,swg22005345.txt,"Which products and versions are affected by ""IBM Security Bulletin: Multiple vulnerabilities in IBM Java Runtime affect WebSphere Message Broker and IBM Integration Bus""?","IBM Integration Bus V10.0.0.0- 10.0.0.8 
+
+IBM Integration Bus V9.0.0.0- 9.0.0.7 
+
+WebSphere Message Broker V8.0.0.0 - 8.0.0.8"
+SYN_8e19cd4399e5e19d6f04,accept,AFFECTED PRODUCTS AND VERSIONS,swg22005400.txt,"Which products and versions are affected by ""IBM Security Bulletin: IBM MQ and IBM MQ Appliance MQOPEN call might succeed when it should have failed.  (CVE-2017-1341 )""?","IBM MQ V8 
+
+Maintenance levels 8.0.0.0 - 8.0.0.7 
+
+IBM MQ Appliance V8 
+
+Maintenance levels between 8.0.0.0 and 8.0.0.7 
+
+IBM MQ V9 
+
+Maintenance levels 9.0.0.0 - 9.0.0.1 
+
+IBM MQ V9 CD 
+
+IBM MQ 9.0.1 - 9.0.3 
+
+IBM MQ Appliance V9 CD 
+
+IBM MQ Appliance 9.0.1 - 9.0.3"
+SYN_2487447748d77d948e14,accept,AFFECTED PRODUCTS AND VERSIONS,swg22009842.txt,"Which products and versions are affected by ""IBM Security Bulletin: IBM MQ Appliance is affected by a Network Security Services (NSS) vulnerability (CVE-2017-7805)""?","IBM MQ Appliance 8.0 
+
+Maintenance levels between 8.0.0.0 and 8.0.0.7
+IBM MQ Appliance 9.0.x Continuous Delivery (CD) Release 
+
+Continuous delivery updates between 9.0.1 and 9.0.3"
+SYN_e2b559eefdf0afb11ace,accept,AFFECTED PRODUCTS AND VERSIONS,swg22011689.txt,"Which products and versions are affected by ""IBM Security Bulletin: Apache Commons FileUpload Vulnerabilities in IBM WebSphere MQ File Transfer Edition component (CVE-2016-1000031)""?","IBM WebSphere MQ File Transfer Edition v7.0.0 
+
+IBM WebSphere MQ File Transfer Edition v7.0.1 
+
+IBM WebSphere MQ File Transfer Edition v7.0.2 
+
+IBM WebSphere MQ File Transfer Edition v7.0.3 
+
+IBM WebSphere MQ File Transfer Edition v7.0.4"
+SYN_7aec41454a5627eb248d,accept,REMEDIATION/FIXES,swg22011689.txt,"What remediation is recommended for ""IBM Security Bulletin: Apache Commons FileUpload Vulnerabilities in IBM WebSphere MQ File Transfer Edition component (CVE-2016-1000031)""?",All affected product versions are already End of Support. Customers must contact IBM to obtain a fix for the affected release.
+SYN_950e8b977151a388a1c9,accept,AFFECTED PRODUCTS AND VERSIONS,swg22012345.txt,"Which products and versions are affected by ""IBM Security Bulletin: Potential Privilege Escalation in WebSphere Application Server Admin Console (CVE-2017-1731)""?","This vulnerability affects the following versions and releases of IBM WebSphere Application Server: 
+
+ * Version 9.0 
+ * Version 8.5 
+ * Version 8.0 
+ * Version 7.0"
+SYN_76030ce7fc91c4987075,accept,AFFECTED PRODUCTS AND VERSIONS,swg22012983.txt,"Which products and versions are affected by ""IBM Security Bulletin: IBM MQ clients connecting to an MQ queue manager can cause a SIGSEGV in the amqrmppa channel process terminating it. (CVE-2018-1371)""?","IBM MQ V8.0 
+
+ * Maintenance level 8.0.0.8
+
+
+IBM MQ V9 LTS  * Maintenance level 9.0.0.2
+
+
+IBM MQ V9 CD  * IBM MQ version 9.0.4"
+SYN_697e81a43a97a573810f,accept,AFFECTED PRODUCTS AND VERSIONS,swg22012992.txt,"Which products and versions are affected by ""IBM Security Bulletin: IBM MQ Clients can send a specially crafted message that could cause a channel to SIGSEGV. (CVE-2017-1747)""?","IBM MQ V9 LTS
+Maintenance levels 9.0.0.0 - 9.0.0.2 
+
+IBM MQ V9 CD
+Maintenance levels 9.0.0 - 9.0.4"
+SYN_b12a78eb42eff2757915,accept,REMEDIATION/FIXES,swg22012992.txt,"What remediation is recommended for ""IBM Security Bulletin: IBM MQ Clients can send a specially crafted message that could cause a channel to SIGSEGV. (CVE-2017-1747)""?","IBM MQ V9 LTS
+Apply FixPack 9.0.0.3 [http://www-01.ibm.com/support/docview.wss?uid=swg24044508] 
+
+IBM MQ V9 CD
+Upgrade to IBM MQ version 9.0.5 [http://www-01.ibm.com/support/docview.wss?uid=swg24043463]
+
+GET NOTIFIED ABOUT FUTURE SECURITY BULLETINS
+ Subscribe to My Notifications [ http://www-01.ibm.com/software/support/einfo.html] to be notified of important product support alerts like this."
+SYN_629b3045005c55723365,reject,REMEDIATION/FIXES,swg22014367.txt,"What remediation is recommended for ""IBM Security Bulletin: Vulnerabilities in OpenSSL affect WebSphere MQ 5.3 and MQ 8 for HPE NonStop Server (CVE-2017-3735)""?","For MQ 5.3 
+
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * https://www-945.ibm.com/support/fixcentral/swg/selectFixes?parent=ibm%7EWebSphere&product=ibm/WebSphere/WebSphere+MQ&release=5.3.1.14&platform=HP+NonStop&function=all
+ * 
+
+For MQ 8 
+ * 
+
+ * 
+ * here
+ *"
+SYN_efb17913a8c48602ad9b,reject,PREREQUISITES,swg24031674.txt,"What prerequisites are required for ""IBM Download Parascript FieldScript for IBM Datacap Taskmaster Capture V8.0.1, V8.1.0, and IBM Datacap V9.0.0.""?","See the following website for detailed system requirements.
+
+URL LANGUAGE SIZE(Bytes) Hardware and software requirements [http://www.ibm.com/support/docview.wss?uid=swg27043811] English 15234"
+SYN_358c8b2a63d0446f6039,reject,INSTALLATION INSTRUCTIONS,swg24039150.txt,"What installation steps are specified for ""IBM ITCAM Agent for SAP Applications, 7.1.1.1-TIV-ITM_SAP-IF0001""?",Please refer to the 7.1.1.1-TIV-ITM_SAP-IF0001.README contained in the description section above for general installation instruction
+SYN_c65302d1cdfddfe9a21e,accept,PREREQUISITES,swg24039229.txt,"What prerequisites are required for ""IBM Monitoring for Virtual Environments: VMware VI 7.2.0.2-TIV-ITM_VMWVI_RPT-IF0001""?","IBM Tivoli Monitoring for Virtual Environments: VMware VI Agent, version 7.2 Fix Pack 2"
+SYN_6f72e186864e3884e2b2,reject,INSTALLATION INSTRUCTIONS,swg24039229.txt,"What installation steps are specified for ""IBM Monitoring for Virtual Environments: VMware VI 7.2.0.2-TIV-ITM_VMWVI_RPT-IF0001""?",Please refer to the full README contained in the Download Description section above for general installation instructions.
+SYN_adc8b5389c46ec9468a9,reject,INSTALLATION INSTRUCTIONS,swg24041394.txt,"What installation steps are specified for ""IBM PI50993:Apache HTTPComponents vulnerabilities in WebSphere Application Server (CVE-2012-6153, CVE-2014-3577)""?","Please review the readme.txt for detailed installation instructions.
+
+URL LANGUAGE SIZE(Bytes) Readme [ftp://public.dhe.ibm.com/software/websphere/appserv/support/fixes/PI50993/8.0.0.11/readme.txt] US English 2260 Readme [ftp://public.dhe.ibm.com/software/websphere/appserv/support/fixes/PI50993/8.5.5.7/readme.txt] US English 2296"
+SYN_77070ba6369b84d258ce,accept,PREREQUISITES,swg24041994.txt,"What prerequisites are required for ""IBM ITCAM for Microsoft (R) App : SQL Server 6.3.1.8-TIV-ITM_SQL-IF0001""?","- IBM Tivoli Monitoring, Version V6.23 Fix Pack 3 with OS Support
+- ITCAMMA: Monitoring Agent for Microsoft SQL Server, Version 6.3.1.8"
+SYN_49685e377693e8be1423,reject,INSTALLATION INSTRUCTIONS,swg24042833.txt,"What installation steps are specified for ""IBM PI69518:group search fails with a classcast exception after upgrade to 8.5.5.10""?","Please review the readme.txt for detailed installation instructions.
+
+URL LANGUAGE SIZE(Bytes) V85 Readme [ftp://public.dhe.ibm.com/software/websphere/appserv/support/fixes/PI69518/8.5.5.10/readme.txt] US English 6584"
+SYN_46571c82c51a024efe1f,accept,PREREQUISITES,swg24043057.txt,"What prerequisites are required for ""IBM ITCAM Agents for WebSphere Messaging Version 7.3.0 Fix Pack 02 (7.3.0-TIV-XEforMsg-FP0002)""?","The following software installed in your environment is compatible with this fix pack.
+Supported WebSphere MQ
+* WebSphere MQ 7.1
+* WebSphere MQ 7.5
+* IBM MQ 8.0
+* IBM MQ 9.0
+
+Supported IBM broker products:
+* WebSphere Message Broker 8.0
+* IBM Integration Bus 9.0
+* IBM Integration Bus 10.0
+
+Supported IBM Tivoli Monitoring
+* IBM Tivoli Monitoring 6.3.0 fix pack 2 or later"
+SYN_5bc2cfa347a7d2380ce0,reject,INSTALLATION INSTRUCTIONS,swg24043057.txt,"What installation steps are specified for ""IBM ITCAM Agents for WebSphere Messaging Version 7.3.0 Fix Pack 02 (7.3.0-TIV-XEforMsg-FP0002)""?",Refer to the Readme file on Fix Central
+SYN_8de4fc519c2bf067f844,accept,PREREQUISITES,swg24043263.txt,"What prerequisites are required for ""IBM Tivoli Log File Agent, Version 6.3.0 Fix Pack 02 (6.3.0-TIV-ITM_LFA-FP0002)""?","The prerequisite level for this fix is as follows: 
+
+
+- IBM Tivoli Monitoring, Version 6.2.2: Fix Pack 02 or higher (6.2.2-TIV-ITM-FP0002).
+
+As this fix is cumulative, it can be installed on any fix level for this version, release, and mod level above the prerequisite."
+SYN_e53eb1eac5ff8e6488b7,accept,PREREQUISITES,swg24043574.txt,"What prerequisites are required for ""IBM SPSS Statistics 24.0 Fix Pack 2""?",This Fix Pack is language independent but can only be installed over existing client and server installations of IBM SPSS Statistics 24.0.0.0

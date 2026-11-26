@@ -1,0 +1,139 @@
+{
+  "complete": true,
+  "results": {
+    "oracle_base": {
+      "token_f1_percent": 37.66,
+      "answer_correctness_percent": 84.42,
+      "correct_refusal_rate_percent": 44.83,
+      "false_refusal_rate_percent": 2.6,
+      "youden_j_percent_points": 42.23,
+      "exact_match_percent": 0.0,
+      "reference_unsupported_percent": 13.33,
+      "reference_contradiction_percent": 0.0,
+      "inference_gpu_gib": 3.053,
+      "questions_per_second": 0.189
+    },
+    "oracle_lora": {
+      "token_f1_percent": 45.08,
+      "answer_correctness_percent": 63.64,
+      "correct_refusal_rate_percent": 100.0,
+      "false_refusal_rate_percent": 0.0,
+      "youden_j_percent_points": 100.0,
+      "exact_match_percent": 12.99,
+      "reference_unsupported_percent": 19.48,
+      "reference_contradiction_percent": 0.0,
+      "inference_gpu_gib": 3.057,
+      "questions_per_second": 0.296
+    },
+    "rag_base": {
+      "token_f1_percent": 29.28,
+      "answer_correctness_percent": 59.74,
+      "correct_refusal_rate_percent": 6.9,
+      "false_refusal_rate_percent": 15.58,
+      "youden_j_percent_points": -8.68,
+      "exact_match_percent": 0.0,
+      "reference_unsupported_percent": 21.54,
+      "reference_contradiction_percent": 0.0,
+      "inference_gpu_gib": 3.053,
+      "questions_per_second": 0.18
+    },
+    "rag_lora": {
+      "token_f1_percent": 33.43,
+      "answer_correctness_percent": 55.84,
+      "correct_refusal_rate_percent": 6.9,
+      "false_refusal_rate_percent": 0.0,
+      "youden_j_percent_points": 6.9,
+      "exact_match_percent": 10.39,
+      "reference_unsupported_percent": 18.18,
+      "reference_contradiction_percent": 0.0,
+      "inference_gpu_gib": 3.058,
+      "questions_per_second": 0.281
+    }
+  },
+  "training": {
+    "model": "Qwen2.5-1.5B-Instruct",
+    "method": "LoRA",
+    "train_samples": 539,
+    "val_samples": 106,
+    "epochs": 2,
+    "learning_rate": 0.0002,
+    "max_length": 2048,
+    "grad_accum": 8,
+    "lora_rank": 8,
+    "best_val_loss": 0.5102,
+    "training_seconds": 1077.285,
+    "peak_gpu_memory_gb": 6.565,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.1133,
+        "val_loss": 0.5102,
+        "optimizer_steps": 68
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.0517,
+        "val_loss": 0.5124,
+        "optimizer_steps": 68
+      }
+    ]
+  },
+  "closed_book_lora_reference": {
+    "token_f1_percent": 7.03,
+    "answer_correctness_percent": 16.88,
+    "correct_refusal_rate_percent": 75.86,
+    "false_refusal_rate_percent": 63.64,
+    "exact_match_percent": 0.0,
+    "reference_contradiction_percent": 0.0,
+    "reference_unsupported_percent": 14.29,
+    "best_val_loss": 1.7973,
+    "training_seconds": 535.475,
+    "training_gpu_gib": 4.87,
+    "inference_gpu_gib": 3.096,
+    "questions_per_second": 1.135,
+    "train_samples": 539,
+    "generation_seconds": 93.41,
+    "youden_j_percent_points": 12.22,
+    "trainable_parameters": 1089536
+  },
+  "input_audit": {
+    "train_kinds": {
+      "distractor": 86,
+      "gold_document": 367,
+      "empty": 86
+    },
+    "train_positive_verbatim_visible": 360,
+    "oracle_val_positive_verbatim_visible": 53,
+    "train_question_truncated": 40,
+    "val_question_truncated": 11,
+    "max_prompt_tokens": 1887,
+    "train_val_document_name_overlap": [
+      "swg21067352.txt",
+      "swg21397335.txt",
+      "swg21507587.txt",
+      "swg21598417.txt",
+      "swg21662193.txt",
+      "swg21674407.txt",
+      "swg21960062.txt"
+    ],
+    "note": "Oracle uses known document, not guaranteed sufficient after packing. Training prioritizes exact reference span if available. Distractors are lexical heuristics, not verified negatives."
+  },
+  "retrieval_audit": {
+    "method": "existing stage3, top5, frozen shared retrieval",
+    "seconds": 19.770598999999493,
+    "gold_document_hit_count": 68,
+    "reference_verbatim_visible_count": 31,
+    "answerable_count": 77,
+    "note": "Gold-document hit does not guarantee answer-bearing evidence; no gold text or labels passed to retriever."
+  },
+  "diagnostic_only": true,
+  "qlora": "NOT RUN",
+  "human_review_required": true,
+  "notes": [
+    "Oracle and RAG are separate experiments. Same input token IDs within each model pair.",
+    "Oracle negatives have empty evidence; retrieved evidence may be sufficient despite dataset impossible label.",
+    "Reference-based Judge does not measure actual supplied-context faithfulness. No true hallucination rate.",
+    "Training target, system prompt and evidence change together; not a one-variable causal experiment.",
+    "Existing RAG retrieval reused; external guardrails not applied in this generator-only comparison."
+  ]
+}

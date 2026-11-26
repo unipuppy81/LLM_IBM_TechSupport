@@ -1,0 +1,17 @@
+[Data Composition Test3 Context Comparison]
+Metric                                    oracle_base      oracle_lora         rag_base         rag_lora
+token_f1_percent                                37.66            45.08            29.28            33.43
+answer_correctness_percent                      84.42            63.64            59.74            55.84
+correct_refusal_rate_percent                    44.83              100              6.9              6.9
+false_refusal_rate_percent                        2.6                0            15.58                0
+youden_j_percent_points                         42.23              100            -8.68              6.9
+exact_match_percent                                 0            12.99                0            10.39
+reference_unsupported_percent                   13.33            19.48            21.54            18.18
+reference_contradiction_percent                     0                0                0                0
+inference_gpu_gib                               3.053            3.057            3.053            3.058
+questions_per_second                            0.189            0.296             0.18            0.281
+Training samples: 539 | Best val loss: 0.5102
+Training seconds: 1077.285 | GPU GiB: 6.565
+Quality: COMPLETE | Complete: True
+Oracle and RAG metrics use original dataset labels; human review required.
+Results: C:\Users\unipu\Documents\GitHub\LLM_IBM_TechSupport\IBMTechSupport\evaluate_results\106\finetuning\data_composition_test3\run_20261127_003107_337442

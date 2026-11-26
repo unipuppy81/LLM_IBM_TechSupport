@@ -1,0 +1,71 @@
+{
+  "baseline_lora": {
+    "token_f1_percent": 7.03,
+    "answer_correctness_percent": 16.88,
+    "correct_refusal_rate_percent": 75.86,
+    "false_refusal_rate_percent": 63.64,
+    "exact_match_percent": 0.0,
+    "reference_contradiction_percent": 0.0,
+    "reference_unsupported_percent": 14.29,
+    "best_val_loss": 1.7973,
+    "training_seconds": 535.475,
+    "training_gpu_gib": 4.87,
+    "inference_gpu_gib": 3.096,
+    "questions_per_second": 1.135,
+    "train_samples": 539,
+    "generation_seconds": 93.41,
+    "youden_j_percent_points": 12.22,
+    "trainable_parameters": 1089536
+  },
+  "candidates": {
+    "A_answerable_only": {
+      "token_f1_percent": 21.7,
+      "answer_correctness_percent": 58.44,
+      "correct_refusal_rate_percent": 0.0,
+      "false_refusal_rate_percent": 0.0,
+      "exact_match_percent": 0.0,
+      "reference_contradiction_percent": 0.0,
+      "reference_unsupported_percent": 16.88,
+      "best_val_loss": 2.2382,
+      "training_seconds": 504.117,
+      "training_gpu_gib": 4.872,
+      "inference_gpu_gib": 2.99,
+      "questions_per_second": 0.42,
+      "train_samples": 367,
+      "trainable_parameters": 1089536,
+      "youden_j_percent_points": 0.0
+    }
+  },
+  "delta_vs_baseline": {
+    "train_samples": -172,
+    "token_f1_percent": 14.67,
+    "answer_correctness_percent": 41.56,
+    "correct_refusal_rate_percent": -75.86,
+    "false_refusal_rate_percent": -63.64,
+    "exact_match_percent": 0.0,
+    "best_val_loss": 0.4409,
+    "training_seconds": -31.358,
+    "training_gpu_gib": 0.002,
+    "inference_gpu_gib": -0.106,
+    "questions_per_second": -0.715,
+    "reference_contradiction_percent": 0.0,
+    "reference_unsupported_percent": 2.59,
+    "youden_j_percent_points": -12.22,
+    "trainable_parameters": 0
+  },
+  "quality_status": "COMPLETE",
+  "complete": true,
+  "human_review_required": true,
+  "qlora": "NOT RUN",
+  "hallucination_rate_percent": null,
+  "diagnostic_only": true,
+  "provisional_selection": null,
+  "notes": [
+    "Removed only the original impossible training records. No answer edits.",
+    "Training starts from original base weights. Positive loss weight stays 1.0.",
+    "Same full 106-question validation, unweighted validation loss and best-loss checkpoint policy.",
+    "At fixed epochs, removal also changes sample order, total optimizer updates and loss composition; this is not an isolated weight intervention.",
+    "Judge always runs. Impossible non-refusals are unverified; reference unsupported is not a true hallucination rate.",
+    "No automatic candidate selection: this is a diagnostic, not the final training dataset."
+  ]
+}

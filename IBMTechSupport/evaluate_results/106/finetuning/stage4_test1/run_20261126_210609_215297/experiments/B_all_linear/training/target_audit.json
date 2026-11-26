@@ -1,0 +1,16 @@
+{
+  "target_modules": [
+    "down_proj",
+    "gate_proj",
+    "k_proj",
+    "o_proj",
+    "q_proj",
+    "up_proj",
+    "v_proj"
+  ],
+  "trainable_parameters": 9232384,
+  "total_parameters": 1552946688,
+  "rank": 8,
+  "alpha": 16,
+  "dropout": 0.05
+}

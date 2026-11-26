@@ -1,0 +1,12 @@
+{
+  "target_modules": [
+    "q_proj",
+    "v_proj"
+  ],
+  "trainable_parameters": 4358144,
+  "total_parameters": 1548072448,
+  "rank": 32,
+  "alpha": 64,
+  "scaling": 2,
+  "dropout": 0.05
+}

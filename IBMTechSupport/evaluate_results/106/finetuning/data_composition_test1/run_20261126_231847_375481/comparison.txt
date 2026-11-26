@@ -1,0 +1,23 @@
+[Data Composition Test1 Comparison]
+Metric                                   Baseline_539   A_positive_367
+train_samples                                     539              367
+token_f1_percent                                 7.03             21.7
+answer_correctness_percent                      16.88            58.44
+correct_refusal_rate_percent                    75.86                0
+false_refusal_rate_percent                      63.64                0
+exact_match_percent                                 0                0
+best_val_loss                                  1.7973           2.2382
+training_seconds                              535.475          504.117
+training_gpu_gib                                 4.87            4.872
+inference_gpu_gib                               3.096             2.99
+questions_per_second                            1.135             0.42
+reference_contradiction_percent                     0                0
+reference_unsupported_percent                   14.29            16.88
+youden_j_percent_points                         12.22                0
+trainable_parameters                          1089536          1089536
+Training composition: 367/172 -> 367/0
+Optimizer updates/epoch: 68 -> 46
+Quality: COMPLETE | Complete: True
+Diagnostic only; no automatic selection.
+Automated quality verdicts require human review. QLoRA: NOT RUN
+Results: C:\Users\unipu\Documents\GitHub\LLM_IBM_TechSupport\IBMTechSupport\evaluate_results\106\finetuning\data_composition_test1\run_20261126_231847_375481

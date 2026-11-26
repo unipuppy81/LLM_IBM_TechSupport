@@ -1,0 +1,127 @@
+{
+  "canonical_sha256": "f7d04670ac9e4aaee70fd70802b813ced05d734086ab8c78f7658b1fb5dc2a28",
+  "matches_reconstructed_stage1": true,
+  "total": 539,
+  "answerable": 367,
+  "impossible": 172,
+  "groups": {
+    "answerable": {
+      "question_words": {
+        "min": 8,
+        "max": 259,
+        "mean": 52.4,
+        "median": 44
+      },
+      "answer_words": {
+        "min": 1,
+        "max": 302,
+        "mean": 46.2,
+        "median": 38
+      },
+      "with_context": 367,
+      "flags": {
+        "repeated_question_paragraph": 56,
+        "document_dependent_phrase": 17,
+        "apar_or_identifier_mention": 14,
+        "contains_url": 74,
+        "lexically_similar_opposite_label": 41,
+        "url_only": 1,
+        "answer_at_most_5_words": 7,
+        "answer_not_contiguous_in_context": 7,
+        "filename_only": 1
+      }
+    },
+    "impossible": {
+      "question_words": {
+        "min": 2,
+        "max": 168,
+        "mean": 53.32,
+        "median": 46.0
+      },
+      "answer_words": {},
+      "with_context": 0,
+      "flags": {
+        "closed_book_label_unverified": 172,
+        "repeated_question_paragraph": 11,
+        "lexically_similar_opposite_label": 32
+      }
+    }
+  },
+  "product_keyword_counts": {
+    "Rational / Rhapsody / RTC / DOORS": {
+      "impossible": 3,
+      "answerable": 5
+    },
+    "Unclassified": {
+      "answerable": 190,
+      "impossible": 72
+    },
+    "Maximo": {
+      "answerable": 2
+    },
+    "MQ": {
+      "impossible": 18,
+      "answerable": 31
+    },
+    "z/OS": {
+      "impossible": 6,
+      "answerable": 5
+    },
+    "Cognos": {
+      "answerable": 3,
+      "impossible": 1
+    },
+    "SPSS": {
+      "answerable": 20,
+      "impossible": 5
+    },
+    "WebSphere / WAS": {
+      "impossible": 53,
+      "answerable": 75
+    },
+    "Tivoli / TSM": {
+      "answerable": 4,
+      "impossible": 3
+    },
+    "DataPower": {
+      "impossible": 5,
+      "answerable": 19
+    },
+    "BPM / BAW": {
+      "answerable": 15,
+      "impossible": 14
+    },
+    "AIX": {
+      "impossible": 5,
+      "answerable": 5
+    },
+    "DB2": {
+      "answerable": 15,
+      "impossible": 10
+    },
+    "Informix": {
+      "answerable": 1
+    },
+    "FileNet": {
+      "impossible": 1,
+      "answerable": 8
+    },
+    "Domino / Notes": {
+      "answerable": 1
+    }
+  },
+  "distinct_context_filenames": 312,
+  "document_frequency": {
+    "1": 265,
+    "7": 1,
+    "2": 44,
+    "3": 1,
+    "4": 1
+  },
+  "normalized_duplicate_question_groups": 10,
+  "normalized_conflicting_label_groups": 0,
+  "duplicate_answer_groups": 19,
+  "distinct_normalized_positive_answers": 342,
+  "lexical_pairs_ge_0_5": 446,
+  "cross_label_lexical_pairs": 171
+}

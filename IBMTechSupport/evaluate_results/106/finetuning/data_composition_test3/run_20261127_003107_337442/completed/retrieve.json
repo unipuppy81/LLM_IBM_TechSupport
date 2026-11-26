@@ -1,0 +1,7 @@
+{
+  "files": {
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\data_composition_test3\\run_20261127_003107_337442\\inputs\\retrieved.json": "cf0e2afb76ad5670ebeecefc07198635dc1e076ded8f63c5b5042ded6207f7cc",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\data_composition_test3\\run_20261127_003107_337442\\inputs\\rag.json": "4a29cb7158ff751515bec9f46ba1e924baaf7e722b0489cfa5ac2c9d440c82f4",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\data_composition_test3\\run_20261127_003107_337442\\inputs\\retrieval_audit.json": "fa693d709cc97bc2b3b0f98b452b877be2dc7e4d116f2e08ce746828e652e943"
+  }
+}

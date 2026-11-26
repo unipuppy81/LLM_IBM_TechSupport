@@ -1,0 +1,22 @@
+{
+  "train_kinds": {
+    "distractor": 86,
+    "gold_document": 367,
+    "empty": 86
+  },
+  "train_positive_verbatim_visible": 360,
+  "oracle_val_positive_verbatim_visible": 53,
+  "train_question_truncated": 40,
+  "val_question_truncated": 11,
+  "max_prompt_tokens": 1887,
+  "train_val_document_name_overlap": [
+    "swg21067352.txt",
+    "swg21397335.txt",
+    "swg21507587.txt",
+    "swg21598417.txt",
+    "swg21662193.txt",
+    "swg21674407.txt",
+    "swg21960062.txt"
+  ],
+  "note": "Oracle uses known document, not guaranteed sufficient after packing. Training prioritizes exact reference span if available. Distractors are lexical heuristics, not verified negatives."
+}

@@ -1,0 +1,44 @@
+{
+  "baseline_367": {
+    "token_f1_percent": 21.7,
+    "answer_correctness_percent": 58.44,
+    "correct_refusal_rate_percent": 0.0,
+    "false_refusal_rate_percent": 0.0,
+    "exact_match_percent": 0.0,
+    "reference_contradiction_percent": 0.0,
+    "reference_unsupported_percent": 16.88,
+    "best_val_loss": 2.2382,
+    "training_seconds": 504.117,
+    "training_gpu_gib": 4.872,
+    "inference_gpu_gib": 2.99,
+    "questions_per_second": 0.42,
+    "train_samples": 367,
+    "trainable_parameters": 1089536,
+    "youden_j_percent_points": 0.0
+  },
+  "expanded": {
+    "token_f1_percent": 21.5,
+    "answer_correctness_percent": 53.25,
+    "correct_refusal_rate_percent": 0.0,
+    "false_refusal_rate_percent": 0.0,
+    "exact_match_percent": 0.0,
+    "reference_contradiction_percent": 0.0,
+    "reference_unsupported_percent": 19.48,
+    "best_val_loss": 2.2794,
+    "training_seconds": 485.461,
+    "training_gpu_gib": 4.872,
+    "inference_gpu_gib": 2.99,
+    "questions_per_second": 0.37,
+    "train_samples": 532,
+    "trainable_parameters": 1089536,
+    "youden_j_percent_points": 0.0
+  },
+  "complete": true,
+  "optimizer_updates_per_epoch": {
+    "baseline": 46,
+    "expanded": 67
+  },
+  "human_review_required": true,
+  "qlora": "NOT RUN",
+  "diagnostic_only": true
+}

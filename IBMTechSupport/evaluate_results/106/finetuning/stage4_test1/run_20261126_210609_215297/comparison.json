@@ -1,0 +1,86 @@
+{
+  "baseline_lora": {
+    "token_f1_percent": 7.03,
+    "answer_correctness_percent": 16.88,
+    "correct_refusal_rate_percent": 75.86,
+    "false_refusal_rate_percent": 63.64,
+    "exact_match_percent": 0.0,
+    "reference_contradiction_percent": 0.0,
+    "reference_unsupported_percent": 14.29,
+    "best_val_loss": 1.7973,
+    "training_seconds": 535.475,
+    "training_gpu_gib": 4.87,
+    "inference_gpu_gib": 3.096,
+    "questions_per_second": 1.135,
+    "train_samples": 539,
+    "generation_seconds": 93.41,
+    "youden_j_percent_points": 12.22,
+    "trainable_parameters": 1089536
+  },
+  "baseline_target_modules": [
+    "q_proj",
+    "v_proj"
+  ],
+  "target_modules": {
+    "A_attention": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj"
+    ],
+    "B_all_linear": "all-linear"
+  },
+  "candidates": {
+    "A_attention": {
+      "token_f1_percent": 0.78,
+      "answer_correctness_percent": null,
+      "correct_refusal_rate_percent": 96.55,
+      "false_refusal_rate_percent": 97.4,
+      "exact_match_percent": 0.0,
+      "best_val_loss": 1.7817,
+      "training_seconds": 786.424,
+      "training_gpu_gib": 4.887,
+      "inference_gpu_gib": 2.995,
+      "questions_per_second": 2.116,
+      "reference_contradiction_percent": null,
+      "reference_unsupported_percent": null,
+      "train_samples": 539,
+      "trainable_parameters": 2179072
+    },
+    "B_all_linear": {
+      "token_f1_percent": 2.02,
+      "answer_correctness_percent": null,
+      "correct_refusal_rate_percent": 89.66,
+      "false_refusal_rate_percent": 90.91,
+      "exact_match_percent": 0.0,
+      "best_val_loss": 1.7821,
+      "training_seconds": 1002.7,
+      "training_gpu_gib": 4.995,
+      "inference_gpu_gib": 3.082,
+      "questions_per_second": 1.04,
+      "reference_contradiction_percent": null,
+      "reference_unsupported_percent": null,
+      "train_samples": 539,
+      "trainable_parameters": 9232384
+    }
+  },
+  "quality_status": {
+    "A_attention": "SKIPPED: False refusal did not decrease; Token F1 decreased; Youden's J decreased",
+    "B_all_linear": "SKIPPED: False refusal did not decrease; Token F1 decreased; Youden's J decreased"
+  },
+  "youden_j_percent_points": {
+    "baseline": 12.22,
+    "A_attention": -0.85,
+    "B_all_linear": -1.25
+  },
+  "provisional_selection": "baseline",
+  "complete": true,
+  "human_review_required": true,
+  "qlora": "NOT RUN",
+  "hallucination_rate_percent": null,
+  "notes": [
+    "Same E dataset, prompt, sample weights, rank, alpha and training settings.",
+    "Each candidate trained independently from original base weights.",
+    "Quality may be skipped for failed generation screening. N/A is not zero."
+  ]
+}
