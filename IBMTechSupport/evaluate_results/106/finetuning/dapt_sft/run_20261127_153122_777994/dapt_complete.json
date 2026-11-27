@@ -1,0 +1,27 @@
+{
+  "adapter_sha256": {
+    "adapter_config.json": "7ac9bdb0da3a5fb323cc2ca522738bb79a5675240c6a7254f05717899ac4ea4a",
+    "adapter_model.safetensors": "2b82bf8d070fce3289ae64add9a7810c3e06f5f2337faa4fb30b5f3c3756ed4a"
+  },
+  "metrics": {
+    "documents": 310,
+    "blocks": 613,
+    "input_tokens_per_epoch": 454735,
+    "target_tokens_per_epoch": 454122,
+    "epochs": 1,
+    "block_length": 1024,
+    "lr": 0.0001,
+    "grad_accum": 8,
+    "optimizer_updates": 77,
+    "skipped_updates": 0,
+    "training_seconds": 247.714,
+    "peak_gpu_memory_gb": 4.74,
+    "history": [
+      {
+        "epoch": 1,
+        "mean_token_loss": 2.0066502802150246,
+        "target_tokens": 454122
+      }
+    ]
+  }
+}

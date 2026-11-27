@@ -1,0 +1,1185 @@
+{
+  "source": "Data Composition Test2 (532 answerable QA), reconstructed from original train_clean.json, historical Stage1 cleanup/answer edits, and previously accepted train augmentation IDs; Windows CRLF serialization verified against recorded original training SHA256.",
+  "original_train_sha256_crlf": "1c98d8c41be15f213eab59d11f7c37ca64920383af1d8aa36a3e48b12d905e59",
+  "original_train_sha256_lf": "29ec5a31c9c2d599e995cae1eac29b9c37b7798fce7ecc78a3b1438c36c4a38d",
+  "source_train_count": 532,
+  "heldout_data_accessed": false,
+  "validation_test_overlap_check": "Not performed, per instruction not to access held-out data. Document overlap allowed.",
+  "counts": {
+    "original": 532,
+    "corrections": 8,
+    "completions": 23,
+    "edited_total": 31,
+    "quarantined": 8,
+    "augmentation_reviewed": 28,
+    "augmentation_accepted": 24,
+    "augmentation_rejected": 4,
+    "final": 548,
+    "answerable": 548,
+    "impossible": 0,
+    "unchanged_retained": 493
+  },
+  "answer_edits": [
+    {
+      "id": "TRAIN_Q034",
+      "category": "correction",
+      "question": "ITNM 4.2 Fix Pack 3 link and build number?.\n\nITNM 4.2 FP3 is available, if yes then where we can download?.",
+      "before": "http://www.ibm.com/support/knowledgecenter/en/SSSHRK_4.2.0/itnm/ip/wip/relnotes/reference/nmip_rn.html?view=kc#relnotes__description",
+      "after": "Yes. IBM Tivoli Network Manager IP Edition 4.2.0 Fix Pack 3 is build 4.2.0.34, released 28 April 2017. Obtain the platform-specific package from IBM Fix Central: 4.2.0-TIV-ITNMIP-AIX-FP0003 or 4.2.0-TIV-ITNMIP-Linux-FP0003. Consult the 4.2.0 release notes before installing.",
+      "reason": "Release-notes URL alone did not provide the download package or build.",
+      "filename": "swg24043575.txt",
+      "document_sha256": "a0bf612a7949a2d52fc153ca56453b54a19ebef4fa6c51f29f4f8a0c964d18b3",
+      "source_excerpts": [
+        "Build 4.2.0.34",
+        "4.2.0-TIV-ITNMIP-AIX-FP0003 28 Apr 2017",
+        "4.2.0-TIV-ITNMIP-Linux-FP0003 28 Apr 2017",
+        "Before installing or upgrading Network Manager, refer to the Fix Pack Release notes:"
+      ]
+    },
+    {
+      "id": "DEV_Q114",
+      "category": "correction",
+      "question": "Any difference between DB2 z/OS V9.1 + IBM Cobol and DB2 LUW V10.5 FP7 + MF Cobol?\n\nWe are planning below migration.\n\n[Current]\nDB2 z/OS V9.1 + IBM Cobol\n[New]\nDB2 AESE V10.5 FP7 / AIX V7.1 + Micro Focus Cobol (MF Cobol)\n\nAny known limitation or things what we need to concern?",
+      "before": "DB2 LUW precompile, prep write different code to DB2 z/OS?",
+      "after": "One documented migration difference is the generated COBOL BLOB declaration. For BLOB(10485760), the DB2 z/OS precompiler produces a group BLOB1-DATA followed by level-49 FILLER PIC(10485760). The LUW precompiler instead generates 02 BLOB1-DATA PIC(10485760). This is expected LUW behavior; there is no hidden option to generate the z/OS form. Review code that depends on this layout.",
+      "reason": "Existing answer repeated a question instead of explaining the migration difference.",
+      "filename": "swg21989702.txt",
+      "document_sha256": "250c722747f379ebd111cc19f6a32fc7c15ce9a7f3417f03bc5540e61b252221",
+      "source_excerpts": [
+        "49 FILLER PIC(10485760).",
+        "02 BLOB1-DATA PIC(10485760).",
+        "we don't have any hidden option to generate the cobol declarations similar to z/OS precompiler"
+      ]
+    },
+    {
+      "id": "DEV_Q254",
+      "category": "correction",
+      "question": "Why do I receive the message, \"IKJ79154I INSTALLATION EXIT IKJEESX0 REQUESTED TERMINATION. \" for a TSO SEND command?\n\nIf you issue the TSO SEND command in a batch job and receive this message:\n\nIKJ79154I INSTALLATION EXIT IKJEESX0 REQUESTED TERMINATION.\nIKJ79154I REASON CODE X'00000004'.",
+      "before": "coded a facility class for the FEK.CMD.SEND and FEK.CMD.SEND.CLEAR.",
+      "after": "RDz invokes TSO exit IKJEESX0 (FEKEESX0) to check SEND authority. Reason code X'00000004' occurs when the necessary FACILITY class security definitions for FEK.CMD.SEND and FEK.CMD.SEND.CLEAR are not coded. Define the appropriate profiles and grant the required READ access under your security policy; refresh the RACLIST for FACILITY after changing the definitions.",
+      "reason": "Original fragment omitted the negation and the cause.",
+      "filename": "swg21980860.txt",
+      "document_sha256": "8cd6e46aefddfd437face36f6c60e59eca9389fff6ab3b76394d96478fe98287",
+      "source_excerpts": [
+        "if you have not coded a facility class for the FEK.CMD.SEND and FEK.CMD.SEND.CLEAR",
+        "Code the appropriate security definitions for FEK.CMD.SEND and FEK.CMD.SEND.CLEAR.",
+        "SETROPTS RACLIST(FACILITY) REFRESH"
+      ]
+    },
+    {
+      "id": "DEV_Q099",
+      "category": "correction",
+      "question": "Is ITCAM Agent for WebSphere Applications 7.2.0.0.7 available?\n\nIs ITCAM Agent for WebSphere Applications 7.2.0.0.7 available?",
+      "before": "7.2.0.0.7 [http://www.ibm.com/support/fixcentral/swg/quickorder?product=ibm/Tivoli/Tivoli+Composite+Application+Manager+for+Applications&release=All&platform=All&function=fixId&fixids=7.2.0.0-TIV-ITCAMAD_WS-IF0007&includeSupersedes=0&source=fc] 7.2.0.0.14 March 9, 2017",
+      "after": "Yes. The ITCAM Agent for WebSphere Applications interim fix 7.2.0.0.7 is identified by fix ID 7.2.0.0-TIV-ITCAMAD_WS-IF0007 and is listed in IBM Fix Central. The release table lists 9 March 2017 with Data Collector level 7.2.0.0.14.",
+      "reason": "Separate agent version and data collector version rather than leaving unlabeled table values.",
+      "filename": "swg21652265.txt",
+      "document_sha256": "2e864afa97c90d1c563ba518e256d5a4f026aa1fac1b0b50628c32beca5445a0",
+      "source_excerpts": [
+        "7.2.0.0-TIV-ITCAMAD_WS-IF0007",
+        "7.2.0.0.14 March 9, 2017"
+      ]
+    },
+    {
+      "id": "TRAIN_Q015",
+      "category": "correction",
+      "question": "Help with Action required for IIB V9 & WMB V8 Hypervisor Editions  for security vulnerabilities in Red Hat Linux\n\n\n\nI need to understand details regarding Action required for IBM Integration Bus Hypervisor Edition V9.0 and WebSphere Message Broker Hypervisor Edition V8.0 for security vulnerabilities in Red Hat Linux.\n\nWhere can I find this information?",
+      "before": "WebSphere Message Broker Hypervisor Edition",
+      "after": "IBM published the alert \"Action required for IBM Integration Bus Hypervisor Edition V9.0 and WebSphere Message Broker Hypervisor Edition V8.0 for security vulnerabilities in Red Hat Linux.\" Both products ship with RHEL Server 6.2 affected by CVE-2016-2126, CVE-2016-2125, CVE-2016-2123, CVE-2016-8866, CVE-2016-9556, CVE-2016-9559 and CVE-2016-9773. Contact Red Hat for the applicable RHEL 6.2 fixes and install them.",
+      "reason": "Original answer was only one product name.",
+      "filename": "swg21998452.txt",
+      "document_sha256": "e9143dc199c406876a1528bfad44d4e44b0d7e519b618cdbbb216ac93ef1d3c8",
+      "source_excerpts": [
+        "IBM Integration Bus Hypervisor Edition V9.0 and WebSphere Message Broker Hypervisor Edition V8.0 ship with Red Hat Enterprise Linux (RHEL) Server 6.2.",
+        "CVE-2016-2126, CVE-2016-2125, CVE-2016-2123, CVE-2016-8866, CVE-2016-9556, CVE-2016-9559, and CVE-2016-9773",
+        "contact Red Hat to obtain and install fixes"
+      ]
+    },
+    {
+      "id": "TRAIN_Q046",
+      "category": "correction",
+      "question": "Does Linux KVM monitoring agent support CANDLEDATA function?\n\nDoes Linux KVM monitoring agent in ITM support CANDLEDATA function?",
+      "before": "The CANDLEDATA mechanism is available with ITM 6.30.05.00.",
+      "after": "ITM introduced CANDLEDATA in 6.30.05.00 for Linux and UNIX. IBM lists LO, LZ, UD and UX as verified agents; this list does not establish support for the Linux KVM monitoring agent. Confirm KVM agent support with its corresponding support team before using CANDLEDATA.",
+      "reason": "General ITM feature availability does not establish support for the specified agent.",
+      "filename": "swg21695194.txt",
+      "document_sha256": "8bcc0dca991a2070d0790146fa8d00938756637a4f9a04ed6614b9503c0a4bac",
+      "source_excerpts": [
+        "The CANDLEDATA mechanism is available with ITM 6.30.05.00.",
+        "limited to Linux and UNIX platforms.",
+        "Agents Verified with CANDLEDATA",
+        "For other agents, contact the corresponding support team."
+      ]
+    },
+    {
+      "id": "TRAIN_Q017",
+      "category": "correction",
+      "question": "Does Portal 6.1.x support Oracle 12c?\n\n\n\nWe are running Portal Server v6.1.0.6 and I need to know what the newest version of Oracle that is supported with the WPS 6.1.0.6?\n\nSpecifically, if Oracle 12c is not supported, what version of Oracle 11g is?",
+      "before": "Oracle 11gR2 V11.2.0.1 (including RAC)",
+      "after": "The IBM AIX requirements for WebSphere Portal 6.1.0.5 and 6.1.5.2 list Oracle 11gR2 11.2.0.1 and Oracle 11gR1 11.1.0.7, including RAC. Oracle 12c is not listed in those requirements. These tested levels do not establish certification for the requested Portal 6.1.0.6 release; verify that release and platform before upgrading.",
+      "reason": "Original answer omitted the Oracle 12c question and silently applied a different Portal release.",
+      "filename": "swg27019359.txt",
+      "document_sha256": "836105be50f0e1ea5bfcd5b6196859d75f7bd6eedc3db2a0820d65995a2422ca",
+      "source_excerpts": [
+        "IBM WebSphere Portal V6.1.0.5 and 6.1.5.2 hardware and software requirements on an AIX operating system.",
+        "Oracle 11gR2 V11.2.0.1 (including RAC)",
+        "Oracle 11gR1 V11.1.0.7 (including RAC)"
+      ]
+    },
+    {
+      "id": "TRAIN_Q562",
+      "category": "correction",
+      "question": "Does Portal 6.1.x support Oracle 11g?\n\n\n\nWe are running Portal Server v6.1.0.6 and I need to know what the newest version of Oracle that is supported with the WPS 6.1.0.6?\n\nSpecifically, What version of Oracle 11g is?",
+      "before": "Oracle 11gR2 V11.2.0.1 (including RAC)",
+      "after": "For the documented WebSphere Portal 6.1.0.5 and 6.1.5.2 AIX requirements, Oracle 11gR2 11.2.0.1 and Oracle 11gR1 11.1.0.7 are listed, including RAC. Check the system requirements for Portal 6.1.0.6 and your operating system before treating these levels as certified for that release.",
+      "reason": "Preserve the documented version and platform scope instead of claiming unverified compatibility.",
+      "filename": "swg27019359.txt",
+      "document_sha256": "836105be50f0e1ea5bfcd5b6196859d75f7bd6eedc3db2a0820d65995a2422ca",
+      "source_excerpts": [
+        "IBM WebSphere Portal V6.1.0.5 and 6.1.5.2 hardware and software requirements on an AIX operating system.",
+        "Oracle 11gR2 V11.2.0.1 (including RAC)",
+        "Oracle 11gR1 V11.1.0.7 (including RAC)"
+      ]
+    },
+    {
+      "id": "DEV_Q288",
+      "category": "completion",
+      "question": "Is Java 8 supported for BPM?\n\n\n\nI understand that support for Java 6 on WebSphere Application Server is ending April 2018, see: http://www-01.ibm.com/support/docview.wss?uid=swg21999583\n\nNow I can switch to Java 7. But what about Java 8? Does BPM 8.5.6 support Java 8?",
+      "before": "IBM BPM V8.5.6.0 Java 6 or Java 7*",
+      "after": "No. IBM BPM 8.5.6.0 supports Java 6 or Java 7, not Java 8. Java 8 support is provided by IBM BPM 8.6. To use Java 8, upgrade to BPM 8.6. Java snippets, Java conditions and Java expressions in BPEL processes must still use Java 6 constructs.",
+      "reason": "Turn an isolated table cell into a direct answer including version and restriction.",
+      "filename": "swg21639640.txt",
+      "document_sha256": "a21308c375fd7aad0d0757303524128302debed37a5fd665e89bb892f244f4f4",
+      "source_excerpts": [
+        "IBM BPM V8.6 Java 8*",
+        "IBM BPM V8.5.6.0 Java 6 or Java 7*",
+        "Java snippets, Java conditions, and Java expressions in BPEL processes must use Java 6 constructs instead of Java 7 or Java 8 constructs."
+      ]
+    },
+    {
+      "id": "TRAIN_Q501",
+      "category": "completion",
+      "question": "Is there a way to force the Tivoli Integrated Portal (TIP) fix pack installer to use a different temp location?\n\nIs there a way to force the Tivoli Integrated Portal (TIP) fix pack installer to use a different temp location?",
+      "before": "There is no option available to override /tmp.",
+      "after": "No. Both the Tivoli Integrated Portal and WebSphere installers hard-code /tmp, and the TIP fix pack installer has no option to override it. For an alternate directory feature, submit an enhancement request through IBM RFE.",
+      "reason": "Include the reason and avoid inventing TMPDIR overrides.",
+      "filename": "swg21655808.txt",
+      "document_sha256": "4662e875c44a5f806ff2556144606b990cd396037b83c3912c84d73fa2d5b5ad",
+      "source_excerpts": [
+        "/tmp is hard coded in both the TIP and Websphere installers.",
+        "There is no option available to override /tmp.",
+        "submit an enhancement request"
+      ]
+    },
+    {
+      "id": "TRAIN_Q346",
+      "category": "completion",
+      "question": "Cannot open module in exclusive edit - (no such file or directory)\n\nI have a module, that I can open normally, but when I try to open it in Exclusive Edit it tells me that \"no such file or directory\"  How do I solve this?",
+      "before": "This defect is resolved in IBM Rational DOORS Version 9.4.0.1",
+      "after": "This IBM Rational DOORS exclusive-edit failure indicates a corrupted user session file on the database server (APAR PM50525). The defect is fixed in DOORS 9.4.0.1. Contact Rational Support to repair the session file or restore the missing file from backup in the module current.ver directory. Do not manually modify database files without Support because this can corrupt the database.",
+      "reason": "Provide cause, fixed version and the safety restriction on database repair.",
+      "filename": "swg21511831.txt",
+      "document_sha256": "a2c551683d9afd35537bc590700639904bc46c53017d5d88d8229d1aee5f0048",
+      "source_excerpts": [
+        "APAR PM50525",
+        "This error indicates that a user session file is corrupted on the database server.",
+        "This defect is resolved in IBM Rational DOORS Version 9.4.0.1",
+        "Retrieve the missing file from system backup and insert it into the module current.ver directory",
+        "Modifications to the files in your DOORS database could result is data corruption"
+      ]
+    },
+    {
+      "id": "TRAIN_Q543",
+      "category": "completion",
+      "question": "RHEL7.2: CF servers crashed when db2cluster -cm -list -alert command issued\n\nEnvironment: DB2 11.1 GA / RHEL7.2\n\nWhenever I execute \"db2cluster -cm -list -alert\", 0x80090030 logged in db2diag.log on member nodes. Finally CF servers become STOPPED status with high probability.\n\n  2016-09-12-15.51.35.731323+540 I362836576E602       LEVEL: Severe  \n  PID     : 22991                TID : 70366596624816 PROC : db2sysc 0  \n  INSTANCE: db2inst1             NODE : 000           DB   : SAMPLE\n  HOSTNAME: pscale00.ibm.com  \n  EDUID   : 112                  EDUNAME: db2LLMn2 (SAMPLE) 0  \n  FUNCTION: DB2 UDB, RAS/PD component, pdLogCaPrintf, probe:876  \n  DATA #1 : <preformatted>  \n  NotifyConn_t.wait (PsGetNotification:) failed: 0x80090030  \n  DATA #1 : <preformatted>  \n  If a CF return code is displayed above and you wish to get  \n  more information then please run the following command:  \n    \n  db2diag -cfrc <CF_errcode>",
+      "before": "Add the following setting to file /etc/systemd/logind.conf\nRemoveIPC=no",
+      "after": "On RHEL 7.2 a known DB2 panic can occur when systemd-logind removes IPC resources owned by a user on logout (Red Hat bug 1264533). For that issue, set RemoveIPC=no in /etc/systemd/logind.conf. Confirm that IPC removal is the cause of the observed DB2 pureScale failure before applying the workaround.",
+      "reason": "Retain exact setting and state the documented condition rather than asserting all CF crashes share this cause.",
+      "filename": "swg21681093.txt",
+      "document_sha256": "f2d9f9b5ca63bd2c04edfc9885553c7107aedef91d0a2982d74b07aa47288b55",
+      "source_excerpts": [
+        "1264533 DB2 Panic, due to removed IPC resources. Redhat v7.2",
+        "logind removing IPC resources owned by user when this user logs off.",
+        "Add the following setting to file /etc/systemd/logind.conf RemoveIPC=no"
+      ]
+    },
+    {
+      "id": "TRAIN_Q090",
+      "category": "completion",
+      "question": "Does  ITCAM MSSQL agent support SQL Server 2017?\n\nDoes MSSQL monitoring agent support SQL Server 2017?\nThe compatibility matrix only mentions SQL Server 2016:\nhttps://www.ibm.com/software/reports/compatibility/clarity-reports/report/html/softwareReqsForProduct?deliverableId=D67CBA30151E11E7B7E234686CAD92CE&osPlatforms=Windows&duComponentIds=S009&mandatoryCapIds=62|45",
+      "before": "Added support for SQL Server 2017 version.",
+      "after": "Yes. IBM ITCAM for Microsoft Applications SQL Server Agent 6.3.1.13 Interim Fix 0001 (6.3.1.13-TIV-ITM_SQL-IF0001, 14 May 2018) added tolerance support for SQL Server 2017 under defect 171127. Use that documented agent fix level when SQL Server 2017 support is required.",
+      "reason": "Name the precise agent fix level and nature of support.",
+      "filename": "swg24044840.txt",
+      "document_sha256": "2713dade11f8841ac95c5d707689e76bf6c0a77e31907b7720a4ce30e52ae401",
+      "source_excerpts": [
+        "Microsoft(R) SQL Server Agent, Version 6.3.1.13",
+        "Interim Fix 0001, (6.3.1.13-TIV-ITM_SQL-IF0001)",
+        "Date: May 14, 2018",
+        "DEFECT: 171127 Abstract: Add tolerance support for SQL Server 2017."
+      ]
+    },
+    {
+      "id": "DEV_Q287",
+      "category": "completion",
+      "question": "Why I am not able to login to StoredIQ Dataserver and Getway using ssh?\n\nWhy I am not able to login to StoredIQ Dataserver and Getway using ssh?",
+      "before": "Restriction in remote login using ssh",
+      "after": "The documented StoredIQ Data Server/Gateway SSH failure is caused by a restriction on remote login. From the appliance console, an authorized administrator can review /etc/ssh/sshd_config and, if root SSH login is approved for that appliance, set PermitRootLogin to yes, save the change and restart the appliance. Do not enable root SSH contrary to your security policy.",
+      "reason": "Provide the documented resolution, with an explicit authorization/security condition.",
+      "filename": "swg22001558.txt",
+      "document_sha256": "6ca9a0856c14fa1436a5a51cc7ba5cf1cf9decbf14051feea02f9a02d1ab6e65",
+      "source_excerpts": [
+        "Restriction in remote login using ssh",
+        "Review the file /etc/ssh/sshd_config on the specific server using console",
+        "Make sure PermitRootLogin is set to yes",
+        "Restart the appliance"
+      ]
+    },
+    {
+      "id": "TRAIN_Q379",
+      "category": "completion",
+      "question": "Why the tick boxes in 'Subscibed Events' table remain ticked after saving the page\n\nWhen editing a widget and try to unsubscribe the event subscription for 'dataRefresh' events, the checkbox/tick for \"dataRferesh\" is still selected, even after saving the page.",
+      "before": "This has been identified as a product defect under APAR IV83442",
+      "after": "This is the DASH product defect APAR IV83442. It affects widgets added after the first Save or Save and Exit. The documented workaround is to place all widgets and configure their subscribed events (including dataRefresh and timeSet) before the first save. For widgets added afterwards that need those event settings changed, contact DASH Support.",
+      "reason": "Include trigger and available workaround.",
+      "filename": "swg21984540.txt",
+      "document_sha256": "92b9eb662338415d67224d78fd64c5fa7fe703bddcf094232549a2aba5b98abe",
+      "source_excerpts": [
+        "APAR IV83442",
+        "Place and configure the Events for all widgets wanted on the page before doing first \"Save\" or \"Save and Exit\"",
+        "DASH support will need to be contacted",
+        "widgets which are placed on the page after first"
+      ]
+    },
+    {
+      "id": "DEV_Q188",
+      "category": "completion",
+      "question": "Is there a support's guide to the CORBA Probes?\n\nWhere can I download the support's guide to the IBM CORBA probes?",
+      "before": "GENERIC_CORBA_SupportsGuide_20.pdf",
+      "after": "Yes. The attachment is GENERIC_CORBA_SupportsGuide_20.pdf in IBM technote swg21614208, \"Support's Guide to IBM CORBA probes.\" The guide explains the IBM CORBA integration, which replaced the third-party Visibroker software in 2012. Use it alongside the specific probe documentation.",
+      "reason": "Supply the source document identifier and what the guide covers.",
+      "filename": "swg21614208.txt",
+      "document_sha256": "aa88f8f47e9045a499028702527a8c2e72fa21c41a404b6e0fa267b3192d9c7f",
+      "source_excerpts": [
+        "The Visibroker software is a third party product, and was replaced in 2012 by the IBM CORBA software.",
+        "GENERIC_CORBA_SupportsGuide_20.pdf [/support/docview.wss?uid=swg21614208&aid=2]",
+        "alongside the probe's specific documentation"
+      ]
+    },
+    {
+      "id": "TRAIN_Q473",
+      "category": "completion",
+      "question": "Why Summarization and pruning are failing with SQL Error Code = -4220 on AIX_LPAR table?\n\nSummarization and pruning are failing with SQL Error Code = -4220 on AIX_LPAR table.  What's the fix?",
+      "before": "Update the invalid data with a valid UTF-8 character string.",
+      "after": "SQL error -4220 can occur when the JCC driver encounters invalid UTF-8 data. Correct the invalid character data; use HEX(column) to inspect its bytes. For supported JCC drivers, db2.jcc.charsetDecoderEncoder=3 is an alternative that substitutes U+FFFD for invalid byte sequences instead of throwing an exception. This does not repair the stored data.",
+      "reason": "Add diagnosis and distinguish the data repair from the driver workaround.",
+      "filename": "swg21684365.txt",
+      "document_sha256": "3155a127a45418cf074a5efb843c8f5ee12ff470ae5ec89b348ad0731b1f3a67",
+      "source_excerpts": [
+        "Update the invalid data with a valid UTF-8 character string.",
+        "SELECT HEX(col1) FROM tab1",
+        "db2.jcc.charsetDecoderEncoder=3",
+        "Unicode REPLACEMENT CHARACTER (U+FFFD)"
+      ]
+    },
+    {
+      "id": "TRAIN_Q110",
+      "category": "completion",
+      "question": "Why does my install of the latest Installation Manager on a Linux Ingram Server not function?\n\n\n\nI've installed the latest Installation Manager on an Ingram Server that I mount to different Linux machines where I have installed WebSphere Application Server. I received the following error when trying to use the Installation Manager:\n\n     00:02.25 ERROR [main] org.eclipse.equinox.log.internal.\n     ExtendedLogReaderServiceFactory safeLogged\n       Application error\n       java.lang.NoClassDefFoundError: org.eclipse.jface.dialogs.\n     ProgressMonitorDialog\n         at java.lang.ClassLoader.defineClassImpl(Native Method)\n         at java.lang.ClassLoader.defineClass(ClassLoader.java:324)\n         at org.eclipse.osgi.internal.baseadaptor.DefaultClassLoader.\n     defineClass(DefaultClassLoader.java:188)\n         at org.eclipse.osgi.baseadaptor.loader.ClasspathManager.\n     defineClassHoldingLock(ClasspathManager.java:632)\n\nI have unmounted and remounted the drive but does not appear to resolve the issue.",
+      "before": "Only install the Installation Manager on a local disk.",
+      "after": "Install IBM Installation Manager on a local disk, not on an NFS-mounted directory shared between UNIX or Linux machines. IBM documents issues on remote NFS installations, including delayed removal of JRE folders during uninstall. Reinstall Installation Manager locally on the system that uses it.",
+      "reason": "Add the NFS-specific restriction and remediation.",
+      "filename": "swg21308281.txt",
+      "document_sha256": "3331bbb0ed1a08a014eee1933df28205bda2c9dc91a456d66a06fe7511f38083",
+      "source_excerpts": [
+        "Do not install the IBM Installation Manager on an NFS mounted disk.",
+        "some of the JRE folders are not being deleted",
+        "Only install the Installation Manager on a local disk."
+      ]
+    },
+    {
+      "id": "TRAIN_Q260",
+      "category": "completion",
+      "question": "Framework Manager data source error\n\n\n\nUsers receive the following error on selecting a data source from the list defined in IBM Cognos within Framework Manager 10.2.2 Fix Pack 5\n\nalt text\n\nThat error (BMT-IMP-0002 Failed to Execute Metadata request. CM-REQ-4342 An error occurred with the client. CAF-WRN-2082 An error has occurred.) prevents all users to add an existing data source via Framework Manager.\n\nHow can we fix this?",
+      "before": "Grant user the required \"Import relational metadata\" capability.",
+      "after": "A possible cause of Cognos Framework Manager BMT-IMP-0002 is missing Import relational metadata capability. In Cognos Connection, open Launch > IBM Cognos Administration > Security > Capabilities. Choose Actions > Set Properties for Import relational metadata, open Permissions, and grant the required user, group or role Read, Execute and Traverse permissions.",
+      "reason": "Include the exact capability and navigation/permission steps.",
+      "filename": "swg21624136.txt",
+      "document_sha256": "e9fbd8c46b351cdad049df49224205b79b6646a6a82743a30d25d35104626ba1",
+      "source_excerpts": [
+        "One possible reason is that the user does not have the required \"Import relational metadata\" capability.",
+        "Launch > IBM Cognos Administration",
+        "granting them Read, Execute and Traverse permissions."
+      ]
+    },
+    {
+      "id": "TRAIN_Q027",
+      "category": "completion",
+      "question": "Why are we not able to create new pages using the Manage Pages Portlet?\n\nWe are using Portal 8.5 on Windows,\n\nFrom WebSphere Portal Administration console. we go to ‘Manage Pages’- > Select ‘Content root’ item from table -> ‘New Page’ button, after entering the new page details and hitting OK we receive following error:\n\nEJPAS0017E: Unable to create PageName\n\nThe error in SystemOut.log shows:\n\n     DefaultTransa E   Message: Could not save object in repository.,\n     Cause: javax.jcr.RepositoryException: RT0002E: Error while calling a function createItems of PLS data manager\n     com.ibm.workplace.wcm.services.repository.RepositoryException:\n     Message: Could not save object in repository., Cause: javax.jcr.RepositoryException: RT0002E: Error while calling a function createItems of PLS data manager\n     ...\n     \n     Caused by: com.ibm.icm.da.DBAccessException:\n     java.sql.SQLFeatureNotSupportedException: DSRA1300E: Feature is not implemented: PreparedStatement.setBinaryStream\n      at com.ibm.icm.da.portable.data.WideTableData.changeItems(WideTableData.java:857)",
+      "before": "The JDBC driver does not meet WebSphere Portal v8's prerequisites.",
+      "after": "For this Portal administration failure, check whether the database and JDBC driver meet WebSphere Portal prerequisites. SystemOut.log messages DSRA8204I, DSRA8205I and DSRA8206I identify the database version, JDBC driver name and driver version. Move unsupported components to a supported level and restart Portal. If the JDBC JAR name changes, review VMM_JDBC_CLASSPATH, ORACLE_JDBC_DRIVER_PATH and other scoped WebSphere variables.",
+      "reason": "Include diagnosis and remediation, not just the cause.",
+      "filename": "swg21611699.txt",
+      "document_sha256": "749be136e61eb51e9360c34e046b84fbda3c89cd4594258577614e058ebad099",
+      "source_excerpts": [
+        "The JDBC driver does not meet WebSphere Portal v8's prerequisites.",
+        "DSRA8204I: Database product version",
+        "DSRA8205I: JDBC driver name",
+        "DSRA8206I: JDBC driver version",
+        "upgrade or downgrade the component(s) to the appropriate supported level(s) and restart the Portal server(s).",
+        "VMM_JDBC_CLASSPATH ORACLE_JDBC_DRIVER_PATH"
+      ]
+    },
+    {
+      "id": "TRAIN_Q570",
+      "category": "completion",
+      "question": "What files require modification when updating, upgrading, moving, or migrating a System Monitor MSSQL database in IBM Enterprise Content Management System Monitor 5.2 ?\n\nWhat files require modification when updating, upgrading, moving, or migrating a System Monitor MSSQL database in IBM Enterprise Content Management System Monitor 5.2?",
+      "before": "The files are:\n$CENIT_ROOT/cala_rex/cfg/cala_rex_finca.cfg\n\n$CENIT_ROOT/cala_rex/cfg/cala_rex_srv.cfg\n\n$CENIT_ROOT/.prodinfo/FSM_SERVER.settings\n\n$CENIT_ROOT/eventserver/cfg/db-cfg.xml\n\n$CENIT_ROOT/gui/cfg/db-cfg.xml\n\n$CENIT_ROOT/initdb/cfg/db-cfg.xml",
+      "after": "Update these files under $CENIT_ROOT: cala_rex/cfg/cala_rex_finca.cfg, cala_rex/cfg/cala_rex_srv.cfg, .prodinfo/FSM_SERVER.settings, eventserver/cfg/db-cfg.xml, gui/cfg/db-cfg.xml and initdb/cfg/db-cfg.xml. If a monitor checks the monitor database server, also update cala/misc/cmdtab_merged.ctb. Reflect any changed port, user or password in the applicable files.",
+      "reason": "Restore the omitted conditional file and changed connection settings.",
+      "filename": "swg22002442.txt",
+      "document_sha256": "7ae4ce396fe3d5f8a9548fc53a05f2efa3cf0fc98fe64df4d8573895e8dd189a",
+      "source_excerpts": [
+        "$CENIT_ROOT/cala_rex/cfg/cala_rex_finca.cfg",
+        "$CENIT_ROOT/cala_rex/cfg/cala_rex_srv.cfg",
+        "$CENIT_ROOT/.prodinfo/FSM_SERVER.settings",
+        "$CENIT_ROOT/eventserver/cfg/db-cfg.xml",
+        "$CENIT_ROOT/gui/cfg/db-cfg.xml",
+        "$CENIT_ROOT/initdb/cfg/db-cfg.xml",
+        "$CENIT_ROOT/cala/misc/cmdtab_merged.ctb",
+        "If the port, user, or password changes, these must also be reflected in the above files."
+      ]
+    },
+    {
+      "id": "TRAIN_Q428",
+      "category": "completion",
+      "question": "ITMv6 issue: Cognos reports run for an extended period, sometimes never finishes\n\nITMv6 issue: Cognos reports run for an extended period, sometimes never finishes",
+      "before": "TCR 2.1/2.1.1 server provides a default setting for heap size, a minimum size (xms) of 512MB and a maximum size (xmx) of 1024MB.",
+      "after": "Large TCR 2.1/2.1.1 reports can exhaust the default JVM heap (512 MB minimum, 1024 MB maximum). To change it, run:\n<INST>/tipv2/bin/wsadmin.sh[.bat] -user <USERNAME> -password <PASSWORD> -f <INST>/tipv2/profiles/TIPProfile/bin/changeMem.py --xms <MINVALUE> --xmx <MAXVALUE>\nFor example, use 1024 and 1843 MB if supported by the JVM. Keep 32-bit JVM limits in mind, and restart the TCR server after changing the values.",
+      "reason": "Original answer listed defaults without explaining how to address memory pressure.",
+      "filename": "swg21585678.txt",
+      "document_sha256": "22b65d1e8c186562c7be01a6c2332ba89938ff09eb53b882fa9867781fdfd84e",
+      "source_excerpts": [
+        "a minimum size (xms) of 512MB and a maximum size (xmx) of 1024MB.",
+        "<INST>/tipv2/bin/wsadmin.sh[.bat] -user <USERNAME> -password <PASSWORD> -f <INST>/tipv2/profiles/TIPProfile/bin/changeMem.py --xms <MINVALUE> --xmx <MAXVALUE>",
+        "<MINVALUE> can be 1024 and <MAXVALUE> can be 1843",
+        "restart the TCR server for the changes to take effect."
+      ]
+    },
+    {
+      "id": "DEV_Q281",
+      "category": "completion",
+      "question": "'Save and Close' and 'Save' buttons grayed out in desktop configuration\n\nIn IBM Content Navigator, when configuring a desktop, the 'Save and Close' and 'Save' buttons may be disabled.",
+      "before": "One of the required fields in the configuration does not have a value",
+      "after": "A required desktop configuration field is empty. In IBM Content Navigator, check the General, Repositories, Layout and Menus tabs; required-field tabs are marked with a red asterisk. Supply a value for every required field to enable Save and Save and Close.",
+      "reason": "Identify the relevant tabs and how to recover the buttons.",
+      "filename": "swg21975568.txt",
+      "document_sha256": "c596872f01357a0cf929bffdc2548ef5a71ae7447ba3273d53d57898dcee0781",
+      "source_excerpts": [
+        "General, Repositories, Layout, and Menus tabs contain required fields.",
+        "flagged with a red asterisk",
+        "Make sure all these fields have a value."
+      ]
+    },
+    {
+      "id": "DEV_Q268",
+      "category": "completion",
+      "question": "ODR OOM issue\n\nI got ODR OOM after upgrading the WAS to v8553. No configuration or traffic load changing. Do I need a fix pack?",
+      "before": "The fix for this APAR is currently targeted for inclusion in\n   fix pack 8.5.5.9.",
+      "after": "If the ODR OutOfMemoryError matches APAR PI53566, redundant HttpRouteAction objects can accumulate during application configuration changes under load. Restarting the ODR is the temporary workaround. IBM lists the PI53566 fix and WebSphere Application Server 8.5.5 Fix Pack 9 (8.5.5.9); confirm that the observed leak matches this APAR before selecting a fix.",
+      "reason": "Qualify APAR applicability and include the temporary workaround.",
+      "filename": "swg1PI53566.txt",
+      "document_sha256": "a0b642d58891c1a96201deab8a405999029aea26cad2d759346c0f68e53adbef",
+      "source_excerpts": [
+        "PI53566: ON DEMAND ROUTER MEMORY LEAK WHEN UPGRADING APPLICATIONS UNDER LOAD",
+        "HttpRouteAction objects",
+        "Restart the ODR.",
+        "8.5.5.9: WebSphere Application Server V8.5.5 Fix Pack 9"
+      ]
+    },
+    {
+      "id": "DEV_Q262",
+      "category": "completion",
+      "question": "Table \"\".\"\" could not be found\n\n\n\nWhen doing a table mapping with DB2 as source, selecting a table which contains special characters on column comments like:\n\nCOMMENT ON COLUMN .. IS 'Test comment ‘1’ complete';\n\nMapping fails with following error message: Table . could not be found in the database.  What's the reason for the error?",
+      "before": "During an insert of data using CLP characters, they do not go through codepage conversion.\nIf operating system and database codepage both are UTF-8, but the data to be inserted is not Unicode, then data in the database might have incorrect codepoints (not-Unicode) and the above error will be a result during data retrieval.",
+      "after": "DB2 CLP input may bypass code-page conversion when both the operating system and database are configured for UTF-8 but the input is not Unicode. This can store invalid code points in column comments. Reinsert the affected data using code-page conversion, setting the operating-system code page to match the input data encoding.",
+      "reason": "Retain diagnosis and add the documented remedy.",
+      "filename": "swg21412846.txt",
+      "document_sha256": "5759bad4b478764bd73ba0533f4faf19763f5322ff0d1e0b8be14e29fa8009cf",
+      "source_excerpts": [
+        "they do not go through codepage conversion.",
+        "If operating system and database codepage both are UTF-8",
+        "Reinsert data with codepage conversion enforced by setting the operation system codepage matching to the codepage of data to be inserted"
+      ]
+    },
+    {
+      "id": "TRAIN_Q515",
+      "category": "completion",
+      "question": "SPSS will not start on Mac\n\n\n\nI downloaded SPSS about 3 weeks ago. On the day when I downloaded it, it was working fine. Last week, I tried starting SPSS but it did not start. I tried reinstalling it, it still would not open. I've updated JAVA (thought this would be a problem), it slowly opened the program but then now that I have reinstalled it and entered in my code, I've used up my code and I have no authorization. But just now, I started SPSS and the same problem is happening. The IBM SPSS name screen appears but nothing happens.\n\n    SPSS would not start.\n\n    Even if it does start, I have licensing problems.",
+      "before": "Delete the following file: com.ibm.spss.plist on your Macintosh to dramatically reduce the opening and closing of the Statistics software.",
+      "after": "For the documented SPSS Statistics 21 or 22 Mac OS X launch/performance problem (APAR PM90266), restart the Mac and rename ~/Library/Preferences/com.ibm.spss.plist to old_com.ibm.spss.plist. In Finder, open Home, then Go while holding Option to access Library > Preferences. Relaunch Statistics and close it normally rather than using Force Quit. Mavericks 10.9 can restore a cached plist via cfprefsd; check the version-specific instructions if this occurs.",
+      "reason": "Add scope and non-destructive procedure; do not generalize to every SPSS release or launch failure.",
+      "filename": "swg21651225.txt",
+      "document_sha256": "7390dff104128602830fdd2f1a3a4f78099128350187002cf7c5a054caa9a55d",
+      "source_excerpts": [
+        "This has been identified as a product defect under APAR PM90266",
+        "Statistics 21 or 22, Not version 23.",
+        "Rename the com.ibm.spss.plist object to old_com.ibm.spss.plist",
+        "do not force quit",
+        "Mavericks restore its cached copy."
+      ]
+    },
+    {
+      "id": "TRAIN_Q209",
+      "category": "completion",
+      "question": "Out of memory error when executing simulation\n\n\n\nI am getting OutOfMemory error when running simulation from ODM 8.5.1 Decision Center.\n\nThe DVS Excel contains 50 scenarios and I am planning to submit a much larger number of scenario.\n\nI noted that each record of the EXECUTION_TRACES.FULL_EXECUTION_TRACE column of the Decision Server Decision Warehouse is several MB long.",
+      "before": "It is possible to customize the Decision Warehouse (DW) trace that is used by the Scenario Suite Provider (SSP) when a Decision Validation Service (DVS) scenario suite is executed in Rule Team Server. The customization can filter out information that is not necessary to keep in the DW. A sample implementation is provided that removes information about all the rules that are not fired, which helps keep the size of the trace small when there is a large number of rules in the ruleset and typically a much smaller number of rules actually fire.",
+      "after": "If large Decision Warehouse traces contribute to the DVS scenario-suite memory problem, customize the Scenario Suite Provider to omit rules that did not fire. Extract jrules-ssptrace-src.jar, edit jrules-ssptrace/build.xml (jrules.home, sspInput, sspOutput), run ant repackage-ssp in that directory, and deploy sspOutput. Only the persisted Decision Warehouse trace is reduced; DVS still uses the larger trace for scenario tests. This is not a guaranteed fix for every simulation OOM.",
+      "reason": "Add implementation steps and the source limitation about in-memory test traces.",
+      "filename": "swg21438208.txt",
+      "document_sha256": "ff5f0db6a0b0c8394881923572eec98e46f6789e2e0c12e6ba2e350cc06123db",
+      "source_excerpts": [
+        "only the DW persisted trace is smaller, the original larger trace is still used by DVS",
+        "Unjar the attached jrules-ssptrace-src.jar",
+        "jrules.home directory path, the sspInput and sspOutput file paths",
+        "ant repackage-ssp",
+        "Deploy the customized SSP"
+      ]
+    },
+    {
+      "id": "TRAIN_Q361",
+      "category": "completion",
+      "question": "Is MQ V7.0.1 is going out of support?\n\nWhen is the last date of support?",
+      "before": "Product Version Release Date End of Support Platforms WebSphere MQ V7.0.1 28 Aug 2009 [https://www.ibm.com/common/ssi/cgi-bin/ssialias?subtype=ca&infotype=an&appname=iSource&supplier=897&letternum=ENUS209-245] 30 Apr 2015",
+      "after": "IBM withdrew support for WebSphere MQ V7.0.1 on 30 April 2015. Its original release date was 28 August 2009. The end-of-support announcement also covers the related V7.0.0 products; check the exact product/platform when planning migration.",
+      "reason": "Convert a table fragment to a direct answer and retain the historical date.",
+      "filename": "swg21674407.txt",
+      "document_sha256": "a2eef23171f86e1eaead4126b5413764e822f46e057ddcd235239d37d99304fb",
+      "source_excerpts": [
+        "WebSphere MQ V7.0.1 28 Aug 2009",
+        "30 Apr 2015",
+        "IBM has withdrawn support for WebSphere MQ V7.0.1 and V7.0.0"
+      ]
+    },
+    {
+      "id": "TRAIN_Q416",
+      "category": "completion",
+      "question": "Why are the component parameters missing for the Enable Hold and Virtual Interview Multiple Response functionality?\n\nWhy are the component parameters missing for the Enable Hold and Virtual Interview Multiple Response functionality?",
+      "before": "The documentation references a MULTIPLE_RESPONSES_FOR_HOLD_VI_ALLOWED and a MULTIPLE_RESPONSES_INTERVIEW_AUTO_COMPLETE parameter that is supposed to be under the VIRTUAL_INTERVIEW_CONFIGURATION component.These component parameters are not automatically added as part of the database upgrade scripts.",
+      "after": "The database upgrade scripts do not automatically add these parameters. In Admin > Components, edit VIRTUAL_INTERVIEW_CONFIGURATION and add MULTIPLE_RESPONSES_FOR_HOLD_VI_ALLOWED and MULTIPLE_RESPONSES_INTERVIEW_AUTO_COMPLETE. Set each to True or False according to the required behavior, then Save and Close.",
+      "reason": "Add the missing manual configuration procedure.",
+      "filename": "swg21984301.txt",
+      "document_sha256": "7e24e6a6eca921e009a3fadfe7d8627f5db4c78a00799c0750d4fd3e9b2c20d9",
+      "source_excerpts": [
+        "These component parameters are not automatically added as part of the database upgrade scripts.",
+        "Admin > Components screen.",
+        "VIRTUAL_INTERVIEW_CONFIGURATION",
+        "MULTIPLE_RESPONSES_FOR_HOLD_VI_ALLOWED",
+        "MULTIPLE_RESPONSES_INTERVIEW_AUTO_COMPLETE",
+        "Click on \"Save and Close\"."
+      ]
+    },
+    {
+      "id": "TRAIN_Q263",
+      "category": "completion",
+      "question": "Where can I get ITM 6.3.0 Fixpack 6 ?  Is it available now ?\n\nWhere can I get ITM 6.3.0 Fixpack 6 ? Is it available now ?",
+      "before": "6.3.0-TIV-ITM-FP0006 11 Dec 2015 English 999999999 FC [http://www.ibm.com/support/fixcentral/swg/quickorder?parent=ibm%7ETivoli&product=ibm/Tivoli/IBM+Tivoli+Monitoring&release=All&platform=All&function=fixId&fixids=6.3.0-TIV-ITM-FP0006&source=fc]",
+      "after": "IBM Tivoli Monitoring 6.3.0 Fix Pack 6 was released on 11 December 2015. In IBM Fix Central, select IBM Tivoli Monitoring and search for fix ID 6.3.0-TIV-ITM-FP0006. It is a cumulative fix pack for ITM 6.3.0.",
+      "reason": "Replace an unlabeled download table row with product, date and actionable fix ID.",
+      "filename": "swg24040390.txt",
+      "document_sha256": "4f4ebd82e830a144e68a1556e83945024345c195827686d26b11fc0dc6be7667",
+      "source_excerpts": [
+        "6.3.0-TIV-ITM-FP0006 11 Dec 2015",
+        "This is a cumulative fix pack for IBM Tivoli Monitoring version 6.3.0."
+      ]
+    },
+    {
+      "id": "TRAIN_Q538",
+      "category": "completion",
+      "question": "Is ITCAM Data Collector for WebSphere 7.2.0.0.14 available?\n\nIs ITCAM Data Collector for WebSphere 7.2.0.0.14 available?",
+      "before": "7.2.0.0.14 [http://www.ibm.com/support/fixcentral/swg/quickorder?product=ibm/Tivoli/Tivoli+Composite+Application+Manager+for+Applications&release=All&platform=All&function=fixId&fixids=7.2.0.0-TIV-ITCAM_DC-IF0014&includeSupersedes=0&source=fc] March 9, 2017",
+      "after": "Yes. The ITCAM Data Collector for WebSphere level 7.2.0.0.14 is listed for 9 March 2017. In IBM Fix Central search for interim fix 7.2.0.0-TIV-ITCAM_DC-IF0014 for the Data Collector, not the separate WebSphere Applications monitoring agent.",
+      "reason": "Disambiguate the component and the fix ID.",
+      "filename": "swg21653030.txt",
+      "document_sha256": "d0c372fbd5647e4e14047ec097132b11748dd7e91e1ca1d860f1df4d2254a7b5",
+      "source_excerpts": [
+        "7.2.0.0.14",
+        "7.2.0.0-TIV-ITCAM_DC-IF0014",
+        "March 9, 2017"
+      ]
+    }
+  ],
+  "quarantine": [
+    {
+      "id": "DEV_Q175",
+      "reason": "Question asks WebSphere Extreme Scale, but the source establishes WebSphere Application Server/SDK leap-year compliance only.",
+      "filename": "swg21578744.txt",
+      "document_sha256": "8a3ea69f7e645634a01ac664a405ad1db965d2034c96cb443c40473d337fbbfd",
+      "source_excerpts": [
+        "WebSphere Application Server and the SDK are leap year compliant."
+      ]
+    },
+    {
+      "id": "DEV_Q176",
+      "reason": "Question asks WebSphere Extreme Scale leap-second compliance; source describes leap years, not leap seconds or this product.",
+      "filename": "swg21578744.txt",
+      "document_sha256": "8a3ea69f7e645634a01ac664a405ad1db965d2034c96cb443c40473d337fbbfd",
+      "source_excerpts": [
+        "WebSphere Application Server and the SDK are leap year compliant."
+      ]
+    },
+    {
+      "id": "DEV_Q240",
+      "reason": "Question reports port 6002 status lookup failure; source addresses a different ITX file-trigger watch failure, not a verified fix for the reported port error.",
+      "filename": "swg21986219.txt",
+      "document_sha256": "f31fba9ac3bc0f6c4bc412869fbb1102d7c12e2054d7f49962a0700e40cfabf2",
+      "source_excerpts": [
+        "Launcher fails to load a watch when On Success = Delete and On Failure = Commit are used.",
+        "File Trigger FATAL Error : ValidateEKDirectories: Cannot find correct card index for watch #."
+      ]
+    },
+    {
+      "id": "TRAIN_Q488",
+      "reason": "Client/server encryption certification does not establish digital-signature provisioning for the requested DB2 UDB v8 security rule.",
+      "filename": "swg21237078.txt",
+      "document_sha256": "949a27ea4f5a196fd5683492f8fdf641d168e40be135014be0c4706b91e7ab81",
+      "source_excerpts": [
+        "DB2 is using ICC on most platforms.",
+        "encryption of data flowing between clients and servers"
+      ]
+    },
+    {
+      "id": "TRAIN_Q556",
+      "reason": "Original no refers to a session-ID hijacking question, not digital-signature provisioning. No signature procedure is established.",
+      "filename": "swg21237078.txt",
+      "document_sha256": "949a27ea4f5a196fd5683492f8fdf641d168e40be135014be0c4706b91e7ab81",
+      "source_excerpts": [
+        "DB2 does not use session ids for authentication",
+        "DB2 uses encryption modules which are FIPS 140-2 certified."
+      ]
+    },
+    {
+      "id": "TRAIN_Q092",
+      "reason": "Question reports ClassCastException in ODM Decision Center; source describes NotSerializableException from PMI SessionObjectSize.",
+      "filename": "swg21268440.txt",
+      "document_sha256": "0db08ebc30bdf1b3b029eb973b28a6903c1d37c02dfdc9741aaa3f0e9c749dd5",
+      "source_excerpts": [
+        "When PMI (Performance Monitoring Infrastructure) is enabled with SessionObjectSize counter enabled, getting NotSerializableException."
+      ]
+    },
+    {
+      "id": "TRAIN_Q121",
+      "reason": "The cited default poller thread counts and tuning setting do not establish the cause or safe resolution of the reported ncp_poller Out-of-memory failure.",
+      "filename": "swg21514810.txt",
+      "document_sha256": "91402b8bc05c12e927051d5b6a0974e773024dcf565d9befbcac8ed1fbda8e04",
+      "source_excerpts": [
+        "There are 100 threads assigned for default Pollers in all three releases (v3.7, v3.8 & v3.9)."
+      ]
+    },
+    {
+      "id": "TRAIN_Q100",
+      "reason": "The supplied TBSM Fix Pack 3 readme does not explicitly establish ITM 6.3 certification. Do not infer compatibility from the package title.",
+      "filename": "swg24039742.txt",
+      "document_sha256": "af0f8b8cae543c4c62db26f0be61bd63ee34b4f93db02093508f8d97a4e32399",
+      "source_excerpts": [
+        "Fix Pack Version 6.1.1-TIV-BSM-FP0003"
+      ]
+    }
+  ],
+  "new_qa": [
+    {
+      "id": "V2_SYN_79825c482c7c64660f1f",
+      "source_train_id": "TRAIN_Q046",
+      "question": "Why is CANDLEDATA restricted to Linux and UNIX in IBM Tivoli Monitoring?",
+      "answer": "CANDLEDATA is implemented primarily through symbolic links from the installation tree to the separate data directory. Most ITM code is unaware of the redirection, so the mechanism is limited to Linux and UNIX platforms.",
+      "filename": "swg21695194.txt",
+      "document_sha256": "8bcc0dca991a2070d0790146fa8d00938756637a4f9a04ed6614b9503c0a4bac",
+      "source_excerpts": [
+        "implemented primarily using symbolic links",
+        "limited to Linux and UNIX platforms"
+      ],
+      "nearest_question": [
+        0.2222222222222222,
+        "TRAIN_Q046"
+      ],
+      "nearest_answer": [
+        0.14545454545454545,
+        "TRAIN_Q135"
+      ]
+    },
+    {
+      "id": "V2_SYN_d97d205f2889d27be106",
+      "source_train_id": "TRAIN_Q046",
+      "question": "Which ITM configuration variables must have their existing overrides removed before conversion to CANDLEDATA?",
+      "answer": "Remove existing overrides of CTIRA_SIT_PATH, KCA_IP_DIR and KCAWD_WRITE_DIR before converting the installation. ITM provides internal overrides for these variables when CANDLEDATA is used.",
+      "filename": "swg21695194.txt",
+      "document_sha256": "8bcc0dca991a2070d0790146fa8d00938756637a4f9a04ed6614b9503c0a4bac",
+      "source_excerpts": [
+        "ITM implements internal overrides for the following configuration variables: CTIRA_SIT_PATH, KCA_IP_DIR, and KCAWD_WRITE_DIR",
+        "you must remove the overrides before converting"
+      ],
+      "nearest_question": [
+        0.09090909090909091,
+        "TRAIN_Q046"
+      ],
+      "nearest_answer": [
+        0.1509433962264151,
+        "SYN_be5f900e931ac976373b"
+      ]
+    },
+    {
+      "id": "V2_SYN_9d067f04a16db30bb0be",
+      "source_train_id": "TRAIN_Q046",
+      "question": "Can the Tivoli Monitoring server or portal server be started from a CANDLEHOME using CANDLEDATA?",
+      "answer": "No. ITM does not allow the monitoring server or portal server to start when CANDLEDATA is implemented. The installer may warn rather than prevent installation, so do not treat successful installation as support for starting these server components.",
+      "filename": "swg21695194.txt",
+      "document_sha256": "8bcc0dca991a2070d0790146fa8d00938756637a4f9a04ed6614b9503c0a4bac",
+      "source_excerpts": [
+        "ITM does not allow the monitoring server to start if CANDLEDATA is implemented.",
+        "ITM does not allow the portal server to start if CANDLEDATA is implemented.",
+        "the installer does not prevent monitoring server or portal server from being installed."
+      ],
+      "nearest_question": [
+        0.16666666666666666,
+        "SYN_24728d2e7ec4da08eac0"
+      ],
+      "nearest_answer": [
+        0.15555555555555556,
+        "TRAIN_Q189"
+      ]
+    },
+    {
+      "id": "V2_SYN_9099b26b0ad549ba2b52",
+      "source_train_id": "TRAIN_Q046",
+      "question": "How can an already converted ITM installation convert a newly installed UX agent to CANDLEDATA?",
+      "answer": "Run itmCANDLEDATA.sh -b no -p \"ux\" -r yes for the newly installed UX agent in the CANDLEHOME where CANDLEDATA is already implemented.",
+      "filename": "swg21695194.txt",
+      "document_sha256": "8bcc0dca991a2070d0790146fa8d00938756637a4f9a04ed6614b9503c0a4bac",
+      "source_excerpts": [
+        "Conversion of a newly installed agent to a CANDLEHOME where CANDLEDATA is already implemented",
+        "itmCANDLEDATA.sh -b no -p \"ux\" -r yes"
+      ],
+      "nearest_question": [
+        0.17391304347826086,
+        "TRAIN_Q013"
+      ],
+      "nearest_answer": [
+        0.14285714285714285,
+        "TRAIN_Q189"
+      ]
+    },
+    {
+      "id": "V2_SYN_5a21648b4bbd60dd9989",
+      "source_train_id": "DEV_Q288",
+      "question": "Which Java version is bundled with IBM Process Designer in BPM 8.5.7.0 CF 2017.03 or later?",
+      "answer": "IBM Process Designer in IBM BPM V8.5.7.0 CF 2017.03 or later versions is bundled with Java 7.",
+      "filename": "swg21639640.txt",
+      "document_sha256": "a21308c375fd7aad0d0757303524128302debed37a5fd665e89bb892f244f4f4",
+      "source_excerpts": [
+        "IBM Process Designer in IBM BPM V8.5.7.0 CF 2017.03 or later versions is bundled with Java 7."
+      ],
+      "nearest_question": [
+        0.17647058823529413,
+        "TRAIN_Q118"
+      ],
+      "nearest_answer": [
+        0.23076923076923078,
+        "DEV_Q288"
+      ]
+    },
+    {
+      "id": "V2_SYN_da4557d37f56548b470d",
+      "source_train_id": "TRAIN_Q346",
+      "question": "Does Rational Support need to stop the DOORS database server to repair session.ixc after a missing session file error?",
+      "answer": "Yes, for the session index repair route, have all users log out and shut down the database server until Support returns the repaired session.ixc for insertion. Restoring a missing session file from backup is a different option and does not require restarting the database server.",
+      "filename": "swg21511831.txt",
+      "document_sha256": "a2c551683d9afd35537bc590700639904bc46c53017d5d88d8229d1aee5f0048",
+      "source_excerpts": [
+        "Choosing to have support repair the session index file requires you to have all users log out and shut down the DOORS database server",
+        "you do not need to restart the database server."
+      ],
+      "nearest_question": [
+        0.14285714285714285,
+        "TRAIN_Q562"
+      ],
+      "nearest_answer": [
+        0.18055555555555555,
+        "TRAIN_Q346"
+      ]
+    },
+    {
+      "id": "V2_SYN_a9b0c404643b08deda3e",
+      "source_train_id": "TRAIN_Q346",
+      "question": "What information does Rational Support require to create a replacement DOORS session file?",
+      "answer": "Provide the session.ixc file from the module directory shown in the error. Adjacent session files are also required; the Support engineer identifies them from the session index. Work in the affected module cannot continue until the replacement session file is restored.",
+      "filename": "swg21511831.txt",
+      "document_sha256": "a2c551683d9afd35537bc590700639904bc46c53017d5d88d8229d1aee5f0048",
+      "source_excerpts": [
+        "From the module directory listed in the error message provide support the file session.ixc",
+        "Adjacent session files will be required",
+        "No work can be performed in the effected module until the replacement session file is restored"
+      ],
+      "nearest_question": [
+        0.34782608695652173,
+        "V2_SYN_da4557d37f56548b470d"
+      ],
+      "nearest_answer": [
+        0.16071428571428573,
+        "V2_SYN_da4557d37f56548b470d"
+      ]
+    },
+    {
+      "id": "V2_SYN_1d55ad00e07864b48658",
+      "source_train_id": "TRAIN_Q090",
+      "question": "What did ITCAM SQL Server Agent 6.3.1.13 IF0001 change about the KOQ_ODBC_DRIVER prerequisite connection?",
+      "answer": "Before defect 171318 was fixed, the prerequisite check hard-coded SQL Server as the driver while the collector used KOQ_ODBC_DRIVER. This could make the prerequisite connection fail even though later data collection succeeded. The fix addresses use of KOQ_ODBC_DRIVER in the prerequisite connection.",
+      "filename": "swg24044840.txt",
+      "document_sha256": "2713dade11f8841ac95c5d707689e76bf6c0a77e31907b7720a4ce30e52ae401",
+      "source_excerpts": [
+        "DEFECT: 171318",
+        "During pre-requisite check, the value of",
+        "for collecting data value for",
+        "KOQ_ODBC_DRIVER",
+        "issue was seen during pre-requiste connection but later on data was being collected successfully."
+      ],
+      "nearest_question": [
+        0.26666666666666666,
+        "SYN_77070ba6369b84d258ce"
+      ],
+      "nearest_answer": [
+        0.12698412698412698,
+        "TRAIN_Q136"
+      ]
+    },
+    {
+      "id": "V2_SYN_4642992dcd744084025e",
+      "source_train_id": "TRAIN_Q090",
+      "question": "What was the ITCAM SQL Server Agent defect 171979 when the SRV1 cursor query failed?",
+      "answer": "The agent incorrectly returned zero when the SRV1 cursor query failed. Zero is a meaningful measured value, not a failure indicator, so sending zero for a failed query was incorrect.",
+      "filename": "swg24044840.txt",
+      "document_sha256": "2713dade11f8841ac95c5d707689e76bf6c0a77e31907b7720a4ce30e52ae401",
+      "source_excerpts": [
+        "DEFECT: 171979",
+        "Zero value was being sent when query fails in SRV1 cursor",
+        "Zero is a meaningful value which does not indicate failure."
+      ],
+      "nearest_question": [
+        0.2222222222222222,
+        "V2_SYN_1d55ad00e07864b48658"
+      ],
+      "nearest_answer": [
+        0.2,
+        "TRAIN_Q189"
+      ]
+    },
+    {
+      "id": "V2_SYN_49187a091d04e351257d",
+      "source_train_id": "TRAIN_Q090",
+      "question": "Which APAR describes collector crashes with SQL Server Native Client 10.0 or 11.0 in the ITCAM SQL Server Agent?",
+      "answer": "APAR IJ05451 describes the collector crash when SQL Server Native Client 10.0 or 11.0 is used as the ODBC driver. It is listed in the fixes for agent 6.3.1.13 Interim Fix 0001.",
+      "filename": "swg24044840.txt",
+      "document_sha256": "2713dade11f8841ac95c5d707689e76bf6c0a77e31907b7720a4ce30e52ae401",
+      "source_excerpts": [
+        "APAR: IJ05451",
+        "SQL Server Native Client 10.0 or SQL Server Native Client 11.0 as ODBC driver.",
+        "Interim Fix 0001, (6.3.1.13-TIV-ITM_SQL-IF0001)"
+      ],
+      "nearest_question": [
+        0.18518518518518517,
+        "V2_SYN_4642992dcd744084025e"
+      ],
+      "nearest_answer": [
+        0.23214285714285715,
+        "TRAIN_Q090"
+      ]
+    },
+    {
+      "id": "V2_SYN_64524d4bccdc7034abf4",
+      "source_train_id": "TRAIN_Q543",
+      "question": "What happens in DB2 on Red Hat Linux v6 when bug 1076574 causes a db2sysc memory leak?",
+      "answer": "The db2sysc process leaks memory until RAM and swap may become fully consumed and the machine becomes unresponsive. Stopping the DB2 engine with db2stop releases the leaked memory; the issue was identified as a Red Hat Linux problem.",
+      "filename": "swg21681093.txt",
+      "document_sha256": "f2d9f9b5ca63bd2c04edfc9885553c7107aedef91d0a2982d74b07aa47288b55",
+      "source_excerpts": [
+        "1076574",
+        "DB2 'db2sysc' process will see memory leak.",
+        "RAM and swap will be 100% consumed.",
+        "This memory is released when DB2 engine is stopped with 'db2stop'."
+      ],
+      "nearest_question": [
+        0.1935483870967742,
+        "SYN_06bd844e83f1c3b34ca4"
+      ],
+      "nearest_answer": [
+        0.11475409836065574,
+        "TRAIN_Q136"
+      ]
+    },
+    {
+      "id": "V2_SYN_8799994f162e56e7d59d",
+      "source_train_id": "TRAIN_Q543",
+      "question": "Which RHEL 7.0 issue causes a 32-bit DB2 sample application using msgrcv with a negative message type to hang?",
+      "answer": "Red Hat bug 1042807 affects a 32-bit application on RHEL 7.0 with a 64-bit DB2 engine. Samples built with BITWIDTH=32 can hang in sqlorqueInternal when msgrcv uses a negative message type. The issue was documented for correction in RHEL 7.1.",
+      "filename": "swg21681093.txt",
+      "document_sha256": "f2d9f9b5ca63bd2c04edfc9885553c7107aedef91d0a2982d74b07aa47288b55",
+      "source_excerpts": [
+        "1042807 32-bit applications running on 64-bit platforms where issuing msgrcv with -ve message type hangs",
+        "BITWIDTH=32",
+        "This problem will be fixed by RedHat in v7.1"
+      ],
+      "nearest_question": [
+        0.16216216216216217,
+        "SYN_b258436bb97a986a9058"
+      ],
+      "nearest_answer": [
+        0.20588235294117646,
+        "TRAIN_Q543"
+      ]
+    },
+    {
+      "id": "V2_SYN_87ded779de4fbbf95d5c",
+      "source_train_id": "TRAIN_Q473",
+      "question": "Which DB2 LUW JCC driver levels support db2.jcc.charsetDecoderEncoder=3?",
+      "answer": "IBM lists the JCC drivers shipped with DB2 LUW 9.5 Fix Pack 8 and later (IC74896), 9.7 Fix Pack 5 and later (IC74895), and DB2 LUW 10.1 onward as supporting the property.",
+      "filename": "swg21684365.txt",
+      "document_sha256": "3155a127a45418cf074a5efb843c8f5ee12ff470ae5ec89b348ad0731b1f3a67",
+      "source_excerpts": [
+        "DB2 LUW 9.5 Fix Pack 8 and later (APAR IC74896), DB2 LUW 9.7 Fix Pack 5 and later (APAR IC74895), and all DB2 LUW releases from DB2 10.1 onwards."
+      ],
+      "nearest_question": [
+        0.07692307692307693,
+        "V2_SYN_1d55ad00e07864b48658"
+      ],
+      "nearest_answer": [
+        0.24489795918367346,
+        "SYN_46571c82c51a024efe1f"
+      ]
+    },
+    {
+      "id": "V2_SYN_13b1116367ea9c78aa5e",
+      "source_train_id": "TRAIN_Q473",
+      "question": "How can a Java program named MyApp use the JCC invalid UTF-8 replacement behavior without changing its source code?",
+      "answer": "For a supporting JCC driver, launch it as java -Ddb2.jcc.charsetDecoderEncoder=3 MyApp. Invalid UTF-8 byte sequences are returned as the Unicode replacement character U+FFFD instead of throwing the conversion exception.",
+      "filename": "swg21684365.txt",
+      "document_sha256": "3155a127a45418cf074a5efb843c8f5ee12ff470ae5ec89b348ad0731b1f3a67",
+      "source_excerpts": [
+        "java -Ddb2.jcc.charsetDecoderEncoder=3 MyApp",
+        "invalid sequence of bytes replaced by the Unicode REPLACEMENT CHARACTER."
+      ],
+      "nearest_question": [
+        0.16666666666666666,
+        "SYN_1d4a397071e39c7f109f"
+      ],
+      "nearest_answer": [
+        0.3,
+        "TRAIN_Q473"
+      ]
+    },
+    {
+      "id": "V2_SYN_fee99071af3b1df87251",
+      "source_train_id": "TRAIN_Q428",
+      "question": "How can an administrator test whether the TCR 2.1 JVM can allocate a heap of 1843 MB?",
+      "answer": "From <INST>/tipv2/java/jre/bin run java -Xmx1843m hello. A class-not-found error for hello indicates that the JVM accepted the heap size; an initialization error or Failed to instantiate heap indicates that it did not.",
+      "filename": "swg21585678.txt",
+      "document_sha256": "22b65d1e8c186562c7be01a6c2332ba89938ff09eb53b882fa9867781fdfd84e",
+      "source_excerpts": [
+        "<INST>/tipv2/java/jre/bin folder",
+        "java -Xmx1843m hello",
+        "\"class not found\" error for hello",
+        "\"Failed to instantiate heap\" message"
+      ],
+      "nearest_question": [
+        0.24242424242424243,
+        "SYN_65f314811675c70613da"
+      ],
+      "nearest_answer": [
+        0.14705882352941177,
+        "DEV_Q068"
+      ]
+    },
+    {
+      "id": "V2_SYN_155db9d1a6342f2c058b",
+      "source_train_id": "TRAIN_Q361",
+      "question": "How can an administrator determine the installed IBM MQ or WebSphere MQ version on distributed platforms and z/OS?",
+      "answer": "On platforms other than z/OS, run dspmqver. On z/OS, look for message CSQY000I in the MSTR job log.",
+      "filename": "swg21674407.txt",
+      "document_sha256": "a2eef23171f86e1eaead4126b5413764e822f46e057ddcd235239d37d99304fb",
+      "source_excerpts": [
+        "all platforms except for z/OS with the command: dspmqver",
+        "On z/OS, look for message CSQY000I",
+        "in the MSTR joblog to determine your version."
+      ],
+      "nearest_question": [
+        0.25806451612903225,
+        "SYN_f059e723e3e2230b910f"
+      ],
+      "nearest_answer": [
+        0.15217391304347827,
+        "TRAIN_Q103"
+      ]
+    },
+    {
+      "id": "V2_SYN_f3750e68839cf121c379",
+      "source_train_id": "TRAIN_Q361",
+      "question": "Do WebSphere MQ V7.0 clients and V7.0.1/V7.0.0 File Transfer Edition agents remain supported after the corresponding server loses support?",
+      "answer": "No. IBM states that those clients and File Transfer Edition agents reach end of support at the same time as the server.",
+      "filename": "swg21674407.txt",
+      "document_sha256": "a2eef23171f86e1eaead4126b5413764e822f46e057ddcd235239d37d99304fb",
+      "source_excerpts": [
+        "WebSphere MQ V7.0 clients and WebSphere MQ File Transfer Edition V7.0.1 and V7.0.0 agents go out of support at the same time as the server."
+      ],
+      "nearest_question": [
+        0.2222222222222222,
+        "TRAIN_Q361"
+      ],
+      "nearest_answer": [
+        0.1702127659574468,
+        "TRAIN_Q453"
+      ]
+    },
+    {
+      "id": "V2_SYN_5ddc7d0134983d78d2f1",
+      "source_train_id": "TRAIN_Q361",
+      "question": "How can an organization obtain old WebSphere MQ V7.0.1 installation images after they were withdrawn from Passport Advantage?",
+      "answer": "The V7.0.1 and V7.0.0 MQ and File Transfer Edition images, and MQ Telemetry V7.0.1 images, are no longer available through Passport Advantage. Contact IBM if there is an urgent business need for the images.",
+      "filename": "swg21674407.txt",
+      "document_sha256": "a2eef23171f86e1eaead4126b5413764e822f46e057ddcd235239d37d99304fb",
+      "source_excerpts": [
+        "are no longer available from Passport Advantage",
+        "Contact IBM if you have an urgent business need for these installation images."
+      ],
+      "nearest_question": [
+        0.17647058823529413,
+        "V2_SYN_f3750e68839cf121c379"
+      ],
+      "nearest_answer": [
+        0.25,
+        "SYN_e2b559eefdf0afb11ace"
+      ]
+    },
+    {
+      "id": "V2_SYN_17923cb7eac0125f9c49",
+      "source_train_id": "TRAIN_Q488",
+      "question": "Which IBM Crypto for C releases are incorporated in DB2 Version 8 Fix Pack 12 and later?",
+      "answer": "DB2 Version 8 Fix Pack 12 and later incorporates ICC version 1.3.9 or 1.4.1 depending on platform. The newer releases address the documented performance, entropy-daemon communication and symbol collision problems in earlier ICC levels.",
+      "filename": "swg21237078.txt",
+      "document_sha256": "949a27ea4f5a196fd5683492f8fdf641d168e40be135014be0c4706b91e7ab81",
+      "source_excerpts": [
+        "DB2 Version 8 Fixpak 12 and later incorporates IBM Crypto for C (ICC) version 1.3.9 or 1.4.1 cryptographic module which fixes these problems.",
+        "Summary of known problems encountered in ICC 1.2.1/1.2.2:",
+        "Entropy Gathering Daemon",
+        "symbol collisions with OpenSSL code"
+      ],
+      "nearest_question": [
+        0.2,
+        "SYN_e53eb1eac5ff8e6488b7"
+      ],
+      "nearest_answer": [
+        0.1836734693877551,
+        "V2_SYN_87ded779de4fbbf95d5c"
+      ]
+    },
+    {
+      "id": "V2_SYN_3b88d37d9264cb5366f8",
+      "source_train_id": "TRAIN_Q092",
+      "question": "Why does WebSphere Application Server log java.io.NotSerializableException when the PMI SessionObjectSize counter is enabled?",
+      "answer": "The Session Manager attempts to serialize application SessionData before reporting its size to PMI. Non-serializable session objects cause NotSerializableException. Ensure session objects implement java.io.Serializable. Disabling SessionObjectSize stops this error but does not change the objects themselves.",
+      "filename": "swg21268440.txt",
+      "document_sha256": "0db08ebc30bdf1b3b029eb973b28a6903c1d37c02dfdc9741aaa3f0e9c749dd5",
+      "source_excerpts": [
+        "WebSphere® Application Server Session Manager throws NotSerializableException when it tries to serialize non-serializable SessionData from the application before sending it to PMI.",
+        "The object needs to implement java™.io.Serializable interface.",
+        "Disabling SessionObjectSize counter makes the error stop occurring."
+      ],
+      "nearest_question": [
+        0.3076923076923077,
+        "SYN_dc6d2ef7055c83495595"
+      ],
+      "nearest_answer": [
+        0.18032786885245902,
+        "SYN_dc6d2ef7055c83495595"
+      ]
+    },
+    {
+      "id": "V2_SYN_207a58ce515f409284ca",
+      "source_train_id": "TRAIN_Q121",
+      "question": "What is the default thread pool size for ncp_poller in ITNM 3.7, 3.8 and 3.9?",
+      "answer": "The default poller has 100 threads in all three versions. Additional pollers were introduced in ITNM 3.8, and each additional poller in 3.8 or 3.9 also receives a 100-thread pool.",
+      "filename": "swg21514810.txt",
+      "document_sha256": "91402b8bc05c12e927051d5b6a0974e773024dcf565d9befbcac8ed1fbda8e04",
+      "source_excerpts": [
+        "There are 100 threads assigned for default Pollers in all three releases (v3.7, v3.8 & v3.9).",
+        "additional poller is a new feature in v3.8 and higher versions",
+        "same # of thread (i.e. 100) pool is assigned."
+      ],
+      "nearest_question": [
+        0.16279069767441862,
+        "DEV_Q102"
+      ],
+      "nearest_answer": [
+        0.16981132075471697,
+        "TRAIN_Q587"
+      ]
+    },
+    {
+      "id": "V2_SYN_dacd55ef1123bf8cb3a6",
+      "source_train_id": "TRAIN_Q121",
+      "question": "Where is the default number of ncp_poller extra threads configured in ITNM 3.8 or 3.9?",
+      "answer": "Edit $NCHOME/etc/precision/NcPollerSchema.cfg and modify/uncomment the BatchExtraThreads update, for example: update config.properties set BatchExtraThreads = 150;",
+      "filename": "swg21514810.txt",
+      "document_sha256": "91402b8bc05c12e927051d5b6a0974e773024dcf565d9befbcac8ed1fbda8e04",
+      "source_excerpts": [
+        "modifying and uncommenting the following line in $NCHOME/etc/precision/NcPollerSchema.cfg",
+        "//update config.properties set BatchExtraThreads = 150;"
+      ],
+      "nearest_question": [
+        0.4166666666666667,
+        "V2_SYN_207a58ce515f409284ca"
+      ],
+      "nearest_answer": [
+        0.14285714285714285,
+        "TRAIN_Q276"
+      ]
+    },
+    {
+      "id": "V2_SYN_0fcc2bf777c581ef5ca5",
+      "source_train_id": "TRAIN_Q515",
+      "question": "Why might deleting the SPSS Statistics plist on OS X Mavericks not result in a new preference file?",
+      "answer": "Mavericks caches plist preferences in the cfprefsd background process and can restore the deleted copy. IBM describes stopping cfprefsd and then starting Statistics to generate a new preference file. This is specific to the documented Statistics 21/22 Mac OS X issue.",
+      "filename": "swg21651225.txt",
+      "document_sha256": "7390dff104128602830fdd2f1a3a4f78099128350187002cf7c5a054caa9a55d",
+      "source_excerpts": [
+        "a cached copy of your \"plist\" file is stored that uses a background process: CFPREFSD",
+        "Mavericks restore its cached copy.",
+        "Only by stopping the \"cfprefsd\" process and starting SPSS Statistics, will it generate a new"
+      ],
+      "nearest_question": [
+        0.18,
+        "TRAIN_Q154"
+      ],
+      "nearest_answer": [
+        0.29333333333333333,
+        "TRAIN_Q515"
+      ]
+    },
+    {
+      "id": "V2_SYN_89fd2ef0efc232148f50",
+      "source_train_id": "DEV_Q188",
+      "question": "What replaced Visibroker in the IBM CORBA probe integration and when?",
+      "answer": "IBM CORBA software replaced the third-party Visibroker software in 2012. The IBM CORBA probe support guide and the specific probe documentation describe the integration.",
+      "filename": "swg21614208.txt",
+      "document_sha256": "aa88f8f47e9045a499028702527a8c2e72fa21c41a404b6e0fa267b3192d9c7f",
+      "source_excerpts": [
+        "The Visibroker software is a third party product, and was replaced in 2012 by the IBM CORBA software."
+      ],
+      "nearest_question": [
+        0.21739130434782608,
+        "SYN_e3379d66fda722ccac6b"
+      ],
+      "nearest_answer": [
+        0.45714285714285713,
+        "DEV_Q188"
+      ]
+    }
+  ],
+  "excluded_augmentation": [
+    {
+      "id": "V2_SYN_b88e94c855010a9b6bbd",
+      "source_train_id": "DEV_Q288",
+      "question": "Which Java language constructs can be used inside BPEL Java expressions on BPM 8.6 with Java 8?",
+      "answer": "Java snippets, Java conditions and Java expressions inside BPEL processes must use Java 6 constructs, even if the BPM runtime supports Java 8.",
+      "filename": "swg21639640.txt",
+      "document_sha256": "a21308c375fd7aad0d0757303524128302debed37a5fd665e89bb892f244f4f4",
+      "source_excerpts": [
+        "IBM BPM V8.6 Java 8*",
+        "Java snippets, Java conditions, and Java expressions in BPEL processes must use Java 6 constructs instead of Java 7 or Java 8 constructs."
+      ],
+      "reason": "Reviewed overlap with an existing/updated training answer.",
+      "nearest_question": [
+        0.13043478260869565,
+        "DEV_Q291"
+      ],
+      "nearest_answer": [
+        0.45161290322580644,
+        "DEV_Q291"
+      ]
+    },
+    {
+      "id": "V2_SYN_d62d7aadde06c250f63f",
+      "source_train_id": "DEV_Q240",
+      "question": "Under which ITX Launcher event settings does APAR PI64816 cause a file-trigger watch to fail?",
+      "answer": "The defect occurs when On Success is set to Delete and On Failure is set to Commit. The Compound system log can show File Trigger FATAL Error : ValidateEKDirectories: Cannot find correct card index for watch #. Obtain the patch for APAR PI64816.",
+      "filename": "swg21986219.txt",
+      "document_sha256": "f31fba9ac3bc0f6c4bc412869fbb1102d7c12e2054d7f49962a0700e40cfabf2",
+      "source_excerpts": [
+        "Launcher fails to load a watch when On Success = Delete and On Failure = Commit are used.",
+        "File Trigger FATAL Error : ValidateEKDirectories: Cannot find correct card index for watch #.",
+        "Obtain patch for APAR PI64816."
+      ],
+      "reason": "Reviewed overlap with an existing/updated training answer.",
+      "nearest_question": [
+        0.16,
+        "V2_SYN_a9b0c404643b08deda3e"
+      ],
+      "nearest_answer": [
+        0.43243243243243246,
+        "SYN_f059e723e3e2230b910f"
+      ]
+    },
+    {
+      "id": "V2_SYN_4d0427cae6e26783a2b2",
+      "source_train_id": "TRAIN_Q209",
+      "question": "Does filtering persisted Decision Warehouse traces reduce the original trace used to execute DVS scenario tests?",
+      "answer": "No. The Scenario Suite Provider customization reduces only the persisted Decision Warehouse trace; DVS continues to use the original larger trace while running scenario-suite tests.",
+      "filename": "swg21438208.txt",
+      "document_sha256": "ff5f0db6a0b0c8394881923572eec98e46f6789e2e0c12e6ba2e350cc06123db",
+      "source_excerpts": [
+        "only the DW persisted trace is smaller, the original larger trace is still used by DVS to perform the tests involved in the scenario suite."
+      ],
+      "reason": "Reviewed overlap with an existing/updated training answer.",
+      "nearest_question": [
+        0.14035087719298245,
+        "TRAIN_Q209"
+      ],
+      "nearest_answer": [
+        0.2,
+        "TRAIN_Q209"
+      ]
+    },
+    {
+      "id": "V2_SYN_0abce162541deffc3767",
+      "source_train_id": "TRAIN_Q570",
+      "question": "Which extra file may contain the MSSQL server name when a System Monitor 5.2 monitor checks its own database server?",
+      "answer": "Check $CENIT_ROOT/cala/misc/cmdtab_merged.ctb if a monitor is configured to check the monitor database server status. Its database server name may be stored in that file.",
+      "filename": "swg22002442.txt",
+      "document_sha256": "7ae4ce396fe3d5f8a9548fc53a05f2efa3cf0fc98fe64df4d8573895e8dd189a",
+      "source_excerpts": [
+        "a monitor could be configured to check the status of the monitor's database server",
+        "$CENIT_ROOT/cala/misc/cmdtab_merged.ctb."
+      ],
+      "reason": "Reviewed overlap with an existing/updated training answer.",
+      "nearest_question": [
+        0.24242424242424243,
+        "TRAIN_Q570"
+      ],
+      "nearest_answer": [
+        0.2641509433962264,
+        "TRAIN_Q570"
+      ]
+    }
+  ],
+  "limitations": [
+    "Targeted AI review of evidence-supported issues, not exhaustive human verification of all 532 records. Unchanged records are not certified correct.",
+    "Source passages are historical IBM documents; no current product support claims have been independently verified.",
+    "Question/answer duplicate checks for new rows use exact normalized comparison and lexical overlap only; semantic overlap and train/val/test leakage not certified.",
+    "No model training or evaluation performed.",
+    "No tokenizer-based length audit performed; answer lengths were constrained by word count in new/edited items, but max_answer_tokens=160 may still truncate some answers."
+  ],
+  "integrity": {
+    "all_contexts_from_train": true,
+    "unique_ids": true,
+    "schema_preserved": true,
+    "retained_non_answer_fields_unchanged": true
+  },
+  "output_sha256": "9372bbf386fa57b18ff67ac8b8e19be2cbad398f3fc33010485dcf953e86e5c7"
+}

@@ -1,0 +1,16 @@
+[DPO Test2 Comparison]
+Metric                                           SFT_548       DPO_Test1        A_lr_2e5        B_epoch3
+token_f1_percent                                   21.59           21.53           21.69           21.76
+exact_match_percent                                  0.0             0.0             0.0             0.0
+abstention_rate_percent                              0.0             0.0             0.0             0.0
+false_refusal_rate_percent                           0.0             0.0             0.0             0.0
+generation_seconds                               393.094         440.034          463.96         510.859
+questions_per_second                                0.27           0.241           0.228           0.207
+peak_gpu_memory_gb                                 3.102            3.54           3.104           3.104
+DPO_Test1 Training: {"pairs": 76, "epochs": 1, "optimizer_updates": 10, "skipped_updates": 0, "mean_dpo_loss": 0.6904487594177848, "reference_seconds": 18.899, "training_seconds": 77.357, "peak_gpu_memory_gb": 3.596}
+A_lr_2e5 Training: {"lr": 2e-05, "epochs": 1, "pairs": 76, "beta": 0.1, "optimizer_updates": 10, "skipped_updates": 0, "mean_dpo_loss": 0.6823141276836395, "training_seconds": 74.703, "peak_gpu_memory_gb": 3.595, "history": [{"epoch": 1, "mean_dpo_loss": 0.6823141276836395, "cumulative_updates": 10, "cumulative_skipped_updates": 0}]}
+B_epoch3 Training: {"lr": 5e-06, "epochs": 3, "pairs": 76, "beta": 0.1, "optimizer_updates": 30, "skipped_updates": 0, "mean_dpo_loss": 0.6784731821532834, "training_seconds": 234.077, "peak_gpu_memory_gb": 3.597, "history": [{"epoch": 1, "mean_dpo_loss": 0.6904487594177848, "cumulative_updates": 10, "cumulative_skipped_updates": 0}, {"epoch": 2, "mean_dpo_loss": 0.6779526864227495, "cumulative_updates": 20, "cumulative_skipped_updates": 0}, {"epoch": 3, "mean_dpo_loss": 0.6670181006193161, "cumulative_updates": 30, "cumulative_skipped_updates": 0}]}
+Judge: NOT RUN | RAG: NONE | Test: NOT USED
+No automatic model selection
+Results: C:\Projects\LLM_IBM_TechSupport\IBMTechSupport\evaluate_results\106\finetuning\dpo\test2_20261127_145414_758782
+Upload only: C:\Projects\LLM_IBM_TechSupport\IBMTechSupport\evaluate_results\106\finetuning\dpo\test2_20261127_145414_758782\dpo_test2_review_bundle.json

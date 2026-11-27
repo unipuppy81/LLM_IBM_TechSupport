@@ -1,0 +1,762 @@
+[
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q152",
+    "loss": 0.6931471824645996,
+    "reward_margin": 0.0,
+    "policy_chosen_logp": -153.59066772460938,
+    "policy_rejected_logp": -46.68040466308594,
+    "reference_chosen_logp": -153.59066772460938,
+    "reference_rejected_logp": -46.68040466308594
+  },
+  {
+    "epoch": 1,
+    "id": "DEV_Q263",
+    "loss": 0.6931471824645996,
+    "reward_margin": 0.0,
+    "policy_chosen_logp": -277.3104553222656,
+    "policy_rejected_logp": -31.976064682006836,
+    "reference_chosen_logp": -277.3104553222656,
+    "reference_rejected_logp": -31.976064682006836
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_2487447748d77d948e14",
+    "loss": 0.6931471824645996,
+    "reward_margin": 0.0,
+    "policy_chosen_logp": -110.63674926757812,
+    "policy_rejected_logp": -11.816615104675293,
+    "reference_chosen_logp": -110.63674926757812,
+    "reference_rejected_logp": -11.816615104675293
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_ed860bc4f76f03d228c6",
+    "loss": 0.6931471824645996,
+    "reward_margin": 0.0,
+    "policy_chosen_logp": -221.08392333984375,
+    "policy_rejected_logp": -25.50936508178711,
+    "reference_chosen_logp": -221.08392333984375,
+    "reference_rejected_logp": -25.50936508178711
+  },
+  {
+    "epoch": 1,
+    "id": "DEV_Q209",
+    "loss": 0.6931471824645996,
+    "reward_margin": 0.0,
+    "policy_chosen_logp": -271.937255859375,
+    "policy_rejected_logp": -69.92709350585938,
+    "reference_chosen_logp": -271.937255859375,
+    "reference_rejected_logp": -69.92709350585938
+  },
+  {
+    "epoch": 1,
+    "id": "DEV_Q254",
+    "loss": 0.6931471824645996,
+    "reward_margin": 0.0,
+    "policy_chosen_logp": -321.9380798339844,
+    "policy_rejected_logp": -34.7939338684082,
+    "reference_chosen_logp": -321.9380798339844,
+    "reference_rejected_logp": -34.7939338684082
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q570",
+    "loss": 0.6931471824645996,
+    "reward_margin": 0.0,
+    "policy_chosen_logp": -404.11077880859375,
+    "policy_rejected_logp": -33.862525939941406,
+    "reference_chosen_logp": -404.11077880859375,
+    "reference_rejected_logp": -33.862525939941406
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q446",
+    "loss": 0.6931471824645996,
+    "reward_margin": 0.0,
+    "policy_chosen_logp": -85.64848327636719,
+    "policy_rejected_logp": -12.129095077514648,
+    "reference_chosen_logp": -85.64848327636719,
+    "reference_rejected_logp": -12.129095077514648
+  },
+  {
+    "epoch": 1,
+    "id": "DEV_Q306",
+    "loss": 0.6927071213722229,
+    "reward_margin": 0.0008802413940429688,
+    "policy_chosen_logp": -279.15087890625,
+    "policy_rejected_logp": -31.62343978881836,
+    "reference_chosen_logp": -279.113525390625,
+    "reference_rejected_logp": -31.57728385925293
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q280",
+    "loss": 0.6877252459526062,
+    "reward_margin": 0.0108734130859375,
+    "policy_chosen_logp": -83.16859436035156,
+    "policy_rejected_logp": -72.34599304199219,
+    "reference_chosen_logp": -83.17208862304688,
+    "reference_rejected_logp": -72.24075317382812
+  },
+  {
+    "epoch": 1,
+    "id": "DEV_Q208",
+    "loss": 0.6878724694252014,
+    "reward_margin": 0.010577392578125,
+    "policy_chosen_logp": -230.79058837890625,
+    "policy_rejected_logp": -32.283477783203125,
+    "reference_chosen_logp": -230.8345947265625,
+    "reference_rejected_logp": -32.221710205078125
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q109",
+    "loss": 0.6863762736320496,
+    "reward_margin": 0.01358795166015625,
+    "policy_chosen_logp": -67.09124755859375,
+    "policy_rejected_logp": -124.85333251953125,
+    "reference_chosen_logp": -67.0301513671875,
+    "reference_rejected_logp": -124.65635681152344
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q477",
+    "loss": 0.6883977651596069,
+    "reward_margin": 0.009521484375,
+    "policy_chosen_logp": -305.40472412109375,
+    "policy_rejected_logp": -17.23360824584961,
+    "reference_chosen_logp": -305.4334411621094,
+    "reference_rejected_logp": -17.167110443115234
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_36b9177848c1958c206f",
+    "loss": 0.6972877979278564,
+    "reward_margin": -0.00826416015625,
+    "policy_chosen_logp": -64.11724090576172,
+    "policy_rejected_logp": -68.2528076171875,
+    "reference_chosen_logp": -64.06735229492188,
+    "reference_rejected_logp": -68.28556060791016
+  },
+  {
+    "epoch": 1,
+    "id": "DEV_Q161",
+    "loss": 0.6896721124649048,
+    "reward_margin": 0.006962203979492188,
+    "policy_chosen_logp": -95.67825317382812,
+    "policy_rejected_logp": -16.59115219116211,
+    "reference_chosen_logp": -95.68907165527344,
+    "reference_rejected_logp": -16.5323486328125
+  },
+  {
+    "epoch": 1,
+    "id": "V2_SYN_5a21648b4bbd60dd9989",
+    "loss": 0.6935948133468628,
+    "reward_margin": -0.0008951187133789063,
+    "policy_chosen_logp": -29.315122604370117,
+    "policy_rejected_logp": -14.133272171020508,
+    "reference_chosen_logp": -29.27225112915039,
+    "reference_rejected_logp": -14.09935188293457
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_d3d6db888d1a86782f49",
+    "loss": 0.6876121759414673,
+    "reward_margin": 0.01110076904296875,
+    "policy_chosen_logp": -273.113525390625,
+    "policy_rejected_logp": -33.34037780761719,
+    "reference_chosen_logp": -273.1209716796875,
+    "reference_rejected_logp": -33.23681640625
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q520",
+    "loss": 0.6861304640769958,
+    "reward_margin": 0.014083099365234376,
+    "policy_chosen_logp": -327.24658203125,
+    "policy_rejected_logp": -50.16155242919922,
+    "reference_chosen_logp": -327.36468505859375,
+    "reference_rejected_logp": -50.138824462890625
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q545",
+    "loss": 0.6863700747489929,
+    "reward_margin": 0.013600540161132813,
+    "policy_chosen_logp": -283.3590087890625,
+    "policy_rejected_logp": -55.98542785644531,
+    "reference_chosen_logp": -283.3607482910156,
+    "reference_rejected_logp": -55.85116195678711
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_f7363f4dff8f75918547",
+    "loss": 0.6800711750984192,
+    "reward_margin": 0.026325321197509768,
+    "policy_chosen_logp": -89.20909118652344,
+    "policy_rejected_logp": -15.129514694213867,
+    "reference_chosen_logp": -89.3560791015625,
+    "reference_rejected_logp": -15.013249397277832
+  },
+  {
+    "epoch": 1,
+    "id": "DEV_Q114",
+    "loss": 0.6802281737327576,
+    "reward_margin": 0.026007080078125,
+    "policy_chosen_logp": -317.74749755859375,
+    "policy_rejected_logp": -163.1798095703125,
+    "reference_chosen_logp": -317.8287658691406,
+    "reference_rejected_logp": -163.00100708007812
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q140",
+    "loss": 0.6904445290565491,
+    "reward_margin": 0.005412673950195313,
+    "policy_chosen_logp": -225.9303741455078,
+    "policy_rejected_logp": -19.44595718383789,
+    "reference_chosen_logp": -225.87667846679688,
+    "reference_rejected_logp": -19.338134765625
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_9d5ca0aeff035716f831",
+    "loss": 0.6858680248260498,
+    "reward_margin": 0.01461181640625,
+    "policy_chosen_logp": -196.3460693359375,
+    "policy_rejected_logp": -40.81982421875,
+    "reference_chosen_logp": -196.3985595703125,
+    "reference_rejected_logp": -40.7261962890625
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q580",
+    "loss": 0.6934077143669128,
+    "reward_margin": -0.000521087646484375,
+    "policy_chosen_logp": -57.01136779785156,
+    "policy_rejected_logp": -56.95034408569336,
+    "reference_chosen_logp": -56.93064880371094,
+    "reference_rejected_logp": -56.87483596801758
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q350",
+    "loss": 0.690819501876831,
+    "reward_margin": 0.004660797119140625,
+    "policy_chosen_logp": -97.79087829589844,
+    "policy_rejected_logp": -72.27018737792969,
+    "reference_chosen_logp": -97.73822021484375,
+    "reference_rejected_logp": -72.1709213256836
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_34295b2b8f98977317a2",
+    "loss": 0.6879881024360657,
+    "reward_margin": 0.010344886779785158,
+    "policy_chosen_logp": -62.567535400390625,
+    "policy_rejected_logp": -31.9877986907959,
+    "reference_chosen_logp": -62.57665252685547,
+    "reference_rejected_logp": -31.89346694946289
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q587",
+    "loss": 0.6778462529182434,
+    "reward_margin": 0.030839538574218752,
+    "policy_chosen_logp": -131.87396240234375,
+    "policy_rejected_logp": -72.45883178710938,
+    "reference_chosen_logp": -132.00169372558594,
+    "reference_rejected_logp": -72.27816772460938
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q069",
+    "loss": 0.6893600821495056,
+    "reward_margin": 0.007588577270507813,
+    "policy_chosen_logp": -116.36515045166016,
+    "policy_rejected_logp": -40.617225646972656,
+    "reference_chosen_logp": -116.24415588378906,
+    "reference_rejected_logp": -40.420345306396484
+  },
+  {
+    "epoch": 1,
+    "id": "V2_SYN_13b1116367ea9c78aa5e",
+    "loss": 0.6855660676956177,
+    "reward_margin": 0.015220069885253908,
+    "policy_chosen_logp": -145.60940551757812,
+    "policy_rejected_logp": -21.69940185546875,
+    "reference_chosen_logp": -145.65060424804688,
+    "reference_rejected_logp": -21.58839988708496
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_48eb643df943e4c053eb",
+    "loss": 0.6873021721839905,
+    "reward_margin": 0.011724472045898438,
+    "policy_chosen_logp": -178.83395385742188,
+    "policy_rejected_logp": -26.97753143310547,
+    "reference_chosen_logp": -178.79605102539062,
+    "reference_rejected_logp": -26.822383880615234
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q199",
+    "loss": 0.6934096217155457,
+    "reward_margin": -0.00052490234375,
+    "policy_chosen_logp": -243.1817626953125,
+    "policy_rejected_logp": -47.18729782104492,
+    "reference_chosen_logp": -243.01641845703125,
+    "reference_rejected_logp": -47.02720260620117
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_20eedb72c969d78ca747",
+    "loss": 0.6969837546348572,
+    "reward_margin": -0.007658576965332032,
+    "policy_chosen_logp": -29.05922508239746,
+    "policy_rejected_logp": -64.67144775390625,
+    "reference_chosen_logp": -28.94424819946289,
+    "reference_rejected_logp": -64.633056640625
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_ee3f34781d25e3b81936",
+    "loss": 0.6785774827003479,
+    "reward_margin": 0.029354858398437503,
+    "policy_chosen_logp": -264.72576904296875,
+    "policy_rejected_logp": -26.25277328491211,
+    "reference_chosen_logp": -264.82696533203125,
+    "reference_rejected_logp": -26.060420989990234
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_29f907ed00c88d8dd659",
+    "loss": 0.6944700479507446,
+    "reward_margin": -0.0026439666748046876,
+    "policy_chosen_logp": -178.41880798339844,
+    "policy_rejected_logp": -36.12655258178711,
+    "reference_chosen_logp": -178.18939208984375,
+    "reference_rejected_logp": -35.92357635498047
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_9ec17243ae6b74b4ccc8",
+    "loss": 0.6688529849052429,
+    "reward_margin": 0.049193382263183594,
+    "policy_chosen_logp": -327.1824645996094,
+    "policy_rejected_logp": -29.506078720092773,
+    "reference_chosen_logp": -327.436279296875,
+    "reference_rejected_logp": -29.267959594726562
+  },
+  {
+    "epoch": 1,
+    "id": "V2_SYN_64524d4bccdc7034abf4",
+    "loss": 0.67975252866745,
+    "reward_margin": 0.02697124481201172,
+    "policy_chosen_logp": -129.01995849609375,
+    "policy_rejected_logp": -17.64742660522461,
+    "reference_chosen_logp": -129.12689208984375,
+    "reference_rejected_logp": -17.484647750854492
+  },
+  {
+    "epoch": 1,
+    "id": "DEV_Q077",
+    "loss": 0.6818110942840576,
+    "reward_margin": 0.02280216217041016,
+    "policy_chosen_logp": -63.069705963134766,
+    "policy_rejected_logp": -21.538616180419922,
+    "reference_chosen_logp": -63.105220794677734,
+    "reference_rejected_logp": -21.34610939025879
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q503",
+    "loss": 0.6874220967292786,
+    "reward_margin": 0.011483192443847656,
+    "policy_chosen_logp": -55.07118606567383,
+    "policy_rejected_logp": -9.619546890258789,
+    "reference_chosen_logp": -55.08696746826172,
+    "reference_rejected_logp": -9.520496368408203
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_9a42c1d3d7015e348e63",
+    "loss": 0.6788527369499207,
+    "reward_margin": 0.02879619598388672,
+    "policy_chosen_logp": -227.38320922851562,
+    "policy_rejected_logp": -10.029587745666504,
+    "reference_chosen_logp": -227.5577392578125,
+    "reference_rejected_logp": -9.916155815124512
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_99521c008e43ebab8522",
+    "loss": 0.6912202835083008,
+    "reward_margin": 0.0038576126098632812,
+    "policy_chosen_logp": -18.52667999267578,
+    "policy_rejected_logp": -17.21027946472168,
+    "reference_chosen_logp": -18.41366958618164,
+    "reference_rejected_logp": -17.058692932128906
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_84b5bddda2dc696525cf",
+    "loss": 0.6774349212646484,
+    "reward_margin": 0.03167533874511719,
+    "policy_chosen_logp": -218.97671508789062,
+    "policy_rejected_logp": -39.28477096557617,
+    "reference_chosen_logp": -219.0365753173828,
+    "reference_rejected_logp": -39.02787780761719
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_84a631ee042703141138",
+    "loss": 0.6812017560005188,
+    "reward_margin": 0.02403526306152344,
+    "policy_chosen_logp": -124.43864440917969,
+    "policy_rejected_logp": -24.739593505859375,
+    "reference_chosen_logp": -124.46940612792969,
+    "reference_rejected_logp": -24.53000259399414
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q461",
+    "loss": 0.6857160925865173,
+    "reward_margin": 0.014917755126953126,
+    "policy_chosen_logp": -118.69627380371094,
+    "policy_rejected_logp": -67.64363098144531,
+    "reference_chosen_logp": -118.57969665527344,
+    "reference_rejected_logp": -67.37787628173828
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q134",
+    "loss": 0.6765146255493164,
+    "reward_margin": 0.03354644775390625,
+    "policy_chosen_logp": -133.85403442382812,
+    "policy_rejected_logp": -149.38673400878906,
+    "reference_chosen_logp": -133.7695770263672,
+    "reference_rejected_logp": -148.96681213378906
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q358",
+    "loss": 0.6835386157035828,
+    "reward_margin": 0.019310379028320314,
+    "policy_chosen_logp": -230.33285522460938,
+    "policy_rejected_logp": -31.649837493896484,
+    "reference_chosen_logp": -230.3062286376953,
+    "reference_rejected_logp": -31.43010711669922
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q449",
+    "loss": 0.6791070103645325,
+    "reward_margin": 0.028280258178710938,
+    "policy_chosen_logp": -126.0341796875,
+    "policy_rejected_logp": -39.259986877441406,
+    "reference_chosen_logp": -126.18829345703125,
+    "reference_rejected_logp": -39.13129806518555
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q440",
+    "loss": 0.669598400592804,
+    "reward_margin": 0.0476654052734375,
+    "policy_chosen_logp": -149.82089233398438,
+    "policy_rejected_logp": -76.26297760009766,
+    "reference_chosen_logp": -150.01295471191406,
+    "reference_rejected_logp": -75.97838592529297
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q454",
+    "loss": 0.6802937388420105,
+    "reward_margin": 0.02587432861328125,
+    "policy_chosen_logp": -75.6627197265625,
+    "policy_rejected_logp": -78.50444030761719,
+    "reference_chosen_logp": -75.59907531738281,
+    "reference_rejected_logp": -78.18205261230469
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q552",
+    "loss": 0.6780534386634827,
+    "reward_margin": 0.030418777465820314,
+    "policy_chosen_logp": -344.0234375,
+    "policy_rejected_logp": -63.9482421875,
+    "reference_chosen_logp": -344.005615234375,
+    "reference_rejected_logp": -63.6262321472168
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_30991eea06ead0199dd1",
+    "loss": 0.6792863607406616,
+    "reward_margin": 0.027916526794433596,
+    "policy_chosen_logp": -104.6162109375,
+    "policy_rejected_logp": -28.03790855407715,
+    "reference_chosen_logp": -104.64297485351562,
+    "reference_rejected_logp": -27.785507202148438
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_76030ce7fc91c4987075",
+    "loss": 0.6753343939781189,
+    "reward_margin": 0.035948657989501955,
+    "policy_chosen_logp": -104.57757568359375,
+    "policy_rejected_logp": -12.597814559936523,
+    "reference_chosen_logp": -104.62117004394531,
+    "reference_rejected_logp": -12.281922340393066
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q033",
+    "loss": 0.6772922873497009,
+    "reward_margin": 0.03196525573730469,
+    "policy_chosen_logp": -337.5379638671875,
+    "policy_rejected_logp": -21.813457489013672,
+    "reference_chosen_logp": -337.63067626953125,
+    "reference_rejected_logp": -21.586517333984375
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q501",
+    "loss": 0.6747788190841675,
+    "reward_margin": 0.03708038330078125,
+    "policy_chosen_logp": -121.44701385498047,
+    "policy_rejected_logp": -39.39887237548828,
+    "reference_chosen_logp": -121.57197570800781,
+    "reference_rejected_logp": -39.15303039550781
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_dc6d2ef7055c83495595",
+    "loss": 0.6685541272163391,
+    "reward_margin": 0.049806213378906256,
+    "policy_chosen_logp": -185.11203002929688,
+    "policy_rejected_logp": -58.19895553588867,
+    "reference_chosen_logp": -185.40322875976562,
+    "reference_rejected_logp": -57.99209213256836
+  },
+  {
+    "epoch": 1,
+    "id": "DEV_Q119",
+    "loss": 0.679809033870697,
+    "reward_margin": 0.026856613159179688,
+    "policy_chosen_logp": -34.3311767578125,
+    "policy_rejected_logp": -105.19851684570312,
+    "reference_chosen_logp": -34.08967208862305,
+    "reference_rejected_logp": -104.68844604492188
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q205",
+    "loss": 0.6735216975212097,
+    "reward_margin": 0.039643859863281256,
+    "policy_chosen_logp": -123.7017593383789,
+    "policy_rejected_logp": -106.69779968261719,
+    "reference_chosen_logp": -123.73050689697266,
+    "reference_rejected_logp": -106.33010864257812
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q577",
+    "loss": 0.6712259650230408,
+    "reward_margin": 0.04433364868164063,
+    "policy_chosen_logp": -111.12976837158203,
+    "policy_rejected_logp": -38.63755798339844,
+    "reference_chosen_logp": -111.15609741210938,
+    "reference_rejected_logp": -38.220550537109375
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_9f543b73726181c54a2b",
+    "loss": 0.6844500303268433,
+    "reward_margin": 0.017470550537109376,
+    "policy_chosen_logp": -113.17475891113281,
+    "policy_rejected_logp": -49.52051544189453,
+    "reference_chosen_logp": -113.11729431152344,
+    "reference_rejected_logp": -49.28834533691406
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q285",
+    "loss": 0.6604383587837219,
+    "reward_margin": 0.06652374267578125,
+    "policy_chosen_logp": -91.48320007324219,
+    "policy_rejected_logp": -126.56549835205078,
+    "reference_chosen_logp": -91.30848693847656,
+    "reference_rejected_logp": -125.72554779052734
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_f52a76fb249a09098de6",
+    "loss": 0.6728854775428772,
+    "reward_margin": 0.040942382812500004,
+    "policy_chosen_logp": -128.52914428710938,
+    "policy_rejected_logp": -20.046382904052734,
+    "reference_chosen_logp": -128.63516235351562,
+    "reference_rejected_logp": -19.742977142333984
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q288",
+    "loss": 0.6907380819320679,
+    "reward_margin": 0.0048240661621093755,
+    "policy_chosen_logp": -133.6248779296875,
+    "policy_rejected_logp": -50.927635192871094,
+    "reference_chosen_logp": -133.28163146972656,
+    "reference_rejected_logp": -50.53614807128906
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_06bd844e83f1c3b34ca4",
+    "loss": 0.6495600938796997,
+    "reward_margin": 0.08916091918945312,
+    "policy_chosen_logp": -284.4257507324219,
+    "policy_rejected_logp": -39.813323974609375,
+    "reference_chosen_logp": -284.84619140625,
+    "reference_rejected_logp": -39.34215545654297
+  },
+  {
+    "epoch": 1,
+    "id": "DEV_Q171",
+    "loss": 0.6802643537521362,
+    "reward_margin": 0.025933837890625002,
+    "policy_chosen_logp": -184.04611206054688,
+    "policy_rejected_logp": -97.3470230102539,
+    "reference_chosen_logp": -183.89956665039062,
+    "reference_rejected_logp": -96.9411392211914
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_fbd903836a28b953bd66",
+    "loss": 0.6452628374099731,
+    "reward_margin": 0.09817733764648438,
+    "policy_chosen_logp": -241.82894897460938,
+    "policy_rejected_logp": -27.905426025390625,
+    "reference_chosen_logp": -242.58450317382812,
+    "reference_rejected_logp": -27.67920684814453
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q590",
+    "loss": 0.6522271633148193,
+    "reward_margin": 0.08358612060546876,
+    "policy_chosen_logp": -315.0147705078125,
+    "policy_rejected_logp": -86.60855102539062,
+    "reference_chosen_logp": -315.1953125,
+    "reference_rejected_logp": -85.95323181152344
+  },
+  {
+    "epoch": 1,
+    "id": "DEV_Q162",
+    "loss": 0.6766873598098755,
+    "reward_margin": 0.0331951379776001,
+    "policy_chosen_logp": -117.24669647216797,
+    "policy_rejected_logp": -3.16703200340271,
+    "reference_chosen_logp": -117.31196594238281,
+    "reference_rejected_logp": -2.9003500938415527
+  },
+  {
+    "epoch": 1,
+    "id": "TRAIN_Q372",
+    "loss": 0.6662128567695618,
+    "reward_margin": 0.054614257812500004,
+    "policy_chosen_logp": -385.826171875,
+    "policy_rejected_logp": -51.901824951171875,
+    "reference_chosen_logp": -385.6741943359375,
+    "reference_rejected_logp": -51.203704833984375
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_7aec41454a5627eb248d",
+    "loss": 0.6827359795570374,
+    "reward_margin": 0.020932006835937503,
+    "policy_chosen_logp": -66.96578216552734,
+    "policy_rejected_logp": -14.539861679077148,
+    "reference_chosen_logp": -67.03189086914062,
+    "reference_rejected_logp": -14.396650314331055
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_d85b69d22bc37b9bb24c",
+    "loss": 0.6765134930610657,
+    "reward_margin": 0.033548736572265626,
+    "policy_chosen_logp": -70.90357971191406,
+    "policy_rejected_logp": -42.29569625854492,
+    "reference_chosen_logp": -70.95305633544922,
+    "reference_rejected_logp": -42.00968551635742
+  },
+  {
+    "epoch": 1,
+    "id": "DEV_Q290",
+    "loss": 0.6707780957221985,
+    "reward_margin": 0.045250129699707035,
+    "policy_chosen_logp": -130.80020141601562,
+    "policy_rejected_logp": -24.19151496887207,
+    "reference_chosen_logp": -130.92794799804688,
+    "reference_rejected_logp": -23.86676025390625
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_e70f9c78b0929566b46c",
+    "loss": 0.6811882257461548,
+    "reward_margin": 0.02406272888183594,
+    "policy_chosen_logp": -73.96065521240234,
+    "policy_rejected_logp": -35.14054870605469,
+    "reference_chosen_logp": -73.86058044433594,
+    "reference_rejected_logp": -34.79984664916992
+  },
+  {
+    "epoch": 1,
+    "id": "DEV_Q245",
+    "loss": 0.6773161292076111,
+    "reward_margin": 0.031916809082031254,
+    "policy_chosen_logp": -120.51493835449219,
+    "policy_rejected_logp": -101.43547058105469,
+    "reference_chosen_logp": -120.18560028076172,
+    "reference_rejected_logp": -100.7869644165039
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_295c90cb55f718f23e3f",
+    "loss": 0.6810778379440308,
+    "reward_margin": 0.024286079406738284,
+    "policy_chosen_logp": -55.02899932861328,
+    "policy_rejected_logp": -22.247655868530273,
+    "reference_chosen_logp": -54.91952896118164,
+    "reference_rejected_logp": -21.89532470703125
+  },
+  {
+    "epoch": 1,
+    "id": "DEV_Q080",
+    "loss": 0.7044761776924133,
+    "reward_margin": -0.022531127929687502,
+    "policy_chosen_logp": -85.88299560546875,
+    "policy_rejected_logp": -75.86476135253906,
+    "reference_chosen_logp": -85.20352172851562,
+    "reference_rejected_logp": -75.41059875488281
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_bc89e2ec3e18877d29c8",
+    "loss": 0.6684754490852356,
+    "reward_margin": 0.04996757507324219,
+    "policy_chosen_logp": -244.86656188964844,
+    "policy_rejected_logp": -40.31260299682617,
+    "reference_chosen_logp": -244.79800415039062,
+    "reference_rejected_logp": -39.74436950683594
+  },
+  {
+    "epoch": 1,
+    "id": "SYN_4a95a1f49470104e4e8f",
+    "loss": 0.6941462159156799,
+    "reward_margin": -0.0019969940185546875,
+    "policy_chosen_logp": -48.11532974243164,
+    "policy_rejected_logp": -46.55730438232422,
+    "reference_chosen_logp": -47.85858917236328,
+    "reference_rejected_logp": -46.320533752441406
+  }
+]

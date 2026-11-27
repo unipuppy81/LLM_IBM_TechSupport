@@ -1,0 +1,38 @@
+{
+  "adapter_sha256": {
+    "adapter_config.json": "7ac9bdb0da3a5fb323cc2ca522738bb79a5675240c6a7254f05717899ac4ea4a",
+    "adapter_model.safetensors": "db0913e6a4c074c484f5cc6555eea87ea9cc4b1fd0e32ed6ced4a721e3227206"
+  },
+  "initial_adapter_sha256": {
+    "adapter_config.json": "7ac9bdb0da3a5fb323cc2ca522738bb79a5675240c6a7254f05717899ac4ea4a",
+    "adapter_model.safetensors": "2b82bf8d070fce3289ae64add9a7810c3e06f5f2337faa4fb30b5f3c3756ed4a"
+  },
+  "metrics": {
+    "model": "Qwen2.5-1.5B-Instruct",
+    "method": "LoRA",
+    "train_samples": 548,
+    "val_samples": 106,
+    "epochs": 2,
+    "learning_rate": 0.0002,
+    "max_length": 2048,
+    "grad_accum": 8,
+    "lora_rank": 8,
+    "best_val_loss": 2.3554,
+    "training_seconds": 497.776,
+    "peak_gpu_memory_gb": 4.869,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 2.5822,
+        "val_loss": 2.3554,
+        "optimizer_steps": 69
+      },
+      {
+        "epoch": 2,
+        "train_loss": 2.4493,
+        "val_loss": 2.4393,
+        "optimizer_steps": 69
+      }
+    ]
+  }
+}

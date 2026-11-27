@@ -1,0 +1,13 @@
+[DPO Test1 Comparison]
+Metric                                           SFT 548      SFT+DPO 76
+token_f1_percent                                   21.59           21.53
+exact_match_percent                                  0.0             0.0
+abstention_rate_percent                              0.0             0.0
+false_refusal_rate_percent                           0.0             0.0
+generation_seconds                               393.094         440.034
+questions_per_second                                0.27           0.241
+peak_gpu_memory_gb                                 3.102            3.54
+DPO Training: {"pairs": 76, "epochs": 1, "optimizer_updates": 10, "skipped_updates": 0, "mean_dpo_loss": 0.6904487594177848, "reference_seconds": 18.899, "training_seconds": 77.357, "peak_gpu_memory_gb": 3.596}
+Judge: NOT RUN | RAG: NONE | Test: NOT USED
+Adapter: C:\Projects\LLM_IBM_TechSupport\IBMTechSupport\models\finetuning\dpo\run_20261127_143501_864689\lora
+Results: C:\Projects\LLM_IBM_TechSupport\IBMTechSupport\evaluate_results\106\finetuning\dpo\run_20261127_143501_864689

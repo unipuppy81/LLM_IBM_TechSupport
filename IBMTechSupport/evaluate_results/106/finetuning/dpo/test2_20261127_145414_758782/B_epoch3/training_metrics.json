@@ -1,0 +1,31 @@
+{
+  "lr": 5e-06,
+  "epochs": 3,
+  "pairs": 76,
+  "beta": 0.1,
+  "optimizer_updates": 30,
+  "skipped_updates": 0,
+  "mean_dpo_loss": 0.6784731821532834,
+  "training_seconds": 234.077,
+  "peak_gpu_memory_gb": 3.597,
+  "history": [
+    {
+      "epoch": 1,
+      "mean_dpo_loss": 0.6904487594177848,
+      "cumulative_updates": 10,
+      "cumulative_skipped_updates": 0
+    },
+    {
+      "epoch": 2,
+      "mean_dpo_loss": 0.6779526864227495,
+      "cumulative_updates": 20,
+      "cumulative_skipped_updates": 0
+    },
+    {
+      "epoch": 3,
+      "mean_dpo_loss": 0.6670181006193161,
+      "cumulative_updates": 30,
+      "cumulative_skipped_updates": 0
+    }
+  ]
+}

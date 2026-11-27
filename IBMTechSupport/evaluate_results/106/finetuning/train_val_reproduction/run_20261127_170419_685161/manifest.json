@@ -1,0 +1,20 @@
+{
+  "runner_sha256": "b62034d15be82574149f2c17bfbda940a1f6f32f1dfedc10980bf1d1aee27014",
+  "train_sha256": "9372bbf386fa57b18ff67ac8b8e19be2cbad398f3fc33010485dcf953e86e5c7",
+  "val_sha256": "51740842406b7f8e6814dc5a57c57d09da4b72fc0c94e62b430e8cf8ccfb45ae",
+  "config_sha256": "abd13d1cf7f4eeb37e7c54713e6c0481112738a35d895b429624ac2344366d06",
+  "adapter_sha256": {
+    "SFT_548": {
+      "adapter_config.json": "5112f6b7360d7d4b39ebbc7a4c94032dbed778c71cd8b11235515599c8aa4364",
+      "adapter_model.safetensors": "edf272a0ed5f1ab81033255b5de9168b34c03f8fa267bc5a3b6492fe9941a257"
+    },
+    "DAPT_SFT_548": {
+      "adapter_config.json": "7ac9bdb0da3a5fb323cc2ca522738bb79a5675240c6a7254f05717899ac4ea4a",
+      "adapter_model.safetensors": "db0913e6a4c074c484f5cc6555eea87ea9cc4b1fd0e32ed6ced4a721e3227206"
+    }
+  },
+  "existing_val_predictions_sha256": {
+    "SFT_548": "acca3e2aaab2a447f07db7c130cf312b9a9e4c2e646b33878e7108bf38d7e4c4",
+    "DAPT_SFT_548": "cb1a76ec23fef64f7c763102f63cc2af2872b128852c990c00f2ec24b95299c7"
+  }
+}

@@ -1,0 +1,1668 @@
+{
+  "purpose": "For assistant technical-error review after training and saved validation evaluation; NEVER train on this bundle.",
+  "summary": {
+    "complete": true,
+    "objective": "Frozen adapter Train reproduction versus previously saved Validation generalization",
+    "models": [
+      "SFT_548",
+      "DAPT_SFT_548"
+    ],
+    "train_count": 548,
+    "validation_count": 106,
+    "train_sha256": "9372bbf386fa57b18ff67ac8b8e19be2cbad398f3fc33010485dcf953e86e5c7",
+    "validation_sha256": "51740842406b7f8e6814dc5a57c57d09da4b72fc0c94e62b430e8cf8ccfb45ae",
+    "adapter_sha256": {
+      "SFT_548": {
+        "adapter_config.json": "5112f6b7360d7d4b39ebbc7a4c94032dbed778c71cd8b11235515599c8aa4364",
+        "adapter_model.safetensors": "edf272a0ed5f1ab81033255b5de9168b34c03f8fa267bc5a3b6492fe9941a257"
+      },
+      "DAPT_SFT_548": {
+        "adapter_config.json": "7ac9bdb0da3a5fb323cc2ca522738bb79a5675240c6a7254f05717899ac4ea4a",
+        "adapter_model.safetensors": "db0913e6a4c074c484f5cc6555eea87ea9cc4b1fd0e32ed6ced4a721e3227206"
+      }
+    },
+    "metrics": {
+      "SFT_548": {
+        "train": {
+          "model": "Qwen2.5-1.5B-Instruct",
+          "dataset": "train_clean_ver2.json",
+          "total": 548,
+          "batch_size": 1,
+          "max_new_tokens": 160,
+          "answerable": 548,
+          "impossible": 0,
+          "exact_match_percent": 0.0,
+          "token_f1_percent": 19.36,
+          "abstention_rate_percent": null,
+          "false_refusal_rate_percent": 0.0,
+          "answerable_f1_at_least_0_30": 74,
+          "answerable_f1_at_least_0_50": 6,
+          "answerable_zero_f1": 3,
+          "mean_prediction_characters": 180.18
+        },
+        "validation": {
+          "model": "Qwen2.5-1.5B-Instruct",
+          "dataset": "val_106.json",
+          "total": 106,
+          "batch_size": 1,
+          "max_new_tokens": 160,
+          "answerable": 77,
+          "impossible": 29,
+          "exact_match_percent": 0.0,
+          "token_f1_percent": 21.59,
+          "abstention_rate_percent": 0.0,
+          "false_refusal_rate_percent": 0.0,
+          "answerable_f1_at_least_0_30": 18,
+          "answerable_f1_at_least_0_50": 3,
+          "answerable_zero_f1": 0,
+          "mean_prediction_characters": 210.88
+        },
+        "train_minus_val_f1_pp": -2.23,
+        "validation_by_train_document_overlap": {
+          "shared_source_filename": {
+            "model": "Qwen2.5-1.5B-Instruct",
+            "dataset": "val_106.json",
+            "total": 7,
+            "batch_size": 1,
+            "max_new_tokens": 160,
+            "answerable": 7,
+            "impossible": 0,
+            "exact_match_percent": 0.0,
+            "token_f1_percent": 25.89,
+            "abstention_rate_percent": null,
+            "false_refusal_rate_percent": 0.0,
+            "answerable_f1_at_least_0_30": 3,
+            "answerable_f1_at_least_0_50": 0,
+            "answerable_zero_f1": 0,
+            "mean_prediction_characters": 221.14
+          },
+          "unshared_source_filename": {
+            "model": "Qwen2.5-1.5B-Instruct",
+            "dataset": "val_106.json",
+            "total": 99,
+            "batch_size": 1,
+            "max_new_tokens": 160,
+            "answerable": 70,
+            "impossible": 29,
+            "exact_match_percent": 0.0,
+            "token_f1_percent": 21.16,
+            "abstention_rate_percent": 0.0,
+            "false_refusal_rate_percent": 0.0,
+            "answerable_f1_at_least_0_30": 15,
+            "answerable_f1_at_least_0_50": 3,
+            "answerable_zero_f1": 0,
+            "mean_prediction_characters": 209.86
+          },
+          "train_matching_question": {
+            "total": 0,
+            "answerable": 0,
+            "impossible": 0,
+            "token_f1_percent": null
+          },
+          "novel_question": {
+            "model": "Qwen2.5-1.5B-Instruct",
+            "dataset": "val_106.json",
+            "total": 106,
+            "batch_size": 1,
+            "max_new_tokens": 160,
+            "answerable": 77,
+            "impossible": 29,
+            "exact_match_percent": 0.0,
+            "token_f1_percent": 21.59,
+            "abstention_rate_percent": 0.0,
+            "false_refusal_rate_percent": 0.0,
+            "answerable_f1_at_least_0_30": 18,
+            "answerable_f1_at_least_0_50": 3,
+            "answerable_zero_f1": 0,
+            "mean_prediction_characters": 210.88
+          }
+        },
+        "train_generation_seconds_excluding_model_load": 1678.83,
+        "sft_target_diagnostics": {
+          "train_f1_against_160_token_target_percent": 19.68,
+          "train_exact_match_against_160_token_target_percent": 0.0,
+          "train_questions_exceeding_192_tokens": 28,
+          "train_references_exceeding_160_tokens": 55,
+          "long_question_full_prompt_f1_against_160_token_target_percent": 17.04,
+          "long_question_training_truncated_prompt_f1_against_160_token_target_percent": 18.52
+        }
+      },
+      "DAPT_SFT_548": {
+        "train": {
+          "model": "Qwen2.5-1.5B-Instruct",
+          "dataset": "train_clean_ver2.json",
+          "total": 548,
+          "batch_size": 1,
+          "max_new_tokens": 160,
+          "answerable": 548,
+          "impossible": 0,
+          "exact_match_percent": 0.0,
+          "token_f1_percent": 19.5,
+          "abstention_rate_percent": null,
+          "false_refusal_rate_percent": 0.0,
+          "answerable_f1_at_least_0_30": 82,
+          "answerable_f1_at_least_0_50": 6,
+          "answerable_zero_f1": 5,
+          "mean_prediction_characters": 187.91
+        },
+        "validation": {
+          "model": "Qwen2.5-1.5B-Instruct",
+          "dataset": "val_106.json",
+          "total": 106,
+          "batch_size": 1,
+          "max_new_tokens": 160,
+          "answerable": 77,
+          "impossible": 29,
+          "exact_match_percent": 0.0,
+          "token_f1_percent": 23.71,
+          "abstention_rate_percent": 0.0,
+          "false_refusal_rate_percent": 0.0,
+          "answerable_f1_at_least_0_30": 24,
+          "answerable_f1_at_least_0_50": 2,
+          "answerable_zero_f1": 0,
+          "mean_prediction_characters": 235.4
+        },
+        "train_minus_val_f1_pp": -4.21,
+        "validation_by_train_document_overlap": {
+          "shared_source_filename": {
+            "model": "Qwen2.5-1.5B-Instruct",
+            "dataset": "val_106.json",
+            "total": 7,
+            "batch_size": 1,
+            "max_new_tokens": 160,
+            "answerable": 7,
+            "impossible": 0,
+            "exact_match_percent": 0.0,
+            "token_f1_percent": 24.28,
+            "abstention_rate_percent": null,
+            "false_refusal_rate_percent": 0.0,
+            "answerable_f1_at_least_0_30": 3,
+            "answerable_f1_at_least_0_50": 0,
+            "answerable_zero_f1": 0,
+            "mean_prediction_characters": 198.0
+          },
+          "unshared_source_filename": {
+            "model": "Qwen2.5-1.5B-Instruct",
+            "dataset": "val_106.json",
+            "total": 99,
+            "batch_size": 1,
+            "max_new_tokens": 160,
+            "answerable": 70,
+            "impossible": 29,
+            "exact_match_percent": 0.0,
+            "token_f1_percent": 23.66,
+            "abstention_rate_percent": 0.0,
+            "false_refusal_rate_percent": 0.0,
+            "answerable_f1_at_least_0_30": 21,
+            "answerable_f1_at_least_0_50": 2,
+            "answerable_zero_f1": 0,
+            "mean_prediction_characters": 239.14
+          },
+          "train_matching_question": {
+            "total": 0,
+            "answerable": 0,
+            "impossible": 0,
+            "token_f1_percent": null
+          },
+          "novel_question": {
+            "model": "Qwen2.5-1.5B-Instruct",
+            "dataset": "val_106.json",
+            "total": 106,
+            "batch_size": 1,
+            "max_new_tokens": 160,
+            "answerable": 77,
+            "impossible": 29,
+            "exact_match_percent": 0.0,
+            "token_f1_percent": 23.71,
+            "abstention_rate_percent": 0.0,
+            "false_refusal_rate_percent": 0.0,
+            "answerable_f1_at_least_0_30": 24,
+            "answerable_f1_at_least_0_50": 2,
+            "answerable_zero_f1": 0,
+            "mean_prediction_characters": 235.4
+          }
+        },
+        "train_generation_seconds_excluding_model_load": 1629.891,
+        "sft_target_diagnostics": {
+          "train_f1_against_160_token_target_percent": 19.81,
+          "train_exact_match_against_160_token_target_percent": 0.0,
+          "train_questions_exceeding_192_tokens": 28,
+          "train_references_exceeding_160_tokens": 55,
+          "long_question_full_prompt_f1_against_160_token_target_percent": 19.97,
+          "long_question_training_truncated_prompt_f1_against_160_token_target_percent": 18.49
+        }
+      }
+    },
+    "paired_token_f1_change": {
+      "train": {
+        "compared_answerable": 548,
+        "changed_answer_text": 477,
+        "increased_token_f1": 227,
+        "decreased_token_f1": 224,
+        "unchanged_token_f1": 97,
+        "largest_f1_decreases": [
+          {
+            "id": "TRAIN_Q395",
+            "sft_f1": 0.4815,
+            "dapt_f1": 0.0606
+          },
+          {
+            "id": "SYN_99521c008e43ebab8522",
+            "sft_f1": 0.5217,
+            "dapt_f1": 0.1034
+          },
+          {
+            "id": "SYN_a90f350e49c5612315f7",
+            "sft_f1": 0.3378,
+            "dapt_f1": 0.0202
+          },
+          {
+            "id": "SYN_8e19cd4399e5e19d6f04",
+            "sft_f1": 0.4417,
+            "dapt_f1": 0.1429
+          },
+          {
+            "id": "TRAIN_Q446",
+            "sft_f1": 0.4324,
+            "dapt_f1": 0.1562
+          },
+          {
+            "id": "TRAIN_Q589",
+            "sft_f1": 0.5029,
+            "dapt_f1": 0.236
+          },
+          {
+            "id": "SYN_9293dde1d1fedc5b1060",
+            "sft_f1": 0.4105,
+            "dapt_f1": 0.1739
+          },
+          {
+            "id": "TRAIN_Q215",
+            "sft_f1": 0.3836,
+            "dapt_f1": 0.1477
+          },
+          {
+            "id": "V2_SYN_f3750e68839cf121c379",
+            "sft_f1": 0.3448,
+            "dapt_f1": 0.1333
+          },
+          {
+            "id": "V2_SYN_da4557d37f56548b470d",
+            "sft_f1": 0.2899,
+            "dapt_f1": 0.1
+          },
+          {
+            "id": "TRAIN_Q163",
+            "sft_f1": 0.2963,
+            "dapt_f1": 0.1176
+          },
+          {
+            "id": "TRAIN_Q047",
+            "sft_f1": 0.2171,
+            "dapt_f1": 0.0532
+          },
+          {
+            "id": "SYN_8de4fc519c2bf067f844",
+            "sft_f1": 0.2759,
+            "dapt_f1": 0.1161
+          },
+          {
+            "id": "TRAIN_Q044",
+            "sft_f1": 0.1875,
+            "dapt_f1": 0.0357
+          },
+          {
+            "id": "TRAIN_Q024",
+            "sft_f1": 0.1818,
+            "dapt_f1": 0.0364
+          }
+        ],
+        "largest_f1_increases": [
+          {
+            "id": "DEV_Q307",
+            "sft_f1": 0.129,
+            "dapt_f1": 0.5
+          },
+          {
+            "id": "SYN_36b9177848c1958c206f",
+            "sft_f1": 0.1139,
+            "dapt_f1": 0.4545
+          },
+          {
+            "id": "SYN_d10dc13929fa68f2f989",
+            "sft_f1": 0.2614,
+            "dapt_f1": 0.5517
+          },
+          {
+            "id": "TRAIN_Q515",
+            "sft_f1": 0.0935,
+            "dapt_f1": 0.3355
+          },
+          {
+            "id": "TRAIN_Q584",
+            "sft_f1": 0.1842,
+            "dapt_f1": 0.4262
+          },
+          {
+            "id": "DEV_Q053",
+            "sft_f1": 0.0468,
+            "dapt_f1": 0.2838
+          },
+          {
+            "id": "SYN_9654ad4720d4171e22a2",
+            "sft_f1": 0.1772,
+            "dapt_f1": 0.4082
+          },
+          {
+            "id": "SYN_950e8b977151a388a1c9",
+            "sft_f1": 0.1412,
+            "dapt_f1": 0.3556
+          },
+          {
+            "id": "DEV_Q030",
+            "sft_f1": 0.1724,
+            "dapt_f1": 0.3636
+          },
+          {
+            "id": "TRAIN_Q466",
+            "sft_f1": 0.1553,
+            "dapt_f1": 0.3407
+          },
+          {
+            "id": "DEV_Q002",
+            "sft_f1": 0.0938,
+            "dapt_f1": 0.2769
+          },
+          {
+            "id": "TRAIN_Q178",
+            "sft_f1": 0.0935,
+            "dapt_f1": 0.2754
+          },
+          {
+            "id": "DEV_Q068",
+            "sft_f1": 0.2162,
+            "dapt_f1": 0.3975
+          },
+          {
+            "id": "TRAIN_Q576",
+            "sft_f1": 0.1607,
+            "dapt_f1": 0.3409
+          },
+          {
+            "id": "SYN_984cc878261863d883d2",
+            "sft_f1": 0.1472,
+            "dapt_f1": 0.3273
+          }
+        ]
+      },
+      "validation": {
+        "compared_answerable": 77,
+        "changed_answer_text": 69,
+        "increased_token_f1": 41,
+        "decreased_token_f1": 24,
+        "unchanged_token_f1": 12,
+        "largest_f1_decreases": [
+          {
+            "id": "TRAIN_Q236",
+            "sft_f1": 0.2069,
+            "dapt_f1": 0.0357
+          },
+          {
+            "id": "DEV_Q074",
+            "sft_f1": 0.2336,
+            "dapt_f1": 0.0828
+          },
+          {
+            "id": "TRAIN_Q006",
+            "sft_f1": 0.3867,
+            "dapt_f1": 0.2778
+          },
+          {
+            "id": "TRAIN_Q111",
+            "sft_f1": 0.2222,
+            "dapt_f1": 0.1143
+          },
+          {
+            "id": "DEV_Q122",
+            "sft_f1": 0.16,
+            "dapt_f1": 0.0588
+          },
+          {
+            "id": "TRAIN_Q157",
+            "sft_f1": 0.5161,
+            "dapt_f1": 0.4294
+          },
+          {
+            "id": "TRAIN_Q295",
+            "sft_f1": 0.297,
+            "dapt_f1": 0.237
+          },
+          {
+            "id": "DEV_Q109",
+            "sft_f1": 0.2222,
+            "dapt_f1": 0.1726
+          },
+          {
+            "id": "DEV_Q266",
+            "sft_f1": 0.375,
+            "dapt_f1": 0.3265
+          },
+          {
+            "id": "TRAIN_Q222",
+            "sft_f1": 0.1031,
+            "dapt_f1": 0.0556
+          },
+          {
+            "id": "TRAIN_Q282",
+            "sft_f1": 0.3973,
+            "dapt_f1": 0.3523
+          },
+          {
+            "id": "TRAIN_Q535",
+            "sft_f1": 0.1538,
+            "dapt_f1": 0.1111
+          },
+          {
+            "id": "TRAIN_Q003",
+            "sft_f1": 0.2093,
+            "dapt_f1": 0.1707
+          },
+          {
+            "id": "TRAIN_Q581",
+            "sft_f1": 0.309,
+            "dapt_f1": 0.2811
+          },
+          {
+            "id": "TRAIN_Q272",
+            "sft_f1": 0.3315,
+            "dapt_f1": 0.3077
+          }
+        ],
+        "largest_f1_increases": [
+          {
+            "id": "TRAIN_Q482",
+            "sft_f1": 0.1356,
+            "dapt_f1": 0.3288
+          },
+          {
+            "id": "TRAIN_Q316",
+            "sft_f1": 0.0699,
+            "dapt_f1": 0.2575
+          },
+          {
+            "id": "TRAIN_Q208",
+            "sft_f1": 0.1203,
+            "dapt_f1": 0.3056
+          },
+          {
+            "id": "TRAIN_Q270",
+            "sft_f1": 0.2222,
+            "dapt_f1": 0.3939
+          },
+          {
+            "id": "TRAIN_Q553",
+            "sft_f1": 0.238,
+            "dapt_f1": 0.3788
+          },
+          {
+            "id": "TRAIN_Q526",
+            "sft_f1": 0.1739,
+            "dapt_f1": 0.3111
+          },
+          {
+            "id": "TRAIN_Q436",
+            "sft_f1": 0.1452,
+            "dapt_f1": 0.271
+          },
+          {
+            "id": "TRAIN_Q594",
+            "sft_f1": 0.146,
+            "dapt_f1": 0.271
+          },
+          {
+            "id": "DEV_Q035",
+            "sft_f1": 0.0942,
+            "dapt_f1": 0.217
+          },
+          {
+            "id": "TRAIN_Q070",
+            "sft_f1": 0.0744,
+            "dapt_f1": 0.1846
+          },
+          {
+            "id": "DEV_Q167",
+            "sft_f1": 0.1435,
+            "dapt_f1": 0.2491
+          },
+          {
+            "id": "TRAIN_Q504",
+            "sft_f1": 0.1613,
+            "dapt_f1": 0.2619
+          },
+          {
+            "id": "TRAIN_Q456",
+            "sft_f1": 0.3111,
+            "dapt_f1": 0.4074
+          },
+          {
+            "id": "TRAIN_Q419",
+            "sft_f1": 0.2162,
+            "dapt_f1": 0.3103
+          },
+          {
+            "id": "TRAIN_Q037",
+            "sft_f1": 0.1333,
+            "dapt_f1": 0.2222
+          }
+        ]
+      }
+    },
+    "training_executed": false,
+    "validation_regenerated": false,
+    "test_used": false,
+    "rag_used": false,
+    "judge_used": false,
+    "limitations": [
+      "Train metrics measure question-to-answer generation, not teacher-forced loss or expert-verified correctness.",
+      "Validation has been used in model selection; it is not an independent test set.",
+      "Train and Validation may share IBM source documents even though QA IDs do not overlap.",
+      "Token F1/Exact Match do not measure technical correctness; short or generic answers may score differently.",
+      "Max new tokens is 160 and answers may be truncated.",
+      "Train F1 - Validation F1 is a descriptive gap, not a controlled estimate of causal generalization failure."
+    ]
+  },
+  "train_cases": [
+    {
+      "id": "TRAIN_Q227",
+      "question": "Why SET CHLAUTH ACTION(REMOVE) is not successful\n\n\n\nI have the following CHLAUTH records defined for channel BMMADMIN.SVRCONN:\n\n     DIS CHLAUTH(BMM*) ALL\n          1 : DIS CHLAUTH(BMM*) ALL\n     AMQ8878: Display channel authentication record details.\n        CHLAUTH(BMMADMIN.SVRCONN)               TYPE(USERMAP)\n        DESCR(BTMA channel)                     CUSTOM( )\n        ADDRESS(10.199.103.0)                   CLNTUSER(CHADVT3UTBMMPA$)\n        MCAUSER(mqm)                            USERSRC(MAP)\n        ALTDATE(2016-01-26)                     ALTTIME(20.38.12)\n     AMQ8878: Display channel authentication record details.\n        CHLAUTH(BMMADMIN.SVRCONN)               TYPE(USERMAP)\n        DESCR( )                                CUSTOM( )\n        ADDRESS( )                              CLNTUSER(chadvt3utbm)\n        MCAUSER(mqm)                            USERSRC(MAP)\n        ALTDATE(2016-01-27)                     ALTTIME(18.03.44)\n\nI am attempting to remove the first of the two records above with this command, but receive the response \"record not found\":\n\n     SET CHLAUTH(BMMADMIN.SVRCONN) TYPE(USERMAP) CLNTUSER('CHADVT3UTBMMPA$') ACTION(REMOVE)\n          3 : SET CHLAUTH(BMMADMIN.SVRCONN) TYPE(USERMAP) CLNTUSER('CHADVT3UTBMMPA$') ACTION(REMOVE)\n     AMQ8884: Channel authentication record not found.\n\nHow do I fix this problem??",
+      "reference_answer": "you MUST include the single quotes when specifying the value during an ACTION(REMOVE):",
+      "source_filenames": [
+        "swg21577138.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM MQ 7.1 and later: How to remove a channel authentication record (CHLAUTH) - United States\n\nText:\n TECHNOTE (FAQ)\n\nQUESTION\n You have added a channel authentication record into a WebSphere MQ 7.1 or later queue manager:\n\nSET CHLAUTH(*) TYPE(USERMAP) CLNTUSER(testuser) USERSRC(CHANNEL) ACTION(ADD)\nAMQ8877: WebSphere MQ channel authentication record set.\n\nThen you display it:\n\nDISPLAY CHLAUTH(*) TYPE(USERMAP)\n1 : DISPLAY CHLAUTH(*) TYPE(USERMAP)\nAMQ8878: Display channel authentication record details.\nCHLAUTH(*) TYPE(USERMAP)\nCLNTUSER(testuser) USERSRC(CHANNEL)\n\nNow you want to remove it and you try executing the following runmqsc command which you constructed using copy and paste from the above output:\n\nDELETE CHLAUTH(*) TYPE(USERMAP) CLNTUSER(testuser) USERSRC(CHANNEL)\n3 : DELETE CHLAUTH(*) TYPE(USERMAP) CLNTUSER(testuser) USERSR",
+      "predictions": {
+        "SFT_548": "This is a bug in MQ 8.0.5.10. It will be fixed in the next release.",
+        "DAPT_SFT_548": "This is a bug in MQ 8.0.0.10. \n\nIn order to resolve this issue, update to MQ 8.0.0.11."
+      },
+      "token_f1": {
+        "SFT_548": 0.05,
+        "DAPT_SFT_548": 0.0
+      }
+    },
+    {
+      "id": "SYN_6093cd686b37665b96ea",
+      "question": "What environment is relevant to the issue described as \"IBM Configuring defaultRowPrefetch for an Oracle JDBC driver\"?",
+      "reference_answer": "WebSphere Application Server using an Oracle JDBC driver",
+      "source_filenames": [
+        "swg21417765.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Configuring defaultRowPrefetch for an Oracle JDBC driver - United States\n\nText:\n TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n The setting defaultRowPrefetch is used to help increase the performance of queries to Oracle databases and we sometimes find customers who want to enable this feature for Oracle database connections to increase the prefetched rows. \n\nOracle JDBC drivers have a feature built in as an extension that allows you to set the number of rows that are prefetched while the full result set is being formulated. This is to reduce the number of trips back and forth to the database. \n\n\nSYMPTOM\nIf defaultRowPrefetch is set as a custom property on the datasource, this will not work as the defaultRowPrefetch is not a datasource property but a property on the connection itself .\n\n\nCAUSE\ndefaultRowPrefetch is a property o",
+      "predictions": {
+        "SFT_548": "Windows 98, Windows ME, Windows NT 4.0, Windows XP, Windows Vista, Windows 7, Windows Server 2003, Windows Server 2008, Windows Server 2008 R2, Windows Server 2012, Windows Server 2012 R2, Windows 8, Windows 8.1, Windows 10, Windows Server 2016, Windows Server 2019",
+        "DAPT_SFT_548": "This problem occurs on all platforms."
+      },
+      "token_f1": {
+        "SFT_548": 0.029,
+        "DAPT_SFT_548": 0.0
+      }
+    },
+    {
+      "id": "SYN_57b8821015f4cd755080",
+      "question": "What symptoms identify the issue described as \"IBM 2035 MQRC_NOT_AUTHORIZED Connecting to WebSphere MQ from WebSphere Application Server via CLIENT Bindings\"?",
+      "reference_answer": "JMSCMQ0001: WebSphere MQ call failed with compcode '2' ('MQCC_FAILED') reason '2035' ('MQRC_NOT_AUTHORIZED')",
+      "source_filenames": [
+        "swg21636093.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM 2035 MQRC_NOT_AUTHORIZED Connecting to WebSphere MQ from WebSphere Application Server via CLIENT Bindings - United States\n\nText:\n TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n This article covers the most common reasons why an application running in WebSphere Application Server receives a 2035 MQRC_NOT_AUTHORIZED error when connecting to MQ as a client over a network. Quick steps to work around the MQRC_NOT_AUTHORIZED errors during development are provided in the 'Resolving the problem' section, as well as considerations for implementing security in production environments. A summary is also provided of behavior for outbound scenarios with container-managed and component-managed security, as well as inbound behavior for listener ports and activiation specifications \n\nSYMPTOM\nJMSCMQ0001: WebSphere MQ call failed with compcode '",
+      "predictions": {
+        "SFT_548": "The client application fails to connect to the queue manager.",
+        "DAPT_SFT_548": "The application server fails to connect to the queue manager."
+      },
+      "token_f1": {
+        "SFT_548": 0.0,
+        "DAPT_SFT_548": 0.0
+      }
+    },
+    {
+      "id": "SYN_c51626fab7595bd92ce4",
+      "question": "What environment is relevant to the issue described as \"IBM Can't disable DASH TimeSet and dataRefresh in Events configuration\"?",
+      "reference_answer": "Any DASH version, this was a problem since DASH 3.1.0",
+      "source_filenames": [
+        "swg21984540.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Can't disable DASH TimeSet and dataRefresh in Events configuration - United States\n\nText:\nDASHL2; timeSet; dataRefresh; Events; WIdgets.; Pages TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n Any Widget added to a Page after the initial \"Save\" or \"Save and Exit\" will not retain the Events settings when trying to disable the TimeSet and dataRefresh Events in the Edit -> Events pull down configuration window. \n\nSYMPTOM\nTimeSet and dataRefresh Events can't be disabled after any \"Save\" for previous added Widgets on a Page.\n\n\nCAUSE\nThis has been identified as a product defect under APAR IV83442\n\nENVIRONMENT\nAny DASH version, this was a problem since DASH 3.1.0\n\nDIAGNOSING THE PROBLEM\nCreate a Page in DASH, add Widgets then save and exit. Access the Page again, edit the page to add another Widget, Edit the Events in the new Widget the",
+      "predictions": {
+        "SFT_548": "Windows 2008 Server (x64) with Windows Update Service Pack 2 installed",
+        "DAPT_SFT_548": "All"
+      },
+      "token_f1": {
+        "SFT_548": 0.0,
+        "DAPT_SFT_548": 0.0
+      }
+    },
+    {
+      "id": "V2_SYN_d97d205f2889d27be106",
+      "question": "Which ITM configuration variables must have their existing overrides removed before conversion to CANDLEDATA?",
+      "reference_answer": "Remove existing overrides of CTIRA_SIT_PATH, KCA_IP_DIR and KCAWD_WRITE_DIR before converting the installation. ITM provides internal overrides for these variables when CANDLEDATA is used.",
+      "source_filenames": [
+        "swg21695194.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM IV67523 Move local data from CANDLEHOME to another file system - United States\n\nText:\n6.30.05.00 CANDLEHOME CANDLEDATA itmCANDLEDATA.sh TECHNOTE (FAQ)\n\nQUESTION\n How do I move local data such as configuration files, log files, historical data, etc. from CANDLEHOME to a different file system? \n\nCAUSE\nSince its inception, IBM Tivoli Monitoring (ITM) has stored local data such as configuration files, log files, and historical data together with the installation files in CANDLEHOME. For example, ITM normally installs in a directory named /opt/IBM/ITM. Within that directory, it stores programs in subdirectory names like /opt/IBM/ITM/bin and /opt/IBM/ITM/classes. It also stores local data in subdirectory names like /opt/IBM/ITM/config and /opt/IBM/ITM/logs. This homogeneous design is a problem for installations that require an approa",
+      "predictions": {
+        "SFT_548": "ITM_CONFIGVAR_OVERRIDE_DISABLE_CANDLEDATA",
+        "DAPT_SFT_548": "ITM_CANDLEDATA_DISABLE_OVERRIDE=TRUE"
+      },
+      "token_f1": {
+        "SFT_548": 0.0,
+        "DAPT_SFT_548": 0.0
+      }
+    },
+    {
+      "id": "TRAIN_Q421",
+      "question": "Authorization code issue\n\nlike many of the other questions posted on here ... I'm having trouble authenticating my SPSS authorization code. Then there is an issue getting a license code back from the IBM proxy server to complete my download. Please help.",
+      "reference_answer": "For installation & licensing issues on Student version and Graduate pack, contact your vendor.",
+      "source_filenames": [
+        "swg21592093.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM SPSS Student Version and Graduate Pack Resources - United States\n\nText:\nSPSS Support Acquisition Statistics Stats Grad Pack Student TECHNOTE (FAQ)\n\nQUESTION\n Where do I get support for IBM SPSS Student Version or Graduate Pack software? \n\nANSWER\nStep 1: \nFor installation & licensing issues on Student version and Graduate pack, contact your vendor. \n\n * Hearne [http://www.hearne.software/Software/SPSS-Grad-Packs-for-Students-by-IBM/FAQ] \n * On the Hub [http://onthehub.com/] \n * StudentDiscounts.com [http://studentdiscounts.com/contact-us.aspx] \n * JourneyEd [https://www.journeyed.com/contact] \n * thinkEDU [https://thinkedu.desk.com/] \n * Studica [http://www.studica.com/technical-support]\n\n\n\n\n\nCross reference information Segment Product Component Platform Version Edition Business Analytics SPSS Amos Windows Not Applicable Grad Pa",
+      "predictions": {
+        "SFT_548": "Please check the following: \n\n1) Make sure you have entered the correct authorization code \n2) Check the spelling of the authorization code \n3) Verify that the authorization code has been entered correctly \n4) If using a proxy server, make sure it is configured properly \n5) If using a proxy server, verify that the proxy server is running \n6) If using a proxy server, verify that the proxy server is set up to allow access to the IBM WebSphere Application Server \n7) If using a proxy server, verify that the proxy server is set up to allow access to the IBM WebSphere Commerce Server \n8) If using a proxy server, verify that the proxy server is set up to allow access to the IBM WebSphere Commerce Commerce Manager \n9) If using a proxy server",
+        "DAPT_SFT_548": "Please check the following: \n\n* Make sure you have entered the correct Authorization Code \n* Check the spelling of the Authorization Code \n* Verify that the Authorization Code has been assigned to the appropriate User Group \n* Ensure that the Authorization Code is active \n* If using a Proxy Server, make sure it is configured correctly"
+      },
+      "token_f1": {
+        "SFT_548": 0.0122,
+        "DAPT_SFT_548": 0.027
+      }
+    },
+    {
+      "id": "SYN_a90f350e49c5612315f7",
+      "question": "Which products and versions are affected by \"IBM Security Bulletin: Malicious File Download vulnerability in IBM Business Process Manager (BPM) and WebSphere Lombardi Edition (WLE) - CVE-2016-9693\"?",
+      "reference_answer": "- WebSphere Lombardi Edition V7.2.0.0 - V7.2.0.5\n- IBM Business Process Manager Advanced V7.5.0.0 - V7.5.1.2\n- IBM Business Process Manager Advanced V8.0.0.0 - V8.0.1.3\n- IBM Business Process Manager Advanced V8.5.0.0 - V8.5.7.0 including cumulative fix 2016.12",
+      "source_filenames": [
+        "swg21998655.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Security Bulletin: Malicious File Download vulnerability in IBM Business Process Manager (BPM) and WebSphere Lombardi Edition (WLE) - CVE-2016-9693 - United States\n\nText:\n SECURITY BULLETIN\n\nSUMMARY\n A comma separated file (CSV) download feature exists in IBM BPM and WLE and is available for anonymous users. An attacker can craft a URL that can trigger a download of attacker-supplied content under an attacker-supplied file name onto the victim's machine. \n\nVULNERABILITY DETAILS\nCVEID:CVE-2016-9693 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9693]\nDESCRIPTION:IBM Business Process Manager has a file download capability that is vulnerable to a set of attacks. Ultimately, an attacker can cause an unauthenticated victim to download a malicious payload. An existing file type restriction can be bypassed so that the payload",
+      "predictions": {
+        "SFT_548": "IBM BPM 8.5.1.0, 8.5.1.1, 8.5.1.2, 8.5.1.3, 8.5.1.4, 8.5.1.5, 8.5.1.6, 8.5.1.7, 8.5.1.8, 8.5.1.9, 8.5.1.10, 8.5.1.11, 8.5.1.12, 8.5.1.13, 8.5.1.14, 8.5.1.15, 8.5.1.1",
+        "DAPT_SFT_548": "This bulletin applies to all versions of BPM and WLE."
+      },
+      "token_f1": {
+        "SFT_548": 0.3378,
+        "DAPT_SFT_548": 0.0202
+      }
+    },
+    {
+      "id": "SYN_4a3c10068341a0cf925f",
+      "question": "What symptoms identify the issue described as \"IBM Tivoli Integrated Portal hangs because of Argus java.lang.OutOfMemory.\"?",
+      "reference_answer": "TIP hangs. SystemOut.log file shows Java.lang.OutOfMemoryError: \n\n[10/2/13 9:27:54:838 CDT] 0000002a webapp E com.ibm.ws.webcontainer.webapp.WebApp logServletError SRVE0293E: \n[Servlet Error]-[/secure/isclite/tiles/nop.jsp]: java.lang.OutOfMemoryError: Java heap space at java.lang.Object.clone(Native Method)",
+      "source_filenames": [
+        "swg21657452.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Tivoli Integrated Portal hangs because of Argus java.lang.OutOfMemory. - United States\n\nText:\ncacheTime; config.xml; Argus; TIP cache; TIPL2CONF; TIPL2PERF TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n Argus stores it's role authorizations in memory cache, and is not cleaned out unless the TIP is restarted. The \"cacheTime\" variable controls this, which is set to -1 by default. If the number of TIP roles is high, it can cause Java OOM errors. \n\nSYMPTOM\nTIP hangs. SystemOut.log file shows Java.lang.OutOfMemoryError: \n\n[10/2/13 9:27:54:838 CDT] 0000002a webapp E com.ibm.ws.webcontainer.webapp.WebApp logServletError SRVE0293E: \n[Servlet Error]-[/secure/isclite/tiles/nop.jsp]: java.lang.OutOfMemoryError: Java heap space at java.lang.Object.clone(Native Method)\n\n\nCAUSE\nBy default, the ARGUS cache will not get cleaned up unless the T",
+      "predictions": {
+        "SFT_548": "The application will hang after logging in.",
+        "DAPT_SFT_548": "The application will hang after opening the portal."
+      },
+      "token_f1": {
+        "SFT_548": 0.0215,
+        "DAPT_SFT_548": 0.0213
+      }
+    },
+    {
+      "id": "SYN_14b41290deb226f33f52",
+      "question": "Under what technical conditions does the issue occur in \"IBM PI34677: MBEANSTARTER LOADEXTENSIONS FAILED TO LOAD EXTENSION\"?",
+      "reference_answer": "*  During Portal Start-Up following error is shown:\n   --------------------\n   0000005e MBeanStarter  E com.ibm.wps.\n   \n   scripting.server.MBeanStarter loadExtensions failed to load\n   extension:\n   key: ServerExt.applications / value:\n   com.ibm.wps.scripting.server.\n   ApplicationServerExtensions",
+      "source_filenames": [
+        "swg1PI34677.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM PI34677: MBEANSTARTER LOADEXTENSIONS FAILED TO LOAD EXTENSION - United States\n\nText:\n  A FIX IS AVAILABLE\nFixes integrated in WebSphere Portal 8.5.0.0 Combined Cumulative Fixes [http://www-01.ibm.com/support/docview.wss?uid=swg24037786]\n\n\nSUBSCRIBE\nYou can track all active APARs for this component.\n\n\n\nAPAR STATUS\n * CLOSED AS PROGRAM ERROR.\n    \n   \n   \n\nERROR DESCRIPTION\n *  During Portal Start-Up following error is shown:\n   --------------------\n   0000005e MBeanStarter  E com.ibm.wps.\n   \n   scripting.server.MBeanStarter loadExtensions failed to load\n   extension:\n   key: ServerExt.applications / value:\n   com.ibm.wps.scripting.server.\n   ApplicationServerExtensions\n   \n   \n    \n   \n   \n\nLOCAL FIX\n *  1) open the WAS admin console\n   2) navigate to Resources > Resource environment providers > WP\n   ScriptingService > Custom ",
+      "predictions": {
+        "SFT_548": "This problem occurs on Windows platforms when using the Java Runtime Environment (JRE) 1.8.0_91 or later.",
+        "DAPT_SFT_548": "This problem occurs on Windows platforms when using the Java Runtime Environment (JRE) 8u92 or later."
+      },
+      "token_f1": {
+        "SFT_548": 0.0645,
+        "DAPT_SFT_548": 0.0225
+      }
+    },
+    {
+      "id": "SYN_2d778392a7a1d0d12641",
+      "question": "Which products and versions are affected by \"IBM Security Bulletin: Vulnerability in MD5 Signature and Hash Algorithm affects WebSphere Message Broker and IBM Integration Bus (CVE-2015-7575)\"?",
+      "reference_answer": "IBM Integration Bus V9, V10 \n\nWebSphere Message Broker V8",
+      "source_filenames": [
+        "swg21975233.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Security Bulletin: Vulnerability in MD5 Signature and Hash Algorithm affects WebSphere Message Broker and IBM Integration Bus (CVE-2015-7575) - United States\n\nText:\nWMB IIB SECURITY BULLETIN\n\nSUMMARY\n The MD5 “SLOTH” vulnerability on TLS 1.2 affects WebSphere Message Broker and IBM Integration Bus \n\nVULNERABILITY DETAILS\nCVEID: CVE-2015-7575 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-7575]\nDESCRIPTION: The TLS protocol could allow weaker than expected security caused by a collision attack when using the MD5 hash function for signing a ServerKeyExchange message during a TLS handshake. An attacker could exploit this vulnerability using man-in-the-middle techniques to impersonate a TLS server and obtain credentials.\nCVSS Base Score: 7.1\nCVSS Temporal Score: See https://exchange.xforce.ibmcloud.com/vulnerabilities/1094",
+      "predictions": {
+        "SFT_548": "WebSphere MQ 8.0.0.10, 9.0.0.0, 9.0.0.1, 9.0.0.2, 9.0.0.3, 9.0.0.4, 9.0.0.5, 9.0.0.6, 9.0.0.7, 9.0.0.8, 9.0.0.9, 9.0.1.0, 9.0.1.1, 9.0.1.2, 9.0.1.3, 9.0.1.4, 9.0.1.5, 9.",
+        "DAPT_SFT_548": "WebSphere MQ 8.0.0.19, 8.1.0.19, 8.2.0.19, 8.5.0.19, 8.6.0.19, 8.7.0.19, 8.8.0.19, 8.9.0.19, 8.10.0.19, 8.11.0.19, 8.12.0.19, 8.13.0.19, 8.14.0.19, 8.15.0.19, 8.16.0.19,"
+      },
+      "token_f1": {
+        "SFT_548": 0.0267,
+        "DAPT_SFT_548": 0.0303
+      }
+    },
+    {
+      "id": "DEV_Q047",
+      "question": "I need to move my perpetual license of SPSS v24 to my new machine.\n\nI have my authorization code first given to me, but since we did not renew our support contract we can't seem to download the software. I was originally told that I could download the trial version and it would have the authorization wizard where I could input the code and move forward. But the only downloadable version is subscription version with no authorization wizard. How do I move forward?",
+      "reference_answer": "If the Software Subscription and Maintenance has expired you will not be able to download the software from Passport Advantage Online.\nIn this case, you would need to renew your software Subscription and Maintenance.\n\nYou can order the Media CD copy of the software your company purchased. The software version is the one up to the time your subscription has expired.",
+      "source_filenames": [
+        "swg22013294.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Access and download SPSS software - United States\n\nText:\nentitlements; software; download TECHNOTE (FAQ)\n\nQUESTION\n Can I download the software without active Subscription and Maintenance? \n\nCAUSE\nexpired entitlements\n\nANSWER\n \n\nOfficial statement by IBM eCustomer Care Team (Passport Advantage Online help desk):\n\nWe would like to inform you that you can only access and download software that has active Subscription and Maintenance from Passport Advantage Online.\nIf the Software Subscription and Maintenance has expired you will not be able to download the software from Passport Advantage Online.\nIn this case, you would need to renew your software Subscription and Maintenance.\n\nYou can order the Media CD copy of the software your company purchased. The software version is the one up to the time your subscription has expired.\nThe ",
+      "predictions": {
+        "SFT_548": "Please contact IBM Support for assistance.",
+        "DAPT_SFT_548": "Please contact IBM Support directly at +1 (800) 439-4222 or visit https://www.ibm.com/support/docview.wss?uid=swg21999000"
+      },
+      "token_f1": {
+        "SFT_548": 0.0274,
+        "DAPT_SFT_548": 0.0594
+      }
+    },
+    {
+      "id": "SYN_5a2712c432e5caf62e0e",
+      "question": "Under what technical conditions does the issue occur in \"IBM PI47826: VMM DOES NOT CLEAR THE CACHE IF CLEARENTITY MODE IS USED.\"?",
+      "reference_answer": "*  If base entry and name in repository is different and\n   clearCache functionality is used with clearEntity mode then\n   virtual member manager (VMM) still looks in the cache and gets\n   the entity from the cache instead of fetching it from the LDAP\n   server.",
+      "source_filenames": [
+        "swg1PI47826.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM PI47826: VMM DOES NOT CLEAR THE CACHE IF CLEARENTITY MODE IS USED. - United States\n\nText:\n  FIXES ARE AVAILABLE\n8.5.5.9: WebSphere Application Server V8.5.5 Fix Pack 9 [http://www-01.ibm.com/support/docview.wss?uid=swg24041819]\n8.5.5.10: WebSphere Application Server V8.5.5 Fix Pack 10 [http://www-01.ibm.com/support/docview.wss?uid=swg24042150]\n8.5.5.11: WebSphere Application Server V8.5.5 Fix Pack 11 [http://www-01.ibm.com/support/docview.wss?uid=swg24043005]\n8.0.0.13: WebSphere Application Server V8.0 Fix Pack 13 [http://www-01.ibm.com/support/docview.wss?uid=swg24042746]\n8.5.5.12: WebSphere Application Server V8.5.5 Fix Pack 12 [http://www-01.ibm.com/support/docview.wss?uid=swg24043844]\n8.0.0.14: WebSphere Application Server V8.0 Fix Pack 14 [http://www-01.ibm.com/support/docview.wss?uid=swg24044096]\n8.5.5.13: WebSphere Appli",
+      "predictions": {
+        "SFT_548": "This problem occurs on all versions of VMM starting with VMM 9.0.0.0.",
+        "DAPT_SFT_548": "This problem occurs on Windows XP SP2, Windows Vista, Windows Server 2008 R2, Windows Server 2008, Windows Server 2003, Windows Server 2008 SP2, Windows Server 2008 SP1, Windows Server 2008 SP0, Windows Server 2003 SP2, Windows Server 2003 SP1, Windows Server 2003 SP0, Windows Server 2000, Windows NT 4.0, Windows ME, Windows 98, Windows 95, Windows 95 OSR2, Windows 95 OSR1, Windows 95 OSR1, Windows 95 OSR2, Windows"
+      },
+      "token_f1": {
+        "SFT_548": 0.1231,
+        "DAPT_SFT_548": 0.0294
+      }
+    },
+    {
+      "id": "DEV_Q064",
+      "question": "Is MQ or MQ Appliance impacted by Sweet32 Birthday Attack if we are running triple-DES cipher.?\n\nIs MQ or MQ Appliance impacted by Sweet32 Birthday Attack if we are running triple-DES cipher.?",
+      "reference_answer": "The following versions are affected: \n\n * IBM MQ  * Maintenance levels between 8.0.0.0 and 8.0.0.5 \n    * 9.0.0.0 only\n   \n   \n * IBM MQ Appliance  * Maintenance levels between 8.0.0.0 and 8.0.0.5\n   \n   \n * IBM WebSphere MQ  * Maintenance levels between 7.0.1.0 and 7.0.1.14 \n    * Maintenance levels between 7.1.0.0 and 7.1.0.8 \n    * Maintenance levels between 7.5.0.0 and 7.5.0.7",
+      "source_filenames": [
+        "swg21995099.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Security Bulletin: IBM MQ and IBM MQ Appliance are vulnerable to SWEET32 Birthday attack (CVE-2016-2183) - United States\n\nText:\n SECURITY BULLETIN\n\nSUMMARY\n A security vulnerability affects IBM MQ and IBM MQ Appliance, that could allow an attacker to obtain sensitive information when using a channel CipherSpec that uses the Triple-DES algorithm. The affected CipherSpecs are:\n\n- TRIPLE_DES_SHA_US\n- FIPS_WITH_3DES_EDE_CBC_SHA\n- ECDHE_ECDSA_3DES_EDE_CBC_SHA256\n- ECDHE_RSA_3DES_EDE_CBC_SHA256 \n\nVULNERABILITY DETAILS\nCVEID: CVE-2016-2183 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-2183]\nDESCRIPTION: OpenSSL could allow a remote attacker to obtain sensitive information, caused by an error in the DES/3DES cipher, used as a part of the SSL/TLS protocol. By capturing large amounts of encrypted traffic between the SSL/TLS ser",
+      "predictions": {
+        "SFT_548": "No. Triple DES is still supported on all IBM MQ platforms.",
+        "DAPT_SFT_548": "No, it will not impact the system."
+      },
+      "token_f1": {
+        "SFT_548": 0.0597,
+        "DAPT_SFT_548": 0.0308
+      }
+    },
+    {
+      "id": "SYN_da644b82d0f522bcc8f0",
+      "question": "What remediation is recommended for \"IBM Security Bulletin: IBM MQ administration command could cause denial of service (CVE-2016-8971)\"?",
+      "reference_answer": "IBM MQ V9.0 Long Term Support Release \n\nApply 9.0.0.1 [https://www-945.ibm.com/support/fixcentral/swg/selectFixes?parent=ibm%7EWebSphere&product=ibm/WebSphere/WebSphere+MQ&release=9.0.0.1&platform=All&function=all&useReleaseAsTarget=true] maintenance level. \n\nIBM MQ V8.0 \n\nApply 8.0.0.6 [http://www-01.ibm.com/support/docview.wss?uid=swg21995100] maintenance level.",
+      "source_filenames": [
+        "swg21998663.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Security Bulletin: IBM MQ administration command could cause denial of service (CVE-2016-8971) - United States\n\nText:\n SECURITY BULLETIN\n\nSUMMARY\n An administration command can cause IBM MQ to access an invalid memory address, leading to a segmentation failure and causing the queue manager to become unresponsive. \n\nVULNERABILITY DETAILS\nCVEID: CVE-2016-8971 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-8971]\nDESCRIPTION: IBM MQ could allow an authenticated user with queue manager permissions to cause a segmentation fault. This would result in the machine needing to be rebooted to resume normal operations.\nCVSS Base Score: 5.3\nCVSS Temporal Score: See https://exchange.xforce.ibmcloud.com/vulnerabilities/118862 [https://exchange.xforce.ibmcloud.com/vulnerabilities/118862] for the current score\nCVSS Environmental Score*:",
+      "predictions": {
+        "SFT_548": "Disable the MQSC command 'mqmadmin' on all nodes.",
+        "DAPT_SFT_548": "Disable the MQ Admin Command Service on all affected systems."
+      },
+      "token_f1": {
+        "SFT_548": 0.031,
+        "DAPT_SFT_548": 0.0465
+      }
+    },
+    {
+      "id": "TRAIN_Q267",
+      "question": "SAP Agent suddenly crashed\n\n\n\nHello, my SAP Agent 7.1.1.1 crashed suddenly. I was able to restart it and since then it is working smoothly, but I would like to understand the root cause to avoid any reoccurrence.  \n\nAny idea ?",
+      "reference_answer": "Defect: 58382 \nAbstract: Exception condition \"GWY_COMMUNICATION_FAILURE\" raised.\nAdditional Information: \"GWY_COMMUNICATION_FAILURE\" has been \ngracefully handled for the /IBMMON/ITM_GWY_CONNECTIONS \nfunction module towards the Gateway Connections attribute \ngroup.",
+      "source_filenames": [
+        "swg24039150.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM ITCAM Agent for SAP Applications, 7.1.1.1-TIV-ITM_SAP-IF0001 - United States\n\nText:\n DOWNLOADABLE FILES\n\nABSTRACT\n This IFix resolves the APARs and defects listed in the \"Problems Fixed\" section below \n\nDOWNLOAD DESCRIPTION\nCopyright International Business Machines Corporation 2014.\n\n\nAll rights reserved.\n\nComponent: IBM(R) Tivoli(R) Composite Application Manager Agent for SAP\nApplications, Version 7.1.1 Fix Pack 0001 \n\nComponent ID: 5724B97SO\n\nFix: Interim Fix 0001, 7.1.1.1-TIV-ITM_SAP-IF0001\n\nDate: 31 December 2014\n\nContents:\n\n1.0 General description\n2.0 Problems fixed\n3.0 Architecture and prerequisites\n4.0 Image directory contents\n5.0 Installation instructions\n6.0 Additional installation information\n7.0 Known problems and workarounds\n8.0 Additional product information\n9.0 Copyright and trademark information\n10.0 Notices\n\n1.0",
+      "predictions": {
+        "SFT_548": "This problem could be caused by a corrupted file on the agent server. \n\nPlease check the log files located at: \nC:\\Program Files\\SAP\\Agent\\Logs\\AgentLog.txt \nand C:\\Program Files\\SAP\\Agent\\Logs\\AgentErrorLog.txt \nfor any errors related to this problem.",
+        "DAPT_SFT_548": "This could be caused by a number of things including: \n\n* A change in the system clock \n* An update to the operating system \n* A change in the network connection \n* A change in the database connectivity \n* A change in the application server connectivity \n* A change in the agent connectivity \n* A change in the agent configuration \n* A change in the agent software \n* A change in the agent hardware \n* A change in the agent installation location \n* A change in the agent startup script \n* A change in the agent log file location \n* A change in the agent log file format \n* A change in the agent log file size \n* A change in the agent log file compression \n* A change in the agent log file encryption \n* A change in the agent log"
+      },
+      "token_f1": {
+        "SFT_548": 0.1633,
+        "DAPT_SFT_548": 0.0333
+      }
+    },
+    {
+      "id": "SYN_f644b4377677e3210f10",
+      "question": "What remediation is recommended for \"IBM Security Bulletin: Vulnerabilities in OpenSSL affect IBM MQ Advanced Message Security (CVE-2016-2177, CVE-2016-2178)\"?",
+      "reference_answer": "IBM MQ V8 \n\nApply fixpack 8.0.0.6 [http://www-01.ibm.com/support/docview.wss?uid=swg21995100] \n\nIBM MQ V9 \n\nApply fixpack 9.0.0.1 [http://www-01.ibm.com/support/docview.wss?uid=swg27048059]\n\nGET NOTIFIED ABOUT FUTURE SECURITY BULLETINS\n Subscribe to My Notifications [ http://www-01.ibm.com/software/support/einfo.html] to be notified of important product support alerts like this.",
+      "source_filenames": [
+        "swg21999724.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Security Bulletin: Vulnerabilities in OpenSSL affect IBM MQ Advanced Message Security (CVE-2016-2177, CVE-2016-2178) - United States\n\nText:\n SECURITY BULLETIN\n\nSUMMARY\n OpenSSL vulnerabilities were disclosed on September 22 and 26, 2016 by the OpenSSL Project. OpenSSL is used by IBM MQ Advanced Message Security on the IBM i platform only. IBM MQ Advanced Message Security has addressed the applicable CVEs. \n\nVULNERABILITY DETAILS\nCVEID: CVE-2016-2177 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-2177]\nDESCRIPTION: OpenSSL is vulnerable to a denial of service, caused by the incorrect use of pointer arithmetic for heap-buffer boundary checks. By leveraging unexpected malloc behavior, a remote attacker could exploit this vulnerability to trigger an integer overflow and cause the application to crash.\nCVSS Base Score: 5.9\n",
+      "predictions": {
+        "SFT_548": "Upgrade to IBM MQ 9.0.0.1 or later.",
+        "DAPT_SFT_548": "Install the latest version of OpenSSL."
+      },
+      "token_f1": {
+        "SFT_548": 0.1746,
+        "DAPT_SFT_548": 0.0336
+      }
+    },
+    {
+      "id": "SYN_e700b91757f357b77ccf",
+      "question": "How can an administrator diagnose the issue described as \"IBM Wrong codepoints for non-ASCII characters inserted in UTF-8 database using CLP\"?",
+      "reference_answer": "Verify that non-ASCII data have a proper Unicode codepoints in Unicode database",
+      "source_filenames": [
+        "swg21412846.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Wrong codepoints for non-ASCII characters inserted in UTF-8 database using CLP - United States\n\nText:\nCLP; insert; codepage; unicode; wrong codepoints; CharConversionException TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n During insert from the CLP there is no codepage conversion if operating system codepage and database codepage are both UTF-8. In this case data to be inserted should also be in UTF-8 encoding.\n\nIf data has a different encoding then the database codepage (this can be verified using any hex editor), then the operating system codepage should be changed to match the data's encoding in order to enforce the data conversion to the database codepage. \n\nSYMPTOM\nError executing Select SQL statement. Caught by java.io.CharConversionException. ERRORCODE=-4220 \n\n Caused by: \njava.nio.charset.MalformedInputException: Input",
+      "predictions": {
+        "SFT_548": "This problem occurs when the character set used by the application is different than the character set used by the database.",
+        "DAPT_SFT_548": "This problem occurs when the character set used by the application is different than the character set used by the database. \n\nTo resolve this issue, change the character set of the database to match the character set used by the application."
+      },
+      "token_f1": {
+        "SFT_548": 0.0556,
+        "DAPT_SFT_548": 0.0345
+      }
+    },
+    {
+      "id": "DEV_Q012",
+      "question": "I receive the following during UDX compilation Can't exec \"/nz/kit/bin/adm/nzudxcompile\": Argument list too long",
+      "reference_answer": "This ARG_MAX kernel parameter adjusted to much larger from kernel release version 2.6.23, that is 2621440 (http://www.in-ulm.de/~mascheck/various/argmax [http://www.in-ulm.de/~mascheck/various/argmax]). \n\nBut we support upto Redhat 5.11 in Twinfin which is less than kernel release 2.6.23. So we have no way to allow ARG_MAX larger than 131072 at this time.",
+      "source_filenames": [
+        "swg21959723.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM UDX compilation error - United States\n\nText:\n TECHNOTE (TROUBLESHOOTING)\n\nTHIS DOCUMENT APPLIES ONLY TO THE FOLLOWING LANGUAGE VERSION(S):\n English \n\nPROBLEM(ABSTRACT)\n Following error can be met during UDX compilation.\nCan't exec \"/nz/kit/bin/adm/nzudxcompile\": Argument list too long \n\nSYMPTOM\nnzudxcompile command returns an \"Argument list too long\" error and aborts.\n\n\nCAUSE\nARG_MAX configuration parameter limits the number of argument list in command line. In this case the client used more than 131072 argument with many program *.c files.\n\nDIAGNOSING THE PROBLEM\nCheck ARG_MAX value in the command line: \n\n$ getconf ARG_MAX\n131072\n\n\nRESOLVING THE PROBLEM\nThis ARG_MAX kernel parameter adjusted to much larger from kernel release version 2.6.23, that is 2621440 (http://www.in-ulm.de/~mascheck/various/argmax [http://www.in-ulm.de/~",
+      "predictions": {
+        "SFT_548": "This problem occurs on some systems where the maximum number of arguments allowed in a shell command line has been exceeded. This limit varies depending on the operating system. On Solaris, it is set at 1024. On Linux, it is set at 4096.",
+        "DAPT_SFT_548": "This problem occurs when the number of files being compiled exceeds the maximum allowed size."
+      },
+      "token_f1": {
+        "SFT_548": 0.1486,
+        "DAPT_SFT_548": 0.0348
+      }
+    },
+    {
+      "id": "TRAIN_Q044",
+      "question": "Authorization code missing for SPSS 25?\n\nI purchased the IBM SPSS from Amazon, and I do not know where to locate the authorization code of license code/key. Can anyone help me?",
+      "reference_answer": "For installation & licensing issues on Student version and Graduate pack, contact your vendor.",
+      "source_filenames": [
+        "swg21592093.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM SPSS Student Version and Graduate Pack Resources - United States\n\nText:\nSPSS Support Acquisition Statistics Stats Grad Pack Student TECHNOTE (FAQ)\n\nQUESTION\n Where do I get support for IBM SPSS Student Version or Graduate Pack software? \n\nANSWER\nStep 1: \nFor installation & licensing issues on Student version and Graduate pack, contact your vendor. \n\n * Hearne [http://www.hearne.software/Software/SPSS-Grad-Packs-for-Students-by-IBM/FAQ] \n * On the Hub [http://onthehub.com/] \n * StudentDiscounts.com [http://studentdiscounts.com/contact-us.aspx] \n * JourneyEd [https://www.journeyed.com/contact] \n * thinkEDU [https://thinkedu.desk.com/] \n * Studica [http://www.studica.com/technical-support]\n\n\n\n\n\nCross reference information Segment Product Component Platform Version Edition Business Analytics SPSS Amos Windows Not Applicable Grad Pa",
+      "predictions": {
+        "SFT_548": "Please refer to the instructions on how to obtain the license key for SPSS 25.",
+        "DAPT_SFT_548": "Please refer to the following link: \nhttps://www.ibm.com/support/knowledgecenter/SSVRGU_25.0.0/com.ibm.spss.base.doc/SPSS_license_key.html"
+      },
+      "token_f1": {
+        "SFT_548": 0.1875,
+        "DAPT_SFT_548": 0.0357
+      }
+    },
+    {
+      "id": "SYN_9a42c1d3d7015e348e63",
+      "question": "What symptoms identify the issue described as \"IBM Insufficient ulimit Value Causes Native OutOfMemory\"?",
+      "reference_answer": "An out of memory Dump Event such as: \n\n\"systhrow\" (00040000) Detail \"java/lang/OutOfMemoryError\"\n\"Failed to create a thread: retVal -1073741830, errno 11\" received\n\nNote: This detailed message will appear only in javacores.",
+      "source_filenames": [
+        "swg21648497.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Insufficient ulimit Value Causes Native OutOfMemory - United States\n\nText:\n TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n An out of memory may be observed on a system running WebSphere Application Server on Linux or AIX that is due to ulimit restrictions on number of process/threads per user. Further investigation may reveal a \"Failed to create a thread:\" message within the generated javacore which would indicate a native out of memory issue has been encountered. The cause of the problem may be an insufficient ulimit setting. While this type of issue can occur on any level of Linux, or AIX, the issue is most likely to be seen in systems running multiple instances of WebSphere Application Server using one userid. The following will outline how to identify if a process ulimit is the culprit and what WebSphere Application Server ",
+      "predictions": {
+        "SFT_548": "Insufficient ulimit value causes native OOM.",
+        "DAPT_SFT_548": "Native OutOfMemory occurs when the limit on the maximum number of native threads (ulimit) is exceeded."
+      },
+      "token_f1": {
+        "SFT_548": 0.0357,
+        "DAPT_SFT_548": 0.1176
+      }
+    },
+    {
+      "id": "TRAIN_Q395",
+      "question": "Does ITCAM for HTTP Server 7.1 FP4 work with IBM HTTP Server (IHS) 8.5.5.10 on AIX 7.2.x ?\n\nDoes ITCAM for HTTP Server 7.1 FP4 work with IBM HTTP Server (IHS) 8.5.5.10 on AIX 7.2.x ?",
+      "reference_answer": "IBM HTTP Server 8.5.5.9 contains all applicable security fixes in Apache HTTP Server versions up through 2.2.31.",
+      "source_filenames": [
+        "swg27036410.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Fix list for IBM HTTP Server Version 8.5 - United States\n\nText:\nFix list Fixlist List of Updates list of defects maintenance refresh pack cumulative fix fix pack fixpack service pack FixListDocument PRODUCT DOCUMENTATION\n\nABSTRACT\nIBM HTTP Server provides periodic fixes for release 8.5. The following is a complete listing of fixes for Version 8.5 with the most recent fix at the top.\n\nCONTENT\n \n\n[https://www-prd-trops.events.ibm.com/sites/default/files/support/swg/swgdocs.nsf/0/88423a02b4f66c1385257a99006a3c24/Content/0.1F4.gif] Back to all versions [http://www.ibm.com/support/docview.wss?uid=swg27006973] \n\n\nFix Pack 14 (8.5.5.14) [https://www-prd-trops.events.ibm.com/sites/default/files/support/swg/swgdocs.nsf/0/88423a02b4f66c1385257a99006a3c24/Content/0.5D6.gif] Fix Pack 13 (8.5.5.13) [https://www-prd-trops.events.ibm.com/site",
+      "predictions": {
+        "SFT_548": "Yes, it works with IBM HTTP Server (IHS) 8.5.5.10 on AIX 7.2.x.",
+        "DAPT_SFT_548": "Yes, it works."
+      },
+      "token_f1": {
+        "SFT_548": 0.4815,
+        "DAPT_SFT_548": 0.0606
+      }
+    },
+    {
+      "id": "SYN_99521c008e43ebab8522",
+      "question": "What symptoms identify the issue described as \"IBM Content Collector Configuration Store is corrupted\"?",
+      "reference_answer": "Cannot start the IBM Content Collector Configuration Store Service",
+      "source_filenames": [
+        "swg21680391.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Content Collector Configuration Store is corrupted - United States\n\nText:\n TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n IBM Content Collector Configuration Store Service cannot be started successfully due to database corruption. \n\nSYMPTOM\nCannot start the IBM Content Collector Configuration Store Service\n\n\nCAUSE\nTransaction log gets corrupted when IBM Content Collector server runs out of disk space. \n\nRESOLVING THE PROBLEM\n\n\n\n 1. Shutdown the IBM Content Collector Configuration Store Service if it is running. \n 2. Make a backup copy of all files under the following directory:\n    C:\\ProgramData\\IBM\\ContentCollector\\ConfigurationStore\n    \n    C:\\ProgramData may be hidden by default. Show hidden folders by changing the configuration in Folder and Search options > View tab > Hidden files and folders > Show hidden files, folders",
+      "predictions": {
+        "SFT_548": "The IBM Content Collector Configuration Store is corrupted if it contains invalid data.",
+        "DAPT_SFT_548": "The following symptoms indicate that the Configuration Store has been corrupted: \n\n* The Configuration Store is empty. \n* The Configuration Store contains invalid entries. \n* The Configuration Store contains duplicate entries. \n* The Configuration Store contains entries that do not match the expected format."
+      },
+      "token_f1": {
+        "SFT_548": 0.5217,
+        "DAPT_SFT_548": 0.1034
+      }
+    },
+    {
+      "id": "DEV_Q307",
+      "question": "Help with Security Bulletin: Vulnerabilities in OpenSSL affect WebSphere MQ 5.3 for HP NonStop Server (CVE-2017-3735)\n\nI need to understand details regarding Security Bulletin: Vulnerabilities in OpenSSL affect WebSphere MQ 5.3 for HP NonStop Server (CVE-2017-3735). What  versions of the product are affected?",
+      "reference_answer": "All versions of WebSphere MQ 5.3 and MQ 8 for HPE NonStop Server",
+      "source_filenames": [
+        "swg22014367.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Security Bulletin: Vulnerabilities in OpenSSL affect WebSphere MQ 5.3 and MQ 8 for HPE NonStop Server (CVE-2017-3735) - United States\n\nText:\n SECURITY BULLETIN\n\nSUMMARY\n IBM WebSphere MQ 5.3 and IBM MQ 8 for HPE NonStop have addressed a vulnerability in which OpenSSL could allow a remote attacker to obtain sensitive information, caused by an error while parsing an IPAddressFamily extension in an X.509 certificate \n\nVULNERABILITY DETAILS\nCVEID: CVE-2017-3735 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-3735]\nDESCRIPTION: OpenSSL could allow a remote attacker to obtain sensitive information, caused by an error while parsing an IPAddressFamily extension in an X.509 certificate. An attacker could exploit this vulnerability to trigger an out-of-bounds read, resulting in an incorrect text display of the certificate.\nCVSS B",
+      "predictions": {
+        "SFT_548": "IBM recommends that all users immediately update their systems to the latest security patches available.",
+        "DAPT_SFT_548": "IBM WebSphere MQ 5.3 for HP NonStop Server 5.3.0.0.0 and earlier versions are affected."
+      },
+      "token_f1": {
+        "SFT_548": 0.129,
+        "DAPT_SFT_548": 0.5
+      }
+    },
+    {
+      "id": "SYN_36b9177848c1958c206f",
+      "question": "Which products and versions are affected by \"IBM Security Bulletin: Vulnerability in SSLv3 affects IBM HTTP Server (CVE-2014-3566)\"?",
+      "reference_answer": "This vulnerability affects all versions and releases of IBM HTTP Server (IHS) component in all editions of WebSphere Application Server and bundling products.",
+      "source_filenames": [
+        "swg21687172.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Security Bulletin: Vulnerability in SSLv3 affects IBM HTTP Server (CVE-2014-3566) - United States\n\nText:\n SECURITY BULLETIN\n\nSUMMARY\n SSLv3 contains a vulnerability that has been referred to as the Padding Oracle On Downgraded Legacy Encryption (POODLE) attack. SSLv3 is enabled by default in the Apache based IBM HTTP Server. \n\nVULNERABILITY DETAILS\nCVE ID: CVE-2014-3566 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3566]\nDESCRIPTION: IBM HTTP Server could allow a remote attacker to obtain sensitive information, caused by a design error when using the SSLv3 protocol. A remote user with the ability to conduct a man-in-the-middle attack could exploit this vulnerability via a POODLE (Padding Oracle On Downgraded Legacy Encryption) attack to decrypt SSL sessions and access the plain text of encrypted connections. \n\nCVSS Ba",
+      "predictions": {
+        "SFT_548": "IBM HTTP Server 8.5.0.19 and earlier, WebSphere Application Server v8.5.0.19 and earlier, WebSphere MQ v7.5.0.0.19 and earlier, WebSphere MQ v7.5.0.0.20 and earlier, WebSphere MQ v7.5.0.0.21 and earlier, WebSphere MQ v7.5.0.0.22 and earlier, WebSphere MQ v7.5.0.0.23 and earlier, WebSphere MQ v7.5.0.0.24 and earlier, WebSphere MQ v7.5.0.0.25 and earlier, WebSphere MQ v7.5.0.",
+        "DAPT_SFT_548": "This vulnerability exists in all versions of IBM HTTP Server prior to 8.5.5."
+      },
+      "token_f1": {
+        "SFT_548": 0.1139,
+        "DAPT_SFT_548": 0.4545
+      }
+    },
+    {
+      "id": "SYN_8e19cd4399e5e19d6f04",
+      "question": "Which products and versions are affected by \"IBM Security Bulletin: IBM MQ and IBM MQ Appliance MQOPEN call might succeed when it should have failed.  (CVE-2017-1341 )\"?",
+      "reference_answer": "IBM MQ V8 \n\nMaintenance levels 8.0.0.0 - 8.0.0.7 \n\nIBM MQ Appliance V8 \n\nMaintenance levels between 8.0.0.0 and 8.0.0.7 \n\nIBM MQ V9 \n\nMaintenance levels 9.0.0.0 - 9.0.0.1 \n\nIBM MQ V9 CD \n\nIBM MQ 9.0.1 - 9.0.3 \n\nIBM MQ Appliance V9 CD \n\nIBM MQ Appliance 9.0.1 - 9.0.3",
+      "source_filenames": [
+        "swg22005400.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Security Bulletin: IBM MQ and IBM MQ Appliance MQOPEN call might succeed when it should have failed.  (CVE-2017-1341 ) - United States\n\nText:\n SECURITY BULLETIN\n\nSUMMARY\n MQOPEN call might succeed when it should have failed, when using generic profile authority matching for remotely defined MQ object. \n\nVULNERABILITY DETAILS\nCVEID: CVE-2017-1341 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1341]\nDESCRIPTION: IBM WebSphere MQ could allow, under special circumstances, an unauthorized user to access an object which they should have been denied access.\nCVSS Base Score: 3.7\nCVSS Temporal Score: See https://exchange.xforce.ibmcloud.com/vulnerabilities/126456 [https://exchange.xforce.ibmcloud.com/vulnerabilities/126456] for the current score\nCVSS Environmental Score*: Undefined\nCVSS Vector: (CVSS:3.0/AV:N/AC:H/PR:N/UI:N/S:U",
+      "predictions": {
+        "SFT_548": "IBM MQ 9.0.0.1, 9.1.0.1, 9.1.0.2, 9.1.0.3, 9.1.0.4, 9.1.0.5, 9.1.0.6, 9.1.0.7, 9.1.0.8, 9.1.0.9, 9.1.1.0, 9.1.1.1, 9.1.1.2, 9.1.1.3, 9.1.1.4, 9.1.1.5, 9.1.1.6, 9.1.",
+        "DAPT_SFT_548": "All versions prior to 9.1.0.8 are affected."
+      },
+      "token_f1": {
+        "SFT_548": 0.4417,
+        "DAPT_SFT_548": 0.1429
+      }
+    },
+    {
+      "id": "SYN_d10dc13929fa68f2f989",
+      "question": "Which products and versions are affected by \"IBM Security Bulletin: Vulnerabilities in OpenSSL affect IBM MQ Advanced Message Security (CVE-2016-2177, CVE-2016-2178)\"?",
+      "reference_answer": "IBM MQ V8 \n\nMaintenance versions 8.0.0.0 through 8.0.0.5 are affected. \n\nIBM MQ V9 \n\n9.0.0.0 only",
+      "source_filenames": [
+        "swg21999724.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Security Bulletin: Vulnerabilities in OpenSSL affect IBM MQ Advanced Message Security (CVE-2016-2177, CVE-2016-2178) - United States\n\nText:\n SECURITY BULLETIN\n\nSUMMARY\n OpenSSL vulnerabilities were disclosed on September 22 and 26, 2016 by the OpenSSL Project. OpenSSL is used by IBM MQ Advanced Message Security on the IBM i platform only. IBM MQ Advanced Message Security has addressed the applicable CVEs. \n\nVULNERABILITY DETAILS\nCVEID: CVE-2016-2177 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-2177]\nDESCRIPTION: OpenSSL is vulnerable to a denial of service, caused by the incorrect use of pointer arithmetic for heap-buffer boundary checks. By leveraging unexpected malloc behavior, a remote attacker could exploit this vulnerability to trigger an integer overflow and cause the application to crash.\nCVSS Base Score: 5.9\n",
+      "predictions": {
+        "SFT_548": "IBM MQ 9.0.0.1, 9.1.0.1, 9.1.0.2, 9.1.0.3, 9.1.0.4, 9.1.0.5, 9.1.0.6, 9.1.0.7, 9.1.0.8, 9.1.0.9, 9.1.1.0, 9.1.1.1, 9.1.1.2, 9.1.1.3, 9.1.1.4, 9.1.1.5, 9.1.1.6, 9.1.",
+        "DAPT_SFT_548": "IBM MQ Advanced Message Security (V9.0.0.0) and V9.1.0.0.0"
+      },
+      "token_f1": {
+        "SFT_548": 0.2614,
+        "DAPT_SFT_548": 0.5517
+      }
+    },
+    {
+      "id": "TRAIN_Q446",
+      "question": "Is DataPower affected by the bash environment variable vulnerability CVE-2014-6271 or CVE-2014-7169\n\nIs DataPower affected by the recent vulnerability reported through CVE-2014-6271 or CVE-2014-7169?",
+      "reference_answer": "In particular, DataPower in all editions and all platforms is NOT vulnerable to the Bash vulnerabilities: CVE-2014-6271, CVE-2014-7169, CVE-2014-7186, CVE-2014-7187, CVE-2014-6277, and CVE-2014-6278.",
+      "source_filenames": [
+        "swg21685435.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM WebSphere DataPower is not affected by the Bash vulnerabilities (CVE-2014-6271, CVE-2014-7169, CVE-2014-7186, CVE-2014-7187, CVE-2014-6277, and CVE-2014-6278)\nFlash (Alert) - United States\n\nText:\nCVE-2014-6271 CVE-2014-7169 DataPower Bash FLASH (ALERT)\n\nABSTRACT\n DataPower is not vulnerable to the Bash vulnerabilities that have been referred to as “Bash Bug” or “Shellshock” and the two memory corruption vulnerabilities. \n\nCONTENT\nDataPower does not use Bash anywhere. Hence it is not impacted by any of the Bash vulnerabilities. \n\nIn particular, DataPower in all editions and all platforms is NOT vulnerable to the Bash vulnerabilities: CVE-2014-6271, CVE-2014-7169, CVE-2014-7186, CVE-2014-7187, CVE-2014-6277, and CVE-2014-6278. \n\nIBM recommends that you review your entire environment to identify vulnerable releases of Bash and tak",
+      "predictions": {
+        "SFT_548": "Yes, it is vulnerable to both CVE-2014-6271 and CVE-2014-7169.",
+        "DAPT_SFT_548": "Yes, it is vulnerable to both CVEs."
+      },
+      "token_f1": {
+        "SFT_548": 0.4324,
+        "DAPT_SFT_548": 0.1562
+      }
+    },
+    {
+      "id": "TRAIN_Q589",
+      "question": "How to have IBM HTTP Server re-direct an application URL from HTTPS to HTTP?\n\nWe have an application which uses SSL, but we need to make this http only. We disabled all the SSL, but many clients URLs are still pointing to https. So we need a HTTP Server redirect to change these URLs from https to http. Is this possible?",
+      "reference_answer": "First, make sure the LoadModule line for mod_rewrite is uncommented in the httpd.conf\n\nLoadModule rewrite_module modules/mod_rewrite.so\n\nNext, add the following to the global scope or any port 80 VirtualHost stanzas defined within the httpd.conf configuration file.\n\nRewriteEngine on\nRewriteCond %{SERVER_PORT} =80\nRewriteRule ^(.*) https://%{SERVER_NAME}%{REQUEST_URI} [R,L]\n\nFinally, restart the IBM HTTP Server after making the preceding changes",
+      "source_filenames": [
+        "swg21114864.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Rewriting HTTP (port 80) requests to HTTPS (port 443) - United States\n\nText:\nrewrite; ssl; plugin; dynamic; static; rules; IHS; WAS TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n The rewrite module (mod_rewrite.c) provided with the IBM® HTTP Server can be used as an effective way to automatically rewrite all HTTP requests to HTTPS. \n\nRESOLVING THE PROBLEM\nThe rewrite module (mod_rewrite.c) can be used to automatically rewrite all HTTP (port 80) requests to HTTPS (port 443). This provides an effective way to ensure that all traffic to and from the IBM HTTP Server is encrypted over the Secure Sockets Layer (SSL) without having to use individual redirects or hard-coded HTTPS links. \nNote: The web server should already be configured to handle HTTPS requests successfully\nbefore attempting to implement the following suggestions. For ",
+      "predictions": {
+        "SFT_548": "Yes, it is possible to do this using the web server’s rewrite rules. \n\nIn order to accomplish this task, you will need to create a new .htaccess file in the root directory of your site. This file should contain the following lines: \n\nRewriteEngine on \nRewriteCond %{HTTPS} on \nRewriteRule ^(.*)$ http://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]",
+        "DAPT_SFT_548": "Yes it is possible. \n\nIn order to do so, you will need to create a new virtual host on the server (or add a new entry to an existing one) and configure it to forward requests to another web server. This other web server should then handle the request and return the appropriate content. \n\nThis could be done using mod_proxy_http, or mod_proxy_balancer."
+      },
+      "token_f1": {
+        "SFT_548": 0.5029,
+        "DAPT_SFT_548": 0.236
+      }
+    },
+    {
+      "id": "TRAIN_Q515",
+      "question": "SPSS will not start on Mac\n\n\n\nI downloaded SPSS about 3 weeks ago. On the day when I downloaded it, it was working fine. Last week, I tried starting SPSS but it did not start. I tried reinstalling it, it still would not open. I've updated JAVA (thought this would be a problem), it slowly opened the program but then now that I have reinstalled it and entered in my code, I've used up my code and I have no authorization. But just now, I started SPSS and the same problem is happening. The IBM SPSS name screen appears but nothing happens.\n\n    SPSS would not start.\n\n    Even if it does start, I have licensing problems.",
+      "reference_answer": "For the documented SPSS Statistics 21 or 22 Mac OS X launch/performance problem (APAR PM90266), restart the Mac and rename ~/Library/Preferences/com.ibm.spss.plist to old_com.ibm.spss.plist. In Finder, open Home, then Go while holding Option to access Library > Preferences. Relaunch Statistics and close it normally rather than using Force Quit. Mavericks 10.9 can restore a cached plist via cfprefsd; check the version-specific instructions if this occurs.",
+      "source_filenames": [
+        "swg21651225.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Performance issue on Mac OS X Launching and Closing SPSS Statistics 21 or 22. - United States\n\nText:\nMac OS X; Performance; open; close; exit; launch; 10.6.x 10.7.x 10.8.x 10.9.x TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n With SPSS Statistics 21 or 22 software installed on Mac OS X. \nThe software was running normally, but for what ever reason, the program might fail or close improperly by using Force Quit several times. \n\nCAUSE\nThis has been identified as a product defect under APAR PM90266\n\nENVIRONMENT\nThis technote applies with any Mac OS X compatible with Statistics 21 or 22, Not version 23. \n\n- IBM SPSS Statistics 21 release is supported on Apple Macintosh 10.6 (Snow Leopard), 10.7 (Lion), and 10.8 (Mountain Lion) with Intel processor. \n\n- IBM SPSS Statistics 22 release is supported on Apple Macintosh 10.7 (Lion), and 1",
+      "predictions": {
+        "SFT_548": "IBM SPSS Statistics requires Java 8 or later.",
+        "DAPT_SFT_548": "IBM SPSS Statistics requires Java Runtime Environment (JRE) 1.8.x or later. \n\nTo resolve this issue, download and install the latest version of JRE from the Oracle website: https://www.oracle.com/java/technologies/javase-jdk8-downloads.html"
+      },
+      "token_f1": {
+        "SFT_548": 0.0935,
+        "DAPT_SFT_548": 0.3355
+      }
+    },
+    {
+      "id": "TRAIN_Q584",
+      "question": "Help with Security Bulletin: Vulnerability identified in IBM WebSphere Application Server shipped with WSRR (CVE-2017-1741)\n\nI need to understand details regarding Security Bulletin: Vulnerability identified in IBM WebSphere Application Server shipped with IBM WebSphere Service Registry and Repository (CVE-2017-1741). We are running WAS traditional V9.0.0.0.  What is the recommended fix?",
+      "reference_answer": "· Upgrade to a minimal fix pack levels as required by interim fix and then apply Interim Fix PI89498 [http://www-01.ibm.com/support/docview.wss?uid=swg24044512] \n--OR-- \n· Apply Fix Pack 8.0.0.15 or later.",
+      "source_filenames": [
+        "swg22012345.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Security Bulletin: Potential Privilege Escalation in WebSphere Application Server Admin Console (CVE-2017-1731) - United States\n\nText:\n SECURITY BULLETIN\n\nSUMMARY\n There is a potential privilege escalation in WebSphere Application Server Admin Console. \n\nVULNERABILITY DETAILS\n\nCVEID: CVE-2017-1731 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1731]\nDESCRIPTION: IBM WebSphere Application Server could provide weaker than expected security when using the Administrative Console. An authenticated remote attacker could exploit this vulnerability to possibly gain elevated privileges.\nCVSS Base Score: 8.8\nCVSS Temporal Score: See https://exchange.xforce.ibmcloud.com/vulnerabilities/134912 [https://exchange.xforce.ibmcloud.com/vulnerabilities/134912] for the current score\nCVSS Environmental Score*: Undefined\nCVSS Vector: (CVSS",
+      "predictions": {
+        "SFT_548": "IBM has released a security bulletin addressing this vulnerability. \n\nThis bulletin addresses the following CVEs: \nCVE-2017-1741 - IBM WebSphere Application Server ships with IBM WebSphere Service Registry and Repository (WSRR) which contains a remote code execution vulnerability. This vulnerability exists due to improper handling of certain HTTP requests. An attacker could exploit this vulnerability to execute arbitrary Java code on the server. \n\nTo mitigate this vulnerability, we recommend updating to the latest version of IBM WebSphere Application Server.",
+        "DAPT_SFT_548": "IBM has released a security update for this vulnerability. This update addresses CVE-2017-1741 by fixing the problem on all platforms. \n\nTo install the update, go to the IBM Support page for this bulletin at http://www.ibm.com/support/docview.wss?uid=swg24038970."
+      },
+      "token_f1": {
+        "SFT_548": 0.1842,
+        "DAPT_SFT_548": 0.4262
+      }
+    },
+    {
+      "id": "DEV_Q053",
+      "question": "After uninstalling Portal 8.0 only from my WAS environment my subsequent attempts to install Portal 8.0 into that same existing WAS fails.\n\n\n\nI installed Portal 8.0.0.1 CF12 with an existing WAS 8.0.0.8 application server and everything was successful. I want to script my install so I uninstalled Portal 8.0.0.1 only and was left with an existing WAS 8.0.0.8...as before. However, when I attempt to reinstall Portal 8.0.0.1 into that same existing WAS 8.0.0.8 to test my scripting I get the following error immediately:\n\nERROR: The required version 8.0.0.5 or later of WebSphere Application Server has not been detected on this system. Select the WebSphere Application Server Package to install WebSphere Application Server and WebSphere Portal.\n\nIIM shows WAS as installed, so I am not sure what is causing this behavior when it installed fine just a few hours ago.",
+      "reference_answer": "Navigate to the AppServer folder and remove the following files (they are regenerated with a reinstall of Portal):\n\nlib/ext/commons-codec-1.3.jar\nlib/ext/commons-httpclient-3.0.1.jar\nlib/ext/openid4java-full-0.9.5.jar\nlib/ext/wp.auth.base.sua_RedirectServletFilter.jar\nlib/ext/wp.auth.base.sua_loginmodule.jar\nlib/ext/wp.auth.tai.jar\nlib/wp.user.connections.jar\nlib/wp.wire.jar\nplugins/com.ibm.patch.was.plugin.jar\nplugins/com.ibm.wp.was.plugin.jar\nplugins/wp.ext.jar\nproperties/jndi.properties",
+      "source_filenames": [
+        "swg21635341.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Portal 8 installation unable to detect the WebSphere Application Server - United States\n\nText:\nportal reinstall fails; install into existing WAS fails TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM\nThe IBM Installation Manager is unable to detect that a WebSphere Application Server exists when attempting to install Portal.\n\nSYMPTOM\nThis issue seems to manifest when an existing Portal has been uninstalled and WebSphere Application Server is not uninstalled. When Portal install is attempted again, but this time to install into the existing WebSphere Application Server then Installation Manager will throw an excecption that notes that it is unable to detect WebSphere Application Server on the system \n\nWe have also seen an issue where the install fails indicating the version of WAS detected is insufficient and we see an exception like this in",
+      "predictions": {
+        "SFT_548": "This problem occurs when there is another instance of Portal running on the same machine.",
+        "DAPT_SFT_548": "This problem occurs when Portal 8.0.0.1 is installed after Portal 8.0.0.0. If you need to remove Portal 8.0.0.0 then follow the steps below:\n\n1) Uninstall Portal 8.0.0.0 using the portal uninstall wizard \n2) Remove all references to Portal 8.0.0.0 from the registry (C:\\Program Files\\IBM\\WebSphere\\AppServer\\bin)\n3) Delete the Portal 8.0.0.0 directory from C:\\Program Files\\IBM\\WebSphere\\AppServer\\profiles\\default\\. \n4) Reboot the machine. \n\nNow try installing Portal 8.0.0.1 again."
+      },
+      "token_f1": {
+        "SFT_548": 0.0468,
+        "DAPT_SFT_548": 0.2838
+      }
+    },
+    {
+      "id": "SYN_9293dde1d1fedc5b1060",
+      "question": "Which products and versions are affected by \"IBM Security Bulletin: Multiple vulnerabilities in IBM Java Runtime affect WebSphere Message Broker and IBM Integration Bus\"?",
+      "reference_answer": "IBM Integration Bus V10.0.0.0- 10.0.0.8 \n\nIBM Integration Bus V9.0.0.0- 9.0.0.7 \n\nWebSphere Message Broker V8.0.0.0 - 8.0.0.8",
+      "source_filenames": [
+        "swg22005345.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Security Bulletin: Multiple vulnerabilities in IBM Java Runtime affect WebSphere Message Broker and IBM Integration Bus - United States\n\nText:\nWMB IIB SECURITY BULLETIN\n\nSUMMARY\n Multiple security vulnerabilities exist in the IBM® Runtime Environment Java™ Technology Edition Version 6 Service Refresh 16 Fix Pack 41 and earlier releases used by WebSphere Message Broker, and the IBM® Runtime Environment Java™ Technology Edition Version 7 Service Refresh 10 Fix Pack 1 and earlier releases used by WebSphere Message Broker and IBM Integration Bus, and the IBM® Runtime Environment Java™ Technology Edition Version 7R1 Service Refresh 4 Fix Pack 1 and earlier releases used by IBM Integration Bus. These issues were disclosed as part of the IBM Java SDK updates in April 2017. WebSphere Message Broker and IBM Integration Bus have addresse",
+      "predictions": {
+        "SFT_548": "WebSphere MQ 8.0.0.10, 9.0.0.0, 9.0.0.1, 9.0.0.2, 9.0.0.3, 9.0.0.4, 9.0.0.5, 9.0.0.6, 9.0.0.7, 9.0.0.8, 9.0.0.9, 9.0.0.10, 9.0.0.11, 9.0.0.12, 9.0.0.13, 9.0.0.14, 9.0.0.",
+        "DAPT_SFT_548": "This bulletin applies to all versions of IBM WebSphere MQ and IBM Integration Bus."
+      },
+      "token_f1": {
+        "SFT_548": 0.4105,
+        "DAPT_SFT_548": 0.1739
+      }
+    },
+    {
+      "id": "TRAIN_Q215",
+      "question": "Is ITNM exposed to vulnerability CVE-2017-1194?.\n\nIs ITNM versions are affected by vulnerability CVE-2017-1194, because ITNM does shipped with WebSphere Application Server,  where I can find the details?.",
+      "reference_answer": "Please consult the security bulletin Cross-site request forgery in WebSphere Application Server (CVE-2017-1194) [http://www-01.ibm.com/support/docview.wss?uid=swg22001226] for vulnerability details and information about fixes.",
+      "source_filenames": [
+        "swg22002975.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Security Bulletin: A security vulnerability has been identified in IBM Tivoli Network Manager IP Edition shipped with WebSphere Application Server (CVE-2017-1194) - United States\n\nText:\n SECURITY BULLETIN\n\nSUMMARY\n WebSphere Application Server is shipped with IBM Tivoli Network Manager IP Edition. Information about a security vulnerability affecting WebSphere Application Server has been published in a security bulletin. \n\nVULNERABILITY DETAILS\nPlease consult the security bulletin Cross-site request forgery in WebSphere Application Server (CVE-2017-1194) [http://www-01.ibm.com/support/docview.wss?uid=swg22001226] for vulnerability details and information about fixes.\n\nAFFECTED PRODUCTS AND VERSIONS\nIBM Tivoli Network Manager 3.9, 4.1, 4.1.1 and 4.2\n\nREMEDIATION/FIXES\nRefer to the following security bulletins for vulnerability de",
+      "predictions": {
+        "SFT_548": "CVE-2017-1194 was fixed in WebSphere Application Server v8.5.5.10 and later.",
+        "DAPT_SFT_548": "CVE-2017-1194 was fixed in WebSphere Application Server v8.5.5.10, v8.5.5.11, v8.5.5.12, v8.5.5.13, v8.5.5.14, v8.5.5.15, v8.5.5.16, v8.5.5.17, v8.5.5.18, v8.5.5.19, v8.5.5.20, v8.5.5.21, v8.5.5.22, v8.5.5.23, v8"
+      },
+      "token_f1": {
+        "SFT_548": 0.3836,
+        "DAPT_SFT_548": 0.1477
+      }
+    },
+    {
+      "id": "SYN_9654ad4720d4171e22a2",
+      "question": "Which products and versions are affected by \"IBM Security Bulletin: Multiple vulnerabilities in IBM Java SDK affect IBM OS Images for Red Hat Linux Systems and AIX (CVE-2015-0410 and CVE-2014-6593)\"?",
+      "reference_answer": "IBM OS Image for Red Hat Linux Systems 2.0.0.1 and earlier.\nIBM OS Image for AIX 2.0.0.1 and earlier.",
+      "source_filenames": [
+        "swg21962588.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Security Bulletin: Multiple vulnerabilities in IBM Java SDK affect IBM OS Images for Red Hat Linux Systems and AIX (CVE-2015-0410 and CVE-2014-6593) - United States\n\nText:\n SECURITY BULLETIN\n\nSUMMARY\n There are multiple vulnerabilities in IBM® SDK Java™ Technology Edition Version 6 and 7 that are used by IBM OS Images for Red Hat Linux Systems and AIX. These issues were disclosed as part of the IBM Java SDK updates in January 2015. \n\nVULNERABILITY DETAILS\nCVEID: CVE-2015-0410 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-0410]\nDESCRIPTION: An unspecified vulnerability related to the Security component could allow a remote attacker to cause a denial of service.\nCVSS Base Score: 5\nCVSS Temporal Score: See https://exchange.xforce.ibmcloud.com/vulnerabilities/100151 [https://exchange.xforce.ibmcloud.com/vulnerabilities/10",
+      "predictions": {
+        "SFT_548": "Red Hat Enterprise Linux Server release 6.8 (Santiago) \nRed Hat Enterprise Linux Server release 7.0 (Maipo) \nRed Hat Enterprise Linux Server release 7.1 (Adler) \nRed Hat Enterprise Linux Server release 7.2 (Zesty) \nRed Hat Enterprise Linux Server release 7.3 (Juno) \nRed Hat Enterprise Linux Server release 7.4 (Bullseye) \nRed Hat Enterprise Linux Server release 7.5 (Tikanga) \nRed Hat Enterprise Linux Server release 7.6 (Alma) \nRed Hat Enterprise Linux Server release 7.7 (Elba) \nRed Hat Enterprise Linux Server release 7.8 (Sisyphus) \nRed Hat Enterprise Linux Server",
+        "DAPT_SFT_548": "This bulletin applies to all IBM OS images for Red Hat Linux systems and AIX."
+      },
+      "token_f1": {
+        "SFT_548": 0.1772,
+        "DAPT_SFT_548": 0.4082
+      }
+    },
+    {
+      "id": "SYN_950e8b977151a388a1c9",
+      "question": "Which products and versions are affected by \"IBM Security Bulletin: Potential Privilege Escalation in WebSphere Application Server Admin Console (CVE-2017-1731)\"?",
+      "reference_answer": "This vulnerability affects the following versions and releases of IBM WebSphere Application Server: \n\n * Version 9.0 \n * Version 8.5 \n * Version 8.0 \n * Version 7.0",
+      "source_filenames": [
+        "swg22012345.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Security Bulletin: Potential Privilege Escalation in WebSphere Application Server Admin Console (CVE-2017-1731) - United States\n\nText:\n SECURITY BULLETIN\n\nSUMMARY\n There is a potential privilege escalation in WebSphere Application Server Admin Console. \n\nVULNERABILITY DETAILS\n\nCVEID: CVE-2017-1731 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1731]\nDESCRIPTION: IBM WebSphere Application Server could provide weaker than expected security when using the Administrative Console. An authenticated remote attacker could exploit this vulnerability to possibly gain elevated privileges.\nCVSS Base Score: 8.8\nCVSS Temporal Score: See https://exchange.xforce.ibmcloud.com/vulnerabilities/134912 [https://exchange.xforce.ibmcloud.com/vulnerabilities/134912] for the current score\nCVSS Environmental Score*: Undefined\nCVSS Vector: (CVSS",
+      "predictions": {
+        "SFT_548": "WebSphere Application Server V8.5.5.0, V8.5.5.1, V8.5.5.2, V8.5.5.3, V8.5.5.4, V8.5.5.5, V8.5.5.6, V8.5.5.7, V8.5.5.8, V8.5.5.9, V8.5.5.10, V8.5.5.11, V8.5.5.12, V8.5.5.13, V8.5.5.14, V8.5.5.15, V8.5.5",
+        "DAPT_SFT_548": "This vulnerability exists in all versions of WebSphere Application Server."
+      },
+      "token_f1": {
+        "SFT_548": 0.1412,
+        "DAPT_SFT_548": 0.3556
+      }
+    },
+    {
+      "id": "V2_SYN_f3750e68839cf121c379",
+      "question": "Do WebSphere MQ V7.0 clients and V7.0.1/V7.0.0 File Transfer Edition agents remain supported after the corresponding server loses support?",
+      "reference_answer": "No. IBM states that those clients and File Transfer Edition agents reach end of support at the same time as the server.",
+      "source_filenames": [
+        "swg21674407.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Announcement: End of Support for WebSphere MQ and WebSphere MQ File Transfer Edition V7.0.1 and V7.0.0 and WebSphere MQ Telemetry V7.0.1 - United States\n\nText:\n NEWS\n\nABSTRACT\n IBM has withdrawn support for WebSphere MQ V7.0.1 and V7.0.0, WebSphere MQ for z/OS V7.0.1 and V7.0.0, WebSphere MQ File Transfer Edition V7.0.1 and V7.0.0, WebSphere MQ File Transfer Edition for z/OS V7.0.1 and V7.0.0, and WebSphere MQ Telemetry V7.0.1. \n\nCONTENT\n\n\nTAB NAVIGATION\n * WebSphere MQ and File Transfer Edition V7.0.1 and V7.0.0 • MQ Telemetry V7.0.1 selected tab\n\nTAB NAVIGATION\n * What were the end of support dates for WebSphere MQ V7.0.1 and V7.0.0, WebSphere MQ File Transfer Edition V7.0.1 and V7.0.0, and WebSphere MQ Telemetry V7.0.1?\n * Do these announcements affect WebSphere MQ File Transfer Edition V7.0.4, V7.0.3 and V7.0.2, WebSphere M",
+      "predictions": {
+        "SFT_548": "Yes. Support for V7.0 clients and V7.0.1/V7.0.0 File Transfer Edition agents remains available until at least December 31, 2018.",
+        "DAPT_SFT_548": "Yes. Support for V7.0 clients and V7.0.1/V7.0.0 File Transfer Edition agents will continue until at least December 31, 2018. Support for V7.1 clients and V7.1 File Transfer Edition agents will continue until at least December 31, 2020. Support for V7.2 clients and V7.2 File Transfer Edition agents will continue until at least December 31, 2022. Support for V7.3 clients and V7.3 File Transfer Edition agents will continue until at least December 31, 2024. Support for V7.4 clients and V7.4 File Transfer Edition agents will continue until at least December"
+      },
+      "token_f1": {
+        "SFT_548": 0.3448,
+        "DAPT_SFT_548": 0.1333
+      }
+    },
+    {
+      "id": "DEV_Q030",
+      "question": "For HP-UX how to write verbose gc output to a log file other than the native_stdout?\n\nA customer asked why no gc logs generated even if they use the -Xverbosegc option. So How can I write verbose gc output to a log file other than the native_stdout for HP-UX?",
+      "reference_answer": "Add the following parameters to the generic JVM arguments: \n-XX:+PrintGCDetails \n-XX:+PrintGCDateStamps \n-XX:+PrintHeapAtGC \n-Xverbosegc:file= /tmp/gc_pid$$.vgc",
+      "source_filenames": [
+        "swg21636533.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Writing Verbose GC To A Specified Log In Solaris and HP-UX - United States\n\nText:\nverbosegc log rotation HP Solaris JVM rotate file TECHNOTE (FAQ)\n\nQUESTION\n How can I write verbose gc output to a log file other than the native_stdout? \n\nCAUSE\nBy default, Solaris and HP-UX do not write verbose GC to a log file. This must be configured.\n\nANSWER\n \n\nWAS 8.5.0.2 (and higher), WAS 8.0.0.6 (and higher), WAS 7.0.0.27 (and higher):\n\nSolaris:\nAdd the following parameters to the generic JVM arguments:\n\n-XX:+PrintGCDetails \n-XX:+PrintGCDateStamps \n-XX:+PrintHeapAtGC \n-Xloggc:/tmp/gc.log\n\nTo enable log file rotation:\n-XX:+UseGCLogFileRotation\n-XX:NumberOfGCLogFiles=10\n-XX:GCLogFileSize=10M\n\n\nnotes:\n-Xloggc:<fileName> \n\n * ex: -Xloggc:/tmp/gc.log \n\n-XX:+UseGCLogFileRotati o n  * Enabled GC log rotation, requires -Xloggc \n\n-XX:NumberOfGClogF",
+      "predictions": {
+        "SFT_548": "To enable verbose GC logging on HP-UX, set the environment variable HPUX_GC_LOGFILE to the desired path.",
+        "DAPT_SFT_548": "To enable verbose GC logging on HP-UX, set the JVM option: \n-Xverbosegc:file=/path/to/log/file"
+      },
+      "token_f1": {
+        "SFT_548": 0.1724,
+        "DAPT_SFT_548": 0.3636
+      }
+    },
+    {
+      "id": "V2_SYN_da4557d37f56548b470d",
+      "question": "Does Rational Support need to stop the DOORS database server to repair session.ixc after a missing session file error?",
+      "reference_answer": "Yes, for the session index repair route, have all users log out and shut down the database server until Support returns the repaired session.ixc for insertion. Restoring a missing session file from backup is a different option and does not require restarting the database server.",
+      "source_filenames": [
+        "swg21511831.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM DOORS module fails to open in exclusive edit mode results in error \"unable to open module ...no such file or directory\" - United States\n\nText:\nmissing session file; file not found; can not open module; open module exclusive edit fails; PM50525 TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n Attempts to open a module exclusive edit in IBM Rational DOORS result in the error \"DOORS report\nUnable to open module '/A Project/Requirements' No such file or directory\". \n\nSYMPTOM\nA module with a large number of sections is used mostly in shareable edit mode. \n\nYou can open the module Read-only , or Shareable-Edit; but not in exclusive edit. \n\nSteps to reproduce: \n\n 1. Login to DOORS\n    \n    \n 2. Click the Project, or folder, icon that contains the module\n    \n    \n 3. Click the module icon in the DOORS Explorer window\n    \n    \n 4. Click",
+      "predictions": {
+        "SFT_548": "No, it is possible to repair session.ixc while the DOORS database server is running.",
+        "DAPT_SFT_548": "No, it will automatically fix the problem."
+      },
+      "token_f1": {
+        "SFT_548": 0.2899,
+        "DAPT_SFT_548": 0.1
+      }
+    },
+    {
+      "id": "TRAIN_Q466",
+      "question": "What happens if I lost my seed and salt value?\n\nIn ISDS, what happens if I lost my seed and salt value?\n\n\n\nThis dW Answers question is about an IBM document with the Title:\nOpen Mic Webcast: Configuring SDS 8.0.1 Virtual Appliance with a remote DB2 database - Tuesday, 17 Jan 2017 [presentation slides are attached; includes link to replay]",
+      "reference_answer": "There is NO way to recover the seed value used during the instance creation if it has been lost. The only workaround is to create a new instance with a new encryption seed value and then use the db2ldif and ldif2db utilities to export and import data respectively. These utilities can be supplied with the new encryption seed and the salt value of the new instance. Thus the data would be preserved(alongwith the passwords) on this new instance.",
+      "source_filenames": [
+        "swg21244655.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Seed value used during the instance creation is lost : Recovery procedure - United States\n\nText:\nseed lost; idsgendirksf; Encryption Seed Value; key stash file TECHNOTE (TROUBLESHOOTING)\n\nTHIS DOCUMENT APPLIES ONLY TO THE FOLLOWING LANGUAGE VERSION(S):\n English \n\nPROBLEM(ABSTRACT)\n Generating key stash file if the seed value which was used at the time of instance creation has been lost then there is no way to recover this seed value. \n\nRESOLVING THE PROBLEM\n \n\nThere is NO way to recover the seed value used during the instance creation if it has been lost. The only workaround is to create a new instance with a new encryption seed value and then use the db2ldif and ldif2db utilities to export and import data respectively. These utilities can be supplied with the new encryption seed and the salt value of the new instance. Thus the",
+      "predictions": {
+        "SFT_548": "If you lose the seed and salt values, you will need to reconfigure the virtual appliance.",
+        "DAPT_SFT_548": "To recover the seed and salt values, follow these steps:\n\n1. Open the file /opt/ibm/isds/conf/db2inst1/seed.salt \n2. Copy the contents of this file to another location on the system \n3. Stop the instance \n4. Remove the file /opt/ibm/isds/conf/db2inst1/seed.salt \n5. Start the instance \n\nNote: If you want to change the seed and salt values, you need to restart the instance after changing them."
+      },
+      "token_f1": {
+        "SFT_548": 0.1553,
+        "DAPT_SFT_548": 0.3407
+      }
+    }
+  ],
+  "validation_cases": [
+    {
+      "id": "TRAIN_Q360",
+      "question": "Is it possible to monitor Memory/LPAR metrics using ITM HMC agent?\n\nI understand the ITM AIX Premium agent captures these metrics but like to know if it is possible to monitor Memory/LPAR metrics using ITM HMC agent?",
+      "reference_answer": "6.2.2.3-TIV-ITM_HMC_BASE-IF0002\n---------------------------------\nFeature: 208626\nAbstract: LPAR Memory Attributes\nAdditional information: The following new attributes are added in\nthe Server LPARs attribute group:\n\nCurrent_Memory - The current amount of memory, in megabytes,\nconfigured for the LPAR.\nWarehouse name: CM0\nRunning_Memory - The amount of memory, in megabytes, varied on-line\nby the LPAR.\nWarehouse name: RM\n\nIn order to display these new attributes in the Tivoli Enterprise\nPortal, use the Query Editor and select Server LPARs_V9 under\nKPH SERVER LPARS.",
+      "source_filenames": [
+        "swg24042283.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Tivoli Monitoring: HMC Base Agent 6.2.2.3-TIV-ITM_HMC_BASE-IF0004 - United States\n\nText:\n DOWNLOADABLE FILES\n\nABSTRACT\n This fix resolves the APARs listed in the APAR Number(s) section below, and adds enhancement feature 215857 to add hardware events. \n\nDOWNLOAD DESCRIPTION\nCopyright International Business Machines Corporation 2015. \nAll rights reserved.\n\n\nComponent: IBM(R) Tivoli(R) Monitoring: HMC Base Agent,\nVersion 6.2.2.3\n\nComponent ID: 5724C04HB\n\nInterim Fix 0004, 6.2.2.3-TIV-ITM_HMC_BASE-IF0004\n\nDate: October 20, 2015 \n\nContents:\n\n1.0 General description\n2.0 Problems fixed\n3.0 Architecture and prerequisites\n4.0 Image directory contents\n5.0 Installation instructions\n6.0 Additional installation information\n7.0 Known problems and workarounds\n8.0 Additional product information\n9.0 Copyright and trademark information\n10.0 Not",
+      "predictions": {
+        "SFT_548": "Yes, this is possible.",
+        "DAPT_SFT_548": "Yes, this is possible."
+      },
+      "token_f1": {
+        "SFT_548": 0.0278,
+        "DAPT_SFT_548": 0.0278
+      }
+    },
+    {
+      "id": "TRAIN_Q236",
+      "question": "Cannot Authorize SPSS 19 Installation on New Computer,Need to Authorize SPSS 19 on a New Computer\n\nI'm currently using SPSS 19 and need to install it on a new computer, however, it will not authorize. I've spoken to SPSS support by phone but they recommended checking here. I'm running on a Mac, OS X Sierra, for SPSS 19. Would someone please be able to assist?,I'm currently running SPSS 19 and need to install it on a new computer. When I try to authorize it, it fails. I've spoken to SPSS over the phone to no avail. I'm running OS X Sierra. Could anyone please help?",
+      "reference_answer": "Apple Macintosh MacOS Sierra (10.12) \n\nSupport for IBM SPSS Statistics 25 and IBM SPSS Statistics 24 only. For release 24 It is also recommended to install the latest FixPack 2 for release 24 on Mac [http://www-01.ibm.com/support/docview.wss?uid=swg24043574]. [http://www-01.ibm.com/support/docview.wss?uid=swg24042675] \n\nNo older SPSS Statistics releases are supported on Sierra.",
+      "source_filenames": [
+        "swg21507587.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM What are the supported Apple Macintosh Operating System Versions for IBM SPSS Statistics? - United States\n\nText:\nSPSS mac macintosh Apple Macintosh statistics OS supported version compatibility matrix leopard Snow Leopard Lion Mountain Lion 10.8 Mavericks 10.9 22 Yosemite 10.10 (Yosemite) el capitan 10.11 spss 24 Sierra 10.12 High Sierra 10.13 TECHNOTE (FAQ)\n\nQUESTION\n I would like to know what are the supported Macintosh Operating system versions for IBM SPSS Statistics versions? \n\nANSWER\nPlease see the list below. It is strongly recommended to review the platform information on IBM Software Product Compatibility Reports [http://publib.boulder.ibm.com/infocenter/prodguid/v1r0/clarity/index.jsp]. The installation of IBM SPSS Statistics software on Apple Macintosh OSX operating systems requires an Intel processor. \n\nA) Apple Mac",
+      "predictions": {
+        "SFT_548": "To resolve this issue, follow these steps: \n\n1. Open the SPSS Setup Assistant (SPSSSetupAssistant.exe) \n2. Click \"Next\" until you reach the \"Select License File\" screen. \n3. Select the file named \"spsssetupassistantsupport_0.1.0.0.dmg\". \n4. Click \"Install\" to start the installation. \n5. Follow the prompts to complete the installation.",
+        "DAPT_SFT_548": "This problem occurs when the license file has been deleted from the authorized location."
+      },
+      "token_f1": {
+        "SFT_548": 0.2069,
+        "DAPT_SFT_548": 0.0357
+      }
+    },
+    {
+      "id": "TRAIN_Q463",
+      "question": "Can Portal prevent the usage of simultaneous logins with the same userID?\n\nIs it possible for WebSphere Portal to limit the usage of a userID to one authenticated session as a time? In other words, prevent authenticating to Portal as \"user1\" from one browser and then simultaneously authenticating to Portal again as \"user1\" from another browser?",
+      "reference_answer": "WebSphere Portal has no built-in mechanism or configuration setting to limit the number of times a user id may log in. Unexpected behavior may occur if the same id is logged in more than once and this is not supported. \n\n\"ConcurrentModificationException\" and other errors may be logged.\n\nMost of the related issues were resolved in WebSphere Portal 5.1. However, you may still encounter exceptions or side-effects if you access the Portal in multiple browser windows using the same user id, whether or not the authentication requests take place on separate physical hosts.\n\nIt may be possible to prevent multiple logins by writing custom \"tracking code.\" Contact IBM Services for assistance to undertake such a project. WebSphere Portal Development does not have any sample code.\n\nIf you wish to write your own code, some of the issues to be aware of are (this is not an inclusive list):\n\n-- Multiple logins may take place on different nodes in a cluster. This means some cluster-wide mechanism would have to be in place to keep track of the logged-in users. Look at the WebSphere Application Server DistributedMap interface.\n\n-- There should be a fail-safe way to track user logout (explicit logout and session timeout). Using a session listener might be a possibility. \n\n-- If a user closes the browser without logging out, that user must wait for a session timeout before logging in again. Otherwise, there should be a \"force simultaneous login\" option in the login user interface.\n\nFor load testing, use unique user ids or virtual users.",
+      "source_filenames": [
+        "swg21227799.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Multiple logins using the same user ID - United States\n\nText:\nConcurrentModificationException; log in; login; multiple; userid; multiple login TECHNOTE (FAQ)\n\nQUESTION\n \"ConcurrentModificationException\" and other errors may occur if the same user id is logged in to IBM WebSphere Portal multiple times.\n\n\nANSWER\nWebSphere Portal has no built-in mechanism or configuration setting to limit the number of times a user id may log in. Unexpected behavior may occur if the same id is logged in more than once and this is not supported. \n\n\"ConcurrentModificationException\" and other errors may be logged.\n\nMost of the related issues were resolved in WebSphere Portal 5.1. However, you may still encounter exceptions or side-effects if you access the Portal in multiple browser windows using the same user id, whether or not the authentication re",
+      "predictions": {
+        "SFT_548": "Yes, this is possible using the <portal:session> tag.",
+        "DAPT_SFT_548": "Yes, this is possible using the Session Manager feature."
+      },
+      "token_f1": {
+        "SFT_548": 0.0631,
+        "DAPT_SFT_548": 0.051
+      }
+    },
+    {
+      "id": "TRAIN_Q222",
+      "question": "Composite Platform Installation Tool (CPIT) does not support IBM Tivoli Directory Server (ITDS) 6.3 on Red Hat Enterprise Linux\n\n\n\nWhen use the CPIT to install the FileNet P8 platform, the installation is not successful and the error occurs at ITDS installation, refer to the detailed error in cpit_install_stderr.txt:\n\nOUTPUT>========================================== OUTPUT>Setting Directories... OUTPUT>Mon Aug 11 08:20:00 SGT 2014 OUTPUT>/opt/IBM/cpit/decompressed/TDS/tdsV6.3/tds ERROR>./install_tds.bin: line 1956: warning: here-document at line 1956 delimited by end-of-file (wanted `/dev/null') OUTPUT>ERROR: /opt/IBM/ldap/V6.3/sbin/idsldif2db not found. TDS installation failed. Process completed with exit code: 1 ERROR in InvokeScripts-function - Terminate the remaining scripts. ***Aborting InvokeScripts-Install function.",
+      "reference_answer": "Tivoli Directory Server 6.3 installation using GUI installation program is not supported on RHEL 6.",
+      "source_filenames": [
+        "swg21599258.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Installing IBM Tivoli Directory Server Version 6.3 on RHEL 6 operating system - United States\n\nText:\nTivoli Directory Server 6.3 on RHEL6; installing Tivoli Directory Server 6.3 on RHEL6 TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n This document describes the points that you must consider when installing IBM Tivoli Directory Server Version 6.3 on Red Hat Enterprise Linux 6 (RHEL 6) operating system. \n\nRESOLVING THE PROBLEM\nFor a comprehensive list of the current recommended fix levels for IBM Tivoli Directory Server, see http://www-304.ibm.com/support/docview.wss?rs=767&uid=swg27009778 [http://www-304.ibm.com/support/docview.wss?rs=767&uid=swg27009778].\nUse this document to find the following information: \n\n * Prerequisites for installing Tivoli Directory Server 6.3 on RHEL 6 systems. \n * Instructions to install Tivoli Direct",
+      "predictions": {
+        "SFT_548": "To resolve this issue, follow the steps below:\n\n1. Download the latest version of the LDAP client package from the following URL: \nhttp://www.ibm.com/support/docview.wss?rs=180&uid=swg21997000\n\n2. Install the downloaded package using the following command:\n\n   rpm -Uvh ldapclient-*.rpm \n\n3. Restart the server after installing the new package.",
+        "DAPT_SFT_548": "To resolve this issue, download the latest version of the tds package from the IBM website."
+      },
+      "token_f1": {
+        "SFT_548": 0.1031,
+        "DAPT_SFT_548": 0.0556
+      }
+    },
+    {
+      "id": "DEV_Q122",
+      "question": "Importing Asset GL Errors\n\n When importing or syncing with assets, I receive the following error for the glaccount.\n\nInternal Server Error\nError 500: nested exception is: psdi.util.MXAccessException: BMXAA4198E - The GL attribute TLOAMNEWGLACCOUNT on object {1} requires an organization. Specify a value in the Organization field.",
+      "reference_answer": "Add the following field or tag to your inbound message. For example, if you are sending XML: \n\n<NEWORGID>xxx</NEWORGID> \n\nwhere xxx is the ORGID value. \n\nMake sure that NEWORGID is included on the object structure. \n\nGo To Integration > Object Structures and query the object structure. \n\nFrom the Select Action menu drop down, select Exclude/Include Fields and select the Non-Persistent Fields tab. Include NEWORGID.",
+      "source_filenames": [
+        "swg21969653.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM BMXAA4198E - The GL attribute TLOAMNEWGLACCOUNT on object {1} requires an organization. - United States\n\nText:\nTAPEINTEGRATION; asset; MIF TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n When importing ASSET using the Integration Framework you receive the following error after applying an IFIX or FIXPACK:\n\nBMXAA4198E - The GL attribute TLOAMNEWGLACCOUNT on object {1} requires an organization. Specify a value in the Organization field. \n\nCAUSE\nThis error is occurring due to a fix made for APAR IV67500 and included in a Maximo 7.5.0.6 or later ifix. The fix requires that the neworgid is included in the message.\n\nDIAGNOSING THE PROBLEM\nYou will see a stack trace similar to the following in the system out log: \n\npsdi.util.MXAccessException: BMXAA4198E - The GL attribute TLOAMNEWGLACCOUNT on object {1} requires an organization. Speci",
+      "predictions": {
+        "SFT_548": "To resolve this issue, set the value of the GL account to the correct organization.",
+        "DAPT_SFT_548": "This error occurs when the GL account has been created but the associated organization was not set up."
+      },
+      "token_f1": {
+        "SFT_548": 0.16,
+        "DAPT_SFT_548": 0.0588
+      }
+    },
+    {
+      "id": "TRAIN_Q231",
+      "question": "Netcool/Impact (all versions): OMNIbusEventReader Filter Analyzer error \"rule includes an unsupported expression\"\n\nNetcool/Impact (all versions): OMNIbusEventReader Filter Analyzer error \"rule includes an unsupported expression\"\n\nThis occurs when comparing two ObjectServer fields against each other in a Filter.",
+      "reference_answer": "In the EventReader properties file: \n\n\n$NCHOME/impact/etc/[ImpactServerName]_[EventReaderName].props\n\nwhere [ImpactServerName] is the name of the ImpactServer (NCI by default) and [EventReaderName] is the lower-case name of the EventReader (for example: omnibuseventreader). Add the property:\n\nimpact.[EventReaderName].consolidatefilters=false\n\nwhere, again, [EventReaderName] is the lower-case name of the EventReader (for example: omnibuseventreader).\n\nOnce this property has been added to the file an ImpactServer restart is required to enable it.\n\nIn a Clustered environment one would have to stop the Secondary ImpactServer(s) first, then stop and restart the Primary ImpactServer and then restart the Secondary ImpactServer(s) to ensure that the property is not overwritten and is distributed to each ImpactServer in the Cluster.",
+      "source_filenames": [
+        "swg21675858.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Filter Analyzer and Filters comparing ObjectServer fields - United States\n\nText:\nnetcool; impact; netcool/impact; nci; event; reader; eventreader; omnibus; omnibuseventreader; object; server; objectserver; field; fields; compare; contrast; comparison; use; filter; filters; filtering; analyse; analyze; analyser; analyzer; filteranalyser; filteranalyzer; rule; includes; unsupported; expression; include; including; support; supporting; supported; restriction; ExecutionException; Execution; Exception; consolidate; consolidatefilters; concurrent; expressions; expression TECHNOTE (FAQ)\n\nQUESTION\n The Filter Analyzer reports the error:\n\n\"rule includes an unsupported expression\"\n\nwhen comparing two ObjectServer fields against each other and/or a field against GetDate within an EventReader Filter\n\n\n\nCAUSE\nThis is a limitation in the fun",
+      "predictions": {
+        "SFT_548": "To resolve this issue, remove the comparison operator from the filter rule.",
+        "DAPT_SFT_548": "To resolve this issue, remove the comparison operator from the filter rule."
+      },
+      "token_f1": {
+        "SFT_548": 0.0682,
+        "DAPT_SFT_548": 0.0682
+      }
+    },
+    {
+      "id": "TRAIN_Q487",
+      "question": "Security Bulletin: API Connect Portal is affected by multiple Drupal vulnerabilities\n\nI need to understand details regarding Security Bulletin: API Connect Portal is affected by multiple Drupal vulnerabilities (CVE-2017-6924, CVE-2017-6923, CVE-2015-7875, CVE-2017-6925). Where can I find this information?",
+      "reference_answer": "IBM security bulletin swg22008902 covers API Connect Portal Drupal vulnerabilities CVE-2017-6924, CVE-2017-6923, CVE-2015-7875 and CVE-2017-6925. The bulletin lists affected API Connect versions 5.0.0.0–5.0.6.3 and 5.0.7.0–5.0.7.2. It directs users to IBM API Connect Portal 5.0.6.4 for the 5.0.6 line, or 5.0.7.2 iFix5 / 5.0.8.0 for the 5.0.7 line, using the APIConnect-Portal fix package.",
+      "source_filenames": [
+        "swg22008902.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Security Bulletin: API Connect Portal is affected by multiple Drupal vulnerabilities - United States\n\nText:\n SECURITY BULLETIN\n\nSUMMARY\n IBM API Connect has addressed the following vulnerabilities. \n\nAPI Connect Portal is affected by multiple Drupal vulnerabilities. \n\nVULNERABILITY DETAILS\nCVEID:CVE-2017-6925 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-6925]\nDESCRIPTION:Drupal could allow a remote attacker to bypass security restrictions, caused by a flaw in the entity access system. An attacker could exploit this vulnerability to gain access to view, create, update, or delete entities.\nCVSS Base Score: 5.3\nCVSS Temporal Score: Seehttps://exchange.xforce.ibmcloud.com/vulnerabilities/130574 [https://exchange.xforce.ibmcloud.com/vulnerabilities/130574]for the current score\nCVSS Environmental Score*: Undefined\nCVSS Vec",
+      "predictions": {
+        "SFT_548": "Drupal core has been updated to fix security issues related to XSS attacks.",
+        "DAPT_SFT_548": "This bulletin addresses several vulnerabilities in Drupal core and contributed modules. These vulnerabilities allow attackers to execute arbitrary PHP code on the server hosting the vulnerable site. This could lead to complete compromise of the system. \n\nDrupal core has been updated to fix all of these issues."
+      },
+      "token_f1": {
+        "SFT_548": 0.069,
+        "DAPT_SFT_548": 0.1429
+      }
+    },
+    {
+      "id": "TRAIN_Q316",
+      "question": "Datapower WebGUI down due to an expired or invalid certificate\n\nThe Datapower WebGUI is down due to an expired or invalid certificate. How can the WebGUI access be restored?",
+      "reference_answer": "The following commands will reset the RBM's, ACL's, WebGUI and SSH services to the default settings. \n\nNote: If the ssh is working, you may omit any commands with the ssh. \n\n \n\nconfig \n\nweb-mgmt \n\nno ssl \n\nexit \n\nwrite mem \n\ny \n\nno web-mgmt \n\nno ssh \n\nrbm \n\nreset \n\nexit \n\nacl web-mgmt \n\nreset \n\nexit \n\nacl ssh \n\nreset \n\nexit \n\nwrite mem (key step to remove the current settings) \n\ny \n\nweb-mgmt <ip to listen on or 0.0.0.0 for all> <port to use default is9090> \n\nssh <ip to listen on or 0.0.0.0 for all> <port to use default is22> \n\nwrite mem \n\ny",
+      "source_filenames": [
+        "swg21498634.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Unable to connect using network services: WebGUI or ssh after upgrading WebSphere DataPower firmware - United States\n\nText:\n TECHNOTE (FAQ)\n\nQUESTION\n Why can't I access the Web managment or ssh after upgrading firmware? \n\nCAUSE\nThis can occur if you are using a custom certificate or authentication for the management services and any of the associated certificates are expired. Expired certificates are removed at upgrade time.\n\nANSWER\nThe first step is to verify that the network is functioning correctly using these commands: \n\nshow int \n\nshow int mode \n\nshow route \n\n \n\nThose commands will show if there is any network activity as well as the ethernet link speed. \n\nOnce the network is confirmed, the quickest way to recover the web management and ssh services is to delete and recreate them with the default settings using the serial",
+      "predictions": {
+        "SFT_548": "Restart the web server hosting the Datapower WebGUI.",
+        "DAPT_SFT_548": "To restore the WebGUI access, follow these steps: \n\n1. Log on to the web GUI using the root account. \n2. Click \"System\" > \"Certificates\". \n3. Select the certificate used by the web GUI. \n4. Click \"Edit\". \n5. In the \"Validity Period\" field, select either \"Not Valid After\" or \"Not Valid Before\", depending on which date you want to set. \n6. Click \"OK\". \n7. Restart the web GUI."
+      },
+      "token_f1": {
+        "SFT_548": 0.0699,
+        "DAPT_SFT_548": 0.2575
+      }
+    },
+    {
+      "id": "TRAIN_Q599",
+      "question": "ICC configuration manager error: This implementation is not part of the Windows Platform FIPS validated cryptographic algorithms.\n\nWhen saving changes in ICC configuration manager, an \"Application Error\" window pops up.\n\nError:\n\nA severe error occurred.\n\nProblem:\n\nException has been thrown by the target of an invocation.\n\nSolution:\n\nContact IBM Software Support with this error message (see Details).\n\nClick on the Details button and the following stack trace is reported:\n\nDetails\n\nSystem.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor) at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)\n\n.....\n\n.....\n\nSystem.InvalidOperationException: This implementation is not part of the Windows Platform FIPS validated cryptographic algorithms.\n\nat System.Security.Cryptography.MD5CryptoServiceProvider..ctor()\n\nWhat is causing this?",
+      "reference_answer": "Incompatible Windows security policy.",
+      "source_filenames": [
+        "swg21991690.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Application Error in IBM Content Collector Configuration Manager when saving a task route - United States\n\nText:\nicc; fips; md5 TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n An application error is reported in the IBM Content Collector (ICC) configuration manager when you try to save a task route or other settings. \n\nSYMPTOM\nThe pop up window shows the following message: \n\n * \n * Error: \n * \n   A severe error occurred.\n   \n   \n * Problem:\n * \n   Exception has been thrown by the target of an invocation.\n   \n   \n * Solution:\n * \n   Contact IBM Software Support with this error message (see Details).\n\n\nClick on the Details button and the following stack trace is reported:  \n\n * Details\n * System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation.\n   at System.RuntimeMethodHandle.InvokeMe",
+      "predictions": {
+        "SFT_548": "This problem occurs when the MD5 hash algorithm is used in combination with the SHA1 hash algorithm.",
+        "DAPT_SFT_548": "This problem occurs when the Microsoft .NET Framework 4.0 is installed on the system but it is not registered with the Windows Cryptographic Provider Service. \n\nTo resolve this issue, uninstall the Microsoft .NET Framework 4.0 redistributable package and then reinstall it."
+      },
+      "token_f1": {
+        "SFT_548": 0.087,
+        "DAPT_SFT_548": 0.0727
+      }
+    },
+    {
+      "id": "TRAIN_Q070",
+      "question": "How do I search for a string which has reserved words or characters when searching in documents in Atlas?\n\nHow do I search for a string which has reserved words or characters when searching in documents in Atlas?",
+      "reference_answer": "When there is a \"-\" in a string you are searching for, you need to use \"\\\" in front of the \"-\" \n\nFor example - \"String1-String2\" should be searched as \"String1\\-String2\"",
+      "source_filenames": [
+        "swg21982451.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Search option for a reserved word or character in documents in Atlas - United States\n\nText:\n TECHNOTE (FAQ)\n\nQUESTION\n How do I search for a string which has reserved words or characters when searching in documents in Atlas? \n\nCAUSE\nThere are specific options to use in oracle when you search for certain strings\n\nANSWER\nWhen there is a \"-\" in a string you are searching for, you need to use \"\\\" in front of the \"-\" \n\nFor example - \"String1-String2\" should be searched as \"String1\\-String2\" \n\nPlease refer to the oracle documentation for Special Characters in Oracle Text Queries",
+      "predictions": {
+        "SFT_548": "In Atlas, you can search for strings containing special characters such as @, #, $, %, ^, &, *, (, ), {, }, [, ], ;, :, ?, <, >, =, !, |, \\, /, ? , * , + , - , . , : , ; , ' , \" , [ , ] , { , } , ~ , ` , _ , ` , & , * , ( , ) , { , } , [ , ] , ~ , ` , _ , ` , & , * , ( , ) , { , } , [ , ] , ~ , ` , _ , ` , & , * , ( , ) , { , } , [ , ] , ~ , ` , _ , ` , & , *",
+        "DAPT_SFT_548": "In Atlas, you can use the \"Search\" feature to find strings containing special characters or reserved words. \n\nTo perform this search, follow these steps: \n\n1. Click on the Search button at the top right corner of the screen. \n2. In the Search box, enter the text you want to search for. \n3. Select the appropriate field(s) to search within. \n4. Click on the Search button."
+      },
+      "token_f1": {
+        "SFT_548": 0.0744,
+        "DAPT_SFT_548": 0.1846
+      }
+    },
+    {
+      "id": "TRAIN_Q415",
+      "question": "Unable to login to FileNet Workplace XT 1.1.5.x. Getting error, Problem initializing encryption/decryption with keyID.\n\n\n\nWe are having issue while trying to login Workplace XT. Getting the error message below as soon as I hit after giving credentials.\n\nError Message: com.filenet.wcm.api.EncryptionException: Problem initializing encryption/decryption with keyId 7d3f93e3, size 256 bits. java.home=/opt/IBM/WebSphere/AppServer/java/jre. Cause: java.security. InvalidKeyException: Illegal key size or default parameters\n\nIBM WAS 8.5.5.9 Workplace XT 1.1.5",
+      "reference_answer": "This behavior occurs if Workplace XT is configured to use Maximum strength keys (>128bit) during installation.",
+      "source_filenames": [
+        "swg21501900.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Unable to log on to FileNet WorkplaceXT receive an AE SecurityCheckFilter error - United States\n\nText:\nAE SecurityCheckFilter; JSSE; unlimited strength TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n Unable to log on to FileNet WorkplaceXT - AE SecurityCheckFilter error \n\nSYMPTOM\nWhen attempting to log on to FileNet WorkplaceXT deployed on an IBM WebSphere Application Server, the following error is displayed : \n\nException Message: [Filter AE SecurityCheckFilter]: filter is unavailable. \nFilter AE SecurityCheckFilter: filter is unavailable. \n\n\nDIAGNOSING THE PROBLEM\nSystemOut.log may contain the following exception : \n\n\nProblem initializing encryption/decryption with keyId abcd1234, size 256 bits. java.home=<<WAS_home>>\\AppServer\\java\\jre. Cause: java.security.InvalidKeyException: Illegal key size or default parameters\ncom.filene",
+      "predictions": {
+        "SFT_548": "Please refer to the filenet-wcm-api-1.0.0.jar located at /opt/IBM/FileNet/WCM/wcmapi/lib. This jar contains the class org.apache.commons.codec.binary.Base64 which has been modified to add a new method called encodeBase64URLSafeString(). This change was made so that it would work on both Java 1.4 and Java 1.5. \n\nIn order to resolve this problem, please update the filenet-wcm-api-1.0.0.jar to the latest version available.",
+        "DAPT_SFT_548": "This problem occurs due to the change in the Java security policy file on the server side. \n\nTo resolve this issue, follow the steps given below:\n\n1. Stop the WebSphere Application Server instance.\n2. Remove the following line from the /usr/local/was/lib/security.policy file \n   <java_home>/jre/lib/security/java.security\n3. Restart the WebSphere Application Server instance."
+      },
+      "token_f1": {
+        "SFT_548": 0.0758,
+        "DAPT_SFT_548": 0.099
+      }
+    },
+    {
+      "id": "TRAIN_Q431",
+      "question": "Install path under \"Program Files\"\n\nMy path for the OS agent is e:\\Program Files\\IBM. Is there any issues or underlying problems if I install under \"Program Files\"? Just want to make sure no issues with a \"space\" in the install path.",
+      "reference_answer": "Getting the below error when you try to install ITM on Window OS \n\n\"D:\\Program Files\\IBM\\ITM\" includes blanks. Due to your system settings the installation path cannot include blanks, please specify location with no spaces.",
+      "source_filenames": [
+        "swg21961222.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Trouble installing ITM on Windows OS - United States\n\nText:\n TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n Getting the below error when you try to install ITM on Window OS \n\n\"D:\\Program Files\\IBM\\ITM\" includes blanks. Due to your system settings the installation path cannot include blanks, please specify location with no spaces. \n\nSYMPTOM\nWhen you try to install ITM on \" C:\\Program Files\\IBM\\ITM\" it woks fine but when we try to install it on \"D:\\Program Files\\IBM\\ITM\" we get the below error:\n\n\n\"D:\\Program Files\\IBM\\ITM\" includes blanks. Due to your system settings the installation path cannot include blanks, please specify location with no spaces.\n\nIf you take out the spaces and use D:\\ProgramFiles\\IBM\\ITM, the install will continue. \n\n\nRESOLVING THE PROBLEM\n \n\nCouple of ways to fix this... \n\n \n\n1. Remove the space in the dire",
+      "predictions": {
+        "SFT_548": "No issues.",
+        "DAPT_SFT_548": "No issues."
+      },
+      "token_f1": {
+        "SFT_548": 0.0816,
+        "DAPT_SFT_548": 0.0816
+      }
+    },
+    {
+      "id": "DEV_Q074",
+      "question": "Help with Security Bulletin: Security Vulnerability in IBM WebSphere Application Server affects IBM SOA Policy Gateway Pattern for AIX Server 2.5 (CVE-2015-1920)\n\nI need to understand details regarding Security Bulletin: Security Vulnerability in IBM WebSphere Application Server affects IBM SOA Policy Gateway Pattern for AIX Server 2.5 (CVE-2015-1920). Where can I find this information?",
+      "reference_answer": "CVEID: CVE-2015-1920 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1920]\nDESCRIPTION: WebSphere Application Server could allow a remote attacker to execute arbitrary code by connecting to a management port and executing a specific sequence of instructions.\nCVSS Base Score: 9.3\nCVSS Temporal Score: See https://exchange.xforce.ibmcloud.com/vulnerabilities/102404 [https://exchange.xforce.ibmcloud.com/vulnerabilities/102404] for the current score\nCVSS Environmental Score*: Undefined\nCVSS Vector: (AV:N/AC:M/Au:N/C:C/I:C/A:C)",
+      "source_filenames": [
+        "swg21959169.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Security Bulletin: Security Vulnerability in IBM WebSphere Application Server affects  IBM SOA Policy Gateway Pattern for AIX Server 2.5 (CVE-2015-1920) - United States\n\nText:\n SECURITY BULLETIN\n\nSUMMARY\n A vulnerability in WebSphere Application Server could allow a remote attacker to execute arbitrary code by connecting to a management port and executing a specific sequence of instructions. \n\nVULNERABILITY DETAILS\nCVEID: CVE-2015-1920 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-1920]\nDESCRIPTION: WebSphere Application Server could allow a remote attacker to execute arbitrary code by connecting to a management port and executing a specific sequence of instructions.\nCVSS Base Score: 9.3\nCVSS Temporal Score: See https://exchange.xforce.ibmcloud.com/vulnerabilities/102404 [https://exchange.xforce.ibmcloud.com/vulnerabi",
+      "predictions": {
+        "SFT_548": "IBM has released a security bulletin on CVE-2015-1920 which addresses a vulnerability in IBM WebSphere Application Server. This vulnerability could allow remote attackers to execute arbitrary code via a crafted request to the IBM SOA Policy Gateway pattern for AIX Server 2.5. \n\nThis vulnerability was fixed in WebSphere Application Server V8.5.5.10, V8.5.5.11, V8.5.5.12, V8.5.5.13, V8.5.5.14, V8.5.5.15, V8.5.5.16, V8.5.5.17, V8.5.5.18,",
+        "DAPT_SFT_548": "IBM has released a patch for this vulnerability. Please refer to the IBM Support Page for details on how to obtain the fix."
+      },
+      "token_f1": {
+        "SFT_548": 0.2336,
+        "DAPT_SFT_548": 0.0828
+      }
+    },
+    {
+      "id": "DEV_Q035",
+      "question": "Help with Security Bulletin: API Connect is affected by a Node.js denial of service vulnerability (CVE-2017-14919)\n\nI need to understand details regarding Security Bulletin: API Connect is affected by a Node.js denial of service vulnerability (CVE-2017-14919). Where can I find this information?",
+      "reference_answer": "CVEID:CVE-2017-14919 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-14919]\nDESCRIPTION:Node.js is vulnerable to a denial of service, caused by an uncaught exception flaw in the zlib module. By making 8 an invalid value for the windowBits parameter, a remote attacker could exploit this vulnerability to cause the application to crash.\nCVSS Base Score: 7.5\nCVSS Temporal Score: Seehttps://exchange.xforce.ibmcloud.com/vulnerabilities/134286 [https://exchange.xforce.ibmcloud.com/vulnerabilities/134286]for the current score\nCVSS Environmental Score*: Undefined\nCVSS Vector: (CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H)",
+      "source_filenames": [
+        "swg22013168.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Security Bulletin: API Connect is affected by a Node.js denial of service vulnerability (CVE-2017-14919) - United States\n\nText:\n SECURITY BULLETIN\n\nSUMMARY\n IBM API Connect has addressed the following vulnerability. \n\nNode.js is vulnerable to a denial of service, caused by an uncaught exception flaw in the zlib module. By making 8 an invalid value for the windowBits parameter, a remote attacker could exploit this vulnerability to cause the application to crash. \n\nVULNERABILITY DETAILS\nCVEID:CVE-2017-14919 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-14919]\nDESCRIPTION:Node.js is vulnerable to a denial of service, caused by an uncaught exception flaw in the zlib module. By making 8 an invalid value for the windowBits parameter, a remote attacker could exploit this vulnerability to cause the application to crash.\nCVSS ",
+      "predictions": {
+        "SFT_548": "This vulnerability was fixed in API Connect 8.5.0.",
+        "DAPT_SFT_548": "This bulletin describes how attackers could exploit a Node.js denial of service vulnerability to crash the application. This vulnerability exists in all versions prior to 8.0.0."
+      },
+      "token_f1": {
+        "SFT_548": 0.0942,
+        "DAPT_SFT_548": 0.217
+      }
+    },
+    {
+      "id": "TRAIN_Q583",
+      "question": "Why does the ITCAM for AD Managing GUI install fail with an end-of-file message?\n\nI am trying to install the ITCAM for AD Managing server and I am seeing the following error when doing either 'launchpad.sh' or 'silent_MS_linux.bin': Initializing InstallShield Wizard........ Launching InstallShield Wizard........\n\n./setup_MS_lin.bin: line 1926: warning: here-document at line 1926 delimited by end-of-file (wanted `/dev/null')\n\nThe installer is unable to run in graphical mode. Try running the installer with the -console for -silent flag.",
+      "reference_answer": "CAUSE\nMissing Linux system libraries.",
+      "source_filenames": [
+        "swg21985630.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Using launchpad.sh or silent_MS_linux.bin results in end-of-file message. - United States\n\nText:\nITCAM compat-libstdc++ libstdc++ libraries silent_MS_linux.bin launchpad.sh errors TECHNOTE (TROUBLESHOOTING)\n\nTHIS DOCUMENT APPLIES ONLY TO THE FOLLOWING LANGUAGE VERSION(S):\n US English \n\nPROBLEM(ABSTRACT)\n Using the DC or MS 'launchpad.sh' script results in the following error message:\n./setup_MS_lin.bin: line 1926: warning: here-document at line 1926 \ndelimited by end-of-file (wanted `/dev/null') \n\nSYMPTOM\nThe following error is seen running when doing either 'launchpad.sh' or 'silent_MS_linux.bin': \n\n Initializing InstallShield Wizard........ \nLaunching InstallShield Wizard........ \n\n./setup_MS_lin.bin: line 1926: warning: here-document at line 1926 \ndelimited by end-of-file (wanted `/dev/null') \n\nThe installer is unable to run",
+      "predictions": {
+        "SFT_548": "To resolve this problem, try running the installer with the -console flag.",
+        "DAPT_SFT_548": "This problem occurs on Linux systems where the /dev/null file has been removed or modified."
+      },
+      "token_f1": {
+        "SFT_548": 0.0952,
+        "DAPT_SFT_548": 0.16
+      }
+    },
+    {
+      "id": "TRAIN_Q482",
+      "question": "Is there a limit to the number of items that can be listed within an \"in\" list as part of a where clause?\n\nIs there a limit to the number of items that can be listed within an \"in\" list as part of a where clause?",
+      "reference_answer": "The short answer is no limit.\n\n\nBy default we create a virtual table for any \"in list\" with more than 5 values.\n\nThe only limitation with large \"in list\" statements would be the memory needed to compile the query. If the query is too complex, you can potentially run out of memory, but that will not affect other sessions since this happens inside the postgres process assigned to that session. The parameter that is responsible for this behaviour is inlist_threshold and it is safe to increase this value to 100, but not more.",
+      "source_filenames": [
+        "swg21698950.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Is there a limit to the number of items that can be listed within an \"in\" list as part of a where clause? - United States\n\nText:\n TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n Is there a limit to the number of items that can be listed within an \"in\" list as part of a where clause? \n\nCAUSE\nEvery time the query optimizer finds a \"(NOT) IN\" statement in the query, a decision must be made:\nOption A: Evaluate the condition sequentially for every member of the IN-list, or \nOption B: create a temporal virtual table from this list and use JOIN logic for evaluation. \n\nIf the amount of members in the IN-list is smaller than the value of INLIST_THRESHOLD, then option A is used. \nIf the amount of members in the IN-list is equal or bigger than the value of INLIST_THRESHOLD, then option B is used.\n\n\nENVIRONMENT\nAny IBM PureData System for A",
+      "predictions": {
+        "SFT_548": "Yes, the maximum length of the IN list is 1000 elements.",
+        "DAPT_SFT_548": "There is no limit to the number of items that can be listed within an \"in\" list as part of a where clause. However, it is recommended that you do not exceed 100 items per query."
+      },
+      "token_f1": {
+        "SFT_548": 0.1356,
+        "DAPT_SFT_548": 0.3288
+      }
+    },
+    {
+      "id": "TRAIN_Q208",
+      "question": "Can I run different levels of the Rational Developer for z Systems host and client?\n\nI'd like to know if I can run different versions of the RDz client and host and if so what compatible or supported versions and releases?",
+      "reference_answer": "In general, IBM Developer for z Systems, Rational Developer for z Systems and Rational Developer for System z follow a two level backward and forward compatibility tolerance for basic Client /Server functionality.",
+      "source_filenames": [
+        "swg21568844.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Developer for z Systems and Rational Developer for z Systems Backward/Forward compatibility - United States\n\nText:\nRDz; compatible; backward; forward; IDz; Debug Tool: Debugger TECHNOTE (FAQ)\n\nQUESTION\n What levels of the IBM Developer for z Systems and Rational Developer for z Systems host and client are compatible? \n\nANSWER\nClient/Server Compatibility\n\n\n\nIn general, IBM Developer for z Systems, Rational Developer for z Systems and Rational Developer for System z follow a two level backward and forward compatibility tolerance for basic Client /Server functionality. \n\nIBM Developer for z Systems v14.1.x host/client is compatible with IBM Developer for z Systems v14.1.x client/host, IBM Developer for z Systems v14.0.x client/host and Rational Developer for z Systems v9.5.x client/host. \n\nIBM Developer for z Systems v14.0.x host/",
+      "predictions": {
+        "SFT_548": "Yes, it is possible to install multiple versions of the RDz client on the same system. However, this will require some care since each version has its own set of libraries and dependencies. \n\nIn order to do this, you need to ensure that all the required libraries are installed on the system. This includes the libraries used by the RDz client and also those used by the RDz host. \n\nIt is important to note that the RDz host requires at least Java 1.4.2_08 or later.",
+        "DAPT_SFT_548": "Yes, it is possible to install multiple versions of the Rational Developer for z/OS on the same system. However, this will require separate installations of the host and client components."
+      },
+      "token_f1": {
+        "SFT_548": 0.1203,
+        "DAPT_SFT_548": 0.3056
+      }
+    },
+    {
+      "id": "TRAIN_Q270",
+      "question": "How to resolve \"An unexpected error occurred. Contact your system administrator. ICWPA1001E\"\n\n\n\nWhen trying to add people to a matter request when there are more than 1000 people in the clipboard, the following error is reported:\n\nAn unexpected error occurred. Contact your system administrator. ICWPA1001E\"",
+      "reference_answer": "To work around the limitation, when you add people from the clipboard, add fewer than 1000 people at one time.",
+      "source_filenames": [
+        "swg27046675.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Known limitation: You cannot add people to a matter request if there are more than 1000 people selected in the clipboard. - United States\n\nText:\n PRODUCT DOCUMENTATION\n\nABSTRACT\n If you try to add people to a matter request when there are more than 1000 people in the clipboard, the following error will occur:\nAn unexpected error occurred.\nContact your system administrator.\nICWPA1001E \n\nCONTENT\nTo work around the limitation, when you add people from the clipboard, add fewer than 1000 people at one time.",
+      "predictions": {
+        "SFT_548": "This problem occurs when the number of people exceeds the maximum limit (1000) allowed by the Microsoft Office Outlook Web Access (OWA) server. \n\nTo resolve this issue, contact your system administrator to increase the OWA server’s maximum number of users.",
+        "DAPT_SFT_548": "This problem occurs when the number of people exceeds the maximum limit (1000) allowed in the clipboard. \n\nTo work around this problem, copy all the people to a new clipboard, then paste them into the original clipboard."
+      },
+      "token_f1": {
+        "SFT_548": 0.2222,
+        "DAPT_SFT_548": 0.3939
+      }
+    },
+    {
+      "id": "TRAIN_Q553",
+      "question": "Help with Security Bulletin: Multiple vulnerabilities in IBM Java SDK affect IBM Image Construction and Composition Tool (CVE-2014-3566 and CVE-2014-6457)\n\nI need to understand details regarding \"Security Bulletin: Multiple vulnerabilities in IBM Java SDK affect IBM Image Construction and Composition Tool (CVE-2014-3566 and CVE-2014-6457) .\" Where can I find this information?",
+      "reference_answer": "CVEID: CVE-2014-6457 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6457]\n\nDESCRIPTION: An unspecified vulnerability related to the JSSE component has partial confidentiality impact, partial integrity impact, and no availability impact.\n\nCVSS Base Score: 4\nCVSS Temporal Score: See https://exchange.xforce.ibmcloud.com/vulnerabilities/97148 [https://exchange.xforce.ibmcloud.com/vulnerabilities/97148] for the current score\nCVSS Environmental Score*: Undefined\nCVSS Vector: (AV:N/AC:H/Au:N/C:P/I:P/A:N) \n\nCVE-ID: CVE-2014-3566 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3566]\n\nDESCRIPTION: Product could allow a remote attacker to obtain sensitive information, caused by a design error when using the SSLv3 protocol. A remote user with the ability to conduct a man-in-the-middle attack could exploit this vulnerability via a POODLE (Padding Oracle On Downgraded Legacy Encryption) attack to decrypt SSL sessions and access the plaintext of encrypted connections. \n\nCVSS Base Score: 4.3\nCVSS Temporal Score: See https://exchange.xforce.ibmcloud.com/vulnerabilities/97013 [https://exchange.xforce.ibmcloud.com/vulnerabilities/97013] for the current score\nCVSS Environmental Score*: Undefined\nCVSS Vector: (AV:N/AC:M/Au:N/C:P/I:N/A:N)",
+      "source_filenames": [
+        "swg21903249.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Security Bulletin: Multiple vulnerabilities in IBM Java SDK affect IBM Image Construction and Composition Tool (CVE-2014-3566 and CVE-2014-6457) - United States\n\nText:\n SECURITY BULLETIN\n\nSUMMARY\n There are multiple vulnerabilities in IBM® SDK Java™ Technology Edition, Version 6 that is used by IBM PureApplication System. This also includes a fix for the Padding Oracle On Downgraded Legacy Encryption (POODLE) SSLv3 vulnerability (CVE-2014-3566). These were disclosed as part of the IBM Java SDK updates in October 2014. \n\nVULNERABILITY DETAILS\nCVEID: CVE-2014-6457 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6457]\n\nDESCRIPTION: An unspecified vulnerability related to the JSSE component has partial confidentiality impact, partial integrity impact, and no availability impact.\n\nCVSS Base Score: 4\nCVSS Temporal Score: See ",
+      "predictions": {
+        "SFT_548": "IBM has released multiple security bulletins addressing vulnerabilities in its Java SDK. These issues were discovered during our regular vulnerability scanning activities. \n\nPlease refer to the following links for more information on each bulletin: \n\nJava SDK - Vulnerabilities in the IBM Image Construction and Composition Tool (CVE-2014-3566 and CVE-2014-6457) \nJava SDK - Vulnerabilities in the IBM WebSphere Application Server (CVE-2014-3568 and CVE-2014-6459) \nJava SDK - Vulnerabilities in the IBM WebSphere MQ (CVE-2014-3569 and CVE-2014-6460) \nJava SDK - Vulnerabilities in",
+        "DAPT_SFT_548": "IBM has released multiple security bulletins addressing vulnerabilities in the IBM Java SDK. These updates fix several issues related to the Java Runtime Environment (JRE). \n\nPlease refer to the following links for more information on each vulnerability: \n\nCVE-2014-3566 - \nhttp://www.cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3566\n\nCVE-2014-6457 - \nhttp://www.cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6457"
+      },
+      "token_f1": {
+        "SFT_548": 0.238,
+        "DAPT_SFT_548": 0.3788
+      }
+    },
+    {
+      "id": "TRAIN_Q526",
+      "question": "Reporting in Rhapsody\n\n\n\nHello All,\n\nI can't find the reports plus in my Rhapsody v8.1.2 x64\n\nanybody knows the reason.",
+      "reference_answer": "IBM's 64-bit Rational Rhapsody feature availability matrix marks ReporterPlus as 'N' (not available) for Rhapsody 8.1.2 x64. This is why ReporterPlus does not appear in that installation.",
+      "source_filenames": [
+        "swg27038779.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Availability of features in the 64-bit version of Rational Rhapsody (8.0.3 and later) - United States\n\nText:\nrhapsody; windows 64-bit PRODUCT DOCUMENTATION\n\nABSTRACT\n This table presents information on the availability of features in the 64-bit version of Rational Rhapsody. Features not listed here have been available in the 64-bit version since it was first released. \n\nCONTENT\n \n\n[/support/docview.wss?uid=swg27038779&amp;aid=1] 803 804 805 806 81 811 812 8121 813 814 815 82 821 83 Rational Rhapsody Architect for Software N N N N N N N N N N N N Y Y Reverse engineering - for languages other than Ada N N N N N N N N N N Y Y Y Y Roundtripping - for languages other than Ada – component level N N N N N N N N N N Y Y Y Y Roundtripping - for languages other than Ada – individual classes N N N N N N N N N N N Y Y Y Code-centric mode (",
+      "predictions": {
+        "SFT_548": "Rhapsody provides two ways to access reports: \n1) From the Report Manager (Report Manager > Reports)\n2) From the Project Explorer (Project Explorer > Reports)\n\nIn both cases, the report manager will display all available reports. \n\nTo add a new report, right-click on the project explorer tree node where you want to place it and select \"Add New Report\".",
+        "DAPT_SFT_548": "Rhapsody 8.1.x has been updated to use the new Report Manager (formerly called \"Report Plus\") which is part of the IBM Data Studio suite. \n\nTo access the Reports feature in Rhapsody, go to File > New > Report."
+      },
+      "token_f1": {
+        "SFT_548": 0.1739,
+        "DAPT_SFT_548": 0.3111
+      }
+    },
+    {
+      "id": "TRAIN_Q436",
+      "question": "Can you delete temporary data that is generated by IBM Business Process Manager?\n\nIn the OS temporary directories, there are many files generated for BPM. These files are created on the following operations:\ncreate TWX snapshot for export\naccess a managed asset during process execution\ncreate offline install package\nThe following temporary directories are used for storing temp files:Operating system temporary directory:/tmp (Linux)c:\\windows\\temp (Windows)\n\nHow can these files be cleaned up?",
+      "reference_answer": "Yes. IBM BPM can leave temporary trace files in the operating-system temporary directory after snapshot import, export or install operations. IBM APAR JR47686 states that these leftover files may be deleted manually; identify the BPM-created files and ensure they are no longer in use before deletion. The APAR also lists related BPM fixes such as 8.0.1 Fix Pack 2 and 8.5.0 Fix Pack 1 to address the underlying accumulation.",
+      "source_filenames": [
+        "swg1JR47686.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM JR47686: FILE SYSTEM FILLS UP WITH TEMPORARY FILES AFTER RUNNING IMPORT/EXPORT. - United States\n\nText:\n  FIXES ARE AVAILABLE\nVersion 8.0.1 Fix Pack 2 for the IBM Business Process Manager products [http://www-01.ibm.com/support/docview.wss?uid=swg24035701]\nVersion 8.5.0 Fix Pack 1 for the IBM Business Process Manager products [http://www-01.ibm.com/support/docview.wss?uid=swg24035702]\nVersion 8.5 Refresh Pack 5 for the IBM Business Process Manager products [http://www-01.ibm.com/support/docview.wss?uid=swg24037683]\n\n\nSUBSCRIBE\nYou can track all active APARs for this component.\n\n\n\nAPAR STATUS\n * CLOSED AS PROGRAM ERROR.\n    \n   \n   \n\nERROR DESCRIPTION\n *  Customer's temporary directory is getting full due to process\n   application traces left inside the local file system after the\n   export/import completes.\n   \n   \n    \n   \n   \n",
+      "predictions": {
+        "SFT_548": "IBM Business Process Manager provides a utility called \"BPM Cleanup\" which will clean up all the temporary files created by the application. This utility is located at /usr/bin/bpm_cleanup.",
+        "DAPT_SFT_548": "To clean up the temporary files, follow these steps:\n\n1. Stop all instances of BPM. \n2. Delete the contents of the /tmp directory on Linux systems. \n3. Delete the contents of the c:\\windows\\temp directory on Windows systems. \n\nNote: If you want to keep the log files, then do not delete them."
+      },
+      "token_f1": {
+        "SFT_548": 0.1452,
+        "DAPT_SFT_548": 0.271
+      }
+    },
+    {
+      "id": "TRAIN_Q594",
+      "question": "In WebSphere MQ, why am I getting AMQ9776, AMQ9777 Channel was blocked errors?\n\nIn WebSphere MQ, why am I getting AMQ9776, AMQ9777 Channel was blocked errors",
+      "reference_answer": "AMQ9776 means an IBM MQ channel was blocked because its effective user mapping is denied (for example by a CHLAUTH rule). AMQ9777 means an inbound channel was blocked, such as when active channel values match a CHLAUTH record with USERSRC(NOACCESS). Inspect queue-manager error logs and the effective MCAUSER, CLNTUSER and ADDRESS/CHLAUTH settings. In affected MQ 8 installations using MQCSP and ADOPTCTX(YES), APAR IT12825 also documents an incorrect USERMAP evaluation; check maintenance and the ChlauthEarlyAdopt setting when that specific scenario applies.",
+      "source_filenames": [
+        "swg1IT23329.txt",
+        "swg1IT12825.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM IT23329: AMQ9776 message missing a bracket, and the CLTUSER and ADDRESS values from channel - United States\n\nText:\n SUBSCRIBE TO THIS APAR\nBy subscribing, you receive periodic emails alerting you to the status of the APAR, along with a link to the fix after it becomes available. You can track this item individually or track all items by product.\n\nNotify me when this APAR changes.\n\nNotify me when an APAR for this component changes.\n\n\n\nAPAR STATUS\n * CLOSED AS PROGRAM ERROR.\n    \n   \n   \n\nERROR DESCRIPTION\n *  AMQ9776: Channel was blocked by userid\n   \n   EXPLANATION:\n   The inbound channel 'MY.SVRCONN' was blocked from address\n   'nnn.n.n.n' because the active values of the channel were\n   mapped to a userid which should be blocked. The active values\n   of the channel were 'MCAUSER(<MCAUSER>'.\n   \n   The expected queue manager l\nTitle: IBM IT12825: IBM MQV8: A CLIENT APPLICATION FAILS TO CONNECT TO A QUEUE MANAGER WITH ERROR AMQ9777: CHANNEL WAS BLOCKED. - United States\n\nText:\n SUBSCRIBE\nYou can track all active APARs for this component.\n\n\n\nAPAR STATUS\n * CLOSED AS PROGRAM ERROR.\n    \n   \n   \n\nERROR DESCRIPTION\n *  A client application fails to connect to a queue manager with\n   error AMQ9777: Channel was blocked.\n   \n   AMQ9777: Channel was blocked\n   The inbound channel 'A.TO.B' was blocked from address 'abc\n   (xxx.xxx.xxx.xxx)' because the active values of the channel\n   matched a record configured with USERSRC(NOACCESS). The active\n   values of the channel were 'CLNTUSER(xyz) ADDRESS(abc)'.\n   \n   MQ is not matching the MQCSP user against the USERMAP rule\n   above. Instead it is only looking at the ID that the client\n   application process is running under.\n",
+      "predictions": {
+        "SFT_548": "These messages indicate that the channel has been blocked due to a timeout on the connection attempt. This could happen if the client application did not send a message within the time-out period.",
+        "DAPT_SFT_548": "This message indicates that the channel has been blocked due to a timeout on the receive side. This could happen if there is a problem with the queue manager (e.g., it is offline) or the client application (e.g., it is hung)."
+      },
+      "token_f1": {
+        "SFT_548": 0.146,
+        "DAPT_SFT_548": 0.271
+      }
+    },
+    {
+      "id": "TRAIN_Q006",
+      "question": "Is ITNM exposed to Apache CXF vulnerability (CVE-2017-3156)?\n\nIs ITNM versions are affected by Apache CXF vulnerability (CVE-2017-3156), If yes then what are all the version will be affected and where I can find the details?",
+      "reference_answer": "Yes. IBM Tivoli Network Manager IP Edition 4.1.1 and 4.2.0 installations with the Huawei MTOSI Collector are affected by CVE-2017-3156 in Apache CXF. For 4.1.1, contact IBM Support and reference APAR IV99816 for the fix. For 4.2.0, Apache CXF was updated to 3.1.10 in Fix Pack 3. See IBM security bulletin swg22008493 for the affected versions and remediation.",
+      "source_filenames": [
+        "swg22008493.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Security Bulletin: IBM Tivoli Network Manager IP Edition is affected by an Apache CXF vulnerability (CVE-2017-3156) - United States\n\nText:\n SECURITY BULLETIN\n\nSUMMARY\n Vulnerability has been addressed in the Apache CXF component of Tivoli Network Manager IP Edition. \n\nVULNERABILITY DETAILS\nCVEID: CVE-2017-3156 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-3156]\nDESCRIPTION: Apache CXF could provide weaker than expected security, caused by the failure to use the OAuth2 Hawk and JOSE MAC Validation code. A remote attacker could exploit this vulnerability using timing attacks to obtain sensitive information.\nCVSS Base Score: 5.9\nCVSS Temporal Score: See https://exchange.xforce.ibmcloud.com/vulnerabilities/130249 [https://exchange.xforce.ibmcloud.com/vulnerabilities/130249] for the current score\nCVSS Environmental Score*:",
+      "predictions": {
+        "SFT_548": "ITNM v8.5.0.1 and earlier versions are vulnerable to CVE-2017-3156. \n\nPlease refer to the following link for more details: \nhttps://www.ibm.com/support/knowledgecenter/SSAW57_8.5.0/com.ibm.itnm.doc/itnm_vulnerabilities.html",
+        "DAPT_SFT_548": "ITNM v8.5.0.1 and earlier versions are vulnerable to CVE-2017-3156. \n\nPlease refer to the following link for more details: \nhttps://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-3156"
+      },
+      "token_f1": {
+        "SFT_548": 0.3867,
+        "DAPT_SFT_548": 0.2778
+      }
+    },
+    {
+      "id": "TRAIN_Q111",
+      "question": "How to find details of Corrupted Object from the entries in db2diag.log?\n\nWe have corruption in DB2 Database and got entries for corrupted Object in db2diag.log ,Need to find details of the Object using information dumped in db2diag.log",
+      "reference_answer": "When we have corruption in the database we may received following kind of entries in db2diag.log \nThese also notify object where we t where we have detected corruption in the Database.",
+      "source_filenames": [
+        "swg21983129.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM How to find details of Corrupted Object from the entries in db2diag.log? - United States\n\nText:\n TECHNOTE (FAQ)\n\nQUESTION\n How to find details of Corrupted Object from the entries in db2diag.log? \n\nANSWER\nWhen we have corruption in the database we may received following kind of entries in db2diag.log \nThese also notify object where we t where we have detected corruption in the Database.\n\nSample db2diag.log entry for Corruption.\n\n2016-05-04-03.13.05.261082-360 I3442A358 LEVEL: Error \nPID : 393470 TID : 1 PROC : db2pfchr 0 \nINSTANCE: db2inst1 NODE : 000 \nFUNCTION: DB2 UDB, buffer pool services, sqlbReadAndReleaseBuffers,probe:13 \nRETCODE : ZRC=0x86020001=-2046689279=SQLB_BADP \"page is bad\" \nDIA8400C A bad page was encountered. \n\n2016-05-04-03.13.05.264301-360 I3801A437 LEVEL: Error \nPID : 393470 TID : 1 PROC : db2pfchr 0 \nINSTANC",
+      "predictions": {
+        "SFT_548": "To get the object ID (OID) of the corrupted object, search for the line containing \"Corruption detected on\" followed by the OID number. For example: \n\nCorruption detected on OBJECT_ID=0x800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "DAPT_SFT_548": "To get the object id, look at the line starting with \"DB2SQL: SQLSTATE=08001\" in the log file. \n\nThe object id is the number after the equals sign. For example, the first entry has an object id of 19000. \n\nTo get the object type, look at the next line in the log file. In this case it says 'TABLE'. \n\nTo get the table name, look at the next line in the log file. In this case it says 'TBLNAME' . \n\nTo get the column name, look at the next line in the log file. In this case it says 'COLNAME' . \n\nTo get the data type, look at the next line in the log file. In this"
+      },
+      "token_f1": {
+        "SFT_548": 0.2222,
+        "DAPT_SFT_548": 0.1143
+      }
+    },
+    {
+      "id": "DEV_Q167",
+      "question": "How do I recreate all the Oracle Text indexes for the Atlas database\n\nHow do I recreate all the Oracle Text indexes for the Atlas database ?",
+      "reference_answer": "Shutdown the application server running the Atlas applications. \n 2. Locate the script drop_ctxsys_indexes.sql to drop the Oracle Text indexes from the following folder in the Atlas release:\n    Atlas\\Schema\\Deploy\\smf\\db\\etc\\oracle \n 3. Open up a command window to that directory and execute the script using SQL Plus:\n    sqlplus <user>/<password>@<database> @drop_ctxsys_indexes.sql \n 4. Locate the scripts, setup_ctxsys_objects.sql and create_ctxsys_indexes.sql, used to create the Oracle Text preferences and indexes from the following folder in the Atlas release. The <version> folder will differ depending on which version you are currently running.\n    Atlas\\Schema\\Deploy\\smf\\db\\release\\<version>\\oracle\\create\\schema \n 5. Open up a command window to that directory and execute the scripts using SQL Plus.\n    sqlplus <user>/<password>@<database> @setup_ctxsys_objects.sql\n    sqlplus <user>/<password>@<database> @create_ctxsys_indexes.sql \n 6. Start the application server running the Atlas applications.",
+      "source_filenames": [
+        "swg21580830.txt"
+      ],
+      "source_evidence_excerpt": "Title: IBM Recreate all the Oracle Text indexes - United States\n\nText:\n TECHNOTE (FAQ)\n\nQUESTION\n How do I recreate all the Oracle Text indexes for the Atlas database \n\nANSWER\nThere are situations where the Oracle Text indexes used by the application may need to be recreated. For example, after importing data from a production database to a test database, the Oracle Text indexes will not be transferred. This will require you to recreate them in order for certain functions in Atlas to work properly. \n\nIf you have access to the Atlas release files from the version you are currently using you can follow these instructions. You will need the ability to access the Atlas database using the Oracle SQL Plus tool. \n\n \n\n 1. Shutdown the application server running the Atlas applications. \n 2. Locate the script drop_ctxsys_indexes.sql to drop the Ora",
+      "predictions": {
+        "SFT_548": "To create all the Oracle Text indexes for the Atlas database, run the following command: \n\n$ORACLE_HOME/bin/otmadmin -createallindexes -d atlas",
+        "DAPT_SFT_548": "To create new text indexes on the Atlas database, follow these steps: \n\n1. Stop the Atlas server \n2. Remove the old index files \n3. Create the new index files \n4. Start the Atlas server \n\nNote: If you want to keep the old index files, remove them first."
+      },
+      "token_f1": {
+        "SFT_548": 0.1435,
+        "DAPT_SFT_548": 0.2491
+      }
+    }
+  ],
+  "sampling": "Lowest Token F1 and largest between-model Token F1 difference; not representative accuracy sampling."
+}

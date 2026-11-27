@@ -1,0 +1,75 @@
+{
+  "scope": "77 answerable questions, paired reference-based AI review; reuse earlier 532 verdicts; newly assess 548 predictions; not a fresh fully blinded review or expert ground truth. Original key reconstructed by exact rng.choice seed 42 code and validated by reported F1, not original review_key.json. No external verification. Unverified alternative does not establish factual falsity. Incorrect indicates not an adequate supported answer to this question. Identical answers reuse prior judgments. Validation data used only for evaluation, no test or training.",
+  "verdict_counts": {
+    "532": {
+      "INCORRECT": 59,
+      "PARTIAL": 13,
+      "UNCERTAIN": 3,
+      "CORRECT": 2
+    },
+    "548": {
+      "INCORRECT": 61,
+      "PARTIAL": 11,
+      "CORRECT": 3,
+      "UNCERTAIN": 2
+    }
+  },
+  "strict_correctness_percent": {
+    "532": 2.6,
+    "548": 3.9
+  },
+  "primary_failures": {
+    "532": {
+      "QUESTION_INTENT_MISMATCH": 18,
+      "TECHNICAL_MISMATCH": 26,
+      "UNVERIFIED_CLAIM_OR_ALTERNATIVE": 18,
+      "MISSING_REQUIRED_DETAIL": 13,
+      "NONE": 2
+    },
+    "548": {
+      "TECHNICAL_MISMATCH": 36,
+      "QUESTION_INTENT_MISMATCH": 10,
+      "UNVERIFIED_CLAIM_OR_ALTERNATIVE": 17,
+      "MISSING_REQUIRED_DETAIL": 11,
+      "NONE": 3
+    }
+  },
+  "pair_comparison": {
+    "same_label": 68,
+    "improved": 4,
+    "declined": 4,
+    "inconclusive": 1
+  },
+  "transitions": {
+    "INCORRECT -> INCORRECT": 56,
+    "PARTIAL -> PARTIAL": 9,
+    "PARTIAL -> CORRECT": 1,
+    "INCORRECT -> CORRECT": 1,
+    "PARTIAL -> INCORRECT": 3,
+    "INCORRECT -> PARTIAL": 2,
+    "UNCERTAIN -> UNCERTAIN": 2,
+    "CORRECT -> INCORRECT": 1,
+    "UNCERTAIN -> INCORRECT": 1,
+    "CORRECT -> CORRECT": 1
+  },
+  "strict_correct_ids": {
+    "532": [
+      "TRAIN_Q482",
+      "TRAIN_Q299"
+    ],
+    "548": [
+      "TRAIN_Q336",
+      "TRAIN_Q343",
+      "TRAIN_Q299"
+    ]
+  },
+  "token_f1_percent": {
+    "532": 20.12,
+    "548": 21.59
+  },
+  "source_sha256": {
+    "blind_review.csv": "f0f64039dbff91be0f978f795f3f26a1a6d4d3fab6d29e688a90af638a71d750",
+    "generation_test2_review.csv": "7464f82f71bd007e1e7998c1f30b2deb1bbb3f3f1a5702a3e2688c5f83388fc0",
+    "predictions.jsonl": "acca3e2aaab2a447f07db7c130cf312b9a9e4c2e646b33878e7108bf38d7e4c4"
+  }
+}

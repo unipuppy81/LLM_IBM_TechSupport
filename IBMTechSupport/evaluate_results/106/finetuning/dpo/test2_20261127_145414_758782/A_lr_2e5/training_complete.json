@@ -1,0 +1,10 @@
+{
+  "adapter_sha256": {
+    "adapter_config.json": "7ac9bdb0da3a5fb323cc2ca522738bb79a5675240c6a7254f05717899ac4ea4a",
+    "adapter_model.safetensors": "6c0e06be7a91ac1db5439d7575688acba71e1730b546cc2fae370faf12ea25d5"
+  },
+  "settings": {
+    "lr": 2e-05,
+    "epochs": 1
+  }
+}

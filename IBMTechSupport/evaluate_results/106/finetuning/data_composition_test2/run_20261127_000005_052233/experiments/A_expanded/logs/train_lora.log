@@ -1,0 +1,64 @@
+W1127 00:00:13.589000 20052 Lib\site-packages\torch\utils\flop_counter.py:113] triton not found; flop counting will not work for triton kernels
+Train Samples: 532
+Validation Samples: 106
+GPU: NVIDIA GeForce RTX 3060 Ti
+Base Model: Qwen2.5-1.5B-Instruct
+LoRA Rank: 8
+trainable params: 1,089,536 || all params: 1,544,803,840 || trainable%: 0.0705
+
+[Epoch 1/2]
+[Training] Epoch 1/2 | Sample 1/532
+[Training] Epoch 1/2 | Sample 50/532
+[Training] Epoch 1/2 | Sample 100/532
+[Training] Epoch 1/2 | Sample 150/532
+Step: 160/532 | Loss: 2.9064
+[Training] Epoch 1/2 | Sample 200/532
+[Training] Epoch 1/2 | Sample 250/532
+[Training] Epoch 1/2 | Sample 300/532
+Step: 320/532 | Loss: 2.2092
+[Training] Epoch 1/2 | Sample 350/532
+[Training] Epoch 1/2 | Sample 400/532
+[Training] Epoch 1/2 | Sample 450/532
+Step: 480/532 | Loss: 4.7701
+[Training] Epoch 1/2 | Sample 500/532
+Step: 532/532 | Loss: 3.6254
+[Training] Epoch 1/2 | Sample 532/532
+Epoch 1 | Train Loss: 2.6617 | Val Loss: 2.2794
+Best LoRA Adapter: Saved
+
+[Epoch 2/2]
+[Training] Epoch 2/2 | Sample 1/532
+[Training] Epoch 2/2 | Sample 50/532
+[Training] Epoch 2/2 | Sample 100/532
+[Training] Epoch 2/2 | Sample 150/532
+Step: 160/532 | Loss: 2.8908
+[Training] Epoch 2/2 | Sample 200/532
+[Training] Epoch 2/2 | Sample 250/532
+[Training] Epoch 2/2 | Sample 300/532
+Step: 320/532 | Loss: 2.2410
+[Training] Epoch 2/2 | Sample 350/532
+[Training] Epoch 2/2 | Sample 400/532
+[Training] Epoch 2/2 | Sample 450/532
+Step: 480/532 | Loss: 2.2013
+[Training] Epoch 2/2 | Sample 500/532
+Step: 532/532 | Loss: 2.0519
+[Training] Epoch 2/2 | Sample 532/532
+Epoch 2 | Train Loss: 2.4863 | Val Loss: 2.3363
+
+[LoRA Training Result]
+model: Qwen2.5-1.5B-Instruct
+method: LoRA
+train_samples: 532
+val_samples: 106
+epochs: 2
+learning_rate: 0.0002
+max_length: 2048
+grad_accum: 8
+lora_rank: 8
+best_val_loss: 2.2794
+training_seconds: 485.461
+peak_gpu_memory_gb: 4.872
+history: [{'epoch': 1, 'train_loss': 2.6617, 'val_loss': 2.2794, 'optimizer_steps': 67}, {'epoch': 2, 'train_loss': 2.4863, 'val_loss': 2.3363, 'optimizer_steps': 67}]
+Adapter Path: C:\Users\unipu\Documents\GitHub\LLM_IBM_TechSupport\IBMTechSupport\models\finetuning\data_composition_test2\run_20261127_000005_052233\A_expanded\lora
+Metrics Path: C:\Users\unipu\Documents\GitHub\LLM_IBM_TechSupport\IBMTechSupport\evaluate_results\106\finetuning\data_composition_test2\run_20261127_000005_052233\experiments\A_expanded\training\lora_train_metrics.json
+LoRA Training: OK

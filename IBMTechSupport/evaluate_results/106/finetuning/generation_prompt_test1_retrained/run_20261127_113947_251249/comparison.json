@@ -1,0 +1,73 @@
+{
+  "metrics": {
+    "A_original_prompt": {
+      "model": "Qwen2.5-1.5B-Instruct-LoRA",
+      "dataset": "val_106.json",
+      "total": 106,
+      "batch_size": 1,
+      "max_new_tokens": 160,
+      "answerable": 77,
+      "impossible": 29,
+      "exact_match_percent": 0.0,
+      "token_f1_percent": 20.12,
+      "abstention_rate_percent": 0.0,
+      "false_refusal_rate_percent": 0.0,
+      "method": "LoRA",
+      "generation_seconds": 254.766,
+      "mean_generation_seconds_per_question": 2.4035,
+      "questions_per_second": 0.416,
+      "peak_gpu_memory_gb": 3.103,
+      "retrieval": null,
+      "faithfulness_percent": null
+    },
+    "B_direct_answer": {
+      "model": "Qwen2.5-1.5B-Instruct-LoRA",
+      "dataset": "val_106.json",
+      "total": 106,
+      "batch_size": 1,
+      "max_new_tokens": 160,
+      "answerable": 77,
+      "impossible": 29,
+      "exact_match_percent": 0.0,
+      "token_f1_percent": 17.36,
+      "abstention_rate_percent": 0.0,
+      "false_refusal_rate_percent": 0.0,
+      "method": "LoRA",
+      "generation_seconds": 263.434,
+      "mean_generation_seconds_per_question": 2.4852,
+      "questions_per_second": 0.402,
+      "peak_gpu_memory_gb": 2.969,
+      "retrieval": null,
+      "faithfulness_percent": null
+    }
+  },
+  "diagnostics": {
+    "A_original_prompt": {
+      "repeated_line": 1
+    },
+    "B_direct_answer": {
+      "repeated_line": 1,
+      "possible_intro_only": 1
+    }
+  },
+  "f1_changes": {
+    "improved": 27,
+    "declined": 45,
+    "tied": 5
+  },
+  "adapter_sha256": {
+    "adapter_config.json": "5112f6b7360d7d4b39ebbc7a4c94032dbed778c71cd8b11235515599c8aa4364",
+    "adapter_model.safetensors": "8e4f51a9c409d807c6c0110cce93107440983bd1b9909b04f4e0cd809e70e659"
+  },
+  "original_adapter_sha256": {
+    "adapter_config.json": "c7dd481e38b35a660840cf48a59278eccd8958474e03c4f9dde0a1faf370cbf1",
+    "adapter_model.safetensors": "180702b88a8c82e1897a1b2d9c25d5a547321c39accfc50c0e7e6ef0d0048073"
+  },
+  "same_as_historical_adapter": false,
+  "new_training": true,
+  "judge": "NOT RUN",
+  "rag": false,
+  "complete": true,
+  "technical_accuracy": "Requires independent review; lexical metrics do not establish correctness.",
+  "comparison": "Both prompts run on the same newly trained adapter; historical predictions not reused."
+}

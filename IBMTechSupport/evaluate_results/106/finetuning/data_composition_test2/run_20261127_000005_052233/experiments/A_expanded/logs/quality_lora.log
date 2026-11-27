@@ -1,0 +1,13 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[lora quality] 10/106
+[lora quality] 20/106
+[lora quality] 30/106
+[lora quality] 40/106
+[lora quality] 50/106
+[lora quality] 60/106
+[lora quality] 70/106
+[lora quality] 80/106
+[lora quality] 90/106
+[lora quality] 100/106
+[lora quality] 106/106

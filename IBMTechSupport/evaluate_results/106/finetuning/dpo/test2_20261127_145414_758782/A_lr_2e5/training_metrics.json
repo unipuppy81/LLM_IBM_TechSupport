@@ -1,0 +1,19 @@
+{
+  "lr": 2e-05,
+  "epochs": 1,
+  "pairs": 76,
+  "beta": 0.1,
+  "optimizer_updates": 10,
+  "skipped_updates": 0,
+  "mean_dpo_loss": 0.6823141276836395,
+  "training_seconds": 74.703,
+  "peak_gpu_memory_gb": 3.595,
+  "history": [
+    {
+      "epoch": 1,
+      "mean_dpo_loss": 0.6823141276836395,
+      "cumulative_updates": 10,
+      "cumulative_skipped_updates": 0
+    }
+  ]
+}

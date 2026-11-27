@@ -1,0 +1,56 @@
+W1126 23:19:02.062000 32292 Lib\site-packages\torch\utils\flop_counter.py:113] triton not found; flop counting will not work for triton kernels
+Train Samples: 367
+Validation Samples: 106
+GPU: NVIDIA GeForce RTX 3060 Ti
+Base Model: Qwen2.5-1.5B-Instruct
+LoRA Rank: 8
+trainable params: 1,089,536 || all params: 1,544,803,840 || trainable%: 0.0705
+
+[Epoch 1/2]
+[Training] Epoch 1/2 | Sample 1/367
+[Training] Epoch 1/2 | Sample 50/367
+[Training] Epoch 1/2 | Sample 100/367
+[Training] Epoch 1/2 | Sample 150/367
+Step: 160/367 | Loss: 1.0651
+[Training] Epoch 1/2 | Sample 200/367
+[Training] Epoch 1/2 | Sample 250/367
+[Training] Epoch 1/2 | Sample 300/367
+Step: 320/367 | Loss: 2.9147
+[Training] Epoch 1/2 | Sample 350/367
+Step: 367/367 | Loss: 2.4961
+[Training] Epoch 1/2 | Sample 367/367
+Epoch 1 | Train Loss: 2.6921 | Val Loss: 2.2382
+Best LoRA Adapter: Saved
+
+[Epoch 2/2]
+[Training] Epoch 2/2 | Sample 1/367
+[Training] Epoch 2/2 | Sample 50/367
+[Training] Epoch 2/2 | Sample 100/367
+[Training] Epoch 2/2 | Sample 150/367
+Step: 160/367 | Loss: 2.3595
+[Training] Epoch 2/2 | Sample 200/367
+[Training] Epoch 2/2 | Sample 250/367
+[Training] Epoch 2/2 | Sample 300/367
+Step: 320/367 | Loss: 4.0486
+[Training] Epoch 2/2 | Sample 350/367
+Step: 367/367 | Loss: 1.8718
+[Training] Epoch 2/2 | Sample 367/367
+Epoch 2 | Train Loss: 2.5050 | Val Loss: 2.3067
+
+[LoRA Training Result]
+model: Qwen2.5-1.5B-Instruct
+method: LoRA
+train_samples: 367
+val_samples: 106
+epochs: 2
+learning_rate: 0.0002
+max_length: 2048
+grad_accum: 8
+lora_rank: 8
+best_val_loss: 2.2382
+training_seconds: 504.117
+peak_gpu_memory_gb: 4.872
+history: [{'epoch': 1, 'train_loss': 2.6921, 'val_loss': 2.2382, 'optimizer_steps': 46}, {'epoch': 2, 'train_loss': 2.505, 'val_loss': 2.3067, 'optimizer_steps': 46}]
+Adapter Path: C:\Users\unipu\Documents\GitHub\LLM_IBM_TechSupport\IBMTechSupport\models\finetuning\data_composition_test1\run_20261126_231847_375481\A_answerable_only\lora
+Metrics Path: C:\Users\unipu\Documents\GitHub\LLM_IBM_TechSupport\IBMTechSupport\evaluate_results\106\finetuning\data_composition_test1\run_20261126_231847_375481\experiments\A_answerable_only\training\lora_train_metrics.json
+LoRA Training: OK

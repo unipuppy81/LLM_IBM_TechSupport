@@ -1,0 +1,23 @@
+{
+  "dataset_sha256": "51740842406b7f8e6814dc5a57c57d09da4b72fc0c94e62b430e8cf8ccfb45ae",
+  "expected_count": 106,
+  "predictions_sha256": "263857289db76213b61110407cdbbe5b413731e0494661ba4a1c61395bc97da2",
+  "base_config_sha256": "abd13d1cf7f4eeb37e7c54713e6c0481112738a35d895b429624ac2344366d06",
+  "adapter_sha256": {
+    "adapter_config.json": "5112f6b7360d7d4b39ebbc7a4c94032dbed778c71cd8b11235515599c8aa4364",
+    "adapter_model.safetensors": "8e4f51a9c409d807c6c0110cce93107440983bd1b9909b04f4e0cd809e70e659"
+  },
+  "inference": {
+    "batch_size": 1,
+    "max_new_tokens": 160,
+    "do_sample": false,
+    "num_beams": 1,
+    "temperature": null,
+    "top_p": null,
+    "top_k": null
+  },
+  "prompt": {
+    "system": "You are an IBM technical support assistant. Answer in English using only your existing knowledge.\nAnswer the exact question directly. Do not repeat the question or merely restate the error. Do not announce a list or procedure without providing it.\nFor troubleshooting, give the specific cause or actionable resolution requested. For configuration or installation, provide the necessary settings or steps. For compatibility, state the supported versions or limits when known. For security bulletins, identify the relevant vulnerability details or a reliable source, not just the bulletin title.\nPreserve applicable product names, versions, error codes, commands, paths and numerical limits. Do not invent technical details. If a condition matters, give a reliable conditional answer when possible.\nIf you cannot reliably answer the essential request, respond exactly INSUFFICIENT_INFORMATION. Otherwise output only the technical answer. Do not output analysis or introductory filler.",
+    "user_template": "{question}"
+  }
+}

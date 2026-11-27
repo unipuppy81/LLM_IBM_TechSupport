@@ -1,0 +1,13 @@
+{
+  "complete": true,
+  "selected": 120,
+  "counts": {
+    "needs_review": 120
+  },
+  "approved_preference_pairs": 0,
+  "seconds": 397.086,
+  "candidates_sha256": "107ce016453a8db8738d1410c18be447abf74eb1d99fdf6deecfd8cf73d7a9f4",
+  "validation_used": false,
+  "test_used": false,
+  "next": "Review both answers against train source evidence; approve only genuinely better chosen answers. Do not train on unreviewed pairs."
+}

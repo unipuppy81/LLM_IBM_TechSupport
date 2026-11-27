@@ -219,20 +219,32 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-# IBM TechSupport
+# IBM TechSupport: track scripts, configs, docs, data, and evaluation results
 IBMTechSupport/.venv/
 IBMTechSupport/models/
-IBMTechSupport/data/raw/
-
-# processed 폴더는 기본적으로 무시
-IBMTechSupport/data/processed/*
-
-# 작은 평가 데이터만 Git에 포함
-!IBMTechSupport/data/processed/val_106.json
-!IBMTechSupport/data/processed/val_clean.json
-!IBMTechSupport/data/processed/test_clean.json
-
 IBMTechSupport/**/__pycache__/
+
+# Evaluation logs are tracked (the Python template above ignores *.log)
+!IBMTechSupport/evaluate_results/**/*.log
+!IBMTechSupport/results/**/*.log
+
+# Exclude model weights/checkpoints anywhere in the repository
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+*.gguf
+*.onnx
+pytorch_model*.bin
+adapter_model*.bin
 
 # MiniGPT exported model weights
 MiniGPT/export/minigpt/*.pt
+/IBMTechSupport/data/processed/bm25_index/corpus.jsonl
+/IBMTechSupport/data/processed/contextual_title_v1/bm25_index/corpus.jsonl
+/IBMTechSupport/data/processed/contextual_title_v1/contextual_chunks.jsonl
+/IBMTechSupport/data/processed/contextual_title_v1/faiss_hnsw_pca192.index
+/IBMTechSupport/data/processed/corpus_chunks.jsonl
+/IBMTechSupport/data/processed/corpus_embeddings.npy
+/IBMTechSupport/data/processed/corpus_faiss.index
+/IBMTechSupport/data/processed/corpus_faiss_pca192_hnsw_m32.index

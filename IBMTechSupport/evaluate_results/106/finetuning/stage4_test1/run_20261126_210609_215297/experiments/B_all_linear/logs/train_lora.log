@@ -1,0 +1,65 @@
+W1126 21:21:11.744000 25684 Lib\site-packages\torch\utils\flop_counter.py:113] triton not found; flop counting will not work for triton kernels
+Train Samples: 539
+Validation Samples: 106
+GPU: NVIDIA GeForce RTX 3060 Ti
+Base Model: Qwen2.5-1.5B-Instruct
+LoRA Rank: 8
+trainable params: 9,232,384 || all params: 1,552,946,688 || trainable%: 0.5945
+
+[Epoch 1/2]
+[Training] Epoch 1/2 | Sample 1/539
+[Training] Epoch 1/2 | Sample 50/539
+[Training] Epoch 1/2 | Sample 100/539
+[Training] Epoch 1/2 | Sample 150/539
+Step: 160/539 | Loss: 0.9076
+[Training] Epoch 1/2 | Sample 200/539
+[Training] Epoch 1/2 | Sample 250/539
+[W1126 21:28:41.000000000 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 666894336 bytes (free: 0, total: 8589410304).
+[Training] Epoch 1/2 | Sample 300/539
+Step: 320/539 | Loss: 1.4221
+[Training] Epoch 1/2 | Sample 350/539
+[Training] Epoch 1/2 | Sample 400/539
+[Training] Epoch 1/2 | Sample 450/539
+Step: 480/539 | Loss: 0.0404
+[Training] Epoch 1/2 | Sample 500/539
+Step: 539/539 | Loss: 2.5513
+[Training] Epoch 1/2 | Sample 539/539
+Epoch 1 | Train Loss: 1.7598 | Val Loss: 1.7821
+Best LoRA Adapter: Saved
+
+[Epoch 2/2]
+[Training] Epoch 2/2 | Sample 1/539
+[Training] Epoch 2/2 | Sample 50/539
+[Training] Epoch 2/2 | Sample 100/539
+[Training] Epoch 2/2 | Sample 150/539
+Step: 160/539 | Loss: 1.6638
+[Training] Epoch 2/2 | Sample 200/539
+[Training] Epoch 2/2 | Sample 250/539
+[Training] Epoch 2/2 | Sample 300/539
+Step: 320/539 | Loss: 0.0321
+[Training] Epoch 2/2 | Sample 350/539
+[Training] Epoch 2/2 | Sample 400/539
+[Training] Epoch 2/2 | Sample 450/539
+Step: 480/539 | Loss: 2.0372
+[Training] Epoch 2/2 | Sample 500/539
+Step: 539/539 | Loss: 0.0097
+[Training] Epoch 2/2 | Sample 539/539
+Epoch 2 | Train Loss: 1.3983 | Val Loss: 1.7846
+
+[LoRA Training Result]
+model: Qwen2.5-1.5B-Instruct
+method: LoRA
+train_samples: 539
+val_samples: 106
+epochs: 2
+learning_rate: 0.0002
+max_length: 2048
+grad_accum: 8
+lora_rank: 8
+best_val_loss: 1.7821
+training_seconds: 1002.7
+peak_gpu_memory_gb: 4.995
+history: [{'epoch': 1, 'train_loss': 1.7598, 'val_loss': 1.7821, 'optimizer_steps': 68}, {'epoch': 2, 'train_loss': 1.3983, 'val_loss': 1.7846, 'optimizer_steps': 68}]
+Adapter Path: C:\Users\unipu\Documents\GitHub\LLM_IBM_TechSupport\IBMTechSupport\models\finetuning\stage4_test1\run_20261126_210609_215297\B_all_linear\lora
+Metrics Path: C:\Users\unipu\Documents\GitHub\LLM_IBM_TechSupport\IBMTechSupport\evaluate_results\106\finetuning\stage4_test1\run_20261126_210609_215297\experiments\B_all_linear\training\lora_train_metrics.json
+LoRA Training: OK

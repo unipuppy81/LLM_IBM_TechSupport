@@ -1,0 +1,10 @@
+{
+  "pairs": 76,
+  "epochs": 1,
+  "optimizer_updates": 10,
+  "skipped_updates": 0,
+  "mean_dpo_loss": 0.6904487594177848,
+  "reference_seconds": 18.899,
+  "training_seconds": 77.357,
+  "peak_gpu_memory_gb": 3.596
+}

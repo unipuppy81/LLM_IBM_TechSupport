@@ -1,0 +1,111 @@
+W1126 16:30:48.494000 38840 Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+Train Samples: 539
+Validation Samples: 106
+
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]
+Loading weights:   4%|▍         | 13/338 [00:00<00:02, 128.40it/s]
+Loading weights:   8%|▊         | 28/338 [00:00<00:02, 139.43it/s]
+Loading weights:  14%|█▍        | 47/338 [00:00<00:02, 138.44it/s]
+Loading weights:  19%|█▊        | 63/338 [00:00<00:01, 142.25it/s]
+Loading weights:  25%|██▍       | 83/338 [00:00<00:01, 143.27it/s]
+Loading weights:  29%|██▉       | 99/338 [00:00<00:01, 147.60it/s]
+Loading weights:  35%|███▍      | 117/338 [00:00<00:01, 155.36it/s]
+Loading weights:  39%|███▉      | 133/338 [00:00<00:01, 152.35it/s]
+Loading weights:  44%|████▍     | 149/338 [00:01<00:01, 150.03it/s]
+Loading weights:  49%|████▉     | 167/338 [00:01<00:01, 141.63it/s]
+Loading weights:  54%|█████▍    | 183/338 [00:01<00:01, 144.16it/s]
+Loading weights:  59%|█████▉    | 201/338 [00:01<00:00, 151.53it/s]
+Loading weights:  64%|██████▍   | 217/338 [00:01<00:00, 145.65it/s]
+Loading weights:  71%|███████   | 239/338 [00:01<00:00, 153.26it/s]
+Loading weights:  75%|███████▌  | 255/338 [00:01<00:00, 150.62it/s]
+Loading weights:  81%|████████  | 274/338 [00:01<00:00, 156.25it/s]
+Loading weights:  86%|████████▌ | 290/338 [00:01<00:00, 149.62it/s]
+Loading weights:  90%|█████████ | 305/338 [00:02<00:00, 147.81it/s]
+Loading weights:  96%|█████████▌| 323/338 [00:02<00:00, 149.72it/s]
+Loading weights: 100%|██████████| 338/338 [00:02<00:00, 151.65it/s]
+C:\Projects\LLM_IBM_TechSupport\.venv\Lib\site-packages\transformers\modeling_utils.py:3195: FutureWarning: `gradient_checkpointing_enable` is deprecated and will be removed in v6. Use `activation_checkpointing_enable` instead.
+  warnings.warn(
+C:\Projects\LLM_IBM_TechSupport\.venv\Lib\site-packages\transformers\modeling_utils.py:3303: FutureWarning: `is_gradient_checkpointing` is deprecated and will be removed in v6. Use `is_activation_checkpointing` instead.
+  warnings.warn(
+GPU: NVIDIA GeForce RTX 3080 Ti
+Base Model: Qwen2.5-1.5B-Instruct
+LoRA Rank: 8
+trainable params: 1,089,536 || all params: 1,544,803,840 || trainable%: 0.0705
+
+[Epoch 1/3]
+[Training] Epoch 1/3 | Sample 1/539
+[Training] Epoch 1/3 | Sample 50/539
+[Training] Epoch 1/3 | Sample 100/539
+[Training] Epoch 1/3 | Sample 150/539
+Step: 160/539 | Loss: 0.9314
+[Training] Epoch 1/3 | Sample 200/539
+[Training] Epoch 1/3 | Sample 250/539
+[Training] Epoch 1/3 | Sample 300/539
+Step: 320/539 | Loss: 1.4523
+[Training] Epoch 1/3 | Sample 350/539
+[Training] Epoch 1/3 | Sample 400/539
+[Training] Epoch 1/3 | Sample 450/539
+Step: 480/539 | Loss: 0.0257
+[Training] Epoch 1/3 | Sample 500/539
+Step: 539/539 | Loss: 2.9287
+[Training] Epoch 1/3 | Sample 539/539
+Epoch 1 | Train Loss: 1.8485 | Val Loss: 1.8677
+Best LoRA Adapter: Saved
+
+[Epoch 2/3]
+[Training] Epoch 2/3 | Sample 1/539
+[Training] Epoch 2/3 | Sample 50/539
+[Training] Epoch 2/3 | Sample 100/539
+[Training] Epoch 2/3 | Sample 150/539
+Step: 160/539 | Loss: 2.8440
+[Training] Epoch 2/3 | Sample 200/539
+[Training] Epoch 2/3 | Sample 250/539
+[Training] Epoch 2/3 | Sample 300/539
+Step: 320/539 | Loss: 0.0357
+[Training] Epoch 2/3 | Sample 350/539
+[Training] Epoch 2/3 | Sample 400/539
+[Training] Epoch 2/3 | Sample 450/539
+Step: 480/539 | Loss: 2.6075
+[Training] Epoch 2/3 | Sample 500/539
+Step: 539/539 | Loss: 0.0191
+[Training] Epoch 2/3 | Sample 539/539
+Epoch 2 | Train Loss: 1.7134 | Val Loss: 1.7973
+Best LoRA Adapter: Saved
+
+[Epoch 3/3]
+[Training] Epoch 3/3 | Sample 1/539
+[Training] Epoch 3/3 | Sample 50/539
+[Training] Epoch 3/3 | Sample 100/539
+[Training] Epoch 3/3 | Sample 150/539
+Step: 160/539 | Loss: 3.5018
+[Training] Epoch 3/3 | Sample 200/539
+[Training] Epoch 3/3 | Sample 250/539
+[Training] Epoch 3/3 | Sample 300/539
+Step: 320/539 | Loss: 2.1437
+[Training] Epoch 3/3 | Sample 350/539
+[Training] Epoch 3/3 | Sample 400/539
+[Training] Epoch 3/3 | Sample 450/539
+Step: 480/539 | Loss: 2.1040
+[Training] Epoch 3/3 | Sample 500/539
+Step: 539/539 | Loss: 0.0163
+[Training] Epoch 3/3 | Sample 539/539
+Epoch 3 | Train Loss: 1.6145 | Val Loss: 1.7897
+Best LoRA Adapter: Saved
+
+[LoRA Training Result]
+model: Qwen2.5-1.5B-Instruct
+method: LoRA
+train_samples: 539
+val_samples: 106
+epochs: 3
+learning_rate: 0.0002
+max_length: 2048
+grad_accum: 8
+lora_rank: 8
+best_val_loss: 1.7897
+training_seconds: 797.8
+peak_gpu_memory_gb: 4.87
+history: [{'epoch': 1, 'train_loss': 1.8485, 'val_loss': 1.8677, 'optimizer_steps': 68}, {'epoch': 2, 'train_loss': 1.7134, 'val_loss': 1.7973, 'optimizer_steps': 68}, {'epoch': 3, 'train_loss': 1.6145, 'val_loss': 1.7897, 'optimizer_steps': 68}]
+Adapter Path: C:\Projects\LLM_IBM_TechSupport\IBMTechSupport\models\finetuning\stage3_test2\run_20261126_163045_370144\B_epoch_3\lora
+Metrics Path: C:\Projects\LLM_IBM_TechSupport\IBMTechSupport\evaluate_results\106\finetuning\stage3_test2\run_20261126_163045_370144\experiments\B_epoch_3\training\lora_train_metrics.json
+LoRA Training: OK

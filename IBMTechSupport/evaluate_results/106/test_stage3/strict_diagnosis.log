@@ -1,0 +1,1413 @@
+{
+  "status": "COMPLETED",
+  "dataset": "val_106.json",
+  "retrieval_mode": "stage3",
+  "guardrail_mode": "original_strict",
+  "evidence_input": "original_unexpanded_chunk",
+  "answerable": 77,
+  "processed_answerable": 77,
+  "impossible_not_evaluated": 29,
+  "false_refusals": 52,
+  "matches_previous_52": true,
+  "gold_hit5_among_false_refusals": 45,
+  "gold_miss5_among_false_refusals": 7,
+  "evidence_status_counts": {
+    "REFERENCE_VERBATIM_IN_GOLD_CHUNK": 18,
+    "UNRESOLVED_REQUIRES_MANUAL_REVIEW": 15,
+    "ANSWER_TEXT_IN_GOLD_SOURCE_NOT_IN_INPUT_CHUNK": 12,
+    "GOLD_DOCUMENT_ABSENT_TOP5": 7
+  },
+  "first_non_yes_stage_counts": {
+    "top_k:NO": 49,
+    "NONE": 3
+  },
+  "terminal_refusal_stage_counts": {
+    "EVIDENCE_JUDGE:expanded_k": 48,
+    "GROUNDING_VERIFIER": 2,
+    "GENERATOR": 2
+  },
+  "interpretation": "Verbatim reference proves text presence only. Non-verbatim cases require manual evidence review. First NO may differ from terminal refusal.",
+  "cases": [
+    {
+      "id": "TRAIN_Q270",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "REFERENCE_VERBATIM_IN_GOLD_CHUNK",
+      "reference_verbatim_in_input": true,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 100.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "To work around the limitation, when you add people from the clipboard, add fewer than 1000 people at one time.",
+      "gold_input_chunk_excerpt": "Title: IBM Known limitation: You cannot add people to a matter request if there are more than 1000 people selected in the clipboard. - United States\n\nText:\n PRODUCT DOCUMENTATION\n\nABSTRACT\n If you try to add people to a matter request when there are more than 1000 people in the clipboard, the following error will occur:\nAn unexpected error occurred.\nContact your system administrator.\nICWPA1001E \n\nCONTENT\nTo work around the limitation, when you add people from the clipboard, add fewer than 1000 people at one time."
+    },
+    {
+      "id": "TRAIN_Q037",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        5
+      ],
+      "input_chunk_evidence": "REFERENCE_VERBATIM_IN_GOLD_CHUNK",
+      "reference_verbatim_in_input": true,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 100.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "Only TIP version 2.1 and higher support multiple logins using same user Id. \n\nFollow below steps to configure Tivoli Integrated Portal to allow multiple users to log in using the same user Id and password. \n\n1. Log in as an administrative user. \n\n2. Navigate to: \n\ntip_home_dir/profiles/TIPProfile/config/cells/TIPCell/applications/isc.ear/deployments/isc/isclite.war/WEB-INF/ \n\n3. Edit consoleProperties.xml. \n\n4. Locate the property with a id attri",
+      "gold_input_chunk_excerpt": "Title: IBM Tivoli Integrated portal enabling multiple logins using same user Id - United States\n\nText:\nTIPL2SEC tivoli integrated portal multiple logins TECHNOTE (FAQ)\n\nQUESTION\n How can I login to TIP from different machines using same user Id? \n\nCAUSE\nNeed to login with multiple times with same user\n\nANSWER\nOnly TIP version 2.1 and higher support multiple logins using same user Id. \n\nFollow below steps to configure Tivoli Integrated Portal to allow multiple users to log in using the same user Id and password. \n\n1. Log in as an administrative user. \n\n2. Navigate to: \n\ntip_home_dir/profiles/TI"
+    },
+    {
+      "id": "TRAIN_Q549",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "UNRESOLVED_REQUIRES_MANUAL_REVIEW",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": false,
+      "answer_term_coverage_percent": 44.8,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "The end-of-file warning when running ITCAM Monitoring Server launchpad.sh or silent_MS_linux.bin on 64-bit RHEL 6/7 can occur because required Linux libraries are missing, particularly the 32-bit compat-libstdc++ or libstdc++ packages. Verify that the required 32-bit libraries are installed; if absent, have the Linux administrator install the missing libraries and retry the installer.",
+      "gold_input_chunk_excerpt": "Title: IBM Using launchpad.sh or silent_MS_linux.bin results in end-of-file message. - United States\n\nText:\nITCAM compat-libstdc++ libstdc++ libraries silent_MS_linux.bin launchpad.sh errors TECHNOTE (TROUBLESHOOTING)\n\nTHIS DOCUMENT APPLIES ONLY TO THE FOLLOWING LANGUAGE VERSION(S):\n US English \n\nPROBLEM(ABSTRACT)\n Using the DC or MS 'launchpad.sh' script results in the following error message:\n./setup_MS_lin.bin: line 1926: warning: here-document at line 1926 \ndelimited by end-of-file (wanted `/dev/null') \n\nSYMPTOM\nThe following error is seen running when doing either 'launchpad.sh' or 'silen"
+    },
+    {
+      "id": "TRAIN_Q535",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "REFERENCE_VERBATIM_IN_GOLD_CHUNK",
+      "reference_verbatim_in_input": true,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 100.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "This error message can be safely ignored.",
+      "gold_input_chunk_excerpt": "Title: IBM Ignorable SYSIBMADM.DBCFG IS AN UNDEFINED NAME error message - United States\n\nText:\n TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n On Z/OS, Events runtime may trace the following exception into system logs when DB2 is used as the runtime repository:\ncom.ibm.websphere.ce.cm.StaleConnectionException: SYSIBMADM.DBCFG IS AN UNDEFINED NAME. SQLCODE=-204, SQLSTATE=42704, DRIVER=3.65.102 \n\nSYMPTOM\ncom.ibm.websphere.ce.cm.StaleConnectionException: SYSIBMADM.DBCFG IS AN UNDEFINED NAME. SQLCODE=-204, SQLSTATE=42704, DRIVER=3.65.102 is logged.\n\n\nCAUSE\nDB2 SYSIBMADM.DBCFG table view does not e"
+    },
+    {
+      "id": "TRAIN_Q282",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "UNRESOLVED_REQUIRES_MANUAL_REVIEW",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": false,
+      "answer_term_coverage_percent": 57.9,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "IBM security bulletin swg22006580 describes CVE-2017-1118 in WebSphere MQ Internet Pass-Thru (MQIPT): when using its SecurityManager, IP addresses not granted the necessary accept/resolve socket permissions can make MQIPT stop responding to connection attempts. MQIPT 2.0 and 2.1 on all platforms are affected. IBM directs users to update to MQIPT 2.1.0.3; no workaround is listed.",
+      "gold_input_chunk_excerpt": "Title: IBM Security Bulletin: Non-configured connections could cause denial of service in IBM WebSphere MQ Internet Pass-Thru (CVE-2017-1118 ) - United States\n\nText:\n SECURITY BULLETIN\n\nSUMMARY\n When using the MQIPT SecurityManager, IP addresses that are not configured in the MQIPT security policy file with the accept and resolve socket permissions, cause MQIPT to stop responding to connection attempts. \n\nVULNERABILITY DETAILS\nCVEID:CVE-2017-1118 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1118]\nDESCRIPTION:IBM WebSphere MQ Internet Pass-Thru could allow an attacker to cause the MQ"
+    },
+    {
+      "id": "TRAIN_Q236",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        5
+      ],
+      "input_chunk_evidence": "REFERENCE_VERBATIM_IN_GOLD_CHUNK",
+      "reference_verbatim_in_input": true,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 100.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "Apple Macintosh MacOS Sierra (10.12) \n\nSupport for IBM SPSS Statistics 25 and IBM SPSS Statistics 24 only. For release 24 It is also recommended to install the latest FixPack 2 for release 24 on Mac [http://www-01.ibm.com/support/docview.wss?uid=swg24043574]. [http://www-01.ibm.com/support/docview.wss?uid=swg24042675] \n\nNo older SPSS Statistics releases are supported on Sierra.",
+      "gold_input_chunk_excerpt": " that no other SPSS release will be officially supported on High Sierra, but older versions like SPSS Statistics 24 may run as well on High Sierra. \n\nNOTE: There's a known issue with some of the earlier release of Mac High Sierra system (13.0 and 13.1 beta version). \nThe top menu of SPSS 25 may disappear if the Mac OS system is set to Non-English. \nThe official MacOSX 10.13.1 version do not have this issue. So, if you encountert this issue you need to update your Mac OS version to latest official 10.13.1 build from Apple. \n\n \n\nB) Apple Macintosh MacOS Sierra (10.12) \n\nSupport for IBM SPSS Stat"
+    },
+    {
+      "id": "TRAIN_Q307",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "ANSWER_TEXT_IN_GOLD_SOURCE_NOT_IN_INPUT_CHUNK",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 19.4,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "There are two options to fix this problem. \n\n1) Make sure the current upgrade is using the same version of JVM as the original install. \n\n2) Removing the newly created DE, which shouldn't have been created, then creating a link to the existing DE is the best work around in this case. The Product upgrade will see the link and add the information to the valid DE install.",
+      "gold_input_chunk_excerpt": "Title: IBM Product upgrade installed a second instance of the DE, causing upgrade failure. - United States\n\nText:\nDEL2INST; Tivoli; Deployment; Engine; FQDN; Duplicate; acsi TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n The Deployment Engine should only have one instance installed on a server with IBM products installed. In this case, a second DE was installed, which caused the failure of the Product upgrade.\nError: Wrong Deployment Engine. \n\nSYMPTOM\nProduct install failed. You will get a message similar to this:\nYou are updating an instance of <Product name> that was installed using \nthe Tiv"
+    },
+    {
+      "id": "TRAIN_Q581",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        5
+      ],
+      "input_chunk_evidence": "UNRESOLVED_REQUIRES_MANUAL_REVIEW",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": false,
+      "answer_term_coverage_percent": 18.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "The ITCAM Data Collector configuration script on AIX can throw java.lang.OutOfMemoryError because its JAVA_OPTS heap limit is too low. Back up config.sh, then raise its Java heap options from JAVA_OPTS=\"-Xms256m -Xmx256m\" to, for example, JAVA_OPTS=\"-Xms512m -Xmx512m\" if the host has adequate memory, and rerun configuration. Note: IBM technote swg21959444 prints '-Xms512m -Xms512m' as the replacement; that appears to repeat the minimum-heap optio",
+      "gold_input_chunk_excerpt": "Title: IBM Configuration of the ITCAM agent on AIX leads to Java heap errors. - United States\n\nText:\nJAVA_OPTS CAMADALL CAMADINST java heap java.lang.OutOfMemoryError CFG5045E TECHNOTE (TROUBLESHOOTING)\n\nTHIS DOCUMENT APPLIES ONLY TO THE FOLLOWING LANGUAGE VERSION(S):\n US English \n\nPROBLEM(ABSTRACT)\n Configuration of the ITCAM agent on AIX leads to Java heap errors. \n\nSYMPTOM\nDuring configuration of the YN agent, you will see these errors: \n\njava.lang.OutOfMemoryError: Java heap space\nat org.python.core.PyException.tracebackHere(PyException.java:158)\nat org.python.core.PyException.tracebackHer"
+    },
+    {
+      "id": "TRAIN_Q295",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "UNRESOLVED_REQUIRES_MANUAL_REVIEW",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": false,
+      "answer_term_coverage_percent": 32.1,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "The 'Missing Permissions manifest attribute' warning in ITNM/Netcool WebGUI Java applets is associated with Java 7 security changes introduced in Update 25. From Java 7 Update 51, missing Permissions attributes can prevent applets from running. Check the installed Java/WebGUI versions and apply a WebGUI update that includes the required manifest attribute; the IBM technote discusses planned WebGUI 7.4 Fix Pack 2 and a subsequent 7.3.1 fix. For af",
+      "gold_input_chunk_excerpt": "Title: IBM JRE 1.7 up40 errors when accessing WebGUI after patch - United States\n\nText:\nMissing Permissions; Missing Codebase; manifest; jre; 1.7; java console TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n 'Missing Permissions manifest attribute' messages appear in java console when using jre 1.7_u25 or greater when using WebGUI 7.4.0.1 or WebGUI 7.3.1.6 / TIP 2.2.0.7+ \n\nSYMPTOM\nMissing Permissions manifest attribute for: \nhttps:// : /ibm/console/webtop/classes/applets.jar \nMissing Codebase manifest attribute for: \nhttps:// : /ibm/console/webtop/classes/applets.jar \n\n\nCAUSE\n \n\nThese messages "
+    },
+    {
+      "id": "TRAIN_Q431",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "REFERENCE_VERBATIM_IN_GOLD_CHUNK",
+      "reference_verbatim_in_input": true,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 100.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "Getting the below error when you try to install ITM on Window OS \n\n\"D:\\Program Files\\IBM\\ITM\" includes blanks. Due to your system settings the installation path cannot include blanks, please specify location with no spaces.",
+      "gold_input_chunk_excerpt": "Title: IBM Trouble installing ITM on Windows OS - United States\n\nText:\n TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n Getting the below error when you try to install ITM on Window OS \n\n\"D:\\Program Files\\IBM\\ITM\" includes blanks. Due to your system settings the installation path cannot include blanks, please specify location with no spaces. \n\nSYMPTOM\nWhen you try to install ITM on \" C:\\Program Files\\IBM\\ITM\" it woks fine but when we try to install it on \"D:\\Program Files\\IBM\\ITM\" we get the below error:\n\n\n\"D:\\Program Files\\IBM\\ITM\" includes blanks. Due to your system settings the installation "
+    },
+    {
+      "id": "TRAIN_Q336",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "REFERENCE_VERBATIM_IN_GOLD_CHUNK",
+      "reference_verbatim_in_input": true,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 100.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "A limitation for remote deployment and silent installations indicates:\nA silent installation terminates if product files are locked. This behavior ensures that the installer does not overwrite product files that are currently running. The best practice is to shut down all components, including monitoring servers, portal server, and portal clients before you perform any product upgrade. This limitation only affects silent installations. Installati",
+      "gold_input_chunk_excerpt": " - Check[C:\\IBM\\ITM\\InstSpbs\\silent_winos622_64bit_prod.txt] for Locked Files=continue\n4-9-2015 10:15:22 CheckLockedFiles - Locked files not present.\n4-9-2015 10:15:22 CheckLockedFiles - Directory C:\\IBM\\ITM - return TRUE\n4-9-2015 10:15:22 Directory C:\\IBM\\ITM has locked files.\n4-9-2015 10:15:22 Correct and launch setup again.\n4-9-2015 10:15:22 Directory C:\\IBM\\ITM has locked files, unable to continue.\n4-9-2015 10:15:22 SEVERE: ERROR - Install aborted.\n\n\nCAUSE\nA limitation for remote deployment and silent installations indicates:\nA silent installation terminates if product files are locked. Th"
+    },
+    {
+      "id": "TRAIN_Q526",
+      "gold_hit5": false,
+      "gold_hit10": false,
+      "gold_ranks": [],
+      "input_chunk_evidence": "GOLD_DOCUMENT_ABSENT_TOP5",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": false,
+      "answer_term_coverage_percent": 0.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "IBM's 64-bit Rational Rhapsody feature availability matrix marks ReporterPlus as 'N' (not available) for Rhapsody 8.1.2 x64. This is why ReporterPlus does not appear in that installation.",
+      "gold_input_chunk_excerpt": null
+    },
+    {
+      "id": "TRAIN_Q343",
+      "gold_hit5": false,
+      "gold_hit10": false,
+      "gold_ranks": [],
+      "input_chunk_evidence": "GOLD_DOCUMENT_ABSENT_TOP5",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 0.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "This vulnerability affects the following versions and releases of IBM WebSphere Application Server: \n\n * Liberty",
+      "gold_input_chunk_excerpt": null
+    },
+    {
+      "id": "DEV_Q122",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "ANSWER_TEXT_IN_GOLD_SOURCE_NOT_IN_INPUT_CHUNK",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 24.2,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "Add the following field or tag to your inbound message. For example, if you are sending XML: \n\n<NEWORGID>xxx</NEWORGID> \n\nwhere xxx is the ORGID value. \n\nMake sure that NEWORGID is included on the object structure. \n\nGo To Integration > Object Structures and query the object structure. \n\nFrom the Select Action menu drop down, select Exclude/Include Fields and select the Non-Persistent Fields tab. Include NEWORGID.",
+      "gold_input_chunk_excerpt": "Title: IBM BMXAA4198E - The GL attribute TLOAMNEWGLACCOUNT on object {1} requires an organization. - United States\n\nText:\nTAPEINTEGRATION; asset; MIF TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n When importing ASSET using the Integration Framework you receive the following error after applying an IFIX or FIXPACK:\n\nBMXAA4198E - The GL attribute TLOAMNEWGLACCOUNT on object {1} requires an organization. Specify a value in the Organization field. \n\nCAUSE\nThis error is occurring due to a fix made for APAR IV67500 and included in a Maximo 7.5.0.6 or later ifix. The fix requires that the neworgid i"
+    },
+    {
+      "id": "TRAIN_Q222",
+      "gold_hit5": false,
+      "gold_hit10": false,
+      "gold_ranks": [],
+      "input_chunk_evidence": "GOLD_DOCUMENT_ABSENT_TOP5",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 0.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "Tivoli Directory Server 6.3 installation using GUI installation program is not supported on RHEL 6.",
+      "gold_input_chunk_excerpt": null
+    },
+    {
+      "id": "DEV_Q154",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        3
+      ],
+      "input_chunk_evidence": "ANSWER_TEXT_IN_GOLD_SOURCE_NOT_IN_INPUT_CHUNK",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 70.1,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "\"a new property is added to increase the file size limit:\n\n\n\n * \n\n\nAdd the property to $NCHOME/impact/etc/<SERVERNAME>_server.props file \nwhere size limit can be 8192, 16384, 32768, etc.. \" \n\nThe property would have to be added to all ImpactServers in the Cluster and would require a restart to enable - ensuring that the ImpactServer started as Primary had the correct, uncorrupted .type file to be replicated across the Cluster. Also ensure that th",
+      "gold_input_chunk_excerpt": "Title: IBM DataType incorrect on Secondary - United States\n\nText:\nnetcool; impact; netcool/impact; nci; data; type; datatype; .type; replication; cluster; sync; error; 500; mark; invalid TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n The DataType is not being correctly replicated across the ImpactServer Cluster \n\nSYMPTOM\nThe .type file of the Secondary ImpactServer configuration is truncated with the error message: \n\n * \n * \n\n\nCAUSE\nAPAR \"IZ81446: IMPACT 511 CLUSTER UNABLE TO REPLICATE DATATYPES WITH USERPARMETERS VALUES IN EXCESS OF 16,000 CHARACTERS.\" [link below] \n\n\n\n\n\nRESOLVING THE PROBLEM"
+    },
+    {
+      "id": "TRAIN_Q456",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "REFERENCE_VERBATIM_IN_GOLD_CHUNK",
+      "reference_verbatim_in_input": true,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 100.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "When WebSphere Application Server is run as a non-root user it will not be able to run native commands. This limited access causes the exceptions.",
+      "gold_input_chunk_excerpt": "Title: IBM Exceptions starting WAS 8.5 as non root user on Solaris - United States\n\nText:\n TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n You notice the exceptions below at start up. \n\nSYMPTOM\nException: command /usr/sbin/zonecfg failed with 1\nand \nFFDC Exception:java.lang.Exception SourceId:com.ibm.ws.xd.vv.nodedetect.NetworkInterfaceUtil.getMacAddresses ProbeId:2\njava.lang.Exception: dlopen() returned error; rc=128\n\n\nCAUSE\nWhen WebSphere Application Server is run as a non-root user it will not be able to run native commands. This limited access causes the exceptions.\n\nRESOLVING THE PROBLEM\nT"
+    },
+    {
+      "id": "TRAIN_Q003",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "UNRESOLVED_REQUIRES_MANUAL_REVIEW",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": false,
+      "answer_term_coverage_percent": 44.4,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "To require mutual TLS (client certificate authentication) in IBM HTTP Server, configure an HTTPS listener with a valid server certificate and enable the SSLClientAuth required directive for the intended server or protected scope. Import the trusted signer/CA certificates for client personal certificates into the IHS key.kdb database using IKEYMAN; without those signers, the server may not request or accept the client certificates correctly. Verif",
+      "gold_input_chunk_excerpt": "Title: IBM Set up SSLClientAuth Signer list - United States\n\nText:\nibm http server ihs key sslclientauth key.kdb; mutual authentication TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n When setting up 'SSLClientAuth required' directive, it is required that the IHS key.kdb have the signer certificates for the clients personal certificate. \n\nThe list of signer certificates will be passed to the client on the Server Hello.\n\nThis is required for the client to pass it's personal certificate during the SSL handshake. \n\nMost sites do not require client authentication. To require client authentication, "
+    },
+    {
+      "id": "TRAIN_Q594",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        3
+      ],
+      "input_chunk_evidence": "UNRESOLVED_REQUIRES_MANUAL_REVIEW",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": false,
+      "answer_term_coverage_percent": 29.6,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "AMQ9776 means an IBM MQ channel was blocked because its effective user mapping is denied (for example by a CHLAUTH rule). AMQ9777 means an inbound channel was blocked, such as when active channel values match a CHLAUTH record with USERSRC(NOACCESS). Inspect queue-manager error logs and the effective MCAUSER, CLNTUSER and ADDRESS/CHLAUTH settings. In affected MQ 8 installations using MQCSP and ADOPTCTX(YES), APAR IT12825 also documents an incorrec",
+      "gold_input_chunk_excerpt": "   blocked. The active values of the channel were\n   'MCAUSER(<MCAUSER>)\n   CLNTUSER(<CLTUSER>) ADDRESS(<ADDRESS>)'.\n   \n   \n    \n   \n   \n\nLOCAL FIX\n\nPROBLEM SUMMARY\n *  ****************************************************************\n   USERS AFFECTED:\n   IBM MQ users of version 8 and above, using CHLAUTH rules.\n   \n   \n   Platforms affected:\n   MultiPlatform\n   \n   ****************************************************************\n   PROBLEM DESCRIPTION:\n   A programming error terminated the error message text\n   prematurely after the user name when generating the AMQ9776\n   error message.\n   "
+    },
+    {
+      "id": "TRAIN_Q463",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "ANSWER_TEXT_IN_GOLD_SOURCE_NOT_IN_INPUT_CHUNK",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 63.9,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "WebSphere Portal has no built-in mechanism or configuration setting to limit the number of times a user id may log in. Unexpected behavior may occur if the same id is logged in more than once and this is not supported. \n\n\"ConcurrentModificationException\" and other errors may be logged.\n\nMost of the related issues were resolved in WebSphere Portal 5.1. However, you may still encounter exceptions or side-effects if you access the Portal in multiple",
+      "gold_input_chunk_excerpt": "Title: IBM Multiple logins using the same user ID - United States\n\nText:\nConcurrentModificationException; log in; login; multiple; userid; multiple login TECHNOTE (FAQ)\n\nQUESTION\n \"ConcurrentModificationException\" and other errors may occur if the same user id is logged in to IBM WebSphere Portal multiple times.\n\n\nANSWER\nWebSphere Portal has no built-in mechanism or configuration setting to limit the number of times a user id may log in. Unexpected behavior may occur if the same id is logged in more than once and this is not supported. \n\n\"ConcurrentModificationException\" and other errors may b"
+    },
+    {
+      "id": "TRAIN_Q221",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "UNRESOLVED_REQUIRES_MANUAL_REVIEW",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": false,
+      "answer_term_coverage_percent": 55.9,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "For this specific Case Analyzer CAPublisher error ('The query processor ran out of internal resources and could not produce a query plan'), IBM technote swg22012121 reports that the update mode caused the problem and recommends changing the Case Analyzer batch update mode to BATCH, then checking whether the error persists. Consult the Case Analyzer updateMode documentation before changing the setting in your environment.",
+      "gold_input_chunk_excerpt": "Title: IBM Latest data are not generated in Case Analyzer - United States\n\nText:\ninternal resources TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n No latest data are generated in IBM Case Analyzer though service is running. \n\nSYMPTOM\nError in log: \n\n\"CAPublisher c2dce3b9 [Error] Unexpected exception occurred while processing task CAPublisher for store CASTORE.; Exception: com.microsoft.sqlserver.jdbc.SQLServerException: The query processor \nran out of internal resources and could not produce a query plan. This is a rare event and only expected for extremely complex queries or queries that refe"
+    },
+    {
+      "id": "TRAIN_Q422",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "REFERENCE_VERBATIM_IN_GOLD_CHUNK",
+      "reference_verbatim_in_input": true,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 100.0,
+      "first_non_yes_stage": "NONE",
+      "terminal_refusal_stage": "GROUNDING_VERIFIER",
+      "guardrail_status": "ANSWER_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "YES"
+        }
+      ],
+      "reference_excerpt": "CVE-ID: CVE-2014-3566 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3566]\n\nDESCRIPTION: IBM Integration Designer and WebSphere Integration Developer could allow a remote attacker to obtain sensitive information, caused by a design error when using the SSLv3 protocol. A remote user with the ability to conduct a man-in-the-middle attack could exploit this vulnerability via a POODLE (Padding Oracle On Downgraded Legacy Encryption) attack t",
+      "gold_input_chunk_excerpt": "Title: IBM Security Bulletin: Vulnerability in SSLv3 affects IBM Integration Designer and WebSphere Integration Developer (CVE-2014-3566) - United States\n\nText:\n SECURITY BULLETIN\n\nSUMMARY\n SSLv3 contains a vulnerability that has been referred to as the Padding Oracle On Downgraded Legacy Encryption (POODLE) attack. SSLv3 is enabled in IBM Integration Designer and WebSphere Integration Developer. \n\nVULNERABILITY DETAILS\nCVE-ID: CVE-2014-3566 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3566]\n\nDESCRIPTION: IBM Integration Designer and WebSphere Integration Developer could allow a rem"
+    },
+    {
+      "id": "TRAIN_Q165",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        5
+      ],
+      "input_chunk_evidence": "REFERENCE_VERBATIM_IN_GOLD_CHUNK",
+      "reference_verbatim_in_input": true,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 100.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "GENERATOR",
+      "guardrail_status": "GENERATOR_ABSTAINED",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "YES"
+        }
+      ],
+      "reference_excerpt": "Please note that in WebSphere Application Server 8.5.5.x and below, the tool can only deploy Java EE applications compiled with a JDK level of 7 or below. To deploy JDK 8 compiled web applications, please upgrade to WebSphere Application Server V9.",
+      "gold_input_chunk_excerpt": "ployment tools alter the bytecode of your application classes rather than generating code ;however, the end result is similar. \n\nThe EJBDeploy Tool \n\nHistorically, EJB deployment in the Application Server product has been performed by the EJBDeploy tool, which is included with WebSphere® Application Server and packaged with the development tools for the WebSphere products. \nThe EJBDeploy tool inspects the external interfaces for your enterprise beans, generates wrapper code as .java files, and compiles the code using the javac compiler. The resulting .class files are packaged in your EJB modul"
+    },
+    {
+      "id": "TRAIN_Q419",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "UNRESOLVED_REQUIRES_MANUAL_REVIEW",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": false,
+      "answer_term_coverage_percent": 43.6,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "No. Doubling the number of additional message-flow instances in IBM Integration Bus or WebSphere Message Broker does not guarantee twice the throughput. Additional instances add concurrent processing threads, but scaling also depends on available processors, execution groups, brokers and other bottlenecks. Measure throughput under the target workload and tune based on observed constraints.",
+      "gold_input_chunk_excerpt": "Title: IBM How additional message flow instances scale for performance - United States\n\nText:\nMQIINFO TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n Additional IBM Integration Bus (IIB) or WebSphere Message Broker (WMB) message flow instances can be scaled to improve performance. \n\nRESOLVING THE PROBLEM\nEach message flow in IIB/WMB can be configured for a number of instances defined by the number of concurrent threads assigned to the message flow. These message flows can be run in a single broker on a number of different execution groups. The number of execution groups, which may vary dependin"
+    },
+    {
+      "id": "TRAIN_Q071",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        3
+      ],
+      "input_chunk_evidence": "REFERENCE_VERBATIM_IN_GOLD_CHUNK",
+      "reference_verbatim_in_input": true,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 100.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "It is important to allow the upgrade to complete when in this state, and not attempt to cancel or kill the upgrade process. To verify the upgrade is still active, check that the following process is still running: \n\nWindows: BESAdmin.exe \n\nLinux: BESAdmin",
+      "gold_input_chunk_excerpt": "Title: IBM Verify an IEM server upgrade is still in progress - United States\n\nText:\n TECHNOTE (FAQ)\n\nQUESTION\n How can I tell if the IBM Endpoint Manager (BigFix) server database upgrade is progressing? \n\nCAUSE\nWhen upgrading a BigFix server, most of the time is usually spent upgrading the database. The installer launches the BESAdmin utility to complete this part of the upgrade, but does not provide detailed progress during this phase. For some long running upgrades, it may appear that the upgrade is hung or not progressing: \n\nOn Windows, the BESAdmin UI will indicate \"Not Responding\" if clic"
+    },
+    {
+      "id": "TRAIN_Q553",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "ANSWER_TEXT_IN_GOLD_SOURCE_NOT_IN_INPUT_CHUNK",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 59.2,
+      "first_non_yes_stage": "NONE",
+      "terminal_refusal_stage": "GROUNDING_VERIFIER",
+      "guardrail_status": "ANSWER_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "YES"
+        }
+      ],
+      "reference_excerpt": "CVEID: CVE-2014-6457 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6457]\n\nDESCRIPTION: An unspecified vulnerability related to the JSSE component has partial confidentiality impact, partial integrity impact, and no availability impact.\n\nCVSS Base Score: 4\nCVSS Temporal Score: See https://exchange.xforce.ibmcloud.com/vulnerabilities/97148 [https://exchange.xforce.ibmcloud.com/vulnerabilities/97148] for the current score\nCVSS Environmenta",
+      "gold_input_chunk_excerpt": "Title: IBM Security Bulletin: Multiple vulnerabilities in IBM Java SDK affect IBM Image Construction and Composition Tool (CVE-2014-3566 and CVE-2014-6457) - United States\n\nText:\n SECURITY BULLETIN\n\nSUMMARY\n There are multiple vulnerabilities in IBM® SDK Java™ Technology Edition, Version 6 that is used by IBM PureApplication System. This also includes a fix for the Padding Oracle On Downgraded Legacy Encryption (POODLE) SSLv3 vulnerability (CVE-2014-3566). These were disclosed as part of the IBM Java SDK updates in October 2014. \n\nVULNERABILITY DETAILS\nCVEID: CVE-2014-6457 [http://cve.mitre.or"
+    },
+    {
+      "id": "TRAIN_Q498",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        4
+      ],
+      "input_chunk_evidence": "UNRESOLVED_REQUIRES_MANUAL_REVIEW",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": false,
+      "answer_term_coverage_percent": 28.6,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "JIT compilation consumes CPU while the JVM compiles frequently executed Java methods, so compilation can create CPU spikes. For IBM Java, first diagnose the methods with -Xjit:verbose={compileStart|compileEnd},vlog=/tmp/jit.log; then consider excluding problematic methods with -Xjit:exclude={package/class.method}, or adjusting JIT optimization levels such as -Xjit:optLevel=noOpt. The IBM document also describes -Xint to disable JIT, but that can ",
+      "gold_input_chunk_excerpt": "lled synchronous compilation mode.\n\n-Xjit:count=0\n-Xjit:exclude={java/lang/Math.max*}(count=0,optLevel=hot)\n\n\n\n\n\n\nCommon Questions \n\n1. What is JIT?\n\nJIT stands for Just-In-Time compiler. The purpose of JIT is to compile code that is most frequently used to speed up subsequent calls to those methods. Long running applications will have the most benefit using JIT.\n\n2. When does code get compiled?\n\nClasses or methods that are frequently called will be compiled with the JIT automatically. The more frequently a method is called, the more aggressive the optimization will be. Thread stacks in a java"
+    },
+    {
+      "id": "DEV_Q147",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "UNRESOLVED_REQUIRES_MANUAL_REVIEW",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": false,
+      "answer_term_coverage_percent": 54.1,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "See IBM technote swg21672459, 'Master list of ITM TEP/Java issues.' It tracks TEP Browser/Java Web Start connectivity problems to TEPS introduced by Java releases, including Oracle Java 7 Update 45 and Java 6 Update 65, and lists version-specific symptoms and workarounds. Check the relevant entry for the TEP client's Java version.",
+      "gold_input_chunk_excerpt": "Title: IBM Master list of ITM TEP/Java issues - United States\n\nText:\nbsydebug 5724C04EP JWS webstart u45 u51 u55 u65 u75 6u65 6u75 7u45 7u51 7u55 7u65 7u71 7u72 7u79 7u80 7u101 8u31 8u40 8u45 8u60 8u65 8u66 8u72 8u101 8u131 8u141 FLASH (ALERT)\n\nABSTRACT\n Recent Java updates have caused various problems related to the TEP Client <--> TEPS connection. \n\nCONTENT\nRecent Java updates, first identified in Oracle Java 7 update 45 / Java 6 update 65 and IBM Java 7 SR 6 / Java 6 SR 15 have caused connection problems when logging into the TEPS via the TEP Browser / Java Web Start clients. This document "
+    },
+    {
+      "id": "TRAIN_Q234",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        4
+      ],
+      "input_chunk_evidence": "REFERENCE_VERBATIM_IN_GOLD_CHUNK",
+      "reference_verbatim_in_input": true,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 100.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "Place the WASServiceCmd.exe utility in the following directory:\n    \n    install_root\\bin \n    \n 2. Launch the command from the command line.",
+      "gold_input_chunk_excerpt": "led information: (Link at the bottom of this document) \n\nSYMPTOM\nCreating and removing a WebSphere service in Windows is confusing and error prone.\n\n\nCAUSE\nThis application takes several parameters which can be confusing to the user along with several long path strings leaving opportunities to setup incorrectly.\n\nENVIRONMENT\nWindows\n\nRESOLVING THE PROBLEM\n\n\n\n 1. Place the WASServiceCmd.exe utility in the following directory:\n    \n    install_root\\bin \n    \n 2. Launch the command from the command line. \n    \n    \n 3. The WASServiceCmd utility prompts you to select specific options and settings "
+    },
+    {
+      "id": "TRAIN_Q599",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "ANSWER_TEXT_IN_GOLD_SOURCE_NOT_IN_INPUT_CHUNK",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 25.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "Incompatible Windows security policy.",
+      "gold_input_chunk_excerpt": "Title: IBM Application Error in IBM Content Collector Configuration Manager when saving a task route - United States\n\nText:\nicc; fips; md5 TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n An application error is reported in the IBM Content Collector (ICC) configuration manager when you try to save a task route or other settings. \n\nSYMPTOM\nThe pop up window shows the following message: \n\n * \n * Error: \n * \n   A severe error occurred.\n   \n   \n * Problem:\n * \n   Exception has been thrown by the target of an invocation.\n   \n   \n * Solution:\n * \n   Contact IBM Software Support with this error message"
+    },
+    {
+      "id": "TRAIN_Q075",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "REFERENCE_VERBATIM_IN_GOLD_CHUNK",
+      "reference_verbatim_in_input": true,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 100.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "Component: IBM® Tivoli® Composite Application Manager for Applications 721 FP2: \nMonitoring Agent for Sybase® Server 620 FP2 (6.2.0-TIV-ITM_SYB-FP0002)\n\nFix Pack: 0002\nComponent ID: 5724B96SO\nDate: December 8, 2017",
+      "gold_input_chunk_excerpt": "Title: IBM Tivoli Composite Application Manager for Applications 721 FP2: Monitoring Agent for Sybase Server 620 FP2 (6.2.0-TIV-ITM_SYB-FP0002) - United States\n\nText:\nSybase Agent; OY; KOY; 5724B96SO; ITM; ITCAM DOWNLOADABLE FILES\n\nABSTRACT\n This fix resolves the APARs and defects and provides the enhancements listed \nin the \"Problems Fixed\" section below. \n\nDOWNLOAD DESCRIPTION\nCopyright International Business Machines Corporation 2018.\n\n\nAll rights reserved.\n\nComponent: IBM® Tivoli® Composite Application Manager for Applications 721 FP2: \nMonitoring Agent for Sybase® Server 620 FP2 (6.2.0-TI"
+    },
+    {
+      "id": "DEV_Q252",
+      "gold_hit5": false,
+      "gold_hit10": true,
+      "gold_ranks": [
+        7,
+        8
+      ],
+      "input_chunk_evidence": "GOLD_DOCUMENT_ABSENT_TOP5",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": false,
+      "answer_term_coverage_percent": 0.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "The trace shows Oracle ORA-02396 ('exceeded maximum idle time'), which means Oracle closed an idle database session; WebSphere can then encounter a StaleConnectionException when reusing it. Ask the DBA to review or raise Oracle's idle time-out. If that is not possible, configure the WebSphere data-source pool with minimum connections 0, an unused timeout shorter than Oracle's idle timeout, and an appropriate reap-time interval so stale connection",
+      "gold_input_chunk_excerpt": null
+    },
+    {
+      "id": "TRAIN_Q111",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "REFERENCE_VERBATIM_IN_GOLD_CHUNK",
+      "reference_verbatim_in_input": true,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 100.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "When we have corruption in the database we may received following kind of entries in db2diag.log \nThese also notify object where we t where we have detected corruption in the Database.",
+      "gold_input_chunk_excerpt": "Title: IBM How to find details of Corrupted Object from the entries in db2diag.log? - United States\n\nText:\n TECHNOTE (FAQ)\n\nQUESTION\n How to find details of Corrupted Object from the entries in db2diag.log? \n\nANSWER\nWhen we have corruption in the database we may received following kind of entries in db2diag.log \nThese also notify object where we t where we have detected corruption in the Database.\n\nSample db2diag.log entry for Corruption.\n\n2016-05-04-03.13.05.261082-360 I3442A358 LEVEL: Error \nPID : 393470 TID : 1 PROC : db2pfchr 0 \nINSTANCE: db2inst1 NODE : 000 \nFUNCTION: DB2 UDB, buffer pool"
+    },
+    {
+      "id": "TRAIN_Q504",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "REFERENCE_VERBATIM_IN_GOLD_CHUNK",
+      "reference_verbatim_in_input": true,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 100.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "Traps can be dropped during high loading, so ensure that the traps are being dropped from specific devices under normal load. \n\nUse snoop, tcpdump or Wireshark to capture the traps that are being dropped on the probe servers port, as defined in the property file.",
+      "gold_input_chunk_excerpt": "Title: IBM MTTrapd [SNMP] probe drops traps from specific devices - United States\n\nText:\nnco_p_mttrapd; snmp; snmp traps; traps; dropped; drop; dropping; malformed; TCP TECHNOTE (FAQ)\n\nQUESTION\n MMTrapd probe : Why are SNMP traps dropped from specific devices? \n\nCAUSE\nSNMP packets can be dropped for a number of reasons, including overloading, malformed packets, malformed traps/informs and incorrectly configured/non-compliant MIBS.\n\nANSWER\nTraps can be dropped during high loading, so ensure that the traps are being dropped from specific devices under normal load. \n\nUse snoop, tcpdump or Wiresha"
+    },
+    {
+      "id": "DEV_Q266",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "UNRESOLVED_REQUIRES_MANUAL_REVIEW",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": false,
+      "answer_term_coverage_percent": 25.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "Install IBM Packaging Utility using IBM Installation Manager. If Installation Manager is already installed, add the Packaging Utility repository on IBM.com and install/update it. Otherwise, download the platform-specific installer package pu.offering.disk.platform_version.zip, which includes Installation Manager, and run its install command or add the extracted package as an Installation Manager repository. The pu.update_version.zip fix pack is f",
+      "gold_input_chunk_excerpt": "ckaging Utility without downloading files. The Packaging Utility repository located on www.ibm.com contains the latest version of Packaging Utility.\n\nYou must have an IBM user name and password to access the repository. To register for these credentials, go to: http://www.ibm.com/account/profile.\n\n\nIBM Knowledge Center topics that are specified by operating system for installing and updating Packaging Utility. The installation topics contain information about downloading the Installation Manager installation files. \n\nOperating System Action Packaging Utility topic located in the IBM Installati"
+    },
+    {
+      "id": "DEV_Q210",
+      "gold_hit5": false,
+      "gold_hit10": false,
+      "gold_ranks": [],
+      "input_chunk_evidence": "GOLD_DOCUMENT_ABSENT_TOP5",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 0.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "When the \"Too Many Open Files\" error message is written to the logs, it indicates that all available file handles for the process have been used (this includes sockets as well). In a majority of cases, this is the result of file handles being leaked by some part of the application.",
+      "gold_input_chunk_excerpt": null
+    },
+    {
+      "id": "DEV_Q076",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        2
+      ],
+      "input_chunk_evidence": "UNRESOLVED_REQUIRES_MANUAL_REVIEW",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": false,
+      "answer_term_coverage_percent": 46.9,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "IBM APAR IV64051 documents false 'Inactive' listener/service alerts in Extended Oracle Database agent 6.31 Fix Pack 2 on Linux/Unix. The agent leaks open handles for $ORACLE_HOME/bin/tnsping until the OS file-handle limit is reached. Apply 6.3.1.2-TIV-ITM_KRZ-IF0002 or later, as specified in the APAR, to resolve the issue.",
+      "gold_input_chunk_excerpt": "Unix, which results in false alert of inactive\n   listener and miss monitoring alert log.\n   \n   Environment: Extended Oracle Database agent 6.31 FP2\n   OS: Linux & Unix\n   \n   Problem Description:\n   When KRZ_ORACLE_HOME is conifgured, Extended Oracle Database\n   agent will check whether '$ORACLE_HOME/bin/tnsping' file can be\n   opened and executed for listener checking function by 5 minutes\n   interval. The agent does not close the file after opening it, so\n   the open file handles of '$ORACLE_HOME/bin/tnsping' for the\n   agent collector process krzclient/krzstart grow until the\n   configure"
+    },
+    {
+      "id": "DEV_Q184",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "REFERENCE_VERBATIM_IN_GOLD_CHUNK",
+      "reference_verbatim_in_input": true,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 100.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "This error occurs when a mediation primitive is wired more than once to the next mediation primitive. It might seem to be a single wire. However, upon closer inspection, more than one wire exists. \n\n\nBy mistake, primitives might be wired more than once when there is only one wire. See the following screen shot:\n[/support/docview.wss?uid=swg21584783&amp;aid=1]\n\nIf you move the primitives in question, however, you notice that there are more wires u",
+      "gold_input_chunk_excerpt": "Title: IBM A CWSXM0100E error is received for WebSphere Enterprise Service Bus (WESB), WebSphere Process Server (WPS), or IBM Business Process Manager (BPM) Advanced - United States\n\nText:\nCWSXM0100E; multiple; replies; single; request TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n When a single request is sent to a Mediation Flow Component in WebSphere Enterprise Service Bus, WebSphere Process Server, or Business Process Manager Advanced, services can be invoked more than once. \n\nSYMPTOM\nThe following error message can be observed in the SystemOut.log file:\n\nCWSXM0100E: Multiple replies have "
+    },
+    {
+      "id": "DEV_Q021",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        2
+      ],
+      "input_chunk_evidence": "ANSWER_TEXT_IN_GOLD_SOURCE_NOT_IN_INPUT_CHUNK",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 68.8,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "In a WS Proxy, you can refresh WSDL from an URL using WSDL Cache policy. However, if the WSDL is hosted on the DataPower appliance, such as in local:///, rather than on an external URL, the WSDL Cache Policy does not apply. \n\nFor instance, changes made to local:///test.wsdl are not picked up by WS Proxy although there is a WSDL Cache policy setting the URL Match expression to local:///test.wsdl. \n\nThis issue was reported to Quality Engineering bu",
+      "gold_input_chunk_excerpt": "Title: IBM WSDL Cache Policy not refreshing from WSDL in local:/// directory - United States\n\nText:\ndatapower; wsdl cache refresh; wsdl; cache; refresh TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n You created a Web Service Proxy (WS Proxy) based on a .wsdl file and want to refresh when there are changes in the .wsdl file. The file is located on the DataPower appliance under the \"local\" directory. You created a WSDL Cache Policy to specify the local .wsdl file for the URL Match expression, but the web service proxy state is not being refreshed when there are changes in the file. \n\nSYMPTOM\nThe"
+    },
+    {
+      "id": "TRAIN_Q436",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        5
+      ],
+      "input_chunk_evidence": "UNRESOLVED_REQUIRES_MANUAL_REVIEW",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": false,
+      "answer_term_coverage_percent": 17.4,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "Yes. IBM BPM can leave temporary trace files in the operating-system temporary directory after snapshot import, export or install operations. IBM APAR JR47686 states that these leftover files may be deleted manually; identify the BPM-created files and ensure they are no longer in use before deletion. The APAR also lists related BPM fixes such as 8.0.1 Fix Pack 2 and 8.5.0 Fix Pack 1 to address the underlying accumulation.",
+      "gold_input_chunk_excerpt": "y folder    *\n   *                      and the contents are parsed. After      *\n   *                      the import, export or install           *\n   *                      operation are completed, the            *\n   *                      temporary content remains on the file   *\n   *                      system.  On Linux machine, the          *\n   *                      temporary folder is  /tmp.\n   *                      Windows machine, the temporary folder   *\n   *                      is the same as %TEMP% system variable   *\n   *                      defined.                       "
+    },
+    {
+      "id": "DEV_Q186",
+      "gold_hit5": false,
+      "gold_hit10": false,
+      "gold_ranks": [],
+      "input_chunk_evidence": "GOLD_DOCUMENT_ABSENT_TOP5",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 0.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "Specify the complete path to the silent response file while launching the silent install.",
+      "gold_input_chunk_excerpt": null
+    },
+    {
+      "id": "TRAIN_Q415",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "ANSWER_TEXT_IN_GOLD_SOURCE_NOT_IN_INPUT_CHUNK",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 8.3,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "This behavior occurs if Workplace XT is configured to use Maximum strength keys (>128bit) during installation.",
+      "gold_input_chunk_excerpt": "Title: IBM Unable to log on to FileNet WorkplaceXT receive an AE SecurityCheckFilter error - United States\n\nText:\nAE SecurityCheckFilter; JSSE; unlimited strength TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n Unable to log on to FileNet WorkplaceXT - AE SecurityCheckFilter error \n\nSYMPTOM\nWhen attempting to log on to FileNet WorkplaceXT deployed on an IBM WebSphere Application Server, the following error is displayed : \n\nException Message: [Filter AE SecurityCheckFilter]: filter is unavailable. \nFilter AE SecurityCheckFilter: filter is unavailable. \n\n\nDIAGNOSING THE PROBLEM\nSystemOut.log may "
+    },
+    {
+      "id": "TRAIN_Q482",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        2
+      ],
+      "input_chunk_evidence": "ANSWER_TEXT_IN_GOLD_SOURCE_NOT_IN_INPUT_CHUNK",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 37.5,
+      "first_non_yes_stage": "NONE",
+      "terminal_refusal_stage": "GENERATOR",
+      "guardrail_status": "GENERATOR_ABSTAINED",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "YES"
+        }
+      ],
+      "reference_excerpt": "The short answer is no limit.\n\n\nBy default we create a virtual table for any \"in list\" with more than 5 values.\n\nThe only limitation with large \"in list\" statements would be the memory needed to compile the query. If the query is too complex, you can potentially run out of memory, but that will not affect other sessions since this happens inside the postgres process assigned to that session. The parameter that is responsible for this behaviour is",
+      "gold_input_chunk_excerpt": "Title: IBM Is there a limit to the number of items that can be listed within an \"in\" list as part of a where clause? - United States\n\nText:\n TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n Is there a limit to the number of items that can be listed within an \"in\" list as part of a where clause? \n\nCAUSE\nEvery time the query optimizer finds a \"(NOT) IN\" statement in the query, a decision must be made:\nOption A: Evaluate the condition sequentially for every member of the IN-list, or \nOption B: create a temporal virtual table from this list and use JOIN logic for evaluation. \n\nIf the amount of membe"
+    },
+    {
+      "id": "TRAIN_Q583",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        2
+      ],
+      "input_chunk_evidence": "REFERENCE_VERBATIM_IN_GOLD_CHUNK",
+      "reference_verbatim_in_input": true,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 100.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "CAUSE\nMissing Linux system libraries.",
+      "gold_input_chunk_excerpt": "Title: IBM Using launchpad.sh or silent_MS_linux.bin results in end-of-file message. - United States\n\nText:\nITCAM compat-libstdc++ libstdc++ libraries silent_MS_linux.bin launchpad.sh errors TECHNOTE (TROUBLESHOOTING)\n\nTHIS DOCUMENT APPLIES ONLY TO THE FOLLOWING LANGUAGE VERSION(S):\n US English \n\nPROBLEM(ABSTRACT)\n Using the DC or MS 'launchpad.sh' script results in the following error message:\n./setup_MS_lin.bin: line 1926: warning: here-document at line 1926 \ndelimited by end-of-file (wanted `/dev/null') \n\nSYMPTOM\nThe following error is seen running when doing either 'launchpad.sh' or 'silen"
+    },
+    {
+      "id": "TRAIN_Q081",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        3
+      ],
+      "input_chunk_evidence": "ANSWER_TEXT_IN_GOLD_SOURCE_NOT_IN_INPUT_CHUNK",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 70.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "Apply IBM Content Collector V4.0.1 Fix Pack 3 to upgrade from IBM Content Collector V4.0.1 to IBM Content Collector V4.0.1.3.",
+      "gold_input_chunk_excerpt": "ww.ibm.com/support/docview.wss?uid=swg1HE12537] CONTENT COLLECTOR INSTALLATION FAILS WITH ACCESS IS DENIED ERROR ON WASSERVICE.EXE FILE PREREQUISITES\nIBM Content Collector V4.0.1 Fix Pack 3 can be used with the following IBM Content Collector version: \n\nURL LANGUAGE SIZE(Bytes) Prerequisites for IBM Content Collector V4.0.1 [http://www-01.ibm.com/support/docview.wss?uid=swg27042658] English 1 \nINSTALLATION INSTRUCTIONS\nRead the fix pack readme files for specific information about installing the fix pack packages.\n\nURL LANGUAGE SIZE(Bytes) 4.0.1.3-IBM-ICC-FP003 [https://www-945.ibm.com/support/"
+    },
+    {
+      "id": "DEV_Q194",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "UNRESOLVED_REQUIRES_MANUAL_REVIEW",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": false,
+      "answer_term_coverage_percent": 20.5,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "To generate javacores automatically when WebSphere logs WSVR0605W hung-thread messages, add an application-server custom property named com.ibm.websphere.threadmonitor.dump.java with value true under Servers > Application Servers > server_name > Administration > Custom Properties; save the change and restart the server. On supported versions, you may specify an integer instead of true to limit the number of dumps. This feature is documented for W",
+      "gold_input_chunk_excerpt": "Title: IBM Configuring the WebSphere Application Server hung thread detector to automatically produce a javacore or thread dump on a WSVR0605W message - United States\n\nText:\nWSVR0605W; hung thread javacore TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n The SystemOut.log contains a WSVR0605W message, also called a hung thread message. A javacore, or thread dump on Solaris and HP-UX, is needed in order to determine how to resolve the potentially hung threads. \n\nCAUSE\nWebSphere Application Server attempts to report potentially hung threads using the hung thread detector. Depending on how the hung"
+    },
+    {
+      "id": "TRAIN_Q299",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        4
+      ],
+      "input_chunk_evidence": "ANSWER_TEXT_IN_GOLD_SOURCE_NOT_IN_INPUT_CHUNK",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 51.5,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "Starting with V8.0 and applicable to all subsequent releases and fixpacks, there is one install package that contains updates for both WebSphere Application Server and Java SDK. Applying fixpacks of WebSphere Application Server also upgrades the SDK that is packaged and bundled within the fixpack. Additionally, separate Java SDK fixpacks are also available that contain just the SDK updates which can be applied to upgrade the SDK.",
+      "gold_input_chunk_excerpt": " the fixpack. Additionally, separate Java SDK fixpacks are also available that contain just the SDK updates which can be applied to upgrade the SDK.\n\nWebSphere Application Server V7.0\nAny V7.0 fix pack can upgrade to the latest Java SDK 1.6.0 service release packaged for WebSphere Application Server.\n\nWebSphere Application Server V6.1\nAny V6.1 fix pack can upgrade to the latest Java SDK 1.5.0 service release packaged for WebSphere Application Server.\n\nWebSphere Application Server V6.0\nAny V6.0 fix pack can upgrade to the latest Java SDK 1.4.2 service release packaged for WebSphere Application "
+    },
+    {
+      "id": "TRAIN_Q541",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        2
+      ],
+      "input_chunk_evidence": "REFERENCE_VERBATIM_IN_GOLD_CHUNK",
+      "reference_verbatim_in_input": true,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 100.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "Based on the following steps the group or role will only have access to either Cognos Workspace (Business Insight) or Cognos Workspace Advanced (Business Insight Advanced). Even though the Role receives Traverse and Execute permissions for the Report Studio capability it will not be able to open Report Studio (this is only possible if you have Traverse and Execute permissions for the Professional User Interface Profile).",
+      "gold_input_chunk_excerpt": "Title: IBM How to create a custom group/role for Cognos Workspace and/or Cognos Workspace Advanced - United States\n\nText:\n TECHNOTE (TROUBLESHOOTING)\n\nPROBLEM(ABSTRACT)\n This document will explain the steps necessary to create a group or role within the Cognos Namespace that can be used to assign only rights for Cognos Workspace Advanced and/or Cognos Workspace (or as they were formerly known in 10.1.1 / 10.1 Business Insight Advanced and/or Business Insight.). \n\nCAUSE\nIBM Cognos Licensing might require a Group of Users to be able to only access Cognos Workspace or Cognos Workspace Advanced (B"
+    },
+    {
+      "id": "TRAIN_Q208",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "REFERENCE_VERBATIM_IN_GOLD_CHUNK",
+      "reference_verbatim_in_input": true,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 100.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "In general, IBM Developer for z Systems, Rational Developer for z Systems and Rational Developer for System z follow a two level backward and forward compatibility tolerance for basic Client /Server functionality.",
+      "gold_input_chunk_excerpt": "Title: IBM Developer for z Systems and Rational Developer for z Systems Backward/Forward compatibility - United States\n\nText:\nRDz; compatible; backward; forward; IDz; Debug Tool: Debugger TECHNOTE (FAQ)\n\nQUESTION\n What levels of the IBM Developer for z Systems and Rational Developer for z Systems host and client are compatible? \n\nANSWER\nClient/Server Compatibility\n\n\n\nIn general, IBM Developer for z Systems, Rational Developer for z Systems and Rational Developer for System z follow a two level backward and forward compatibility tolerance for basic Client /Server functionality. \n\nIBM Developer "
+    },
+    {
+      "id": "TRAIN_Q414",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "ANSWER_TEXT_IN_GOLD_SOURCE_NOT_IN_INPUT_CHUNK",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": true,
+      "answer_term_coverage_percent": 75.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "IBM has withdrawn support for WebSphere MQ V7.0.1 and V7.0.0, WebSphere MQ for z/OS V7.0.1 and V7.0.0,",
+      "gold_input_chunk_excerpt": "ntly running?\n * Is any information available to help me upgrade to a later version?\n * How do I purchase a support extension for my current version?\n * When a WebSphere MQ server product goes out of support, does the client and file transfer agent also go out of support?\n * Are these products still supported when they are bundled with another IBM product?\n * Is the WebSphere MQ V7.0 Resource Adapter supported in WebSphere Application Server?\n * Is documentation still available for these products?\n * How do I obtain installation images for these products if I still need them?\n * Is there an IB"
+    },
+    {
+      "id": "TRAIN_Q063",
+      "gold_hit5": false,
+      "gold_hit10": false,
+      "gold_ranks": [],
+      "input_chunk_evidence": "GOLD_DOCUMENT_ABSENT_TOP5",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": false,
+      "answer_term_coverage_percent": 0.0,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "The IBM Operational Decision Manager 8.5.1.2 cumulative Fix Pack updates ODM 8.5.1 or 8.5.1.1. Obtain the platform-specific packages from the IBM Operational Decision Manager V8.5.1.2 Fix Pack download document: 8.5.1-WS-ODM_DC-<OS>-FP002.zip for Decision Center and/or 8.5.1-WS-ODM_DS-<OS>-FP002.zip for Decision Server. Extract to WDC and/or WDS, add each extracted updates/repository.config in IBM Installation Manager (File > Preferences > Reposi",
+      "gold_input_chunk_excerpt": null
+    },
+    {
+      "id": "TRAIN_Q537",
+      "gold_hit5": true,
+      "gold_hit10": true,
+      "gold_ranks": [
+        1
+      ],
+      "input_chunk_evidence": "UNRESOLVED_REQUIRES_MANUAL_REVIEW",
+      "reference_verbatim_in_input": false,
+      "reference_verbatim_in_gold_source": false,
+      "answer_term_coverage_percent": 45.2,
+      "first_non_yes_stage": "top_k:NO",
+      "terminal_refusal_stage": "EVIDENCE_JUDGE:expanded_k",
+      "guardrail_status": "EVIDENCE_NO",
+      "judge_path": [
+        {
+          "stage": "top_k",
+          "decision": "NO"
+        },
+        {
+          "stage": "expanded_k",
+          "decision": "NO"
+        }
+      ],
+      "reference_excerpt": "For Netcool/Impact 6.1.0 using HSQLDB, connect to HSQLDB with the appropriate administrative account and issue SET PASSWORD \"new_password\"; (HSQLDB requires double quotes around the password). The default password is blank. After changing it, update the Netcool/Impact HSQLDB DataSource password using the Impact configuration GUI, or encrypt the password using nci_crypt and update the DataSource configuration; a manually edited configuration requi",
+      "gold_input_chunk_excerpt": "Title: IBM Change HSQLDB password - United States\n\nText:\nnetcool; impact; netcool/impact; nci; hsql; database; data; base; db; hsqldb; pass; word; password; pw; sa; system; admin; systemadmin; security; sec; authentication; auth; vulnerable; vulnerability; change; alter; update TECHNOTE (FAQ)\n\nQUESTION\n The default password does not fulfil corporate security requirements. \n\nCAUSE\nThe default password is blank\n\nANSWER\nLooking into guides for this third party software shows HSQLDB command line capability as being: \n\n * \n * SET PASSWORD\n * \n * \n * SET PASSWORD <password>;\n * \n * \n * Changes the p"
+    }
+  ]
+}

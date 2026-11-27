@@ -1,0 +1,160 @@
+W1126 16:12:31.461000 10956 Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]
+Loading weights:   4%|▍         | 13/338 [00:00<00:02, 118.71it/s]
+Loading weights:   7%|▋         | 25/338 [00:00<00:02, 111.84it/s]
+Loading weights:  11%|█         | 37/338 [00:00<00:02, 103.51it/s]
+Loading weights:  14%|█▍        | 48/338 [00:00<00:02, 99.30it/s] 
+Loading weights:  17%|█▋        | 58/338 [00:00<00:02, 96.65it/s]
+Loading weights:  21%|██▏       | 72/338 [00:00<00:02, 102.60it/s]
+Loading weights:  25%|██▍       | 83/338 [00:00<00:02, 97.00it/s] 
+Loading weights:  28%|██▊       | 93/338 [00:00<00:02, 94.09it/s]
+Loading weights:  32%|███▏      | 107/338 [00:01<00:02, 105.07it/s]
+Loading weights:  35%|███▌      | 119/338 [00:01<00:02, 102.70it/s]
+Loading weights:  39%|███▉      | 131/338 [00:01<00:01, 105.18it/s]
+Loading weights:  42%|████▏     | 142/338 [00:01<00:01, 103.09it/s]
+Loading weights:  46%|████▌     | 155/338 [00:01<00:01, 108.80it/s]
+Loading weights:  50%|█████     | 169/338 [00:01<00:01, 114.16it/s]
+Loading weights:  54%|█████▎    | 181/338 [00:01<00:01, 111.69it/s]
+Loading weights:  57%|█████▋    | 193/338 [00:01<00:01, 111.97it/s]
+Loading weights:  61%|██████    | 205/338 [00:01<00:01, 108.21it/s]
+Loading weights:  65%|██████▍   | 219/338 [00:02<00:01, 111.10it/s]
+Loading weights:  69%|██████▊   | 232/338 [00:02<00:00, 114.40it/s]
+Loading weights:  72%|███████▏  | 244/338 [00:02<00:00, 112.66it/s]
+Loading weights:  76%|███████▌  | 256/338 [00:02<00:00, 111.58it/s]
+Loading weights:  79%|███████▉  | 268/338 [00:02<00:00, 111.94it/s]
+Loading weights:  83%|████████▎ | 280/338 [00:02<00:00, 108.24it/s]
+Loading weights:  86%|████████▌ | 291/338 [00:02<00:00, 94.81it/s] 
+Loading weights:  89%|████████▉ | 301/338 [00:02<00:00, 85.57it/s]
+Loading weights:  92%|█████████▏| 310/338 [00:03<00:00, 73.64it/s]
+Loading weights:  96%|█████████▌| 323/338 [00:03<00:00, 73.95it/s]
+Loading weights: 100%|██████████| 338/338 [00:03<00:00, 102.68it/s]
+C:\Projects\LLM_IBM_TechSupport\.venv\Lib\site-packages\transformers\modeling_utils.py:3303: FutureWarning: `is_gradient_checkpointing` is deprecated and will be removed in v6. Use `is_activation_checkpointing` instead.
+  warnings.warn(
+[transformers] The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+Generated: 1/106
+Generated: 2/106
+Generated: 3/106
+Generated: 4/106
+Generated: 5/106
+Generated: 6/106
+Generated: 7/106
+Generated: 8/106
+Generated: 9/106
+Generated: 10/106
+Generated: 11/106
+Generated: 12/106
+Generated: 13/106
+Generated: 14/106
+Generated: 15/106
+Generated: 16/106
+Generated: 17/106
+Generated: 18/106
+Generated: 19/106
+Generated: 20/106
+Generated: 21/106
+Generated: 22/106
+Generated: 23/106
+Generated: 24/106
+Generated: 25/106
+Generated: 26/106
+Generated: 27/106
+Generated: 28/106
+Generated: 29/106
+Generated: 30/106
+Generated: 31/106
+Generated: 32/106
+Generated: 33/106
+Generated: 34/106
+Generated: 35/106
+Generated: 36/106
+Generated: 37/106
+Generated: 38/106
+Generated: 39/106
+Generated: 40/106
+Generated: 41/106
+Generated: 42/106
+Generated: 43/106
+Generated: 44/106
+Generated: 45/106
+Generated: 46/106
+Generated: 47/106
+Generated: 48/106
+Generated: 49/106
+Generated: 50/106
+Generated: 51/106
+Generated: 52/106
+Generated: 53/106
+Generated: 54/106
+Generated: 55/106
+Generated: 56/106
+Generated: 57/106
+Generated: 58/106
+Generated: 59/106
+Generated: 60/106
+Generated: 61/106
+Generated: 62/106
+Generated: 63/106
+Generated: 64/106
+Generated: 65/106
+Generated: 66/106
+Generated: 67/106
+Generated: 68/106
+Generated: 69/106
+Generated: 70/106
+Generated: 71/106
+Generated: 72/106
+Generated: 73/106
+Generated: 74/106
+Generated: 75/106
+Generated: 76/106
+Generated: 77/106
+Generated: 78/106
+Generated: 79/106
+Generated: 80/106
+Generated: 81/106
+Generated: 82/106
+Generated: 83/106
+Generated: 84/106
+Generated: 85/106
+Generated: 86/106
+Generated: 87/106
+Generated: 88/106
+Generated: 89/106
+Generated: 90/106
+Generated: 91/106
+Generated: 92/106
+Generated: 93/106
+Generated: 94/106
+Generated: 95/106
+Generated: 96/106
+Generated: 97/106
+Generated: 98/106
+Generated: 99/106
+Generated: 100/106
+Generated: 101/106
+Generated: 102/106
+Generated: 103/106
+Generated: 104/106
+Generated: 105/106
+Generated: 106/106
+{
+  "model": "Qwen2.5-1.5B-Instruct-LoRA",
+  "dataset": "val_106.json",
+  "total": 106,
+  "batch_size": 1,
+  "max_new_tokens": 160,
+  "answerable": 77,
+  "impossible": 29,
+  "exact_match_percent": 0.0,
+  "token_f1_percent": 9.93,
+  "abstention_rate_percent": 51.72,
+  "false_refusal_rate_percent": 51.95,
+  "method": "LoRA",
+  "generation_seconds": 178.603,
+  "mean_generation_seconds_per_question": 1.6849,
+  "questions_per_second": 0.593,
+  "peak_gpu_memory_gb": 3.096,
+  "retrieval": null,
+  "faithfulness_percent": null
+}

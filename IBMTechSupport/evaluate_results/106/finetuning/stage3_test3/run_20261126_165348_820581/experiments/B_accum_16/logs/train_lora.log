@@ -1,0 +1,86 @@
+W1126 17:04:04.168000 27628 Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+Train Samples: 539
+Validation Samples: 106
+
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]
+Loading weights:   4%|▍         | 15/338 [00:00<00:02, 126.16it/s]
+Loading weights:  10%|▉         | 33/338 [00:00<00:01, 155.25it/s]
+Loading weights:  14%|█▍        | 49/338 [00:00<00:02, 137.20it/s]
+Loading weights:  21%|██        | 71/338 [00:00<00:01, 139.97it/s]
+Loading weights:  26%|██▋       | 89/338 [00:00<00:01, 150.60it/s]
+Loading weights:  31%|███       | 105/338 [00:00<00:01, 136.50it/s]
+Loading weights:  36%|███▋      | 123/338 [00:00<00:01, 146.93it/s]
+Loading weights:  42%|████▏     | 143/338 [00:00<00:01, 150.17it/s]
+Loading weights:  47%|████▋     | 159/338 [00:01<00:01, 152.27it/s]
+Loading weights:  53%|█████▎    | 178/338 [00:01<00:01, 141.32it/s]
+Loading weights:  58%|█████▊    | 196/338 [00:01<00:00, 146.15it/s]
+Loading weights:  64%|██████▎   | 215/338 [00:01<00:00, 141.97it/s]
+Loading weights:  68%|██████▊   | 231/338 [00:01<00:00, 144.12it/s]
+Loading weights:  75%|███████▍  | 252/338 [00:01<00:00, 146.86it/s]
+Loading weights:  79%|███████▉  | 267/338 [00:01<00:00, 147.42it/s]
+Loading weights:  85%|████████▍ | 287/338 [00:01<00:00, 149.99it/s]
+Loading weights:  90%|████████▉ | 303/338 [00:02<00:00, 143.52it/s]
+Loading weights:  96%|█████████▌| 323/338 [00:02<00:00, 156.31it/s]
+Loading weights: 100%|██████████| 338/338 [00:02<00:00, 149.89it/s]
+C:\Projects\LLM_IBM_TechSupport\.venv\Lib\site-packages\transformers\modeling_utils.py:3195: FutureWarning: `gradient_checkpointing_enable` is deprecated and will be removed in v6. Use `activation_checkpointing_enable` instead.
+  warnings.warn(
+C:\Projects\LLM_IBM_TechSupport\.venv\Lib\site-packages\transformers\modeling_utils.py:3303: FutureWarning: `is_gradient_checkpointing` is deprecated and will be removed in v6. Use `is_activation_checkpointing` instead.
+  warnings.warn(
+GPU: NVIDIA GeForce RTX 3080 Ti
+Base Model: Qwen2.5-1.5B-Instruct
+LoRA Rank: 8
+trainable params: 1,089,536 || all params: 1,544,803,840 || trainable%: 0.0705
+
+[Epoch 1/2]
+[Training] Epoch 1/2 | Sample 1/539
+[Training] Epoch 1/2 | Sample 50/539
+[Training] Epoch 1/2 | Sample 100/539
+[Training] Epoch 1/2 | Sample 150/539
+[Training] Epoch 1/2 | Sample 200/539
+[Training] Epoch 1/2 | Sample 250/539
+[Training] Epoch 1/2 | Sample 300/539
+Step: 320/539 | Loss: 1.4753
+[Training] Epoch 1/2 | Sample 350/539
+[Training] Epoch 1/2 | Sample 400/539
+[Training] Epoch 1/2 | Sample 450/539
+[Training] Epoch 1/2 | Sample 500/539
+Step: 539/539 | Loss: 2.9801
+[Training] Epoch 1/2 | Sample 539/539
+Epoch 1 | Train Loss: 1.8884 | Val Loss: 1.8762
+Best LoRA Adapter: Saved
+
+[Epoch 2/2]
+[Training] Epoch 2/2 | Sample 1/539
+[Training] Epoch 2/2 | Sample 50/539
+[Training] Epoch 2/2 | Sample 100/539
+[Training] Epoch 2/2 | Sample 150/539
+[Training] Epoch 2/2 | Sample 200/539
+[Training] Epoch 2/2 | Sample 250/539
+[Training] Epoch 2/2 | Sample 300/539
+Step: 320/539 | Loss: 0.0989
+[Training] Epoch 2/2 | Sample 350/539
+[Training] Epoch 2/2 | Sample 400/539
+[Training] Epoch 2/2 | Sample 450/539
+[Training] Epoch 2/2 | Sample 500/539
+Step: 539/539 | Loss: 0.0284
+[Training] Epoch 2/2 | Sample 539/539
+Epoch 2 | Train Loss: 1.7601 | Val Loss: 1.8374
+Best LoRA Adapter: Saved
+
+[LoRA Training Result]
+model: Qwen2.5-1.5B-Instruct
+method: LoRA
+train_samples: 539
+val_samples: 106
+epochs: 2
+learning_rate: 0.0002
+max_length: 2048
+grad_accum: 16
+lora_rank: 8
+best_val_loss: 1.8374
+training_seconds: 525.158
+peak_gpu_memory_gb: 4.87
+history: [{'epoch': 1, 'train_loss': 1.8884, 'val_loss': 1.8762, 'optimizer_steps': 34}, {'epoch': 2, 'train_loss': 1.7601, 'val_loss': 1.8374, 'optimizer_steps': 34}]
+Adapter Path: C:\Projects\LLM_IBM_TechSupport\IBMTechSupport\models\finetuning\stage3_test3\run_20261126_165348_820581\B_accum_16\lora
+Metrics Path: C:\Projects\LLM_IBM_TechSupport\IBMTechSupport\evaluate_results\106\finetuning\stage3_test3\run_20261126_165348_820581\experiments\B_accum_16\training\lora_train_metrics.json
+LoRA Training: OK

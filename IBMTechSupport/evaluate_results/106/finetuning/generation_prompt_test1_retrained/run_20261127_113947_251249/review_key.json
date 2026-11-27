@@ -1,0 +1,387 @@
+[
+  {
+    "id": "TRAIN_Q270",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q113",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q037",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "TRAIN_Q549",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q006",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q535",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "DEV_Q035",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q316",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q282",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "DEV_Q167",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "DEV_Q028",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q172",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q236",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q307",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q581",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q295",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q431",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "TRAIN_Q336",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "DEV_Q220",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "TRAIN_Q231",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "TRAIN_Q526",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q343",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "DEV_Q122",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "TRAIN_Q222",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "DEV_Q154",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "DEV_Q158",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q456",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q157",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "TRAIN_Q380",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q171",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q003",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "TRAIN_Q594",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q070",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "TRAIN_Q592",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "TRAIN_Q463",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "TRAIN_Q221",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q360",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "TRAIN_Q272",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q422",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "TRAIN_Q165",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q233",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "TRAIN_Q419",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "TRAIN_Q071",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q553",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q498",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "DEV_Q147",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q234",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "TRAIN_Q599",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q075",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "DEV_Q252",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q111",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "TRAIN_Q504",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "TRAIN_Q256",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "DEV_Q266",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "DEV_Q210",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "DEV_Q076",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "DEV_Q184",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "DEV_Q021",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q436",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "DEV_Q224",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "DEV_Q186",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q415",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q482",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "DEV_Q109",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "TRAIN_Q493",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "DEV_Q074",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "TRAIN_Q583",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q081",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "DEV_Q194",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "DEV_Q101",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q299",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q541",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "TRAIN_Q487",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "TRAIN_Q208",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  },
+  {
+    "id": "TRAIN_Q414",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q063",
+    "A": "B_direct_answer",
+    "B": "A_original_prompt"
+  },
+  {
+    "id": "TRAIN_Q537",
+    "A": "A_original_prompt",
+    "B": "B_direct_answer"
+  }
+]

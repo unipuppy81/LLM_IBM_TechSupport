@@ -1,0 +1,215 @@
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights:   7%|▋         | 23/338 [00:00<00:01, 166.64it/s]Loading weights:  13%|█▎        | 45/338 [00:00<00:01, 164.86it/s]Loading weights:  18%|█▊        | 62/338 [00:00<00:01, 158.68it/s]Loading weights:  24%|██▍       | 81/338 [00:00<00:01, 141.01it/s]Loading weights:  29%|██▉       | 99/338 [00:00<00:01, 149.24it/s]Loading weights:  35%|███▌      | 119/338 [00:00<00:01, 157.06it/s]Loading weights:  40%|███▉      | 135/338 [00:00<00:01, 149.91it/s]Loading weights:  46%|████▌     | 155/338 [00:01<00:01, 152.89it/s]Loading weights:  51%|█████     | 171/338 [00:01<00:01, 149.26it/s]Loading weights:  55%|█████▌    | 186/338 [00:01<00:01, 148.98it/s]Loading weights:  59%|█████▉    | 201/338 [00:01<00:01, 132.42it/s]Loading weights:  65%|██████▌   | 220/338 [00:01<00:00, 146.08it/s]Loading weights:  70%|███████   | 237/338 [00:01<00:00, 152.25it/s]Loading weights:  75%|███████▍  | 253/338 [00:01<00:00, 139.25it/s]Loading weights:  79%|███████▉  | 268/338 [00:01<00:00, 140.04it/s]Loading weights:  84%|████████▍ | 285/338 [00:01<00:00, 128.74it/s]Loading weights:  90%|████████▉ | 304/338 [00:02<00:00, 142.67it/s]Loading weights:  95%|█████████▍| 321/338 [00:02<00:00, 142.76it/s]Loading weights: 100%|██████████| 338/338 [00:02<00:00, 149.05it/s]
+C:\Projects\LLM_IBM_TechSupport\.venv\Lib\site-packages\transformers\modeling_utils.py:3303: FutureWarning: `is_gradient_checkpointing` is deprecated and will be removed in v6. Use `is_activation_checkpointing` instead.
+  warnings.warn(
+Generated: 1/106
+Generated: 2/106
+Generated: 3/106
+Generated: 4/106
+Generated: 5/106
+Generated: 6/106
+Generated: 7/106
+Generated: 8/106
+Generated: 9/106
+Generated: 10/106
+Generated: 11/106
+Generated: 12/106
+Generated: 13/106
+Generated: 14/106
+Generated: 15/106
+Generated: 16/106
+Generated: 17/106
+Generated: 18/106
+Generated: 19/106
+Generated: 20/106
+Generated: 21/106
+Generated: 22/106
+Generated: 23/106
+Generated: 24/106
+Generated: 25/106
+Generated: 26/106
+Generated: 27/106
+Generated: 28/106
+Generated: 29/106
+Generated: 30/106
+Generated: 31/106
+Generated: 32/106
+Generated: 33/106
+Generated: 34/106
+Generated: 35/106
+Generated: 36/106
+Generated: 37/106
+Generated: 38/106
+Generated: 39/106
+Generated: 40/106
+Generated: 41/106
+Generated: 42/106
+Generated: 43/106
+Generated: 44/106
+Generated: 45/106
+Generated: 46/106
+Generated: 47/106
+Generated: 48/106
+Generated: 49/106
+Generated: 50/106
+Generated: 51/106
+Generated: 52/106
+Generated: 53/106
+Generated: 54/106
+Generated: 55/106
+Generated: 56/106
+Generated: 57/106
+Generated: 58/106
+Generated: 59/106
+Generated: 60/106
+Generated: 61/106
+Generated: 62/106
+Generated: 63/106
+Generated: 64/106
+Generated: 65/106
+Generated: 66/106
+Generated: 67/106
+Generated: 68/106
+Generated: 69/106
+Generated: 70/106
+Generated: 71/106
+Generated: 72/106
+Generated: 73/106
+Generated: 74/106
+Generated: 75/106
+Generated: 76/106
+Generated: 77/106
+Generated: 78/106
+Generated: 79/106
+Generated: 80/106
+Generated: 81/106
+Generated: 82/106
+Generated: 83/106
+Generated: 84/106
+Generated: 85/106
+Generated: 86/106
+Generated: 87/106
+Generated: 88/106
+Generated: 89/106
+Generated: 90/106
+Generated: 91/106
+Generated: 92/106
+Generated: 93/106
+Generated: 94/106
+Generated: 95/106
+Generated: 96/106
+Generated: 97/106
+Generated: 98/106
+Generated: 99/106
+Generated: 100/106
+Generated: 101/106
+Generated: 102/106
+Generated: 103/106
+Generated: 104/106
+Generated: 105/106
+Generated: 106/106
+Generated: 1/106
+Generated: 2/106
+Generated: 3/106
+Generated: 4/106
+Generated: 5/106
+Generated: 6/106
+Generated: 7/106
+Generated: 8/106
+Generated: 9/106
+Generated: 10/106
+Generated: 11/106
+Generated: 12/106
+Generated: 13/106
+Generated: 14/106
+Generated: 15/106
+Generated: 16/106
+Generated: 17/106
+Generated: 18/106
+Generated: 19/106
+Generated: 20/106
+Generated: 21/106
+Generated: 22/106
+Generated: 23/106
+Generated: 24/106
+Generated: 25/106
+Generated: 26/106
+Generated: 27/106
+Generated: 28/106
+Generated: 29/106
+Generated: 30/106
+Generated: 31/106
+Generated: 32/106
+Generated: 33/106
+Generated: 34/106
+Generated: 35/106
+Generated: 36/106
+Generated: 37/106
+Generated: 38/106
+Generated: 39/106
+Generated: 40/106
+Generated: 41/106
+Generated: 42/106
+Generated: 43/106
+Generated: 44/106
+Generated: 45/106
+Generated: 46/106
+Generated: 47/106
+Generated: 48/106
+Generated: 49/106
+Generated: 50/106
+Generated: 51/106
+Generated: 52/106
+Generated: 53/106
+Generated: 54/106
+Generated: 55/106
+Generated: 56/106
+Generated: 57/106
+Generated: 58/106
+Generated: 59/106
+Generated: 60/106
+Generated: 61/106
+Generated: 62/106
+Generated: 63/106
+Generated: 64/106
+Generated: 65/106
+Generated: 66/106
+Generated: 67/106
+Generated: 68/106
+Generated: 69/106
+Generated: 70/106
+Generated: 71/106
+Generated: 72/106
+Generated: 73/106
+Generated: 74/106
+Generated: 75/106
+Generated: 76/106
+Generated: 77/106
+Generated: 78/106
+Generated: 79/106
+Generated: 80/106
+Generated: 81/106
+Generated: 82/106
+Generated: 83/106
+Generated: 84/106
+Generated: 85/106
+Generated: 86/106
+Generated: 87/106
+Generated: 88/106
+Generated: 89/106
+Generated: 90/106
+Generated: 91/106
+Generated: 92/106
+Generated: 93/106
+Generated: 94/106
+Generated: 95/106
+Generated: 96/106
+Generated: 97/106
+Generated: 98/106
+Generated: 99/106
+Generated: 100/106
+Generated: 101/106
+Generated: 102/106
+Generated: 103/106
+Generated: 104/106
+Generated: 105/106
+Generated: 106/106

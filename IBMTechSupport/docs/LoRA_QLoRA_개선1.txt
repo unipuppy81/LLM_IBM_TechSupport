@@ -1,5 +1,8 @@
 LoRA/QLoRA 개선
 
+기록 기준: 2026-11-27, DAPT+SFT Test2 후보 A 완료 / 후보 B 부분 실행 및 Train vs Validation 진단까지. 후속 실험은 실행 로그 및 분석 CSV/JSON 기준.
+대상: Qwen2.5-1.5B-Instruct. Stage 1 이후 개선 실험은 LoRA만 수행.
+
 # 평가 데이터: val_106.json (답변 가능 77건, 답변 불가능 29건)
 평가 지표			LoRA		QLoRA
 Exact Match		0%		0%
@@ -11,7 +14,17 @@ Answer Correctness	0%		0%
 추론 GPU 메모리		2.929 GB	1.147 GB
 평균 추론 시간		0.337초	0.472초
 
-두 모델 모두 모든 질문에 답변을 거부하는 상태
+두 모델 모두 모든 질문에 INSUFFICIENT_INFORMATION으로 답변한 상태.
+
+## 평가 지표 해석
+정상 거부율 = 답변 불가능 레이블 29건 중 정확한 거부 문자열을 출력한 비율.
+잘못된 거부율 = 답변 가능 레이블 77건 중 정확한 거부 문자열을 출력한 비율.
+Youden's J(%p) = 정상 거부율 - 잘못된 거부율.
+Token F1, Exact Match, Answer Correctness는 답변 가능 77건을 기준으로 집계.
+Answer Correctness는 기존 LLM Judge의 엄격한 CORRECT 판정 비율이며, 사람이 검증한 정답률은 아님.
+N/A는 해당 평가를 수행하지 않았다는 의미이며 0%와 구분.
+Reference Unsupported/Contradiction은 참조 정답·문서 기반 자동 판정 지표이며 실제 환각률이나 검색 근거 충실도를 의미하지 않음.
+val_106.json은 반복 최적화에 사용한 개발 검증 데이터이므로 독립적인 최종 일반화 성능으로 해석하지 않음.
 
 
 
@@ -48,6 +61,9 @@ Loss 감소만으로 학습이 성공했다고 판단할 수 없다.
 Stage 0. 평가 체계 구축
    평가 지표 및 비교 기준 고정
 
+초기 원본 학습 데이터 634건 중 Validation ID 중복 83건 제거 → 551건.
+최초 실험의 실제 학습 샘플 632건과 원본 데이터 634건은 구분한다.
+
 ## 최종 Baseline
 평가 지표			Base		LoRA		QLoRA
 Token F1			22.24%	0%		0%
@@ -69,7 +85,7 @@ Stage 1. 데이터 및 학습 구조 검증
 기존 데이터 검증 결과
 ## 검증 결과
 검증 항목				결과			조치
-Train/Validation 데이터 누출	0건			유지
+Train/Validation ID 및 정규화 질문 중복	0건	유지
 완전 중복				2건			제거 후보
 정규화 중복				초과 17건		검토
 라벨 충돌				10건			제거 후보
@@ -80,7 +96,7 @@ Label Masking			오류 0건		유지
 EOS Token				오류 0건		유지
 질문 토큰 절단			42건			개선 후보
 정답 토큰 절단			57건			개선 후보
-정답 원문 불일치			4건			내용 검토
+정답 문자열이 근거에 그대로 포함되지 않은 사례	4건	내용 검토
 
 
 ## 과도한 답변 거부의 원인 후보
@@ -95,7 +111,7 @@ EOS Token				오류 0건		유지
 답변 가능	75.13
 답변 불가능	4
 
-현재 학습 방식은 샘플별 평균 Loss를 계산한다. 따라서 긴 기술 답변과 짧은 거부 답변이 샘플 단위로 동일한 비중을 가진다.
+현재 학습 방식은 샘플별 평균 Loss를 계산한다. 가중치 적용 전에는 긴 기술 답변과 짧은 거부 답변에 동일한 샘플 단위 계수를 부여한다. 실제 Gradient 크기가 동일하다는 의미는 아니다.
 반복되는 짧은 거부 답변을 과도하게 학습했을 가능성이 있다. 다만 아직 원인으로 확정할 수는 없다
 
 
@@ -150,7 +166,7 @@ Validation Loss는 소폭 감소했으나 실제 답변 성능에는 변화가 �
 ## 결과
 답변 성능 개선은 확인되지 않았으나 데이터 품질 및 정합성을 위해 수정 사항을 유지한다.
 
-최종 학습 데이터
+Stage 1 최종 학습 데이터 (이후 비교 기준)
 전체: 539건
 답변 가능: 367건
 답변 불가능: 172건
@@ -317,16 +333,17 @@ Loss Weighting은 과도한 답변 거부 성향을 완화했으나 답변 가�
 
 
 ## 최종 선정
-E(0.175)를 Stage 2 최종 설정으로 채택한다.
+E(0.175)를 Stage 2의 잠정 비교 기준으로 채택한다. 이후 closed-book LoRA 실험의 Baseline으로 재사용한다.
 선정 근거 : 정상 거부율 50% 이상 충족, 답변 정확도 개선, 전체 후보 중 가장 높은 Youden's J 및 가장 낮은 Reference Unsupported 비율.
 
 자동 평가 결과는 사람의 검증이 필요하며, 판별력 개선의 통계적 유의성은 검증되지 않았다.
+데이터 균형 조절, Balanced Sampling, Hard Negative, 데이터 증강은 이 단계에서 미실행. QLoRA 재학습은 보류.
 
 
 =================================================
 
-Stage 3. 하이퍼파라미터 최적화
-   학습 조건 최적화
+Stage 3. 하이퍼파라미터 최적화 및 추가 원인 분석
+   학습 조건과 추론 프롬프트 비교
 
 
 # Test1: Learning Rate 최적화
@@ -555,7 +572,7 @@ B : 간결한 프롬프트 적용 결과 Token F1은 15.95%로 증가했으나 �
 
 ## 결과
 
-Base LLM은 답변 정확도 62.34%를 기록했으나 답변 불가능 질문도 거부하지 않았다.
+Base LLM은 Answer Correctness 62.34%를 기록했으나 답변 불가능 질문에서 정확한 거부 문자열을 출력하지 않았다.
 
 LoRA 적용 이후 정상 거부율은 75.86%로 증가했으나 잘못된 거부율도 63.64%로 증가했다.
 
@@ -563,13 +580,22 @@ LoRA 적용 이후 정상 거부율은 75.86%로 증가했으나 잘못된 거�
 
 답변 불가능 질문 29건 중 22건이 LoRA 적용 이후 거부로 전환됐다.
 
-Fine-tuning 이후 과도한 답변 거부 현상이 발생했으며 전체 답변 정확도가 크게 저하됐다.
+Fine-tuning 이후 과도한 답변 거부 현상이 발생했으며 답변 가능 77건 기준 자동 평가 정답률이 크게 저하됐다.
+이는 기술 지식 자체의 망각을 확정하는 근거는 아니다. 출력 거부 성향이 강화된 결과일 수 있다.
+거부 출력 증가로 추론 시간이 짧아졌을 수 있으므로 Questions/s 증가를 토큰 처리 속도 개선으로 해석하지 않는다.
 
 학습 목표 및 데이터의 답변 가능 여부 레이블을 재검토할 필요가 있다.
 
 QLoRA 재학습은 수행하지 않았다.
 
 
+
+LR Scheduler, Warmup, Weight Decay, Gradient Clipping의 추가 탐색은 보류.
+
+=================================================
+
+Stage 4. LoRA 구조 최적화
+   Adapter 구조 및 학습 범위 개선
 
 # Test1: Target Modules 최적화
 
@@ -678,6 +704,15 @@ QLoRA 재학습은 수행하지 않음.
 
 
 
+Alpha/Rank 비율은 2로 고정하여 Rank와 Alpha를 함께 변경했다. Alpha 단독 최적화는 수행하지 않았다.
+Dropout 등 나머지 구조 탐색은 보류.
+
+=================================================
+
+Stage 4 이후 추가 원인 분석: Data Composition
+   학습 데이터 구성 및 근거 기반 학습 검증
+   실제 실행 폴더명: data_composition_test1~3
+
 # Test1: 답변 가능 데이터 단독 학습
 
 문제점 : 반복적인 거부 문자열 학습으로 인한 기술적 답변 생성 능력 저하 가능성
@@ -691,7 +726,7 @@ QLoRA 재학습은 수행하지 않음.
 | 전체 학습 데이터 | 539 | 367 |
 | 답변 가능 데이터 | 367 | 367 |
 | 답변 불가능 데이터 | 172 | 0 |
-| Epoch당 Optimizer Update | 68 | 46 |
+| Epoch당 Optimizer Update 구간 | 68 | 46 |
 
 나머지 학습 하이퍼파라미터 유지.
 
@@ -720,16 +755,983 @@ QLoRA 재학습은 수행하지 않음.
 
 잘못된 거부 현상이 제거됐으나 정상 거부 능력도 함께 사라짐.
 
-답변 거부 데이터가 기술적 답변 생성 능력을 억제하는 주요 요인일 가능성을 확인함.
+답변 거부 데이터가 기술적 답변 출력을 억제하는 요인일 가능성을 뒷받침함.
+동일 상세 프롬프트의 Base LLM(Answer Correctness 62.34%, Token F1 25.00%)을 초과하지 못함.
 
-단, 학습 데이터 수와 Optimizer Update 수도 함께 감소했으므로 거부 학습의 독립적인 영향으로 확정할 수 없음.
+단, 학습 데이터 수와 Optimizer Update 구간 수도 함께 감소했으므로 거부 학습의 독립적인 영향으로 확정할 수 없음.
 
 원인 분석 목적의 실험으로 기존 Baseline을 즉시 교체하지 않음.
 
+# Test2: 답변 가능 데이터 확장 (367 → 532건)
+
+문제점 : 답변 가능 데이터 단독 학습에서 기술적 답변 생성은 회복됐으나 Base LLM보다 낮은 정확도와 거부 능력 부재.
+변경 사항 : 기존 답변 가능 367건에 학습 근거 문서에서 추출·구성한 QA 후보 165건 추가. 스크립트는 review.csv에서 승인된 후보를 사용한다. 후보의 개별 기술적 정확성은 본 검토에서 재판정하지 않음.
+
+## 실험 구성
+
+| 항목 | Baseline (Test1) | Expanded |
+|---|---:|---:|
+| 전체 학습 데이터 | 367 | 532 |
+| 답변 가능 데이터 | 367 | 532 |
+| 답변 불가능 데이터 | 0 | 0 |
+| Epoch당 Optimizer Update 구간 | 46 | 67 |
+
+기존 상세 System Prompt, LR 2e-4, Epoch 2, Gradient Accumulation 8, Rank 8, Alpha 16 유지.
+답변 가능 데이터만 사용하며 일반 샘플 평균 CE 적용. 동일 val_106.json으로 비교.
+
+## 평가 결과
+
+| 평가 지표 | Baseline (367) | Expanded (532) |
+|---|---:|---:|
+| Token F1(%) | 21.70 | 21.50 |
+| Answer Correctness(%) | 58.44 | 53.25 |
+| 정상 거부율(%) | 0 | 0 |
+| 잘못된 거부율(%) | 0 | 0 |
+| Youden's J(%p) | 0 | 0 |
+| Exact Match(%) | 0 | 0 |
+| Validation Loss | 2.2382 | 2.2794 |
+| 학습 시간(초) | 504.117 | 485.461 |
+| 학습 GPU(GiB) | 4.872 | 4.872 |
+| 추론 GPU(GiB) | 2.990 | 2.990 |
+| Questions/s | 0.420 | 0.370 |
+| Reference Contradiction(%) | 0 | 0 |
+| Reference Unsupported(%) | 16.88 | 19.48 |
+| 학습 파라미터 수 | 1,089,536 | 1,089,536 |
+
+## 결과
+
+Token F1 0.20%p 감소, Answer Correctness 5.19%p 감소, Reference Unsupported 2.60%p 증가.
+데이터 확장만으로 답변 성능을 개선하지 못했으며 거부 능력도 회복되지 않음.
+샘플 수와 업데이트 구간도 함께 변경되었으므로 추가 데이터의 품질만을 단독 원인으로 확정하지 않음.
+원인 분석 목적의 실험이며 532건을 최종 학습 데이터로 자동 채택하지 않음.
+LLM Judge 평가 완료. QLoRA 미실행.
+
+결과: evaluate_results/106/finetuning/data_composition_test2/run_20261127_000005_052233/comparison.json
+
+
+# Test3: 근거 문서 입력 기반 LoRA 학습 및 Oracle/RAG 비교
+
+문제점 : 질문만 받는 closed-book LoRA의 학습 목표와 문서 기반 답변 가능 여부 레이블이 일치하지 않을 가능성.
+변경 사항 : 질문과 근거 문서를 함께 입력하고, 제공된 근거에 기반해 답변 또는 거부하도록 LoRA 재학습. 539건의 기존 학습 데이터를 다시 사용.
+
+## 실험 구성
+
+| 실험 | 모델 | 입력 근거 |
+|---|---|---|
+| A (oracle_base) | Base LLM | 데이터셋 지정 근거 문서 |
+| B (oracle_lora) | Base LLM + Context LoRA | 동일 Oracle 근거 |
+| C (rag_base) | Base LLM | 기존 Stage 3 Retrieval Top-5 |
+| D (rag_lora) | Base LLM + Context LoRA | 동일 검색 근거 |
+
+Oracle: 답변 가능 질문에 데이터셋 지정 문서를 사용하고 답변 불가능 질문에는 빈 근거 사용.
+RAG: 정답/레이블을 검색기에 제공하지 않고 기존 검색 결과를 사용.
+동일한 입력 토큰을 각 Base/LoRA 쌍에서 공유. Oracle과 RAG는 별도 조건.
+외부 Guardrail은 사용하지 않은 Generator 단독 비교이며 기존 전체 RAG Pipeline 성능과 구분한다.
+
+## 학습 설정
+
+| 항목 | 설정 |
+|---|---|
+| 학습 데이터 | 539건 (답변 가능 367, 불가능 172) |
+| 답변 가능 근거 | 지정 문서 367건 |
+| 답변 불가능 근거 | 빈 근거 86건, distractor 문서 86건 |
+| System Prompt | 제공된 근거에 기반해 답변 또는 거부 |
+| Max Sequence Length | 2048 |
+| Max Question / Answer / New Tokens | 192 / 160 / 160 |
+| Loss Weight (가능 / 불가능) | 1.0 / 0.175 |
+| LR / Epoch / Gradient Accumulation | 2e-4 / 2 / 8 |
+| Rank / Alpha / Dropout | 8 / 16 / 0.05 |
+| Target Modules | q_proj, v_proj |
+| Seed | 42 |
+| 학습 GPU(GiB) | 6.565 |
+| 학습 시간(초) | 1077.285 |
+| Best Validation Loss | 0.5102 (Epoch 1) |
+
+기존 closed-book 학습과 입력 및 목표가 다르므로 Validation Loss를 직접 비교하지 않는다.
+
+## 평가 결과
+
+| 평가 지표 | A Oracle Base | B Oracle LoRA | C RAG Base | D RAG LoRA |
+|---|---:|---:|---:|---:|
+| Token F1(%) | 37.66 | 45.08 | 29.28 | 33.43 |
+| Answer Correctness(%) | 84.42 | 63.64 | 59.74 | 55.84 |
+| 정상 거부율(%) | 44.83 | 100 | 6.90 | 6.90 |
+| 잘못된 거부율(%) | 2.60 | 0 | 15.58 | 0 |
+| Youden's J(%p) | 42.23 | 100 | -8.68 | 6.90 |
+| Exact Match(%) | 0 | 12.99 | 0 | 10.39 |
+| Reference Contradiction(%) | 0 | 0 | 0 | 0 |
+| Reference Unsupported(%) | 13.33 | 19.48 | 21.54 | 18.18 |
+| 추론 GPU(GiB) | 3.053 | 3.057 | 3.053 | 3.058 |
+| Questions/s | 0.189 | 0.296 | 0.180 | 0.281 |
+
+## 입력 및 검색 검증
+
+| 검증 항목 | 결과 |
+|---|---:|
+| 학습 답변 가능 질문의 근거 내 정답 문자열 확인 | 360/367 |
+| Oracle 평가 답변 가능 질문의 근거 내 정답 문자열 확인 | 53/77 |
+| RAG 검색 지정 문서 적중 | 68/77 |
+| RAG 입력 내 정답 문자열 확인 | 31/77 |
+| 학습 질문 절단 | 40건 |
+| 평가 질문 절단 | 11건 |
+| 최대 실제 Prompt 토큰 | 1887 |
+| 학습/검증 근거 문서명 중복 | 7개 |
+
+## 결과
+
+Oracle: LoRA 적용으로 Token F1 7.42%p 증가, 잘못된 거부율 2.60%p 감소, 정상 거부율 55.17%p 증가. 그러나 Answer Correctness는 20.78%p 감소.
+RAG: LoRA 적용으로 Token F1 4.15%p 증가, 잘못된 거부율 15.58%p 감소. 정상 거부율은 6.90%로 개선되지 않았고 Answer Correctness는 3.90%p 감소.
+RAG LoRA는 기존 closed-book LoRA(정답률 16.88%)보다 정답률이 높으나, 입력·프롬프트·학습 목표가 동시에 달라진 결과라 LoRA 자체의 독립 효과로 볼 수 없다.
+
+## 해석 및 한계
+
+- Oracle LoRA의 Youden's J 100%는 해당 데이터와 입력 구성에서의 결과이다. 답변 불가능 질문에 빈 근거가 사용되므로 근거 유무만으로도 레이블을 구분할 수 있다. 실제 검색 문서의 충분성을 완벽하게 판단했다고 해석하지 않는다.
+- RAG LoRA에서 답변 불가능 레이블 29건 중 정확한 거부 출력은 2건이며, 27건은 비거부 출력이다. 다만 검색 문서가 원래 레이블과 달리 충분한 근거를 제공할 가능성이 있어 27건을 모두 환각으로 볼 수 없다.
+- Oracle 및 RAG에서 정답 문자열이 근거에 그대로 없는 경우도 답변 가능한 근거가 존재할 수 있다. 문서 적중과 실제 근거 충분성은 구분해야 한다.
+- 학습의 distractor 문서는 휴리스틱으로 선택되었으며 실제 불충분 근거인지 검증된 것은 아니다.
+- 근거 문서명 중복 7개는 별도로 검토해야 한다. 이는 질문 ID 중복과 구분되며, 문서 독립 일반화는 검증되지 않았다.
+- 기존 Judge는 참조 정답과 문서를 기반으로 평가하며 모델이 실제 받은 근거에 대한 Faithfulness를 직접 검증하지 않는다.
+- Oracle과 RAG의 품질 평가 완료. 최종 Adapter 자동 선정 없음. QLoRA 미실행.
+
+결과: evaluate_results/106/finetuning/data_composition_test3/run_20261127_003107_337442/comparison.json
+Context LoRA Adapter: models/finetuning/data_composition_test3/run_20261127_003107_337442/lora/
+
+
 =================================================
 
-Stage 4. LoRA 구조 최적화
-   Adapter 구조 및 학습 범위 개선
+Data Composition 이후 추가 원인 분석: Generation Prompt
+   Closed-book LoRA의 답변 생성 능력 검증
+
+# Test1: 답변 생성 System Prompt 비교
+
+문제점 : Data Composition Test2의 자동 정답률 신뢰성 부족 및 기술적 답변 오류.
+변경 사항 : 532건으로 학습한 LoRA를 기준으로 추론 System Prompt만 변경하여 비교.
+기존 Correctness Judge와 RAG Judge의 모델 및 코드는 유지. 이번 생성 비교에서는 Judge를 실행하지 않음.
+
+## 최초 실행
+
+스크립트: run_generation_prompt_test1.py
+기존 Data Composition Test2의 저장된 예측과 원본 Adapter를 재사용할 계획이었으나,
+회사 PC에 adapter_config.json 및 Adapter 가중치가 필요한 경로에 없어 FileNotFoundError 발생.
+신규 프롬프트 추론은 실행되지 않음.
+
+## 재학습 및 실험 구성
+
+스크립트: run_generation_prompt_test1_retrain.py
+기존 Test2의 학습 스냅샷과 Base Model, 학습 설정을 사용하여 신규 Adapter 생성.
+기존 결과와 혼용하지 않고 별도 경로에 저장. 신규 Adapter 하나로 두 프롬프트를 각각 실행함.
+
+| 항목 | 설정 |
+|---|---|
+| Base Model | Qwen2.5-1.5B-Instruct |
+| 학습 데이터 | 532건 (답변 가능 532, 불가능 0) |
+| Validation | val_106.json (77/29) |
+| Epoch / LR / Gradient Accumulation | 2 / 2e-4 / 8 |
+| Max Sequence Length | 2048 |
+| Max Question / Answer / New Tokens | 192 / 160 / 160 |
+| Rank / Alpha / Dropout | 8 / 16 / 0.05 |
+| Target Modules | q_proj, v_proj |
+| Seed | 42 |
+| Epoch당 Optimizer Update 구간 | 67 |
+| 학습 파라미터 수 | 1,089,536 |
+| 실행 GPU | NVIDIA GeForce RTX 3080 Ti |
+| Checkpoint 선정 | 최소 Validation Loss |
+
+| 실험 | 추론 System Prompt |
+|---|---|
+| A_original_prompt | 기존 상세 프롬프트 |
+| B_direct_answer | 핵심 요청에 직접 답변하고 정확한 설정·명령·절차·버전·수치 제시, 질문 반복 및 서론만 출력하는 답변 금지 |
+
+두 실험 모두 동일 신규 Adapter, 동일 질문 입력, Batch Size 1, Greedy Decoding, Max New Tokens 160 유지.
+학습은 기존 상세 프롬프트로 수행. 추론 시에만 프롬프트 변경. RAG 및 Judge 미실행.
+
+## 재학습 결과
+
+| 평가 지표 | 기존 Test2 | 재학습 |
+|---|---:|---:|
+| 학습 데이터 | 532 | 532 |
+| Best Validation Loss | 2.2794 | 2.2796 |
+| 학습 시간(초) | 485.461 | 451.647 |
+| 학습 GPU(GiB) | 4.872 | 4.868 |
+
+| Epoch | Train Loss | Validation Loss | Optimizer Update 구간 |
+|---|---:|---:|---:|
+| 1 | 2.6616 | 2.2796 | 67 |
+| 2 | 2.4864 | 2.3398 | 67 |
+
+Epoch 1의 Adapter가 최종 저장됨. Epoch 2의 Train Loss는 감소했으나 Validation Loss는 증가함.
+기존 Best Validation Loss와 유사하나 동일 가중치가 재현됐다는 의미는 아님.
+기존 Test2 Token F1은 21.50%, 재학습 후 기존 Prompt는 20.12%로 차이가 발생함.
+
+## 평가 결과
+
+| 평가 지표 | A 기존 Prompt | B 개선 Prompt |
+|---|---:|---:|
+| Token F1(%) | 20.12 | 17.36 |
+| Exact Match(%) | 0 | 0 |
+| Answer Correctness(%) | N/A | N/A |
+| 정상 거부율(%) | 0 | 0 |
+| 잘못된 거부율(%) | 0 | 0 |
+| Youden's J(%p) | 0 | 0 |
+| 추론 시간(초) | 254.766 | 263.434 |
+| 평균 추론 시간(초) | 2.4035 | 2.4852 |
+| 추론 GPU(GiB) | 3.103 | 2.969 |
+| Questions/s | 0.416 | 0.402 |
+| 반복 문장 감지 | 1 | 1 |
+| 서론만 출력 의심 | 0 | 1 |
+
+답변 가능 질문 77건의 개별 Token F1 변화: 개선 27건, 악화 45건, 동일 5건.
+기계적 오류 감지는 휴리스틱이며 실제 기술적 오류를 전수 검증한 결과가 아님.
+
+## 결과
+
+개선 Prompt의 Token F1이 2.76%p 감소하고 거부 능력은 개선되지 않음.
+기존 상세 Prompt를 잠정 유지하고 재학습한 Adapter를 이후 원인 분석에 재사용함.
+Token F1 및 Exact Match만으로 기술적 정확성을 판단하지 않음.
+Judge 모델 변경 없음. QLoRA 재학습 없음.
+
+결과: evaluate_results/106/finetuning/generation_prompt_test1_retrained/run_20261127_113947_251249/
+Adapter: models/finetuning/generation_prompt_test1_retrained/run_20261127_113947_251249/lora/
+주요 파일: comparison.json, comparison.txt, training/lora_train_metrics.json,
+A_original_prompt/predictions.jsonl, B_direct_answer/predictions.jsonl,
+answer_comparison.jsonl, blind_review.csv, review_key.json, training_complete.json
+
+
+# Test2: 실제 생성 답변의 기술적 오류 분석
+
+문제점 : 프롬프트 변경만으로 생성 성능이 개선되지 않았으며 기존 Correctness Judge의 오판 가능성도 확인됨.
+변경 사항 : Test1의 답변 가능 질문 77건에 대한 두 프롬프트의 생성 답변 154건을 비교 검토.
+기존 Judge 대신 ChatGPT가 질문·기준 정답·필요한 경우 제공된 원문 근거를 대조하여 판정.
+신규 학습, 추론 및 검색 없음. 답변 불가능 질문 29건은 이번 기술 정확성 검토 대상에서 제외.
+
+## 판정 기준
+
+CORRECT : 핵심 요구사항을 충족하고 중대한 기술적 오류가 없음.
+PARTIAL : 일부 필수 정보는 맞으나 완전한 답변은 아님.
+INCORRECT : 기술적 오류 또는 질문 요구사항에 답하지 못함.
+UNCERTAIN : 참조 자료로 대체 주장 등을 충분히 검증하지 못함.
+
+## 블라인드 검토 결과 (77건씩)
+
+| 평가 지표 | 블라인드 A | 블라인드 B |
+|---|---:|---:|
+| CORRECT | 3 | 3 |
+| PARTIAL | 13 | 8 |
+| INCORRECT | 55 | 62 |
+| UNCERTAIN | 6 | 4 |
+| 엄격한 CORRECT 비율(%) | 3.90 | 3.90 |
+
+블라인드 A/B는 질문마다 무작위로 섞인 답변 위치이며 Test1의 A_original_prompt/B_direct_answer와 동일하지 않음.
+따라서 이 표를 프롬프트별 성능 비교에 직접 사용하면 안 됨.
+
+## 프롬프트별 재집계 (배정 순서 복원)
+
+원본 blind_review.csv와 판정 CSV의 질문 ID, 질문, 기준 정답, A/B 답변 및 행 순서가 동일함을 확인.
+실행 스크립트의 random.Random(42) 및 질문별 swap 규칙을 같은 행 순서로 재현하여 프롬프트 배정을 복원함.
+실제 실행 결과의 review_key.json은 미확인 상태이므로 아래 프롬프트별 수치는 복원에 기반한 잠정 집계임.
+
+| 평가 지표 | 기존 상세 Prompt | 개선 직접 답변 Prompt |
+|---|---:|---:|
+| CORRECT | 2 | 4 |
+| PARTIAL | 13 | 8 |
+| INCORRECT | 59 | 58 |
+| UNCERTAIN | 3 | 7 |
+| 엄격한 CORRECT 비율(%) | 2.60 | 5.19 |
+
+## 주요 오류 유형 (프롬프트별 복원 집계)
+
+| 오류 유형 | 기존 상세 Prompt | 개선 직접 답변 Prompt |
+|---|---:|---:|
+| 기술적 내용 불일치 | 26 | 25 |
+| 근거 미확인 주장 또는 대체 절차 | 18 | 29 |
+| 필수 정보 누락 | 13 | 13 |
+| 질문 의도 불일치 | 18 | 6 |
+| 오류 유형 없음 | 2 | 4 |
+
+각 답변의 주된 오류 유형 하나를 집계. 여러 부수 오류가 공존할 수 있음.
+근거 미확인 주장은 확정된 허위 주장과 구분하며, 실제 환각률을 의미하지 않음.
+
+## 실제 오류 사례
+
+- ICWPA1001E: 기준 해결책은 클립보드에서 1000명 미만씩 추가하는 것. 생성 답변은 1000명이라는 상한만 제시하거나 질문에 제시된 문제를 반복하여 실제 우회 절차가 누락됨.
+- Atlas 로깅: 기준 정답의 log4j.properties 수정 대신 다른 설정 파일 또는 경로를 제시하는 사례.
+- Atlas 특수문자 검색: 이스케이프 처리 대신 일반 검색 방법을 설명하는 사례.
+
+## 결과 및 한계
+
+기술적 오류, 필수 정보 누락, 질문 의도 불일치 및 근거 미확인 주장이 반복됨.
+개선 Prompt는 복원 집계상 질문 의도 불일치를 줄였으나 근거 미확인 주장이 증가함.
+엄격한 CORRECT 판정은 2건에서 4건으로 증가했으나 PARTIAL은 13건에서 8건으로 감소하고 UNCERTAIN은 증가함.
+Token F1 감소까지 고려할 때 전반적인 개선이 확립되지 않았으므로 기존 Prompt를 잠정 유지함.
+기술 지식의 학습 부족, 추론 시 지식 인출 실패, 정답 토큰 절단 등의 원인은 아직 분리하여 검증하지 않음.
+이번 AI 검토의 판정은 전문가가 확정한 레이블이 아니며 기존 Correctness Judge 지표와 직접 비교하지 않음.
+기존 Correctness Judge의 모델·코드 및 기존 평가 결과는 변경하지 않음.
+
+분석 파일: generation_test2_review.csv, generation_test2_summary.json
+(기존 블라인드 A/B 집계 보존, 위 프롬프트별 표는 배정 규칙 복원에 따른 별도 집계.)
+
+
+=================================================
+
+현재 진행 상황 및 다음 작업 (2026-11-27)
+
+| 단계 | 상태 | 채택 또는 확인 결과 |
+|---|---|---|
+| Stage 0 | 완료 | 평가 기준 및 551건 Baseline |
+| Stage 1 | 완료 | 정제 539건 |
+| Stage 2 | 주요 실험 완료 | 상세 Prompt, 2048/192/160/160, Loss Weight 0.175 |
+| Stage 3 | 주요 실험 완료 | LR 2e-4, Epoch 2, Accumulation 8 유지 |
+| Stage 4 | Test1~2 완료, 나머지 보류 | q_proj/v_proj, Rank 8, Alpha 16 유지 |
+| Data Composition | Test1~3 완료 | 367/532건 closed-book 및 539건 Context LoRA 진단 완료; 최종 모델 미선정 |
+| Generation Prompt | Test1~2 완료 | 532건 재학습, 추론 Prompt 비교, 답변 154건 AI 검토; 기존 Prompt 잠정 유지 |
+| Stage 5~9 | 보류/미진행 | 후속 원인 분석 이후 판단 |
+
+## 현재 모델 비교 (val_106.json)
+
+| 모델 / 조건 | Token F1(%) | Answer Correctness(%) | 정상 거부율(%) | 잘못된 거부율(%) | J(%p) |
+|---|---:|---:|---:|---:|---:|
+| 초기 LoRA (Stage 0) | 0 | 0 | 100 | 100 | 0 |
+| Closed-book Base (상세 Prompt) | 25.00 | 62.34 | 0 | 0 | 0 |
+| Closed-book LoRA E (539건) | 7.03 | 16.88 | 75.86 | 63.64 | 12.22 |
+| Closed-book LoRA (367건) | 21.70 | 58.44 | 0 | 0 | 0 |
+| Closed-book LoRA (532건) | 21.50 | 53.25 | 0 | 0 | 0 |
+| Closed-book LoRA (532건 재학습, 기존 Prompt) | 20.12 | N/A | 0 | 0 | 0 |
+| Closed-book LoRA (532건 재학습, 개선 Prompt) | 17.36 | N/A | 0 | 0 | 0 |
+| Oracle Base | 37.66 | 84.42 | 44.83 | 2.60 | 42.23 |
+| Oracle LoRA | 45.08 | 63.64 | 100 | 0 | 100 |
+| RAG Base (Generator 단독) | 29.28 | 59.74 | 6.90 | 15.58 | -8.68 |
+| RAG LoRA (Generator 단독) | 33.43 | 55.84 | 6.90 | 0 | 6.90 |
+
+서로 다른 근거 조건의 수치는 참고용이며 직접적인 단일변수 통제 실험으로 해석하지 않는다.
+
+## 이어서 진행하기 전 확인
+
+회사 PC의 기존 Test2 Adapter 누락으로 재학습을 완료했으며 신규 Adapter로 두 프롬프트의 추론 완료.
+재학습 결과와 기존 Test2 결과는 별도 보존. 신규 Adapter를 반복 사용하고 추가 재학습은 필요할 때만 수행.
+기존 RAG Judge 및 Correctness Judge 모델은 Qwen2.5-1.5B-Instruct 유지. 기존 평가 결과 보존.
+기존 자동 Answer Correctness의 신뢰성 문제는 평가 한계로 기록. Generation Prompt Test2의 AI 검토 결과와 구분.
+실제 review_key.json으로 프롬프트별 복원 집계 확인 필요. 그 밖의 기존 Adapter 및 RAG 인덱스 실물은 별도 확인 필요.
+models/finetuning 및 data/processed는 Git 외 별도 백업 권장.
+
+## 권장 다음 실험 (아직 미실행)
+
+Generation Prompt Test3: 학습 데이터에 대한 답변 재현 능력과 Validation 일반화 능력 분리 검증.
+기존 532건 학습 데이터 및 재학습 Adapter를 고정하고 기존 상세 Prompt로 closed-book 답변 생성.
+학습 질문에서 기준 답변을 재현하는 정도와 기존 Validation 결과를 비교하여 학습 데이터 재현 실패와 미학습 질문 일반화 실패를 구분.
+Token F1/Exact Match 및 실제 기술적 오류 검토를 구분하고, 학습 데이터 평가 결과를 일반화 성능으로 해석하지 않음.
+Base Model 비교가 필요하면 동일 질문과 동일 Prompt 및 추론 조건으로 평가. Test 데이터는 개발 최적화에 사용하지 않음.
+이번 단계에서 추가 학습, Judge 모델 변경, RAG 변경은 하지 않음.
+기존 Data Composition Test4(RAG 입력 근거 충분성 분석)는 현재 closed-book LoRA 개선 범위와 달라 보류함.
+
+
+
+
+
+
+
+
+=================================================
+
+# Train Clean Ver2: 학습 데이터 품질 개선
+
+문제점 : 기술적 내용 불일치, 필수 정보 누락, 근거 없는 기술 답변 생성.
+
+변경 사항 : 기존 Data Composition Test2 학습 데이터 532건의 정답 수정, 불완전한 답변 보완 및 QA 증강.
+
+## 데이터 개선 내역
+
+| 항목 | 건수 |
+|---|---:|
+| 기존 학습 데이터 | 532 |
+| 잘못된 정답 수정 | 8 |
+| 불완전한 답변 보완 | 23 |
+| 근거 불충분 데이터 제외 | 8 |
+| 신규 QA 증강 | 24 |
+| 최종 학습 데이터 | 548 |
+
+Train 데이터와 해당 근거 문서만 사용.
+데이터 개선 과정에서 Validation/Test 데이터 미사용.
+동일 근거 문서 사용 허용.
+기존 데이터 분할 및 원본 유지.
+
+개선 데이터 : train_clean_ver2.json
+
+## 학습 설정
+
+기존 532건 실험과 동일한 학습 조건 유지.
+
+- Learning Rate : 2e-4
+- Epoch : 2
+- Gradient Accumulation : 8
+- Rank / Alpha : 8 / 16
+- Max Sequence Length : 2048
+- System Prompt : 기존 상세 프롬프트
+- Optimizer Update/Epoch : 67 → 69
+
+## 평가 결과
+
+| 평가 지표 | 기존 532건 | 개선 548건 |
+|---|---:|---:|
+| Token F1(%) | 20.12 | 21.59 |
+| Exact Match(%) | 0 | 0 |
+| 정상 거부율(%) | 0 | 0 |
+| 잘못된 거부율(%) | 0 | 0 |
+| Validation Loss | 2.2796 | 2.3149 |
+| 학습 시간(초) | 451.647 | 502.108 |
+| 학습 GPU(GiB) | 4.868 | 4.869 |
+| 추론 시간(초) | 254.766 | 393.094 |
+| 추론 GPU(GiB) | 3.103 | 3.102 |
+| Questions/s | 0.416 | 0.270 |
+
+## 결과
+
+Token F1 1.47%p 증가.
+Validation Loss 0.0353 증가.
+추론 처리량 감소 및 답변 거부 능력 개선 없음.
+
+학습 데이터 개선으로 어휘 단위 답변 일치도가 소폭 증가했으나 Base LLM의 Token F1 25.00%에는 도달하지 못함.
+
+데이터 수정·제외·증강을 동시에 수행했으므로 각 변경 요소의 독립적인 효과는 확인되지 않음.
+
+기술적 정확성 개선 여부는 별도 답변 비교를 통해 검증할 예정.
+
+Judge 평가, RAG, QLoRA 미실행. Test 데이터 미사용.
+
+결과 경로:
+evaluate_results/106/finetuning/train_clean_ver2/run_20261127_134955_078761/
+
+
+
+# Train Clean Ver2: 기술적 정확성 검증
+
+문제점 : Token F1 증가가 실제 기술적 답변 정확성 향상으로 이어졌는지 확인 필요.
+
+검증 방법 : 동일한 Validation 답변 가능 질문 77건에 대한 기존 532건 모델과 개선 548건 모델의 생성 답변 비교.
+
+기존 Correctness Judge 미사용.
+기준 정답 및 근거 문서 기반 AI 평가.
+추가 학습 및 추론 미실행.
+
+## 평가 결과
+
+| 평가 지표 | 기존 532건 | 개선 548건 |
+|---|---:|---:|
+| CORRECT | 2 | 3 |
+| PARTIAL | 13 | 11 |
+| INCORRECT | 59 | 61 |
+| UNCERTAIN | 3 | 2 |
+| 엄격한 정답률(%) | 2.60 | 3.90 |
+| Token F1(%) | 20.12 | 21.59 |
+
+## 오류 유형
+
+| 오류 유형 | 기존 532건 | 개선 548건 |
+|---|---:|---:|
+| 기술적 내용 불일치 | 26 | 36 |
+| 근거 미확인 주장 | 18 | 17 |
+| 필수 정보 누락 | 13 | 11 |
+| 질문 의도 불일치 | 18 | 10 |
+
+## 질문별 성능 변화
+
+- 개선 : 4건
+- 동일 판정 : 68건
+- 악화 : 4건
+- 판단 보류 : 1건
+
+## 결과
+
+엄격한 정답률 1.30%p 증가.
+
+질문 의도 불일치는 감소했으나 기술적 내용 불일치는 증가함.
+
+학습 데이터 정제 및 증강만으로 유의미한 기술적 정확성 개선을 확인하지 못함.
+
+기존 532건 판정을 재사용했으며, 548건 답변은 새로 평가함. 전문가 검증 및 완전한 블라인드 평가는 수행하지 않았으므로 정답률은 참고 지표로 사용.
+
+개선된 548건 학습 데이터 및 LoRA Adapter 보존.
+
+다음 개선 방향 : DPO(Preference Tuning) 검토.
+
+QLoRA 재학습 미실행.
+Correctness Judge 변경 없음.
+RAG 및 Test 데이터 미사용.
+
+
+
+
+=================================================
+
+# DPO Test1: Preference Tuning
+
+문제점 : SFT 기반 학습 데이터 정제 및 증강만으로 기술적 정확성을 충분히 개선하지 못함.
+
+변경 사항 : 정확한 기술 답변과 부정확한 생성 답변을 비교하여 선호 답변의 상대적 생성 확률을 높이는 DPO 학습 적용.
+
+## Preference Dataset 구성
+
+- 학습 데이터 : train_clean_ver2.json (548건)
+- 초기 모델 : 548건 기반 LoRA
+- Chosen : Train 근거 문서로 검증한 정답
+- Rejected : 기존 LoRA가 생성한 상대적으로 부정확한 답변
+- 후보 추출 Seed : 42
+
+## 데이터 검증 결과
+
+| 항목 | 건수 |
+|---|---:|
+| 생성 후보 | 120 |
+| 승인된 Preference Pair | 76 |
+| 정답 후보 오류 및 불완전성 | 24 |
+| 명확한 선호 차이 없음 | 12 |
+| 근거 부족으로 판단 불가 | 8 |
+| 전체 제외 | 44 |
+
+후보 생성 시간 : 397.086초
+
+기존 Correctness Judge를 사용하지 않고 Train 근거 문서 기반 AI 검토를 수행함.
+
+Validation/Test 데이터 미사용.
+기존 SFT 학습 데이터 변경 없음.
+전문가 검증 미실행.
+
+## 생성 파일
+
+- train_dpo_v1.jsonl : DPO 학습 데이터 76건
+- train_dpo_v1_review.json : 전체 후보의 승인 및 제외 근거
+
+## 결과
+
+Preference Dataset 구성 및 검증 완료.
+
+기존 548건 LoRA Adapter를 초기 Policy Model과 고정 Reference Model로 사용하여 DPO 학습을 진행할 예정.
+
+DPO 학습 및 성능 평가 미실행.
+
+
+
+
+
+
+
+
+
+
+## DPO Test1 학습 설정
+
+| 항목 | 설정 |
+|---|---|
+| 초기 Adapter | SFT 548건 LoRA |
+| Reference Model | 초기 LoRA 고정 |
+| Preference Pair | 76건 |
+| Learning Rate | 5e-6 |
+| Beta | 0.1 |
+| Epoch | 1 |
+| Gradient Accumulation | 8 |
+| Optimizer Update | 10 |
+| Rank / Alpha | 8 / 16 |
+| Max Sequence Length | 2048 |
+| Seed | 42 |
+
+## 학습 결과
+
+| 항목 | 결과 |
+|---|---:|
+| 평균 DPO Loss | 0.690449 |
+| Optimizer Update | 10 |
+| Skipped Update | 0 |
+| Reference 계산 시간(초) | 18.899 |
+| 학습 시간(초) | 77.357 |
+| 학습 GPU(GiB) | 3.596 |
+
+## 평가 결과
+
+| 평가 지표 | SFT 548건 | SFT + DPO 76건 |
+|---|---:|---:|
+| Token F1(%) | 21.59 | 21.53 |
+| Exact Match(%) | 0 | 0 |
+| 정상 거부율(%) | 0 | 0 |
+| 잘못된 거부율(%) | 0 | 0 |
+| 추론 시간(초) | 393.094 | 440.034 |
+| Questions/s | 0.270 | 0.241 |
+| 추론 GPU(GiB) | 3.102 | 3.540 |
+
+## 결과
+
+DPO 학습 정상 완료.
+
+평균 DPO Loss는 초기 이론값 0.693147에 근접함. 선호 학습 강도가 제한적이었을 가능성이 있음.
+
+Token F1 0.06%p 감소.
+답변 거부 능력 개선 없음.
+추론 처리량 감소.
+
+현재 지표상 성능 개선은 확인되지 않았으며, 기술적 정확성 개선 여부는 별도 검증이 필요함.
+
+기존 SFT 548건 Adapter 유지.
+DPO Test1 Adapter 및 결과 보존.
+
+다음 실험에서는 Learning Rate 및 Epoch를 조정하여 비교.
+
+Judge, RAG, QLoRA 미실행.
+Test 데이터 미사용.
+
+결과 경로:
+evaluate_results/106/finetuning/dpo/run_20261127_143501_864689/
+
+
+
+
+
+# DPO Test2: Learning Rate 및 Epoch 최적화
+
+문제점 : DPO Test1의 낮은 학습 강도 및 답변 성능 개선 부재.
+
+변경 사항 : Learning Rate 및 Epoch 증가.
+
+## 실험 구성
+
+| 항목 | Test1 | A | B |
+|---|---:|---:|---:|
+| Learning Rate | 5e-6 | 2e-5 | 5e-6 |
+| Epoch | 1 | 1 | 3 |
+| Beta | 0.1 | 0.1 | 0.1 |
+| Preference Pair | 76 | 76 | 76 |
+| Optimizer Update | 10 | 10 | 30 |
+
+모든 DPO 실험은 동일한 SFT 548건 Adapter에서 시작.
+
+## 평가 결과
+
+| 평가 지표 | SFT 548 | Test1 | A | B |
+|---|---:|---:|---:|---:|
+| Token F1(%) | 21.59 | 21.53 | 21.69 | 21.76 |
+| Exact Match(%) | 0 | 0 | 0 | 0 |
+| 정상 거부율(%) | 0 | 0 | 0 | 0 |
+| 잘못된 거부율(%) | 0 | 0 | 0 | 0 |
+| 평균 DPO Loss | - | 0.69045 | 0.68231 | 0.67847 |
+| DPO 학습 시간(초) | - | 77.357 | 74.703 | 234.077 |
+| 학습 GPU(GiB) | - | 3.596 | 3.595 | 3.597 |
+| 추론 시간(초) | 393.094 | 440.034 | 463.960 | 510.859 |
+| 추론 GPU(GiB) | 3.102 | 3.540 | 3.104 | 3.104 |
+| Questions/s | 0.270 | 0.241 | 0.228 | 0.207 |
+
+## 기술적 정확성 검증
+
+Validation 답변 가능 질문 77건, 생성 답변 308건 비교.
+
+| 평가 지표 | SFT 548 | Test1 | A | B |
+|---|---:|---:|---:|---:|
+| CORRECT | 3 | 3 | 2 | 2 |
+| PARTIAL | 11 | 10 | 10 | 12 |
+| INCORRECT | 61 | 62 | 63 | 61 |
+| UNCERTAIN | 2 | 2 | 2 | 2 |
+| 엄격한 정답률(%) | 3.90 | 3.90 | 2.60 | 2.60 |
+
+4개 모델에서 완전히 동일한 답변을 생성한 질문 41건.
+
+기존 SFT 대비 판정 개선 사례 0건.
+판정 악화 사례 Test1 1건, A 3건, B 1건.
+
+## 결과
+
+Learning Rate 및 Epoch 증가에 따라 DPO Loss 감소.
+
+후보 B에서 Token F1이 0.17%p 증가했으나 기술적 정확성은 개선되지 않음.
+
+현재 Preference Dataset 및 학습 조건에서 DPO의 성능 개선 효과를 확인하지 못함.
+
+기존 SFT 548건 Adapter 유지.
+DPO Adapter 채택하지 않음.
+추가 DPO 하이퍼파라미터 탐색 중단.
+
+근거 문서 기반 AI 평가이며 전문가 검증 및 독립적인 완전 블라인드 평가는 미실행.
+
+기존 Correctness Judge 변경 없음.
+QLoRA, RAG 미실행.
+Test 데이터 미사용.
+
+결과 경로:
+evaluate_results/106/finetuning/dpo/test2_20261127_145414_758782/
+
+
+
+# DAPT + SFT Test1: 기술 문서 추가 사전학습 후 QA 미세조정
+
+문제점 : 정제된 SFT 548건의 Token F1 21.59%가 Base LLM 25.00%보다 낮고, 기술적 사실 오류가 반복됨.
+
+변경 사항 : Train 기술 문서로 DAPT(Causal LM)를 수행한 뒤 동일 QA 548건으로 SFT를 수행.
+기존 Base LLM Qwen2.5-1.5B-Instruct 유지. RAG, Correctness Judge, QLoRA 변경 없음.
+
+## 실험 구성 및 학습 결과
+
+| 항목 | DAPT | SFT |
+|---|---:|---:|
+| 학습 자료 | Train 기술 문서 310개 | Train QA 548건(전부 답변 가능) |
+| 학습 단위 | 613 blocks | 548 samples |
+| Epoch | 1 | 2 |
+| Learning Rate | 1e-4 | 2e-4 |
+| LoRA Rank / Alpha | 8 / 16 | 8 / 16 |
+| Target Modules | q_proj, v_proj | q_proj, v_proj |
+| Gradient Accumulation | 8 | 8 |
+| 학습 시간(초) | 247.714 | 497.776 |
+| 학습 GPU Peak(GiB) | 4.740 | 4.869 |
+
+DAPT 처리량 : 입력 토큰 454,735개, 학습 Target 토큰 454,122개.
+DAPT 최종 Token Loss : 2.00665.
+SFT Best Validation Loss : 2.3554 (Epoch 1).
+DAPT + SFT 총 학습 시간 : 약 745.49초.
+
+## Validation 평가 결과 (val_106.json)
+
+| 지표 | Base LLM | SFT 548 | DAPT 1 Epoch + SFT |
+|---|---:|---:|---:|
+| Token F1(%) | 25.00 | 21.59 | 23.71 |
+| Exact Match(%) | 0 | 0 | 0 |
+| 정상 거부율(%) | 0 | 0 | 0 |
+| 잘못된 거부율(%) | 0 | 0 | 0 |
+
+DAPT + SFT Token F1은 SFT 단독 대비 +2.12%p, Base 대비 -1.29%p.
+DAPT + SFT Validation 추론 시간 : 413.823초.
+DAPT + SFT 추론 GPU Peak : 3.102 GiB.
+
+## 기술적 정확성 재검토 (AI 기반 잠정 판정)
+
+동일 회차 재검토에서 답변 가능 77건을 각각 평가한 참고 결과:
+
+| 판정 | Base | SFT 548 | DAPT + SFT |
+|---|---:|---:|---:|
+| CORRECT | 2 | 2 | 3 |
+| PARTIAL | 19 | 12 | 11 |
+| INCORRECT | 56 | 60 | 61 |
+| UNCERTAIN | 0 | 3 | 2 |
+
+기존 회차 SFT 548 검토에서는 CORRECT 3/77로 판정된 적이 있으므로, 회차별 AI 판정 차이가 존재함.
+전문가 검증 및 완전한 블라인드 재검토가 아니며 기술적 정확성 개선으로 확정하지 않음.
+
+## 결과
+
+DAPT 적용 후 Token F1은 소폭 상승했으나 Base LLM을 넘지 못함.
+엄격한 기술적 정답 판정에서도 확실한 개선이 확인되지 않음.
+정상 거부율 0%로 답변 불가능 질문 29건에 대한 정확한 거부 능력은 회복되지 않음.
+Loss 감소와 답변 정확도 개선은 동일한 의미가 아님.
+
+Adapter : models/finetuning/dapt_sft/run_20261127_153122_777994/lora/
+평가 : evaluate_results/106/finetuning/dapt_sft/run_20261127_153122_777994/
+
+
+# DAPT + SFT Test2: 학습량 및 학습 범위 확대
+
+문제점 : DAPT Test1에서 Token F1은 21.59%에서 23.71%로 증가했으나 기술적 정확성 개선은 제한적임.
+
+기존 DAPT는 약 45만 개 Target Token을 1회 학습하고 Attention 일부만 갱신함.
+
+변경 사항 :
+- DAPT 학습 반복 횟수 증가
+- LoRA Adapter 학습 범위 및 용량 확대
+- 복수 실험 및 평가 통합 자동화
+
+## 실험 구성
+
+| 항목 | Test1 | A | B |
+|---|---|---|---|
+| DAPT Epoch | 1 | 3 | 3 |
+| Rank | 8 | 8 | 32 |
+| Alpha | 16 | 16 | 64 |
+| Target Modules | q_proj, v_proj | q_proj, v_proj | all-linear |
+| SFT Epoch | 2 | 2 | 2 |
+| SFT QA | 548 | 548 | 548 |
+
+기존 Train 기술 문서 310개 유지.
+DAPT Learning Rate 1e-4 유지.
+SFT Learning Rate 2e-4 유지.
+
+## 선정 기준
+
+Token F1 및 Loss 감소만으로 개선 여부를 판단하지 않음.
+
+기술적 정확성, 필수 정보 충족 여부 및 기술적 오류 감소를 우선 평가.
+
+유의미한 개선이 확인되지 않을 경우 동일 데이터 기반 하이퍼파라미터 반복 탐색을 중단하고 학습 데이터 및 학습 목표를 재검토.
+
+기존 Base, SFT 548, DAPT Test1 평가 결과 재사용.
+
+기존 모델 및 결과 보존.
+RAG, QLoRA, Judge 변경 없음.
+Validation/Test 데이터 학습에 미사용.
+
+## 실제 실행 결과 (2026-11-27)
+
+실행 스크립트 : run_dapt_sft_test2.py
+결과 경로 : evaluate_results/106/finetuning/dapt_sft/test2_20261127_161739_495798/
+
+### 후보 A: DAPT 3 Epoch / q_proj,v_proj / Rank 8
+
+DAPT 613 blocks x 3 Epoch 완료.
+Epoch별 마지막 Token Loss : 2.0067 → 1.9118 → 1.8464.
+
+SFT 548건 x 2 Epoch 완료.
+
+| Epoch | Train Loss | Validation Loss |
+|---|---:|---:|
+| 1 | 2.5206 | 2.3901 |
+| 2 | 2.3949 | 2.4413 |
+
+Best Validation Loss : 2.3901 (Epoch 1 Adapter 저장).
+SFT 학습 시간 : 503.178초.
+SFT 학습 GPU Peak : 4.869 GiB.
+
+Validation 106건 추론 완료.
+
+| 지표 | Base | SFT 548 | DAPT Test1 | Test2 A |
+|---|---:|---:|---:|---:|
+| Token F1(%) | 25.00 | 21.59 | 23.71 | 22.42 |
+| Exact Match(%) | 0 | 0 | 0 | 0 |
+| 정상 거부율(%) | 0 | 0 | 0 | 0 |
+| 잘못된 거부율(%) | 0 | 0 | 0 | 0 |
+
+Test2 A : DAPT Test1 대비 -1.29%p, SFT 548 대비 +0.83%p, Base 대비 -2.58%p.
+Validation 생성 시간 : 389.692초, 0.272 Questions/s, GPU Peak 3.102 GiB.
+
+후보 A는 DAPT 학습 횟수 확대에도 Validation Token F1 개선이 확인되지 않음.
+Epoch 2에서 Train Loss는 감소했으나 Validation Loss는 상승함.
+기술적 정확성 검토는 이 로그에서 별도로 완료되지 않음.
+
+Adapter : models/finetuning/dapt_sft/test2_20261127_161739_495798/A_dapt3/lora/
+
+### 후보 B: DAPT 3 Epoch / all-linear / Rank 32
+
+학습 파라미터 : 36,929,536개 (전체 약 2.3364%).
+DAPT 613 blocks x 3 Epoch 완료.
+Epoch별 마지막 Token Loss : 1.8098 → 1.5517 → 1.3781.
+
+SFT : 548건, 2 Epoch 설정. 제출된 실행 로그에서 [Epoch 1/2] 시작 확인.
+이후 사용자가 작업을 중단하기로 결정했으며, 제출 로그상 SFT 완료 및 Validation 106건 결과는 없음.
+따라서 후보 B의 Token F1, 기술적 정확성, 최종 모델 성능은 미평가(N/A).
+DAPT Token Loss 1.3781만으로 SFT 후 답변 성능을 추정하지 않음.
+
+## Test2 결과 및 판단
+
+후보 A : 기존 DAPT 1 Epoch 대비 F1 저하.
+후보 B : DAPT 완료, SFT 및 Validation 최종 결과 미확인.
+Test2 전체의 성능 우열은 확정 불가. 현재 확인된 결과에서 DAPT Epoch 확대의 이점은 없음.
+기존 Base LLM 및 SFT/DAPT Adapter와 결과는 보존. Test 데이터 미사용.
+동일 계열 장시간 학습 반복보다 기존 Adapter의 Train 재현과 Validation 결과를 분리해 진단하기로 함.
+
+
+
+
+
+
+=================================================
+
+# Train vs Validation Diagnostic: 저장된 Adapter의 학습 데이터 재현 능력 검증
+
+문제점 : SFT, DAPT, DPO 및 학습 범위 확장에도 closed-book 답변의 기술적 정확성이 낮음.
+확인 목표 : 학습한 질문에서부터 답변을 재현하지 못하는지, 또는 Validation 질문에서만 실패하는지 구분.
+
+## 진단 구성
+
+스크립트 : run_train_val_reproduction.py
+Train : train_clean_ver2.json, 548건(전부 답변 가능).
+Validation : val_106.json, 106건(답변 가능 77, 답변 불가능 29).
+모델 : 저장된 SFT_548 및 DAPT_SFT_548 Adapter.
+추론 : 기존 상세 System Prompt, Greedy Decoding, Max New Tokens 160.
+신규 학습 없음. Validation은 기존 저장 예측 재사용, Train 548건씩만 생성.
+RAG, Judge, Test 데이터 사용 없음.
+
+## 평가 결과
+
+| 평가 지표 | SFT_548 | DAPT_SFT_548 |
+|---|---:|---:|
+| Train Token F1(%) | 19.36 | 19.50 |
+| Validation Token F1(%) | 21.59 | 23.71 |
+| Train - Validation F1(%p) | -2.23 | -4.21 |
+| Train Exact Match(%) | 0 | 0 |
+| Validation Exact Match(%) | 0 | 0 |
+| Train F1 >= 0.30 (548건 중) | 74 | 82 |
+| Train F1 >= 0.50 (548건 중) | 6 | 6 |
+| Train F1 = 0 (548건 중) | 3 | 5 |
+
+Train 548건의 생성 시간(모델 로드 제외) : SFT 1,678.830초 / DAPT+SFT 1,629.891초.
+두 모델 모두 Train F1 약 19%로 낮고 Train/Validation Exact Match 0%.
+Validation F1이 Train보다 높아, Train만 높고 Validation에서 급락하는 전형적 과적합 패턴은 확인되지 않음.
+단, Train과 Validation의 정답 길이·질문 난이도·구성 차이가 있어 이 격차만으로 일반화 능력을 정량 확정하지 않음.
+
+## 학습 토큰 길이와 근거 문서 중복 진단
+
+| 항목 | 결과 |
+|---|---:|
+| Train 질문 192토큰 초과 | 28/548 |
+| Train 정답 160토큰 초과 | 55/548 |
+| SFT Train F1 (정답 160토큰 절단 기준) | 19.68% |
+| DAPT+SFT Train F1 (정답 160토큰 절단 기준) | 19.81% |
+| Train/Validation 정규화 질문 일치 | 0건 |
+| Train 문서와 파일명 공유한 Validation 질문 | 7/106 (모두 답변 가능) |
+
+정답을 160토큰으로 맞춰도 Train F1 증가는 SFT +0.32%p, DAPT+SFT +0.31%p에 그침.
+질문과 정답 절단은 일부 사례에 영향을 줄 수 있으나 저조한 전체 F1을 단독으로 설명하지 못함.
+문서 파일명이 같은 Validation 7건의 F1 : SFT 25.89%, DAPT+SFT 24.28%.
+파일명이 다른 Validation 답변 가능 70건의 F1 : SFT 21.16%, DAPT+SFT 23.66%.
+문서 공유 7건은 표본이 작고, 파일명 일치가 실제 문서 내용의 완전한 중복을 보장하지 않음.
+
+## 질문별 SFT 대비 DAPT+SFT F1 변화
+
+| 구분 | Train (548건) | Validation 답변 가능 (77건) |
+|---|---:|---:|
+| F1 개선 | 227 | 41 |
+| F1 악화 | 224 | 24 |
+| 동일 | 97 | 12 |
+| 답변 문자열 변경 | 477 | 69 |
+
+DAPT는 많은 답변을 변경했지만, Train에서는 F1 개선 건수와 악화 건수가 거의 동일함.
+F1 상승이 기술적 정확성 개선이라는 뜻은 아님.
+
+## 생성 답변과 근거 문서 대조: 확인된 오류 사례
+
+진단 번들은 Train 39건, Validation 25건을 낮은 F1 또는 모델 간 F1 차이 기준으로 선별 제공.
+무작위 표본이 아니므로 아래 사례의 빈도를 전체 548/106건의 오류율로 환산하지 않음.
+
+### 학습 QA 질문/정답/근거 간 정합성 문제
+
+- TRAIN_Q589 : 질문은 HTTPS → HTTP 리디렉션을 묻지만 정답 및 연결 문서는 HTTP → HTTPS 리디렉션 방법. 질문과 정답의 방향이 반대임.
+- TRAIN_Q395 : 질문은 ITCAM for HTTP Server와 IHS의 AIX 버전 호환성이나 정답은 IBM HTTP Server 8.5.5.9의 Apache 보안 수정 내역. 질문 핵심 요구와 정답이 맞지 않음.
+- TRAIN_Q584 : 질문은 CVE-2017-1741, 근거 문서 제목과 내용은 CVE-2017-1731. CVE 대응 관계 재검증 필요.
+
+위 3건은 전체 Train 데이터에서의 오류 건수 추정치가 아니며, 실제 매핑 또는 정답 생성 단계의 검증 필요성을 보여주는 확인 사례임.
+
+### 학습한 사실과 반대되는 생성 답변
+
+- TRAIN_Q446 : IBM DataPower는 관련 Bash CVE의 영향을 받지 않는다는 정답과 반대로 SFT/DAPT 모두 '취약하다'고 생성. SFT Token F1은 약 0.4324여도 핵심 사실은 틀림.
+- DEV_Q064 : IBM MQ와 MQ Appliance의 Triple-DES/SWEET32 취약 버전 질문에 두 모델 모두 영향이 없다고 부정. 문서의 영향 버전 정보와 모순.
+- TRAIN_Q466 : 분실한 ISDS Seed는 복구할 수 없다는 문서와 달리 DAPT+SFT가 기존 값을 복구하는 임의 절차 생성.
+- TRAIN_Q436 : DAPT+SFT는 BPM 임시 파일 문제에 전체 /tmp 또는 Windows Temp 디렉터리 삭제를 제안. 근거는 BPM 생성 잔여 파일의 선별 삭제이므로 위험한 과잉 절차임.
+
+기술적 오류 유형 : 핵심 사실 반전, 제품/버전 혼동, 임의 명령·파일 경로 및 과잉 해결 절차.
+단순 표현 차이 또는 Token F1 계산 문제만으로 설명되지 않음.
+
+## 진단 결론과 한계
+
+1. Train에서도 답변 재현 F1이 낮고, 실제로 학습 정답과 반대되는 기술적 사실을 생성한 사례가 있음.
+2. Validation만 실패하는 전형적인 일반화 부족 패턴은 관찰되지 않았으나 일반화 문제 자체가 없다고 확정할 수는 없음.
+3. QA 품질 검증을 수행했음에도 질문/정답/근거 정합성 오류가 일부 남아 있음.
+4. 학습 목표가 Causal LM / SFT Cross-Entropy이며 기술적 참·거짓을 직접 최적화하는 지표는 아님.
+5. Token F1/Exact Match는 기술적 정확성 또는 지식 보유량의 직접 측정치가 아님.
+6. DAPT, LoRA Rank, Epoch의 한계치에 도달했다고 확정할 자료는 부족함.
+7. Validation은 반복 모델 선정에 사용한 개발 세트이며 독립 Test 성능을 의미하지 않음.
+
+## 다음 검토 사항 (추가 GPU 학습 아님)
+
+- 기존 Train 데이터의 질문-정답-근거 문서 매핑 로직과 생성 규칙 확인.
+- 위 불일치 사례의 수정 및 같은 유형을 탐지하는 정합성 검사 점검.
+- 지식 학습 실패, 생성 시 사실 인출 실패, F1과 기술적 정답 판정 불일치 분리 분석.
+- 현재 단계에서는 Base LLM 변경, RAG 변경, Judge 변경 및 재학습을 진행하지 않음.
+
+결과 경로 : evaluate_results/106/finetuning/train_val_reproduction/run_20261127_170419_685161/
+근거 파일 : train_val_diagnostic_bundle.json, txt_append.txt.
+
+
+아래는 진행할지 안할지 모름 아직
 =================================================
 
 Stage 5. QLoRA 양자화 최적화
@@ -750,6 +1752,7 @@ Stage 8. Preference Tuning
 
 Stage 9. 최종 성능 검증
     개선 요소별 기여도 및 일반화 검증
+    독립적인 최종 검증 전에는 일반화 성능을 확정하지 않음.
 
 =================================================
 

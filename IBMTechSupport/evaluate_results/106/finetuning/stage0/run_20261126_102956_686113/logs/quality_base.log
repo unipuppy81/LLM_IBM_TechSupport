@@ -1,0 +1,14 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+W1126 10:40:57.386000 7924 Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights:   6%|▌         | 19/338 [00:00<00:01, 184.19it/s]Loading weights:  11%|█         | 38/338 [00:00<00:02, 139.92it/s]Loading weights:  16%|█▌        | 53/338 [00:00<00:02, 140.62it/s]Loading weights:  20%|██        | 69/338 [00:00<00:02, 118.68it/s]Loading weights:  25%|██▌       | 86/338 [00:00<00:01, 129.00it/s]Loading weights:  30%|██▉       | 100/338 [00:00<00:01, 129.54it/s]Loading weights:  35%|███▌      | 119/338 [00:00<00:01, 129.63it/s]Loading weights:  39%|███▉      | 133/338 [00:01<00:01, 121.26it/s]Loading weights:  43%|████▎     | 147/338 [00:01<00:01, 125.71it/s]Loading weights:  47%|████▋     | 160/338 [00:01<00:01, 125.99it/s]Loading weights:  52%|█████▏    | 176/338 [00:01<00:01, 114.16it/s]Loading weights:  57%|█████▋    | 194/338 [00:01<00:01, 130.26it/s]Loading weights:  62%|██████▏   | 208/338 [00:01<00:01, 123.87it/s]Loading weights:  67%|██████▋   | 226/338 [00:01<00:00, 130.76it/s]Loading weights:  71%|███████   | 240/338 [00:01<00:00, 118.59it/s]Loading weights:  75%|███████▍  | 253/338 [00:02<00:00, 120.86it/s]Loading weights:  79%|███████▉  | 267/338 [00:02<00:00, 122.29it/s]Loading weights:  83%|████████▎ | 281/338 [00:02<00:00, 126.27it/s]Loading weights:  87%|████████▋ | 294/338 [00:02<00:00, 127.09it/s]Loading weights:  92%|█████████▏| 311/338 [00:02<00:00, 123.32it/s]Loading weights:  96%|█████████▌| 325/338 [00:02<00:00, 118.82it/s]Loading weights: 100%|██████████| 338/338 [00:02<00:00, 128.62it/s]
+[base quality] 10/106
+[base quality] 20/106
+[base quality] 30/106
+[base quality] 40/106
+[base quality] 50/106
+[base quality] 60/106
+[base quality] 70/106
+[base quality] 80/106
+[base quality] 90/106
+[base quality] 100/106
+[base quality] 106/106

@@ -1,0 +1,36 @@
+# Train vs Validation 재현 진단 (LoRA 신규 학습 없음)
+
+기존 모델: SFT 548, DAPT+SFT Test1 (Qwen2.5-1.5B-Instruct)
+Train 548건: 기존 모델로 질문에 대한 답변을 직접 생성.
+Validation 106건: 동일 Prompt/Generation 설정으로 저장한 기존 예측 재사용.
+Test/RAG/Judge 미사용. Adapter 및 원본 학습 데이터 변경 없음.
+
+| 지표 | SFT Train | SFT Validation | DAPT Train | DAPT Validation |
+|---|---:|---:|---:|---:|
+| Token F1(%) | 19.36 | 21.59 | 19.5 | 23.71 |
+| Exact Match(%) | 0.0 | 0.0 | 0.0 | 0.0 |
+| 정상 거부율(%) | N/A | 0.0 | N/A | 0.0 |
+| 잘못된 거부율(%) | 0.0 | 0.0 | 0.0 | 0.0 |
+| F1 0.50 이상(건) | 6 | 3 | 6 | 2 |
+| F1 0.00(건) | 3 | 0 | 5 | 0 |
+
+SFT Train-Validation F1 차이: -2.23%p
+DAPT Train-Validation F1 차이: -4.21%p
+
+## 학습 시 실제 입력/정답 절단 영향
+SFT: {"train_f1_against_160_token_target_percent": 19.68, "train_exact_match_against_160_token_target_percent": 0.0, "train_questions_exceeding_192_tokens": 28, "train_references_exceeding_160_tokens": 55, "long_question_full_prompt_f1_against_160_token_target_percent": 17.04, "long_question_training_truncated_prompt_f1_against_160_token_target_percent": 18.52}
+DAPT+SFT: {"train_f1_against_160_token_target_percent": 19.81, "train_exact_match_against_160_token_target_percent": 0.0, "train_questions_exceeding_192_tokens": 28, "train_references_exceeding_160_tokens": 55, "long_question_full_prompt_f1_against_160_token_target_percent": 19.97, "long_question_training_truncated_prompt_f1_against_160_token_target_percent": 18.49}
+
+## 해석 원칙
+- Train 생성 성능이 낮으면 학습 질문에 대한 정답 재현 자체가 부족하다는 증거다. 암기 부족이 유일한 원인이라는 뜻은 아니다.
+- Train 생성 성능이 높은데 Validation이 낮으면 미학습 질문에 대한 일반화 격차가 있음을 시사한다.
+- Train과 Validation 모두 높더라도 기술적 정확성은 별도 확인이 필요하다.
+- Validation은 이미 개발에 활용했으므로 독립 Test 성능이 아니다.
+- 원문 파일명 공유 여부에 따른 Validation 결과는 별도 JSON에 저장된다.
+- 본 진단은 추가 학습이나 최종 모델 선정에 Validation 정답을 사용하지 않는다.
+
+## 문항별 비교
+Train: {"compared_answerable": 548, "changed_answer_text": 477, "increased_token_f1": 227, "decreased_token_f1": 224, "unchanged_token_f1": 97, "largest_f1_decreases": [{"id": "TRAIN_Q395", "sft_f1": 0.4815, "dapt_f1": 0.0606}, {"id": "SYN_99521c008e43ebab8522", "sft_f1": 0.5217, "dapt_f1": 0.1034}, {"id": "SYN_a90f350e49c5612315f7", "sft_f1": 0.3378, "dapt_f1": 0.0202}, {"id": "SYN_8e19cd4399e5e19d6f04", "sft_f1": 0.4417, "dapt_f1": 0.1429}, {"id": "TRAIN_Q446", "sft_f1": 0.4324, "dapt_f1": 0.1562}, {"id": "TRAIN_Q589", "sft_f1": 0.5029, "dapt_f1": 0.236}, {"id": "SYN_9293dde1d1fedc5b1060", "sft_f1": 0.4105, "dapt_f1": 0.1739}, {"id": "TRAIN_Q215", "sft_f1": 0.3836, "dapt_f1": 0.1477}, {"id": "V2_SYN_f3750e68839cf121c379", "sft_f1": 0.3448, "dapt_f1": 0.1333}, {"id": "V2_SYN_da4557d37f56548b470d", "sft_f1": 0.2899, "dapt_f1": 0.1}, {"id": "TRAIN_Q163", "sft_f1": 0.2963, "dapt_f1": 0.1176}, {"id": "TRAIN_Q047", "sft_f1": 0.2171, "dapt_f1": 0.0532}, {"id": "SYN_8de4fc519c2bf067f844", "sft_f1": 0.2759, "dapt_f1": 0.1161}, {"id": "TRAIN_Q044", "sft_f1": 0.1875, "dapt_f1": 0.0357}, {"id": "TRAIN_Q024", "sft_f1": 0.1818, "dapt_f1": 0.0364}], "largest_f1_increases": [{"id": "DEV_Q307", "sft_f1": 0.129, "dapt_f1": 0.5}, {"id": "SYN_36b9177848c1958c206f", "sft_f1": 0.1139, "dapt_f1": 0.4545}, {"id": "SYN_d10dc13929fa68f2f989", "sft_f1": 0.2614, "dapt_f1": 0.5517}, {"id": "TRAIN_Q515", "sft_f1": 0.0935, "dapt_f1": 0.3355}, {"id": "TRAIN_Q584", "sft_f1": 0.1842, "dapt_f1": 0.4262}, {"id": "DEV_Q053", "sft_f1": 0.0468, "dapt_f1": 0.2838}, {"id": "SYN_9654ad4720d4171e22a2", "sft_f1": 0.1772, "dapt_f1": 0.4082}, {"id": "SYN_950e8b977151a388a1c9", "sft_f1": 0.1412, "dapt_f1": 0.3556}, {"id": "DEV_Q030", "sft_f1": 0.1724, "dapt_f1": 0.3636}, {"id": "TRAIN_Q466", "sft_f1": 0.1553, "dapt_f1": 0.3407}, {"id": "DEV_Q002", "sft_f1": 0.0938, "dapt_f1": 0.2769}, {"id": "TRAIN_Q178", "sft_f1": 0.0935, "dapt_f1": 0.2754}, {"id": "DEV_Q068", "sft_f1": 0.2162, "dapt_f1": 0.3975}, {"id": "TRAIN_Q576", "sft_f1": 0.1607, "dapt_f1": 0.3409}, {"id": "SYN_984cc878261863d883d2", "sft_f1": 0.1472, "dapt_f1": 0.3273}]}
+Validation: {"compared_answerable": 77, "changed_answer_text": 69, "increased_token_f1": 41, "decreased_token_f1": 24, "unchanged_token_f1": 12, "largest_f1_decreases": [{"id": "TRAIN_Q236", "sft_f1": 0.2069, "dapt_f1": 0.0357}, {"id": "DEV_Q074", "sft_f1": 0.2336, "dapt_f1": 0.0828}, {"id": "TRAIN_Q006", "sft_f1": 0.3867, "dapt_f1": 0.2778}, {"id": "TRAIN_Q111", "sft_f1": 0.2222, "dapt_f1": 0.1143}, {"id": "DEV_Q122", "sft_f1": 0.16, "dapt_f1": 0.0588}, {"id": "TRAIN_Q157", "sft_f1": 0.5161, "dapt_f1": 0.4294}, {"id": "TRAIN_Q295", "sft_f1": 0.297, "dapt_f1": 0.237}, {"id": "DEV_Q109", "sft_f1": 0.2222, "dapt_f1": 0.1726}, {"id": "DEV_Q266", "sft_f1": 0.375, "dapt_f1": 0.3265}, {"id": "TRAIN_Q222", "sft_f1": 0.1031, "dapt_f1": 0.0556}, {"id": "TRAIN_Q282", "sft_f1": 0.3973, "dapt_f1": 0.3523}, {"id": "TRAIN_Q535", "sft_f1": 0.1538, "dapt_f1": 0.1111}, {"id": "TRAIN_Q003", "sft_f1": 0.2093, "dapt_f1": 0.1707}, {"id": "TRAIN_Q581", "sft_f1": 0.309, "dapt_f1": 0.2811}, {"id": "TRAIN_Q272", "sft_f1": 0.3315, "dapt_f1": 0.3077}], "largest_f1_increases": [{"id": "TRAIN_Q482", "sft_f1": 0.1356, "dapt_f1": 0.3288}, {"id": "TRAIN_Q316", "sft_f1": 0.0699, "dapt_f1": 0.2575}, {"id": "TRAIN_Q208", "sft_f1": 0.1203, "dapt_f1": 0.3056}, {"id": "TRAIN_Q270", "sft_f1": 0.2222, "dapt_f1": 0.3939}, {"id": "TRAIN_Q553", "sft_f1": 0.238, "dapt_f1": 0.3788}, {"id": "TRAIN_Q526", "sft_f1": 0.1739, "dapt_f1": 0.3111}, {"id": "TRAIN_Q436", "sft_f1": 0.1452, "dapt_f1": 0.271}, {"id": "TRAIN_Q594", "sft_f1": 0.146, "dapt_f1": 0.271}, {"id": "DEV_Q035", "sft_f1": 0.0942, "dapt_f1": 0.217}, {"id": "TRAIN_Q070", "sft_f1": 0.0744, "dapt_f1": 0.1846}, {"id": "DEV_Q167", "sft_f1": 0.1435, "dapt_f1": 0.2491}, {"id": "TRAIN_Q504", "sft_f1": 0.1613, "dapt_f1": 0.2619}, {"id": "TRAIN_Q456", "sft_f1": 0.3111, "dapt_f1": 0.4074}, {"id": "TRAIN_Q419", "sft_f1": 0.2162, "dapt_f1": 0.3103}, {"id": "TRAIN_Q037", "sft_f1": 0.1333, "dapt_f1": 0.2222}]}
+
+Results: C:\Projects\LLM_IBM_TechSupport\IBMTechSupport\evaluate_results\106\finetuning\train_val_reproduction\run_20261127_170419_685161

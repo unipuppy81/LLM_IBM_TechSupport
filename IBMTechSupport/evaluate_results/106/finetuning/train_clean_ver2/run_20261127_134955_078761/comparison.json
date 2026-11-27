@@ -1,0 +1,102 @@
+{
+  "baseline_training": {
+    "model": "Qwen2.5-1.5B-Instruct",
+    "method": "LoRA",
+    "train_samples": 532,
+    "val_samples": 106,
+    "epochs": 2,
+    "learning_rate": 0.0002,
+    "max_length": 2048,
+    "grad_accum": 8,
+    "lora_rank": 8,
+    "best_val_loss": 2.2796,
+    "training_seconds": 451.647,
+    "peak_gpu_memory_gb": 4.868,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 2.6616,
+        "val_loss": 2.2796,
+        "optimizer_steps": 67
+      },
+      {
+        "epoch": 2,
+        "train_loss": 2.4864,
+        "val_loss": 2.3398,
+        "optimizer_steps": 67
+      }
+    ]
+  },
+  "new_training": {
+    "model": "Qwen2.5-1.5B-Instruct",
+    "method": "LoRA",
+    "train_samples": 548,
+    "val_samples": 106,
+    "epochs": 2,
+    "learning_rate": 0.0002,
+    "max_length": 2048,
+    "grad_accum": 8,
+    "lora_rank": 8,
+    "best_val_loss": 2.3149,
+    "training_seconds": 502.108,
+    "peak_gpu_memory_gb": 4.869,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 2.6687,
+        "val_loss": 2.3149,
+        "optimizer_steps": 69
+      },
+      {
+        "epoch": 2,
+        "train_loss": 2.5032,
+        "val_loss": 2.38,
+        "optimizer_steps": 69
+      }
+    ]
+  },
+  "baseline_generation": {
+    "model": "Qwen2.5-1.5B-Instruct-LoRA",
+    "dataset": "val_106.json",
+    "total": 106,
+    "batch_size": 1,
+    "max_new_tokens": 160,
+    "answerable": 77,
+    "impossible": 29,
+    "exact_match_percent": 0.0,
+    "token_f1_percent": 20.12,
+    "abstention_rate_percent": 0.0,
+    "false_refusal_rate_percent": 0.0,
+    "method": "LoRA",
+    "generation_seconds": 254.766,
+    "mean_generation_seconds_per_question": 2.4035,
+    "questions_per_second": 0.416,
+    "peak_gpu_memory_gb": 3.103,
+    "retrieval": null,
+    "faithfulness_percent": null
+  },
+  "new_generation": {
+    "model": "Qwen2.5-1.5B-Instruct-LoRA",
+    "dataset": "val_106.json",
+    "total": 106,
+    "batch_size": 1,
+    "max_new_tokens": 160,
+    "answerable": 77,
+    "impossible": 29,
+    "exact_match_percent": 0.0,
+    "token_f1_percent": 21.59,
+    "abstention_rate_percent": 0.0,
+    "false_refusal_rate_percent": 0.0,
+    "method": "LoRA",
+    "generation_seconds": 393.094,
+    "mean_generation_seconds_per_question": 3.7084,
+    "questions_per_second": 0.27,
+    "peak_gpu_memory_gb": 3.102,
+    "retrieval": null,
+    "faithfulness_percent": null
+  },
+  "judge": "NOT RUN",
+  "rag": false,
+  "complete": true,
+  "limitation": "Training data size and optimizer update count changed; lexical metrics do not establish technical correctness."
+}

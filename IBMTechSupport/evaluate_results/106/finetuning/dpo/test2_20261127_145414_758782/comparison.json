@@ -1,0 +1,160 @@
+{
+  "complete": true,
+  "generation": {
+    "SFT_548": {
+      "model": "Qwen2.5-1.5B-Instruct-LoRA",
+      "dataset": "val_106.json",
+      "total": 106,
+      "batch_size": 1,
+      "max_new_tokens": 160,
+      "answerable": 77,
+      "impossible": 29,
+      "exact_match_percent": 0.0,
+      "token_f1_percent": 21.59,
+      "abstention_rate_percent": 0.0,
+      "false_refusal_rate_percent": 0.0,
+      "method": "LoRA",
+      "generation_seconds": 393.094,
+      "mean_generation_seconds_per_question": 3.7084,
+      "questions_per_second": 0.27,
+      "peak_gpu_memory_gb": 3.102,
+      "retrieval": null,
+      "faithfulness_percent": null
+    },
+    "DPO_Test1": {
+      "model": "Qwen2.5-1.5B-Instruct-LoRA",
+      "dataset": "val_106.json",
+      "total": 106,
+      "batch_size": 1,
+      "max_new_tokens": 160,
+      "answerable": 77,
+      "impossible": 29,
+      "exact_match_percent": 0.0,
+      "token_f1_percent": 21.53,
+      "abstention_rate_percent": 0.0,
+      "false_refusal_rate_percent": 0.0,
+      "method": "LoRA",
+      "generation_seconds": 440.034,
+      "mean_generation_seconds_per_question": 4.1513,
+      "questions_per_second": 0.241,
+      "peak_gpu_memory_gb": 3.54,
+      "retrieval": null,
+      "faithfulness_percent": null
+    },
+    "A_lr_2e5": {
+      "model": "Qwen2.5-1.5B-Instruct-LoRA",
+      "dataset": "val_106.json",
+      "total": 106,
+      "batch_size": 1,
+      "max_new_tokens": 160,
+      "answerable": 77,
+      "impossible": 29,
+      "exact_match_percent": 0.0,
+      "token_f1_percent": 21.69,
+      "abstention_rate_percent": 0.0,
+      "false_refusal_rate_percent": 0.0,
+      "method": "LoRA",
+      "generation_seconds": 463.96,
+      "mean_generation_seconds_per_question": 4.377,
+      "questions_per_second": 0.228,
+      "peak_gpu_memory_gb": 3.104,
+      "retrieval": null,
+      "faithfulness_percent": null
+    },
+    "B_epoch3": {
+      "model": "Qwen2.5-1.5B-Instruct-LoRA",
+      "dataset": "val_106.json",
+      "total": 106,
+      "batch_size": 1,
+      "max_new_tokens": 160,
+      "answerable": 77,
+      "impossible": 29,
+      "exact_match_percent": 0.0,
+      "token_f1_percent": 21.76,
+      "abstention_rate_percent": 0.0,
+      "false_refusal_rate_percent": 0.0,
+      "method": "LoRA",
+      "generation_seconds": 510.859,
+      "mean_generation_seconds_per_question": 4.8194,
+      "questions_per_second": 0.207,
+      "peak_gpu_memory_gb": 3.104,
+      "retrieval": null,
+      "faithfulness_percent": null
+    }
+  },
+  "training": {
+    "DPO_Test1": {
+      "pairs": 76,
+      "epochs": 1,
+      "optimizer_updates": 10,
+      "skipped_updates": 0,
+      "mean_dpo_loss": 0.6904487594177848,
+      "reference_seconds": 18.899,
+      "training_seconds": 77.357,
+      "peak_gpu_memory_gb": 3.596
+    },
+    "A_lr_2e5": {
+      "lr": 2e-05,
+      "epochs": 1,
+      "pairs": 76,
+      "beta": 0.1,
+      "optimizer_updates": 10,
+      "skipped_updates": 0,
+      "mean_dpo_loss": 0.6823141276836395,
+      "training_seconds": 74.703,
+      "peak_gpu_memory_gb": 3.595,
+      "history": [
+        {
+          "epoch": 1,
+          "mean_dpo_loss": 0.6823141276836395,
+          "cumulative_updates": 10,
+          "cumulative_skipped_updates": 0
+        }
+      ]
+    },
+    "B_epoch3": {
+      "lr": 5e-06,
+      "epochs": 3,
+      "pairs": 76,
+      "beta": 0.1,
+      "optimizer_updates": 30,
+      "skipped_updates": 0,
+      "mean_dpo_loss": 0.6784731821532834,
+      "training_seconds": 234.077,
+      "peak_gpu_memory_gb": 3.597,
+      "history": [
+        {
+          "epoch": 1,
+          "mean_dpo_loss": 0.6904487594177848,
+          "cumulative_updates": 10,
+          "cumulative_skipped_updates": 0
+        },
+        {
+          "epoch": 2,
+          "mean_dpo_loss": 0.6779526864227495,
+          "cumulative_updates": 20,
+          "cumulative_skipped_updates": 0
+        },
+        {
+          "epoch": 3,
+          "mean_dpo_loss": 0.6670181006193161,
+          "cumulative_updates": 30,
+          "cumulative_skipped_updates": 0
+        }
+      ]
+    }
+  },
+  "shared_reference_seconds": 18.296,
+  "adapters": {
+    "SFT_548": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\train_clean_ver2\\run_20261127_134955_078761\\lora",
+    "DPO_Test1": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\dpo\\run_20261127_143501_864689\\lora",
+    "A_lr_2e5": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\dpo\\test2_20261127_145414_758782\\A_lr_2e5\\lora",
+    "B_epoch3": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\dpo\\test2_20261127_145414_758782\\B_epoch3\\lora"
+  },
+  "validation_sha256": "51740842406b7f8e6814dc5a57c57d09da4b72fc0c94e62b430e8cf8ccfb45ae",
+  "judge": "NOT RUN",
+  "rag": false,
+  "test_used": false,
+  "selected_model": null,
+  "limitation": "Lexical metrics do not establish technical correctness; review before selection."
+}

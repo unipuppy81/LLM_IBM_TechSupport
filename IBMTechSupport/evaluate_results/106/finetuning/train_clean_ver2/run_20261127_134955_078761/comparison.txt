@@ -1,0 +1,16 @@
+[Train Clean Ver2 Comparison]
+Metric                                            532 QA          548 QA
+train_samples                                        532             548
+best_val_loss                                     2.2796          2.3149
+training_seconds                                 451.647         502.108
+peak_gpu_memory_gb                                 4.868           4.869
+token_f1_percent                                   20.12           21.59
+exact_match_percent                                  0.0             0.0
+abstention_rate_percent                              0.0             0.0
+false_refusal_rate_percent                           0.0             0.0
+generation_seconds                               254.766         393.094
+questions_per_second                               0.416            0.27
+peak_gpu_memory_gb                                 3.103           3.102
+Judge: NOT RUN | RAG: NONE | Test: NOT USED
+Adapter: C:\Projects\LLM_IBM_TechSupport\IBMTechSupport\models\finetuning\train_clean_ver2\run_20261127_134955_078761\lora
+Results: C:\Projects\LLM_IBM_TechSupport\IBMTechSupport\evaluate_results\106\finetuning\train_clean_ver2\run_20261127_134955_078761

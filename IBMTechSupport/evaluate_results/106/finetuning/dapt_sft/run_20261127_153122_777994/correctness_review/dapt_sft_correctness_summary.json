@@ -1,0 +1,190 @@
+{
+  "source_sha256": "0fe84fe05901740bc372f59b8c669f86a4b76a882f62e5c71225eb3497f70717",
+  "questions": 77,
+  "answers": 231,
+  "method": "AI re-review of all three anonymous answer slots against provided references; source evidence consulted selectively for ambiguities, not independent expert ground truth. Mapping applied after recording grades. Prior SFT grades not reused. Not fully blind: prior conversation contained known outputs. Evaluation only.",
+  "metrics": {
+    "Base": {
+      "CORRECT": 2,
+      "PARTIAL": 19,
+      "INCORRECT": 56,
+      "UNCERTAIN": 0,
+      "strict_correct_percent": 2.6
+    },
+    "SFT_548": {
+      "CORRECT": 2,
+      "PARTIAL": 12,
+      "INCORRECT": 60,
+      "UNCERTAIN": 3,
+      "strict_correct_percent": 2.6
+    },
+    "DAPT_SFT_548": {
+      "CORRECT": 3,
+      "PARTIAL": 11,
+      "INCORRECT": 61,
+      "UNCERTAIN": 2,
+      "strict_correct_percent": 3.9
+    }
+  },
+  "paired_comparison": {
+    "Base": {
+      "worsened": 14,
+      "same_verdict": 53,
+      "improved": 8,
+      "uncertain_transition": 2,
+      "identical_answers": 1,
+      "transitions": {
+        "PARTIAL -> INCORRECT": 12,
+        "INCORRECT -> INCORRECT": 47,
+        "PARTIAL -> PARTIAL": 6,
+        "INCORRECT -> PARTIAL": 5,
+        "INCORRECT -> CORRECT": 2,
+        "INCORRECT -> UNCERTAIN": 2,
+        "CORRECT -> INCORRECT": 2,
+        "PARTIAL -> CORRECT": 1
+      }
+    },
+    "SFT_548": {
+      "same_verdict": 69,
+      "worsened": 3,
+      "uncertain_transition": 3,
+      "improved": 2,
+      "identical_answers": 8,
+      "transitions": {
+        "INCORRECT -> INCORRECT": 57,
+        "PARTIAL -> PARTIAL": 9,
+        "CORRECT -> CORRECT": 2,
+        "PARTIAL -> INCORRECT": 3,
+        "UNCERTAIN -> PARTIAL": 1,
+        "INCORRECT -> CORRECT": 1,
+        "INCORRECT -> PARTIAL": 1,
+        "INCORRECT -> UNCERTAIN": 1,
+        "UNCERTAIN -> UNCERTAIN": 1,
+        "UNCERTAIN -> INCORRECT": 1
+      }
+    }
+  },
+  "correct_ids": {
+    "Base": [
+      "TRAIN_Q599",
+      "TRAIN_Q414"
+    ],
+    "SFT_548": [
+      "TRAIN_Q343",
+      "TRAIN_Q299"
+    ],
+    "DAPT_SFT_548": [
+      "TRAIN_Q343",
+      "TRAIN_Q419",
+      "TRAIN_Q299"
+    ]
+  },
+  "generation": {
+    "Base": {
+      "model": "Qwen2.5-1.5B-Instruct",
+      "dataset": "val_106.json",
+      "total": 106,
+      "batch_size": 1,
+      "max_new_tokens": 160,
+      "answerable": 77,
+      "impossible": 29,
+      "exact_match_percent": 0.0,
+      "token_f1_percent": 25.0,
+      "abstention_rate_percent": 0.0,
+      "false_refusal_rate_percent": 0.0,
+      "method": "Base",
+      "generation_seconds": 812.475,
+      "mean_generation_seconds_per_question": 7.6649,
+      "questions_per_second": 0.13,
+      "peak_gpu_memory_gb": 3.098,
+      "retrieval": null,
+      "faithfulness_percent": null
+    },
+    "SFT_548": {
+      "model": "Qwen2.5-1.5B-Instruct-LoRA",
+      "dataset": "val_106.json",
+      "total": 106,
+      "batch_size": 1,
+      "max_new_tokens": 160,
+      "answerable": 77,
+      "impossible": 29,
+      "exact_match_percent": 0.0,
+      "token_f1_percent": 21.59,
+      "abstention_rate_percent": 0.0,
+      "false_refusal_rate_percent": 0.0,
+      "method": "LoRA",
+      "generation_seconds": 393.094,
+      "mean_generation_seconds_per_question": 3.7084,
+      "questions_per_second": 0.27,
+      "peak_gpu_memory_gb": 3.102,
+      "retrieval": null,
+      "faithfulness_percent": null
+    },
+    "DAPT_SFT_548": {
+      "model": "Qwen2.5-1.5B-Instruct-LoRA",
+      "dataset": "val_106.json",
+      "total": 106,
+      "batch_size": 1,
+      "max_new_tokens": 160,
+      "answerable": 77,
+      "impossible": 29,
+      "exact_match_percent": 0.0,
+      "token_f1_percent": 23.71,
+      "abstention_rate_percent": 0.0,
+      "false_refusal_rate_percent": 0.0,
+      "method": "LoRA",
+      "generation_seconds": 413.823,
+      "mean_generation_seconds_per_question": 3.904,
+      "questions_per_second": 0.256,
+      "peak_gpu_memory_gb": 3.102,
+      "retrieval": null,
+      "faithfulness_percent": null
+    }
+  },
+  "previous_sft_review_comparison": {
+    "identical_answers": 77,
+    "disagree_count": 8,
+    "disagreements": [
+      {
+        "id": "TRAIN_Q336",
+        "prior": "CORRECT",
+        "new": "PARTIAL"
+      },
+      {
+        "id": "TRAIN_Q592",
+        "prior": "INCORRECT",
+        "new": "UNCERTAIN"
+      },
+      {
+        "id": "TRAIN_Q504",
+        "prior": "INCORRECT",
+        "new": "PARTIAL"
+      },
+      {
+        "id": "DEV_Q021",
+        "prior": "UNCERTAIN",
+        "new": "INCORRECT"
+      },
+      {
+        "id": "TRAIN_Q436",
+        "prior": "INCORRECT",
+        "new": "UNCERTAIN"
+      },
+      {
+        "id": "DEV_Q109",
+        "prior": "PARTIAL",
+        "new": "INCORRECT"
+      },
+      {
+        "id": "TRAIN_Q541",
+        "prior": "PARTIAL",
+        "new": "INCORRECT"
+      },
+      {
+        "id": "TRAIN_Q487",
+        "prior": "INCORRECT",
+        "new": "PARTIAL"
+      }
+    ]
+  }
+}

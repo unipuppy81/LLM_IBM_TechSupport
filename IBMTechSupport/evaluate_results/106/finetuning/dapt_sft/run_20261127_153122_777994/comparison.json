@@ -1,0 +1,150 @@
+{
+  "complete": true,
+  "generation": {
+    "Base": {
+      "model": "Qwen2.5-1.5B-Instruct",
+      "dataset": "val_106.json",
+      "total": 106,
+      "batch_size": 1,
+      "max_new_tokens": 160,
+      "answerable": 77,
+      "impossible": 29,
+      "exact_match_percent": 0.0,
+      "token_f1_percent": 25.0,
+      "abstention_rate_percent": 0.0,
+      "false_refusal_rate_percent": 0.0,
+      "method": "Base",
+      "generation_seconds": 812.475,
+      "mean_generation_seconds_per_question": 7.6649,
+      "questions_per_second": 0.13,
+      "peak_gpu_memory_gb": 3.098,
+      "retrieval": null,
+      "faithfulness_percent": null
+    },
+    "SFT_548": {
+      "model": "Qwen2.5-1.5B-Instruct-LoRA",
+      "dataset": "val_106.json",
+      "total": 106,
+      "batch_size": 1,
+      "max_new_tokens": 160,
+      "answerable": 77,
+      "impossible": 29,
+      "exact_match_percent": 0.0,
+      "token_f1_percent": 21.59,
+      "abstention_rate_percent": 0.0,
+      "false_refusal_rate_percent": 0.0,
+      "method": "LoRA",
+      "generation_seconds": 393.094,
+      "mean_generation_seconds_per_question": 3.7084,
+      "questions_per_second": 0.27,
+      "peak_gpu_memory_gb": 3.102,
+      "retrieval": null,
+      "faithfulness_percent": null
+    },
+    "DAPT_SFT_548": {
+      "model": "Qwen2.5-1.5B-Instruct-LoRA",
+      "dataset": "val_106.json",
+      "total": 106,
+      "batch_size": 1,
+      "max_new_tokens": 160,
+      "answerable": 77,
+      "impossible": 29,
+      "exact_match_percent": 0.0,
+      "token_f1_percent": 23.71,
+      "abstention_rate_percent": 0.0,
+      "false_refusal_rate_percent": 0.0,
+      "method": "LoRA",
+      "generation_seconds": 413.823,
+      "mean_generation_seconds_per_question": 3.904,
+      "questions_per_second": 0.256,
+      "peak_gpu_memory_gb": 3.102,
+      "retrieval": null,
+      "faithfulness_percent": null
+    }
+  },
+  "base_evaluation_source": "new: C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\dapt_sft\\run_20261127_153122_777994\\base",
+  "dapt_training": {
+    "documents": 310,
+    "blocks": 613,
+    "input_tokens_per_epoch": 454735,
+    "target_tokens_per_epoch": 454122,
+    "epochs": 1,
+    "block_length": 1024,
+    "lr": 0.0001,
+    "grad_accum": 8,
+    "optimizer_updates": 77,
+    "skipped_updates": 0,
+    "training_seconds": 247.714,
+    "peak_gpu_memory_gb": 4.74,
+    "history": [
+      {
+        "epoch": 1,
+        "mean_token_loss": 2.0066502802150246,
+        "target_tokens": 454122
+      }
+    ]
+  },
+  "sft_training": {
+    "model": "Qwen2.5-1.5B-Instruct",
+    "method": "LoRA",
+    "train_samples": 548,
+    "val_samples": 106,
+    "epochs": 2,
+    "learning_rate": 0.0002,
+    "max_length": 2048,
+    "grad_accum": 8,
+    "lora_rank": 8,
+    "best_val_loss": 2.3554,
+    "training_seconds": 497.776,
+    "peak_gpu_memory_gb": 4.869,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 2.5822,
+        "val_loss": 2.3554,
+        "optimizer_steps": 69
+      },
+      {
+        "epoch": 2,
+        "train_loss": 2.4493,
+        "val_loss": 2.4393,
+        "optimizer_steps": 69
+      }
+    ]
+  },
+  "baseline_sft_training": {
+    "model": "Qwen2.5-1.5B-Instruct",
+    "method": "LoRA",
+    "train_samples": 548,
+    "val_samples": 106,
+    "epochs": 2,
+    "learning_rate": 0.0002,
+    "max_length": 2048,
+    "grad_accum": 8,
+    "lora_rank": 8,
+    "best_val_loss": 2.3149,
+    "training_seconds": 502.108,
+    "peak_gpu_memory_gb": 4.869,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 2.6687,
+        "val_loss": 2.3149,
+        "optimizer_steps": 69
+      },
+      {
+        "epoch": 2,
+        "train_loss": 2.5032,
+        "val_loss": 2.38,
+        "optimizer_steps": 69
+      }
+    ]
+  },
+  "adapter": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\dapt_sft\\run_20261127_153122_777994\\lora",
+  "dapt_adapter": "C:\\Projects\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\dapt_sft\\run_20261127_153122_777994\\dapt_lora",
+  "judge": "NOT RUN",
+  "rag": false,
+  "test_used": false,
+  "selection": "NONE; technical review required",
+  "limitation": "Small train-only corpus; LoRA adaptation, not full-parameter pretraining. Validation has been used for model development."
+}

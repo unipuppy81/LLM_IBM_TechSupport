@@ -1,0 +1,93 @@
+W1126 14:34:03.819000 37116 Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+Train Samples: 539
+Validation Samples: 106
+
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]
+Loading weights:   2%|▏         | 8/338 [00:00<00:04, 79.14it/s]
+Loading weights:   7%|▋         | 24/338 [00:00<00:02, 115.55it/s]
+Loading weights:  11%|█         | 36/338 [00:00<00:02, 111.91it/s]
+Loading weights:  15%|█▌        | 51/338 [00:00<00:02, 120.64it/s]
+Loading weights:  19%|█▉        | 64/338 [00:00<00:02, 122.15it/s]
+Loading weights:  25%|██▍       | 83/338 [00:00<00:01, 141.38it/s]
+Loading weights:  29%|██▉       | 98/338 [00:00<00:01, 131.64it/s]
+Loading weights:  33%|███▎      | 113/338 [00:00<00:01, 136.09it/s]
+Loading weights:  39%|███▉      | 131/338 [00:01<00:01, 140.04it/s]
+Loading weights:  43%|████▎     | 146/338 [00:01<00:01, 133.14it/s]
+Loading weights:  47%|████▋     | 160/338 [00:01<00:01, 130.05it/s]
+Loading weights:  53%|█████▎    | 179/338 [00:01<00:01, 143.88it/s]
+Loading weights:  57%|█████▋    | 194/338 [00:01<00:01, 131.90it/s]
+Loading weights:  63%|██████▎   | 213/338 [00:01<00:00, 136.59it/s]
+Loading weights:  67%|██████▋   | 227/338 [00:01<00:00, 132.41it/s]
+Loading weights:  72%|███████▏  | 244/338 [00:01<00:00, 137.68it/s]
+Loading weights:  78%|███████▊  | 263/338 [00:01<00:00, 140.91it/s]
+Loading weights:  82%|████████▏ | 278/338 [00:02<00:00, 141.76it/s]
+Loading weights:  87%|████████▋ | 293/338 [00:02<00:00, 139.64it/s]
+Loading weights:  91%|█████████▏| 309/338 [00:02<00:00, 144.25it/s]
+Loading weights:  96%|█████████▌| 324/338 [00:02<00:00, 139.17it/s]
+Loading weights: 100%|██████████| 338/338 [00:02<00:00, 138.80it/s]
+C:\Projects\LLM_IBM_TechSupport\.venv\Lib\site-packages\transformers\modeling_utils.py:3195: FutureWarning: `gradient_checkpointing_enable` is deprecated and will be removed in v6. Use `activation_checkpointing_enable` instead.
+  warnings.warn(
+C:\Projects\LLM_IBM_TechSupport\.venv\Lib\site-packages\transformers\modeling_utils.py:3303: FutureWarning: `is_gradient_checkpointing` is deprecated and will be removed in v6. Use `is_activation_checkpointing` instead.
+  warnings.warn(
+GPU: NVIDIA GeForce RTX 3080 Ti
+Base Model: Qwen2.5-1.5B-Instruct
+LoRA Rank: 8
+trainable params: 1,089,536 || all params: 1,544,803,840 || trainable%: 0.0705
+
+[Epoch 1/2]
+[Training] Epoch 1/2 | Sample 1/539
+[Training] Epoch 1/2 | Sample 50/539
+[Training] Epoch 1/2 | Sample 100/539
+[Training] Epoch 1/2 | Sample 150/539
+Step: 160/539 | Loss: 0.9316
+[Training] Epoch 1/2 | Sample 200/539
+[Training] Epoch 1/2 | Sample 250/539
+[Training] Epoch 1/2 | Sample 300/539
+Step: 320/539 | Loss: 1.4466
+[Training] Epoch 1/2 | Sample 350/539
+[Training] Epoch 1/2 | Sample 400/539
+[Training] Epoch 1/2 | Sample 450/539
+Step: 480/539 | Loss: 0.0344
+[Training] Epoch 1/2 | Sample 500/539
+Step: 539/539 | Loss: 2.9245
+[Training] Epoch 1/2 | Sample 539/539
+Epoch 1 | Train Loss: 1.8378 | Val Loss: 1.8861
+Best LoRA Adapter: Saved
+
+[Epoch 2/2]
+[Training] Epoch 2/2 | Sample 1/539
+[Training] Epoch 2/2 | Sample 50/539
+[Training] Epoch 2/2 | Sample 100/539
+[Training] Epoch 2/2 | Sample 150/539
+Step: 160/539 | Loss: 2.8271
+[Training] Epoch 2/2 | Sample 200/539
+[Training] Epoch 2/2 | Sample 250/539
+[Training] Epoch 2/2 | Sample 300/539
+Step: 320/539 | Loss: 0.0465
+[Training] Epoch 2/2 | Sample 350/539
+[Training] Epoch 2/2 | Sample 400/539
+[Training] Epoch 2/2 | Sample 450/539
+Step: 480/539 | Loss: 2.6068
+[Training] Epoch 2/2 | Sample 500/539
+Step: 539/539 | Loss: 0.0208
+[Training] Epoch 2/2 | Sample 539/539
+Epoch 2 | Train Loss: 1.7040 | Val Loss: 1.8204
+Best LoRA Adapter: Saved
+
+[LoRA Training Result]
+model: Qwen2.5-1.5B-Instruct
+method: LoRA
+train_samples: 539
+val_samples: 106
+epochs: 2
+learning_rate: 0.0002
+max_length: 2048
+grad_accum: 8
+lora_rank: 8
+best_val_loss: 1.8204
+training_seconds: 532.958
+peak_gpu_memory_gb: 4.87
+history: [{'epoch': 1, 'train_loss': 1.8378, 'val_loss': 1.8861, 'optimizer_steps': 68}, {'epoch': 2, 'train_loss': 1.704, 'val_loss': 1.8204, 'optimizer_steps': 68}]
+Adapter Path: C:\Projects\LLM_IBM_TechSupport\IBMTechSupport\models\finetuning\stage2_test4\run_20261126_143359_373376\C_weight_010\lora
+Metrics Path: C:\Projects\LLM_IBM_TechSupport\IBMTechSupport\evaluate_results\106\finetuning\stage2_test4\run_20261126_143359_373376\experiments\C_weight_010\training\lora_train_metrics.json
+LoRA Training: OK

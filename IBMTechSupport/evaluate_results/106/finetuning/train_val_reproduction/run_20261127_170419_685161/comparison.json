@@ -1,0 +1,571 @@
+{
+  "complete": true,
+  "objective": "Frozen adapter Train reproduction versus previously saved Validation generalization",
+  "models": [
+    "SFT_548",
+    "DAPT_SFT_548"
+  ],
+  "train_count": 548,
+  "validation_count": 106,
+  "train_sha256": "9372bbf386fa57b18ff67ac8b8e19be2cbad398f3fc33010485dcf953e86e5c7",
+  "validation_sha256": "51740842406b7f8e6814dc5a57c57d09da4b72fc0c94e62b430e8cf8ccfb45ae",
+  "adapter_sha256": {
+    "SFT_548": {
+      "adapter_config.json": "5112f6b7360d7d4b39ebbc7a4c94032dbed778c71cd8b11235515599c8aa4364",
+      "adapter_model.safetensors": "edf272a0ed5f1ab81033255b5de9168b34c03f8fa267bc5a3b6492fe9941a257"
+    },
+    "DAPT_SFT_548": {
+      "adapter_config.json": "7ac9bdb0da3a5fb323cc2ca522738bb79a5675240c6a7254f05717899ac4ea4a",
+      "adapter_model.safetensors": "db0913e6a4c074c484f5cc6555eea87ea9cc4b1fd0e32ed6ced4a721e3227206"
+    }
+  },
+  "metrics": {
+    "SFT_548": {
+      "train": {
+        "model": "Qwen2.5-1.5B-Instruct",
+        "dataset": "train_clean_ver2.json",
+        "total": 548,
+        "batch_size": 1,
+        "max_new_tokens": 160,
+        "answerable": 548,
+        "impossible": 0,
+        "exact_match_percent": 0.0,
+        "token_f1_percent": 19.36,
+        "abstention_rate_percent": null,
+        "false_refusal_rate_percent": 0.0,
+        "answerable_f1_at_least_0_30": 74,
+        "answerable_f1_at_least_0_50": 6,
+        "answerable_zero_f1": 3,
+        "mean_prediction_characters": 180.18
+      },
+      "validation": {
+        "model": "Qwen2.5-1.5B-Instruct",
+        "dataset": "val_106.json",
+        "total": 106,
+        "batch_size": 1,
+        "max_new_tokens": 160,
+        "answerable": 77,
+        "impossible": 29,
+        "exact_match_percent": 0.0,
+        "token_f1_percent": 21.59,
+        "abstention_rate_percent": 0.0,
+        "false_refusal_rate_percent": 0.0,
+        "answerable_f1_at_least_0_30": 18,
+        "answerable_f1_at_least_0_50": 3,
+        "answerable_zero_f1": 0,
+        "mean_prediction_characters": 210.88
+      },
+      "train_minus_val_f1_pp": -2.23,
+      "validation_by_train_document_overlap": {
+        "shared_source_filename": {
+          "model": "Qwen2.5-1.5B-Instruct",
+          "dataset": "val_106.json",
+          "total": 7,
+          "batch_size": 1,
+          "max_new_tokens": 160,
+          "answerable": 7,
+          "impossible": 0,
+          "exact_match_percent": 0.0,
+          "token_f1_percent": 25.89,
+          "abstention_rate_percent": null,
+          "false_refusal_rate_percent": 0.0,
+          "answerable_f1_at_least_0_30": 3,
+          "answerable_f1_at_least_0_50": 0,
+          "answerable_zero_f1": 0,
+          "mean_prediction_characters": 221.14
+        },
+        "unshared_source_filename": {
+          "model": "Qwen2.5-1.5B-Instruct",
+          "dataset": "val_106.json",
+          "total": 99,
+          "batch_size": 1,
+          "max_new_tokens": 160,
+          "answerable": 70,
+          "impossible": 29,
+          "exact_match_percent": 0.0,
+          "token_f1_percent": 21.16,
+          "abstention_rate_percent": 0.0,
+          "false_refusal_rate_percent": 0.0,
+          "answerable_f1_at_least_0_30": 15,
+          "answerable_f1_at_least_0_50": 3,
+          "answerable_zero_f1": 0,
+          "mean_prediction_characters": 209.86
+        },
+        "train_matching_question": {
+          "total": 0,
+          "answerable": 0,
+          "impossible": 0,
+          "token_f1_percent": null
+        },
+        "novel_question": {
+          "model": "Qwen2.5-1.5B-Instruct",
+          "dataset": "val_106.json",
+          "total": 106,
+          "batch_size": 1,
+          "max_new_tokens": 160,
+          "answerable": 77,
+          "impossible": 29,
+          "exact_match_percent": 0.0,
+          "token_f1_percent": 21.59,
+          "abstention_rate_percent": 0.0,
+          "false_refusal_rate_percent": 0.0,
+          "answerable_f1_at_least_0_30": 18,
+          "answerable_f1_at_least_0_50": 3,
+          "answerable_zero_f1": 0,
+          "mean_prediction_characters": 210.88
+        }
+      },
+      "train_generation_seconds_excluding_model_load": 1678.83,
+      "sft_target_diagnostics": {
+        "train_f1_against_160_token_target_percent": 19.68,
+        "train_exact_match_against_160_token_target_percent": 0.0,
+        "train_questions_exceeding_192_tokens": 28,
+        "train_references_exceeding_160_tokens": 55,
+        "long_question_full_prompt_f1_against_160_token_target_percent": 17.04,
+        "long_question_training_truncated_prompt_f1_against_160_token_target_percent": 18.52
+      }
+    },
+    "DAPT_SFT_548": {
+      "train": {
+        "model": "Qwen2.5-1.5B-Instruct",
+        "dataset": "train_clean_ver2.json",
+        "total": 548,
+        "batch_size": 1,
+        "max_new_tokens": 160,
+        "answerable": 548,
+        "impossible": 0,
+        "exact_match_percent": 0.0,
+        "token_f1_percent": 19.5,
+        "abstention_rate_percent": null,
+        "false_refusal_rate_percent": 0.0,
+        "answerable_f1_at_least_0_30": 82,
+        "answerable_f1_at_least_0_50": 6,
+        "answerable_zero_f1": 5,
+        "mean_prediction_characters": 187.91
+      },
+      "validation": {
+        "model": "Qwen2.5-1.5B-Instruct",
+        "dataset": "val_106.json",
+        "total": 106,
+        "batch_size": 1,
+        "max_new_tokens": 160,
+        "answerable": 77,
+        "impossible": 29,
+        "exact_match_percent": 0.0,
+        "token_f1_percent": 23.71,
+        "abstention_rate_percent": 0.0,
+        "false_refusal_rate_percent": 0.0,
+        "answerable_f1_at_least_0_30": 24,
+        "answerable_f1_at_least_0_50": 2,
+        "answerable_zero_f1": 0,
+        "mean_prediction_characters": 235.4
+      },
+      "train_minus_val_f1_pp": -4.21,
+      "validation_by_train_document_overlap": {
+        "shared_source_filename": {
+          "model": "Qwen2.5-1.5B-Instruct",
+          "dataset": "val_106.json",
+          "total": 7,
+          "batch_size": 1,
+          "max_new_tokens": 160,
+          "answerable": 7,
+          "impossible": 0,
+          "exact_match_percent": 0.0,
+          "token_f1_percent": 24.28,
+          "abstention_rate_percent": null,
+          "false_refusal_rate_percent": 0.0,
+          "answerable_f1_at_least_0_30": 3,
+          "answerable_f1_at_least_0_50": 0,
+          "answerable_zero_f1": 0,
+          "mean_prediction_characters": 198.0
+        },
+        "unshared_source_filename": {
+          "model": "Qwen2.5-1.5B-Instruct",
+          "dataset": "val_106.json",
+          "total": 99,
+          "batch_size": 1,
+          "max_new_tokens": 160,
+          "answerable": 70,
+          "impossible": 29,
+          "exact_match_percent": 0.0,
+          "token_f1_percent": 23.66,
+          "abstention_rate_percent": 0.0,
+          "false_refusal_rate_percent": 0.0,
+          "answerable_f1_at_least_0_30": 21,
+          "answerable_f1_at_least_0_50": 2,
+          "answerable_zero_f1": 0,
+          "mean_prediction_characters": 239.14
+        },
+        "train_matching_question": {
+          "total": 0,
+          "answerable": 0,
+          "impossible": 0,
+          "token_f1_percent": null
+        },
+        "novel_question": {
+          "model": "Qwen2.5-1.5B-Instruct",
+          "dataset": "val_106.json",
+          "total": 106,
+          "batch_size": 1,
+          "max_new_tokens": 160,
+          "answerable": 77,
+          "impossible": 29,
+          "exact_match_percent": 0.0,
+          "token_f1_percent": 23.71,
+          "abstention_rate_percent": 0.0,
+          "false_refusal_rate_percent": 0.0,
+          "answerable_f1_at_least_0_30": 24,
+          "answerable_f1_at_least_0_50": 2,
+          "answerable_zero_f1": 0,
+          "mean_prediction_characters": 235.4
+        }
+      },
+      "train_generation_seconds_excluding_model_load": 1629.891,
+      "sft_target_diagnostics": {
+        "train_f1_against_160_token_target_percent": 19.81,
+        "train_exact_match_against_160_token_target_percent": 0.0,
+        "train_questions_exceeding_192_tokens": 28,
+        "train_references_exceeding_160_tokens": 55,
+        "long_question_full_prompt_f1_against_160_token_target_percent": 19.97,
+        "long_question_training_truncated_prompt_f1_against_160_token_target_percent": 18.49
+      }
+    }
+  },
+  "paired_token_f1_change": {
+    "train": {
+      "compared_answerable": 548,
+      "changed_answer_text": 477,
+      "increased_token_f1": 227,
+      "decreased_token_f1": 224,
+      "unchanged_token_f1": 97,
+      "largest_f1_decreases": [
+        {
+          "id": "TRAIN_Q395",
+          "sft_f1": 0.4815,
+          "dapt_f1": 0.0606
+        },
+        {
+          "id": "SYN_99521c008e43ebab8522",
+          "sft_f1": 0.5217,
+          "dapt_f1": 0.1034
+        },
+        {
+          "id": "SYN_a90f350e49c5612315f7",
+          "sft_f1": 0.3378,
+          "dapt_f1": 0.0202
+        },
+        {
+          "id": "SYN_8e19cd4399e5e19d6f04",
+          "sft_f1": 0.4417,
+          "dapt_f1": 0.1429
+        },
+        {
+          "id": "TRAIN_Q446",
+          "sft_f1": 0.4324,
+          "dapt_f1": 0.1562
+        },
+        {
+          "id": "TRAIN_Q589",
+          "sft_f1": 0.5029,
+          "dapt_f1": 0.236
+        },
+        {
+          "id": "SYN_9293dde1d1fedc5b1060",
+          "sft_f1": 0.4105,
+          "dapt_f1": 0.1739
+        },
+        {
+          "id": "TRAIN_Q215",
+          "sft_f1": 0.3836,
+          "dapt_f1": 0.1477
+        },
+        {
+          "id": "V2_SYN_f3750e68839cf121c379",
+          "sft_f1": 0.3448,
+          "dapt_f1": 0.1333
+        },
+        {
+          "id": "V2_SYN_da4557d37f56548b470d",
+          "sft_f1": 0.2899,
+          "dapt_f1": 0.1
+        },
+        {
+          "id": "TRAIN_Q163",
+          "sft_f1": 0.2963,
+          "dapt_f1": 0.1176
+        },
+        {
+          "id": "TRAIN_Q047",
+          "sft_f1": 0.2171,
+          "dapt_f1": 0.0532
+        },
+        {
+          "id": "SYN_8de4fc519c2bf067f844",
+          "sft_f1": 0.2759,
+          "dapt_f1": 0.1161
+        },
+        {
+          "id": "TRAIN_Q044",
+          "sft_f1": 0.1875,
+          "dapt_f1": 0.0357
+        },
+        {
+          "id": "TRAIN_Q024",
+          "sft_f1": 0.1818,
+          "dapt_f1": 0.0364
+        }
+      ],
+      "largest_f1_increases": [
+        {
+          "id": "DEV_Q307",
+          "sft_f1": 0.129,
+          "dapt_f1": 0.5
+        },
+        {
+          "id": "SYN_36b9177848c1958c206f",
+          "sft_f1": 0.1139,
+          "dapt_f1": 0.4545
+        },
+        {
+          "id": "SYN_d10dc13929fa68f2f989",
+          "sft_f1": 0.2614,
+          "dapt_f1": 0.5517
+        },
+        {
+          "id": "TRAIN_Q515",
+          "sft_f1": 0.0935,
+          "dapt_f1": 0.3355
+        },
+        {
+          "id": "TRAIN_Q584",
+          "sft_f1": 0.1842,
+          "dapt_f1": 0.4262
+        },
+        {
+          "id": "DEV_Q053",
+          "sft_f1": 0.0468,
+          "dapt_f1": 0.2838
+        },
+        {
+          "id": "SYN_9654ad4720d4171e22a2",
+          "sft_f1": 0.1772,
+          "dapt_f1": 0.4082
+        },
+        {
+          "id": "SYN_950e8b977151a388a1c9",
+          "sft_f1": 0.1412,
+          "dapt_f1": 0.3556
+        },
+        {
+          "id": "DEV_Q030",
+          "sft_f1": 0.1724,
+          "dapt_f1": 0.3636
+        },
+        {
+          "id": "TRAIN_Q466",
+          "sft_f1": 0.1553,
+          "dapt_f1": 0.3407
+        },
+        {
+          "id": "DEV_Q002",
+          "sft_f1": 0.0938,
+          "dapt_f1": 0.2769
+        },
+        {
+          "id": "TRAIN_Q178",
+          "sft_f1": 0.0935,
+          "dapt_f1": 0.2754
+        },
+        {
+          "id": "DEV_Q068",
+          "sft_f1": 0.2162,
+          "dapt_f1": 0.3975
+        },
+        {
+          "id": "TRAIN_Q576",
+          "sft_f1": 0.1607,
+          "dapt_f1": 0.3409
+        },
+        {
+          "id": "SYN_984cc878261863d883d2",
+          "sft_f1": 0.1472,
+          "dapt_f1": 0.3273
+        }
+      ]
+    },
+    "validation": {
+      "compared_answerable": 77,
+      "changed_answer_text": 69,
+      "increased_token_f1": 41,
+      "decreased_token_f1": 24,
+      "unchanged_token_f1": 12,
+      "largest_f1_decreases": [
+        {
+          "id": "TRAIN_Q236",
+          "sft_f1": 0.2069,
+          "dapt_f1": 0.0357
+        },
+        {
+          "id": "DEV_Q074",
+          "sft_f1": 0.2336,
+          "dapt_f1": 0.0828
+        },
+        {
+          "id": "TRAIN_Q006",
+          "sft_f1": 0.3867,
+          "dapt_f1": 0.2778
+        },
+        {
+          "id": "TRAIN_Q111",
+          "sft_f1": 0.2222,
+          "dapt_f1": 0.1143
+        },
+        {
+          "id": "DEV_Q122",
+          "sft_f1": 0.16,
+          "dapt_f1": 0.0588
+        },
+        {
+          "id": "TRAIN_Q157",
+          "sft_f1": 0.5161,
+          "dapt_f1": 0.4294
+        },
+        {
+          "id": "TRAIN_Q295",
+          "sft_f1": 0.297,
+          "dapt_f1": 0.237
+        },
+        {
+          "id": "DEV_Q109",
+          "sft_f1": 0.2222,
+          "dapt_f1": 0.1726
+        },
+        {
+          "id": "DEV_Q266",
+          "sft_f1": 0.375,
+          "dapt_f1": 0.3265
+        },
+        {
+          "id": "TRAIN_Q222",
+          "sft_f1": 0.1031,
+          "dapt_f1": 0.0556
+        },
+        {
+          "id": "TRAIN_Q282",
+          "sft_f1": 0.3973,
+          "dapt_f1": 0.3523
+        },
+        {
+          "id": "TRAIN_Q535",
+          "sft_f1": 0.1538,
+          "dapt_f1": 0.1111
+        },
+        {
+          "id": "TRAIN_Q003",
+          "sft_f1": 0.2093,
+          "dapt_f1": 0.1707
+        },
+        {
+          "id": "TRAIN_Q581",
+          "sft_f1": 0.309,
+          "dapt_f1": 0.2811
+        },
+        {
+          "id": "TRAIN_Q272",
+          "sft_f1": 0.3315,
+          "dapt_f1": 0.3077
+        }
+      ],
+      "largest_f1_increases": [
+        {
+          "id": "TRAIN_Q482",
+          "sft_f1": 0.1356,
+          "dapt_f1": 0.3288
+        },
+        {
+          "id": "TRAIN_Q316",
+          "sft_f1": 0.0699,
+          "dapt_f1": 0.2575
+        },
+        {
+          "id": "TRAIN_Q208",
+          "sft_f1": 0.1203,
+          "dapt_f1": 0.3056
+        },
+        {
+          "id": "TRAIN_Q270",
+          "sft_f1": 0.2222,
+          "dapt_f1": 0.3939
+        },
+        {
+          "id": "TRAIN_Q553",
+          "sft_f1": 0.238,
+          "dapt_f1": 0.3788
+        },
+        {
+          "id": "TRAIN_Q526",
+          "sft_f1": 0.1739,
+          "dapt_f1": 0.3111
+        },
+        {
+          "id": "TRAIN_Q436",
+          "sft_f1": 0.1452,
+          "dapt_f1": 0.271
+        },
+        {
+          "id": "TRAIN_Q594",
+          "sft_f1": 0.146,
+          "dapt_f1": 0.271
+        },
+        {
+          "id": "DEV_Q035",
+          "sft_f1": 0.0942,
+          "dapt_f1": 0.217
+        },
+        {
+          "id": "TRAIN_Q070",
+          "sft_f1": 0.0744,
+          "dapt_f1": 0.1846
+        },
+        {
+          "id": "DEV_Q167",
+          "sft_f1": 0.1435,
+          "dapt_f1": 0.2491
+        },
+        {
+          "id": "TRAIN_Q504",
+          "sft_f1": 0.1613,
+          "dapt_f1": 0.2619
+        },
+        {
+          "id": "TRAIN_Q456",
+          "sft_f1": 0.3111,
+          "dapt_f1": 0.4074
+        },
+        {
+          "id": "TRAIN_Q419",
+          "sft_f1": 0.2162,
+          "dapt_f1": 0.3103
+        },
+        {
+          "id": "TRAIN_Q037",
+          "sft_f1": 0.1333,
+          "dapt_f1": 0.2222
+        }
+      ]
+    }
+  },
+  "training_executed": false,
+  "validation_regenerated": false,
+  "test_used": false,
+  "rag_used": false,
+  "judge_used": false,
+  "limitations": [
+    "Train metrics measure question-to-answer generation, not teacher-forced loss or expert-verified correctness.",
+    "Validation has been used in model selection; it is not an independent test set.",
+    "Train and Validation may share IBM source documents even though QA IDs do not overlap.",
+    "Token F1/Exact Match do not measure technical correctness; short or generic answers may score differently.",
+    "Max new tokens is 160 and answers may be truncated.",
+    "Train F1 - Validation F1 is a descriptive gap, not a controlled estimate of causal generalization failure."
+  ]
+}

@@ -1,0 +1,51 @@
+W1126 11:05:15.290000 6372 Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+Train Samples: 551
+Validation Samples: 106
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights:   0%|          | 1/338 [00:00<02:04,  2.70it/s]Loading weights:   1%|          | 3/338 [00:00<00:44,  7.49it/s]Loading weights:   5%|▍         | 16/338 [00:00<00:07, 40.87it/s]Loading weights:   9%|▊         | 29/338 [00:00<00:04, 64.30it/s]Loading weights:  15%|█▌        | 51/338 [00:00<00:02, 104.36it/s]Loading weights:  19%|█▉        | 64/338 [00:00<00:02, 107.92it/s]Loading weights:  23%|██▎       | 77/338 [00:01<00:02, 113.19it/s]Loading weights:  29%|██▉       | 99/338 [00:01<00:01, 139.82it/s]Loading weights:  34%|███▎      | 114/338 [00:01<00:01, 137.63it/s]Loading weights:  40%|███▉      | 135/338 [00:01<00:01, 151.28it/s]Loading weights:  45%|████▍     | 151/338 [00:01<00:01, 147.42it/s]Loading weights:  51%|█████     | 171/338 [00:01<00:01, 155.40it/s]Loading weights:  55%|█████▌    | 187/338 [00:01<00:01, 146.85it/s]Loading weights:  61%|██████    | 207/338 [00:01<00:00, 154.27it/s]Loading weights:  66%|██████▌   | 223/338 [00:01<00:00, 143.25it/s]Loading weights:  72%|███████▏  | 243/338 [00:02<00:00, 153.04it/s]Loading weights:  77%|███████▋  | 259/338 [00:02<00:00, 143.18it/s]Loading weights:  81%|████████▏ | 275/338 [00:02<00:00, 146.63it/s]Loading weights:  86%|████████▌ | 290/338 [00:02<00:00, 147.26it/s]Loading weights:  90%|█████████ | 305/338 [00:02<00:00, 121.93it/s]Loading weights:  97%|█████████▋| 327/338 [00:02<00:00, 140.27it/s]Loading weights: 100%|██████████| 338/338 [00:02<00:00, 122.40it/s]
+C:\Projects\LLM_IBM_TechSupport\.venv\Lib\site-packages\transformers\modeling_utils.py:3195: FutureWarning: `gradient_checkpointing_enable` is deprecated and will be removed in v6. Use `activation_checkpointing_enable` instead.
+  warnings.warn(
+C:\Projects\LLM_IBM_TechSupport\.venv\Lib\site-packages\transformers\modeling_utils.py:3303: FutureWarning: `is_gradient_checkpointing` is deprecated and will be removed in v6. Use `is_activation_checkpointing` instead.
+  warnings.warn(
+GPU: NVIDIA GeForce RTX 3080 Ti
+Base Model: Qwen2.5-1.5B-Instruct
+Quantization: 4-bit NF4
+Double Quantization: True
+4-bit Layers: 196
+LoRA Rank: 8
+trainable params: 1,089,536 || all params: 1,544,803,840 || trainable%: 0.0705
+
+[Epoch 1/2]
+Step: 160/551 | Loss: 0.0642
+Step: 320/551 | Loss: 2.2493
+Step: 480/551 | Loss: 2.6940
+Step: 551/551 | Loss: 2.2379
+Epoch 1 | Train Loss: 1.9242 | Val Loss: 1.8353
+Best QLoRA Adapter: Saved
+
+[Epoch 2/2]
+Step: 160/551 | Loss: 3.6116
+Step: 320/551 | Loss: 2.7617
+Step: 480/551 | Loss: 1.0640
+Step: 551/551 | Loss: 5.2144
+Epoch 2 | Train Loss: 1.7790 | Val Loss: 1.8080
+Best QLoRA Adapter: Saved
+
+[QLoRA Training Result]
+model: Qwen2.5-1.5B-Instruct
+method: QLoRA
+quantization: 4-bit NF4
+double_quantization: True
+train_samples: 551
+val_samples: 106
+epochs: 2
+learning_rate: 0.0002
+max_length: 512
+grad_accum: 8
+lora_rank: 8
+best_val_loss: 1.808
+training_seconds: 464.163
+peak_gpu_memory_gb: 2.745
+history: [{'epoch': 1, 'train_loss': 1.9242, 'val_loss': 1.8353, 'optimizer_steps': 69}, {'epoch': 2, 'train_loss': 1.779, 'val_loss': 1.808, 'optimizer_steps': 69}]
+Adapter Path: C:\Projects\LLM_IBM_TechSupport\IBMTechSupport\models\finetuning\stage0\run_20261126_102956_686113\qlora
+Metrics Path: C:\Projects\LLM_IBM_TechSupport\IBMTechSupport\evaluate_results\106\finetuning\stage0\run_20261126_102956_686113\training\qlora_train_metrics.json
+QLoRA Training: OK

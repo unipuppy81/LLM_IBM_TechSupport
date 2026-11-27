@@ -1,0 +1,1114 @@
+{
+  "experiment": "Data Composition Test2 / A_expanded (532 positive QA)",
+  "run": "run_20261127_000005_052233",
+  "source_files": {
+    "cases": "IBMTechSupport/evaluate_results/106/finetuning/data_composition_test2/run_20261127_000005_052233/experiments/A_expanded/lora/quality_evaluation/cases.jsonl",
+    "metrics": "IBMTechSupport/evaluate_results/106/finetuning/data_composition_test2/run_20261127_000005_052233/experiments/A_expanded/lora/quality_evaluation/metrics.json",
+    "validation": "IBMTechSupport/data/processed/val_106.json"
+  },
+  "source_repository": "unipuppy81/LLM_IBM_TechSupport",
+  "source_reported_hashes": {
+    "validation_sha256": "51740842406b7f8e6814dc5a57c57d09da4b72fc0c94e62b430e8cf8ccfb45ae",
+    "predictions_sha256": "0b1f1be1a6ba8c45c36d8cb0f4dc47cc73763f5960038731ef95ef098002baac"
+  },
+  "scope": {
+    "validation_total": 106,
+    "reviewed_answerable": 77,
+    "impossible_excluded_from_correctness": 29,
+    "impossible_non_refusal_original": 29,
+    "no_training": true,
+    "no_test_access": true,
+    "no_rag": true,
+    "no_prompt_change": true
+  },
+  "method": "ChatGPT case-by-case second AI review of saved question, reference answer and actual prediction; selected cases also checked against supplied validation reference documents. Original Judge verdicts/reasons were visible: not blinded. No human expert adjudication or external verification. No original artifacts modified. The provided hashes are copied from the saved metrics, not independently recomputed. The original texts and raw Judge reasons remain in cases.jsonl; this report joins by id.",
+  "rubric": {
+    "CORRECT": "essential requested content met without material contradiction; no extra detail required for simple yes/no questions unless a restriction is essential",
+    "PARTIAL": "relevant correct content but an essential requirement, action or qualification is missing, or unsupported additional detail remains",
+    "INCORRECT": "material contradiction, wrong task/cause/configuration, or no substantive answer to requested content",
+    "UNCERTAIN": "an alternative substantive answer cannot be verified with supplied references"
+  },
+  "summary": {
+    "original_counts": {
+      "CORRECT": 41,
+      "INCORRECT": 21,
+      "UNCERTAIN": 15
+    },
+    "second_review_counts": {
+      "PARTIAL": 17,
+      "INCORRECT": 54,
+      "UNCERTAIN": 3,
+      "CORRECT": 3
+    },
+    "original_strict_percent": 53.25,
+    "second_review_strict_percent": 3.9,
+    "strict_delta_percentage_points": -49.35,
+    "exact_label_agreement_count": 21,
+    "exact_label_agreement_percent": 27.27,
+    "binary_correct_noncorrect_agreement_count": 37,
+    "binary_correct_noncorrect_agreement_percent": 48.05,
+    "original_correct_not_confirmed": 39,
+    "original_correct_to_incorrect": 25,
+    "original_correctness_format_invalid_count": 15,
+    "original_claim_review_format_invalid_count": 62,
+    "selected_document_text_review_count": 24,
+    "confusion_matrix_original_to_review": {
+      "CORRECT": {
+        "CORRECT": 2,
+        "PARTIAL": 12,
+        "INCORRECT": 25,
+        "UNCERTAIN": 2
+      },
+      "INCORRECT": {
+        "CORRECT": 0,
+        "PARTIAL": 1,
+        "INCORRECT": 19,
+        "UNCERTAIN": 1
+      },
+      "UNCERTAIN": {
+        "CORRECT": 1,
+        "PARTIAL": 4,
+        "INCORRECT": 10,
+        "UNCERTAIN": 0
+      }
+    },
+    "category_counts": {
+      "numeric_workaround": 1,
+      "wrong_configuration": 4,
+      "wrong_task": 8,
+      "wrong_cause": 4,
+      "wrong_version": 1,
+      "empty_procedure": 8,
+      "question_echo": 12,
+      "missing_condition": 6,
+      "missing_action": 6,
+      "missing_cause": 4,
+      "wrong_scope": 5,
+      "contradiction": 6,
+      "wrong_procedure": 2,
+      "unverified_alternative": 3,
+      "wrong_command": 2,
+      "correct_yes_no": 3,
+      "missing_location": 1,
+      "unsupported_detail": 1
+    }
+  },
+  "limitations": [
+    "Original Judge and second AI review are not human ground truth. Strict labels are provisional and use a more explicit rubric; differences are not all proven Judge errors.",
+    "All 77 question/reference/prediction triples were reviewed. Reference documents were fetched; selected document text was inspected for supplementary evidence, not every document exhaustively.",
+    "No claim that unsupported alternative answers are false. 29 impossible rows have no reference answer, so their technical correctness cannot be assessed here.",
+    "Validation is a development set; do not use case-specific answers, commands or labels as training examples or prompt examples. Hold out test data until final evaluation."
+  ],
+  "next_steps": [
+    "Freeze the existing evaluation artifacts and keep the second review separate.",
+    "Have an IBM technical reviewer verify a stratified subset including original CORRECT vs review INCORRECT, disputed/uncertain cases and format failures.",
+    "For future comparisons, validate Judge output parsing and assess the same saved predictions with a fixed, independently calibrated judge/rubric before comparing prompt candidates.",
+    "After evaluation calibration, test a general closed-book generation prompt focused on requested task, essential actionable steps, version limits, and avoiding empty introductions/repetition; keep adapter and generation settings fixed."
+  ],
+  "cases": [
+    {
+      "id": "TRAIN_Q270",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "PARTIAL",
+      "category": "numeric_workaround",
+      "reference_documents": [
+        "swg27046675.txt"
+      ],
+      "review_basis": "reference_answer_and_selected_document_text",
+      "review_reason_ko": "최대 1000명이라고 했지만 원문 우회책은 한 번에 1000명 미만으로 나누어 추가하는 것이다. 조치와 경계 조건이 명시되지 않았다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q113",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "wrong_configuration",
+      "reference_documents": [
+        "swg21981881.txt"
+      ],
+      "review_basis": "reference_answer_and_selected_document_text",
+      "review_reason_ko": "생성 답변은 AtlasExtensions.properties와 axis2 DEBUG를 제시한다. 기준의 log4j.properties, 세 appender 경로, 저장 및 재시작 절차와 불일치한다. 기존 Judge는 생성 답변에 없는 내용을 있다고 판단했다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q037",
+      "original_verdict": "INCORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "wrong_task",
+      "reference_documents": [
+        "swg21576245.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "사용자 ID 정의만 제공한다. TIP 2.1 이상과 ENABLE.CONCURRENT.LOGIN=true 설정 및 재시작이라는 동시 로그인 해결책이 없다.",
+      "exact_label_agreement": true
+    },
+    {
+      "id": "TRAIN_Q549",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "wrong_cause",
+      "reference_documents": [
+        "swg21985630.txt"
+      ],
+      "review_basis": "reference_answer_and_selected_document_text",
+      "review_reason_ko": "파일을 찾지 못했다는 답변은 실제 원인인 Linux 32-bit compat-libstdc++/libstdc++ 라이브러리 누락을 설명하지 못한다. 설치 후 재시도 조치도 없다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q006",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "wrong_version",
+      "reference_documents": [
+        "swg22008493.txt"
+      ],
+      "review_basis": "reference_answer_and_selected_document_text",
+      "review_reason_ko": "1.0.0/1.0.1을 제시했으나 원문의 대상은 Huawei MTOSI Collector를 설치한 ITNM 4.1.1/4.2.0이다. 수정 APAR 및 Fix Pack도 누락됐다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q535",
+      "original_verdict": "INCORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "empty_procedure",
+      "reference_documents": [
+        "swg21690184.txt"
+      ],
+      "review_basis": "reference_answer_and_selected_document_text",
+      "review_reason_ko": "해결 절차를 예고하고 끝난다. z/OS DB2에 해당 뷰가 없으며 메시지를 무시해도 된다는 핵심 답이 없다. 기존 Judge의 이유도 실제 후보와 기준 정답의 관계를 뒤바꿨다.",
+      "exact_label_agreement": true
+    },
+    {
+      "id": "DEV_Q035",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "empty_procedure",
+      "reference_documents": [
+        "swg22013168.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "요약을 제공한다고만 말한다. Node.js zlib의 windowBits 관련 취약점, DoS 및 CVSS 등 요청한 내용이 없다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q316",
+      "original_verdict": "INCORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "wrong_task",
+      "reference_documents": [
+        "swg21498634.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "인증서 만료 상황을 반복하고 1년 유효기간을 단정한다. WebGUI 복구 절차가 없으며 기존 Judge가 설명한 리셋 명령도 실제 생성 답변에 없다.",
+      "exact_label_agreement": true
+    },
+    {
+      "id": "TRAIN_Q282",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "question_echo",
+      "reference_documents": [
+        "swg22006580.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "제목의 DoS 사실만 반복한다. SecurityManager의 소켓 권한 문제, MQIPT 2.0/2.1 대상 및 2.1.0.3 수정 정보를 제공하지 않는다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "DEV_Q167",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "empty_procedure",
+      "reference_documents": [
+        "swg21580830.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "Oracle Text 인덱스 재생성 절차를 예고하고 끝난다. 서버 중지, SQL 스크립트 3종 실행 및 서버 재시작이 모두 없다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "DEV_Q028",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "question_echo",
+      "reference_documents": [
+        "swg21975747.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "CVE와 제품명을 반복하지만 JAXP 관련 DoS 설명 및 CVSS 등 요청한 상세 정보가 없다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q172",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "PARTIAL",
+      "category": "missing_condition",
+      "reference_documents": [
+        "swg21998312.txt"
+      ],
+      "review_basis": "reference_answer_and_selected_document_text",
+      "review_reason_ko": "TLS 1.2 지원 여부는 맞지만 7.6.0.5 이상이라는 필수 버전 제한이 없다. Application Stack/DataServer 범위도 누락됐다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q236",
+      "original_verdict": "INCORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "question_echo",
+      "reference_documents": [
+        "swg21507587.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "인증 실패를 반복할 뿐이다. macOS Sierra는 SPSS 24/25만 지원하고 19는 미지원이라는 호환성 판단이 없다.",
+      "exact_label_agreement": true
+    },
+    {
+      "id": "TRAIN_Q307",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "question_echo",
+      "reference_documents": [
+        "swg21967589.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "질문에 이미 있는 두 번째 DE 설치 원인을 반복한다. 동일 JVM 사용 또는 새 DE 제거 후 기존 DE 링크 생성이라는 복구 방법을 제공하지 않는다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q581",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "PARTIAL",
+      "category": "missing_action",
+      "reference_documents": [
+        "swg21959444.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "JVM heap이 작다는 원인은 맞지만 해결 요청에 필요한 config.sh JAVA_OPTS 조정 및 재실행이 없다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q295",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "PARTIAL",
+      "category": "missing_condition",
+      "reference_documents": [
+        "swg21653261.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "Permissions manifest 요구사항은 맞지만 Java 7 Update 25/51의 보안 변경과 실패 조건을 구분하지 않아 원인 설명이 불충분하다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q431",
+      "original_verdict": "UNCERTAIN",
+      "original_correctness_format_valid": false,
+      "review_verdict": "INCORRECT",
+      "category": "wrong_task",
+      "reference_documents": [
+        "swg21961222.txt"
+      ],
+      "review_basis": "reference_answer_and_selected_document_text",
+      "review_reason_ko": "Program Files에 설치된다는 일반 진술은 공백 경로의 설치 문제를 판단하지 못한다. 원문은 볼륨별 NTFS 8.3 설정과 공백 없는 경로 등 조건을 제시한다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q336",
+      "original_verdict": "UNCERTAIN",
+      "original_correctness_format_valid": false,
+      "review_verdict": "PARTIAL",
+      "category": "missing_cause",
+      "reference_documents": [
+        "swg21882989.txt"
+      ],
+      "review_basis": "reference_answer_and_selected_document_text",
+      "review_reason_ko": "다른 프로세스가 파일을 잠근다는 관련 설명은 있으나 디렉터리 전체 잠금으로 표현했고, 제품 파일이 사용 중일 때 silent install이 덮어쓰기를 방지하기 위해 종료한다는 핵심 동작 설명이 빠졌다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "DEV_Q220",
+      "original_verdict": "INCORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "wrong_scope",
+      "reference_documents": [
+        "swg21960375.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "PureApplication 7.1.0.0.0 이하라는 버전 주장을 입증하지 못하며 질문의 CBC padding/POODLE 계열 정보 탈취 취약점에 대한 상세 설명을 제공하지 않는다.",
+      "exact_label_agreement": true
+    },
+    {
+      "id": "TRAIN_Q231",
+      "original_verdict": "INCORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "empty_procedure",
+      "reference_documents": [
+        "swg21675858.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "비교 연산자 목록을 예고할 뿐이다. consolidatefilters=false 및 ImpactServer 재시작이라는 해결책이 없다.",
+      "exact_label_agreement": true
+    },
+    {
+      "id": "TRAIN_Q526",
+      "original_verdict": "INCORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "wrong_scope",
+      "reference_documents": [
+        "swg27038779.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "Enterprise Edition 일반 설명은 8.1.2 x64에서 ReporterPlus가 제공되지 않는다는 핵심 이유를 설명하지 못한다.",
+      "exact_label_agreement": true
+    },
+    {
+      "id": "TRAIN_Q343",
+      "original_verdict": "INCORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "contradiction",
+      "reference_documents": [
+        "swg22010419.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "Liberty는 취약하지 않다고 답했으나 기준은 Liberty가 영향을 받는다고 명시한다.",
+      "exact_label_agreement": true
+    },
+    {
+      "id": "DEV_Q122",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "PARTIAL",
+      "category": "missing_action",
+      "reference_documents": [
+        "swg21969653.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "조직과 GL 계정의 연계 필요성은 맞지만 오류 해결에 필요한 NEWORGID 필드 추가 및 Object Structure 설정 절차가 없다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q222",
+      "original_verdict": "UNCERTAIN",
+      "original_correctness_format_valid": false,
+      "review_verdict": "PARTIAL",
+      "category": "missing_condition",
+      "reference_documents": [
+        "swg21599258.txt"
+      ],
+      "review_basis": "reference_answer_and_selected_document_text",
+      "review_reason_ko": "RHEL에서 CPIT가 지원되지 않는다고 포괄적으로 표현했다. 원문은 RHEL 6의 GUI 설치 제한과 native utilities 설치 가능성을 명시한다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "DEV_Q154",
+      "original_verdict": "UNCERTAIN",
+      "original_correctness_format_valid": false,
+      "review_verdict": "INCORRECT",
+      "category": "wrong_cause",
+      "reference_documents": [
+        "swg21598417.txt"
+      ],
+      "review_basis": "reference_answer_and_selected_document_text",
+      "review_reason_ko": "USERPARAMETERS가 사용자 속성이라는 설명은 문서의 원인인 긴 USERPARAMETERS에 따른 파일 크기/복제 제한과 맞지 않는다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "DEV_Q158",
+      "original_verdict": "UNCERTAIN",
+      "original_correctness_format_valid": false,
+      "review_verdict": "INCORRECT",
+      "category": "contradiction",
+      "reference_documents": [
+        "swg21960062.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "Yes라고 답했으나 TOKEN_SEPARATOR는 따옴표를 필수로 요구하지 않는다. 기존 Judge 원문은 CORRECT를 주장했다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q456",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "question_echo",
+      "reference_documents": [
+        "swg21626683.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "zonecfg 실행 실패를 반복한다. WAS가 non-root로 실행되면 native 명령 접근이 제한된다는 원인이 빠졌다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q157",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "question_echo",
+      "reference_documents": [
+        "swg21962479.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "제목을 반복한다. 영향 범위 7.0.1.12 이하, channel agent 문제, APAR IV73860/7.0.1.13 등 실질 정보가 없다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q380",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "wrong_procedure",
+      "reference_documents": [
+        "swg21981880.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "존재가 확인되지 않은 Custodian Notes 탭을 클릭하라고 한다. 실제 기준 절차는 Notes 탭에서 Show Custodian Notes 버튼 선택이다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q171",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "UNCERTAIN",
+      "category": "unverified_alternative",
+      "reference_documents": [
+        "swg21700633.txt"
+      ],
+      "review_basis": "reference_answer_and_selected_document_text",
+      "review_reason_ko": "DB2 9.7.0.10/11 영향 여부는 이 문서만으로 확인할 수 없다. 기준은 별도 보안 공지 swg21692618을 안내한다. 외부 공지 확인 없이 버전 주장을 정오 확정하지 않는다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q003",
+      "original_verdict": "INCORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "wrong_configuration",
+      "reference_documents": [
+        "swg21670474.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "web.xml의 BASIC 인증은 요청한 IHS 상호 TLS 설정과 다르다. SSLClientAuth required와 신뢰할 CA/서명 인증서가 없다.",
+      "exact_label_agreement": true
+    },
+    {
+      "id": "TRAIN_Q594",
+      "original_verdict": "UNCERTAIN",
+      "original_correctness_format_valid": false,
+      "review_verdict": "INCORRECT",
+      "category": "wrong_cause",
+      "reference_documents": [
+        "swg1IT23329.txt",
+        "swg1IT12825.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "메시지를 받지 못해서 차단됐다는 설명은 사용자 매핑 거부/CHLAUTH 차단이라는 오류 원인과 맞지 않는다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q070",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "wrong_command",
+      "reference_documents": [
+        "swg21982451.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "\\\\w+를 제시했으나 기준은 하이픈 앞에 백슬래시를 붙이는 검색 구문이다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q592",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "PARTIAL",
+      "category": "missing_action",
+      "reference_documents": [
+        "swg21685666.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "MQ Hypervisor 영향 여부에는 답했지만 추가 제품 목록은 검증되지 않았고, 요청한 Red Hat 보안 수정 적용 조치가 없다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q463",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "PARTIAL",
+      "category": "missing_condition",
+      "reference_documents": [
+        "swg21227799.txt"
+      ],
+      "review_basis": "reference_answer_and_selected_document_text",
+      "review_reason_ko": "동시 로그인 제한 자체는 custom tracking으로 가능할 수 있지만 내장 설정은 없다는 핵심 조건을 생략했다. 무조건적인 Yes는 오해를 유발한다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q221",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "question_echo",
+      "reference_documents": [
+        "swg22012121.txt",
+        "swg22004617.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "질문에 이미 있는 SQL 오류 메시지를 반복한다. Case Analyzer update mode 및 BATCH 변경이라는 실제 해결책이 없다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q360",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "CORRECT",
+      "category": "correct_yes_no",
+      "reference_documents": [
+        "swg24042283.txt"
+      ],
+      "review_basis": "reference_answer_and_selected_document_text",
+      "review_reason_ko": "HMC agent로 Memory/LPAR metrics를 모니터링할 수 있는지 묻는 질문에 Yes라고 정확히 답했다. 지원 fix와 속성 이름은 추가 정보로 유용하지만 질문은 구체적 설정을 요구하지 않았다.",
+      "exact_label_agreement": true
+    },
+    {
+      "id": "TRAIN_Q272",
+      "original_verdict": "UNCERTAIN",
+      "original_correctness_format_valid": false,
+      "review_verdict": "INCORRECT",
+      "category": "question_echo",
+      "reference_documents": [
+        "swg21662193.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "권한 오류의 일반 정의만 제시했다. 업그레이드 후 JMS가 non-blank user identifier를 항상 전달하도록 바뀌었다는 핵심 원인이 없다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q422",
+      "original_verdict": "INCORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "wrong_cause",
+      "reference_documents": [
+        "swg21689914.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "SSLv3 POODLE에 의한 정보 탈취 취약점을 DoS로 설명해 영향 유형이 틀렸다.",
+      "exact_label_agreement": true
+    },
+    {
+      "id": "TRAIN_Q165",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "contradiction",
+      "reference_documents": [
+        "swg21994741.txt"
+      ],
+      "review_basis": "reference_answer_and_selected_document_text",
+      "review_reason_ko": "Java 8 EJBDeploy가 WAS 8.5.5.9 이상에서 지원된다고 했으나 기준과 원문은 8.5.5.x 이하에서 JDK 7 이하만 지원하고 JDK 8은 WAS V9를 요구한다고 설명한다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q233",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "question_echo",
+      "reference_documents": [
+        "swg22013054.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "보안 공지 제목만 반복한다. XSS가 Web UI에서 JavaScript를 삽입하여 자격 증명 노출을 일으킬 수 있다는 내용 및 CVSS가 없다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q419",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "contradiction",
+      "reference_documents": [
+        "swg21137319.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "인스턴스 수는 처리량에 영향이 없다고 단정한다. 기준은 동시 처리 스레드 증가가 성능에 영향을 줄 수 있으나 두 배가 보장되지 않는다고 설명한다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q071",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "wrong_task",
+      "reference_documents": [
+        "swg21962862.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "업그레이드 순서를 나열했으나 오래 걸리는 상황에서 중단하지 말고 BESAdmin 프로세스를 확인하라는 요청의 핵심 조치가 없다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q553",
+      "original_verdict": "INCORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "empty_procedure",
+      "reference_documents": [
+        "swg21903249.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "지원 버전을 주장하고 취약점 목록을 예고하나 CVE-2014-6457/3566의 구체적 설명과 CVSS가 없고 제시한 버전의 근거도 없다.",
+      "exact_label_agreement": true
+    },
+    {
+      "id": "TRAIN_Q498",
+      "original_verdict": "INCORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "PARTIAL",
+      "category": "missing_action",
+      "reference_documents": [
+        "isg3T1024513.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "JIT의 바이트코드 컴파일 역할은 관련되지만 CPU spike의 구체적 이유와 진단/최적화 옵션이 빠져 있다. 반복 문장도 존재한다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "DEV_Q147",
+      "original_verdict": "INCORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "empty_procedure",
+      "reference_documents": [
+        "swg21672459.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "Java 1.6.0_23/25 목록을 예고하고 끝난다. 요청한 최신 알려진 문제 목록 또는 해당 IBM master list 안내가 없다.",
+      "exact_label_agreement": true
+    },
+    {
+      "id": "TRAIN_Q234",
+      "original_verdict": "INCORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "empty_procedure",
+      "reference_documents": [
+        "swg21397335.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "절차를 예고하고 끝난다. 요청한 자동화 도구 WASServiceCmd.exe 및 실행 방법이 없다.",
+      "exact_label_agreement": true
+    },
+    {
+      "id": "TRAIN_Q599",
+      "original_verdict": "UNCERTAIN",
+      "original_correctness_format_valid": false,
+      "review_verdict": "PARTIAL",
+      "category": "missing_cause",
+      "reference_documents": [
+        "swg21991690.txt"
+      ],
+      "review_basis": "reference_answer_and_selected_document_text",
+      "review_reason_ko": "MD5CryptoServiceProvider의 FIPS 미준수라는 로그 내용은 맞지만 실제 원인인 활성화된 Windows FIPS 보안 정책과의 충돌을 명시하지 않는다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q075",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "PARTIAL",
+      "category": "missing_location",
+      "reference_documents": [
+        "swg24044440.txt"
+      ],
+      "review_basis": "reference_answer_and_selected_document_text",
+      "review_reason_ko": "IBM Support라는 일반 위치만 제시한다. 원문의 구체적 다운로드 방법은 Passport Advantage에서 part number CNN25ML을 사용하는 것이다. 다른 Support 경로의 실제 가능 여부는 확인하지 않았다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "DEV_Q252",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "wrong_configuration",
+      "reference_documents": [
+        "swg21634959.txt",
+        "swg21207584.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "maximum idle time=0만 반복한다. Oracle idle timeout 원인 및 DBA 조정 또는 WAS min connections=0, unused timeout을 Oracle보다 짧게 설정하는 방법과 불일치한다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q111",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "wrong_command",
+      "reference_documents": [
+        "swg21983129.txt"
+      ],
+      "review_basis": "reference_answer_and_selected_document_text",
+      "review_reason_ko": "set serveroutput/pagesize 등의 명령은 원문의 db2diag.log pool/obj/type 해석 및 syscat.tables의 tableid/tbspaceid 조회가 아니다. 기준 정답이 짧으나 문서에 실제 조회 절차가 있다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q504",
+      "original_verdict": "UNCERTAIN",
+      "original_correctness_format_valid": false,
+      "review_verdict": "INCORRECT",
+      "category": "wrong_task",
+      "reference_documents": [
+        "swg21468340.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "malformed trap이라는 증상만 언급한다. 정상 부하에서 발생하는지 점검하고 snoop/tcpdump/Wireshark로 trap을 캡처하는 원인 확인 방법이 없다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q256",
+      "original_verdict": "INCORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "missing_action",
+      "reference_documents": [
+        "swg24035571.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "스크립트가 해당 DB에서 사용되도록 설계되지 않았다고만 답한다. 기준 해결책인 6.3.1-TIV-ITM_KRZ-FP0001의 krzgrant.sql 실행을 제시하지 않는다.",
+      "exact_label_agreement": true
+    },
+    {
+      "id": "DEV_Q266",
+      "original_verdict": "UNCERTAIN",
+      "original_correctness_format_valid": false,
+      "review_verdict": "INCORRECT",
+      "category": "wrong_task",
+      "reference_documents": [
+        "swg24037641.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "Packaging Utility의 용도를 설명했지만 설치 방법을 묻는 질문에 Installation Manager, repository 또는 플랫폼별 설치 패키지를 제시하지 않는다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "DEV_Q210",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "PARTIAL",
+      "category": "missing_cause",
+      "reference_documents": [
+        "swg21067352.txt"
+      ],
+      "review_basis": "reference_answer_and_selected_document_text",
+      "review_reason_ko": "open files 제한 초과는 맞지만 시스템 전체가 아닌 프로세스의 파일 핸들/소켓 한도라는 점과 흔한 원인인 핸들 누수를 설명하지 않는다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "DEV_Q076",
+      "original_verdict": "UNCERTAIN",
+      "original_correctness_format_valid": false,
+      "review_verdict": "INCORRECT",
+      "category": "contradiction",
+      "reference_documents": [
+        "swg1IV64051.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "실제 리스너가 동작 중인데 비활성으로 오인하는 상황에 리스너가 실행되지 않는다고 답했다. tnsping 핸들 누수 및 수정 버전이 빠졌다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "DEV_Q184",
+      "original_verdict": "UNCERTAIN",
+      "original_correctness_format_valid": false,
+      "review_verdict": "INCORRECT",
+      "category": "question_echo",
+      "reference_documents": [
+        "swg21584783.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "서비스가 두 번 호출된다는 질문의 증상만 반복한다. mediation primitive의 중복 wire가 원인이라는 핵심이 없다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "DEV_Q021",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "UNCERTAIN",
+      "category": "unverified_alternative",
+      "reference_documents": [
+        "swg21298897.txt"
+      ],
+      "review_basis": "reference_answer_and_selected_document_text",
+      "review_reason_ko": "dpwsp -refresh의 실제 지원 여부를 제공 문서로 확인할 수 없다. 원문은 local:/// WSDL에 대한 서비스 disable/re-enable을 안내한다. 미검증 대체 명령을 정답 또는 확정적 오답으로 단정하지 않는다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q436",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "PARTIAL",
+      "category": "unsupported_detail",
+      "reference_documents": [
+        "swg1JR47686.txt"
+      ],
+      "review_basis": "reference_answer_and_selected_document_text",
+      "review_reason_ko": "BPM 중지 후 임시 파일 제거는 원문과 일치하나 제시한 IBM_BPM_*.log 패턴의 정확성은 문서에서 확인되지 않는다. 안전한 파일 식별이 부족하고 항목이 반복된다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "DEV_Q224",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "wrong_configuration",
+      "reference_documents": [
+        "swg21696267.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "web.xml의 보안 제약과 역할 기반 접근 제한 구성을 제시했으나 실제 요구는 PolicyAtlas.ear의 weblogic.xml에서 cookie-secure와 cookie-http-only를 설정하는 것이다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "DEV_Q186",
+      "original_verdict": "UNCERTAIN",
+      "original_correctness_format_valid": false,
+      "review_verdict": "INCORRECT",
+      "category": "contradiction",
+      "reference_documents": [
+        "swg21608744.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "질문에 라이선스 동의 문구가 있다고 명시됐는데 없다고 주장했다. 실제 조치인 silent response file의 전체 경로를 지정하지 않는다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q415",
+      "original_verdict": "UNCERTAIN",
+      "original_correctness_format_valid": false,
+      "review_verdict": "PARTIAL",
+      "category": "missing_cause",
+      "reference_documents": [
+        "swg21501900.txt"
+      ],
+      "review_basis": "reference_answer_and_selected_document_text",
+      "review_reason_ko": "키 크기 문제를 언급하지만 key ID가 크기를 지원하지 않는다는 설명은 불명확하다. 실제 원인인 maximum-strength 키와 JRE 정책 제한의 조합 및 해결 방법이 없다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q482",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "CORRECT",
+      "category": "correct_yes_no",
+      "reference_documents": [
+        "swg21698950.txt"
+      ],
+      "review_basis": "reference_answer_and_selected_document_text",
+      "review_reason_ko": "IN 목록 항목 수에 고정 상한이 없다는 질문의 직접적인 답을 정확히 제공했다. 컴파일 메모리의 실질 제약은 보충 설명으로 필요할 수 있으나 고정 개수 제한 여부 자체는 맞다.",
+      "exact_label_agreement": true
+    },
+    {
+      "id": "DEV_Q109",
+      "original_verdict": "INCORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "wrong_task",
+      "reference_documents": [
+        "swg21995079.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "IIB의 일반 용도만 설명한다. CVE-2016-8918의 비기본 설정에서 인증 우회 가능성이나 CVSS 정보를 제공하지 않는다.",
+      "exact_label_agreement": true
+    },
+    {
+      "id": "TRAIN_Q493",
+      "original_verdict": "INCORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "wrong_scope",
+      "reference_documents": [
+        "swg22012342.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "ITNM 자체를 취약점이라고 설명한다. 관련 WAS 관리 콘솔의 정보 노출 및 파일 읽기 취약점이라는 요청 내용이 없다.",
+      "exact_label_agreement": true
+    },
+    {
+      "id": "DEV_Q074",
+      "original_verdict": "INCORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "wrong_scope",
+      "reference_documents": [
+        "swg21959169.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "WAS 버전 목록을 반복하며 SOA Policy Gateway Pattern for AIX 2.5라는 질문의 범위와 CVE의 원격 코드 실행 상세 설명을 충족하지 않는다.",
+      "exact_label_agreement": true
+    },
+    {
+      "id": "TRAIN_Q583",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "question_echo",
+      "reference_documents": [
+        "swg21985630.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "질문에 있는 그래픽 모드 오류와 console/silent 제안을 반복했다. 실제 원인인 Linux 시스템 라이브러리 누락이 없다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q081",
+      "original_verdict": "INCORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "missing_action",
+      "reference_documents": [
+        "swg24042387.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "권한이 없다는 오류의 표면적 설명만 있고 실제 해결책인 ICC 4.0.1 FP3 적용이 없다.",
+      "exact_label_agreement": true
+    },
+    {
+      "id": "DEV_Q194",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "empty_procedure",
+      "reference_documents": [
+        "swg21448581.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "설정 절차를 예고하고 끝난다. com.ibm.websphere.threadmonitor.dump.java 속성, 값, 설정 위치 및 재시작이 모두 없다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "DEV_Q101",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "question_echo",
+      "reference_documents": [
+        "swg21957998.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "보안 공지 제목을 반복한다. 이전 MQ client JAR 문제, 영향 Toolkit 버전과 APAR IT05725/수정 정보를 제공하지 않는다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q299",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "PARTIAL",
+      "category": "missing_condition",
+      "reference_documents": [
+        "swg21138332.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "통합 패키지라는 사실은 맞지만 질문의 직접 요구인 V8.0부터라는 시점이 없다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q541",
+      "original_verdict": "INCORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "wrong_task",
+      "reference_documents": [
+        "swg21593254.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "영향을 받는 사용자 역할만 제시한다. Report Studio에 필요한 Professional User Interface Profile의 Traverse/Execute 권한이라는 원인이 없다.",
+      "exact_label_agreement": true
+    },
+    {
+      "id": "TRAIN_Q487",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "wrong_scope",
+      "reference_documents": [
+        "swg22008902.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "Drupal 버전 목록을 길게 제시하나 해당 IBM API Connect Portal 영향 버전과 필요한 fix가 없다. 나머지 CVE에 대한 설명도 완성되지 않았다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q208",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "PARTIAL",
+      "category": "missing_condition",
+      "reference_documents": [
+        "swg21568844.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "다른 버전 간 호환 가능성은 맞지만 질문이 요청한 기본 기능의 앞뒤 2개 레벨 호환 범위가 누락됐다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q414",
+      "original_verdict": "UNCERTAIN",
+      "original_correctness_format_valid": false,
+      "review_verdict": "CORRECT",
+      "category": "correct_yes_no",
+      "reference_documents": [
+        "swg21674407.txt"
+      ],
+      "review_basis": "reference_answer_and_selected_document_text",
+      "review_reason_ko": "MQ V7.0 지원 종료를 정확하게 답했다. 기존 UNCERTAIN은 내용 오류가 아니라 출력 형식 오류였다. 종료 날짜는 이 질문에서 요구하지 않았다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q063",
+      "original_verdict": "INCORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "UNCERTAIN",
+      "category": "unverified_alternative",
+      "reference_documents": [
+        "swg24039235.txt"
+      ],
+      "review_basis": "reference_answer_and_selected_document_text",
+      "review_reason_ko": "기존 Fix Central URL에 fixpack 파라미터를 추가했다. 실제 다운로드 가능 여부는 제공 근거만으로 확인할 수 없다. 원문은 8.5.1.2 다운로드 문서와 플랫폼별 FP002 패키지를 안내한다.",
+      "exact_label_agreement": false
+    },
+    {
+      "id": "TRAIN_Q537",
+      "original_verdict": "CORRECT",
+      "original_correctness_format_valid": true,
+      "review_verdict": "INCORRECT",
+      "category": "wrong_procedure",
+      "reference_documents": [
+        "swg21967958.txt"
+      ],
+      "review_basis": "question_reference_answer_prediction",
+      "review_reason_ko": "hsql.conf의 비밀번호 편집을 제안하지만 기준은 HSQLDB SET PASSWORD 명령과 Impact DataSource 암호 갱신이다. 제시 절차는 핵심 변경 방법을 충족하지 않는다.",
+      "exact_label_agreement": false
+    }
+  ]
+}

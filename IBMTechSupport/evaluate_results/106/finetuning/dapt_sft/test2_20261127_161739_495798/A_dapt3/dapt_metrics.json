@@ -1,0 +1,31 @@
+{
+  "documents": 310,
+  "blocks": 613,
+  "input_tokens_per_epoch": 454735,
+  "target_tokens_per_epoch": 454122,
+  "epochs": 3,
+  "block_length": 1024,
+  "lr": 0.0001,
+  "grad_accum": 8,
+  "optimizer_updates": 231,
+  "skipped_updates": 0,
+  "training_seconds": 695.858,
+  "peak_gpu_memory_gb": 4.74,
+  "history": [
+    {
+      "epoch": 1,
+      "mean_token_loss": 2.0066502802150246,
+      "target_tokens": 454122
+    },
+    {
+      "epoch": 2,
+      "mean_token_loss": 1.911819210833642,
+      "target_tokens": 454122
+    },
+    {
+      "epoch": 3,
+      "mean_token_loss": 1.8463796477001497,
+      "target_tokens": 454122
+    }
+  ]
+}

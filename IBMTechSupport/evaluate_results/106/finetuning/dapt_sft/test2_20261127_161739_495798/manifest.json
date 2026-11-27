@@ -1,0 +1,27 @@
+{
+  "train_sha256": "9372bbf386fa57b18ff67ac8b8e19be2cbad398f3fc33010485dcf953e86e5c7",
+  "validation_sha256": "51740842406b7f8e6814dc5a57c57d09da4b72fc0c94e62b430e8cf8ccfb45ae",
+  "specs": {
+    "A_dapt3": {
+      "rank": 8,
+      "alpha": 16,
+      "targets": [
+        "q_proj",
+        "v_proj"
+      ],
+      "epochs": 3,
+      "params": 1089536
+    },
+    "B_dapt3_all_linear_r32": {
+      "rank": 32,
+      "alpha": 64,
+      "targets": "all-linear",
+      "epochs": 3,
+      "params": 36929536
+    }
+  },
+  "config_sha256": "abd13d1cf7f4eeb37e7c54713e6c0481112738a35d895b429624ac2344366d06",
+  "previous_comparison_sha256": "9387bff990e490d288036178a83ecce4b3966a656a685d99b89efdb3a7baa04c",
+  "runner_sha256": "a79efe9ec7433e1d9a40bbc07fca3337d417feaf188ae06b6c15f4b22085cc74",
+  "test1_runner_sha256": "d30585261983312dc3e407ea639d7fc77c610b0f68586dae6e6668934bc2b18e"
+}

@@ -1,0 +1,127 @@
+W1126 22:08:41.323000 32896 Lib\site-packages\torch\utils\flop_counter.py:113] triton not found; flop counting will not work for triton kernels
+Generated: 1/106
+Generated: 2/106
+Generated: 3/106
+Generated: 4/106
+Generated: 5/106
+Generated: 6/106
+Generated: 7/106
+Generated: 8/106
+Generated: 9/106
+Generated: 10/106
+Generated: 11/106
+Generated: 12/106
+Generated: 13/106
+Generated: 14/106
+Generated: 15/106
+Generated: 16/106
+Generated: 17/106
+Generated: 18/106
+Generated: 19/106
+Generated: 20/106
+Generated: 21/106
+Generated: 22/106
+Generated: 23/106
+Generated: 24/106
+Generated: 25/106
+Generated: 26/106
+Generated: 27/106
+Generated: 28/106
+Generated: 29/106
+Generated: 30/106
+Generated: 31/106
+Generated: 32/106
+Generated: 33/106
+Generated: 34/106
+Generated: 35/106
+Generated: 36/106
+Generated: 37/106
+Generated: 38/106
+Generated: 39/106
+Generated: 40/106
+Generated: 41/106
+Generated: 42/106
+Generated: 43/106
+Generated: 44/106
+Generated: 45/106
+Generated: 46/106
+Generated: 47/106
+Generated: 48/106
+Generated: 49/106
+Generated: 50/106
+Generated: 51/106
+Generated: 52/106
+Generated: 53/106
+Generated: 54/106
+Generated: 55/106
+Generated: 56/106
+Generated: 57/106
+Generated: 58/106
+Generated: 59/106
+Generated: 60/106
+Generated: 61/106
+Generated: 62/106
+Generated: 63/106
+Generated: 64/106
+Generated: 65/106
+Generated: 66/106
+Generated: 67/106
+Generated: 68/106
+Generated: 69/106
+Generated: 70/106
+Generated: 71/106
+Generated: 72/106
+Generated: 73/106
+Generated: 74/106
+Generated: 75/106
+Generated: 76/106
+Generated: 77/106
+Generated: 78/106
+Generated: 79/106
+Generated: 80/106
+Generated: 81/106
+Generated: 82/106
+Generated: 83/106
+Generated: 84/106
+Generated: 85/106
+Generated: 86/106
+Generated: 87/106
+Generated: 88/106
+Generated: 89/106
+Generated: 90/106
+Generated: 91/106
+Generated: 92/106
+Generated: 93/106
+Generated: 94/106
+Generated: 95/106
+Generated: 96/106
+Generated: 97/106
+Generated: 98/106
+Generated: 99/106
+Generated: 100/106
+Generated: 101/106
+Generated: 102/106
+Generated: 103/106
+Generated: 104/106
+Generated: 105/106
+Generated: 106/106
+{
+  "model": "Qwen2.5-1.5B-Instruct-LoRA",
+  "dataset": "val_106.json",
+  "total": 106,
+  "batch_size": 1,
+  "max_new_tokens": 160,
+  "answerable": 77,
+  "impossible": 29,
+  "exact_match_percent": 0.0,
+  "token_f1_percent": 0.69,
+  "abstention_rate_percent": 100.0,
+  "false_refusal_rate_percent": 97.4,
+  "method": "LoRA",
+  "generation_seconds": 40.594,
+  "mean_generation_seconds_per_question": 0.383,
+  "questions_per_second": 2.611,
+  "peak_gpu_memory_gb": 3.003,
+  "retrieval": null,
+  "faithfulness_percent": null
+}

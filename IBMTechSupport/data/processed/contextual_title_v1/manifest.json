@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "kind": "deterministic_title_context_not_llm_generated",
+  "source_sha256": "ba7a86b1411659495c1ddcdf7842abccde52615c2f08d6bb9c568100908caa17",
+  "baseline_sha256": "3f1a61771e2d057839987d34e3f05ef96df0b8c8f2abd5646b847e3ddf653e74",
+  "config_digest": "73ece2fcb1b39a585b389fe08b30cd0965c4be533e9beeb67282cafa0cc5ec9e",
+  "documents": 28481,
+  "documents_with_title": 28481,
+  "chunks": 111023,
+  "modified_chunks": 83737,
+  "context_corpus_sha256": "eae1c22b69a4784ab49a2a02533aa6ca00d3bd735be9b1d6ea837b73b3b1a66b",
+  "title_limit": 160
+}

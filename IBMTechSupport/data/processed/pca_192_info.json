@@ -1,0 +1,13 @@
+{
+  "source_model": "BAAI/bge-small-en-v1.5",
+  "original_dimensions": 384,
+  "pca_fit_components": 256,
+  "output_dimensions": 192,
+  "pca_fit_sample": 20000,
+  "random_state": 42,
+  "source_vectors": 111023,
+  "pca_explained_variance_ratio": 0.877124,
+  "normalized": true,
+  "faiss_index": "IndexFlatIP",
+  "note": "PCA fitted with 256 components; first 192 are used to reproduce dimension-comparison experiment"
+}

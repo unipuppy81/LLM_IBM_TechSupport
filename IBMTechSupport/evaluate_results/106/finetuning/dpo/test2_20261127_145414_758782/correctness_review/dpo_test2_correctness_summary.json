@@ -1,0 +1,304 @@
+{
+  "source": "dpo_test2_review_bundle.json",
+  "source_sha256": "f33ae661a037329a1bfb8f912041deb73b4221144f6c192189feb7eeaa493464",
+  "cases": 77,
+  "answers": 308,
+  "unique_answers_per_question_total": 126,
+  "all_four_exactly_same": 41,
+  "method": "Question-specific AI review of supplied reference documents and answers; identical answers within a question receive identical verdicts. One primary failure category per non-CORRECT answer. Mapping is embedded in the bundle, so this is not an independently controlled blind review.",
+  "models": {
+    "SFT_548": {
+      "counts": {
+        "CORRECT": 3,
+        "PARTIAL": 11,
+        "INCORRECT": 61,
+        "UNCERTAIN": 2
+      },
+      "strict_correctness_percent": 3.9,
+      "primary_failure_counts": {
+        "기술적 내용 불일치": 38,
+        "근거 미확인 주장 또는 대체 절차": 15,
+        "필수 정보 누락": 16,
+        "질문 의도 불일치": 5
+      },
+      "generation": {
+        "model": "Qwen2.5-1.5B-Instruct-LoRA",
+        "dataset": "val_106.json",
+        "total": 106,
+        "batch_size": 1,
+        "max_new_tokens": 160,
+        "answerable": 77,
+        "impossible": 29,
+        "exact_match_percent": 0.0,
+        "token_f1_percent": 21.59,
+        "abstention_rate_percent": 0.0,
+        "false_refusal_rate_percent": 0.0,
+        "method": "LoRA",
+        "generation_seconds": 393.094,
+        "mean_generation_seconds_per_question": 3.7084,
+        "questions_per_second": 0.27,
+        "peak_gpu_memory_gb": 3.102,
+        "retrieval": null,
+        "faithfulness_percent": null
+      },
+      "training": null
+    },
+    "DPO_Test1": {
+      "counts": {
+        "CORRECT": 3,
+        "PARTIAL": 10,
+        "INCORRECT": 62,
+        "UNCERTAIN": 2
+      },
+      "strict_correctness_percent": 3.9,
+      "primary_failure_counts": {
+        "기술적 내용 불일치": 39,
+        "근거 미확인 주장 또는 대체 절차": 16,
+        "필수 정보 누락": 14,
+        "질문 의도 불일치": 5
+      },
+      "generation": {
+        "model": "Qwen2.5-1.5B-Instruct-LoRA",
+        "dataset": "val_106.json",
+        "total": 106,
+        "batch_size": 1,
+        "max_new_tokens": 160,
+        "answerable": 77,
+        "impossible": 29,
+        "exact_match_percent": 0.0,
+        "token_f1_percent": 21.53,
+        "abstention_rate_percent": 0.0,
+        "false_refusal_rate_percent": 0.0,
+        "method": "LoRA",
+        "generation_seconds": 440.034,
+        "mean_generation_seconds_per_question": 4.1513,
+        "questions_per_second": 0.241,
+        "peak_gpu_memory_gb": 3.54,
+        "retrieval": null,
+        "faithfulness_percent": null
+      },
+      "training": {
+        "pairs": 76,
+        "epochs": 1,
+        "optimizer_updates": 10,
+        "skipped_updates": 0,
+        "mean_dpo_loss": 0.6904487594177848,
+        "reference_seconds": 18.899,
+        "training_seconds": 77.357,
+        "peak_gpu_memory_gb": 3.596
+      }
+    },
+    "A_lr_2e5": {
+      "counts": {
+        "CORRECT": 2,
+        "PARTIAL": 10,
+        "INCORRECT": 63,
+        "UNCERTAIN": 2
+      },
+      "strict_correctness_percent": 2.6,
+      "primary_failure_counts": {
+        "기술적 내용 불일치": 40,
+        "근거 미확인 주장 또는 대체 절차": 15,
+        "필수 정보 누락": 16,
+        "질문 의도 불일치": 4
+      },
+      "generation": {
+        "model": "Qwen2.5-1.5B-Instruct-LoRA",
+        "dataset": "val_106.json",
+        "total": 106,
+        "batch_size": 1,
+        "max_new_tokens": 160,
+        "answerable": 77,
+        "impossible": 29,
+        "exact_match_percent": 0.0,
+        "token_f1_percent": 21.69,
+        "abstention_rate_percent": 0.0,
+        "false_refusal_rate_percent": 0.0,
+        "method": "LoRA",
+        "generation_seconds": 463.96,
+        "mean_generation_seconds_per_question": 4.377,
+        "questions_per_second": 0.228,
+        "peak_gpu_memory_gb": 3.104,
+        "retrieval": null,
+        "faithfulness_percent": null
+      },
+      "training": {
+        "lr": 2e-05,
+        "epochs": 1,
+        "pairs": 76,
+        "beta": 0.1,
+        "optimizer_updates": 10,
+        "skipped_updates": 0,
+        "mean_dpo_loss": 0.6823141276836395,
+        "training_seconds": 74.703,
+        "peak_gpu_memory_gb": 3.595,
+        "history": [
+          {
+            "epoch": 1,
+            "mean_dpo_loss": 0.6823141276836395,
+            "cumulative_updates": 10,
+            "cumulative_skipped_updates": 0
+          }
+        ]
+      }
+    },
+    "B_epoch3": {
+      "counts": {
+        "CORRECT": 2,
+        "PARTIAL": 12,
+        "INCORRECT": 61,
+        "UNCERTAIN": 2
+      },
+      "strict_correctness_percent": 2.6,
+      "primary_failure_counts": {
+        "기술적 내용 불일치": 38,
+        "근거 미확인 주장 또는 대체 절차": 15,
+        "필수 정보 누락": 18,
+        "질문 의도 불일치": 4
+      },
+      "generation": {
+        "model": "Qwen2.5-1.5B-Instruct-LoRA",
+        "dataset": "val_106.json",
+        "total": 106,
+        "batch_size": 1,
+        "max_new_tokens": 160,
+        "answerable": 77,
+        "impossible": 29,
+        "exact_match_percent": 0.0,
+        "token_f1_percent": 21.76,
+        "abstention_rate_percent": 0.0,
+        "false_refusal_rate_percent": 0.0,
+        "method": "LoRA",
+        "generation_seconds": 510.859,
+        "mean_generation_seconds_per_question": 4.8194,
+        "questions_per_second": 0.207,
+        "peak_gpu_memory_gb": 3.104,
+        "retrieval": null,
+        "faithfulness_percent": null
+      },
+      "training": {
+        "lr": 5e-06,
+        "epochs": 3,
+        "pairs": 76,
+        "beta": 0.1,
+        "optimizer_updates": 30,
+        "skipped_updates": 0,
+        "mean_dpo_loss": 0.6784731821532834,
+        "training_seconds": 234.077,
+        "peak_gpu_memory_gb": 3.597,
+        "history": [
+          {
+            "epoch": 1,
+            "mean_dpo_loss": 0.6904487594177848,
+            "cumulative_updates": 10,
+            "cumulative_skipped_updates": 0
+          },
+          {
+            "epoch": 2,
+            "mean_dpo_loss": 0.6779526864227495,
+            "cumulative_updates": 20,
+            "cumulative_skipped_updates": 0
+          },
+          {
+            "epoch": 3,
+            "mean_dpo_loss": 0.6670181006193161,
+            "cumulative_updates": 30,
+            "cumulative_skipped_updates": 0
+          }
+        ]
+      }
+    }
+  },
+  "comparisons_vs_sft": {
+    "DPO_Test1": {
+      "counts": {
+        "exact_same_answer": 60,
+        "same_verdict": 76,
+        "worsened": 1
+      },
+      "transitions": {
+        "INCORRECT -> INCORRECT": 61,
+        "PARTIAL -> PARTIAL": 10,
+        "CORRECT -> CORRECT": 3,
+        "UNCERTAIN -> UNCERTAIN": 2,
+        "PARTIAL -> INCORRECT": 1
+      },
+      "changed_verdicts": [
+        {
+          "id": "DEV_Q266",
+          "before": "PARTIAL",
+          "after": "INCORRECT",
+          "before_reason": "다운로드 후 설치 방향은 맞으나 IBM Installation Manager 및 저장소/패키지 구성 누락.",
+          "after_reason": "WAS 설치 서버와 Packaging Utility 서비스 요구사항은 근거에서 확인되지 않음; Installation Manager 절차 누락."
+        }
+      ]
+    },
+    "A_lr_2e5": {
+      "counts": {
+        "exact_same_answer": 45,
+        "same_verdict": 74,
+        "worsened": 3
+      },
+      "transitions": {
+        "INCORRECT -> INCORRECT": 61,
+        "PARTIAL -> PARTIAL": 9,
+        "PARTIAL -> INCORRECT": 2,
+        "CORRECT -> PARTIAL": 1,
+        "CORRECT -> CORRECT": 2,
+        "UNCERTAIN -> UNCERTAIN": 2
+      },
+      "changed_verdicts": [
+        {
+          "id": "TRAIN_Q307",
+          "before": "PARTIAL",
+          "after": "INCORRECT",
+          "before_reason": "잘못 생성된 두 번째 DE 제거 방향은 맞지만 기존 DE로의 링크 생성 또는 동일 JVM 조건 누락.",
+          "after_reason": "정상 DE까지 재설치하도록 안내; 원문은 신규 비정상 DE를 제거하고 기존 DE로 링크하도록 안내."
+        },
+        {
+          "id": "TRAIN_Q336",
+          "before": "CORRECT",
+          "after": "PARTIAL",
+          "before_reason": "다른 애플리케이션의 파일 점유로 설치가 중단된다는 원인과 프로세스 종료 후 재시도 방향이 질문의 핵심을 충족.",
+          "after_reason": "같은 경로 사용을 언급하나 실제 파일 잠금인지 명확히 설명하지 않음; 설치 중단 이유 누락."
+        },
+        {
+          "id": "DEV_Q210",
+          "before": "PARTIAL",
+          "after": "INCORRECT",
+          "before_reason": "파일 디스크립터 한계 원인은 맞으나 핸들 누출 가능성 및 진단 누락; 고정 102400 수치 근거 없음.",
+          "after_reason": "파일 핸들 한계는 인식했으나 Windows MaxUserPort를 파일 핸들 제한의 해결책으로 잘못 안내; 누출 진단 누락."
+        }
+      ]
+    },
+    "B_epoch3": {
+      "counts": {
+        "exact_same_answer": 52,
+        "same_verdict": 76,
+        "worsened": 1
+      },
+      "transitions": {
+        "INCORRECT -> INCORRECT": 61,
+        "PARTIAL -> PARTIAL": 11,
+        "CORRECT -> PARTIAL": 1,
+        "CORRECT -> CORRECT": 2,
+        "UNCERTAIN -> UNCERTAIN": 2
+      },
+      "changed_verdicts": [
+        {
+          "id": "TRAIN_Q336",
+          "before": "CORRECT",
+          "after": "PARTIAL",
+          "before_reason": "다른 애플리케이션의 파일 점유로 설치가 중단된다는 원인과 프로세스 종료 후 재시도 방향이 질문의 핵심을 충족.",
+          "after_reason": "같은 경로 사용을 언급하나 실제 파일 잠금인지 명확히 설명하지 않음; 설치 중단 이유 누락."
+        }
+      ]
+    }
+  },
+  "test_used": false,
+  "training_data_created": false,
+  "previous_sft_review_check": {
+    "exact_answer_matches": 77,
+    "changed_verdicts": []
+  }
+}

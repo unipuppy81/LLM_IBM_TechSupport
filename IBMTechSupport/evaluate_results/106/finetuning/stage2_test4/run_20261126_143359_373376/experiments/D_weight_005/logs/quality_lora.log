@@ -1,0 +1,33 @@
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+W1126 15:13:45.402000 34844 Lib\site-packages\torch\distributed\elastic\multiprocessing\redirects.py:29] NOTE: Redirects are currently not supported in Windows or MacOs.
+
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]
+Loading weights:   7%|▋         | 22/338 [00:00<00:02, 152.61it/s]
+Loading weights:  13%|█▎        | 45/338 [00:00<00:01, 152.79it/s]
+Loading weights:  19%|█▉        | 64/338 [00:00<00:01, 164.84it/s]
+Loading weights:  24%|██▍       | 81/338 [00:00<00:01, 159.36it/s]
+Loading weights:  29%|██▉       | 99/338 [00:00<00:01, 163.97it/s]
+Loading weights:  35%|███▍      | 117/338 [00:00<00:01, 161.81it/s]
+Loading weights:  40%|███▉      | 135/338 [00:00<00:01, 165.66it/s]
+Loading weights:  45%|████▌     | 153/338 [00:00<00:01, 169.30it/s]
+Loading weights:  51%|█████     | 171/338 [00:01<00:01, 159.88it/s]
+Loading weights:  57%|█████▋    | 191/338 [00:01<00:00, 155.78it/s]
+Loading weights:  63%|██████▎   | 213/338 [00:01<00:00, 167.84it/s]
+Loading weights:  68%|██████▊   | 230/338 [00:01<00:00, 161.22it/s]
+Loading weights:  73%|███████▎  | 247/338 [00:01<00:00, 161.14it/s]
+Loading weights:  78%|███████▊  | 264/338 [00:01<00:00, 145.70it/s]
+Loading weights:  84%|████████▍ | 285/338 [00:01<00:00, 143.91it/s]
+Loading weights:  92%|█████████▏| 311/338 [00:01<00:00, 159.57it/s]
+Loading weights:  97%|█████████▋| 328/338 [00:02<00:00, 156.56it/s]
+Loading weights: 100%|██████████| 338/338 [00:02<00:00, 163.09it/s]
+[lora quality] 10/106
+[lora quality] 20/106
+[lora quality] 30/106
+[lora quality] 40/106
+[lora quality] 50/106
+[lora quality] 60/106
+[lora quality] 70/106
+[lora quality] 80/106
+[lora quality] 90/106
+[lora quality] 100/106
+[lora quality] 106/106
