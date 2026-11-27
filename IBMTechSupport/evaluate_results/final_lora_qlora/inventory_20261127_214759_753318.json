@@ -1,0 +1,812 @@
+{
+  "scripts": [
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\benchmarks\\benchmark_contextual_retrieval.py",
+      "cli_arguments": [
+        "--batch-size",
+        "--limit",
+        "--mode",
+        "--variant"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\benchmarks\\benchmark_judge_error_audit.py",
+      "cli_arguments": [
+        "--backend",
+        "--limit",
+        "--mode",
+        "--model",
+        "--model-path",
+        "--num-ctx",
+        "--overwrite",
+        "--prompt",
+        "--timeout",
+        "--url"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\benchmarks\\benchmark_rag_chunk_expansion.py",
+      "cli_arguments": [
+        "--limit",
+        "--mode",
+        "--overwrite",
+        "--radius",
+        "--verbose"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\benchmarks\\benchmark_rag_e2e_final.py",
+      "cli_arguments": [
+        "--limit",
+        "--method",
+        "--overwrite",
+        "--resume",
+        "--verbose"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\benchmarks\\benchmark_rag_judge_ablation.py",
+      "cli_arguments": [
+        "--limit",
+        "--overwrite",
+        "--resume"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\debug\\apply_per_document_judge.py",
+      "cli_arguments": []
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\debug\\apply_relaxed_judge.py",
+      "cli_arguments": [
+        "--root"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\debug\\audit_judge_v3.py",
+      "cli_arguments": []
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\debug\\compare_judge_modes.py",
+      "cli_arguments": [
+        "--config",
+        "--ids",
+        "--predictions",
+        "--rerun-strict"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\debug\\debug_per_document_judge.py",
+      "cli_arguments": [
+        "--config",
+        "--ids",
+        "--predictions"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\debug\\debug_rag_one.py",
+      "cli_arguments": [
+        "--config",
+        "--id"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\analyze_stage2_judge_failures.py",
+      "cli_arguments": [
+        "--explain",
+        "--judge-model",
+        "--run"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\benchmark_training.py",
+      "cli_arguments": [
+        "--checkpoint",
+        "--compare",
+        "--grad-accum",
+        "--max-length",
+        "--model",
+        "--optimizer",
+        "--seed",
+        "--timed-samples",
+        "--warmup-samples"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\evaluate_answerability.py",
+      "cli_arguments": [
+        "--input",
+        "--labels",
+        "--output",
+        "--predictions",
+        "--save-predictions"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\evaluate_base.py",
+      "cli_arguments": [
+        "--config",
+        "--limit"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\evaluate_evidence_judge.py",
+      "cli_arguments": [
+        "--input",
+        "--limit",
+        "--model",
+        "--num-ctx",
+        "--output",
+        "--overwrite",
+        "--retries",
+        "--timeout",
+        "--url"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\evaluate_generation.py",
+      "cli_arguments": [
+        "--batch-size",
+        "--dataset",
+        "--limit",
+        "--output",
+        "--predictions"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\evaluate_judge_cases.py",
+      "cli_arguments": []
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\evaluate_lora.py",
+      "cli_arguments": [
+        "--quality-only"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\evaluate_qlora.py",
+      "cli_arguments": [
+        "--quality-only"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\evaluate_rag.py",
+      "cli_arguments": [
+        "--config"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\evaluate_rag_v3_quality.py",
+      "cli_arguments": [
+        "--output",
+        "--retrieval-only"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\evaluate_retrieval.py",
+      "cli_arguments": [
+        "--dataset",
+        "--limit",
+        "--output",
+        "--predictions",
+        "--retriever",
+        "--top-k"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\evaluate_stage2_prompt.py",
+      "cli_arguments": [
+        "--config"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\evaluate_stage2_prompt_fast.py",
+      "cli_arguments": [
+        "--config",
+        "--full",
+        "--judge-all",
+        "--no-historical-cache",
+        "--previous-run",
+        "--prompt",
+        "--quality"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\evaluate_stage2_prompt_quality.py",
+      "cli_arguments": [
+        "--diagnostics-only",
+        "--judge-model",
+        "--run"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\evaluate_stage2_quality.py",
+      "cli_arguments": [
+        "--judge-model",
+        "--output",
+        "--predictions"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\evaluate_stage4.py",
+      "cli_arguments": [
+        "--allow-id-only-judge",
+        "--config",
+        "--finalize",
+        "--followup-judge",
+        "--judge",
+        "--predictions",
+        "--replies",
+        "--review"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\evaluate_with_evidence.py",
+      "cli_arguments": [
+        "--labels",
+        "--output",
+        "--predictions"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\judge_quality\\judge_quality.py",
+      "cli_arguments": [
+        "--bootstrap",
+        "--calibration",
+        "--debug",
+        "--debug-log",
+        "--dev-human",
+        "--enforce",
+        "--exclude-human",
+        "--final-human",
+        "--final2-human",
+        "--force",
+        "--human",
+        "--judge-jsonl",
+        "--judge-output",
+        "--limit",
+        "--max-attempts",
+        "--max-new-tokens",
+        "--model-path",
+        "--output",
+        "--output-dir",
+        "--policy",
+        "--predictions",
+        "--report",
+        "--review-csv",
+        "--review-html",
+        "--sample-size",
+        "--seed",
+        "--validation-human",
+        "--validation-output"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\judge_quality\\judge_quality_backup.py",
+      "cli_arguments": [
+        "--bootstrap",
+        "--calibration",
+        "--debug",
+        "--debug-log",
+        "--enforce",
+        "--force",
+        "--judge-jsonl",
+        "--limit",
+        "--max-attempts",
+        "--max-new-tokens",
+        "--model-path",
+        "--output",
+        "--output-dir",
+        "--policy",
+        "--predictions",
+        "--review-csv",
+        "--sample-size",
+        "--seed"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\judge_quality\\judge_quality_guard.py",
+      "cli_arguments": [
+        "--fail-on-review",
+        "--out-dir",
+        "command",
+        "jsonl_path"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\judge_quality\\run_judge_v38.py",
+      "cli_arguments": []
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\rag_candidate_k_experiment.py",
+      "cli_arguments": [
+        "--output",
+        "--root"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\rag_failure_analysis.py",
+      "cli_arguments": [
+        "--chunks",
+        "--expect-count",
+        "--off",
+        "--on",
+        "--out",
+        "--root",
+        "--scan-corpus",
+        "--val"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\rag_gold_chunk_audit.py",
+      "cli_arguments": [
+        "--baseline",
+        "--corpus",
+        "--k-cases",
+        "--min-ref-tokens",
+        "--output",
+        "--root",
+        "--top-candidates",
+        "--val"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\rag_judge_probability.py",
+      "cli_arguments": [
+        "--approved",
+        "--limit",
+        "--output-dir",
+        "--resume",
+        "--root"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\rag_oracle_experiment.py",
+      "cli_arguments": [
+        "--approved",
+        "--baseline",
+        "--limit",
+        "--mode",
+        "--output",
+        "--root",
+        "--val"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\rag_retrieval_trace.py",
+      "cli_arguments": [
+        "--limit",
+        "--on",
+        "--output",
+        "--root",
+        "--val"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\rag_stage2.py",
+      "cli_arguments": [
+        "--dataset",
+        "--expected-count",
+        "--force",
+        "--force-final"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\ragas_evaluate.py",
+      "cli_arguments": []
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\replay_stage2_judge_reasons.py",
+      "cli_arguments": [
+        "--config",
+        "--run"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\retrieval_diagnose.py",
+      "cli_arguments": [
+        "--dataset",
+        "--wide-k"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\retrieval_stage3_optimize.py",
+      "cli_arguments": [
+        "--diagnose-strict",
+        "--dry-run",
+        "--evaluate-answers",
+        "--evaluate-controlled",
+        "--skip-benchmark"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\test_evaluation.py",
+      "cli_arguments": []
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\evaluate\\test_yaml_evaluation.py",
+      "cli_arguments": []
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\finetuning\\audit_training_data.py",
+      "cli_arguments": [
+        "--out",
+        "--train"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\finetuning\\export_test2_judge.py",
+      "cli_arguments": [
+        "--source"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\finetuning\\final_eval_preflight.py",
+      "cli_arguments": [
+        "--asset",
+        "--lock",
+        "--root",
+        "--test",
+        "--train"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\finetuning\\run_data_composition_test1.py",
+      "cli_arguments": [
+        "--parent",
+        "--prepare-only",
+        "--resume",
+        "--run",
+        "--worker"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\finetuning\\run_data_composition_test2.py",
+      "cli_arguments": [
+        "--baseline",
+        "--resume",
+        "--run",
+        "--size",
+        "--train",
+        "--worker"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\finetuning\\run_data_composition_test3.py",
+      "cli_arguments": [
+        "--oracle-only",
+        "--parent",
+        "--prepare-only",
+        "--resume",
+        "--run",
+        "--worker"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\finetuning\\run_generation_prompt_test1.py",
+      "cli_arguments": [
+        "--adapter"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\finetuning\\run_generation_prompt_test1_retrain.py",
+      "cli_arguments": [
+        "--resume",
+        "--train-only"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\finetuning\\run_judge_reliability_test1.py",
+      "cli_arguments": [
+        "--parser-only",
+        "--review"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\finetuning\\run_stage2_prompt.py",
+      "cli_arguments": [
+        "--parent",
+        "--prepare-only",
+        "--resume",
+        "--run",
+        "--worker"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\finetuning\\run_stage3_test4_prompt.py",
+      "cli_arguments": [
+        "--full-quality",
+        "--generation-only",
+        "--parent",
+        "--prepare-only",
+        "--resume"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\finetuning\\run_train_clean_ver2.py",
+      "cli_arguments": []
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\make_rag_case_report.py",
+      "cli_arguments": [
+        "--output",
+        "--repo"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\prepare_lora_stage2.py",
+      "cli_arguments": []
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\rag_guardrails.py",
+      "cli_arguments": []
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\rag_guardrails_per_document.py",
+      "cli_arguments": []
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\rag_guardrails_relaxed.py",
+      "cli_arguments": []
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\rag_pipeline.py",
+      "cli_arguments": [
+        "--config",
+        "--question",
+        "--retriever",
+        "--top-k"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\retrieval_config.py",
+      "cli_arguments": []
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\stage2_retrieval.py",
+      "cli_arguments": []
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\train_lora.py",
+      "cli_arguments": [
+        "--epochs",
+        "--grad-accum",
+        "--learning-rate",
+        "--limit",
+        "--max-length",
+        "--seed"
+      ]
+    },
+    {
+      "path": "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\scripts\\train_qlora.py",
+      "cli_arguments": [
+        "--epochs",
+        "--grad-accum",
+        "--learning-rate",
+        "--limit",
+        "--max-length",
+        "--seed"
+      ]
+    }
+  ],
+  "data_paths": [
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\bm25_index\\corpus.mmindex.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\bm25_index\\params.index.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\bm25_index\\vocab.index.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\bm25_index\\vocab.tokenizer.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\contextual_title_v1\\bm25_index\\corpus.mmindex.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\contextual_title_v1\\bm25_index\\params.index.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\contextual_title_v1\\bm25_index\\vocab.index.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\contextual_title_v1\\bm25_index\\vocab.tokenizer.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\contextual_title_v1\\manifest.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\finetuning\\stage1\\run_20261126_111844_787702\\conflict_quarantine.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\finetuning\\stage1\\run_20261126_111844_787702\\exact_dedup.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\hybrid_bm25_index\\params.index.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\hybrid_bm25_index\\vocab.index.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\pca_192_info.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\bm25_index\\corpus.mmindex.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\bm25_index\\params.index.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\bm25_index\\vocab.index.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\bm25_index\\vocab.tokenizer.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\contextual_title_v1\\bm25_index\\corpus.mmindex.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\contextual_title_v1\\bm25_index\\params.index.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\contextual_title_v1\\bm25_index\\vocab.index.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\contextual_title_v1\\bm25_index\\vocab.tokenizer.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\contextual_title_v1\\manifest.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\finetuning\\stage1\\run_20261126_111844_787702\\conflict_quarantine.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\finetuning\\stage1\\run_20261126_111844_787702\\exact_dedup.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\hybrid_bm25_index\\params.index.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\hybrid_bm25_index\\vocab.index.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\pca_192_info.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\qa_clean.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\qa_dedup.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\test.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\test_clean.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\train.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\train_clean.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\train_clean_ver2.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\train_clean_ver2_audit.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\val.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\val_106.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\val_clean.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\qa_clean.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\qa_dedup.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\test.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\test_clean.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\train.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\train_clean.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\train_clean_ver2.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\train_clean_ver2_audit.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\val.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\val_106.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\val_clean.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\bm25_index\\corpus.jsonl",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\contextual_title_v1\\bm25_index\\corpus.jsonl",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\contextual_title_v1\\contextual_chunks.jsonl",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\corpus_chunks.jsonl",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\bm25_index\\corpus.jsonl",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\contextual_title_v1\\bm25_index\\corpus.jsonl",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\contextual_title_v1\\contextual_chunks.jsonl",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\corpus_chunks.jsonl",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\processed\\train_dpo_v1.jsonl",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\data\\processed\\train_dpo_v1.jsonl"
+  ],
+  "config_paths": [
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\configs\\base\\v1.yaml",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\configs\\base\\v1_106.yaml",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\configs\\rag\\retrieval.yaml",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\configs\\rag\\retrieval_stage2_selected.yaml",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\configs\\rag\\retrieval_stage3_candidate.yaml",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\configs\\rag\\stage2_v3_frozen.yaml",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\configs\\rag\\v1.yaml",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\configs\\rag\\v1_106.yaml",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\configs\\rag\\v2.yaml",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\configs\\rag\\v2_106.yaml",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\configs\\rag\\v3.yaml",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\configs\\rag\\v3_relaxed.yaml",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\configs\\rag\\v4.yaml",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\configs\\rag\\v5_stage2_106.yaml",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\configs\\rag\\v5_stage2_test.yaml",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\configs\\judge_quality\\policy.json"
+  ],
+  "adapters": [
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\data_composition_test1\\run_20261126_231847_375481\\A_answerable_only\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\data_composition_test2\\run_20261127_000005_052233\\A_expanded\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\data_composition_test3\\run_20261127_003107_337442\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\dapt_sft\\run_20261127_153122_777994\\dapt_lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\dapt_sft\\run_20261127_153122_777994\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\dapt_sft\\test2_20261127_161739_495798\\A_dapt3\\dapt_lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\dapt_sft\\test2_20261127_161739_495798\\A_dapt3\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\dapt_sft\\test2_20261127_161739_495798\\B_dapt3_all_linear_r32\\dapt_lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\dpo\\run_20261127_143501_864689\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\dpo\\test2_20261127_145414_758782\\A_lr_2e5\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\dpo\\test2_20261127_145414_758782\\B_epoch3\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\generation_prompt_test1_retrained\\run_20261127_113947_251249\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\stage0\\run_20261126_102956_686113\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\stage0\\run_20261126_102956_686113\\qlora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\stage1_cleanup\\run_20261126_113250_190348\\combined_cleanup\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\stage1_quality\\run_20261126_114427_318655\\answer_quality\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\stage2_prompt\\run_20261126_130006_240586\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\stage2_test2\\run_20261126_131911_671712\\B_prompt\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\stage2_test2\\run_20261126_131911_671712\\C_question\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\stage2_test2\\run_20261126_131911_671712\\D_answer\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\stage2_test3\\run_20261126_140246_231726\\A_weight_050\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\stage2_test3\\run_20261126_140246_231726\\B_weight_025\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\stage2_test3_midpoint\\run_20261126_153404_972504\\E_weight_0175\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\stage2_test4\\run_20261126_143359_373376\\C_weight_010\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\stage2_test4\\run_20261126_143359_373376\\D_weight_005\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\stage3_test1\\run_20261126_160215_350523\\A_lr_1e4\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\stage3_test1\\run_20261126_160215_350523\\B_lr_5e4\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\stage3_test2\\run_20261126_163045_370144\\A_epoch_1\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\stage3_test2\\run_20261126_163045_370144\\B_epoch_3\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\stage3_test3\\run_20261126_165348_820581\\A_accum_4\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\stage3_test3\\run_20261126_165348_820581\\B_accum_16\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\finetuning\\train_clean_ver2\\run_20261127_134955_078761\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage0\\run_20261126_102956_686113\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage0\\run_20261126_102956_686113\\qlora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage1_cleanup\\run_20261126_113250_190348\\combined_cleanup\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage1_quality\\run_20261126_114427_318655\\answer_quality\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage2_prompt\\run_20261126_130006_240586\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage2_test2\\run_20261126_131911_671712\\B_prompt\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage2_test2\\run_20261126_131911_671712\\C_question\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage2_test2\\run_20261126_131911_671712\\D_answer\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage2_test3\\run_20261126_140246_231726\\A_weight_050\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage2_test3\\run_20261126_140246_231726\\B_weight_025\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage2_test3_midpoint\\run_20261126_153404_972504\\E_weight_0175\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage2_test4\\run_20261126_143359_373376\\C_weight_010\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage2_test4\\run_20261126_143359_373376\\D_weight_005\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage3_test1\\run_20261126_160215_350523\\A_lr_1e4\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage3_test1\\run_20261126_160215_350523\\B_lr_5e4\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage3_test2\\run_20261126_163045_370144\\A_epoch_1\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage3_test2\\run_20261126_163045_370144\\B_epoch_3\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage3_test3\\run_20261126_165348_820581\\A_accum_4\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage3_test3\\run_20261126_165348_820581\\B_accum_16\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage4_test1\\run_20261126_210609_215297\\A_attention\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage4_test1\\run_20261126_210609_215297\\B_all_linear\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage4_test2\\run_20261126_214633_010105\\A_rank_16\\lora\\adapter_config.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\models\\finetuning\\stage4_test2\\run_20261126_214633_010105\\B_rank_32\\lora\\adapter_config.json"
+  ],
+  "records": [
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\dapt_sft\\run_20261127_153122_777994\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\data_composition_test1\\run_20261126_231847_375481\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\data_composition_test2\\run_20261127_000005_052233\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\data_composition_test3\\run_20261127_003107_337442\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\dpo\\run_20261127_143501_864689\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\dpo\\test2_20261127_145414_758782\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\generation_prompt_test1_retrained\\run_20261127_113947_251249\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\judge_reliability_test1\\run_20261127_110745_998302\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage0\\run_20261126_102956_686113\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage1_cleanup\\run_20261126_113250_190348\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage1_quality\\run_20261126_114427_318655\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage2_prompt\\run_20261126_130006_240586\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage2_test2\\run_20261126_131911_671712\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage2_test3\\run_20261126_140246_231726\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage2_test3_midpoint\\run_20261126_153404_972504\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage2_test4\\run_20261126_143359_373376\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test1\\run_20261126_160215_350523\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test2\\run_20261126_163045_370144\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test3\\run_20261126_165348_820581\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test4_prompt\\run_20261126_172342_145347\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test5\\run_20261126_173316_296155\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage4_test1\\run_20261126_210609_215297\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage4_test2\\run_20261126_214633_010105\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\train_clean_ver2\\run_20261127_134955_078761\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\train_val_reproduction\\run_20261127_170419_685161\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\rag\\stage2_prompt_ab\\fast_48pbi4xw\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\rag\\stage2_prompt_ab\\fast_5ec1cdqw\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\rag\\stage2_prompt_ab\\fast_6n5sx63t\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\rag\\stage2_prompt_ab\\fast_8r1dbagj\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\rag\\stage2_prompt_ab\\fast_9pvycqsj\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\rag\\stage2_prompt_ab\\fast_bdygeulx\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\rag\\stage2_prompt_ab\\fast_c9hr9oks\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\rag\\stage2_prompt_ab\\fast_erb39q44\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\rag\\stage2_prompt_ab\\fast_g4g_ce7n\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\rag\\stage2_prompt_ab\\fast_jdjlxlnc\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\rag\\stage2_prompt_ab\\fast_jn56833u\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\rag\\stage2_prompt_ab\\fast_l81g4igl\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\rag\\stage2_prompt_ab\\fast_rakrzanp\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\rag\\stage2_prompt_ab\\fast_stn42a5q\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\rag\\stage2_prompt_ab\\fast_uivaa8m8\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\rag\\stage2_prompt_ab\\fast_uvqxwxj7\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\rag\\stage2_prompt_ab\\fast_vlpyl1a3\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\rag\\stage2_prompt_ab\\fast_w35wujpb\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\rag\\stage2_prompt_ab\\fast_wo3h9zwz\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\rag\\stage2_prompt_ab\\fast_y0nb6rad\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\rag\\stage2_prompt_ab\\run_fa9wu45r\\comparison.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\dapt_sft\\run_20261127_153122_777994\\sft_training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\dapt_sft\\test2_20261127_161739_495798\\A_dapt3\\sft_training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\data_composition_test1\\run_20261126_231847_375481\\experiments\\A_answerable_only\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\data_composition_test2\\run_20261127_000005_052233\\experiments\\A_expanded\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\data_composition_test3\\run_20261127_003107_337442\\train_run\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\generation_prompt_test1_retrained\\run_20261127_113947_251249\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage0\\run_20261126_102956_686113\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage0\\run_20261126_102956_686113\\training\\qlora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage1_cleanup\\run_20261126_113250_190348\\experiments\\combined_cleanup\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage1_quality\\run_20261126_114427_318655\\experiments\\answer_quality\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage2_prompt\\run_20261126_130006_240586\\experiments\\system_prompt\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage2_test2\\run_20261126_131911_671712\\experiments\\B_prompt\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage2_test2\\run_20261126_131911_671712\\experiments\\C_question\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage2_test2\\run_20261126_131911_671712\\experiments\\D_answer\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage2_test3\\run_20261126_140246_231726\\experiments\\A_weight_050\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage2_test3\\run_20261126_140246_231726\\experiments\\B_weight_025\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage2_test3_midpoint\\run_20261126_153404_972504\\experiments\\E_weight_0175\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage2_test4\\run_20261126_143359_373376\\experiments\\C_weight_010\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage2_test4\\run_20261126_143359_373376\\experiments\\D_weight_005\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test1\\run_20261126_160215_350523\\experiments\\A_lr_1e4\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test1\\run_20261126_160215_350523\\experiments\\B_lr_5e4\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test2\\run_20261126_163045_370144\\experiments\\A_epoch_1\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test2\\run_20261126_163045_370144\\experiments\\B_epoch_3\\training\\epoch1_snapshot\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test2\\run_20261126_163045_370144\\experiments\\B_epoch_3\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test3\\run_20261126_165348_820581\\experiments\\A_accum_4\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage3_test3\\run_20261126_165348_820581\\experiments\\B_accum_16\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage4_test1\\run_20261126_210609_215297\\experiments\\A_attention\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage4_test1\\run_20261126_210609_215297\\experiments\\B_all_linear\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage4_test2\\run_20261126_214633_010105\\experiments\\A_rank_16\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\stage4_test2\\run_20261126_214633_010105\\experiments\\B_rank_32\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\train_clean_ver2\\run_20261127_134955_078761\\training\\lora_train_metrics.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\dpo\\test2_20261127_145414_758782\\A_lr_2e5\\training_complete.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\dpo\\test2_20261127_145414_758782\\B_epoch3\\training_complete.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\generation_prompt_test1_retrained\\run_20261127_113947_251249\\training_complete.json",
+    "C:\\Users\\unipu\\Documents\\GitHub\\LLM_IBM_TechSupport\\IBMTechSupport\\evaluate_results\\106\\finetuning\\train_clean_ver2\\run_20261127_134955_078761\\training_complete.json"
+  ]
+}

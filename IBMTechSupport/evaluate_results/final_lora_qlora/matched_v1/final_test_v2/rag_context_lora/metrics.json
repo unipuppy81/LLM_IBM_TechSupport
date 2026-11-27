@@ -1,0 +1,27 @@
+{
+  "model": "Qwen2.5-1.5B-Instruct",
+  "dataset": "test_clean.json",
+  "total": 120,
+  "batch_size": 1,
+  "max_new_tokens": 160,
+  "answerable": 80,
+  "impossible": 40,
+  "exact_match_percent": 3.75,
+  "token_f1_percent": 10.93,
+  "abstention_rate_percent": 77.5,
+  "false_refusal_rate_percent": 76.25,
+  "spec": {
+    "lock_sha256": "8627b85198ea037cb7bce3b97dfbd0ffe12143f8dd35ce16d2ff44b1f57d29f6",
+    "test_sha256": "40854124e7ca9a6fc953543034221317d6cc2010e1fb6823c300cf167a2213f4",
+    "cache_sha256": "1c89074971337fbf03ad0dbac9849ac03ecf2c8fa6426e1b5da2b6d1a45bd5ca",
+    "model": "rag_context_lora",
+    "quantized": false
+  },
+  "predictions_sha256": "30f52ff9e7a3ea03b27ffc6ba84f2bb3b1f7661b041cfd37a16b160046916ca7",
+  "inference_seconds": 664.024,
+  "peak_gpu_memory_gib": 3.501,
+  "generation_seconds": 388.251,
+  "judge_seconds": 215.333,
+  "verification_seconds": 51.192,
+  "scope": "RAG guardrail + generation loop; cache retrieval/model load excluded; includes base guardrail model memory"
+}

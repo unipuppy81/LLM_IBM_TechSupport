@@ -1,0 +1,7 @@
+{
+  "previous_lock_sha256": "aead6343129dd1a7ddada633b4a8732af1a9b1032a3dfaebc9e730728b54976b",
+  "previous_audit_sha256": "16cd27a113a959f6169861ac54f1770d937980b048c8a7779588eff1fa1f9c27",
+  "new_lock_sha256": "8627b85198ea037cb7bce3b97dfbd0ffe12143f8dd35ce16d2ff44b1f57d29f6",
+  "reason": "Historical unused original_clean overlap reported separately; additionally audit validation against test.",
+  "same_previous_frozen_assets_and_settings": true
+}

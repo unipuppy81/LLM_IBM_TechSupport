@@ -248,3 +248,6 @@ MiniGPT/export/minigpt/*.pt
 /IBMTechSupport/data/processed/corpus_embeddings.npy
 /IBMTechSupport/data/processed/corpus_faiss.index
 /IBMTechSupport/data/processed/corpus_faiss_pca192_hnsw_m32.index
+
+# Exclude all processed data
+/IBMTechSupport/data/processed/

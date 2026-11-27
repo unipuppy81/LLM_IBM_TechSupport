@@ -1,0 +1,24 @@
+{
+  "model": "Qwen2.5-1.5B-Instruct",
+  "dataset": "test_clean.json",
+  "total": 120,
+  "batch_size": 1,
+  "max_new_tokens": 160,
+  "answerable": 80,
+  "impossible": 40,
+  "exact_match_percent": 0.0,
+  "token_f1_percent": 19.87,
+  "abstention_rate_percent": 0.0,
+  "false_refusal_rate_percent": 0.0,
+  "spec": {
+    "lock_sha256": "8627b85198ea037cb7bce3b97dfbd0ffe12143f8dd35ce16d2ff44b1f57d29f6",
+    "test_sha256": "40854124e7ca9a6fc953543034221317d6cc2010e1fb6823c300cf167a2213f4",
+    "cache_sha256": null,
+    "model": "base_qlora",
+    "quantized": true
+  },
+  "predictions_sha256": "bdb9cb0aef8a1c81a626dc60a0661e726a153736e81251120d94f2a8bb0710da",
+  "inference_seconds": 408.98911469999985,
+  "peak_gpu_memory_gib": 1.210179328918457,
+  "scope": "closed generation loop; model load excluded"
+}

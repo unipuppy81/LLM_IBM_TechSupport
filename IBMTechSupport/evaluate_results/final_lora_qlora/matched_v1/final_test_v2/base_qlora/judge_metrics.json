@@ -1,0 +1,12 @@
+{
+  "correct": 32,
+  "denominator": 80,
+  "percent": 40.0,
+  "counts": {
+    "INCORRECT": 28,
+    "CORRECT": 32,
+    "UNCERTAIN": 19,
+    "PARTIAL": 1
+  },
+  "predictions_sha256": "bdb9cb0aef8a1c81a626dc60a0661e726a153736e81251120d94f2a8bb0710da"
+}

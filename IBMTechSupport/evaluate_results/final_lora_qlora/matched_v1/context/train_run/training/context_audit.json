@@ -1,0 +1,12 @@
+{
+  "forward_counts": {
+    "answerable": 734,
+    "impossible": 344,
+    "validation": 212
+  },
+  "trainable_parameters": 1089536,
+  "weights": [
+    1.0,
+    0.175
+  ]
+}
