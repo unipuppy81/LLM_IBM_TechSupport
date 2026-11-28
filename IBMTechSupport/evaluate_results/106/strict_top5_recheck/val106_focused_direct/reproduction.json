@@ -1,0 +1,9 @@
+{
+  "direct_gpu_cases": 106,
+  "identical_nontiming_rows": 106,
+  "mismatch_ids": [],
+  "compared_to": "val106_focused_v1",
+  "direct_predictions_sha256": "6328eb83780487acbafa518efa264d8027d6a011fd60c493e0a868d801e96536",
+  "scored_predictions_sha256": "6041d782b620db8f220a28cc62ec7cea8b004cfa3066228f43b7b2819bb6755f",
+  "cache_sha256": "387f5d81e9db36b57c378115d4ea574d107b5d8733b26a364d7aba9ba565921b"
+}

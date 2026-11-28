@@ -1,0 +1,67 @@
+{
+  "dataset": "val_106.json",
+  "answerable": 77,
+  "impossible": 29,
+  "cache_sha256": "387f5d81e9db36b57c378115d4ea574d107b5d8733b26a364d7aba9ba565921b",
+  "counts": {
+    "strict": {
+      "judge_correct": 25,
+      "false_refusals": 48,
+      "impossible_responses": 6
+    },
+    "recheck": {
+      "judge_correct": 28,
+      "false_refusals": 45,
+      "impossible_responses": 6
+    }
+  },
+  "transitions": {
+    "refused_to_correct": 3,
+    "refused_to_noncorrect": 0,
+    "correct_to_noncorrect": 0,
+    "correct_to_refused": 0
+  },
+  "recheck_method": "focused",
+  "impossible_transitions": {
+    "refused_to_response": 0,
+    "response_to_refused": 0
+  },
+  "noncorrect_definition": "Emitted answer with PARTIAL, INCORRECT or UNCERTAIN correctness",
+  "rechecks": {
+    "attempted": 68,
+    "passed": 3,
+    "generator_refused": 0,
+    "verifier_refused": 0
+  },
+  "review_reasons": {
+    "no_applicable_support_passage": 58,
+    "supported": 3,
+    "insufficient_or_uncertain": 7
+  },
+  "success": true,
+  "changed_original_judge_paths": [],
+  "changed_cases_without_recheck": [],
+  "correctness_judge": "evaluate_stage2_quality.CORRECT_SYSTEM, FP16 base Qwen",
+  "versions": {
+    "torch": "2.14.1+cu126",
+    "transformers": "4.57.3",
+    "faiss-cpu": "1.15.1",
+    "sentence-transformers": "5.7.0",
+    "bm25s": "0.3.16"
+  },
+  "source_sha256": {
+    "rag_guardrails.py": "ee19f334364da08a181c3508b907f29a366169ec3b5e1d2add30d4a90047a887",
+    "rag_guardrails_per_document.py": "70e8fc6d2ec1425968ccd3f635085713ad8492ac856830cae2d82729a2586007",
+    "rag_top5_recheck.py": "c12ce7f1fb5300bf11c8d4aed2e2f7ac5ea94e7fead006bd1803fb67bba17d11",
+    "rag_passage_recheck.py": "e8d77ea608cd14d53de4b0f631acf1b66e4451109280191a263e660cbba3512f",
+    "rag_section_recheck.py": "699d2c315b9e8a0f0833c8b495c840c46648e54ad757211179d242ea2dbefd15",
+    "rag_pipeline.py": "d1bc0b2a81d0825dadc86bdc9ae3143416214dbcbafc9c2979903e9a3744a34e",
+    "stage2_retrieval.py": "ac3f5f96025e2421645c271286ef4b34e3b32f5b712502959aad7752306c98f1",
+    "evaluate/strict_recheck.py": "9521622461b4d9a1a8397c510b6dc6f1459560f1a077fe9fdc8d2d0f0398edd9",
+    "evaluate/evaluate_stage2_quality.py": "d08f7181806ccdbf6d97ec7626a43647442a6dc4df396eb6f3d7dde2e2852820"
+  },
+  "prediction_sha256": {
+    "strict": "2da1071983e12dc8326a753ff9855ebb1f8de8ceb45afa681d4212954b30d7a7",
+    "recheck": "6041d782b620db8f220a28cc62ec7cea8b004cfa3066228f43b7b2819bb6755f"
+  }
+}

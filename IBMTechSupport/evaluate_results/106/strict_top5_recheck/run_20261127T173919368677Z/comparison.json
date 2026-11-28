@@ -1,0 +1,65 @@
+{
+  "dataset": "val_106.json",
+  "answerable": 77,
+  "impossible": 29,
+  "cache_sha256": "387f5d81e9db36b57c378115d4ea574d107b5d8733b26a364d7aba9ba565921b",
+  "counts": {
+    "strict": {
+      "judge_correct": 25,
+      "false_refusals": 48,
+      "impossible_responses": 6
+    },
+    "recheck": {
+      "judge_correct": 25,
+      "false_refusals": 48,
+      "impossible_responses": 6
+    }
+  },
+  "transitions": {
+    "refused_to_correct": 0,
+    "refused_to_noncorrect": 0,
+    "correct_to_noncorrect": 0,
+    "correct_to_refused": 0
+  },
+  "impossible_transitions": {
+    "refused_to_response": 0,
+    "response_to_refused": 0
+  },
+  "noncorrect_definition": "Emitted answer with PARTIAL, INCORRECT or UNCERTAIN correctness",
+  "rechecks": {
+    "attempted": 68,
+    "passed": 0,
+    "generator_refused": 0,
+    "verifier_refused": 0
+  },
+  "review_reasons": {
+    "insufficient_or_uncertain": 26,
+    "unsupported_condition": 13,
+    "quote_not_in_named_chunk": 17,
+    "invalid_json": 12
+  },
+  "success": false,
+  "changed_original_judge_paths": [],
+  "changed_cases_without_recheck": [],
+  "correctness_judge": "evaluate_stage2_quality.CORRECT_SYSTEM, FP16 base Qwen",
+  "versions": {
+    "torch": "2.14.1+cu126",
+    "transformers": "4.57.3",
+    "faiss-cpu": "1.15.1",
+    "sentence-transformers": "5.7.0",
+    "bm25s": "0.3.16"
+  },
+  "source_sha256": {
+    "rag_guardrails.py": "e2d1868cf63ed16687bdf73ca52084f860986d48db11019320a4f3c7e443f73e",
+    "rag_guardrails_per_document.py": "04042add5e7e6a4c3e14be6e53f4367269c52ec2092e98cf9dec6f79c86bcfcd",
+    "rag_top5_recheck.py": "c12ce7f1fb5300bf11c8d4aed2e2f7ac5ea94e7fead006bd1803fb67bba17d11",
+    "rag_pipeline.py": "d1bc0b2a81d0825dadc86bdc9ae3143416214dbcbafc9c2979903e9a3744a34e",
+    "stage2_retrieval.py": "ac3f5f96025e2421645c271286ef4b34e3b32f5b712502959aad7752306c98f1",
+    "evaluate/strict_recheck.py": "c8512c29e0a89a7dfb4855a40e7f19ffbdc9e81760e4bfcb6ba3d3b0619fe3f5",
+    "evaluate/evaluate_stage2_quality.py": "d08f7181806ccdbf6d97ec7626a43647442a6dc4df396eb6f3d7dde2e2852820"
+  },
+  "prediction_sha256": {
+    "strict": "d822cc4794a4767d43530a701074e6325ad2dcbedd1672f5f92ee2695f3dd944",
+    "recheck": "1ae3743ddddfc8e8658caf86b5e8d552f2b9d7eb751da0a11859ccd299329850"
+  }
+}

@@ -1,0 +1,63 @@
+Strict RAG 근거 재판정 실험 패치노트
+2026-11-28
+
+변경 목적
+  충분한 검색 근거가 있어도 Evidence Judge가 거부하는 문제를 줄이고,
+  답변 불가능 문항의 응답 증가 없이 기술 정답을 복구한다.
+
+구현
+  기존 Top5·Top10 Evidence Judge가 모두 NO일 때 재판정을 한 번 적용하는
+  선택 기능을 추가했다. 기본값은 꺼짐이다.
+  verbatim, passages, sections, focused 네 방식을 구현했다.
+  질문·검색 청크만으로 판단하며, 인용 원문과 청크 또는 구간 위치를 검증한다.
+  통과 후 기존 Top5, 생성 프롬프트, 생성기와 Grounding Verifier를 사용한다.
+  평가 진입점에서 문항별 검색 캐시, 실행 설정, 예측, 판정 사유, 기술 정답,
+  문항별 전환 및 파일 해시를 저장한다. 새 실행 폴더로 이전 결과를 보존한다.
+  완료된 Strict 결과와 캐시를 검증해 재사용하는 옵션도 제공한다.
+
+실측 결과
+  val_106.json 106건. 답변 가능 77건, 불가능 29건.
+  방식              Judge 정답    오거부    불가능 문항 응답
+  기존 Strict           25          48              6
+  verbatim              25          48              6
+  passages              25          48              6
+  sections              25          47              6
+  focused               28          45              6
+
+  focused의 거부→정답은 3건이다. 거부→비정답과 기존 정답 손실은 각각 0건이다.
+  복구 문항은 TRAIN_Q270, TRAIN_Q592, TRAIN_Q463이다.
+  재판정 대상 68건 중 3건이 통과했고 생성기와 Verifier에서도 통과했다.
+  근거 후보 미선택 58건, 모델의 근거 부족·불확실 판정 7건은 거부를 유지했다.
+  전체 재실행에서도 시간 필드를 제외한 106건의 답변·판정 및 채점이 일치했다.
+
+검증 범위와 한계
+  기존 진단의 오거부 52건과 현재 기준선 48건 사이의 차이는 원인 미확정이다.
+  검토했던 18문항의 Top5 원문 90개는 이번 캐시와 모두 일치한다.
+  여러 후보를 같은 검증 세트에서 비교했다. 새 미사용 세트의 성능은 미측정이다.
+  focused도 답변 가능 77건 중 45건을 거부한다.
+  이번 결과는 기존 test_clean 120건의 6종 평가와 별도인 개발 검증 결과다.
+  단위 테스트 74건 중 73건 통과, 기존 외부 업로드 자료가 필요한 1건 건너뜀.
+  문단 단위 CrossEncoder 개선과 포트폴리오 화면은 아직 구현하지 않았다.
+
+주요 파일
+  scripts/rag_guardrails.py
+  scripts/rag_guardrails_per_document.py
+  scripts/rag_top5_recheck.py
+  scripts/rag_passage_recheck.py
+  scripts/rag_section_recheck.py
+  scripts/evaluate/strict_recheck.py
+  tests/test_strict_recheck.py (저장소 루트 기준)
+  tests/test_rag_passage_recheck.py (저장소 루트 기준)
+  docs/Strict_RAG_과도한_거부_개선_실험기록.txt
+  evaluate_results/106/strict_top5_recheck/
+
+최종 전체 재실행 자료
+  evaluate_results/106/strict_top5_recheck/run_20261127T233350341282Z/
+  comparison.json에 집계, cases.jsonl에 기술 정답 판정,
+  recheck.jsonl에 재판정과 원문 인용, retrieval_cache.json에 검색 입력을 저장했다.
+  예비 17건 기록은 partial 파일로 보존했고 최종 집계에서 제외했다.
+
+재현 명령
+  저장소 루트의 PowerShell에서 실행한다.
+  $env:PYTHONPATH = (Resolve-Path .\IBMTechSupport\scripts).Path
+  .\IBMTechSupport\.venv\Scripts\python.exe -m evaluate.strict_recheck all --method focused

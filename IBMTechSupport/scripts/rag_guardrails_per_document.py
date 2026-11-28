@@ -10,6 +10,26 @@ from rag_guardrails_relaxed import judge_evidence_relaxed
 def choose_guardrail_runner(config):
     """Select a runner without changing the behavior of existing v3 experiments."""
     mode = config.get("guardrails", {}).get("judge_mode", "strict")
+    recheck = config.get("guardrails", {}).get("top5_recheck", False)
+    if type(recheck) is not bool:
+        raise ValueError("guardrails.top5_recheck must be a boolean")
+    if recheck:
+        from functools import partial
+        if mode != "strict":
+            raise ValueError("top5_recheck requires strict mode")
+        method = config["guardrails"].get("top5_recheck_method", "verbatim")
+        if method == "passages":
+            from rag_passage_recheck import recheck_passages
+            return partial(answer_with_guardrails, top5_recheck=True, recheck_fn=recheck_passages)
+        if method == "sections":
+            from rag_section_recheck import recheck_sections
+            return partial(answer_with_guardrails, top5_recheck=True, recheck_fn=recheck_sections)
+        if method == "focused":
+            from rag_section_recheck import recheck_focused
+            return partial(answer_with_guardrails, top5_recheck=True, recheck_fn=recheck_focused)
+        if method != "verbatim":
+            raise ValueError(f"Unknown top5_recheck_method: {method}")
+        return partial(answer_with_guardrails, top5_recheck=True)
     if mode == "strict":
         return answer_with_guardrails
     if mode == "relaxed":

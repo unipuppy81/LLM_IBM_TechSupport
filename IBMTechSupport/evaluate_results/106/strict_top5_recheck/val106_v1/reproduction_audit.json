@@ -1,0 +1,44 @@
+{
+  "scope": "Post-hoc reproduction audit only. Neither historical file is an inference input.",
+  "historical_inputs": [
+    "test_stage3/strict_18_full_inputs.jsonl",
+    "test_stage3/strict_diagnosis.log"
+  ],
+  "cached_questions": 106,
+  "cached_chunks": 1060,
+  "historical_reviewed_questions": 18,
+  "ranked_chunks_compared": 90,
+  "ranked_filename_and_text_matches": 90,
+  "historical_false_refusals": 52,
+  "current_false_refusals": 48,
+  "false_refusal_ids_in_both": 40,
+  "historical_only_false_refusals": [
+    "DEV_Q076",
+    "DEV_Q184",
+    "TRAIN_Q075",
+    "TRAIN_Q111",
+    "TRAIN_Q208",
+    "TRAIN_Q222",
+    "TRAIN_Q282",
+    "TRAIN_Q295",
+    "TRAIN_Q422",
+    "TRAIN_Q482",
+    "TRAIN_Q541",
+    "TRAIN_Q553"
+  ],
+  "current_only_false_refusals": [
+    "DEV_Q028",
+    "DEV_Q074",
+    "DEV_Q101",
+    "TRAIN_Q231",
+    "TRAIN_Q256",
+    "TRAIN_Q360",
+    "TRAIN_Q493",
+    "TRAIN_Q592"
+  ],
+  "strict_sha256": "2da1071983e12dc8326a753ff9855ebb1f8de8ceb45afa681d4212954b30d7a7",
+  "cache_sha256": "387f5d81e9db36b57c378115d4ea574d107b5d8733b26a364d7aba9ba565921b",
+  "format_correction": "A preliminary 17-row run identified a single Markdown fence around model JSON; these rows are excluded. The full recheck run accepts a single JSON fence and uses the original retrieval cache and Strict baseline.",
+  "ranked_top10_identical_for_77_only_vs_full_batch": 77,
+  "ranked_top10_differences_for_77_only_vs_full_batch": []
+}

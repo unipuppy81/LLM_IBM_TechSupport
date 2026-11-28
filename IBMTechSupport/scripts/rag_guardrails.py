@@ -102,8 +102,7 @@ def _parse_decision(raw):
     return match.group(1).upper() if match else "UNCERTAIN"
 
 
-def _llm_decision(model, tokenizer, system, user):
-    """Run deterministic short judgment. Unexpected output -> UNCERTAIN (not YES)."""
+def _llm_response(model, tokenizer, system, user, max_new_tokens):
     import torch
 
     messages = [
@@ -120,7 +119,7 @@ def _llm_decision(model, tokenizer, system, user):
     with torch.inference_mode():
         output = model.generate(
             **inputs,
-            max_new_tokens=12,
+            max_new_tokens=max_new_tokens,
             do_sample=False,
             num_beams=1,
             pad_token_id=tokenizer.pad_token_id,
@@ -128,7 +127,13 @@ def _llm_decision(model, tokenizer, system, user):
         )
     seconds = time.perf_counter() - start
     raw = tokenizer.decode(output[0, input_width:], skip_special_tokens=True).strip()
-    return {"decision": _parse_decision(raw), "raw": raw, "seconds": round(seconds, 4)}
+    return raw, round(seconds, 4)
+
+
+def _llm_decision(model, tokenizer, system, user):
+    """Run deterministic short judgment. Unexpected output -> UNCERTAIN (not YES)."""
+    raw, seconds = _llm_response(model, tokenizer, system, user, 12)
+    return {"decision": _parse_decision(raw), "raw": raw, "seconds": seconds}
 
 
 def judge_evidence(model, tokenizer, question, documents):
@@ -149,7 +154,7 @@ def verify_grounding(model, tokenizer, question, documents, answer):
 def answer_with_guardrails(
     *, question, retrieved_documents, model, tokenizer, generation_config,
     prompt_config, generate_answer, top_k=5, retry_top_k=10,
-    judge_fn=judge_evidence, verify_fn=verify_grounding,
+    judge_fn=judge_evidence, verify_fn=verify_grounding, top5_recheck=False, recheck_fn=None,
 ):
     """Select evidence, retry with more hits if needed, then verify the generated answer.
 
@@ -180,8 +185,19 @@ def answer_with_guardrails(
         judgment = judge_fn(model, tokenizer, question, selected)
         history.append({"stage": "expanded_k", "document_count": len(selected), **judgment})
 
+    allowed = judgment["decision"] == "YES"
+    if (top5_recheck and len(first) == 5 and len(available) == 10
+            and [item["decision"] for item in history] == ["NO", "NO"]):
+        if recheck_fn is None:
+            from rag_top5_recheck import recheck_evidence as recheck_fn
+        review = recheck_fn(model, tokenizer, question, first)
+        history.append({"stage": "top5_recheck", "document_count": len(first), **review})
+        if review["decision"] == "YES":
+            selected = first
+            allowed = True
+
     judge_seconds = round(sum(item["seconds"] for item in history), 4)
-    if judgment["decision"] != "YES":
+    if not allowed:
         return {
             "answer": ABSTAIN, "generation_seconds": 0.0,
             "judge_seconds": judge_seconds, "verification_seconds": 0.0,

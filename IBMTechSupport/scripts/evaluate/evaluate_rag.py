@@ -110,6 +110,9 @@ def create_predictions(records, config):
         stats.update({
             "guardrails_enabled": True,
             "judge_mode": guardrails.get("judge_mode", "strict"),
+            **({"top5_recheck": True,
+                "top5_recheck_method": guardrails.get("top5_recheck_method", "verbatim")}
+               if guardrails.get("top5_recheck") else {}),
             **({"answerability_prompt_sha256": guardrails["answerability_prompt_sha256"],
                 "retrieval_config_sha256": guardrails["retrieval_config_sha256"]}
                if guardrails.get("judge_mode") == "per_document_v3" else {}),
